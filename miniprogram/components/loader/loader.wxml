@@ -1,0 +1,6 @@
+<view class="loader" style="height: {{winHeight}}rpx;">
+  <view class="lds-ripple">
+    <view></view>
+    <view></view>
+  </view>
+</view>

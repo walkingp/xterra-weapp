@@ -1,0 +1,8 @@
+<view class="box">
+  <block wx:if="{{loading}}">
+    <loader />
+  </block>
+  <block wx:else>
+    <course-item list="{{courses}}" />
+  </block>
+</view>

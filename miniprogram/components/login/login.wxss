@@ -1,0 +1,15 @@
+.login{
+  height: 90vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.btnLogin{
+  height: 80rpx;
+  background: #07C160;
+  border-radius: 4px;
+  color: #fff;
+  margin-top: 40rpx;
+}

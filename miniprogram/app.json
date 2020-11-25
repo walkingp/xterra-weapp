@@ -1,0 +1,53 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/my/my",
+    "pages/events/events",
+    "pages/community/community"
+  ],
+  "window": {
+    "backgroundColor": "#ffffff",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTitleText": "XTERRA",
+    "navigationBarTextStyle": "black"
+  },
+  "sitemapLocation": "sitemap.json",
+  "usingComponents": {
+    "towxml": "/towxml/towxml",
+    "login": "/components/login/login",
+    "loader": "/components/loader/loader",
+    "course-item": "/components/course-item/course-item"
+  },
+  "tabBar": {
+    "color": "#535353",
+    "selectedColor": "#000000",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "images/tabs/home@2x.png",
+        "selectedIconPath": "images/tabs/home_fill@2x.png"
+      },
+      {
+        "pagePath": "pages/events/events",
+        "text": "赛事活动",
+        "iconPath": "images/tabs/events@2x.png",
+        "selectedIconPath": "images/tabs/events_fill@2x.png"
+      },
+      {
+        "pagePath": "pages/community/community",
+        "text": "社区中心",
+        "iconPath": "images/tabs/community@2x.png",
+        "selectedIconPath": "images/tabs/community_fill@2x.png"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "text": "我的",
+        "iconPath": "images/tabs/my@2x.png",
+        "selectedIconPath": "images/tabs/my_fill@2x.png"
+      }
+    ]
+  }
+}
