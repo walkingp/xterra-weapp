@@ -1,4 +1,4 @@
-const { getIndexCourseList } = require("../../api/course");
+const { getBannerList } = require("../../api/race");
 
 // miniprogram/pages/index/index.js
 Page({
@@ -8,18 +8,13 @@ Page({
    */
   data: {
     loading: false,
-    courses: []
+    banners: []
   },
   async fetch(){
-    const courses = await getIndexCourseList();
-    courses.map(item=>{
-      item.startDate = dayjs(new Date(item.startDate)).format("YYYY年MM月DD日");
-      item.endDate = dayjs(new Date(item.endDate)).format("MM月DD日");
-      return item;
-    })
+    const banners = await getBannerList();
     this.setData({
       loading: false,
-      courses
+      banners
     });
   },
   /**

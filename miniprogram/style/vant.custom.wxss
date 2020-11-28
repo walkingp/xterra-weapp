@@ -1,0 +1,6 @@
+page {
+  --button-border-radius: 5rpx;
+  --button-default-color: #f2f3f5;
+  --toast-max-width: 100px;
+  --toast-background-color: pink;
+}

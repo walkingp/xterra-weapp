@@ -3,6 +3,14 @@
     <loader />
   </block>
   <block wx:else>
-    <course-item list="{{courses}}" />
+    <swiper indicator-dots="{{true}}" autoplay="{{true}}">
+      <block wx:for="{{banners}}" wx:key="_id">
+        <swiper-item>
+          <view class="swiper-item">
+            <image src="{{item.picUrl}}"></image>
+          </view>
+        </swiper-item>
+      </block>
+    </swiper>
   </block>
 </view>
