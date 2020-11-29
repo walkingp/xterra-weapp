@@ -1,6 +1,4 @@
-const { getBannerList } = require("../../api/race");
-const { getNewsIndexList } = require("./../../api/news");
-const { getRaceIndexList } = require("./../../api/race");
+const { getRaceDetail } = require("./../../../api/race");
 const dayjs = require("dayjs");
 // miniprogram/pages/index/index.js
 Page({
@@ -9,34 +7,26 @@ Page({
    * 页面的初始数据
    */
   data: {
+    id: null,
     loading: false,
-    banners: [],
-    news: [],
-    races: []
+    detail: null
   },
-  async fetch(){
-    const banners = await getBannerList();
-    const news = await getNewsIndexList();
-    const races = await getRaceIndexList();
-    news.map(item=>{
-      item.formatDate = dayjs(new Date(item.postTime)).format("MM月DD日");
-      return item;
-    })
-    console.log(races);
+  async fetch(id){
+    const detail = await getRaceDetail(id);
+    console.log(detail);
     this.setData({
       loading: false,
-      races,
-      news,
-      banners
+      detail
     });
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
-    this.fetch();
-  },
+    const { id } = options;
+    this.setData({
+      id
+    });
+    this.fetch(id);
 
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

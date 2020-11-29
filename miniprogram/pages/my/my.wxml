@@ -4,7 +4,6 @@
   </block>
   <block wx:else>
     <block wx:if="{{isLogined}}">
-      <course-item list="{{courses}}" />
     </block>
     <block wx:else>
       <login bind:onCompleted="onCompleted" />

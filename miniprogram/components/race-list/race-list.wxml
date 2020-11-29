@@ -1,0 +1,19 @@
+<block wx:if="{{list.length}}">
+  <view class="list">
+    <navigator url="/pages/events/detail/detail?id={{item._id}}" class="item flex" wx:for="{{list}}" wx:key="_id">
+      <view class="cover flex-none">
+        <image src="{{item.picUrls[0]}}" mode="aspectFill"></image>
+      </view>
+      <view class="flex-auto flex column">
+        <text class="title">{{item.title}}</text>
+        <text class="date">{{item.formatDate}}</text>
+      </view>
+    </navigator>
+  </view>
+</block>
+<block wx:else>
+  <view class="empty">
+    <icon class="icon-box-img" type="info" size="64"></icon>
+    <text>暂无新闻</text>
+  </view>
+</block>

@@ -1,0 +1,18 @@
+@import "./../../style/mi.flex.wxss";
+.cover {
+  width: 120rpx;
+  padding-right: 30rpx;
+}
+.list{
+  padding: 24rpx 0;
+}
+.item{
+  border-bottom: solid 1rpx #f1f1f1;
+}
+.item+.item{
+  margin-top: 24rpx;
+}
+.title{
+  font-size: 30rpx;
+  font-weight: bold;
+}

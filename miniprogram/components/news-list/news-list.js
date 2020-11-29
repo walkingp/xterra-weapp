@@ -1,4 +1,4 @@
-// components/course-item/course-item.js
+// components/news-list/news-list.js
 Component({
   /**
    * 组件的属性列表

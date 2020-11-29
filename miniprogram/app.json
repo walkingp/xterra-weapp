@@ -3,7 +3,8 @@
     "pages/index/index",
     "pages/my/my",
     "pages/events/events",
-    "pages/community/community"
+    "pages/community/community",
+    "pages/events/detail/detail"
   ],
   "window": {
     "backgroundColor": "#ffffff",
@@ -17,7 +18,51 @@
     "towxml": "/towxml/towxml",
     "login": "/components/login/login",
     "loader": "/components/loader/loader",
-    "course-item": "/components/course-item/course-item"
+    "news-list": "/components/news-list/news-list",
+    "race-list": "/components/race-list/race-list",
+    "van-button": "@vant/weapp/button/index",
+    "van-calendar": "@vant/weapp/calendar/index",
+    "van-dropdown-menu": "@vant/weapp/dropdown-menu/index",
+    "van-dropdown-item": "@vant/weapp/dropdown-item/index",
+    "van-empty": "@vant/weapp/empty/index",
+    "van-icon": "@vant/weapp/icon/index",
+    "van-cell": "@vant/weapp/cell/index",
+    "van-cell-group": "@vant/weapp/cell-group/index",
+    "van-field": "@vant/weapp/field/index",
+    "van-uploader": "@vant/weapp/uploader/index",
+    "van-panel": "@vant/weapp/panel/index",
+    "van-row": "@vant/weapp/row/index",
+    "van-tab": "@vant/weapp/tab/index",
+    "van-tabs": "@vant/weapp/tabs/index",
+    "van-sidebar": "@vant/weapp/sidebar/index",
+    "van-sidebar-item": "@vant/weapp/sidebar-item/index",
+    "van-index-bar": "@vant/weapp/index-bar/index",
+    "van-index-anchor": "@vant/weapp/index-anchor/index",
+    "van-popup": "@vant/weapp/popup/index",
+    "van-switch": "@vant/weapp/switch/index",
+    "van-action-sheet": "@vant/weapp/action-sheet/index",
+    "van-col": "@vant/weapp/col/index",
+    "van-sticky": "@vant/weapp/sticky/index",
+    "van-radio": "@vant/weapp/radio/index",
+    "van-radio-group": "@vant/weapp/radio-group/index",
+    "van-image": "@vant/weapp/image/index",
+    "van-checkbox": "@vant/weapp/checkbox/index",
+    "van-checkbox-group": "@vant/weapp/checkbox-group/index",
+    "van-skeleton": "@vant/weapp/skeleton/index",
+    "van-divider": "@vant/weapp/divider/index",
+    "van-tag": "@vant/weapp/tag/index",
+    "van-dialog": "@vant/weapp/dialog/index",
+    "van-notice-bar": "@vant/weapp/notice-bar/index",
+    "van-grid": "@vant/weapp/grid/index",
+    "van-grid-item": "@vant/weapp/grid-item/index",
+    "van-search": "@vant/weapp/search/index",
+    "van-picker": "@vant/weapp/picker/index",
+    "van-loading": "@vant/weapp/loading/index"
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "将用于系统判断您的当前位置用于接收通知"
+    }
   },
   "tabBar": {
     "color": "#535353",

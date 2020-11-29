@@ -1,0 +1,38 @@
+<view class="box">
+  <block wx:if="{{loading}}">
+    <loader />
+  </block>
+  <block wx:else>
+    <swiper indicator-dots="{{true}}" autoplay="{{true}}">
+      <block wx:for="{{detail.picUrls}}" wx:key="index">
+        <swiper-item>
+          <view class="swiper-item">
+            <image src="{{item}}"></image>
+          </view>
+        </swiper-item>
+      </block>
+    </swiper>
+    <view class="title">{{detail.title}}</view>
+    <view class="info section">
+      <view class="hd">时间地点</view>
+      <view class="cells">
+        <view class="cell">
+          <text>比赛时间：</text>
+          <text>{{detail.raceDate}}</text>
+        </view>
+        <view class="cell">
+          <text>比赛地点：</text>
+          <text>{{detail.location}}</text>
+        </view>
+        <view class="cell">
+          <text>赛事组别：</text>
+          <text>{{detail.catesName}}</text>
+        </view>
+        <view class="cell">
+          <text>报名截止时间</text>
+          <text>{{detail.endRegTime}}</text>
+        </view>
+      </view>
+    </view>
+  </block>
+</view>

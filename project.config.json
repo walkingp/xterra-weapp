@@ -75,6 +75,12 @@
           "pathName": "pages/detail/detail",
           "query": "id=2fd465895fab7acd008463b536578912",
           "scene": null
+        },
+        {
+          "name": "赛事详情",
+          "pathName": "pages/events/detail/detail",
+          "query": "id=0bcbdde05fc3a636006efd9971c76de4",
+          "scene": null
         }
       ]
     }

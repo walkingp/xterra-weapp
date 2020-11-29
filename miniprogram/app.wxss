@@ -1,5 +1,10 @@
 /**app.wxss**/
+@import "./style/vant.custom.wxss";
+@import "./style/mi.base.wxss";
 
 view, text, image{
   box-sizing: border-box;
+}
+page{
+  color: #646566;
 }

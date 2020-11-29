@@ -12,5 +12,31 @@
         </swiper-item>
       </block>
     </swiper>
+    <view class="shortcuts">
+      <van-grid border="{{false}}">
+        <van-grid-item icon="/images/icons/events@2x.png" url="/pages/events/events" link-type="switchTab" text="活动报名" />
+        <van-grid-item icon="/images/icons/profile@2x.png" url="/pages/profile/profile" link-type="switchTab" text="用户中心" />
+        <van-grid-item icon="/images/icons/community@2x.png" url="/pages/community/community" link-type="switchTab" text="社区中心" />
+        <van-grid-item icon="/images/icons/points@2x.png" url="/pages/events/events" text="积分商城" />
+      </van-grid>
+    </view>
+    <view class="news">
+      <view class="flex space-between">
+        <text class="hd">媒体中心</text>
+        <navigator url="">更多</navigator>
+      </view>
+      <view class="list">
+        <news-list list="{{news}}" />
+      </view>
+    </view>
+    <view class="races">
+      <view class="flex space-between">
+        <text class="hd">最近报名</text>
+        <navigator url="">更多</navigator>
+      </view>
+      <view class="list">
+        <race-list list="{{races}}" />
+      </view>
+    </view>
   </block>
 </view>

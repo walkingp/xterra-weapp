@@ -15,3 +15,14 @@ export const getPaginations = (args) => {
     }).catch(reject)
   })
 }
+
+export const getCollectionById = (args) => {
+  const { dbName, id } = args;
+  return new Promise(async (resolve, reject) => {
+    await wx.cloud.database().collection(dbName).doc(id).get().then(res=>{
+      resolve(res.data);
+    }).catch(err=>{
+      reject(err)
+    });
+  })
+}
