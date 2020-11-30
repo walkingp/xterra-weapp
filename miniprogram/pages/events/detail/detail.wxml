@@ -1,38 +1,66 @@
-<view class="box">
+<view class="container">
   <block wx:if="{{loading}}">
     <loader />
   </block>
   <block wx:else>
-    <swiper indicator-dots="{{true}}" autoplay="{{true}}">
-      <block wx:for="{{detail.picUrls}}" wx:key="index">
-        <swiper-item>
-          <view class="swiper-item">
-            <image src="{{item}}"></image>
+    <view class="section">
+      <swiper indicator-dots="{{true}}" autoplay="{{true}}">
+        <block wx:for="{{detail.picUrls}}" wx:key="index">
+          <swiper-item>
+            <view class="swiper-item">
+              <image src="{{item}}" mode="widthFix"></image>
+            </view>
+          </swiper-item>
+        </block>
+      </swiper>
+      <view class="flex space-between header">
+        <text class="title">{{detail.title}}</text>
+        <text class="status">{{detail.status}}</text>
+      </view>
+      <view class="info">
+        <view class="cells">
+          <view class="cell">
+            <text>比赛时间：</text>
+            <text class="bold">{{detail.raceDate}}</text>
           </view>
-        </swiper-item>
-      </block>
-    </swiper>
-    <view class="title">{{detail.title}}</view>
-    <view class="info section">
-      <view class="hd">时间地点</view>
-      <view class="cells">
-        <view class="cell">
-          <text>比赛时间：</text>
-          <text>{{detail.raceDate}}</text>
-        </view>
-        <view class="cell">
-          <text>比赛地点：</text>
-          <text>{{detail.location}}</text>
-        </view>
-        <view class="cell">
-          <text>赛事组别：</text>
-          <text>{{detail.catesName}}</text>
-        </view>
-        <view class="cell">
-          <text>报名截止时间</text>
-          <text>{{detail.endRegTime}}</text>
+          <view class="cell">
+            <text>比赛地点：</text>
+            <text class="bold">{{detail.location}}</text>
+          </view>
+          <view class="cell">
+            <text>赛事组别：</text>
+            <text class="bold">{{detail.cates}}</text>
+          </view>
+          <view class="cell">
+            <text>报名截止时间：</text>
+            <text class="bold">{{detail.endRegTime}}</text>
+          </view>
         </view>
       </view>
+    </view>
+    <view class="section icons">
+      <van-grid border="{{false}}">
+        <van-grid-item icon="/images/icons/events@2x.png" url="/pages/events/events" link-type="switchTab" text="活动报名" />
+        <van-grid-item icon="/images/icons/profile@2x.png" url="/pages/profile/profile" link-type="switchTab" text="用户中心" />
+        <van-grid-item icon="/images/icons/community@2x.png" url="/pages/community/community" link-type="switchTab" text="社区中心" />
+        <van-grid-item icon="/images/icons/points@2x.png" url="/pages/events/events" text="积分商城" />
+      </van-grid>
+    </view>
+    <view class="section icons">
+      <view class="hd">赛事新闻</view>
+      <view class="list">
+        <news-list list="{{news}}" type="list" />
+      </view>
+    </view>
+    <view class="section icons">
+      <view class="hd">赛事组别</view>
+      <view class="list">
+        <race-cate-list list="{{cates}}" />
+      </view>
+    </view>
+    <view class="section icons">
+      <view class="hd">线路图</view>
+      <view class="list"></view>
     </view>
   </block>
 </view>

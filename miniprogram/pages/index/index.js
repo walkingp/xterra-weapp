@@ -22,7 +22,7 @@ Page({
       item.formatDate = dayjs(new Date(item.postTime)).format("MM月DD日");
       return item;
     })
-    console.log(races);
+    console.log(news);
     this.setData({
       loading: false,
       races,

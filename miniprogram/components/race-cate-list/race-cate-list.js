@@ -1,13 +1,9 @@
-// components/news-list/news-list.js
+// components/race-cate-list/race-cate-list.js
 Component({
   /**
    * 组件的属性列表
    */
   properties: {
-    type: {
-      type: String,
-      value: 'thumbnail' // list
-    },
     list: {
       type: Array
     }

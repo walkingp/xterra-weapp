@@ -3,16 +3,22 @@
   width: 120rpx;
   padding-right: 30rpx;
 }
-.list{
-  padding: 24rpx 0;
-}
 .item{
+  padding: 24rpx 0;
   border-bottom: solid 1rpx #f1f1f1;
-}
-.item+.item{
-  margin-top: 24rpx;
 }
 .title{
   font-size: 30rpx;
   font-weight: bold;
+}
+.cate{
+  border-radius: 10rpx;
+  background-color: #C50F28;
+  padding: 5rpx 10rpx;
+  margin-right: 10rpx;
+  color: white;
+}
+.desc{
+  font-size: 20rpx;  
+  margin-top: 10rpx;
 }

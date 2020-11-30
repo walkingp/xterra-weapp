@@ -1,4 +1,4 @@
-const { getRaceDetail } = require("./../../../api/race");
+const { getRaceDetail, getRaceCatesList, getRaceNewsList } = require("./../../../api/race");
 const dayjs = require("dayjs");
 // miniprogram/pages/index/index.js
 Page({
@@ -9,13 +9,25 @@ Page({
   data: {
     id: null,
     loading: false,
-    detail: null
+    detail: null,
+    news: [],
+    cates: []
   },
   async fetch(id){
     const detail = await getRaceDetail(id);
-    console.log(detail);
+    detail.cates = detail.catesName.join('/');
+    detail.endRegTime = dayjs(new Date(detail.endRegTime)).format("YYYY年MM月DD日 hh:mm:ss");
+    const cates = await getRaceCatesList(id);
+    const news = await getRaceNewsList(id);
+    news.map(item=>{
+      item.formatDate = dayjs(new Date(item.postTime)).format("MM月DD日");
+      return item;
+    });
+    console.log(cates);
     this.setData({
       loading: false,
+      cates,
+      news,
       detail
     });
   },
