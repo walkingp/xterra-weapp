@@ -4,7 +4,8 @@
     "pages/my/my",
     "pages/events/events",
     "pages/community/community",
-    "pages/events/detail/detail"
+    "pages/events/detail/detail",
+    "pages/news/detail/detail"
   ],
   "window": {
     "backgroundColor": "#ffffff",

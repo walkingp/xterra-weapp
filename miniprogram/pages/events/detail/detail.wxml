@@ -13,7 +13,7 @@
           </swiper-item>
         </block>
       </swiper>
-      <view class="flex space-between header">
+      <view class="flex space-between align-center header">
         <text class="title">{{detail.title}}</text>
         <text class="status">{{detail.status}}</text>
       </view>
@@ -39,28 +39,56 @@
       </view>
     </view>
     <view class="section icons">
-      <van-grid border="{{false}}">
-        <van-grid-item icon="/images/icons/events@2x.png" url="/pages/events/events" link-type="switchTab" text="活动报名" />
-        <van-grid-item icon="/images/icons/profile@2x.png" url="/pages/profile/profile" link-type="switchTab" text="用户中心" />
-        <van-grid-item icon="/images/icons/community@2x.png" url="/pages/community/community" link-type="switchTab" text="社区中心" />
-        <van-grid-item icon="/images/icons/points@2x.png" url="/pages/events/events" text="积分商城" />
+      <van-grid border="{{false}}" column-num="4">
+        <van-grid-item icon="/images/icons/events@2x.png" url="/pages/events/events" link-type="switchTab"
+          text="报名查询" />
+        <van-grid-item icon="/images/icons/profile@2x.png" url="/pages/profile/profile" link-type="switchTab"
+          text="照片查询" />
+        <van-grid-item icon="/images/icons/community@2x.png" url="/pages/community/community" link-type="switchTab"
+          text="成绩查询" />
+        <van-grid-item icon="/images/icons/points@2x.png" url="/pages/events/events" text="装备要求" />
+        <van-grid-item icon="/images/icons/points@2x.png" url="/pages/events/events" text="交通住宿" />
+        <van-grid-item icon="/images/icons/points@2x.png" url="/pages/events/events" text="美食美景" />
       </van-grid>
     </view>
     <view class="section icons">
-      <view class="hd">赛事新闻</view>
+      <view class="hd">
+        <text>赛事新闻</text>
+        <navigator url="">更多</navigator>
+      </view>
       <view class="list">
         <news-list list="{{news}}" type="list" />
       </view>
     </view>
     <view class="section icons">
-      <view class="hd">赛事组别</view>
+      <view class="hd pb">
+        <text>赛事组别</text>
+        <navigator url="">更多</navigator>
+      </view>
       <view class="list">
         <race-cate-list list="{{cates}}" />
       </view>
     </view>
-    <view class="section icons">
-      <view class="hd">线路图</view>
-      <view class="list"></view>
+    <view class="section icons" wx:if="{{detail.routePics}}">
+      <view class="hd pb">线路图</view>
+      <view class="list">
+        <swiper indicator-dots="{{true}}" autoplay="{{true}}">
+          <block wx:for="{{detail.routePics}}" wx:key="index">
+            <swiper-item>
+              <view class="swiper-item">
+                <image src="{{item}}" mode="widthFix"></image>
+              </view>
+            </swiper-item>
+          </block>
+        </swiper>
+      </view>
+    </view>
+    <view class="section content">
+      <van-tabs active="{{ 0 }}" bind:change="onChange">
+        <van-tab title="比赛规程"><towxml nodes="{{detail.content}}"/></van-tab>
+        <van-tab title="报名须知"><towxml nodes="{{detail.admission}}"/></van-tab>
+        <van-tab title="赛事流程"><towxml nodes="{{detail.flow}}"/></van-tab>
+      </van-tabs>
     </view>
   </block>
 </view>

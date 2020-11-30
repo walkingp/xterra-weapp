@@ -1,20 +1,19 @@
-<block wx:if="{{list.length}}">
-  <navigator url="/pages/detail/detail?id={{item._id}}" class="item flex" wx:for="{{list}}" wx:key="_id">
-    <view class="cover flex-none">
-      <image src="{{item.coverUrl}}" mode="widthFix"></image>
-    </view>
-    <view class="flex-auto flex column">
-      <text class="title">{{item.title}}</text>
-      <view class="desc">
-        <text class="cate">{{item.cate}}</text>
-        <text class="date">{{item.formatDate}}</text>
-      </view>
-    </view>
-  </navigator>
+<block wx:if="{{loading}}">
+  <van-loading type="spinner" />
 </block>
 <block wx:else>
-  <view class="empty">
-    <icon class="icon-box-img" type="info" size="64"></icon>
-    <text>暂无新闻</text>
-  </view>
+  <block wx:if="{{list.length}}">
+    <navigator url="/pages/detail/detail?id={{item._id}}" class="item flex" wx:for="{{list}}" wx:key="_id">
+      <view class="cover flex-none">
+        <image src="{{item.coverUrl}}" mode="widthFix"></image>
+      </view>
+      <view class="flex-auto flex column">
+        <text class="title overflow-2">{{item.title}}</text>
+        <view class="desc flex space-between align-center">
+          <text class="cate">{{item.cate}}</text>
+          <text class="date text-gray">{{item.formatDate}}</text>
+        </view>
+      </view>
+    </navigator>
+  </block>
 </block>

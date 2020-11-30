@@ -1,13 +1,16 @@
 @import "./../../style/mi.flex.wxss";
 .cover {
-  width: 120rpx;
+  width: 225rpx;
   padding-right: 30rpx;
 }
 .list{
-  padding: 24rpx 0;
+  padding-top: 24rpx;
 }
 .item{
   border-bottom: solid 1rpx #f1f1f1;
+}
+.item:last-child{
+  border-bottom: none;
 }
 .item+.item{
   margin-top: 24rpx;
@@ -15,4 +18,24 @@
 .title{
   font-size: 30rpx;
   font-weight: bold;
+}
+.cover image{
+  width: 100%;
+  height: 160rpx;
+  border-radius: 15rpx;
+}
+.hd{
+  padding-bottom: 20rpx;
+}
+.text{
+  overflow: hidden;
+  text-emphasis: none;
+  height: 160rpx;
+  justify-content: space-between;
+}
+.info text{
+  font-size: 24rpx;
+  color: #666;
+  white-space: nowrap;
+  overflow: hidden;
 }

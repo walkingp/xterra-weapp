@@ -12,12 +12,21 @@ Component({
       type: Array
     }
   },
+  observers: {
+    'list': function (list) {
+      if(list.length) {
+        this.setData({
+          loading: false
+        })
+      }
+    }
+  },
 
   /**
    * 组件的初始数据
    */
   data: {
-
+    loading: false
   },
 
   /**

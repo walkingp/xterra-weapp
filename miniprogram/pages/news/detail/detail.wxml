@@ -1,0 +1,14 @@
+<view class="container" wx:if="{{loaded}}">
+  <view class="header">
+    <view class="title flex align-center">{{detail.title}}</view>
+    <view class="date">
+      <text>{{detail.createTime}}</text>
+    </view>
+  </view>
+  <view class="content">
+    <towxml nodes="{{article}}" />
+  </view>
+</view>
+<view class="container flex align-center justify-center" wx:else>
+  <loader />
+</view>

@@ -1,9 +1,9 @@
 <block wx:if="{{list.length}}">
-  <navigator url="/pages/detail/detail?id={{item._id}}" class="item flex" wx:for="{{list}}" wx:key="_id">
+  <navigator url="/pages/detail/detail?id={{item._id}}" class="item flex align-center" wx:for="{{list}}" wx:key="_id">
     <view class="flex-auto flex column">
       <view class="top">
         <text class="title">{{item.title}}</text>
-        <text class="cate"> {{item.ealyBirdPrice}}</text>
+        <text class="price"> 早鸟价：{{item.earlyBirdPrice}}元</text>
       </view>
       <text class="desc">{{item.desc}}</text>
     </view>

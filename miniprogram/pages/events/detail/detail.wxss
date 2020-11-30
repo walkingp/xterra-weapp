@@ -1,11 +1,6 @@
 .container{
   background-color: #f6f6f6;
 }
-.section{
-  background-color: #fff;
-  padding: 30rpx;
-  margin-bottom: 18rpx;
-}
 swiper{
   height: 320rpx!important;
 }
@@ -23,11 +18,6 @@ swiper{
   color: #666;
 }
 .cell .bold{
-  font-weight: bold;
-  color: #333;
-}
-.section .hd{
-  font-size: 30rpx;
   font-weight: bold;
   color: #333;
 }

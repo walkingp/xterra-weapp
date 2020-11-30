@@ -1,5 +1,6 @@
 const { getRaceDetail, getRaceCatesList, getRaceNewsList } = require("./../../../api/race");
 const dayjs = require("dayjs");
+const app = getApp();
 // miniprogram/pages/index/index.js
 Page({
 
@@ -15,15 +16,19 @@ Page({
   },
   async fetch(id){
     const detail = await getRaceDetail(id);
+    console.log(detail);
     detail.cates = detail.catesName.join('/');
     detail.endRegTime = dayjs(new Date(detail.endRegTime)).format("YYYY年MM月DD日 hh:mm:ss");
+    detail.admission = app.towxml(detail.admission,'html'); // 报名须知
+    detail.content = app.towxml(detail.content,'html');
+    detail.flow = app.towxml(detail.flow,'html');
     const cates = await getRaceCatesList(id);
+    console.log(cates);
     const news = await getRaceNewsList(id);
     news.map(item=>{
       item.formatDate = dayjs(new Date(item.postTime)).format("MM月DD日");
       return item;
     });
-    console.log(cates);
     this.setData({
       loading: false,
       cates,

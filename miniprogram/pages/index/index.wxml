@@ -1,4 +1,4 @@
-<view class="box">
+<view class="container">
   <block wx:if="{{loading}}">
     <loader />
   </block>
@@ -12,7 +12,7 @@
         </swiper-item>
       </block>
     </swiper>
-    <view class="shortcuts">
+    <view class="shortcuts box no-min-height">
       <van-grid border="{{false}}">
         <van-grid-item icon="/images/icons/events@2x.png" url="/pages/events/events" link-type="switchTab" text="活动报名" />
         <van-grid-item icon="/images/icons/profile@2x.png" url="/pages/profile/profile" link-type="switchTab" text="用户中心" />
@@ -20,7 +20,7 @@
         <van-grid-item icon="/images/icons/points@2x.png" url="/pages/events/events" text="积分商城" />
       </van-grid>
     </view>
-    <view class="news">
+    <view class="news box">
       <view class="flex space-between">
         <text class="hd">媒体中心</text>
         <navigator url="">更多</navigator>
@@ -29,13 +29,33 @@
         <news-list list="{{news}}" />
       </view>
     </view>
-    <view class="races">
+    <view class="races box">
       <view class="flex space-between">
         <text class="hd">最近报名</text>
         <navigator url="">更多</navigator>
       </view>
       <view class="list">
         <race-list list="{{races}}" />
+      </view>
+    </view>
+    <view class="bottom flex space-between">
+      <view class="box flex space-between">
+        <view class="flex-auto flex column">
+          <text class="bold">关于XTERRA</text>
+          <text>我们是做什么？</text>
+        </view>
+        <view class="flex-none">
+          <image src="./../../images/icons/about@2x.png"></image>
+        </view>        
+      </view>
+      <view class="box flex space-between">
+        <view class="flex-auto flex column">
+          <text class="bold">社交网络</text>
+          <text>关注我们的社交平台</text>
+        </view>
+        <view class="flex-none">
+          <image src="./../../images/icons/wechat@2x.png"></image>
+        </view>        
       </view>
     </view>
   </block>

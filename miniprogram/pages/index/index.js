@@ -21,8 +21,13 @@ Page({
     news.map(item=>{
       item.formatDate = dayjs(new Date(item.postTime)).format("MM月DD日");
       return item;
-    })
-    console.log(news);
+    });
+    races.map(item=>{
+      item.cates = item.catesName.join('/');
+      item.raceDate = dayjs(new Date(item.raceDate)).format("MM月DD日");
+      return item;
+    });
+    console.log(races);
     this.setData({
       loading: false,
       races,
