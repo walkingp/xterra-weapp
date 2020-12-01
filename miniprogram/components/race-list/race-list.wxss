@@ -1,10 +1,8 @@
 @import "./../../style/mi.flex.wxss";
+@import "./../../style/app.common.wxss";
 .cover {
   width: 225rpx;
   padding-right: 30rpx;
-}
-.list{
-  padding-top: 24rpx;
 }
 .item{
   border-bottom: solid 1rpx #f1f1f1;

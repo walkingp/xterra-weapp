@@ -1,6 +1,11 @@
 page {
+  --text-color: #333;
   --button-border-radius: 5rpx;
   --button-default-color: #f2f3f5;
   --toast-max-width: 100px;
   --toast-background-color: pink;
+
+  --grid-item-content-padding: @padding-xs @padding-xs;
+  --grid-item-icon-size: 66rpx;
+  --grid-item-text-font-size: 28rpx;
 }

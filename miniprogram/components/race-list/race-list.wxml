@@ -4,7 +4,7 @@
       wx:key="_id">
       <view class="hd flex space-between align-center">
         <text class="title">{{item.title}}</text>
-        <text class="status">{{item.status}}</text>
+        <text class="status ing">{{item.status}}</text>
       </view>
       <view class="flex align-center">
         <view class="cover flex-none">

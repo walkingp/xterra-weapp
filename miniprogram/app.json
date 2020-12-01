@@ -5,7 +5,8 @@
     "pages/events/events",
     "pages/community/community",
     "pages/events/detail/detail",
-    "pages/news/detail/detail"
+    "pages/news/detail/detail",
+    "pages/news/news"
   ],
   "window": {
     "backgroundColor": "#ffffff",

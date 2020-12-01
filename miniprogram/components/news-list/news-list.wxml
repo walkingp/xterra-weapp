@@ -3,7 +3,7 @@
 </block>
 <block wx:else>
   <block wx:if="{{list.length}}">
-    <navigator url="/pages/detail/detail?id={{item._id}}" class="item flex" wx:for="{{list}}" wx:key="_id">
+    <navigator url="/pages/news/detail/detail?id={{item._id}}" class="item flex" wx:for="{{list}}" wx:key="_id">
       <view class="cover flex-none">
         <image src="{{item.coverUrl}}" mode="widthFix"></image>
       </view>

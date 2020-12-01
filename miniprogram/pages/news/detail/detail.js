@@ -1,3 +1,6 @@
+const { getNewsDetail } = require("../../../api/news");
+const app = getApp();
+const dayjs = require("dayjs");
 // miniprogram/pages/news/detail/detail.js
 Page({
 
@@ -5,14 +8,32 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    id: null,
+    loading: true,
+    detail: null
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    const { id } = options;
 
+    this.setData({
+      id
+    });
+    this.fetch(id);
+  },
+
+  async fetch(id){
+    const detail = await getNewsDetail(id);
+    console.log(detail);
+    detail.formatDate = dayjs(new Date(detail.postTime)).format("MM月DD日");
+    detail.content = app.towxml(detail.content,'html');
+    this.setData({
+      loading: false,
+      detail
+    })
   },
 
   /**

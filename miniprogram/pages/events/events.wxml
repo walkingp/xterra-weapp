@@ -1,2 +1,5 @@
-<!--miniprogram/pages/events/events.wxml-->
-<text>miniprogram/pages/events/events.wxml</text>
+<view class="container">
+  <view class="box">
+    <race-list list="{{races}}" />
+  </view>
+</view>

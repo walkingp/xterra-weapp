@@ -23,7 +23,7 @@
     <view class="news box">
       <view class="flex space-between">
         <text class="hd">媒体中心</text>
-        <navigator url="">更多</navigator>
+        <navigator url="/pages/news/news">更多</navigator>
       </view>
       <view class="list">
         <news-list list="{{news}}" />

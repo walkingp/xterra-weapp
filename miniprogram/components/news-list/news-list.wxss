@@ -34,6 +34,9 @@
   color: white;
 }
 .desc{
-  font-size: 20rpx;  
+  font-size: 24rpx;  
   margin-top: 10rpx;
+}
+.date{
+  color: #999;
 }

@@ -1,12 +1,16 @@
-<view class="container" wx:if="{{loaded}}">
+<view class="container" wx:if="{{!loading}}">
   <view class="header">
     <view class="title flex align-center">{{detail.title}}</view>
-    <view class="date">
-      <text>{{detail.createTime}}</text>
+    <view class="info">
+      <text class="cate">{{detail.cate}}</text>
+      <text class="date">{{detail.formatDate}}</text>
+    </view>
+    <view class="cover">
+      <image mode="cover" src="{{detail.coverUrl}}" />
     </view>
   </view>
   <view class="content">
-    <towxml nodes="{{article}}" />
+    <towxml nodes="{{detail.content}}" />
   </view>
 </view>
 <view class="container flex align-center justify-center" wx:else>

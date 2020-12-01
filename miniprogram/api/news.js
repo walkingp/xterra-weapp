@@ -1,4 +1,4 @@
-import { getPaginations } from "../utils/cloud"
+import { getCollectionById, getPaginations } from "../utils/cloud"
 
 export const getNewsIndexList = async () => {
   const data = await getPaginations({
@@ -12,5 +12,10 @@ export const getNewsIndexList = async () => {
     pageIndex: 1,
     pageSize: 2
   })
+  return data;
+}
+
+export const getNewsDetail = async id => {
+  const data = await getCollectionById({ dbName: "news", id});
   return data;
 }

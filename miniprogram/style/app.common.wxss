@@ -1,0 +1,11 @@
+.status{
+  padding: 0 20rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  border-radius: 30rpx;
+  color: #fff;
+  font-size: 24rpx;
+}
+.status.ing{
+  background-color: #FF6D02;
+}

@@ -1,5 +1,6 @@
 .container{
   background-color: #f6f6f6;
+  padding: 0;
 }
 swiper{
   height: 320rpx!important;
@@ -30,13 +31,4 @@ swiper{
 }
 .header .title{
   font-weight: bold;
-}
-.status{
-  background-color: #FF6D02;
-  padding: 0 20rpx;
-  height: 56rpx;
-  line-height: 56rpx;
-  border-radius: 5rpx;
-  color: #fff;
-  font-size: 24rpx;
 }

@@ -1,4 +1,4 @@
-const { getRaceIndexList } = require("./../../api/race");
+const { getNewsIndexList } = require("./../../api/news");
 const dayjs = require("dayjs");
 // miniprogram/pages/index/index.js
 Page({
@@ -11,16 +11,13 @@ Page({
     races: []
   },
   async fetch(){
-    const races = await getRaceIndexList();
-    races.map(item=>{
-      item.cates = item.catesName.join('/');
-      item.raceDate = dayjs(new Date(item.raceDate)).format("MM月DD日");
+    const news = await getNewsIndexList();
+    news.map(item=>{
+      item.formatDate = dayjs(new Date(item.postTime)).format("MM月DD日");
       return item;
     });
-
     this.setData({
-      races,
-      loading: false
+      news
     })
   },
 
