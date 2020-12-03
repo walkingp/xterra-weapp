@@ -93,6 +93,12 @@
           "pathName": "pages/news/news",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "社区首页",
+          "pathName": "pages/community/community",
+          "query": "",
+          "scene": null
         }
       ]
     }

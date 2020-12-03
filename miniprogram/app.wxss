@@ -24,38 +24,6 @@ button{
   color: #DF1042;
   font-size: 30rpx;
 }
-.box{
-  border-radius: 10rpx;  
-  background: #fff;
-  padding: 30rpx;
-}
-.box+.box{
-  margin-top: 20rpx;
-}
-.box .hd{
-  font-weight: bold;
-}
-.section{
-  background-color: #fff;
-  padding: 30rpx;
-  margin-bottom: 18rpx;
-}
-.section .hd{
-  font-size: 30rpx;
-  font-weight: bold;
-  color: #333;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.section .hd.pb{
-  padding-bottom: 30rpx;
-}
-.hd navigator{
-  color: #999;
-  font-size: 26rpx;
-  font-weight: normal;
-}
 
 .h2w.h2w-light {
   background-color: transparent!important;

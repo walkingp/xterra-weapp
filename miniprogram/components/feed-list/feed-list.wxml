@@ -1,0 +1,32 @@
+<view class="feeds list">
+  <view class="item" wx:for="{{list}}" wx:key="id">
+    <view class="flex space-between">
+      <view class="flex flex-auto">
+        <navigator>
+          <image src="{{item.avatarUrl}}" class="avatar"></image>
+        </navigator>
+        <view class="flex column user">
+          <navigator>{{item.nickName}}</navigator>
+          <text>{{item.addedDate}}</text>
+        </view>
+      </view>
+      <view class="flex-none" wx:if="{{item.status === '2'}}">
+        置顶
+      </view>
+    </view>
+    <view class="content">{{item.content}}</view>
+    <view class="pics">
+      <image wx:for="{{item.picUrls}}" src="{{item}}" wx:key="item"></image>
+    </view>
+    <view class="action flex">
+      <view class="flex align-center">
+        <image src="./../../images/icons/thumbup.svg" class="icon mini"></image>
+        {{item.kudos}}
+      </view>
+      <view class="flex align-center comment">
+        <image src="./../../images/icons/comment.svg" class="icon mini"></image>
+        {{item.comments}}
+      </view>
+    </view>
+  </view>
+</view>

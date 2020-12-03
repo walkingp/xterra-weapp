@@ -1,2 +1,6 @@
-<!--miniprogram/pages/community/community.wxml-->
-<text>miniprogram/pages/community/community.wxml</text>
+<view class="container">
+  <view class="top"></view>
+  <view class="body box">
+    <feed-list list="{{list}}"></feed-list>
+  </view>
+</view>

@@ -1,3 +1,6 @@
+const { getFeedIndexList } = require("../../api/feed");
+const { feedStatus } = require("../../config/const");
+
 // miniprogram/pages/community/community.js
 Page({
 
@@ -5,14 +8,24 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    statuses: [
+      feedStatus.normal,
+      feedStatus.top
+    ]
   },
-
+  async fetch(){
+    const { statuses } = this.data;
+    const list = await getFeedIndexList(statuses[0]);
+    console.log(list);
+    this.setData({
+      list
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.fetch();
   },
 
   /**

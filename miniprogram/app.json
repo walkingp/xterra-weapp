@@ -23,6 +23,7 @@
     "loader": "/components/loader/loader",
     "news-list": "/components/news-list/news-list",
     "race-list": "/components/race-list/race-list",
+    "feed-list": "/components/feed-list/feed-list",
     "race-cate-list": "/components/race-cate-list/race-cate-list",
     "van-button": "@vant/weapp/button/index",
     "van-calendar": "@vant/weapp/calendar/index",

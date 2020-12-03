@@ -1,0 +1,47 @@
+@import "./../../style/mi.flex.wxss";
+@import "./../../style/app.common.wxss";
+.pics image{
+  height: 210rpx!important;
+  width: 100%;
+}
+.content{
+  margin: 30rpx 0;
+  font-weight: bold;
+  color: #333;
+  font-size: 30rpx;
+  letter-spacing: 4rpx;
+}
+.user{
+  margin-left: 20rpx;
+}
+.user navigator{
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333;
+}
+.user text{
+  font-size: 22rpx;
+  color: #999;
+}
+.action{
+  margin-top: 20rpx;
+  color: #666;
+  font-size: 24rpx;
+}
+.action image{
+  margin-right: 5rpx;
+}
+.action .comment{
+  margin-left: 20rpx;
+}
+.item{
+  padding: 38rpx 0;
+  border-bottom: solid 2rpx #eee;
+}
+.item:first-child{
+  padding-top: 0;
+}
+.item:last-child{
+  padding-bottom: 0;
+  border-bottom: none;
+}

@@ -1,5 +1,11 @@
-const storageKey = {
+export const storageKey = {
   userId: 'userId'
 };
 
-module.exports = storageKey;
+export const feedStatus = {
+  deleted: -1,
+  pending: 0,
+  normal: 1,
+  top: 2,
+  faved: 3
+};
