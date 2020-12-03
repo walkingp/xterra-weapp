@@ -1,0 +1,30 @@
+.swiper {
+  position: relative;
+}
+.swiper-item {
+  height: 100%;
+}
+.swiper-item image{
+  width: 100%;
+  height: 100%;
+  border-radius: 10rpx;
+}
+.dots {
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  bottom: 20rpx;
+}
+
+.dot {
+  width: 12rpx;
+  height: 12rpx;
+  background-color: rgba(255,255,255,.3);
+  border-radius: 50%;
+}
+
+.dot+.dot {
+  margin-left: 20rpx;
+}

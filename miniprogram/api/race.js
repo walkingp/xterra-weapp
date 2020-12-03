@@ -1,9 +1,10 @@
 import { getPaginations, getCollectionById } from "../utils/cloud"
 
-export const getBannerList = async ( size = 5) => {
+export const getBannerList = async ( position = 'index', size = 5) => {
   const data = await getPaginations({
     dbName: 'banner',
     filter: {
+      position,
       isActive: true
     },
     orderBy: {

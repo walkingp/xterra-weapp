@@ -4,7 +4,7 @@
   line-height: 40rpx;
   border-radius: 30rpx;
   color: #fff;
-  font-size: 24rpx;
+  font-size: 22rpx;
 }
 .status.ing{
   background-color: #FF6D02;

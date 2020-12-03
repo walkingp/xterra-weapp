@@ -3,15 +3,7 @@
     <loader />
   </block>
   <block wx:else>
-    <swiper indicator-dots="{{true}}" autoplay="{{true}}">
-      <block wx:for="{{banners}}" wx:key="_id">
-        <swiper-item>
-          <view class="swiper-item">
-            <image src="{{item.picUrl}}"></image>
-          </view>
-        </swiper-item>
-      </block>
-    </swiper>
+    <banner-list />
     <view class="shortcuts box no-min-height">
       <van-grid border="{{false}}">
         <van-grid-item icon="/images/icons/events@2x.png" url="/pages/events/events" link-type="switchTab" text="活动报名" />

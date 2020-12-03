@@ -1,0 +1,16 @@
+<view class="swiper">
+  <swiper bindchange="swiperChange" indicator-dots="{{false}}" autoplay="{{true}}">
+    <block wx:for="{{banners}}" wx:key="_id">
+      <swiper-item>
+        <view class="swiper-item">
+          <image src="{{item.picUrl}}"></image>
+        </view>
+      </swiper-item>
+    </block>
+  </swiper>
+  <view class="dots">
+    <block wx:for="{{banners}}" wx:key="index">
+      <view class="dot{{index == current ? ' active' : ''}}"></view>
+    </block>
+  </view>
+</view>

@@ -6,12 +6,10 @@
 }
 .item{
   border-bottom: solid 1rpx #f1f1f1;
+  padding: 24rpx 0;
 }
 .item:last-child{
   border-bottom: none;
-}
-.item+.item{
-  margin-top: 24rpx;
 }
 .title{
   font-size: 30rpx;

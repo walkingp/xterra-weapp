@@ -1,1 +1,4 @@
-/* miniprogram/pages/events/events.wxss */
+.selector{
+  margin: 20rpx 0;
+  border-radius: 10rpx;
+}

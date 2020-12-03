@@ -21,6 +21,7 @@
     "towxml": "/towxml/towxml",
     "login": "/components/login/login",
     "loader": "/components/loader/loader",
+    "banner-list": "/components/banner-list/banner-list",
     "news-list": "/components/news-list/news-list",
     "race-list": "/components/race-list/race-list",
     "feed-list": "/components/feed-list/feed-list",

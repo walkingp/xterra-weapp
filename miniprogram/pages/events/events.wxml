@@ -1,4 +1,12 @@
 <view class="container">
+  <banner-list position="race" />
+  <view class="selector">
+    <van-dropdown-menu>
+      <van-dropdown-item value="{{ location }}" options="{{ locations }}" />
+      <van-dropdown-item value="{{ status }}" options="{{ statuses }}" />
+      <van-dropdown-item value="{{ type }}" options="{{ types }}" />
+    </van-dropdown-menu>
+  </view>
   <view class="box">
     <race-list list="{{races}}" />
   </view>

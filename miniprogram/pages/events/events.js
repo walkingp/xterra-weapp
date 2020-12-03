@@ -8,7 +8,35 @@ Page({
    */
   data: {
     loading: false,
-    races: []
+    races: [],
+    locations: [
+      { text: '全国不限', value: '' },
+      { text: '江浙沪', value: '江浙沪' },
+      { text: '京津冀', value: '京津冀' },
+      { text: '珠三角', value: '珠三角' },
+      { text: '西南地区', value: '西南地区' },
+      { text: '其他地区', value: '其他地区' },
+      { text: '海外', value: '海外' },
+    ],
+    statuses: [
+      { text: '报名状态', value: '' },
+      { text: '未开始报名', value: '未开始报名' },
+      { text: '报名中', value: '报名中' },
+      { text: '名额已满', value: '名额已满' },
+      { text: '报名已截止', value: '报名已截止' },
+      { text: '比赛已结束', value: '比赛已结束' },
+    ],
+    types: [
+      { text: '运动类型', value: '' },
+      { text: '铁人三项', value: '铁人三项' },
+      { text: '越野跑', value: '越野跑' },
+      { text: 'X-Plogging', value: 'X-Plogging' },
+      { text: '训练营', value: '训练营' },
+      { text: '其他', value: '其他' },
+    ],
+    location: '',
+    status: '',
+    type: ''
   },
   async fetch(){
     const races = await getRaceIndexList();
