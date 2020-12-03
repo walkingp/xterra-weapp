@@ -1,5 +1,4 @@
 <view class="login">
-  <mp-icon icon="info" color="#07c160" size="{{80}}"></mp-icon>
-  <text>您需要登录后继续使用</text>
-  <button class="weui-btn btnLogin weui-btn_primary" bindgetuserinfo="onGotUserInfo" open-type="getUserInfo">授权登录</button>
+  <image src="./../../images/avatar@2x.png"></image>
+  <button class="weui-btn btnLogin weui-btn_primary" bindgetuserinfo="onGotUserInfo" open-type="getUserInfo">未登录</button>
 </view>

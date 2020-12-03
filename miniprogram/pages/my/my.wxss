@@ -1,3 +1,24 @@
-.box{
-  padding: 24rpx 0;
+.top{
+  height: 282rpx;
+  background: url(https://7874-xterra-c2969f-1258173660.tcb.qcloud.la/app/images/bg_my%402x.png?sign=6460d1785b62c36352e3f97bac1abf0b&t=1606967668) no-repeat;
+  background-size: 100% 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20rpx 20rpx 20rpx 60rpx;
+}
+.my {
+  margin-top: 20rpx;
+}
+.right{
+  align-self: flex-start;
+  display: flex;
+
+}
+.right image{
+  width: 40rpx!important;
+  height: 40rpx!important;
+}
+.right navigator+navigator{
+  margin-left: 10rpx;
 }

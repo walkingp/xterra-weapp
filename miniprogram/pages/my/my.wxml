@@ -1,12 +1,49 @@
-<view class="box">
+<view class="container">
   <block wx:if="{{loading}}">
     <loader />
   </block>
   <block wx:else>
-    <block wx:if="{{isLogined}}">
-    </block>
-    <block wx:else>
-      <login bind:onCompleted="onCompleted" />
-    </block>
+    <view class="top">
+      <view class="left">
+        <block wx:if="{{isLogined}}">
+        </block>
+        <block wx:else>
+          <login bind:onCompleted="onCompleted" />
+        </block>      
+      </view>
+      <view class="right">
+        <navigator url="">
+          <image src="./../../images/icons/edit.svg"></image>
+        </navigator>
+        <navigator url="">
+          <image src="./../../images/icons/mall.svg"></image>
+        </navigator>
+      </view>
+    </view>
+    <view class="box my">
+      <view class="flex space-between">
+        <text class="hd">我的信息</text>
+      </view>
+      <view class="list">
+        <van-grid border="{{false}}">
+          <van-grid-item icon="/images/icons/trophy.svg" url="/pages/events/events" text="我的赛事" />
+          <van-grid-item icon="/images/icons/post.svg" url="/pages/profile/profile" text="社区发贴" />
+          <van-grid-item icon="/images/icons/doc.svg" url="/pages/community/community" text="兑换记录" />
+          <van-grid-item icon="/images/icons/card.svg" url="/pages/events/events" text="报名资料" />
+        </van-grid>
+      </view>
+    </view>
+    <view class="box other">
+      <view class="flex space-between">
+        <text class="hd">其他</text>
+      </view>
+      <view class="list">
+        <van-grid border="{{false}}">
+          <van-grid-item icon="/images/icons/call.svg" url="/pages/events/events" text="联系我们" />
+          <van-grid-item icon=" /images/icons/help.svg" url="/pages/profile/profile" text="帮助中心" />
+          <van-grid-item icon="/images/icons/building.svg" url="/pages/community/community" text="关于XTERRA" />
+        </van-grid>
+      </view>
+    </view>
   </block>
 </view>

@@ -1,15 +1,16 @@
 .login{
-  height: 90vh;
   overflow: hidden;
   display: flex;
   align-items: center;
-  justify-content: center;
-  flex-direction: column;
+}
+.login image{
+  width: 124rpx!important;
+  height: 124rpx!important;
 }
 .btnLogin{
-  height: 80rpx;
-  background: #07C160;
-  border-radius: 4px;
-  color: #fff;
-  margin-top: 40rpx;
+  background: transparent;
+  border: none;
+  color: #9F9F9F;
+  margin: 0;
+  font-size: 32rpx;
 }

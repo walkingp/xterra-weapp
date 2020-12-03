@@ -1,0 +1,3 @@
+<view class="flex-auto container flex align-center justify-center">
+  <web-view src="{{url}}" binderror="onError" />
+</view>

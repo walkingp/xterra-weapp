@@ -6,7 +6,8 @@
     "pages/community/community",
     "pages/events/detail/detail",
     "pages/news/detail/detail",
-    "pages/news/news"
+    "pages/news/news",
+    "pages/more/webview/webview"
   ],
   "window": {
     "backgroundColor": "#ffffff",
