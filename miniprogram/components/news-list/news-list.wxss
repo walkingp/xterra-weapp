@@ -21,17 +21,23 @@
 }
 .item:last-child{
   border-bottom: none;
+  padding-bottom: 0;
 }
 .title{
   font-size: 26rpx;
   font-weight: bold;
 }
 .cate{
-  border-radius: 10rpx;
-  background-color: #C50F28;
+  border-radius: 20rpx;
+  background-color: #DD312C;
   padding: 5rpx 10rpx;
   margin-right: 10rpx;
+  font-size: 24rpx;
   color: white;
+}
+.summary{
+  font-size: 22rpx;
+  color: #999;
 }
 .desc{
   font-size: 24rpx;  

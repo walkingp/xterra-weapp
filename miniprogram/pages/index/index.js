@@ -15,6 +15,9 @@ Page({
     races: []
   },
   async fetch(){
+    wx.showLoading({
+      title: '加载中…',
+    });
     const banners = await getBannerList();
     const news = await getNewsIndexList();
     const races = await getRaceIndexList();
@@ -33,6 +36,10 @@ Page({
       races,
       news,
       banners
+    }, () => {
+      wx.hideLoading({
+        success: (res) => {},
+      })
     });
   },
   /**

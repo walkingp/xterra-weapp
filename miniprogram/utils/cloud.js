@@ -26,3 +26,14 @@ export const getCollectionById = (args) => {
     });
   })
 }
+
+export const getCollectionByWhere = (args) => {
+  const { dbName, filter } = args;
+  return new Promise(async (resolve, reject) => {
+    await wx.cloud.database().collection(dbName).where(filter).get().then(res=>{
+      resolve(res.data);
+    }).catch(err=>{
+      reject(err)
+    });
+  })
+}

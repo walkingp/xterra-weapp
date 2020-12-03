@@ -1,5 +1,5 @@
 <view class="container">
-  <banner-list position="race" />
+  <banner-list list="{{banners}}" />
   <view class="selector">
     <van-dropdown-menu>
       <van-dropdown-item value="{{ location }}" options="{{ locations }}" />

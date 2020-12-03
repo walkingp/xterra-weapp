@@ -6,18 +6,8 @@ Component({
    * 组件的属性列表
    */
   properties: {
-    position: {
-      type: String,
-      value: 'index'
-    }
-  },
-
-  lifetimes: {
-    async attached(){
-      const banners = await getBannerList(this.properties.position);
-      this.setData({
-        banners
-      })
+    list: {
+      type: Array
     }
   },
 
@@ -25,7 +15,6 @@ Component({
    * 组件的初始数据
    */
   data: {
-    banners: [],
     current: 0
   },
 
@@ -38,5 +27,26 @@ Component({
         current: e.detail.current
       })
     },
+    tap(e){
+      const { src, type, url } = e.currentTarget.dataset;
+      const { list } = this.properties;
+      const urls = list.map(item=>item.picUrl);
+      switch(type){
+        case 'preview':
+          wx.previewImage({
+            urls,
+            current: src
+          });
+          break;
+        case 'navigate':
+          if(!url.startsWith('/')){
+            url = '/' + url;
+          }
+          wx.navigateTo({
+            url,
+          });
+          break;
+      }
+    }
   }
 })

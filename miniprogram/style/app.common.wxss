@@ -31,6 +31,9 @@
   padding: 30rpx;
   margin-bottom: 18rpx;
 }
+.section:last-child{
+  margin-bottom: 0;
+}
 .section .hd{
   font-size: 30rpx;
   font-weight: bold;
@@ -50,4 +53,7 @@
 .icon.mini{
   width: 35rpx;
   height: 35rpx;
+}
+.sticky{
+  position: sticky;
 }

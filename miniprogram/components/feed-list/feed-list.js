@@ -8,12 +8,28 @@ Component({
       type: Array
     }
   },
+  observers: {
+    'list': function(list) {
+      const feeds = list.map(item=>{
+        const col = Math.ceil(24 / item.picUrls.length);
+        if(col < 8) {
+          item.cols = 8;
+        }else{
+          item.cols = col;
+        }
+        return item;
+      });
+      this.setData({
+        feeds
+      })
+    }
+  },
 
   /**
    * 组件的初始数据
    */
   data: {
-
+    feeds: []
   },
 
   /**

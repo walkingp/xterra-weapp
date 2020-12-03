@@ -3,7 +3,7 @@
     <loader />
   </block>
   <block wx:else>
-    <banner-list />
+    <banner-list list="{{banners}}" />
     <view class="shortcuts box no-min-height">
       <van-grid border="{{false}}">
         <van-grid-item icon="/images/icons/events@2x.png" url="/pages/events/events" link-type="switchTab" text="活动报名" />
@@ -11,15 +11,6 @@
         <van-grid-item icon="/images/icons/community@2x.png" url="/pages/community/community" link-type="switchTab" text="社区中心" />
         <van-grid-item icon="/images/icons/points@2x.png" url="/pages/events/events" text="积分商城" />
       </van-grid>
-    </view>
-    <view class="news box">
-      <view class="flex space-between">
-        <text class="hd">媒体中心</text>
-        <navigator url="/pages/news/news">更多</navigator>
-      </view>
-      <view class="list">
-        <news-list list="{{news}}" />
-      </view>
     </view>
     <view class="races box">
       <view class="flex space-between">
@@ -30,8 +21,17 @@
         <race-list list="{{races}}" />
       </view>
     </view>
+    <view class="news box">
+      <view class="flex space-between">
+        <text class="hd">媒体中心</text>
+        <navigator url="/pages/news/news">更多</navigator>
+      </view>
+      <view class="list">
+        <news-list list="{{news}}" />
+      </view>
+    </view>
     <view class="bottom flex space-between">
-      <view class="box flex space-between">
+      <navigator url="/pages/page/page?id=about" class="box flex space-between">
         <view class="flex-auto flex column">
           <text class="bold">关于XTERRA</text>
           <text>我们是做什么？</text>
@@ -39,8 +39,8 @@
         <view class="flex-none">
           <image src="./../../images/icons/about@2x.png"></image>
         </view>        
-      </view>
-      <view class="box flex space-between">
+      </navigator>
+      <navigator url="/pages/page/page?id=sns" class="box flex space-between">
         <view class="flex-auto flex column">
           <text class="bold">社交网络</text>
           <text>关注我们的社交平台</text>
@@ -48,7 +48,7 @@
         <view class="flex-none">
           <image src="./../../images/icons/wechat@2x.png"></image>
         </view>        
-      </view>
+      </navigator>
     </view>
   </block>
 </view>

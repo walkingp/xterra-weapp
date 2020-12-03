@@ -1,4 +1,4 @@
-const { getRaceIndexList } = require("./../../api/race");
+const { getRaceIndexList, getBannerList } = require("./../../api/race");
 const dayjs = require("dayjs");
 // miniprogram/pages/index/index.js
 Page({
@@ -9,8 +9,9 @@ Page({
   data: {
     loading: false,
     races: [],
+    banners: [],
     locations: [
-      { text: '全国不限', value: '' },
+      { text: '地区', value: '' },
       { text: '江浙沪', value: '江浙沪' },
       { text: '京津冀', value: '京津冀' },
       { text: '珠三角', value: '珠三角' },
@@ -45,9 +46,10 @@ Page({
       item.raceDate = dayjs(new Date(item.raceDate)).format("MM月DD日");
       return item;
     });
-
+    const banners = await getBannerList("race");
     this.setData({
       races,
+      banners,
       loading: false
     })
   },

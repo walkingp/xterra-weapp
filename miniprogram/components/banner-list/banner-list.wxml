@@ -1,15 +1,15 @@
 <view class="swiper">
   <swiper bindchange="swiperChange" indicator-dots="{{false}}" autoplay="{{true}}">
-    <block wx:for="{{banners}}" wx:key="_id">
-      <swiper-item>
+    <block wx:for="{{list}}" wx:key="_id">
+      <swiper-item bindtap="tap" data-src="{{item.picUrl}}" data-url="{{item.redirectUrl}}" data-type="{{item.type}}">
         <view class="swiper-item">
-          <image src="{{item.picUrl}}"></image>
+          <image src="{{item.picUrl}}" mode="aspectFill"></image>
         </view>
       </swiper-item>
     </block>
   </swiper>
   <view class="dots">
-    <block wx:for="{{banners}}" wx:key="index">
+    <block wx:for="{{list}}" wx:key="index">
       <view class="dot{{index == current ? ' active' : ''}}"></view>
     </block>
   </view>

@@ -1,36 +1,45 @@
-const { getFeedIndexList } = require("../../api/feed");
-const { feedStatus } = require("../../config/const");
-const dayjs = require("dayjs");
-// miniprogram/pages/community/community.js
+const { getPageDetail } = require("../../api/page");
+
+// miniprogram/pages/page/page.js
+const app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    statuses: [
-      feedStatus.normal,
-      feedStatus.top
-    ]
+    id: null
   },
-  async fetch(){
-    const { statuses } = this.data;
-    const list = await getFeedIndexList(statuses[0]);
-    list.map(item=>{      
-      item.addedDate = dayjs(new Date(item.addedDate)).format("MM月DD日 hh:mm");
-      return item;
-    })
-    this.setData({
-      list
-    })
-  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.fetch();
-  },
+    const { id } = options
+    this.setData({
+      id
+    });
 
+    this.fetch(id);
+  },
+  async fetch(id){
+    const res = await getPageDetail(id);
+    if(!res){
+      wx.showToast({
+        icon: 'none',
+        title: '内容不存在',
+      })
+      return;
+    }
+    const detail = res[0];
+    detail.content = app.towxml(detail.content,'html');
+    wx.setNavigationBarTitle({
+      title: detail.title,
+    })
+    this.setData({
+      detail
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

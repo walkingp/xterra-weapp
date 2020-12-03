@@ -4,6 +4,8 @@
 .shortcuts{
   margin-top: 20rpx;
   padding: 10rpx;
+  padding-bottom: 20rpx;
+  --grid-item-icon-size: 66rpx;
 }
 .news{
   margin-top: 20rpx;

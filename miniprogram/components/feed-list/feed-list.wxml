@@ -1,11 +1,11 @@
 <view class="feeds list">
-  <view class="item" wx:for="{{list}}" wx:key="id">
+  <view class="item" wx:for="{{feeds}}" wx:key="id">
     <view class="flex space-between">
       <view class="flex flex-auto">
         <navigator>
           <image src="{{item.avatarUrl}}" class="avatar"></image>
         </navigator>
-        <view class="flex column user">
+        <view class="flex column user space-between">
           <navigator>{{item.nickName}}</navigator>
           <text>{{item.addedDate}}</text>
         </view>
@@ -16,7 +16,11 @@
     </view>
     <view class="content">{{item.content}}</view>
     <view class="pics">
-      <image wx:for="{{item.picUrls}}" src="{{item}}" wx:key="item"></image>
+      <van-row gutter="10">
+        <van-col span="{{item.cols}}" wx:for="{{item.picUrls}}" wx:key="item" wx:for-item="pic">
+          <image src="{{pic}}" mode="aspectFill"></image>
+        </van-col>
+      </van-row>      
     </view>
     <view class="action flex">
       <view class="flex align-center">

@@ -9,6 +9,7 @@
       </view>
       <view class="flex-auto flex column">
         <text class="title overflow-2">{{item.title}}</text>
+        <text class="text-gray summary overflow-2">{{item.summary}}</text>
         <view class="desc flex space-between align-center">
           <text class="cate">{{item.cate}}</text>
           <text class="date text-gray">{{item.formatDate}}</text>

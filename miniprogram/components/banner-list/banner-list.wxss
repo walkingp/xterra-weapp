@@ -19,10 +19,12 @@
 }
 
 .dot {
-  width: 12rpx;
-  height: 12rpx;
-  background-color: rgba(255,255,255,.3);
-  border-radius: 50%;
+  width: 26rpx;
+  height: 5rpx;
+  background-color: #fff;
+}
+.dot.active{
+  background-color: #C3002F;
 }
 
 .dot+.dot {

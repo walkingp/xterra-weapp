@@ -7,12 +7,13 @@
     "pages/events/detail/detail",
     "pages/news/detail/detail",
     "pages/news/news",
-    "pages/more/webview/webview"
+    "pages/more/webview/webview",
+    "pages/page/page"
   ],
   "window": {
     "backgroundColor": "#ffffff",
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarBackgroundColor": "#F5F5F5",
     "navigationBarTitleText": "XTERRA",
     "navigationBarTextStyle": "black"
   },

@@ -1,9 +1,31 @@
 .container{
   background-color: #f6f6f6;
   padding: 0;
+  height: 100vh;
+}
+.top{
+  overflow: auto;
+}
+.bottom{
+  padding: 20rpx 0;
+  border-top: solid 2rpx rgba(0,0,0,.1);
+}
+.bottom button{
+  width: 300rpx;
+}
+map{
+  width: 100%;
+  border-radius: 20rpx;
+  margin: 20rpx 0 10rpx 0;
 }
 swiper{
   height: 320rpx!important;
+}
+.icons van-grid{
+  --grid-item-icon-size: 52rpx;
+}
+.van-grid-item {
+  margin-bottom: 20rpx;
 }
 .swiper-item image{
   height: 320rpx!important;
@@ -19,7 +41,6 @@ swiper{
   color: #666;
 }
 .cell .bold{
-  font-weight: bold;
   color: #333;
 }
 .info{

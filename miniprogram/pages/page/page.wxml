@@ -1,0 +1,5 @@
+<view class="container">
+  <view class="content">
+    <towxml nodes="{{detail.content}}" />
+  </view>
+</view>
