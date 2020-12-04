@@ -40,6 +40,9 @@ Page({
     type: ''
   },
   async fetch(){
+    wx.showLoading({
+      title: '加载中',
+    })
     const races = await getRaceIndexList();
     races.map(item=>{
       item.cates = item.catesName.join('/');
@@ -51,6 +54,10 @@ Page({
       races,
       banners,
       loading: false
+    }, ()=>{
+      wx.hideLoading({
+        success: (res) => {},
+      })
     })
   },
 

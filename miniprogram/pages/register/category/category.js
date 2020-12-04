@@ -1,41 +1,18 @@
-const { getFeedIndexList } = require("../../api/feed");
-const { feedStatus } = require("../../config/const");
-const dayjs = require("dayjs");
-// miniprogram/pages/community/community.js
+// miniprogram/pages/register/category/category.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    statuses: [
-      feedStatus.normal,
-      feedStatus.top
-    ]
+
   },
-  async fetch(){
-    wx.showLoading({
-      title: '加载中…',
-    })
-    const { statuses } = this.data;
-    const list = await getFeedIndexList(statuses[0]);
-    list.map(item=>{      
-      item.addedDate = dayjs(new Date(item.addedDate)).format("MM月DD日 hh:mm");
-      return item;
-    })
-    this.setData({
-      list
-    }, () => {
-      wx.hideLoading({
-        success: (res) => {},
-      })
-    })
-  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.fetch();
+
   },
 
   /**

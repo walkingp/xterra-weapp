@@ -45,6 +45,17 @@
 .section .hd.pb{
   padding-bottom: 30rpx;
 }
+.section .bd{
+  min-height: 100rpx;
+}
+.section .ft{
+  font-size: 22rpx;
+  color: #999;
+  padding-top: 20rpx;
+}
+.section .ft van-icon{
+  margin-left: 10rpx;
+}
 .hd navigator{
   color: #999;
   font-size: 26rpx;

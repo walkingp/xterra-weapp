@@ -1,1 +1,18 @@
-/* miniprogram/pages/community/community.wxss */
+.top{
+  margin-bottom: 20rpx;
+  border-radius: 20rpx;
+}
+.top van-icon{
+  margin-left: 20rpx;
+}
+.icon{
+  width: 50rpx;
+  height: 50rpx;
+  margin-left: 20rpx;
+}
+.van-cell{
+  height: 68rpx;
+  line-height: 68rpx;
+  border-radius: 5rpx;
+  padding-top: 10rpx;
+}

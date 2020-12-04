@@ -1,98 +1,99 @@
 <view class="container flex column">
-  <block wx:if="{{loading}}">
-    <loader />
-  </block>
-  <block wx:else>
-    <view class="flex-auto top">
-      <view class="section">
-        <banner-list list="{{detail.picUrls}}"></banner-list>
-        <view class="flex space-between align-center header">
-          <text class="title">{{detail.title}}</text>
-          <text class="status">{{detail.status}}</text>
-        </view>
-        <view class="info">
-          <view class="cells">
-            <view class="cell">
-              <text>比赛时间：</text>
-              <text class="bold">{{detail.raceDate}}</text>
-            </view>
-            <view class="cell">
-              <text>比赛地点：</text>
-              <text class="bold">{{detail.location}}</text>
-            </view>
-            <view class="cell">
-              <text>赛事组别：</text>
-              <text class="bold">{{detail.cates}}</text>
-            </view>
-            <view class="cell">
-              <text>报名截止时间：</text>
-              <text class="bold">{{detail.endRegTime}}</text>
-            </view>
+  <view class="flex-auto top">
+    <view class="section">
+      <banner-list list="{{detail.picUrls}}"></banner-list>
+      <view class="flex space-between align-center header">
+        <text class="title">{{detail.title}}</text>
+        <text class="status">{{detail.status}}</text>
+      </view>
+      <view class="info">
+        <view class="cells">
+          <view class="cell">
+            <text>比赛时间：</text>
+            <text class="bold">{{detail.raceDate}}</text>
+          </view>
+          <view class="cell">
+            <text>比赛地点：</text>
+            <text class="bold">{{detail.location}}</text>
+          </view>
+          <view class="cell">
+            <text>赛事组别：</text>
+            <text class="bold">{{detail.cates}}</text>
+          </view>
+          <view class="cell">
+            <text>报名截止时间：</text>
+            <text class="bold">{{detail.endRegTime}}</text>
           </view>
         </view>
       </view>
-      <view class="section location" wx:if="{{detail.coordinate}}">
-        <view class="hd">
-          <text>比赛地点</text>
-        </view>
-        <view class="map">
-          <map id="map" markers="{{markers}}"  longitude="{{detail.coordinate[0]}}" latitude="{{detail.coordinate[1]}}" scale="11" subkey="{{mapKey}}" layer-style="1" bindtap="showLocation" bindregionchange="regionchange"></map>
-        </view>
-        <view class="text">{{detail.location}}</view>
+    </view>
+    <view class="section location" wx:if="{{detail.coordinate}}">
+      <view class="hd">
+        <text>比赛地点</text>
       </view>
-      <view class="section icons">
-        <van-grid border="{{false}}" column-num="4">
-          <van-grid-item icon="orders-o" url="/pages/events/events" link-type="switchTab"
-            text="报名查询" />
-          <van-grid-item icon="photo-o" url="/pages/profile/profile" link-type="switchTab"
-            text="照片查询" />
-          <van-grid-item icon="notes-o" url="/pages/community/community" link-type="switchTab"
-            text="成绩查询" />
-          <van-grid-item icon="paid" url="/pages/events/events" text="装备要求" />
-          <van-grid-item icon="hotel-o" url="/pages/events/events" text="交通住宿" />
-          <van-grid-item icon="flower-o" url="/pages/events/events" text="美食美景" />
-        </van-grid>
+      <view class="map">
+        <map id="map" markers="{{markers}}" longitude="{{detail.coordinate[0]}}" latitude="{{detail.coordinate[1]}}"
+          scale="11" subkey="{{mapKey}}" layer-style="1" bindtap="showLocation" bindregionchange="regionchange"></map>
       </view>
-      <view class="section icons">
-        <view class="hd">
-          <text>赛事新闻</text>
-          <navigator url="">更多</navigator>
-        </view>
-        <view class="list">
-          <news-list list="{{news}}" type="list" />
-        </view>
+      <view class="text">{{detail.location}}</view>
+    </view>
+    <view class="section icons">
+      <van-grid border="{{false}}" column-num="4">
+        <van-grid-item icon="orders-o" url="/pages/events/events" link-type="switchTab" text="报名查询" />
+        <van-grid-item icon="photo-o" url="/pages/profile/profile" link-type="switchTab" text="照片查询" />
+        <van-grid-item icon="notes-o" url="/pages/community/community" link-type="switchTab" text="成绩查询" />
+        <van-grid-item icon="paid" url="/pages/events/events" text="装备要求" />
+        <van-grid-item icon="hotel-o" url="/pages/events/events" text="交通住宿" />
+        <van-grid-item icon="flower-o" url="/pages/events/events" text="美食美景" />
+      </van-grid>
+    </view>
+    <view class="section icons">
+      <view class="hd">
+        <text>赛事新闻</text>
+        <navigator url="">更多</navigator>
       </view>
-      <view class="section icons">
-        <view class="hd pb">
-          <text>赛事组别</text>
-          <navigator url="">更多</navigator>
-        </view>
-        <view class="list">
-          <race-cate-list list="{{cates}}" />
-        </view>
+      <view class="bd">
+        <news-list list="{{news}}" type="list" />
       </view>
-      <view class="section icons" wx:if="{{detail.routePics}}">
-        <view class="hd pb">线路图</view>
-        <view class="list">
-          <banner-list list="{{detail.routePics}}"></banner-list>
-        </view>
-      </view>
-      <view class="section content">
-        <van-tabs sticky active="{{ 0 }}" bind:change="onChange">
-          <van-tab title="比赛规程">
-            <towxml nodes="{{detail.content}}" />
-          </van-tab>
-          <van-tab title="报名须知">
-            <towxml nodes="{{detail.admission}}" />
-          </van-tab>
-          <van-tab title="赛事流程">
-            <towxml nodes="{{detail.flow}}" />
-          </van-tab>
-        </van-tabs>
+      <view class="ft flex align-center justify-center">
+        查看更多
+        <van-icon name="arrow-down" />
       </view>
     </view>
-    <view class="bottom flex-none flex justify-center align-center">
-      <button class="button">立即报名</button>
+    <view class="section icons">
+      <view class="hd pb">
+        <text>赛事组别</text>
+        <navigator url="">更多</navigator>
+      </view>
+      <view class="bd">
+        <race-cate-list list="{{cates}}" />
+      </view>
+      <view class="ft flex align-center justify-center">
+        查看全部
+        <van-icon name="arrow-down" />
+      </view>
     </view>
-  </block>
+    <view class="section icons" wx:if="{{detail.routePics}}">
+      <view class="hd pb">线路图</view>
+      <view class="list">
+        <banner-list list="{{detail.routePics}}"></banner-list>
+      </view>
+    </view>
+    <view class="section content">
+      <van-tabs sticky active="{{ 0 }}" bind:change="onChange">
+        <van-tab title="比赛规程">
+          <towxml nodes="{{detail.content}}" />
+        </van-tab>
+        <van-tab title="报名须知">
+          <towxml nodes="{{detail.admission}}" />
+        </van-tab>
+        <van-tab title="赛事流程">
+          <towxml nodes="{{detail.flow}}" />
+        </van-tab>
+      </van-tabs>
+    </view>
+  </view>
+  <view class="bottom flex-none flex justify-center align-center">
+    <button class="button">立即报名</button>
+  </view>
 </view>

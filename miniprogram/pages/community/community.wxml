@@ -1,5 +1,9 @@
 <view class="container">
-  <view class="top"></view>
+  <view class="top flex align-center">
+    <van-field class="flex-auto" value="{{ value }}" placeholder="请输入搜索内容" border="{{ false }}" bind:change="onChange" />
+    <image src="./../../images/icons/camera.svg" class="icon" />
+    <van-icon name="manager-o" size="25px" />
+  </view>
   <view class="body box">
     <feed-list list="{{list}}"></feed-list>
   </view>

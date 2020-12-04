@@ -16,7 +16,7 @@ export const getBannerList = async ( position = 'index', size = 5) => {
   return data;
 }
 
-export const getRaceNewsList = async ( raceId, size = 5) => {
+export const getRaceNewsList = async ( raceId, pageIndex = 1, size = 5) => {
   const data = await getPaginations({
     dbName: 'news',
     filter: {
@@ -27,7 +27,7 @@ export const getRaceNewsList = async ( raceId, size = 5) => {
     orderBy: {
       order: 'desc'
     },
-    pageIndex: 1,
+    pageIndex,
     pageSize: size
   })
   return data;

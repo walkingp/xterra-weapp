@@ -8,7 +8,8 @@
     "pages/news/detail/detail",
     "pages/news/news",
     "pages/more/webview/webview",
-    "pages/page/page"
+    "pages/page/page",
+    "pages/register/category/category"
   ],
   "window": {
     "backgroundColor": "#ffffff",

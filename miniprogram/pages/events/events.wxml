@@ -7,7 +7,7 @@
       <van-dropdown-item value="{{ type }}" options="{{ types }}" />
     </van-dropdown-menu>
   </view>
-  <view class="box">
+  <view class="box list">
     <race-list list="{{races}}" />
   </view>
 </view>

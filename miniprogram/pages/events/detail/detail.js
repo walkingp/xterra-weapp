@@ -17,6 +17,11 @@ Page({
     news: [],
     cates: []
   },
+  register(){
+    wx.navigateTo({
+      url: '/pages/register/register',
+    })
+  },
   async fetch(id){
     wx.showLoading({
       title: '加载中...',

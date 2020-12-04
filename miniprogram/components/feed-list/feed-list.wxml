@@ -1,5 +1,5 @@
 <view class="feeds list">
-  <view class="item" wx:for="{{feeds}}" wx:key="id">
+  <view class="item" wx:for="{{feeds}}" wx:key="id" wx:for-index="idx">
     <view class="flex space-between">
       <view class="flex flex-auto">
         <navigator>
@@ -18,7 +18,7 @@
     <view class="pics">
       <van-row gutter="10">
         <van-col span="{{item.cols}}" wx:for="{{item.picUrls}}" wx:key="item" wx:for-item="pic">
-          <image src="{{pic}}" mode="aspectFill"></image>
+          <image bindtap="preview" data-src="{{pic}}" data-index="{{idx}}" src="{{pic}}" mode="aspectFill"></image>
         </van-col>
       </van-row>      
     </view>

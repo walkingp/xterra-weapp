@@ -36,6 +36,13 @@ Component({
    * 组件的方法列表
    */
   methods: {
-
+    preview(e){
+      const { src, index } = e.currentTarget.dataset;
+      const urls = this.data.feeds[index].picUrls;
+      wx.previewImage({
+        urls,
+        current: src
+      });
+    }
   }
 })

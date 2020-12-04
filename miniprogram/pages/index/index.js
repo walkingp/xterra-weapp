@@ -14,6 +14,12 @@ Page({
     news: [],
     races: []
   },
+  gotoAbout(e){
+    const { url } = e.currentTarget.dataset;
+    wx.navigateTo({
+      url
+    });
+  },
   async fetch(){
     wx.showLoading({
       title: '加载中…',

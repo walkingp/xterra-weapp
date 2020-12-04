@@ -3,11 +3,15 @@
     <loader />
   </block>
   <block wx:else>
+    <view class="top flex column align-end justify-center">
+      <image src="./../../images/logo@2x.png"></image>
+      <button bindtap="gotoAbout" data-url="/pages/page/page?id=about" class="button">了解更多</button>
+    </view>
     <banner-list list="{{banners}}" />
     <view class="shortcuts box no-min-height">
       <van-grid border="{{false}}">
         <van-grid-item icon="/images/icons/events@2x.png" url="/pages/events/events" link-type="switchTab" text="活动报名" />
-        <van-grid-item icon="/images/icons/profile@2x.png" url="/pages/profile/profile" link-type="switchTab" text="用户中心" />
+        <van-grid-item icon="/images/icons/profile@2x.png" url="/pages/my/my" link-type="switchTab" text="用户中心" />
         <van-grid-item icon="/images/icons/community@2x.png" url="/pages/community/community" link-type="switchTab" text="社区中心" />
         <van-grid-item icon="/images/icons/points@2x.png" url="/pages/events/events" text="积分商城" />
       </van-grid>
