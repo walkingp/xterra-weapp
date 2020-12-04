@@ -1,0 +1,37 @@
+@import "./../../../../style/mi.flex.wxss";
+.title{
+  font-size: 28rpx;
+  color: #333;
+  font-weight: bold;
+  padding: 30rpx 0;
+}
+.cates .item{
+  height: 88rpx;
+  display: flex;
+  align-items: center;
+  border-radius: 10rpx;
+  background-color: #fff;
+  padding: 0 30rpx;
+  margin-bottom: 20rpx;
+}
+.blank{
+  color: transparent;
+}
+.cates .item .hd{
+  font-weight: bold;
+}
+.cates .item .label{
+  font-size: 24rpx;
+  color: #999;
+  padding-left: 20rpx;
+}
+.cates .item .unit{
+  font-size: 24rpx;
+  color: #999;
+  padding-left: 20rpx;
+}
+.cates .item .price{
+  color: #BA0C2F;
+  font-size: 30rpx;
+  font-weight: bold;
+}

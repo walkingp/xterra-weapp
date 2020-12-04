@@ -99,6 +99,18 @@
           "pathName": "pages/community/community",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "报名",
+          "pathName": "pages/register/register",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "报名状态",
+          "pathName": "pages/register/status/status",
+          "query": "",
+          "scene": null
         }
       ]
     }

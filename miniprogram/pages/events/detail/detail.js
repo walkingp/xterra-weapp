@@ -18,8 +18,9 @@ Page({
     cates: []
   },
   register(){
+    const { id } = this.data;
     wx.navigateTo({
-      url: '/pages/register/register',
+      url: `/pages/register/register?id=${id}`,
     })
   },
   async fetch(id){

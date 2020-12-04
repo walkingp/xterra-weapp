@@ -94,6 +94,6 @@
     </view>
   </view>
   <view class="bottom flex-none flex justify-center align-center">
-    <button class="button">立即报名</button>
+    <button bindtap="register" class="button">立即报名</button>
   </view>
 </view>

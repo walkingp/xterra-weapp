@@ -13,6 +13,7 @@ button::after{
   padding: 28rpx 30rpx;
 }
 page{
+  --priamry-color: #BA0C2F;
   color: #333;
   background-color: #F5F5F5;
   min-height: 100vh;
@@ -29,6 +30,14 @@ button{
   color: #DF1042;
   font-size: 30rpx;
   letter-spacing: 4rpx;
+}
+button.secondary{
+  border: solid 2rpx #aaa;
+  color: #aaa;
+}
+button.mini{
+  height: 60rpx;
+  font-size: 26rpx;
 }
 
 .h2w.h2w-light {

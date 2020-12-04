@@ -1,13 +1,40 @@
-// miniprogram/pages/register/category/category.js
+// miniprogram/pages/register/register.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    isValid: false,
+    step: 0,
+    group: 0,
+    steps: [
+      {
+        text: '选择组别',
+      },
+      {
+        text: '选择报名人',
+      },
+      {
+        text: '确认付款',
+      },
+      {
+        text: '完成报名',
+      },
+    ],
   },
-
+  nextStep(e){
+    this.setData({
+      isValid: false,
+      step: this.data.step + 1
+    })
+  },
+  prevStep(e){
+    this.setData({
+      isValid: false,
+      step: this.data.step - 1
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */

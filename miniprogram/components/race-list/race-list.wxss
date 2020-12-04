@@ -16,7 +16,7 @@
   padding-bottom: 0;
 }
 .title{
-  font-size: 30rpx;
+  font-size: 28rpx;
   font-weight: bold;
 }
 .cover image{

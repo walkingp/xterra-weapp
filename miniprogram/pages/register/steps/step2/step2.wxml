@@ -1,0 +1,15 @@
+<view class="title">请选择报名人</view>
+<view class="cates">
+  <radio-group bindchange="radioChange">
+    <view wx:for="{{3}}" class="item flex align-center space-between">
+      <view class="flex-auto flex align-center">
+        <radio id="i{{index}}" value="{{item.value}}" />
+        <label class="hd" for="i{{index}}">张小双</label>
+        <label for="i{{index}}" class="label">男</label>
+        <label for="i{{index}}" class="unit">18521562202</label>
+        <label for="i{{index}}" class="blank flex-auto">b</label>
+      </view>
+      <text>编辑</text>
+    </view>
+  </radio-group>
+</view>

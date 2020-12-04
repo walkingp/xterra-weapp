@@ -1,0 +1,18 @@
+.container{
+  height: 100vh;
+  padding: 0;
+}
+.body{
+  overflow: auto;
+  padding: 30rpx;
+}
+.buttons button{
+  background-color: transparent;
+  width: 400rpx;
+  margin: 20rpx auto;
+}
+.buttons button.secondary{
+  border: solid 2rpx #999;
+  color: #fff;
+  background-color: #999;
+}

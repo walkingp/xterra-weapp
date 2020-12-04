@@ -1,0 +1,48 @@
+image.icon{
+  width: 100rpx!important;
+  height: 100rpx!important;
+}
+.cate{
+  font-size: 26rpx;
+  padding-top: 10rpx;
+  color: #999;
+}
+.title{
+  font-size: 28rpx;
+  color: #333;
+  font-weight: bold;
+  padding-bottom: 10rpx;
+}
+.image{
+  width: 196rpx;
+  height: 145rpx;
+  border-radius: 10rpx;
+}
+.info{
+  margin-top: 20rpx;
+}
+.cell{
+  padding: 5rpx 0;
+  font-size: 26rpx;
+}
+.cell label{
+  color: #999;
+  display: inline-block;
+  width: 150rpx;
+}
+.cell:last-child{
+  border-bottom: none;
+}
+.price{
+  font-weight: bold;
+  color: #BA0C2F;
+}
+.gray{
+  color: #999;
+}
+.ft{
+  padding: 20rpx 0;
+}
+button{
+  margin: 0 0 0 20rpx;
+}

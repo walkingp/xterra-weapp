@@ -1,0 +1,23 @@
+@import "./../../../../style/mi.flex.wxss";
+
+.box{
+  min-height: 600rpx;
+  border-radius: 10rpx;
+  background-color: #fff;
+  padding: 30rpx;
+  line-height: 200%;
+  margin-top: 30rpx;
+  font-size: 24rpx;
+}
+.box image{
+  width: 100rpx;
+  height: 100rpx;
+}
+.gray{
+  color: #999;
+}
+.email{
+  color: #BA0C2F;
+  padding: 0 4rpx;
+  font-weight: bold;
+}

@@ -9,7 +9,8 @@
     "pages/news/news",
     "pages/more/webview/webview",
     "pages/page/page",
-    "pages/register/category/category"
+    "pages/register/register",
+    "pages/register/status/status"
   ],
   "window": {
     "backgroundColor": "#ffffff",
@@ -65,6 +66,7 @@
     "van-grid-item": "@vant/weapp/grid-item/index",
     "van-search": "@vant/weapp/search/index",
     "van-picker": "@vant/weapp/picker/index",
+    "van-steps": "@vant/weapp/steps/index",
     "van-loading": "@vant/weapp/loading/index"
   },
   "permission": {

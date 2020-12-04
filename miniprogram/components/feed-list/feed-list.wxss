@@ -7,7 +7,7 @@
 .content{
   margin: 30rpx 0;
   color: #333;
-  font-size: 30rpx;
+  font-size: 28rpx;
   letter-spacing: 4rpx;
 }
 .user{

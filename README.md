@@ -59,3 +59,8 @@ XTERRA官方小程序，主要功能:
 
 [CMS](https://xterra-c2969f-1258173660.tcloudbaseapp.com)
 xterra/xterra2020
+
+## 账户类：
+XTERRA阿里云
+账号：xterraplanet 
+密码：decor525$

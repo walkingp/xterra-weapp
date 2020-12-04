@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "step1": "./steps/step1/step1",
+    "step2": "./steps/step2/step2",
+    "step3": "./steps/step3/step3",
+    "step4": "./steps/step4/step4"
+  }
+}

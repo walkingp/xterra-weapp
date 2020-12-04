@@ -1,0 +1,30 @@
+@import "./../../../style/mi.flex.wxss";
+.title{
+  font-size: 28rpx;
+  color: #333;
+  font-weight: bold;
+  padding-bottom: 10rpx;
+}
+.box{
+  border-radius: 10rpx;
+  background-color: #fff;
+  padding: 30rpx;
+  line-height: 200%;
+  margin-top: 30rpx;
+}
+.box label{
+  color: #999;
+  display: inline-block;
+  width: 200rpx;
+}
+.list .cell{
+  padding: 5rpx 0;
+  font-size: 26rpx;
+  border-bottom: solid 2rpx #f1f1f1;
+}
+.list .cell:last-child{
+  border-bottom: none;
+}
+.gray{
+  color: #999;
+}

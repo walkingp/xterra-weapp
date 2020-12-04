@@ -1,0 +1,8 @@
+<view class="box flex column align-center justify-center">
+  <image src="./../../../../images/icons/succ@2x.png"></image>
+  <view class="text flex column align-center justify-center">
+    <text>恭喜你完成报名！</text>
+    <view class="gray">请登录您的邮箱<text class="email">walkingp@126.com</text>检查报名确认邮件。</view>
+    <text class="gray">如有任何报名问题，请与客服人员及时联系</text>
+  </view>
+</view>
