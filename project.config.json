@@ -111,6 +111,11 @@
           "pathName": "pages/register/status/status",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "添加报名人",
+          "pathName": "pages/register/form/form",
+          "scene": null
         }
       ]
     }

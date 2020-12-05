@@ -10,7 +10,8 @@
     "pages/more/webview/webview",
     "pages/page/page",
     "pages/register/register",
-    "pages/register/status/status"
+    "pages/register/status/status",
+    "pages/register/form/form"
   ],
   "window": {
     "backgroundColor": "#ffffff",
@@ -42,6 +43,7 @@
     "van-panel": "@vant/weapp/panel/index",
     "van-row": "@vant/weapp/row/index",
     "van-tab": "@vant/weapp/tab/index",
+    "van-area": "@vant/weapp/area/index",
     "van-tabs": "@vant/weapp/tabs/index",
     "van-sidebar": "@vant/weapp/sidebar/index",
     "van-sidebar-item": "@vant/weapp/sidebar-item/index",
