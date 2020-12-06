@@ -50,6 +50,7 @@
     "van-index-bar": "@vant/weapp/index-bar/index",
     "van-index-anchor": "@vant/weapp/index-anchor/index",
     "van-popup": "@vant/weapp/popup/index",
+    "van-datetime-picker": "@vant/weapp/datetime-picker/index",
     "van-switch": "@vant/weapp/switch/index",
     "van-action-sheet": "@vant/weapp/action-sheet/index",
     "van-col": "@vant/weapp/col/index",
