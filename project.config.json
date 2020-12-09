@@ -103,7 +103,7 @@
         {
           "name": "报名",
           "pathName": "pages/register/register",
-          "query": "",
+          "query": "id=0bcbdde05fc3a636006efd9971c76de4",
           "scene": null
         },
         {
@@ -115,6 +115,7 @@
         {
           "name": "添加报名人",
           "pathName": "pages/register/form/form",
+          "query": "",
           "scene": null
         }
       ]

@@ -1,3 +1,5 @@
+const { getRaceDetail } = require("../../api/race");
+
 // miniprogram/pages/register/register.js
 Page({
 
@@ -5,6 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    id: "",
     isValid: false,
     step: 0,
     group: 0,
@@ -39,7 +42,22 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    const { id } = options;
+    this.setData({
+      id
+    });
+    this.fetch(id);
+  },
 
+  async fetch(id){
+    const detail = await getRaceDetail(id);
+    this.setData({
+      detail
+    });
+    const {title} = detail;
+    wx.setNavigationBarTitle({
+      title,
+    })
   },
 
   /**

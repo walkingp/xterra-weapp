@@ -2,25 +2,25 @@
   请选择报名类型
 </view>
 <view class="groups flex align-center">
-  <view class="item active"><text>个人组</text></view>
-  <view class="item"><text>团队组</text></view>
-  <view class="item"><text>亲子组</text></view>
+  <view class="item active" wx:if="{{hasIndividual}}"><text>个人组</text></view>
+  <view class="item" wx:if="{{hasRelay}}"><text>团队组</text></view>
+  <view class="item" wx:if="{{hasFamily}}"><text>亲子组</text></view>
 </view>
 <view class="title">请选择组别</view>
 <view class="cates">
   <radio-group bindchange="radioChange">
-    <view wx:for="{{3}}" class="item flex align-center space-between">
+    <view wx:for="{{cates}}" wx:key="id" class="item flex align-center space-between">
       <view class="bd flex-auto flex align-center">
         <view class="flex-none">
-          <label for="p{{index}}" class="hd">半程距离个人组</label>
+          <label for="p{{index}}" class="hd">{{item.title}}</label>
           <label for="p{{index}}" class="label">报名费</label>
           <label for="p{{index}}" class="unit">￥</label>
-          <label for="p{{index}}" class="price">100</label>
+          <label for="p{{index}}" class="price">{{item.regPrice}}</label>
         </view>
         <label for="p{{index}}" class="transparent flex-auto">blank</label>
       </view>
       <view class="flex-none">
-        <radio id="p{{index}}" value="{{item.value}}" />
+        <radio id="p{{index}}" data-index="{{index}}" value="{{item._id}}" />
       </view>
     </view>
   </radio-group>
@@ -28,7 +28,7 @@
 <view class="box">
   <view class="title">报名优惠费用</view>
   <view class="desc flex column">
-    <text>11月15日前报名享受优惠价格300元；</text>
+    <text wx:if="{{}}">11月15日前报名享受优惠价格300元；</text>
     <text>11月15日前报名享受优惠价格300元；</text>
     <text>11月15日前报名享受优惠价格300元；</text>
     <text>11月15日前报名享受优惠价格300元；</text>

@@ -49,6 +49,8 @@
 }
 .cates .item .hd{
   font-weight: bold;
+  flex: none;
+  min-width: 80rpx;
 }
 .cates .item .bd .label{
   font-size: 24rpx;

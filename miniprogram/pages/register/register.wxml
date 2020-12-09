@@ -4,7 +4,7 @@
       <van-steps steps="{{ steps }}" active-color="#BA0C2F" active="{{ step }}" />
     </view>
     <view class="step1" wx:if="{{step===0}}">
-      <step1 />
+      <step1 raceId="{{id}}" raceDetail="{{detail}}" />
     </view>
     <view class="step2" wx:if="{{step===1}}">
       <step2 />
