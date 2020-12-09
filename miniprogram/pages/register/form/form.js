@@ -1,12 +1,23 @@
+import { getProfileDetail } from "../../../api/race";
 // miniprogram/pages/register/form/form.js
 import areaList from "./../../../config/area";
 const dayjs = require("dayjs");
+const app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    isLogined: false,
+    userId: null,
+    userInfo: null,
+
+    raceId: null,
+    id: null,
+    action: null,
+    detail: null,
+
     areaList: areaList,
     showAddrPicker: false,
     showDatePicker: false,
@@ -43,10 +54,58 @@ Page({
     })
   },
   onCardNoChange(e){
-
+    const idCard = e.detail.value;
+    const gender = this.getGenderFromIdCard(idCard);
+    const birthDate = this.getBirthdayFromIdCard(idCard);
+    this.setData({
+      gender,
+      birthDate
+    });
   },
-  saveData(e){
-    console.log(e);
+  async fetch(id){
+    const detail = await getProfileDetail(id);
+    
+    this.setData({
+      detail
+    });
+    const { trueName, cardType, gender, birthDate, bloodType, tSize, region, addr, cardNo, contactUser, contactUserPhone, email, phoneNum } = detail;
+    this.setData({
+      trueName, cardType, gender, birthDate: dayjs(birthDate).format("YYYY-MM-DD"), bloodType, tSize, region, addr, cardNo, contactUser, contactUserPhone, email, phoneNum
+    })
+  },
+  async saveData(e){
+    let profile = e.detail.value;
+    const { id, cardType, gender, birthDate, bloodType, tSize, region, userId, userInfo, raceId, action } = this.data;
+    profile = { ...profile, cardType, gender, birthDate, bloodType, tSize, region, birthDate: new Date(birthDate), createdAt: new Date(), userId, userName: userInfo.nickname }
+
+    const db = wx.cloud.database();
+    if(action === 'edit'){
+      const res = await db.collection("profile").doc(id).update({
+        data: profile
+      });
+      console.log(res);
+    }else{
+      const result = await db.collection("profile").add({
+        data: profile
+      });
+      console.log(result);
+    }
+    wx.showToast({
+      title: '保存成功',
+      success: ()=>{
+        setTimeout(() => {
+          if(raceId){
+            wx.redirectTo({
+              url: `/pages/register/register?id=${raceId}`,
+            });
+            return;
+          }
+          wx.redirectTo({
+            url: '/pages/my/profile/profile',
+          })
+        }, 2000);
+      }
+    })
   },
   onConfirm(e){
     const { value } = e.detail;
@@ -117,7 +176,6 @@ Page({
   },
   onClose(e){
     const { type } = e.currentTarget.dataset;
-    debugger
     switch(type){
       case 'other':
         this.setData({
@@ -140,7 +198,23 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    const { id, action, raceId } = options;
+    this.setData({
+      raceId,
+      action,
+      id
+    });
+    if(action === 'edit'){
+      this.fetch(id)
+    }
+    app.checkLogin().then(res=>{
+      const { isLogined, userId, userInfo } = res;
+      this.setData({
+        isLogined,
+        userId,
+        userInfo
+      });
+    })
   },
   getGenderFromIdCard(idCard){
     return parseInt(idCard.substr(16, 1)) % 2 == 1 ? '男' : '女';

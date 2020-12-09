@@ -53,6 +53,11 @@ Component({
         raceId
       } = this.properties;
       const cates = await getRaceCatesList(raceId);
+      cates.map(cate=>{
+        cate.earlierPriceEndTime = dayjs(cate.earlierPriceEndTime).format("YYYY年MM月DD日");
+        cate.earlyPriceEndTime = dayjs(cate.earlyPriceEndTime).format("YYYY年MM月DD日");
+        return cate;
+      });
       console.log(cates);
       const hasIndividual = cates.filter(item=>item.type === 'individual').length > 0;
       const hasRelay = cates.filter(item=>item.type === 'relay').length > 0;

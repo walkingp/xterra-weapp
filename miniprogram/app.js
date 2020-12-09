@@ -23,21 +23,14 @@ App({
                   console.log(res.result.data);
                   //如果成功获取到
                   //将获取到的用户资料写入app.js全局变量
-                  that.globalData.userInfo = res.result.data.userData
+                  that.globalData.userInfo = res.result.data
                   that.globalData.userId = res.result.data._id
                   that.globalData.isLogined = true
-                  const isJoined = !!res.result.data.branch
-                  that.globalData.isJoined = isJoined
-                  console.log('isJoined', that.globalData.isJoined)
-                  const isAdmin = res.result.data.isAdmin;
-                  that.globalData.isAdmin = isAdmin
 
                   resolve({
-                    userInfo: res.result.data.userData,
+                    userInfo: res.result.data,
                     userId: res.result.data._id,
-                    isLogined: true,
-                    isJoined,
-                    isAdmin
+                    isLogined: true
                   })
                 }else{
                   reject(null)
@@ -68,25 +61,19 @@ App({
       })
     })
   },
-  onLaunch: function () {
+  onLaunch: async function () {
     this.globalData = {
       winHeight: 0,
       userInfo: null,
       userId: null,
       isLogined: false,
       isJoined: false,
-      isAdmin: false,
       auth: {
         'scope.userInfo': false
       },
     }
 
     this.checkUpdate();
-    this.checkLogin().then(res=>{
-      console.log(res)
-    }).catch(err=>{
-      console.error(err)
-    });
     if (!wx.cloud) {
       console.error('请使用 2.2.3 或以上的基础库以使用云能力')
     } else {
@@ -94,6 +81,8 @@ App({
         env: config.env,
         traceUser: true,
       })
+      const res = await this.checkLogin();
+      console.log(res)
     }
 
     this.initDeviceInfo();

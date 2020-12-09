@@ -47,6 +47,11 @@
   margin-bottom: 20rpx;
   font-size: 28rpx;
 }
+.info{
+  font-size: 22rpx;
+  color: #999;
+  padding: 20rpx 0;
+}
 .cates .item .hd{
   font-weight: bold;
   flex: none;
@@ -81,4 +86,8 @@
   padding-bottom: 27rpx;
   font-size: 24rpx;
   color: #999;
+}
+.empty .desc text{
+  padding-bottom: 20rpx;
+  display: block;
 }

@@ -1,0 +1,19 @@
+<view class="container">
+  <view class="box">
+    <view class="title">我的报名人资料</view>
+    <view class="list">
+      <navigator url="/pages/register/form/form?action=edit&id={{item._id}}" class="cell flex align-center" wx:for="{{profiles}}" wx:key="_id">
+        <view class="flex-auto">
+          <text>{{item.trueName}}</text>
+          <text class="gray">（{{item.trueName}}）</text>
+        </view>
+        <view class="flex-none">
+          <van-icon name="arrow" />
+        </view>
+      </navigator>
+    </view>
+    <view class="footer">
+      <button bindtap="gotoAdd">添加新报名人</button>
+    </view>
+  </view>
+</view>

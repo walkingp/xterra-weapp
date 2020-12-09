@@ -61,6 +61,26 @@ export const getRaceIndexList = async ( size = 2) => {
   return data;
 }
 
+export const getMyProfiles = async (userId, size = 20) => {
+  const data = await getPaginations({
+    dbName: 'profile',
+    filter: {
+      userId,
+    },
+    orderBy: {
+      createdAt: 'desc'
+    },
+    pageIndex: 1,
+    pageSize: size
+  })
+  return data;
+}
+
+export const getProfileDetail = async id => {
+  const data = await getCollectionById({ dbName: 'profile', id });
+  return data;
+}
+
 export const getRaceDetail = async id => {
   const data = await getCollectionById({ dbName: 'race', id });
   return data;

@@ -7,6 +7,22 @@
   justify-content: space-between;
   padding: 20rpx 20rpx 20rpx 60rpx;
 }
+image.avatar{
+  width: 124rpx;
+  height: 124rpx;
+}
+.info{
+  height: 124rpx;
+  padding-left: 40rpx;
+}
+.info text{
+  font-size: 24rpx;
+  color: #fff;
+}
+.info text.userName{
+  font-size: 32rpx;
+  font-weight: bold;
+}
 .my {
   margin-top: 20rpx;
 }

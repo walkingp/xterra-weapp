@@ -117,6 +117,18 @@
           "pathName": "pages/register/form/form",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "我的报名资料",
+          "pathName": "pages/my/profile/profile",
+          "query": "id=0bcbdde05fc3a636006efd9971c76de4",
+          "scene": null
+        },
+        {
+          "name": "修改联系人资料",
+          "pathName": "pages/register/form/form",
+          "query": "action=edit&id=846bf2595fd0d6b1000dd7471a1d6b7a",
+          "scene": null
         }
       ]
     }

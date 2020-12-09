@@ -12,7 +12,7 @@ Component({
    * 组件的初始数据
    */
   data: {
-
+    isLogined: false
   },
 
   /**
@@ -127,14 +127,11 @@ Component({
       if (result) {
         const detail = result.data;
         console.log(detail)
-        const isJoined = !!detail.branch;
-        app.globalData.isJoined = isJoined;
         this.setData({
           detail,
-          isLoaded: true,
-          isJoined
+          isLoaded: true          
         },()=>{
-          this.triggerEvent('onCompleted', { isLogined: true})
+          this.triggerEvent('onCompleted', { isLogined: true, userInfo: detail })
         })
       }
     },

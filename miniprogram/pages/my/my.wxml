@@ -4,21 +4,29 @@
   </block>
   <block wx:else>
     <view class="top">
-      <view class="left">
-        <block wx:if="{{isLogined}}">
-        </block>
-        <block wx:else>
-          <login bind:onCompleted="onCompleted" />
-        </block>      
-      </view>
-      <view class="right">
-        <navigator url="">
-          <image src="./../../images/icons/edit.svg"></image>
-        </navigator>
-        <navigator url="">
-          <image src="./../../images/icons/mall.svg"></image>
-        </navigator>
-      </view>
+      <block wx:if="{{isLogined}}">
+        <view class="left">
+          <view class="flex align-center">
+            <image src="{{userInfo.avatarUrl}}" class="avatar"></image>
+            <view class="info flex column space-between">
+              <text class="userName">{{userInfo.nickname}}</text>
+              <text>性别：{{userInfo.gender === 0 ? '男' : '女'}}</text>
+              <text>积分：{{userInfo.gender}}</text>
+            </view>
+          </view>
+        </view>
+        <view class="right">
+          <navigator url="">
+            <image src="./../../images/icons/edit.svg"></image>
+          </navigator>
+          <navigator url="">
+            <image src="./../../images/icons/mall.svg"></image>
+          </navigator>
+        </view>
+      </block>
+      <block wx:else>
+        <login bind:onCompleted="onCompleted" />
+      </block>
     </view>
     <view class="box my">
       <view class="flex space-between">
@@ -29,7 +37,7 @@
           <van-grid-item icon="/images/icons/trophy.svg" url="/pages/events/events" text="我的赛事" />
           <van-grid-item icon="/images/icons/post.svg" url="/pages/profile/profile" text="社区发贴" />
           <van-grid-item icon="/images/icons/doc.svg" url="/pages/community/community" text="兑换记录" />
-          <van-grid-item icon="/images/icons/card.svg" url="/pages/events/events" text="报名资料" />
+          <van-grid-item icon="/images/icons/card.svg" url="/pages/my/profile/profile" text="报名资料" />
         </van-grid>
       </view>
     </view>

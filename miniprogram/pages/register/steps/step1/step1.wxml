@@ -12,10 +12,13 @@
     <view wx:for="{{cates}}" wx:key="id" class="item flex align-center space-between">
       <view class="bd flex-auto flex align-center">
         <view class="flex-none">
-          <label for="p{{index}}" class="hd">{{item.title}}</label>
-          <label for="p{{index}}" class="label">报名费</label>
-          <label for="p{{index}}" class="unit">￥</label>
-          <label for="p{{index}}" class="price">{{item.regPrice}}</label>
+          <view class="flex align-center">
+            <label for="p{{index}}" class="hd">{{item.title}}</label>
+            <label for="p{{index}}" class="label">报名费</label>
+            <label for="p{{index}}" class="unit">￥</label>
+            <label for="p{{index}}" class="price">{{item.regPrice}}</label>
+          </view>
+          <label class="info" wx:if="{{item.desc}}">{{item.desc}}</label>
         </view>
         <label for="p{{index}}" class="transparent flex-auto">blank</label>
       </view>
@@ -25,18 +28,26 @@
     </view>
   </radio-group>
 </view>
-<view class="box">
+<view class="box" wx:if="{{selectedCateId !== null }}">
   <view class="title">报名优惠费用</view>
   <view class="desc flex column">
-    <text wx:if="{{}}">11月15日前报名享受优惠价格300元；</text>
-    <text>11月15日前报名享受优惠价格300元；</text>
-    <text>11月15日前报名享受优惠价格300元；</text>
-    <text>11月15日前报名享受优惠价格300元；</text>
+    <text wx:if="{{cates[selectedCateId].enableEarlierBirdPrice}}">{{cates[selectedCateId].earlierPriceEndTime}}前报名享受优惠价格{{cates[selectedCateId].earlierBirdPrice}}元；</text>
+    <text wx:if="{{cates[selectedCateId].enableEarlyBirdPrice}}">{{cates[selectedCateId].earlyPriceEndTime}}前报名享受优惠价格{{cates[selectedCateId].earlyBirdPrice}}元；</text>
   </view>
   <view class="title">退改规则</view>
   <view class="desc flex column">
     <text>11月15日前报名享受优惠价格300元；</text>
     <text>11月15日前报名享受优惠价格300元；</text>
     <text>11月15日前报名享受优惠价格300元；</text>    
+  </view>
+</view>
+<view class="box empty" wx:else>
+  <view class="title">报名优惠费用</view>
+  <view class="desc">
+    <text>请选择组别看查看优惠明细</text>
+  </view>
+  <view class="title">退改规则</view>
+  <view class="desc">
+    <text>请选择组别看查看退改规则明细</text>
   </view>
 </view>

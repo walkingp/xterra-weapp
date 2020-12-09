@@ -11,7 +11,8 @@
     "pages/page/page",
     "pages/register/register",
     "pages/register/status/status",
-    "pages/register/form/form"
+    "pages/register/form/form",
+    "pages/my/profile/profile"
   ],
   "window": {
     "backgroundColor": "#ffffff",
@@ -49,6 +50,7 @@
     "van-sidebar-item": "@vant/weapp/sidebar-item/index",
     "van-index-bar": "@vant/weapp/index-bar/index",
     "van-index-anchor": "@vant/weapp/index-anchor/index",
+    "van-swipe-cell": "@vant/weapp/swipe-cell/index",
     "van-popup": "@vant/weapp/popup/index",
     "van-datetime-picker": "@vant/weapp/datetime-picker/index",
     "van-switch": "@vant/weapp/switch/index",

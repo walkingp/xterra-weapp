@@ -7,9 +7,9 @@ const tenpay = require('tenpay');
 
 // 步骤2、配置支付信息
 const config = {
-  appid: 'wx6c1f45baadc03eaf',
-  mchid: '1525190941',
-  partnerKey: 'kpYU1t9PYR5JW8ct514jExnB0JncCnoc',     //就是微信支付账户里面设置的API密钥
+  appid: 'wx491fb14c7948a753',
+  mchid: '1525969401',
+  partnerKey: '3ybPBpsiqnnKPro9rYc7ghP3Dyti95JB',     //就是微信支付账户里面设置的API密钥
   pfx: require('fs').readFileSync('apiclient_cert.p12'),      //这是pfx格式的证书，支付不用证书，但是退款什么的会用到
   notify_url: 'http://www.weixin.qq.com/wxpay/pay.php', //随便写一个，云函数无法实现返回结果，但有巧妙的方法实现同样功能
   spbill_create_ip: '127.0.0.1'   //随便写一个，为一些POS场合用的

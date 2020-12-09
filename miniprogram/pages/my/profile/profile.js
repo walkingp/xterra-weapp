@@ -1,37 +1,45 @@
-
+const { getMyProfiles } = require("../../../api/race")
 const app = getApp();
+// miniprogram/pages/my/profile/profile.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    isLogined: false,
-    userInfo: null
+    profiles: []
+  },
+  gotoAdd(){
+    wx.navigateTo({
+      url: '/pages/register/form/form',
+    })
   },
   async fetch(){
+    const { userId } = app.globalData;
+    if(!userId){
+      wx.showToast({
+        title: '没有登录',
+        icon: "none",
+        success: ()=>{
+          setTimeout(() => {
+            wx.switchTab({
+              url: '/pages/my/my',
+            })
+          }, 1000);
+        }
+      })
+    }
+    const profiles = await getMyProfiles(userId);
+    this.setData({
+      profiles
+    });
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    app.checkLogin().then(res=>{
-      const { userInfo, isLogined } = res;
-      this.setData({
-        userInfo,
-        isLogined
-      }, () => {
-        this.fetch();
-      })
-    }).catch(err=>{
-    });
-  },
-
-  onCompleted(arg){
-    const { isLogined, userInfo } = arg.detail;
-    console.log(arg)
-    this.setData({
-      isLogined
+    app.checkLogin().then(res => {
+      this.fetch();
     })
   },
 
@@ -46,12 +54,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    const {
-      isLogined
-    } = getApp().globalData;
-    this.setData({
-      isLogined
-    })
+
   },
 
   /**

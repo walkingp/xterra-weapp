@@ -1,5 +1,5 @@
 const { getRaceDetail } = require("../../api/race");
-
+const app = getApp();
 // miniprogram/pages/register/register.js
 Page({
 
@@ -9,7 +9,7 @@ Page({
   data: {
     id: "",
     isValid: false,
-    step: 0,
+    step: 2,
     group: 0,
     steps: [
       {
@@ -27,21 +27,31 @@ Page({
     ],
   },
   nextStep(e){
+    const step = this.data.step + 1;
     this.setData({
       isValid: false,
-      step: this.data.step + 1
-    })
+      step
+    });
+    app.globalData.step = step;
   },
   prevStep(e){
+    const step = this.data.step - 1;
     this.setData({
       isValid: false,
-      step: this.data.step - 1
-    })
+      step
+    });
+    app.globalData.step = step;
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    if(app.globalData.step){
+      const { step } = app.globalData;
+      this.setData({
+        step
+      });
+    }
     const { id } = options;
     this.setData({
       id
@@ -50,9 +60,16 @@ Page({
   },
 
   async fetch(id){
+    wx.showLoading({
+      title: '加载中',
+    })
     const detail = await getRaceDetail(id);
     this.setData({
       detail
+    },() => {
+      wx.hideLoading({
+        success: (res) => {},
+      })
     });
     const {title} = detail;
     wx.setNavigationBarTitle({

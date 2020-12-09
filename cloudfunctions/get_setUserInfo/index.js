@@ -32,7 +32,7 @@ exports.main = async (event, context) => {
     //获取当前用户信息
     try {
       return await usersTable.doc(md5(wxContext.OPENID)).field({
-        openid: false
+        _openid: false
       }).get()
     } catch (e) {
       console.error(e)
@@ -43,10 +43,11 @@ exports.main = async (event, context) => {
       return await usersTable.add({
         data: {
           _id: md5(wxContext.OPENID),
-          openid: wxContext.OPENID,
-          userData: event.userData,
-          nickName: event.userData.nickName,
-          createdAt: new Date()
+          _openid: wxContext.OPENID,
+          nickname: event.userData.nickName,
+          avatarUrl: event.userData.avatarUrl,
+          gender: event.userData.gender,
+          addedDate: new Date()
         }
       })
     } catch (e) {

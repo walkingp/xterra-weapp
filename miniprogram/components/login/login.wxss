@@ -3,14 +3,26 @@
   display: flex;
   align-items: center;
 }
-.login image{
+.userinfo-avatar{
   width: 124rpx!important;
   height: 124rpx!important;
+  overflow:hidden;  
+  border-radius: 50%;  
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2); 
+  margin-right: 40rpx;
+}
+.mytop-username{
+  font-size: 32rpx;
+  font-family: SourceHanSansCN-Medium;
+  color: #fff;
+  font-weight: bold;
+  margin-top: 10rpx;
 }
 .btnLogin{
   background: transparent;
   border: none;
   color: #9F9F9F;
+  padding: 0!important;
   margin: 0;
   font-size: 32rpx;
 }
