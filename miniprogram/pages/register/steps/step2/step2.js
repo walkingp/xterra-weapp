@@ -36,6 +36,11 @@ Component({
         });
       })
     },
+    checkboxChanged(e){
+      const profileIds = e.detail.value;
+      app.globalData.order.profileIds = profileIds;
+      debugger;
+    },
     gotoAdd(){
       wx.navigateTo({
         url: '/pages/register/form/form?action=register',

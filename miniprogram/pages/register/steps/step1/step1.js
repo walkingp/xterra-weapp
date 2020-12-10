@@ -3,7 +3,7 @@ const {
 } = require("../../../../api/race");
 const dayjs = require("dayjs");
 
-// pages/register/steps/step1/step1.js
+const app = getApp();
 Component({
   /**
    * 组件的属性列表
@@ -47,6 +47,12 @@ Component({
       this.setData({
         selectedCateId
       });
+      app.globalData.order = {
+        raceId: this.properties.raceId,
+        raceTitle: this.properties.raceDetail.title,
+        cateId: selectedCateId,
+        cateTitle: this.data.cates[selectedCateId].title
+      };
     },
     async fetch() {
       const {

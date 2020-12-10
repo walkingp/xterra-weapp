@@ -1,10 +1,10 @@
 <view class="title">请选择报名人</view>
 <view class="cates">
   <block wx:if="{{profiles.length>0}}">
-  <checkbox-group bindchange="radioChange">
+  <checkbox-group bindchange="checkboxChanged">
     <view class="item flex align-center space-between" wx:for="{{profiles}}" wx:key="_id">
       <view class="flex-auto flex align-center">
-        <checkbox id="i{{index}}" value="{{item.value}}" />
+        <checkbox id="i{{index}}" value="{{item._id}}" />
         <label class="hd" for="i{{index}}">{{item.trueName}}</label>
         <label for="i{{index}}" class="label">{{item.gender}}</label>
         <label for="i{{index}}" class="unit">{{item.phoneNum}}</label>

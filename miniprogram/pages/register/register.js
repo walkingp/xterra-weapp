@@ -9,7 +9,7 @@ Page({
   data: {
     id: "",
     isValid: false,
-    step: 1,
+    step: 0,
     group: 0,
     steps: [
       {
@@ -33,6 +33,7 @@ Page({
       step
     });
     app.globalData.step = step;
+
   },
   prevStep(e){
     const step = this.data.step - 1;

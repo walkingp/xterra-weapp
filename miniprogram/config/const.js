@@ -1,5 +1,6 @@
 export const storageKey = {
-  userId: 'userId'
+  userId: 'userId',
+  order: 'order'
 };
 
 export const feedStatus = {
