@@ -1,0 +1,8 @@
+<van-tabs active="{{ active }}" bind:change="onChange">
+  <van-tab title="全部报名">
+    <reg-list />
+  </van-tab>
+  <van-tab title="已完成">内容 2</van-tab>
+  <van-tab title="待付款">内容 3</van-tab>
+  <van-tab title="已取消">内容 4</van-tab>
+</van-tabs>

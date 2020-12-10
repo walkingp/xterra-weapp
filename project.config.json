@@ -129,6 +129,12 @@
           "pathName": "pages/register/form/form",
           "query": "action=edit&id=846bf2595fd0d6b1000dd7471a1d6b7a",
           "scene": null
+        },
+        {
+          "name": "我的报名",
+          "pathName": "pages/my/registration/registration",
+          "query": "action=edit&id=846bf2595fd0d6b1000dd7471a1d6b7a",
+          "scene": null
         }
       ]
     }

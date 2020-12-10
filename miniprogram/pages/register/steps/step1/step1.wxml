@@ -42,12 +42,9 @@
   </view>
 </view>
 <view class="box empty" wx:else>
-  <view class="title">报名优惠费用</view>
+  <view class="title">注意事项</view>
   <view class="desc">
-    <text>请选择组别看查看优惠明细</text>
-  </view>
-  <view class="title">退改规则</view>
-  <view class="desc">
-    <text>请选择组别看查看退改规则明细</text>
+    <text>每次只能选择一个组别进行报名，如需多人报名多个组别，请依次完成每个组别的报名；</text>
+    <text>各组别优惠价格及退改政策，请点击选择组别后查看报名优惠价格。</text>
   </view>
 </view>

@@ -3,3 +3,6 @@ button{
   background-color: transparent!important;
   color: #DF1042!important;
 }
+.title{
+  font-weight: bold;
+}

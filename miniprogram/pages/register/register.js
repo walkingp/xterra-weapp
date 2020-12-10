@@ -9,7 +9,7 @@ Page({
   data: {
     id: "",
     isValid: false,
-    step: 2,
+    step: 0,
     group: 0,
     steps: [
       {

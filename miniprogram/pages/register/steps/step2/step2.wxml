@@ -1,15 +1,21 @@
 <view class="title">请选择报名人</view>
 <view class="cates">
-  <radio-group bindchange="radioChange">
-    <view wx:for="{{3}}" class="item flex align-center space-between">
+  <checkbox-group bindchange="radioChange">
+    <view class="item flex align-center space-between" wx:for="{{profiles}}" wx:key="_id">
       <view class="flex-auto flex align-center">
-        <radio id="i{{index}}" value="{{item.value}}" />
-        <label class="hd" for="i{{index}}">张小双</label>
-        <label for="i{{index}}" class="label">男</label>
-        <label for="i{{index}}" class="unit">18521562202</label>
+        <checkbox id="i{{index}}" value="{{item.value}}" />
+        <label class="hd" for="i{{index}}">{{item.trueName}}</label>
+        <label for="i{{index}}" class="label">{{item.gender}}</label>
+        <label for="i{{index}}" class="unit">{{item.phoneNum}}</label>
         <label for="i{{index}}" class="blank flex-auto">b</label>
       </view>
-      <text>编辑</text>
+      <navigator url="/pages/register/form/form?action=edit&id={{item._id}}">编辑</navigator>
     </view>
-  </radio-group>
+  </checkbox-group>
+</view>
+<view class="box">
+  <view class="title">提示</view>
+  <view class="tip">
+    同一项目可选择多个报名人；如需要报名多个项目，需要依次选择单个项目报名后，再进行其他项目报名。
+  </view>
 </view>

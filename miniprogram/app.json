@@ -12,7 +12,8 @@
     "pages/register/register",
     "pages/register/status/status",
     "pages/register/form/form",
-    "pages/my/profile/profile"
+    "pages/my/profile/profile",
+    "pages/my/registration/registration"
   ],
   "window": {
     "backgroundColor": "#ffffff",
@@ -30,6 +31,7 @@
     "news-list": "/components/news-list/news-list",
     "race-list": "/components/race-list/race-list",
     "feed-list": "/components/feed-list/feed-list",
+    "reg-list": "/components/reg-list/reg-list",
     "race-cate-list": "/components/race-cate-list/race-cate-list",
     "van-button": "@vant/weapp/button/index",
     "van-calendar": "@vant/weapp/calendar/index",

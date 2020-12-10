@@ -2,23 +2,14 @@
 <view class="box">
   <view class="title">报名人资料：</view>
   <view class="list">
-    <view class="cell flex align-center">
+    <navigator url="/pages/register/form/form?action=edit&id={{item._id}}" class="cell flex align-center" wx:for="{{profiles}}" wx:key="_id">
       <view class="flex-auto">
-        <text>米高</text>
-        <text class="gray">（奥运距离个人组）</text>
+        <text>{{item.trueName}}</text>
+        <text class="gray">（{{item.phoneNum}}）</text>
       </view>
       <view class="flex-none">
         <van-icon name="arrow" />
       </view>
-    </view>
-    <view class="cell flex align-center">
-      <view class="flex-auto">
-        <text>米高</text>
-        <text class="gray">（奥运距离个人组）</text>
-      </view>
-      <view class="flex-none">
-        <van-icon name="arrow" />
-      </view>
-    </view>
+    </navigator>
   </view>
 </view>
