@@ -46,3 +46,13 @@
   color: #999;
   font-size: 24rpx;
 }
+button.button{
+  background-color: transparent;
+  width: 400rpx;
+}
+.empty{
+  text-align: center;
+  font-size: 24rpx;
+  color: #999;
+  padding-bottom: 20rpx;
+}

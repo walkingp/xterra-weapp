@@ -1,5 +1,6 @@
 <view class="title">请选择报名人</view>
 <view class="cates">
+  <block wx:if="{{profiles.length>0}}">
   <checkbox-group bindchange="radioChange">
     <view class="item flex align-center space-between" wx:for="{{profiles}}" wx:key="_id">
       <view class="flex-auto flex align-center">
@@ -12,10 +13,11 @@
       <navigator url="/pages/register/form/form?action=edit&id={{item._id}}">编辑</navigator>
     </view>
   </checkbox-group>
-</view>
-<view class="box">
-  <view class="title">提示</view>
-  <view class="tip">
-    同一项目可选择多个报名人；如需要报名多个项目，需要依次选择单个项目报名后，再进行其他项目报名。
+  </block>
+<block wx:else>
+  <view class="empty">你还没有添加过任何报名资料</view>
+</block>
+  <view class="buttons">
+    <button bindtap="gotoAdd" class="button">添加新报名人</button>
   </view>
 </view>

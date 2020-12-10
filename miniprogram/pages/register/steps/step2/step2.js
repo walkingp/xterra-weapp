@@ -36,5 +36,10 @@ Component({
         });
       })
     },
+    gotoAdd(){
+      wx.navigateTo({
+        url: '/pages/register/form/form?action=register',
+      })
+    }
   }
 })
