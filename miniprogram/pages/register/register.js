@@ -1,4 +1,5 @@
-const { getRaceDetail } = require("../../api/race");
+const { getRaceDetail, getRegistrationDetail } = require("../../api/race");
+const { orderStatus } = require("../../config/const");
 const app = getApp();
 // miniprogram/pages/register/register.js
 Page({
@@ -11,6 +12,7 @@ Page({
     isValid: false,
     step: 0,
     group: 0,
+    order: null,
     steps: [
       {
         text: '选择组别',
@@ -33,7 +35,40 @@ Page({
       step
     });
     app.globalData.step = step;
-
+    switch(step){
+      case 0:
+        break;
+      case 1:
+        break;
+      case 2:
+        this.order();
+        break;
+    }
+  },
+  order(){
+    let { order } = app.globalData;
+    order.userId = app.globalData.userId;
+    order.userName = app.globalData.userName;
+    order.userInfo = app.globalData.userInfo;
+    order.status = orderStatus.pending; // 待支付
+    wx.cloud.callFunction({
+      name: 'saveOrder',
+      data: {
+        data: order
+      }
+    }).then(async res => {
+      console.log(res);
+      debugger
+      const { id, orderNum } = res.result;
+      
+      app.globalData.order.id = id;
+      app.globalData.order.orderNum = orderNum;
+      console.log(app.globalData.order);
+      const { order } = app.globalData;
+      this.setData({
+        order
+      });
+    }).catch(console.error)
   },
   prevStep(e){
     const step = this.data.step - 1;

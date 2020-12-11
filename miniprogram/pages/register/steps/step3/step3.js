@@ -4,34 +4,45 @@ Component({
    * 组件的属性列表
    */
   properties: {
-
+    order: {
+      type: Object
+    }
   },
 
   /**
    * 组件的初始数据
    */
   data: {
-    money: 1
+    money: 1,
+    detail: null
   },
-
+  observers: {
+    'order': function(detail) {
+      if(detail && detail.id){
+        this.setData({
+          detail
+        });
+      }
+    }
+  },
   /**
    * 组件的方法列表
    */
   methods: {
-    confirmOrder: function() {
+    confirmOrder: function(e) {
+      const { detail } = this.data;
       const that = this;
       const nonceStr = Math.random().toString(36).substr(2, 15)
       const timeStamp = parseInt(Date.now() / 1000) + ''
       const out_trade_no = "otn" + nonceStr + timeStamp
-      const fee = this.data.money;
   
       wx.cloud.callFunction({
         name: "payment",
         data: {
           command: "pay",
           out_trade_no,
-          body: '2021年XTERRA报名',
-          total_fee: fee.toString()
+          body: detail.raceTitle,
+          total_fee: detail.totalFee.toString()
         },
         success(res) {
           console.log("云函数payment提交成功：", res.result)
@@ -43,6 +54,7 @@ Component({
       })
     },
     pay(payData) {
+      const { detail } = this.data;
       //官方标准的支付方法
       wx.requestPayment({ //已经得到了5个参数
         timeStamp: payData.timeStamp,
@@ -59,10 +71,30 @@ Component({
               command: "payOK",
               out_trade_no: "test0004"
             },
+            success: function(){
+              wx.showToast({
+                icon: 'success',
+                title: '支付成功',
+                success: function(){
+                  wx.redirectTo({
+                    url: `/pages/register/status/status?orderNum=${orderNum}`,
+                  })
+                }
+              })
+            }
           })
         },
         fail(res) {
-          console.log("支付失败：", res)
+          console.log("支付失败：", res);
+          wx.showToast({
+            icon: 'none',
+            title: '支付失败',
+            success: function(){
+              wx.redirectTo({
+                url: `/pages/register/status/status?orderNum=${orderNum}`,
+              })
+            }
+          })
         },
        complete(res) {
           console.log("支付完成：", res)
@@ -72,16 +104,17 @@ Component({
   
     //退款
     refund: function() {
+      const { detail } = this.data;
       let that = this;
       wx.cloud.callFunction({
         name: "payment",
         data: {
           command: "refund",
           out_trade_no: "test0005",
-          body: '2021年XTERRA报名',
+          body: detail.raceTitle,
           total_fee: 1,
           refund_fee: 1,
-          refund_desc: '押金退款'
+          refund_desc: '报名费退款'
         },
         success(res) {
           console.log("云函数payment提交成功：", res)

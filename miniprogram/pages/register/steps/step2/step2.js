@@ -28,18 +28,30 @@ Component({
    */
   methods: {
     async fetch() {
+      wx.showLoading({
+        title: '加载中……',
+      })
       app.checkLogin().then(async res => {
         const { userId } = res;
         const profiles = await getMyProfiles(userId);
         this.setData({
           profiles
+        }, () => {
+          wx.hideLoading({
+            success: (res) => {},
+          })
         });
       })
     },
     checkboxChanged(e){
       const profileIds = e.detail.value;
-      app.globalData.order.profileIds = profileIds;
-      debugger;
+      let { profiles } = this.data;
+      profiles = profiles.filter(item => {
+        return profileIds.includes(item._id);
+      });
+      app.globalData.order.profiles = profiles;
+      app.globalData.order.profileCount = profiles.length;
+      app.globalData.order.totalFee = app.globalData.order.price * profiles.length;
     },
     gotoAdd(){
       wx.navigateTo({

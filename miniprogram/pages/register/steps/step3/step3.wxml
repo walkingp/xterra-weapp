@@ -1,21 +1,21 @@
 <view class="box">
   <view class="title">报名信息：</view>
   <view class="cell">
-    <label>选择项目：</label>
-    <text>奥运距离个人组</text>
+    <label>比赛名称：</label>
+    <text>{{detail.raceTitle}}</text>
   </view>
   <view class="cell">
     <label>报名类别：</label>
-    <text>个人组</text>
+    <text>{{detail.cateTitle}}</text>
   </view>
   <view class="cell">
     <label>总费用：</label>
-    <text>￥480</text>
+    <text>￥{{detail.totalFee}}</text>
   </view>
   <view class="cell">
     <label>订单状态：</label>
-    <text>未支付</text>
+    <text>待支付</text>
   </view>
 </view>
-<userlist />
-<button bindtap="confirmOrder">立即支付</button>
+<userlist profiles="{{detail.profiles}}" />
+<button data-fee="{{detail.totalFee}}" bindtap="confirmOrder">立即支付</button>

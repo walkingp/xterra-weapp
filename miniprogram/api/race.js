@@ -81,6 +81,10 @@ export const getProfileDetail = async id => {
   return data;
 }
 
+export const getRegistrationDetail = async id => {
+  const data = await getCollectionById({ dbName: 'registration', id });
+  return data;
+}
 export const getRaceDetail = async id => {
   const data = await getCollectionById({ dbName: 'race', id });
   return data;

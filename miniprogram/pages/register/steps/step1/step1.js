@@ -44,10 +44,12 @@ Component({
     radioChange(e){
       const { value } = e.detail;
       const selectedCateId = this.data.cates.findIndex(item=>item._id === value);
+      const selectedCate = this.data.cates.find(item=>item._id === value);
       this.setData({
         selectedCateId
       });
       app.globalData.order = {
+        price: selectedCate.price,
         raceId: this.properties.raceId,
         raceTitle: this.properties.raceDetail.title,
         cateId: selectedCateId,
@@ -62,6 +64,10 @@ Component({
       cates.map(cate=>{
         cate.earlierPriceEndTime = dayjs(cate.earlierPriceEndTime).format("YYYY年MM月DD日");
         cate.earlyPriceEndTime = dayjs(cate.earlyPriceEndTime).format("YYYY年MM月DD日");
+
+        //此处用于判断当前价格
+        cate.price = cate.earlierBirdPrice;
+
         return cate;
       });
       console.log(cates);

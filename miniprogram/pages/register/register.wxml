@@ -10,7 +10,7 @@
       <step2 />
     </view>
     <view class="step3" wx:if="{{step===2}}">
-      <step3 />
+      <step3 order="{{order}}" />
     </view>
     <view class="step4" wx:if="{{step===3}}">
       <step4 />
