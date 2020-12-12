@@ -1,2 +1,24 @@
 @import "./../../style/mi.flex.wxss";
 @import "./../../style/app.common.wxss";
+.list{
+  padding: 30rpx;
+}
+.item{
+  background-color: #fff;
+  padding: 30rpx;
+  border-radius: 10rpx;
+}
+
+.item+.item{
+  margin-top: 30rpx;
+}
+.cover image{
+  width: 54rpx;
+  height: 54rpx;
+}
+.buttons button{
+  margin: 0!important;
+}
+.buttons button+button{
+  margin-left: 30rpx!important;
+}

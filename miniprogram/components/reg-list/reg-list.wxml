@@ -4,14 +4,21 @@
       wx:key="_id">
       <view class="hd flex space-between align-center">
         <text class="title">{{item.title}}</text>
-        <text class="status ing">{{item.status}}</text>
       </view>
       <view class="flex align-center">
         <view class="cover flex-none">
           <image src="{{item.picUrls[0]}}" mode="aspectFill"></image>
         </view>
-        <view class="flex-auto text flex column space-betwee info">
+        <view class="flex-auto text flex space-betwee info">
           <text>组别：{{item.cate}}</text>
+          <text class="price">￥480.00</text>
+        </view>
+      </view>
+      <view class="flex space-between aign-center">
+        <text class="status flex-none ing">{{item.status}}</text>
+        <view class="buttons flex-auto justify-end flex align-center">
+          <button class="secondary">查看详情</button>
+          <button class="primary">去支付</button>
         </view>
       </view>
     </navigator>
