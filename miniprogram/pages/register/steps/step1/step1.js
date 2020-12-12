@@ -34,13 +34,22 @@ Component({
     earlyPriceEndTime: '',
     hasIndividual: false,
     hasRelay: false,
-    hasFamily: false
+    hasFamily: false,
+    selectedGroupType: 'individual',
+    selectedGroupText: '个人组'
   },
 
   /**
    * 组件的方法列表
    */
   methods: {
+    changeGroup(e){
+      const { type, title } = e.currentTarget.dataset;
+      this.setData({
+        selectedGroupType: type,
+        selectedGroupText: title
+      })
+    },
     radioChange(e){
       const { value } = e.detail;
       const selectedCateId = this.data.cates.findIndex(item=>item._id === value);
@@ -52,8 +61,11 @@ Component({
         price: selectedCate.price,
         raceId: this.properties.raceId,
         raceTitle: this.properties.raceDetail.title,
+        racePic: this.properties.raceDetail.picUrls,
         cateId: selectedCateId,
-        cateTitle: this.data.cates[selectedCateId].title
+        cateTitle: this.data.cates[selectedCateId].title,
+        groupType: this.data.selectedGroupType,
+        groupText: this.data.selectedGroupText
       };
     },
     async fetch() {

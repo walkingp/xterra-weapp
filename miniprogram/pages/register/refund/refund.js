@@ -1,42 +1,20 @@
-const { getRegistrationDetail, updateOrderStatus } = require("../../../api/race");
-const dayjs = require("dayjs");
-const { orderStatus } = require("../../../config/const");
-// miniprogram/pages/register/status/status.js
+// miniprogram/pages/register/refund/refund.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    id: null,
-    detail: null
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    const { id } = options;
-    this.setData({
-      id
-    });
-    this.fetch(id);
+
   },
 
-  async fetch( id ) {
-    const detail = await getRegistrationDetail(id);
-    detail.orderTime = dayjs(detail.addedDate).format("YYYY-MM-DD HH:mm:ss");
-    this.setData({
-      detail
-    });
-    console.log(detail);
-  },
-  redirect(e){
-    const { url } = e.currentTarget.dataset;
-    wx.navigateTo({
-      url
-    })
-  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

@@ -4,7 +4,7 @@
       <banner-list list="{{detail.picUrls}}"></banner-list>
       <view class="flex space-between align-center header">
         <text class="title">{{detail.title}}</text>
-        <text class="status">{{detail.status}}</text>
+        <text class="status ing">{{detail.status}}</text>
       </view>
       <view class="info">
         <view class="cells">

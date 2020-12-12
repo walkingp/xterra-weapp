@@ -1,3 +1,6 @@
+const { updateOrderStatus } = require("../../../../api/race");
+const { orderStatus } = require("../../../../config/const");
+
 // pages/register/steps/step3/step3.js
 Component({
   /**
@@ -55,6 +58,7 @@ Component({
     },
     pay(payData) {
       const { detail } = this.data;
+      debugger
       //官方标准的支付方法
       wx.requestPayment({ //已经得到了5个参数
         timeStamp: payData.timeStamp,
@@ -72,29 +76,35 @@ Component({
               out_trade_no: "test0004"
             },
             success: function(){
-              wx.showToast({
-                icon: 'success',
-                title: '支付成功',
-                success: function(){
-                  wx.redirectTo({
-                    url: `/pages/register/status/status?orderNum=${orderNum}`,
-                  })
-                }
+              updateOrderStatus({id:detail.id, ...orderStatus.paid }).then(res=>{
+                console.log(res);
+                wx.showToast({
+                  icon: 'success',
+                  title: '支付成功',
+                  success: function(){
+                    wx.redirectTo({
+                      url: `/pages/register/status/status?id=${detail.id}`,
+                    })
+                  }
+                })
               })
             }
           })
         },
         fail(res) {
           console.log("支付失败：", res);
-          wx.showToast({
-            icon: 'none',
-            title: '支付失败',
-            success: function(){
-              wx.redirectTo({
-                url: `/pages/register/status/status?orderNum=${orderNum}`,
-              })
-            }
-          })
+          updateOrderStatus({id:detail.id, ...orderStatus.failed }).then(res=>{
+            console.log(res);
+            wx.showToast({
+              icon: 'none',
+              title: '支付失败',
+              success: function(){
+                wx.redirectTo({
+                  url: `/pages/register/status/status?id=${detail.id}`,
+                })
+              }
+            })
+          });
         },
        complete(res) {
           console.log("支付完成：", res)

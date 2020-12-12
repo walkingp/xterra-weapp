@@ -1,3 +1,6 @@
+const { getMyRegistrations } = require("../../../api/race")
+const app = getApp();
+const dayjs = require("dayjs");
 // miniprogram/pages/my/registration/registration.js
 Page({
 
@@ -5,6 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    regs: [],
     active: 0
   },
   onChange(e){
@@ -14,7 +18,22 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    app.checkLogin().then(res => {
+      this.fetch();
+    })
 
+  },
+
+  async fetch(){
+    const { userId } = app.globalData;
+    const regs = await getMyRegistrations(userId);
+    regs.map(item => {
+      item.regDate = dayjs(item.addedDate).format("YYYY-MM-DD");
+      return item;
+    });
+    this.setData({
+      regs
+    })
   },
 
   /**

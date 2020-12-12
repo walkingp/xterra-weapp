@@ -13,7 +13,8 @@
     "pages/register/status/status",
     "pages/register/form/form",
     "pages/my/profile/profile",
-    "pages/my/registration/registration"
+    "pages/my/registration/registration",
+    "pages/register/refund/refund"
   ],
   "window": {
     "backgroundColor": "#ffffff",

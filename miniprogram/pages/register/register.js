@@ -50,7 +50,9 @@ Page({
     order.userId = app.globalData.userId;
     order.userName = app.globalData.userName;
     order.userInfo = app.globalData.userInfo;
-    order.status = orderStatus.pending; // 待支付
+    order.status = orderStatus.pending.status; // 待支付
+    order.statusText = orderStatus.pending.statusText;
+    order.orderType = '微信支付';
     wx.cloud.callFunction({
       name: 'saveOrder',
       data: {
@@ -58,10 +60,9 @@ Page({
       }
     }).then(async res => {
       console.log(res);
-      debugger
       const { id, orderNum } = res.result;
       
-      app.globalData.order.id = id;
+      app.globalData.order.id = id._id;
       app.globalData.order.orderNum = orderNum;
       console.log(app.globalData.order);
       const { order } = app.globalData;

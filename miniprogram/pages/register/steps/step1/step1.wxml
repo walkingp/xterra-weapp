@@ -2,9 +2,9 @@
   请选择报名类型
 </view>
 <view class="groups flex align-center">
-  <view class="item active" wx:if="{{hasIndividual}}"><text>个人组</text></view>
-  <view class="item" wx:if="{{hasRelay}}"><text>团队组</text></view>
-  <view class="item" wx:if="{{hasFamily}}"><text>亲子组</text></view>
+  <view class="item active" bindtap="changeGroup" data-title="个人组" data-type="individual" wx:if="{{hasIndividual}}"><text>个人组</text></view>
+  <view class="item" bindtap="changeGroup" data-title="团队组" data-type="relay" wx:if="{{hasRelay}}"><text>团队组</text></view>
+  <view class="item" bindtap="changeGroup" data-title="亲子组" data-type="family" wx:if="{{hasFamily}}"><text>亲子组</text></view>
 </view>
 <view class="title">请选择组别</view>
 <view class="cates">

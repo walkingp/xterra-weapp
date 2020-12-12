@@ -3,6 +3,23 @@
 .list{
   padding: 30rpx;
 }
+.hd{
+  border-bottom: solid 2rpx #f1f1f1;
+  padding-bottom: 20rpx;
+}
+.gray{
+  color: #999;
+}
+.bd{
+  padding: 20rpx 0;
+}
+.ft{
+  border-top: solid 2rpx #f1f1f1;
+  padding-top: 20rpx;
+}
+.title{
+  font-weight: bold;
+}
 .item{
   background-color: #fff;
   padding: 30rpx;
@@ -13,12 +30,35 @@
   margin-top: 30rpx;
 }
 .cover image{
-  width: 54rpx;
-  height: 54rpx;
+  width: 100rpx;
+  height: 100rpx;
+  margin-right: 20rpx;
+  border-radius: 10rpx;
 }
 .buttons button{
   margin: 0!important;
+  height: 50rpx!important;
+  border-radius: 40rpx!important;
+}
+.buttons button.primary{
+  background-color: #DF1042;
+  color: #fff;
 }
 .buttons button+button{
   margin-left: 30rpx!important;
+}
+.info{
+  font-size: 26rpx;
+  color: #999;
+}
+.info .price{
+  color: #DF1042;
+}
+.fee{
+  padding-bottom: 20rpx;
+  color: #999;
+}
+.fee .bold{
+  font-weight: bold;
+  color: #DF1042;
 }

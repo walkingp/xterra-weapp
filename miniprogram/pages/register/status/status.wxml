@@ -1,42 +1,54 @@
 <view class="container flex column">
   <view class="box flex column align-center justify-center">    
     <image class="icon" src="./../../../images/icons/succ@2x.png" />
-    <text>报名成功</text>
+    <text>{{detail.statusText}}</text>
   </view>
-  <navigator class="box flex align-center space-between">
+  <navigator url="pages/events/detail/detail?id={{detail.raceId}}" class="box flex align-center space-between">
     <view class="flex-auto flex align-center">
       <image src="./../../../images/avatar@2x.png" class="image"></image>
       <view class="text flex column">
-        <text class="title">2020XTERRA昆明越野铁三赛</text>
-        <text class="cate">30KM组</text>
+        <text class="title">{{detail.raceTitle}}</text>
+        <text class="cate">{{detail.cateTitle}}</text>
       </view>
     </view>
     <van-icon class="flex-none" name="arrow" />
   </navigator>
-  <userlist />
+  <userlist profiles="{{detail.profiles}}" />
   <view class="box info">
     <view class="title">报名信息：</view>
     <view class="list">
       <view class="cell">
+        <label>订单编号：</label>
+        <text>{{detail.orderNum}}</text>
+      </view>
+      <view class="cell">
+        <label>订单时间：</label>
+        <text>{{detail.orderTime}}</text>
+      </view>
+      <view class="cell">
         <label>选择项目：</label>
-        <text>奥运距离个人组</text>
+        <text>{{detail.cateTitle}}</text>
       </view>
       <view class="cell">
         <label>报名类别：</label>
-        <text>个人组</text>
+        <text>{{detail.cateTitle}}</text>
       </view>
       <view class="cell">
         <label>总费用：</label>
-        <text class="price">￥480</text>
+        <text class="price">￥{{detail.totalFee}}</text>
       </view>
       <view class="cell">
         <label>付款方式</label>
         <text>微信支付</text>
       </view>
+      <view class="cell">
+        <label>订单状态：</label>
+        <text>{{detail.statusText}}</text>
+      </view>
     </view>
     <view class="ft flex justify-end align-center">
-      <button class="button secondary mini">申请退款</button>
-      <button class="button mini">我的报名</button>
+      <button bindtap="redirect" data-url="/pages/register/refund/refund?id={{detail._id}}" class="button secondary mini">申请退款</button>
+      <button bindtap="redirect" data-url="/pages/my/registration/registration" class="button mini">我的报名</button>
     </view>
   </view>
 </view>

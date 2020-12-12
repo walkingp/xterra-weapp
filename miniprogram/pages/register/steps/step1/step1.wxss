@@ -1,7 +1,7 @@
 @import "./../../../../style/mi.flex.wxss";
 .groups .item{
   height: 244rpx;
-  flex: auto;
+  width: 220rpx;
   border-radius: 10rpx;
   display: flex;
   align-items: center;
@@ -38,7 +38,7 @@
 }
 
 .cates .item{
-  height: 88rpx;
+  height: 100rpx;
   display: flex;
   align-items: center;
   border-radius: 10rpx;
@@ -78,6 +78,7 @@
 }
 .transparent{
   color: transparent;
+  height: 100rpx;
 }
 .box .title{
   padding: 0 0 36rpx 0;

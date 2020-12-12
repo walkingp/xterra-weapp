@@ -109,7 +109,7 @@
         {
           "name": "报名状态",
           "pathName": "pages/register/status/status",
-          "query": "orderNum=20201211152814974016",
+          "query": "id=cc9f30fe5fd4bb9f00184bb601000de2",
           "scene": null
         },
         {
