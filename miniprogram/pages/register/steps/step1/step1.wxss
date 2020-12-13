@@ -73,12 +73,15 @@
 .info{
   font-size: 22rpx;
   color: #999;
-  padding: 20rpx 0;
+  display: block;
 }
 .cates .item .hd{
   font-weight: bold;
   flex: none;
   min-width: 80rpx;
+}
+.left{
+  padding: 15rpx 0;
 }
 .cates .item .bd .label{
   font-size: 24rpx;

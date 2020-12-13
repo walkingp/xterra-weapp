@@ -49,6 +49,7 @@ Component({
       profiles = profiles.filter(item => {
         return profileIds.includes(item._id);
       });
+      this.triggerEvent('onComplete', { prevEnabled: true, nextEnabled: profileIds.length > 0 });
       app.globalData.order.profiles = profiles;
       app.globalData.order.profileCount = profiles.length;
       app.globalData.order.totalFee = app.globalData.order.price * profiles.length;

@@ -58,7 +58,6 @@ Component({
     },
     pay(payData) {
       const { detail } = this.data;
-      debugger
       //官方标准的支付方法
       wx.requestPayment({ //已经得到了5个参数
         timeStamp: payData.timeStamp,

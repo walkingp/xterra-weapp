@@ -11,19 +11,21 @@
   <radio-group bindchange="radioChange">
     <view wx:for="{{cates}}" wx:key="id" class="item flex align-center space-between">
       <view class="bd flex-auto flex align-center">
-        <view class="flex-none">
+        <view class="flex-none left">
           <view class="flex align-center">
             <label for="p{{index}}" class="hd">{{item.title}}</label>
-            <label for="p{{index}}" class="label">报名费</label>
-            <label for="p{{index}}" class="unit">￥</label>
-            <label for="p{{index}}" class="price">{{item.regPrice}}</label>
+            <label for="p{{index}}" class="label">{{item.priceLabel}}</label>
+            <block wx:if="{{!item.expired}}">
+              <label for="p{{index}}" class="unit">￥</label>
+              <label for="p{{index}}" class="price">{{item.regPrice}}</label>
+            </block>
           </view>
           <label class="info" wx:if="{{item.desc}}">{{item.desc}}</label>
         </view>
         <label for="p{{index}}" class="transparent flex-auto">blank</label>
       </view>
       <view class="flex-none">
-        <radio id="p{{index}}" data-index="{{index}}" value="{{item._id}}" />
+        <radio id="p{{index}}" disabled="{{item.expired ? true : false}}" data-index="{{index}}" value="{{item._id}}" />
       </view>
     </view>
   </radio-group>

@@ -33,13 +33,25 @@ Page({
   onComplete(e){
     const { prevEnabled, nextEnabled } = e.detail;
     this.setData({
-      prevD: prevEnabled,
-      nextEnabled: nextEnabled
+      prevEnabled,
+      nextEnabled
     });
+  },
+  prevStep(e){
+    const step = this.data.step - 1;
+    this.setData({
+      nextEnabled: true,
+      prevEnabled: false,
+      isValid: false,
+      step
+    });
+    app.globalData.step = step;
   },
   nextStep(e){
     const step = this.data.step + 1;
     this.setData({
+      nextEnabled: false,
+      prevEnabled: true,
       isValid: false,
       step
     });
@@ -55,6 +67,9 @@ Page({
     }
   },
   order(){
+    wx.showLoading({
+      title: '加载中',
+    })
     let { order } = app.globalData;
     order.userId = app.globalData.userId;
     order.userName = app.globalData.userName;
@@ -77,16 +92,12 @@ Page({
       const { order } = app.globalData;
       this.setData({
         order
+      }, () => {
+        wx.hideLoading({
+          success: (res) => {},
+        })
       });
     }).catch(console.error)
-  },
-  prevStep(e){
-    const step = this.data.step - 1;
-    this.setData({
-      isValid: false,
-      step
-    });
-    app.globalData.step = step;
   },
   /**
    * 生命周期函数--监听页面加载

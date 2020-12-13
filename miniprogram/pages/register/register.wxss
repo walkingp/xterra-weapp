@@ -12,7 +12,6 @@
   margin: 20rpx auto;
 }
 .buttons button.secondary{
-  border: solid 2rpx #999;
-  color: #fff;
-  background-color: #999;
+  border: solid 2rpx #333;
+  color: #333;
 }

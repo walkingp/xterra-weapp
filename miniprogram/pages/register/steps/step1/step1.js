@@ -37,7 +37,7 @@ Component({
     hasRelay: false,
     hasFamily: false,
     selectedGroupType: 'individual',
-    selectedGroupText: '个人组'
+    selectedGroupText: '个人组',
   },
 
   /**
@@ -53,7 +53,7 @@ Component({
         selectedGroupType: type,
         selectedGroupText: title
       })
-      this.triggerEvent('onComplete', { prevEnabled: false, nextEnabled: false });
+      this.triggerEvent('onComplete', { prevEnabled: true, nextEnabled: false });
     },
     radioChange(e){
       const { value } = e.detail;
@@ -72,7 +72,7 @@ Component({
         groupType: this.data.selectedGroupType,
         groupText: this.data.selectedGroupText
       };
-      this.triggerEvent('onComplete', { prevEnabled: false, nextEnabled: true });
+      this.triggerEvent('onComplete', { prevEnabled: true, nextEnabled: true });
     },
     async fetch() {
       const {
@@ -83,10 +83,38 @@ Component({
       const hasRelay = cates.filter(item=>item.type === 'relay').length > 0;
       const hasFamily = cates.filter(item=>item.type === 'family').length > 0;    
       cates.map(cate=>{
-        cate.earlierPriceEndTime = dayjs(cate.earlierPriceEndTime).format("YYYY年MM月DD日");
-        cate.earlyPriceEndTime = dayjs(cate.earlyPriceEndTime).format("YYYY年MM月DD日");
+        const now = dayjs(new Date());
+        if(now.isBefore(cate.regEndTime)){if(cate.enableEarlierBirdPrice){
+            if(now.isBefore(cate.earlierPriceEndTime)){
+              cate.price = cate.earlierBirdPrice;
+              cate.priceLabel = '早早鸟价';
+            }else{
+              cate.price = cate.earlyBirdPrice;
+              cate.priceLabel = '早鸟价';
+            }
+          }else if(cate.enableEarlyBirdPrice){
+            if(now.isBefore(cate.earlyPriceEndTime)){
+              cate.price = cate.earlyBirdPrice;
+              cate.priceLabel = '早鸟价';
+            }else{
+              cate.price = cate.regPrice;
+              cate.priceLabel = '正常价';
+            }
+          } 
+        }else{ // 已超报名截止时间
+          cate.expired = true;
+          cate.priceLabel = '报名已结束';
+        }
+        // 格式化
+        if(cate.enableEarlierBirdPrice){
+          cate.earlierPriceEndTime = dayjs(cate.earlierPriceEndTime).format("YYYY年MM月DD日");
+        }
+        if(cate.enableEarlyBirdPrice){
+          cate.earlyPriceEndTime = dayjs(cate.earlyPriceEndTime).format("YYYY年MM月DD日");
+        }
 
         //此处用于判断当前价格
+
         cate.price = cate.earlierBirdPrice;
 
         return cate;
