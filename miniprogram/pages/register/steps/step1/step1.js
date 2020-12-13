@@ -30,6 +30,7 @@ Component({
   data: {
     selectedCateId: null,
     cates: [],
+    allCates: [],
     earlierPriceEndTime: '',
     earlyPriceEndTime: '',
     hasIndividual: false,
@@ -45,10 +46,14 @@ Component({
   methods: {
     changeGroup(e){
       const { type, title } = e.currentTarget.dataset;
+      const { allCates } = this.data;
+      const cates = allCates.filter(item=> item.type === type);  
       this.setData({
+        cates,
         selectedGroupType: type,
         selectedGroupText: title
       })
+      this.triggerEvent('onComplete', { prevEnabled: false, nextEnabled: false });
     },
     radioChange(e){
       const { value } = e.detail;
@@ -67,12 +72,16 @@ Component({
         groupType: this.data.selectedGroupType,
         groupText: this.data.selectedGroupText
       };
+      this.triggerEvent('onComplete', { prevEnabled: false, nextEnabled: true });
     },
     async fetch() {
       const {
         raceId
       } = this.properties;
-      const cates = await getRaceCatesList(raceId);
+      let cates = await getRaceCatesList(raceId);
+      const hasIndividual = cates.filter(item=>item.type === 'individual').length > 0;
+      const hasRelay = cates.filter(item=>item.type === 'relay').length > 0;
+      const hasFamily = cates.filter(item=>item.type === 'family').length > 0;    
       cates.map(cate=>{
         cate.earlierPriceEndTime = dayjs(cate.earlierPriceEndTime).format("YYYY年MM月DD日");
         cate.earlyPriceEndTime = dayjs(cate.earlyPriceEndTime).format("YYYY年MM月DD日");
@@ -82,11 +91,11 @@ Component({
 
         return cate;
       });
+
+      
       console.log(cates);
-      const hasIndividual = cates.filter(item=>item.type === 'individual').length > 0;
-      const hasRelay = cates.filter(item=>item.type === 'relay').length > 0;
-      const hasFamily = cates.filter(item=>item.type === 'family').length > 0;
       this.setData({
+        allCates: cates,
         hasIndividual,
         hasRelay,
         hasFamily,

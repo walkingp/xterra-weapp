@@ -1,2 +1,45 @@
-<!--miniprogram/pages/register/refund/refund.wxml-->
-<text>miniprogram/pages/register/refund/refund.wxml</text>
+<view class="container flex column">
+  <view class="box flex column align-center justify-center">    
+    <image class="icon" src="./../../../images/icons/succ@2x.png" />
+    <text>{{detail.statusText}}</text>
+  </view>
+  <navigator url="pages/events/detail/detail?id={{detail.raceId}}" class="box flex align-center space-between">
+    <view class="flex-auto flex align-center">
+      <image src="{{detail.racePic[0]}}" class="image"></image>
+      <view class="text flex column">
+        <text class="title">{{detail.raceTitle}}</text>
+        <text class="cate">{{detail.cateTitle}}</text>
+      </view>
+    </view>
+    <van-icon class="flex-none" name="arrow" />
+  </navigator>
+  <view class="box info">
+    <view class="title">申请退款</view>
+    <view class="list">
+      <van-cell title="退款金额" value="￥{{detail.totalFee}}" />
+      <van-cell title="退款理由" bind:click="showAction" value="{{reason}}" is-link border="{{ false }}" />
+    </view>
+  </view>
+  <view class="box info">
+    <view class="title">退款政策</view>
+    <view class="desc flex column">
+      <text>11月15日前报名享受优惠价格300元；</text>
+      <text>11月15日前报名享受优惠价格300元；</text>
+      <text>11月15日前报名享受优惠价格300元；</text>    
+    </view>
+    <view class="title">注意事项</view>
+    <view class="desc flex column">
+      <text>退款申请将在后台审核完成后才能退款，退款在审核完成后大约一周内退还到原支付账户。</text>
+    </view>
+  </view>
+  <view class="ft flex justify-end align-center">
+      <button bindtap="redirect" data-url="/pages/register/refund/refund?id={{detail._id}}" class="button secondary mini">再想一想</button>
+    <button bindtap="refundNow" disabled="{{disabled}}" class="button mini">申请退款</button>
+  </view>
+  <van-action-sheet
+  show="{{ show }}"
+  actions="{{ actions }}"
+  bind:close="onClose"
+  bind:select="onSelect"
+/>
+</view>

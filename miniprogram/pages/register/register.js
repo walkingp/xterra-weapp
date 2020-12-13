@@ -13,6 +13,8 @@ Page({
     step: 0,
     group: 0,
     order: null,
+    prevEnabled: false,
+    nextEnabled: false,
     steps: [
       {
         text: '选择组别',
@@ -27,6 +29,13 @@ Page({
         text: '完成报名',
       },
     ],
+  },
+  onComplete(e){
+    const { prevEnabled, nextEnabled } = e.detail;
+    this.setData({
+      prevD: prevEnabled,
+      nextEnabled: nextEnabled
+    });
   },
   nextStep(e){
     const step = this.data.step + 1;

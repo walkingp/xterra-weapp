@@ -1,1 +1,51 @@
-/* miniprogram/pages/register/refund/refund.wxss */
+image.icon{
+  width: 100rpx!important;
+  height: 100rpx!important;
+}
+.cate{
+  font-size: 26rpx;
+  padding-top: 10rpx;
+  color: #999;
+}
+.title{
+  font-size: 28rpx;
+  color: #333;
+  font-weight: bold;
+  padding-bottom: 10rpx;
+}
+.image{
+  width: 196rpx;
+  height: 145rpx;
+  border-radius: 10rpx;
+  margin-right: 20rpx;
+}
+.info{
+  padding: 20rpx 0;
+}
+.title{
+  padding: 0 32rpx;
+}
+.text .title{
+  padding: 0;
+}
+button.van-action-sheet__item{
+  border: none;
+  height: auto;
+  height: 100rpx;
+  color: #333;
+}
+.ft{
+  padding: 20rpx;
+}
+.desc{
+  padding: 32rpx;
+  line-height: 150%;
+}
+.desc text{
+  font-size: 24rpx;
+  color: #999;
+}
+.empty .desc text{
+  padding-bottom: 20rpx;
+  display: block;
+}

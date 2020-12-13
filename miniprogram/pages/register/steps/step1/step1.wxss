@@ -17,6 +17,26 @@
 .groups .item+.item{
   margin-left: 30rpx;
 }
+.groups .item.active{
+  position: relative;
+}
+
+.groups .item.active text{
+  margin-top: 60rpx;
+}
+.groups .item.active::before{
+  position: absolute;
+  left: 50%;
+  top: 80rpx;
+  content: "";
+  display: block;
+  width: 40rpx;
+  height: 30rpx;
+  transform: translateX(-50%) rotate(-45deg);
+  border: solid #fff;
+  border-width: 0 0 4rpx 4rpx;
+  z-index: 2;
+}
 .groups .item::after{
   content: "";
   display: block;
@@ -26,8 +46,11 @@
   right: 0;
   bottom: 0;
   border-radius: 10rpx;
-  background-color: rgba(0,0,0,.2);
+  background-color: rgba(0,0,0,.1);
   z-index: 1;
+}
+.groups .item.active::after{
+  background-color: rgba(0,0,0,.3);
 }
 
 .title{

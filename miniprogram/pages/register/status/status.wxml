@@ -20,6 +20,7 @@
       <view class="cell">
         <label>订单编号：</label>
         <text>{{detail.orderNum}}</text>
+        <text class="copy">复制</text>
       </view>
       <view class="cell">
         <label>订单时间：</label>
