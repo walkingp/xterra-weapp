@@ -24,12 +24,21 @@
         <view>总费用：<text class="bold">￥{{item.totalFee}}</text></view>
       </view>
       <view class="ft flex space-between align-center">
-        <text class="flex-none ing">{{item.statusText}}</text>
+        <text class="flex-none status" style="color:{{item.textColor}};">{{item.statusText}}</text>
         <view class="buttons flex-auto justify-end flex align-center">
           <button class="secondary">查看详情</button>
-          <button class="primary">去支付</button>
+          <button wx:if="{{item.showPayButton}}" class="primary">去支付</button>
         </view>
       </view>
     </navigator>
   </view>
+</block>
+<block wx:else>
+<view class="box">
+  <van-empty
+  class="custom-image"
+  image="/images/empty@2x.png"
+  description="暂无数据"
+/>
+</view>
 </block>

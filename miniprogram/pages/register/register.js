@@ -1,4 +1,4 @@
-const { getRaceDetail, getRegistrationDetail } = require("../../api/race");
+const { getRaceDetail, updateOrderStatus } = require("../../api/race");
 const { orderStatus } = require("../../config/const");
 const app = getApp();
 // miniprogram/pages/register/register.js
@@ -9,11 +9,12 @@ Page({
    */
   data: {
     id: "",
+    cateId: null,
     isValid: false,
     step: 0,
     group: 0,
     order: null,
-    prevEnabled: false,
+    prevEnabled: true,
     nextEnabled: false,
     steps: [
       {
@@ -48,7 +49,8 @@ Page({
     app.globalData.step = step;
   },
   nextStep(e){
-    const step = this.data.step + 1;
+    let { step } = this.data;
+    step = step + 1;
     this.setData({
       nextEnabled: false,
       prevEnabled: true,
@@ -63,6 +65,9 @@ Page({
         break;
       case 2:
         this.order();
+        break;
+      case 3:
+        this.confirmOrder();
         break;
     }
   },
@@ -94,7 +99,8 @@ Page({
         order
       }, () => {
         wx.hideLoading({
-          success: (res) => {},
+          success: (res) => {
+          },
         })
       });
     }).catch(console.error)
@@ -109,9 +115,9 @@ Page({
         step
       });
     }
-    const { id } = options;
+    const { id, cateId } = options;
     this.setData({
-      id
+      id, cateId
     });
     this.fetch(id);
   },
@@ -121,6 +127,7 @@ Page({
       title: '加载中',
     })
     const detail = await getRaceDetail(id);
+    detail.disclaimer = app.towxml(detail.disclaimer,'html');
     this.setData({
       detail
     },() => {
@@ -133,53 +140,109 @@ Page({
       title,
     })
   },
+  
+  confirmOrder: function(e) {
+    wx.showLoading({
+      title: '支付进行中',
+    })
+    const { order } = this.data;
+    const that = this;
+    const nonceStr = Math.random().toString(36).substr(2, 15)
+    const timeStamp = parseInt(Date.now() / 1000) + ''
+    const out_trade_no = "otn" + nonceStr + timeStamp
+    const total_fee = (order.totalFee*100).toString();
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+    wx.cloud.callFunction({
+      name: "payment",
+      data: {
+        command: "pay",
+        out_trade_no,
+        body: order.raceTitle,
+        total_fee
+      },
+      success(res) {
+        console.log("云函数payment提交成功：", res.result)
+        that.pay(res.result)
+      },
+      fail(res) {
+        console.log("云函数payment提交失败：", res)
+      }
+    })
   },
+  pay(payData) {
+    const that = this;
+    const { order } = this.data;
+    //官方标准的支付方法
+    wx.requestPayment({ //已经得到了5个参数
+      timeStamp: payData.timeStamp,
+      nonceStr: payData.nonceStr,
+      package: payData.package, //统一下单接口返回的 prepay_id 格式如：prepay_id=***
+      signType: 'MD5',
+      paySign: payData.paySign, //签名
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
+      success(res) {
+        console.log("支付成功：", res)
+        wx.cloud.callFunction({  //巧妙利用小程序支付成功后的回调，再次调用云函数，通知其支付成功，以便进行订单状态变更
+          name: "payment",
+          data: {
+            command: "payOK",
+            out_trade_no: "test0004"
+          },
+          success: function(){
+            updateOrderStatus({id:order.id, ...orderStatus.paid }).then(res=>{
+              order.status = orderStatus.paid.status; // 已支付
+              order.statusText = orderStatus.paid.statusText;
+              that.saveStartlist();
+              console.log(res);
+              wx.showToast({
+                icon: 'success',
+                title: '支付成功',
+                success: function(){
+                  that.setData({
+                    step: 4
+                  })
+                }
+              })
+            })
+          }
+        })
+      },
+      fail(res) {
+        console.log("支付失败：", res);
+        updateOrderStatus({id:order.id, ...orderStatus.failed }).then(res=>{
+          console.log(res);
+          wx.showToast({
+            icon: 'none',
+            title: '支付失败',
+            success: function(){
+              wx.redirectTo({
+                url: `/pages/register/status/status?id=${order.id}`,
+              })
+            }
+          })
+        });
+      },
+     complete(res) {
+        console.log("支付完成：", res)
+      }
+    })
   },
+  saveStartlist(){
+    const { profiles, id, orderNum, userId, userName, userInfo, status, statusText, orderType, raceId, raceTitle, racePic, cateId, cateTitle, groupType, groupText } = app.globalData.order;
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+    const db = wx.cloud.database();
+    profiles.forEach(async item=>{
+      delete item._openid;
+      delete item._id;
+      console.log(item);
+      const result = await db.collection("start-list").add({
+        data: {
+          ...item,
+          createdAt: new Date(),
+          id, orderNum, userId, userName, userInfo, status, statusText, orderType, raceId, raceTitle, racePic, cateId, cateTitle, groupType, groupText
+        }
+      });
+      console.log(result)
+    })
   }
 })

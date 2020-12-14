@@ -2,20 +2,19 @@
   <view class="title">报名信息：</view>
   <view class="cell">
     <label>比赛名称：</label>
-    <text>{{detail.raceTitle}}</text>
+    <text>{{order.raceTitle}}</text>
   </view>
   <view class="cell">
     <label>报名类别：</label>
-    <text>{{detail.cateTitle}}</text>
+    <text>{{order.cateTitle}}</text>
   </view>
   <view class="cell">
     <label>总费用：</label>
-    <text>￥{{detail.totalFee}}</text>
+    <text>￥{{order.totalFee}}</text>
   </view>
   <view class="cell">
     <label>订单状态：</label>
     <text>待支付</text>
   </view>
 </view>
-<userlist profiles="{{detail.profiles}}" />
-<button data-fee="{{detail.totalFee}}" bindtap="confirmOrder">立即支付</button>
+<userlist profiles="{{order.profiles}}" />

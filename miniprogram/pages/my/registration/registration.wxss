@@ -1,1 +1,3 @@
-/* miniprogram/pages/my/registration/registration.wxss */
+van-tabs{
+  min-height: 100vh;
+}

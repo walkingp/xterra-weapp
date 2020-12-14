@@ -10,7 +10,7 @@
         <label for="i{{index}}" class="unit">{{item.phoneNum}}</label>
         <label for="i{{index}}" class="blank flex-auto">b</label>
       </view>
-      <navigator url="/pages/register/form/form?action=edit&id={{item._id}}">编辑</navigator>
+      <navigator url="/pages/register/form/form?action=edit&raceId={{raceId}}&id={{item._id}}">编辑</navigator>
     </view>
   </checkbox-group>
   </block>
@@ -18,6 +18,6 @@
   <view class="empty">你还没有添加过任何报名资料</view>
 </block>
   <view class="buttons">
-    <button bindtap="gotoAdd" class="button">添加新报名人</button>
+    <button data-url="/pages/register/form/form?action=add&raceId={{raceId}}" bindtap="gotoAdd" class="button">添加新报名人</button>
   </view>
 </view>

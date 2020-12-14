@@ -1,6 +1,7 @@
 @import "./../../style/mi.flex.wxss";
 .item{
-  padding: 10rpx 0;
+  padding: 20rpx 0;
+  border-bottom: solid 2rpx #f1f1f1;
 }
 .desc{
   font-size: 24rpx;
@@ -17,4 +18,9 @@
   color:#DF1042;
   font-size: 24rpx;
   font-weight: bold;
+}
+button{
+  font-size: 24rpx;
+  height: 52rpx;
+  padding: 0 20rpx!important;
 }

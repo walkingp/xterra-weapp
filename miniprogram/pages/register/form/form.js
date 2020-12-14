@@ -96,7 +96,7 @@ Page({
         setTimeout(() => {
           if(raceId){
             wx.redirectTo({
-              url: `/pages/register/register?id=${raceId}`,
+              url: `/pages/register/register?id=${raceId}&step=2`,
             });
             return;
           }

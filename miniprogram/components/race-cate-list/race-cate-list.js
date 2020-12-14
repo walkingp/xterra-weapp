@@ -4,6 +4,9 @@ Component({
    * 组件的属性列表
    */
   properties: {
+    raceId: {
+      type: String
+    },
     list: {
       type: Array
     }
@@ -20,6 +23,11 @@ Component({
    * 组件的方法列表
    */
   methods: {
-
+    redirect(e){
+      const { url } = e.currentTarget.dataset;
+      wx.navigateTo({
+        url
+      })
+    },
   }
 })

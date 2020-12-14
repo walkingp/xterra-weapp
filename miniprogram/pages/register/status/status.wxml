@@ -3,7 +3,7 @@
     <image class="icon" src="./../../../images/icons/succ@2x.png" />
     <text>{{detail.statusText}}</text>
   </view>
-  <navigator url="pages/events/detail/detail?id={{detail.raceId}}" class="box flex align-center space-between">
+  <navigator url="/pages/events/detail/detail?id={{detail.raceId}}" class="box flex align-center space-between">
     <view class="flex-auto flex align-center">
       <image src="./../../../images/avatar@2x.png" class="image"></image>
       <view class="text flex column">
@@ -27,11 +27,11 @@
         <text>{{detail.orderTime}}</text>
       </view>
       <view class="cell">
-        <label>选择项目：</label>
-        <text>{{detail.cateTitle}}</text>
+        <label>报名类别：</label>
+        <text>{{detail.groupText}}</text>
       </view>
       <view class="cell">
-        <label>报名类别：</label>
+        <label>选择组别：</label>
         <text>{{detail.cateTitle}}</text>
       </view>
       <view class="cell">

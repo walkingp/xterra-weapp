@@ -34,7 +34,7 @@
       </view>
       <view class="list">
         <van-grid border="{{false}}">
-          <van-grid-item icon="/images/icons/trophy.svg" url="/pages/events/events" text="我的赛事" />
+          <van-grid-item icon="/images/icons/trophy.svg" url="/pages/my/registration/registration" text="我的报名" />
           <van-grid-item icon="/images/icons/post.svg" url="/pages/profile/profile" text="社区发贴" />
           <van-grid-item icon="/images/icons/doc.svg" url="/pages/community/community" text="兑换记录" />
           <van-grid-item icon="/images/icons/card.svg" url="/pages/my/profile/profile" text="报名资料" />

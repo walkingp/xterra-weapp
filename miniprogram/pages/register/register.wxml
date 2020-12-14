@@ -4,20 +4,20 @@
       <van-steps steps="{{ steps }}" active-color="#BA0C2F" active="{{ step }}" />
     </view>
     <view class="step1" wx:if="{{step===0}}">
-      <step1 raceId="{{id}}" raceDetail="{{detail}}" bind:onComplete="onComplete" />
+      <step1 cateId="{{cateId}}" raceId="{{id}}" raceDetail="{{detail}}" bind:onComplete="onComplete" />
     </view>
     <view class="step2" wx:if="{{step===1}}">
-      <step2 bind:onComplete="onComplete" />
+      <step2 raceId="{{id}}" bind:onComplete="onComplete" />
     </view>
-    <view class="step3" wx:if="{{step===2}}">
+    <view class="step3" wx:if="{{step===2 || step === 3}}">
       <step3 order="{{order}}" id="step3" bind:onComplete="onComplete" />
     </view>
-    <view class="step4" wx:if="{{step===3}}">
+    <view class="step4" wx:if="{{step===4}}">
       <step4 />
     </view>
   </view>
   <view class="buttons flex-none">
-    <button bindtap="nextStep" disabled="{{!nextEnabled}}" class="button primary">{{step === 3 ? '返回主页' : (step === 2 ? '确认支付' : '下一步')}}</button>
-    <button bindtap="prevStep" disabled="{{!prevEnabled}}" class="button secondary" wx:if="{{ step > 0 }}">{{step === 3 ? '查看报名' : '返回上一步'}}</button>
+    <button bindtap="nextStep" disabled="{{!nextEnabled}}" wx:if="{{step < 4 }}" class="button primary">{{step === 3 ? '返回主页' : (step === 2 ? '确认支付' : '下一步')}}</button>
+    <button bindtap="prevStep" disabled="{{!prevEnabled}}" class="button secondary" wx:if="{{ step > 0 && step < 4 }}">{{step === 3 ? '查看报名' : '返回上一步'}}</button>
   </view>
 </view>

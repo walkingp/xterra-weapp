@@ -6,30 +6,44 @@
   <view class="item {{ selectedGroupType === 'relay' ? 'active' : '' }}" bindtap="changeGroup" data-title="团队组" data-type="relay" wx:if="{{hasRelay}}"><text>团队组</text></view>
   <view class="item {{ selectedGroupType === 'family' ? 'active' : '' }}" bindtap="changeGroup" data-title="亲子组" data-type="family" wx:if="{{hasFamily}}"><text>亲子组</text></view>
 </view>
-<view class="title">请选择组别</view>
-<view class="cates">
-  <radio-group bindchange="radioChange">
-    <view wx:for="{{cates}}" wx:key="id" class="item flex align-center space-between">
-      <view class="bd flex-auto flex align-center">
-        <view class="flex-none left">
-          <view class="flex align-center">
-            <label for="p{{index}}" class="hd">{{item.title}}</label>
-            <label for="p{{index}}" class="label">{{item.priceLabel}}</label>
-            <block wx:if="{{!item.expired}}">
-              <label for="p{{index}}" class="unit">￥</label>
-              <label for="p{{index}}" class="price">{{item.regPrice}}</label>
-            </block>
+<block wx:if="{{ selectedGroupType === 'individual'}}">
+  <view class="title">请选择组别</view>
+  <view class="cates">
+    <radio-group bindchange="radioChange">
+      <view wx:for="{{cates}}" wx:key="id" class="item flex align-center space-between">
+        <view class="bd flex-auto flex align-center">
+          <view class="flex-none left">
+            <view class="flex align-center">
+              <label for="p{{index}}" class="hd">{{item.title}}</label>
+              <label for="p{{index}}" class="label">{{item.priceLabel}}</label>
+              <block wx:if="{{!item.expired}}">
+                <label for="p{{index}}" class="unit">￥</label>
+                <label for="p{{index}}" class="price">{{item.price}}</label>
+              </block>
+            </view>
+            <label for="p{{index}}" class="info" wx:if="{{item.desc}}">{{item.desc}}</label>
           </view>
-          <label class="info" wx:if="{{item.desc}}">{{item.desc}}</label>
+          <label for="p{{index}}" class="transparent flex-auto">blank</label>
         </view>
-        <label for="p{{index}}" class="transparent flex-auto">blank</label>
+        <view class="flex-none">
+          <radio id="p{{index}}" disabled="{{item.expired ? true : false}}" checked="{{cateId===item._id ? true : false}}" data-index="{{index}}" value="{{item._id}}" />
+        </view>
       </view>
-      <view class="flex-none">
-        <radio id="p{{index}}" disabled="{{item.expired ? true : false}}" data-index="{{index}}" value="{{item._id}}" />
-      </view>
-    </view>
-  </radio-group>
-</view>
+    </radio-group>
+  </view>
+</block>
+<block wx:elif="{{ selectedGroupType === 'relay'}}">
+  <view class="title">团队信息</view>
+  <view class="input">
+    <input type="text" maxlength="{{64}}" placeholder="请填写团队名称" />
+  </view>
+  <view class="input">
+    <textarea maxlength="{{500}}" placeholder="请填写团队描述" />
+  </view>
+</block>
+<block wx:else>
+  <view class="title">家庭信息</view>
+</block>
 <view class="box" wx:if="{{selectedCateId !== null }}">
   <view class="title">报名优惠费用</view>
   <view class="desc flex column">
@@ -38,9 +52,7 @@
   </view>
   <view class="title">退改规则</view>
   <view class="desc flex column">
-    <text>11月15日前报名享受优惠价格300元；</text>
-    <text>11月15日前报名享受优惠价格300元；</text>
-    <text>11月15日前报名享受优惠价格300元；</text>    
+    <text>11月15日前申请退款可退回50%；11月15日后不可申请退款</text>
   </view>
 </view>
 <view class="box empty" wx:else>
@@ -48,5 +60,9 @@
   <view class="desc">
     <text>每次只能选择一个组别进行报名，如需多人报名多个组别，请依次完成每个组别的报名；</text>
     <text>各组别优惠价格及退改政策，请点击选择组别后查看报名优惠价格。</text>
+    <view>选择报名即代表您已认真阅读并且同意<text class="link" bindtap="showDisclaimer">《免责协议》</text></view>
   </view>
 </view>
+<van-popup show="{{ show }}" round closeable bind:close="onClose" custom-style="height: 680rpx; padding: 20rpx; width:680rpx; overflow-y: auto;" bind:close="onClose">
+  <towxml nodes="{{raceDetail.disclaimer}}" />
+</van-popup>

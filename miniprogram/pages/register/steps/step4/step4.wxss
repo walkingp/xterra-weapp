@@ -15,9 +15,13 @@
 }
 .gray{
   color: #999;
+
 }
 .email{
   color: #BA0C2F;
   padding: 0 4rpx;
   font-weight: bold;
+}
+.text button{
+  margin-top: 40rpx;
 }

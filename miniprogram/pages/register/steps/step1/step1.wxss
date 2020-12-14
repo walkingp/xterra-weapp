@@ -114,7 +114,27 @@
   font-size: 24rpx;
   color: #999;
 }
+.desc view{
+  font-size: 24rpx;
+  color: #999;
+}
+.empty .desc view text.link{
+  display: inline;
+  color: #1989fa;
+  font-weight: bold;
+}
 .empty .desc text{
   padding-bottom: 20rpx;
   display: block;
+}
+.input{
+  background-color: #fff;
+  border-radius: 10rpx;
+  padding: 10rpx;
+}
+input, textarea{
+  font-size: 26rpx;
+}
+.input+.input{
+  margin-top: 15rpx;
 }

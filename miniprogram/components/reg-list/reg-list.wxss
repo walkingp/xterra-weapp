@@ -17,6 +17,9 @@
   border-top: solid 2rpx #f1f1f1;
   padding-top: 20rpx;
 }
+.ft .status{
+  font-size: 24rpx;
+}
 .title{
   font-weight: bold;
 }

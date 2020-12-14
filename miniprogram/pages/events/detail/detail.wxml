@@ -63,14 +63,9 @@
     <view class="section icons">
       <view class="hd pb">
         <text>赛事组别</text>
-        <navigator url="">更多</navigator>
       </view>
       <view class="bd">
-        <race-cate-list list="{{cates}}" />
-      </view>
-      <view class="ft flex align-center justify-center">
-        查看全部
-        <van-icon name="arrow-down" />
+        <race-cate-list raceId="{{detail._id}}" list="{{cates}}" />
       </view>
     </view>
     <view class="section icons" wx:if="{{detail.routePics}}">

@@ -1,7 +1,6 @@
 const {
   getRaceCatesList
 } = require("../../../../api/race");
-const dayjs = require("dayjs");
 
 const app = getApp();
 Component({
@@ -12,6 +11,9 @@ Component({
     raceId: {
       type: String
     },
+    cateId: {
+      type: String
+    },
     raceDetail: {
       type: Object
     }
@@ -20,6 +22,14 @@ Component({
     'raceId': function (raceId) {
       if (raceId) {
         this.fetch();
+      }
+    },
+    'cateId': function (cateId) {
+      if (cateId) {
+        this.setData({
+          selectedCateId: cateId
+        })
+        this.triggerEvent('onComplete', { prevEnabled: false, nextEnabled: true });
       }
     }
   },
@@ -38,12 +48,23 @@ Component({
     hasFamily: false,
     selectedGroupType: 'individual',
     selectedGroupText: '个人组',
+    show: false
   },
 
   /**
    * 组件的方法列表
    */
   methods: {
+    onClose(){
+      this.setData({
+        show: false
+      })
+    },
+    showDisclaimer(){
+      this.setData({
+        show: true
+      })
+    },
     changeGroup(e){
       const { type, title } = e.currentTarget.dataset;
       const { allCates } = this.data;
@@ -57,6 +78,9 @@ Component({
     },
     radioChange(e){
       const { value } = e.detail;
+      this.selectCate(value);
+    },
+    selectCate(value){
       const selectedCateId = this.data.cates.findIndex(item=>item._id === value);
       const selectedCate = this.data.cates.find(item=>item._id === value);
       this.setData({
@@ -81,46 +105,9 @@ Component({
       let cates = await getRaceCatesList(raceId);
       const hasIndividual = cates.filter(item=>item.type === 'individual').length > 0;
       const hasRelay = cates.filter(item=>item.type === 'relay').length > 0;
-      const hasFamily = cates.filter(item=>item.type === 'family').length > 0;    
-      cates.map(cate=>{
-        const now = dayjs(new Date());
-        if(now.isBefore(cate.regEndTime)){if(cate.enableEarlierBirdPrice){
-            if(now.isBefore(cate.earlierPriceEndTime)){
-              cate.price = cate.earlierBirdPrice;
-              cate.priceLabel = '早早鸟价';
-            }else{
-              cate.price = cate.earlyBirdPrice;
-              cate.priceLabel = '早鸟价';
-            }
-          }else if(cate.enableEarlyBirdPrice){
-            if(now.isBefore(cate.earlyPriceEndTime)){
-              cate.price = cate.earlyBirdPrice;
-              cate.priceLabel = '早鸟价';
-            }else{
-              cate.price = cate.regPrice;
-              cate.priceLabel = '正常价';
-            }
-          } 
-        }else{ // 已超报名截止时间
-          cate.expired = true;
-          cate.priceLabel = '报名已结束';
-        }
-        // 格式化
-        if(cate.enableEarlierBirdPrice){
-          cate.earlierPriceEndTime = dayjs(cate.earlierPriceEndTime).format("YYYY年MM月DD日");
-        }
-        if(cate.enableEarlyBirdPrice){
-          cate.earlyPriceEndTime = dayjs(cate.earlyPriceEndTime).format("YYYY年MM月DD日");
-        }
+      const hasFamily = cates.filter(item=>item.type === 'family').length > 0; 
 
-        //此处用于判断当前价格
-
-        cate.price = cate.earlierBirdPrice;
-
-        return cate;
-      });
-
-      
+      const that = this;
       console.log(cates);
       this.setData({
         allCates: cates,
@@ -128,6 +115,11 @@ Component({
         hasRelay,
         hasFamily,
         cates
+      }, () => {
+        const { cateId } = this.data;
+        if(cateId){
+          that.selectCate(cateId);
+        }
       });
     }
   }

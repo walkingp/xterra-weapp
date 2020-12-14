@@ -21,31 +21,38 @@ export const feedStatus = {
 export const orderStatus = {
   pending: {
     status: 0,
-    statusText: '待支付'
+    statusText: '待支付',
+    textColor: '#DF1042'
   },
   paid: {
     status: 1, 
-    statusText: '已支付'
+    statusText: '已支付',
+    textColor: '#0b8235'
   },
   failed: {
     status: 2, 
-    statusText: '支付失败'
+    statusText: '支付失败',
+    textColor: '#DF1042'
   },
   withdrew: {
     status: 3, 
-    statusText: '已取消'
+    statusText: '已取消',
+    textColor: '#DF1042'
   },
   closed: {
     status: 4, 
-    statusText: '已关闭'
+    statusText: '已关闭',
+    textColor: '#eee'
   },
   refunding: {
     status: 5, 
-    statusText: '申请退款中'
+    statusText: '申请退款中',
+    textColor: '#DF1042'
   },
   refunded: {
     status: 6, 
-    statusText: '已退款'
+    statusText: '已退款',
+    textColor: '#0b8235'
   },
 }
 

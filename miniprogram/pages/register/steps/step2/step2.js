@@ -8,7 +8,9 @@ Component({
    * 组件的属性列表
    */
   properties: {
-
+    raceId: {
+      type: String
+    },
   },
 
   /**
@@ -49,14 +51,16 @@ Component({
       profiles = profiles.filter(item => {
         return profileIds.includes(item._id);
       });
-      this.triggerEvent('onComplete', { prevEnabled: true, nextEnabled: profileIds.length > 0 });
       app.globalData.order.profiles = profiles;
       app.globalData.order.profileCount = profiles.length;
-      app.globalData.order.totalFee = app.globalData.order.price * profiles.length;
+      const totalFee = app.globalData.order.price * profiles.length;
+      app.globalData.order.totalFee = totalFee.toFixed(2);
+      this.triggerEvent('onComplete', { prevEnabled: true, nextEnabled: profileIds.length > 0 });
     },
-    gotoAdd(){
+    gotoAdd(e){
+      const { url } = e.currentTarget.dataset;
       wx.navigateTo({
-        url: '/pages/register/form/form?action=register',
+        url
       })
     }
   }
