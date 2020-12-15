@@ -11,7 +11,7 @@ const transporter = nodemailer.createTransport({
 });
 const mailOptions = {
   from: '1289657692@qq.com', // 发件地址
-  to: 'Hong.Jian.Michael.Wang@dnvgl.com', // 收件列表
+  to: 'walkingp@126.com', // 收件列表
   subject: '测试云函数', // 标题
   text: '测试云函数'
 };

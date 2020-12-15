@@ -11,21 +11,20 @@
   <view class="cates">
     <radio-group bindchange="radioChange">
       <view wx:for="{{cates}}" wx:key="id" class="item flex align-center space-between">
-        <view class="bd flex-auto flex align-center">
-          <view class="flex-none left">
-            <view class="flex align-center">
-              <label for="p{{index}}" class="hd">{{item.title}}</label>
+        <view class="bd flex-auto flex column">
+          <view class="flex align-center space-between">
+            <label for="p{{index}}" class="hd flex-auto">{{item.title}}</label>
+            <view class="flex-none">
               <label for="p{{index}}" class="label">{{item.priceLabel}}</label>
               <block wx:if="{{!item.expired}}">
                 <label for="p{{index}}" class="unit">￥</label>
                 <label for="p{{index}}" class="price">{{item.price}}</label>
               </block>
             </view>
-            <label for="p{{index}}" class="info" wx:if="{{item.desc}}">{{item.desc}}</label>
           </view>
-          <label for="p{{index}}" class="transparent flex-auto">blank</label>
+          <label for="p{{index}}" class="info" wx:if="{{item.desc}}">{{item.desc}}</label>
         </view>
-        <view class="flex-none">
+        <view class="flex-none radio">
           <radio id="p{{index}}" disabled="{{item.expired ? true : false}}" checked="{{cateId===item._id ? true : false}}" data-index="{{index}}" value="{{item._id}}" />
         </view>
       </view>
@@ -35,14 +34,14 @@
 <block wx:elif="{{ selectedGroupType === 'relay'}}">
   <view class="title">团队信息</view>
   <view class="input">
-    <input type="text" maxlength="{{64}}" placeholder="请填写团队名称" />
-  </view>
-  <view class="input">
-    <textarea maxlength="{{500}}" placeholder="请填写团队描述" />
+    <input type="text" maxlength="{{64}}" confirm-type="done" data-group="relay" bindblur="saveTeamTitle" placeholder="请填写团队名称" />
   </view>
 </block>
 <block wx:else>
   <view class="title">家庭信息</view>
+  <view class="input">
+    <input type="text" maxlength="{{64}}" confirm-type="done" data-group="family" bindblur="saveTeamTitle" placeholder="请填写家庭队名" />
+  </view>
 </block>
 <view class="box" wx:if="{{selectedCateId !== null }}">
   <view class="title">报名优惠费用</view>
@@ -60,8 +59,14 @@
   <view class="desc">
     <text>每次只能选择一个组别进行报名，如需多人报名多个组别，请依次完成每个组别的报名；</text>
     <text>各组别优惠价格及退改政策，请点击选择组别后查看报名优惠价格。</text>
-    <view>选择报名即代表您已认真阅读并且同意<text class="link" bindtap="showDisclaimer">《免责协议》</text></view>
   </view>
+</view>
+<view class="bottom">
+  <checkbox-group bindchange="checkAgreement">
+    <checkbox name="agreed" value="true" id="accepted"></checkbox>
+  </checkbox-group>
+  <label for="accepted">我已认真阅读并且同意</label>
+  <text class="link" bindtap="showDisclaimer">《免责协议》</text>
 </view>
 <van-popup show="{{ show }}" round closeable bind:close="onClose" custom-style="height: 680rpx; padding: 20rpx; width:680rpx; overflow-y: auto;" bind:close="onClose">
   <towxml nodes="{{raceDetail.disclaimer}}" />

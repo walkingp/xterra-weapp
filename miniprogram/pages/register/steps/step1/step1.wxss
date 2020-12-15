@@ -97,6 +97,9 @@
   font-size: 30rpx;
   font-weight: bold;
 }
+.radio{
+  margin-left: 20rpx;
+}
 .box{
   border-radius: 10rpx;
   background-color: #fff;
@@ -118,7 +121,7 @@
   font-size: 24rpx;
   color: #999;
 }
-.empty .desc view text.link{
+text.link{
   display: inline;
   color: #1989fa;
   font-weight: bold;
@@ -134,7 +137,19 @@
 }
 input, textarea{
   font-size: 26rpx;
+  padding: 10rpx;
+  width: 100%;
+}
+.input{
+  margin-bottom: 20rpx;
 }
 .input+.input{
   margin-top: 15rpx;
+}
+.bottom{
+  margin-top: 40rpx;
+  font-size: 24rpx;
+}
+checkbox-group{
+  display: inline;
 }

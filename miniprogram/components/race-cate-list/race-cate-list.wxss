@@ -13,6 +13,9 @@
   color: #333;
   font-size: 28rpx;
   margin-right: 30rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .price{
   color:#DF1042;
@@ -23,4 +26,7 @@ button{
   font-size: 24rpx;
   height: 52rpx;
   padding: 0 20rpx!important;
+}
+.btn{
+  margin-left: 20rpx;
 }

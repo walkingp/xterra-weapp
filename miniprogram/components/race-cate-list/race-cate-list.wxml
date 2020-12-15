@@ -1,16 +1,18 @@
 <block wx:if="{{list.length}}">
   <view class="item flex align-center" wx:for="{{list}}" wx:key="_id">
     <view class="flex-auto flex column">
-      <view class="top">
-        <text class="title">{{item.title}}</text>
-        <text class="price"> {{item.priceLabel}}</text>
-        <block wx:if="{{!item.expired}}">
-          <text class="price">￥{{item.price}}元</text>
-        </block>
+      <view class="top flex space-between">
+        <text class="title flex-auto">{{item.title}}</text>
+        <view class="flex-none">
+          <text class="price"> {{item.priceLabel}}</text>
+          <block wx:if="{{!item.expired}}">
+            <text class="price">￥{{item.price}}元</text>
+          </block>
+        </view>
       </view>
       <text class="desc">{{item.desc}}</text>
     </view>
-    <view class="flex-none" wx:if="{{!item.expired}}">
+    <view class="flex-none btn" wx:if="{{!item.expired}}">
       <button data-url="/pages/register/register?id={{raceId}}&cateId={{item._id}}" bindtap="redirect" class="button">一键报名</button>
     </view>
   </view>
