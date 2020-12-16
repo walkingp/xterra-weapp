@@ -152,6 +152,8 @@ Page({
     const out_trade_no = "otn" + nonceStr + timeStamp
     const total_fee = (order.totalFee*100).toString();
 
+    app.globalData.order.out_trade_no = out_trade_no;
+
     wx.cloud.callFunction({
       name: "payment",
       data: {
@@ -189,7 +191,9 @@ Page({
             out_trade_no: "test0004"
           },
           success: function(){
-            updateOrderStatus({id:order.id, ...orderStatus.paid }).then(res=>{
+            // 重要：此处更新保存out_trade_no，用于退款
+            const { out_trade_no } = app.globalData.order;
+            updateOrderStatus({id:order.id, ...orderStatus.paid, out_trade_no }).then(res=>{
               order.status = orderStatus.paid.status; // 已支付
               order.statusText = orderStatus.paid.statusText;
               that.saveStartlist();
@@ -227,8 +231,11 @@ Page({
       }
     })
   },
+  updateOrderNo(){
+
+  },
   saveStartlist(){
-    const { profiles, id, orderNum, userId, userName, userInfo, status, statusText, orderType, raceId, raceTitle, racePic, cateId, cateTitle, groupType, groupText } = app.globalData.order;
+    const { profiles, id, orderNum, userId, userName, userInfo, status, statusText, orderType, raceId, raceTitle, racePic, cateId, cateTitle, groupType, groupText, out_trade_no } = app.globalData.order;
 
     const db = wx.cloud.database();
     profiles.forEach(async item=>{

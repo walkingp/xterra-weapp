@@ -25,6 +25,7 @@ exports.main = async(event, context) => {
   //步骤4，调用，想用一个云函数实现全部支付功能，包括支付、退款、查询等
   switch (event.command) {
     case "pay":  //支付功能
+    console.log("pay, event, wxContext.OPENID", event, wxContext.OPENID);
       return await api.getPayParams({
         out_trade_no: event.out_trade_no,   //这是商户的订单号，要求商户内唯一
         body: event.body,

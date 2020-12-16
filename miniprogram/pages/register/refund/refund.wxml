@@ -17,7 +17,8 @@
     <view class="title">申请退款</view>
     <view class="list">
       <van-cell title="退款金额" value="￥{{refundMoney}}" />
-      <van-cell title="退款理由" bind:click="showAction" value="{{reason}}" is-link border="{{ false }}" />
+      <van-cell title="退款理由" bind:click="showAction" value="{{reason}}" is-link border="{{ false }}" wx:if="{{canRefund}}" />
+      <van-cell title="退款理由" border="{{ false }}" value="不可退款" wx:else />
     </view>
   </view>
   <view class="box info">
@@ -31,8 +32,8 @@
     </view>
   </view>
   <view class="ft flex justify-end align-center">
-      <button bindtap="redirect" data-url="/pages/register/refund/refund?id={{detail._id}}" class="button secondary mini">再想一想</button>
-    <button bindtap="refundNow" disabled="{{disabled}}" class="button mini">申请退款</button>
+    <button bindtap="back" data-url="/pages/register/refund/refund?id={{detail._id}}" class="button secondary mini">再想一想</button>
+    <button bindtap="refund" disabled="{{disabled}}" class="button mini">申请退款</button>
   </view>
   <van-action-sheet
   show="{{ show }}"
