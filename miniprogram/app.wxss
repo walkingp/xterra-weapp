@@ -37,8 +37,8 @@ button[disabled]{
   border-color: #d6d6d6!important;
 }
 button.secondary{
-  border: solid 2rpx #aaa;
-  color: #aaa;
+  border: solid 2rpx #666;
+  color: #666;
 }
 button.mini{
   height: 60rpx;

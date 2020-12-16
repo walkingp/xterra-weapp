@@ -33,6 +33,11 @@ image.icon{
 .cell:last-child{
   border-bottom: none;
 }
+image.icon{
+  width: 48rpx!important;
+  height: 48rpx!important;
+  margin-left: 10rpx;
+}
 .price{
   font-weight: bold;
   color: #BA0C2F;

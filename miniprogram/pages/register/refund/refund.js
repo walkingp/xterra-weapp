@@ -1,4 +1,4 @@
-const { getRegistrationDetail, updateOrderStatus } = require("../../../api/race");
+const { getRegistrationDetail, updateOrderStatus, getRaceDetail } = require("../../../api/race");
 const dayjs = require("dayjs");
 const { orderStatus } = require("../../../config/const");
 // miniprogram/pages/register/status/status.js
@@ -11,6 +11,7 @@ Page({
     show: false,
     reason: '请选择',
     disabled: true,//仅付款成功时可退款
+    policyText: null,
     actions: [
       {
         name: '填错信息',
@@ -47,8 +48,19 @@ Page({
   async fetch( id ) {
     const detail = await getRegistrationDetail(id);
     detail.orderTime = dayjs(detail.addedDate).format("YYYY-MM-DD HH:mm:ss");
-    const disabled = detail.status !== orderStatus.paid
+    const disabled = detail.status !== orderStatus.paid;
+
+    let policyText = '无退款政策' 
+    const raceDetail = await getRaceDetail(detail.raceId);
+    let refundMoney = 0;
+    if(raceDetail){
+      const { enableRefund, refundRate, refundLastDate } = raceDetail;
+      policyText = `${dayjs(refundLastDate).format('YYYY年MM月DD日')}前可申请退款${(refundRate*100).toFixed(0)}%`
+      refundMoney = detail.totalFee * refundRate;
+    }
     this.setData({
+      refundMoney,
+      policyText,
       disabled,
       detail
     });

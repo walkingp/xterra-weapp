@@ -16,16 +16,14 @@
   <view class="box info">
     <view class="title">申请退款</view>
     <view class="list">
-      <van-cell title="退款金额" value="￥{{detail.totalFee}}" />
+      <van-cell title="退款金额" value="￥{{refundMoney}}" />
       <van-cell title="退款理由" bind:click="showAction" value="{{reason}}" is-link border="{{ false }}" />
     </view>
   </view>
   <view class="box info">
     <view class="title">退款政策</view>
     <view class="desc flex column">
-      <text>11月15日前报名享受优惠价格300元；</text>
-      <text>11月15日前报名享受优惠价格300元；</text>
-      <text>11月15日前报名享受优惠价格300元；</text>    
+      <text>{{policyText}}</text> 
     </view>
     <view class="title">注意事项</view>
     <view class="desc flex column">

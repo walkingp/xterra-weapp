@@ -40,6 +40,7 @@
       </view>
       <view class="cell">
         <label>付款方式</label>
+        <image src="/images/icons/wepay.svg" class="icon" />
         <text>微信支付</text>
       </view>
       <view class="cell">
@@ -48,7 +49,7 @@
       </view>
     </view>
     <view class="ft flex justify-end align-center">
-      <button bindtap="redirect" data-url="/pages/register/refund/refund?id={{detail._id}}" class="button secondary mini">申请退款</button>
+      <button bindtap="redirect" disabled="{{!refundEnabled}}" data-url="/pages/register/refund/refund?id={{detail._id}}" class="button secondary mini">申请退款</button>
       <button bindtap="redirect" data-url="/pages/my/registration/registration" class="button mini">我的报名</button>
     </view>
   </view>

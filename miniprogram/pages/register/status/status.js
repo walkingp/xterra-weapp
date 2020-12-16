@@ -1,4 +1,4 @@
-const { getRegistrationDetail, updateOrderStatus } = require("../../../api/race");
+const { getRegistrationDetail, updateOrderStatus, getRaceDetail } = require("../../../api/race");
 const dayjs = require("dayjs");
 const { orderStatus } = require("../../../config/const");
 // miniprogram/pages/register/status/status.js
@@ -8,6 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    refundEnabled: true,
     id: null,
     detail: null
   },
@@ -29,6 +30,16 @@ Page({
     this.setData({
       detail
     });
+    const { raceId } = detail;
+    const raceDetail = await getRaceDetail(raceId);
+    if(raceDetail){
+      const enabled = raceDetail.enabledRefund && dayjs(new Date()).isBefore(dayjs(raceDetail.refundLastDate));
+      if(!enabled){
+        this.setData({
+          refundEnabled: false
+        });
+      }
+    }
     console.log(detail);
   },
   redirect(e){
