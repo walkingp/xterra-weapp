@@ -23,6 +23,8 @@
 .cates .item .label{
   font-size: 24rpx;
   color: #999;
+}
+.gender{
   padding-left: 20rpx;
 }
 .cates .item .unit{

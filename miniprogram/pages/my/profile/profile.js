@@ -15,6 +15,9 @@ Page({
     })
   },
   async fetch(){
+    wx.showLoading({
+      title: '加载中……',
+    })
     const { userId } = app.globalData;
     if(!userId){
       wx.showToast({
@@ -32,6 +35,10 @@ Page({
     const profiles = await getMyProfiles(userId);
     this.setData({
       profiles
+    },() => {
+      wx.hideLoading({
+        success: (res) => {},
+      })
     });
   },
   /**

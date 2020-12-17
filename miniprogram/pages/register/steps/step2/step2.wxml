@@ -6,7 +6,8 @@
       <view class="flex-auto flex align-center">
         <checkbox id="i{{index}}" value="{{item._id}}" />
         <label class="hd" for="i{{index}}">{{item.trueName}}</label>
-        <label for="i{{index}}" class="label">{{item.gender}}</label>
+        <label for="i{{index}}" class="label">({{item.relation}})</label>
+        <label for="i{{index}}" class="label gender">{{item.gender}}</label>
         <label for="i{{index}}" class="unit">{{item.phoneNum}}</label>
         <label for="i{{index}}" class="blank flex-auto">b</label>
       </view>

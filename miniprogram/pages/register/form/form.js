@@ -30,6 +30,8 @@ Page({
     tSize: '未选择',
     region: '未选择',
     birthDate: '未选择',
+    relation: '本人',
+    relations: ['本人', '家人', '同事', '朋友', '其他'],
     defaultBirthDate: new Date(1990,6,15).getTime(),
     genders: ['男', '女'],
     cardTypes: ['身份证', '护照', '军官证', '其他'],
@@ -68,15 +70,15 @@ Page({
     this.setData({
       detail
     });
-    const { trueName, cardType, gender, birthDate, bloodType, tSize, region, addr, cardNo, contactUser, contactUserPhone, email, phoneNum } = detail;
+    const { relation, trueName, cardType, gender, birthDate, bloodType, tSize, region, addr, cardNo, contactUser, contactUserPhone, email, phoneNum } = detail;
     this.setData({
-      trueName, cardType, gender, birthDate: dayjs(birthDate).format("YYYY-MM-DD"), bloodType, tSize, region, addr, cardNo, contactUser, contactUserPhone, email, phoneNum
+      relation: relation || '本人', trueName, cardType, gender, birthDate: dayjs(birthDate).format("YYYY-MM-DD"), bloodType, tSize, region, addr, cardNo, contactUser, contactUserPhone, email, phoneNum
     })
   },
   async saveData(e){
     let profile = e.detail.value;
-    const { id, cardType, gender, birthDate, bloodType, tSize, region, userId, userInfo, raceId, action } = this.data;
-    profile = { ...profile, cardType, gender, birthDate, bloodType, tSize, region, birthDate: new Date(birthDate), createdAt: new Date(), userId, userName: userInfo.nickname }
+    const { id, relation, cardType, gender, birthDate, bloodType, tSize, region, userId, userInfo, raceId, action } = this.data;
+    profile = { ...profile, relation, cardType, gender, birthDate, bloodType, tSize, region, birthDate: new Date(birthDate), createdAt: new Date(), userId, userName: userInfo.nickname }
 
     const db = wx.cloud.database();
     if(action === 'edit'){
@@ -115,6 +117,11 @@ Page({
     })
     console.log(value);
     switch (actionType) {
+      case 'relation':
+        this.setData({
+          relation: value
+        })
+        break;
       case 'gender':
         this.setData({
           gender: value
@@ -150,6 +157,9 @@ Page({
     const { type } = e.currentTarget.dataset;
     let columns = [];
     switch (type) {
+      case 'relation':
+        columns = this.data.relations;
+        break;
       case 'gender':
         columns = this.data.genders;
         break;
@@ -242,54 +252,5 @@ Page({
     }
 
     return birthday;
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
   }
 })

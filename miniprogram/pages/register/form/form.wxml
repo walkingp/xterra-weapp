@@ -2,6 +2,8 @@
   <form bindsubmit="saveData" class="list">
     <view class="title">{{action === 'edit' ? '修改联系人' : '添加联系人'}}</view>
     <van-cell-group title="基本信息">
+      <van-cell title="与本人关系" required name="relation" is-link border="{{ false }}" value="{{relation}}" bind:click="showPicker"
+        data-type="relation" />
       <van-field value="{{ trueName }}" required name="trueName" label="姓名" placeholder="请输入真实姓名" border="{{ false }}" />
       <van-cell title="证件类型" required name="cardType" is-link border="{{ false }}" value="{{cardType}}" bind:click="showPicker"
         data-type="card" />

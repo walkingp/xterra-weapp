@@ -5,6 +5,7 @@
       <navigator url="/pages/register/form/form?action=edit&id={{item._id}}" class="cell flex align-center" wx:for="{{profiles}}" wx:key="_id">
         <view class="flex-auto">
           <text>{{item.trueName}}</text>
+          <text class="gray">（{{item.relation}}）</text>
           <text class="gray">（{{item.phoneNum}}）</text>
         </view>
         <view class="flex-none">
