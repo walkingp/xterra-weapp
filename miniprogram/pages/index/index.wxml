@@ -1,58 +1,35 @@
 <view class="container">
-  <block wx:if="{{loading}}">
-    <loader />
-  </block>
-  <block wx:else>
-    <view class="top flex column align-end justify-center">
-      <image src="./../../images/logo@2x.png"></image>
-      <button bindtap="gotoAbout" data-url="/pages/page/page?id=about" class="button">了解更多</button>
-    </view>
-    <banner-list list="{{banners}}" />
-    <view class="shortcuts box no-min-height">
-      <van-grid border="{{false}}">
-        <van-grid-item icon="/images/icons/events@2x.png" url="/pages/events/events" link-type="switchTab" text="活动报名" />
-        <van-grid-item icon="/images/icons/profile@2x.png" url="/pages/my/my" link-type="switchTab" text="用户中心" />
-        <van-grid-item icon="/images/icons/community@2x.png" url="/pages/community/community" link-type="switchTab" text="社区中心" />
-        <van-grid-item icon="/images/icons/points@2x.png" url="/pages/events/events" text="积分商城" />
-      </van-grid>
-    </view>
-    <view class="races box">
-      <view class="flex space-between">
-        <text class="hd">最近报名</text>
-        <navigator url="">更多</navigator>
-      </view>
-      <view class="list">
-        <race-list list="{{races}}" />
-      </view>
-    </view>
-    <view class="news box">
-      <view class="flex space-between">
-        <text class="hd">媒体中心</text>
-        <navigator url="/pages/news/news">更多</navigator>
-      </view>
-      <view class="list">
-        <news-list list="{{news}}" />
-      </view>
-    </view>
-    <view class="bottom flex space-between">
-      <navigator url="/pages/page/page?id=about" class="box flex space-between">
-        <view class="flex-auto flex column">
-          <text class="bold">关于XTERRA</text>
-          <text>我们是做什么？</text>
+	<swiper class="main" vertical="true" indicator-dots="{{false}}" bindchange="mainSwiperChanged" duration="1000">
+		<swiper-item item-id="0">
+      <view class="swiper">
+        <swiper class="{{banners.length === 1 ? 'disabled' : ''}}" bindchange="swiperChange" indicator-dots="{{false}}" autoplay="{{true}}">
+          <block wx:for="{{banners}}" wx:key="_id">
+            <swiper-item bindtap="tap" data-src="{{item.picUrl}}" data-url="{{item.redirectUrl}}" data-type="{{item.type}}">
+              <view class="swiper-item">
+                <image src="{{item.picUrl}}" mode="aspectFill"></image>
+                <button>查看详情</button>
+              </view>
+            </swiper-item>
+          </block>
+        </swiper>
+        <view class="dots" wx:if="{{banners.length>1}}">
+          <block wx:for="{{banners}}" wx:key="index">
+            <view class="dot{{index == current ? ' active' : ''}}"></view>
+          </block>
+        </view>    
+        <view class="slide-more">
+          <image class="p1" src="./../../images/icons/arrow@2x.png" />
+          <image class="p2" src="./../../images/icons/arrow@2x.png" />
         </view>
-        <view class="flex-none">
-          <image src="./../../images/icons/about@2x.png"></image>
-        </view>        
-      </navigator>
-      <navigator url="/pages/page/page?id=sns" class="box flex space-between">
-        <view class="flex-auto flex column">
-          <text class="bold">社交网络</text>
-          <text>关注我们的社交平台</text>
+      </view>
+    </swiper-item>
+    <swiper-item class="main" item-id="{{index+1}}" wx:for="{{races}}" wx:key="_id">
+      <view class="list">
+        <view class="item">
+          <image src="{{item.bigPic}}" />
+          <button>查看详情</button>
         </view>
-        <view class="flex-none">
-          <image src="./../../images/icons/wechat@2x.png"></image>
-        </view>        
-      </navigator>
-    </view>
-  </block>
+      </view>
+    </swiper-item>
+  </swiper>
 </view>

@@ -1,62 +1,75 @@
 .container{
-  padding: 28rpx 30rpx;
+  padding: 0;
 }
-.top{
-  background: url(https://7874-xterra-c2969f-1258173660.tcb.qcloud.la/app/images/bg_home_part%402x.png?sign=f1fb177eab4227ab8b84441afe6fa3d9&t=1607065530) no-repeat;
-  background-size: 100% 100%;
-  height: 218rpx;
-  margin-bottom: 20rpx;
-  padding: 40rpx;
+.main{
+  min-height: 100vh;
 }
-.top image{
-  width: 255rpx;
-  height: 48rpx;
+.swiper{
+  height: 100vh;
 }
-.top button{
-  margin: 40rpx 40rpx 0 0!important;
+.swiper swiper, .swiper swiper-item, .swiper .swiper-item{
+  height: 100%;
 }
-.shortcuts{
-  margin-top: 20rpx;
-  padding: 10rpx;
-  padding-bottom: 20rpx;
-  --grid-item-icon-size: 66rpx;
+.swiper .swiper-item{
+  position: relative;
 }
-.news{
-  margin-top: 20rpx;
+.main button{
+  position: absolute;
+  left: 50%;
+  bottom: 160rpx;
+  transform: translateX(-50%);
+  background-color: transparent;
+  border: solid 2rpx #fff!important;
+  color: #fff!important;
+  width: 175rpx;
 }
-.list{
-  min-height: 300rpx;
-}
-.races .list{
-  padding-top: 20rpx;
-}
-.bottom{
-  margin-top: 20rpx;
-}
-.bottom .box{
-  margin-top: 0;
+.swiper-item image{
+  height: 100vh!important;
   width: 100%;
-  padding: 30rpx 20rpx;
-  min-height: auto;
 }
-.bottom .box+.box{
-  margin-left: 30rpx;
+
+.slide-more {
+	font-size: 24rpx;
+	color: #fff;
+	letter-spacing: 4rpx;
+	position: absolute;
+	left: 50%;
+	bottom: 20rpx;
+	transform: translateX(-50%);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
-.bottom .box image{
-  width: 70rpx;
-  height: 70rpx;
+
+.slide-more image {
+	width: 24rpx;
+	height: 12rpx;
 }
-.bottom text{
-  font-size: 24rpx;
-  color: #666;
-  white-space: nowrap;
+
+@keyframes show {
+	from {
+		visibility: hidden;
+	}
+
+	50% {
+		visibility: hidden;
+	}
+
+	to {
+		visibility: visible;
+	}
 }
-.bottom .bold{
-  font-size: 28rpx;
-  font-weight: bold;
-  color: #333;
+
+.slide-more image.p1 {
+	animation: show 1s 1s linear infinite;
 }
-.hd+navigator{
-  color: #999;
-  font-size: 26rpx;
+.slide-more image.p2 {
+	animation: show .8s 1s linear infinite;
+}
+.list .item{
+  position: relative;
+}
+.list image{
+  width: 100vw;
+  height: 100vh;
 }

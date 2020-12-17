@@ -14,6 +14,18 @@ Page({
     news: [],
     races: []
   },
+  mainSwiperChanged(e){
+    const { current } = e.detail;
+    if(current === 2){
+      wx.showTabBar({
+        animation: current === 2,
+      })
+    }else{
+      wx.hideTabBar({
+        animation: true,
+      })
+    }
+  },
   gotoAbout(e){
     const { url } = e.currentTarget.dataset;
     wx.navigateTo({
@@ -52,6 +64,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.hideTabBar({
+      animation: true,
+    })
     this.fetch();
   },
 
