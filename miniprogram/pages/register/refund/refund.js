@@ -69,7 +69,7 @@ Page({
         refund_desc: `报名费退款：${raceDetail.title}`
       },
       async success(res) {
-        await updateOrderStatus({id:detail._id, ...orderStatus.refunded })
+        await updateOrderStatus({id:detail._id, ...orderStatus.refunded, refundTime: new Date() })
         wx.showToast({
           icon: "success",
           title: '退款成功',

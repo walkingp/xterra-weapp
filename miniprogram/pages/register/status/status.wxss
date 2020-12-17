@@ -22,7 +22,7 @@ image.icon{
   margin-top: 20rpx;
 }
 .cell{
-  padding: 5rpx 0;
+  padding: 8rpx 0;
   font-size: 26rpx;
 }
 .cell label{
@@ -33,9 +33,13 @@ image.icon{
 .cell:last-child{
   border-bottom: none;
 }
+image.paystatus{
+  width: 100rpx!important;
+  height: 100rpx!important;
+}
 image.icon{
-  width: 48rpx!important;
-  height: 48rpx!important;
+  width: 36rpx!important;
+  height: 36rpx!important;
   margin-left: 10rpx;
 }
 .price{
@@ -50,4 +54,8 @@ image.icon{
 }
 button{
   margin: 0 0 0 20rpx;
+}
+.copy{
+  padding: 0 10rpx;
+  color: #0078D4;
 }

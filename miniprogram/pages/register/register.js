@@ -174,6 +174,7 @@ Page({
   pay(payData) {
     const that = this;
     const { order } = this.data;
+    const { out_trade_no } = app.globalData.order;
     //官方标准的支付方法
     wx.requestPayment({ //已经得到了5个参数
       timeStamp: payData.timeStamp,
@@ -192,7 +193,6 @@ Page({
           },
           success: function(){
             // 重要：此处更新保存out_trade_no，用于退款
-            const { out_trade_no } = app.globalData.order;
             updateOrderStatus({id:order.id, ...orderStatus.paid, out_trade_no }).then(res=>{
               order.status = orderStatus.paid.status; // 已支付
               order.statusText = orderStatus.paid.statusText;
@@ -213,7 +213,7 @@ Page({
       },
       fail(res) {
         console.log("支付失败：", res);
-        updateOrderStatus({id:order.id, ...orderStatus.failed }).then(res=>{
+        updateOrderStatus({id:order.id, ...orderStatus.failed, out_trade_no }).then(res=>{
           console.log(res);
           wx.showToast({
             icon: 'none',
@@ -246,7 +246,7 @@ Page({
         data: {
           ...item,
           createdAt: new Date(),
-          id, orderNum, userId, userName, userInfo, status, statusText, orderType, raceId, raceTitle, racePic, cateId, cateTitle, groupType, groupText
+          id, orderNum, userId, userName, userInfo, status, statusText, orderType, raceId, raceTitle, racePic, cateId, cateTitle, groupType, groupText, out_trade_no
         }
       });
       console.log(result)

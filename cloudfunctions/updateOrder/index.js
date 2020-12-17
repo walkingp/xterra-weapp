@@ -7,10 +7,13 @@ const orderTable = db.collection("registration")
 const _ = db.command
 // 云函数入口函数
 exports.main = async (event, context) => {
-  const { id, status, statusText, out_trade_no } = event;
+  const { id, status, statusText, out_trade_no, refundTime } = event;
   let data = { status, statusText };
   if(out_trade_no){
     data.out_trade_no = out_trade_no;
+  }
+  if(refundTime){
+    data.refundTime = refundTime;
   }
   const wxContext = cloud.getWXContext()
   try {

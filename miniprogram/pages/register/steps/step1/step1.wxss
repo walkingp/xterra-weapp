@@ -147,8 +147,9 @@ input, textarea{
   margin-top: 15rpx;
 }
 .bottom{
-  margin-top: 40rpx;
+  margin: 20rpx 0;
   font-size: 24rpx;
+  color: #999;
 }
 checkbox-group{
   display: inline;

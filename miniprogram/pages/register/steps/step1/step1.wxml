@@ -43,6 +43,13 @@
     <input type="text" maxlength="{{64}}" confirm-type="done" data-group="family" bindblur="saveTeamTitle" placeholder="请填写家庭队名" />
   </view>
 </block>
+<view class="bottom">
+  <checkbox-group bindchange="checkAgreement">
+    <checkbox name="agreed" value="true" id="accepted"></checkbox>
+  </checkbox-group>
+  <label for="accepted">我已认真阅读并且同意</label>
+  <text class="link" bindtap="showDisclaimer">《免责协议》</text>
+</view>
 <view class="box" wx:if="{{selectedCateId !== null }}">
   <view class="title">报名优惠费用</view>
   <view class="desc flex column">
@@ -60,13 +67,6 @@
     <text>每次只能选择一个组别进行报名，如需多人报名多个组别，请依次完成每个组别的报名；</text>
     <text>各组别优惠价格及退改政策，请点击选择组别后查看报名优惠价格。</text>
   </view>
-</view>
-<view class="bottom">
-  <checkbox-group bindchange="checkAgreement">
-    <checkbox name="agreed" value="true" id="accepted"></checkbox>
-  </checkbox-group>
-  <label for="accepted">我已认真阅读并且同意</label>
-  <text class="link" bindtap="showDisclaimer">《免责协议》</text>
 </view>
 <van-popup show="{{ show }}" round closeable bind:close="onClose" custom-style="height: 680rpx; padding: 20rpx; width:680rpx; overflow-y: auto;" bind:close="onClose">
   <towxml nodes="{{raceDetail.disclaimer}}" />

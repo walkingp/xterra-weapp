@@ -1,6 +1,6 @@
 <view class="container flex column">
   <view class="box flex column align-center justify-center">    
-    <image class="icon" src="./../../../images/icons/succ@2x.png" />
+    <image class="paystatus" src="./../../../images/icons/succ@2x.png" />
     <text>{{detail.statusText}}</text>
   </view>
   <navigator url="/pages/events/detail/detail?id={{detail.raceId}}" class="box flex align-center space-between">
@@ -20,7 +20,7 @@
       <view class="cell">
         <label>订单编号：</label>
         <text>{{detail.orderNum}}</text>
-        <text class="copy">复制</text>
+        <text bindtap="copyText" data-text="{{detail.orderNum}}" class="copy">复制</text>
       </view>
       <view class="cell">
         <label>订单时间：</label>
@@ -31,17 +31,25 @@
         <text>{{detail.groupText}}</text>
       </view>
       <view class="cell">
-        <label>选择组别：</label>
+        <label>报名组别：</label>
         <text>{{detail.cateTitle}}</text>
       </view>
       <view class="cell">
-        <label>总费用：</label>
+        <label>报名费用：</label>
+        <text>￥{{detail.totalFee}}</text>
+      </view>
+      <view class="cell">
+        <label>优惠金额：</label>
+        <text>￥{{detail.totalFee}}</text>
+      </view>
+      <view class="cell">
+        <label>实付费用：</label>
         <text class="price">￥{{detail.totalFee}}</text>
       </view>
       <view class="cell">
         <label>付款方式</label>
-        <image src="/images/icons/wepay.svg" class="icon" />
         <text>微信支付</text>
+        <image src="/images/icons/wepay.svg" class="icon" />
       </view>
       <view class="cell">
         <label>订单状态：</label>
@@ -49,7 +57,8 @@
       </view>
     </view>
     <view class="ft flex justify-end align-center">
-      <button bindtap="redirect" disabled="{{!refundEnabled}}" data-url="/pages/register/refund/refund?id={{detail._id}}" class="button secondary mini">申请退款</button>
+      <button bindtap="confirmOrder" disabled="{{!showPayBtn}}" class="button mini">立即支付</button>
+      <button bindtap="redirect" disabled="{{!refundEnabled}}" data-url="/pages/register/refund/refund?id={{detail._id}}" class="button secondary mini" wx:if="{{showRefundBtn}}">申请退款</button>
       <button bindtap="redirect" data-url="/pages/my/registration/registration" class="button mini">我的报名</button>
     </view>
   </view>

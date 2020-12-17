@@ -147,7 +147,7 @@ export const getRaceDetail = async id => {
 }
 
 export const updateOrderStatus = async param => {
-  const { id, status, statusText, out_trade_no } = param;
+  const { id, status, statusText, out_trade_no, refundTime } = param;
   return new Promise((resolve, reject) => {
     wx.cloud.callFunction({
       name: 'updateOrder',
@@ -155,7 +155,8 @@ export const updateOrderStatus = async param => {
         id,
         status,
         statusText,
-        out_trade_no
+        out_trade_no,
+        refundTime
       }
     }).then(res => {
       resolve(res.result);
