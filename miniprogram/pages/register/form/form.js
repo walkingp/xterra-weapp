@@ -174,6 +174,16 @@ Page({
       showAddrPicker: true
     })
   },
+  onCancel(){
+    this.setData({
+      showAction: false
+    })
+  },
+  onDateCancel(){
+    this.setData({
+      showDatePicker: false
+    })
+  },
   onClose(e){
     const { type } = e.currentTarget.dataset;
     switch(type){

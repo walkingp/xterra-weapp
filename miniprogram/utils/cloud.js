@@ -16,6 +16,17 @@ export const getPaginations = (args) => {
   })
 }
 
+export const sendEmail = ({ html, from, to, subject }) => {
+  return new Promise((resolve, reject) => {
+    wx.cloud.callFunction({
+      name: 'sendmail',
+      data: { html, from, to, subject }
+    }).then(res => {
+      resolve(res.result.data);
+    }).catch(reject)
+  })
+}
+
 export const getCollectionById = (args) => {
   const { dbName, id } = args;
   return new Promise(async (resolve, reject) => {

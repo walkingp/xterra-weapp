@@ -41,12 +41,12 @@
   </form>
 
   <van-popup show="{{ showAction }}" position="bottom" bind:close="onClose" data-type="other">
-    <van-picker show-toolbar="{{true}}" columns="{{ columns }}" bind:confirm="onConfirm" />
+    <van-picker show-toolbar="{{true}}" columns="{{ columns }}" bind:cancel="onCancel" bind:confirm="onConfirm" />
   </van-popup>
   <van-popup show="{{ showAddrPicker }}" position="bottom" bind:close="onClose" data-type="addr">
     <van-area area-list="{{ areaList }}" value="310000" bind:confirm="onAddConfirm" />
   </van-popup>
   <van-popup show="{{ showDatePicker }}" position="bottom" bind:close="onClose" data-type="date">
-    <van-datetime-picker type="date" value="{{ defaultBirthDate }}" min-date="{{ minDate }}" max-date="{{ maxDate }}" bind:confirm="onDateConfirm" />
+    <van-datetime-picker type="date" value="{{ defaultBirthDate }}" min-date="{{ minDate }}" bind:cancel="onDateCancel" max-date="{{ maxDate }}" bind:confirm="onDateConfirm" />
   </van-popup>
 </view>

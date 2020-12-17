@@ -22,7 +22,7 @@
   font-size: 24rpx;
   font-weight: bold;
 }
-button{
+.race-cate-item button{
   font-size: 24rpx;
   height: 52rpx;
   padding: 0 20rpx!important;

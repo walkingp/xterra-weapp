@@ -70,3 +70,10 @@ export const raceGroups = {
     groupText: '家庭组'
   }
 }
+
+export const emailTemplateType = {
+  registration: {
+    title: '报名邮件',
+    value: 'registration'
+  }
+}

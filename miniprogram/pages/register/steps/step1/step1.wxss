@@ -77,7 +77,6 @@
 }
 .cates .item .hd{
   font-weight: bold;
-  flex: none;
   min-width: 80rpx;
 }
 .left{

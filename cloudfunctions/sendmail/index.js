@@ -17,9 +17,10 @@ const mailOptions = {
 };
 // 云函数入口函数
 exports.main = async (event, context) => {
+  const { html, from, to, subject } = event;
   console.log("Start to sendemail")
   //开始发送邮件
-  const info = await transporter.sendMail(mailOptions);
+  const info = await transporter.sendMail({ html, from, to, subject });
   console.log('Message sent: ' + info.response);
   return info
 }

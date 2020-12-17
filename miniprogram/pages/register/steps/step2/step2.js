@@ -55,6 +55,7 @@ Component({
       app.globalData.order.profileCount = profiles.length;
       const totalFee = app.globalData.order.price * profiles.length;
       app.globalData.order.totalFee = totalFee.toFixed(2);
+      app.globalData.order.paidFee = totalFee.toFixed(2);
       this.triggerEvent('onComplete', { prevEnabled: true, nextEnabled: profileIds.length > 0 });
     },
     gotoAdd(e){

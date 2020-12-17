@@ -1,5 +1,5 @@
 <block wx:if="{{list.length}}">
-  <view class="item flex align-center" wx:for="{{list}}" wx:key="_id">
+  <view class="item race-cate-item flex align-center" wx:for="{{list}}" wx:key="_id">
     <view class="flex-auto flex column">
       <view class="top flex space-between">
         <text class="title flex-auto">{{item.title}}</text>
