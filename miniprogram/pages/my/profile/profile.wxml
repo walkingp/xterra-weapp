@@ -13,8 +13,14 @@
         </view>
       </navigator>
     </view>
-    <view class="footer">
-      <button bindtap="gotoAdd">添加新报名人</button>
+  </view>
+  <view class="box">
+    <view class="title">注意事项：</view>
+    <view class="desc">
+    请注意，填写信息时请核对填写内容的准确性，其中手机号和邮箱用于接收比赛通知，“本人”仅限一位。
     </view>
+  </view>
+  <view class="footer flex align-center justify-center">
+    <button bindtap="gotoAdd">添加新报名人</button>
   </view>
 </view>

@@ -27,7 +27,9 @@
   display: inline-block;
   width: 200rpx;
 }
+.footer{
+  margin-top: 30rpx;
+}
 .footer button{
   width: 270rpx!important;
-  margin: 0 0 0 auto!important;
 }

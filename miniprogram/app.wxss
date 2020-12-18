@@ -31,10 +31,9 @@ button{
   font-size: 30rpx;
   letter-spacing: 4rpx;
 }
-button[disabled]{
-  background-color: #d6d6d6!important;
-  color: #fff!important;
-  border-color: #d6d6d6!important;
+button.primary{
+  background-color: #DF1042!important;
+  color: #fff;
 }
 button.secondary{
   border: solid 2rpx #666;
@@ -43,6 +42,11 @@ button.secondary{
 button.mini{
   height: 60rpx;
   font-size: 26rpx;
+}
+button[disabled]{
+  background-color: #d6d6d6!important;
+  color: #fff!important;
+  border-color: #d6d6d6!important;
 }
 
 .h2w.h2w-light {

@@ -2,6 +2,7 @@ import dayjs from "dayjs";
 import { orderStatus } from "../config/const";
 import { sendRegEmail } from "./email";
 import { updateOrderStatus } from "./race";
+import { sendRegSMS } from "./sms";
 
 export const payNow = function(detail, callback) {
   wx.showLoading({
@@ -62,7 +63,7 @@ function pay(payData, detail, callback) {
               icon: 'success',
               title: '支付成功',
               success: async function(){
-                await sendEmail(detail);
+                await sendEmailSMS(detail);
                 wx.hideLoading({
                   success: (res) => {
                     callback();
@@ -112,7 +113,8 @@ function saveStartlist(detail){
     console.log(result)
   })
 }
-function sendEmail(order) {
+
+async function sendEmailSMS(order){
   const {
     raceId,
     raceTitle,
@@ -123,18 +125,49 @@ function sendEmail(order) {
     totalFee,
     paidFee
   } = order;
+  await profiles.forEach(async profile => {
+    const { trueName, phoneNum, email } = profile;
+    const orderDate = dayjs(new Date()).format("YYYY年MM月DD日 HH:mm:ss");
+    const params = { orderDate, catePrice: price, cateNum: profiles.length, raceId, raceTitle, orderNum, cateTitle, price, totalFee, paidFee, trueName, phoneNum, email };
+    await sendEmail(params);
+    await sendSms(params);
+  }) 
+}
+function sendEmail(order) {
+  const {
+    raceId,
+    raceTitle,
+    orderNum,
+    cateTitle,
+    totalFee,
+    paidFee, trueName, email, orderDate, cateNum, catePrice
+  } = order;
   const values = {
     raceId,
     raceTitle,
-    trueName: profiles[0].trueName,
-    email: profiles[0].email,
-    orderDate: dayjs(new Date()).format("YYYY年MM月DD日 HH:mm:ss"),
+    trueName,
+    email,
+    orderDate,
     orderNum,
-    cateNum: profiles.length,
+    cateNum,
     cateTitle,
-    catePrice: price,
+    catePrice,
     totalFee,
     paidFee
   };
   return sendRegEmail(values);
 }
+
+
+function sendSms({ phoneNum, trueName, raceId, raceTitle, cateTitle}){
+  sendRegSMS({
+    mobile: phoneNum,
+    trueName,
+    raceId,
+    raceTitle,
+    cateTitle
+  })
+  wx.showToast({
+    title: '发送成功',
+  })
+};

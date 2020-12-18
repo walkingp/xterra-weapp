@@ -26,6 +26,10 @@
 .box .hd{
   font-weight: bold;
 }
+.box .desc{
+  color: #999;
+  font-size: 24rpx;
+}
 .section{
   background-color: #fff;
   padding: 30rpx;
