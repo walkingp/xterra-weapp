@@ -136,10 +136,18 @@
 	height: 250rpx!important;
 	width: 100%;
 }
-.news .item text{
+.news .item .desc{
 	padding: 20rpx;
 	overflow: hidden;
+	max-height: 100rpx;
 }
 .news .list{
 	columns: 2;
+}
+
+.news .list .item{
+	height: 280rpx;
+}
+.news .list .item image{
+	height: 160rpx!important;
 }

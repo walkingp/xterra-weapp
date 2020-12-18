@@ -39,14 +39,14 @@
           <text class="title">新闻动态</text>
           <navigator>更多</navigator>
         </view>
-        <view class="cover item">
+        <navigator url="/pages/news/detail/detail?id={{news[0]._id}}" class="cover item">
           <image src="{{news[0].coverUrl}}" />
-          <text class="overflow-2">{{news[0].title}}</text>
-        </view>
+          <view class="desc overflow-2">{{news[0].title}}</view>
+        </navigator>
         <view class="list">
-          <navigator url="/pages/news/detail/detail?id={{item._id}}" class="item" wx:for="{{news}}" wx:key="_id">
+          <navigator url="/pages/news/detail/detail?id={{item._id}}" class="item" wx:for="{{news}}" wx:if="{{index>0}}" wx:key="_id">
             <image src="{{item.coverUrl}}" mode="aspectFill"></image>
-            <text class="overflow-2">{{item.title}}</text>
+            <view class="desc overflow-2">{{item.title}}</view>
           </navigator>
         </view>
       </view>

@@ -10,7 +10,7 @@ export const getNewsIndexList = async () => {
       order: 'desc'
     },
     pageIndex: 1,
-    pageSize: 2
+    pageSize: 9
   })
   return data;
 }
