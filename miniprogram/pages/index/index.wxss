@@ -21,10 +21,10 @@
   background-color: transparent;
   border: solid 2rpx #fff!important;
   color: #fff!important;
-  width: 175rpx;
+  width: 200rpx;
 }
-.swiper-item image{
-  height: 100vh!important;
+.swiper-item image.cover{
+  height: 100%!important;
   width: 100%;
 }
 
@@ -69,7 +69,77 @@
 .list .item{
   position: relative;
 }
-.list image{
+.list image.cover{
   width: 100vw;
   height: 100vh;
+}
+
+.dots {
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  bottom: 80rpx;
+}
+
+.dot {
+  width: 26rpx;
+  height: 5rpx;
+  background-color: #fff;
+}
+.dot.active{
+  background-color: #C3002F;
+}
+
+.dot+.dot {
+  margin-left: 20rpx;
+}
+.swiper swiper.disabled{
+  position: relative;
+}
+.swiper swiper.disabled::after{
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  z-index: 9;
+  background-color: transparent;
+}
+.news{
+	padding: 30rpx;
+}
+.news .title{
+	font-weight: bold;
+	font-size: 30rpx;
+	padding-bottom: 20rpx;
+	padding-top: 20rpx;
+}
+.news .title navigator{
+	font-weight: normal;
+	color: #999;
+	font-size: 26rpx;
+}
+.news .item{
+	height: 380rpx;
+	display: flex;
+	flex-direction: column;
+	background-color: #fff;
+	overflow: hidden;
+}
+.news .cover{
+	margin-bottom: 20rpx;
+}
+.news .item image{
+	height: 250rpx!important;
+	width: 100%;
+}
+.news .item text{
+	padding: 20rpx;
+	overflow: hidden;
+}
+.news .list{
+	columns: 2;
 }

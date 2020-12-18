@@ -1,12 +1,14 @@
 <view class="container">
-	<swiper class="main" vertical="true" indicator-dots="{{false}}" bindchange="mainSwiperChanged" duration="1000">
-		<swiper-item item-id="0">
+  <swiper class="main" vertical="true" indicator-dots="{{false}}" bindchange="mainSwiperChanged" duration="1000">
+    <swiper-item item-id="0">
       <view class="swiper">
-        <swiper class="{{banners.length === 1 ? 'disabled' : ''}}" bindchange="swiperChange" indicator-dots="{{false}}" autoplay="{{true}}">
+        <swiper class="{{banners.length === 1 ? 'disabled' : ''}}" bindchange="swiperChange" indicator-dots="{{false}}"
+          autoplay="{{true}}">
           <block wx:for="{{banners}}" wx:key="_id">
-            <swiper-item bindtap="tap" data-src="{{item.picUrl}}" data-url="{{item.redirectUrl}}" data-type="{{item.type}}">
+            <swiper-item bindtap="tap" data-src="{{item.picUrl}}" data-url="{{item.redirectUrl}}"
+              data-type="{{item.type}}">
               <view class="swiper-item">
-                <image src="{{item.picUrl}}" mode="aspectFill"></image>
+                <image class="cover" src="{{item.picUrl}}" mode="aspectFill"></image>
                 <button>查看详情</button>
               </view>
             </swiper-item>
@@ -16,18 +18,36 @@
           <block wx:for="{{banners}}" wx:key="index">
             <view class="dot{{index == current ? ' active' : ''}}"></view>
           </block>
-        </view>    
+        </view>
         <view class="slide-more">
           <image class="p1" src="./../../images/icons/arrow@2x.png" />
           <image class="p2" src="./../../images/icons/arrow@2x.png" />
         </view>
       </view>
     </swiper-item>
-    <swiper-item class="main" item-id="{{index+1}}" wx:for="{{races}}" wx:key="_id">
+    <swiper-item class="main" item-id="{{index+1}}" wx:for="{{races}}" wx:key="_id" wx:if="{{index<2}}">
       <view class="list">
         <view class="item">
-          <image src="{{item.bigPic}}" />
+          <image class="cover" src="{{item.bigPic}}" mode="aspectFill" />
           <button>查看详情</button>
+        </view>
+      </view>
+    </swiper-item>
+    <swiper-item class="main" item-id="3">
+      <view class="news">
+        <view class="title flex align-center space-between">
+          <text class="title">新闻动态</text>
+          <navigator>更多</navigator>
+        </view>
+        <view class="cover item">
+          <image src="{{news[0].coverUrl}}" />
+          <text class="overflow-2">{{news[0].title}}</text>
+        </view>
+        <view class="list">
+          <navigator url="/pages/news/detail/detail?id={{item._id}}" class="item" wx:for="{{news}}" wx:key="_id">
+            <image src="{{item.coverUrl}}" mode="aspectFill"></image>
+            <text class="overflow-2">{{item.title}}</text>
+          </navigator>
         </view>
       </view>
     </swiper-item>

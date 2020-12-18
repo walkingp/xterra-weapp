@@ -3,10 +3,10 @@ const {
 } = require("../../api/race");
 const {
   getNewsIndexList
-} = require("./../../api/news");
+} = require("../../api/news");
 const {
   getRaceIndexList
-} = require("./../../api/race");
+} = require("../../api/race");
 const dayjs = require("dayjs");
 // miniprogram/pages/index/index.js
 Page({
@@ -18,16 +18,22 @@ Page({
     loading: false,
     banners: [],
     news: [],
-    races: []
+    races: [],
+    current: 0
+  },  
+  swiperChange(e) {
+    this.setData({
+      current: e.detail.current
+    })
   },
   mainSwiperChanged(e) {
     const {
       current
     } = e.detail;
-    if (current === 2) {
+    if (current === 3) {
       wx.showTabBar({
         animation: current === 2,
-      })
+      });
     } else {
       wx.hideTabBar({
         animation: true,
@@ -69,9 +75,6 @@ Page({
         success: (res) => {},
       })
     });
-  },
-  swiperChange() {
-
   },
   /**
    * 生命周期函数--监听页面加载
