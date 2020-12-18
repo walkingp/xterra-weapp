@@ -18,13 +18,13 @@
   </view>
 </view>
 <userlist profiles="{{order.profiles}}" />
-<view class="box">
+<view class="box info">
   <view class="title">使用优惠券</view>
-  <view class="radio">
-    <van-radio-group value="{{ radio }}" bind:change="onChange">
-      <van-radio name="1">优惠券 1</van-radio>
-      <van-radio name="2">优惠券 2</van-radio>
-    </van-radio-group>
-    <van-button icon="plus" plain type="primary" size="small">添加优惠券</van-button>
-  </view>
+  <van-cell title="选择优惠券" value="暂无" border="{{ false }}" is-link />
+  <van-cell-group>
+    <van-field border="{{ false }}" value="{{ sms }}" center clearable label="优惠券代码" placeholder="请输入12位优惠券代码" border="{{ false }}"
+      use-button-slot>
+      <van-button slot="button" size="small" type="primary">添加</van-button>
+    </van-field>
+  </van-cell-group>
 </view>

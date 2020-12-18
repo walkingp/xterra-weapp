@@ -21,6 +21,12 @@
   line-height: 200%;
   margin-top: 30rpx;
 }
+.box.info{
+  padding: 30rpx 0;
+}
+.box.info .title{
+  padding: 0 30rpx;
+}
 .box label{
   color: #999;
   display: inline-block;
@@ -35,7 +41,4 @@
 }
 .gray{
   color: #999;
-}
-van-button{
-  margin-top: 10rpx;
 }
