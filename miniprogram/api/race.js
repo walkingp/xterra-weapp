@@ -111,6 +111,21 @@ export const getMyProfiles = async (userId, size = 20) => {
   return data;
 }
 
+export const getMyCoupons = async (userId, size = 100) => {
+  const data = await getPaginations({
+    dbName: 'coupon',
+    filter: {
+      assignedUserId: userId,
+    },
+    orderBy: {
+      _createTime: 'desc'
+    },
+    pageIndex: 1,
+    pageSize: size
+  })
+  return data;
+}
+
 export const getMyRegistrations = async (userId, size = 100) => {
   const data = await getPaginations({
     dbName: 'registration',

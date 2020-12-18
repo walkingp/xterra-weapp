@@ -20,7 +20,7 @@
 <userlist profiles="{{order.profiles}}" />
 <view class="box info">
   <view class="title">使用优惠券</view>
-  <van-cell title="选择优惠券" value="暂无" border="{{ false }}" is-link />
+  <van-cell title="选择优惠券" value="{{coupon}}" border="{{ false }}" is-link />
   <van-cell-group>
     <van-field border="{{ false }}" value="{{ sms }}" center clearable label="优惠券代码" placeholder="请输入12位优惠券代码" border="{{ false }}"
       use-button-slot>

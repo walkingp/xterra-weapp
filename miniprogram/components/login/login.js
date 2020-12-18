@@ -123,7 +123,7 @@ Component({
         return;
       }
       const db = wx.cloud.database();
-      const result = await db.collection("users").doc(userId).get();
+      const result = await db.collection("userlist").doc(userId).get();
       if (result) {
         const detail = result.data;
         console.log(detail)

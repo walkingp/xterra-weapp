@@ -10,7 +10,7 @@ cloud.init({
 })
 
 const db = cloud.database()
-const usersTable = db.collection("users")
+const usersTable = db.collection("userlist")
 const _ = db.command
 
 // 云函数入口函数

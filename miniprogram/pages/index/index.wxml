@@ -40,7 +40,7 @@
           <navigator>更多</navigator>
         </view>
         <navigator url="/pages/news/detail/detail?id={{news[0]._id}}" class="cover item">
-          <image src="{{news[0].coverUrl}}" />
+          <image src="{{news[0].coverUrl}}" mode="aspectFill" />
           <view class="desc overflow-2">{{news[0].title}}</view>
         </navigator>
         <view class="list">

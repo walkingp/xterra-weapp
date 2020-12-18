@@ -31,7 +31,8 @@ Page({
     const { isLogined, userInfo } = arg.detail;
     console.log(arg)
     this.setData({
-      isLogined
+      isLogined,
+      userInfo
     })
   },
 
