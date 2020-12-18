@@ -2,9 +2,19 @@
   请选择报名类型
 </view>
 <view class="groups flex align-center">
-  <view class="item {{ selectedGroupType === 'individual' ? 'active' : '' }}" bindtap="changeGroup" data-title="个人组" data-type="individual" wx:if="{{hasIndividual}}"><text>个人组</text></view>
-  <view class="item {{ selectedGroupType === 'relay' ? 'active' : '' }}" bindtap="changeGroup" data-title="团队组" data-type="relay" wx:if="{{hasRelay}}"><text>团队组</text></view>
-  <view class="item {{ selectedGroupType === 'family' ? 'active' : '' }}" bindtap="changeGroup" data-title="亲子组" data-type="family" wx:if="{{hasFamily}}"><text>亲子组</text></view>
+  <view class="item {{ selectedGroupType === 'individual' ? 'active' : '' }}" bindtap="changeGroup" data-title="个人组"
+    data-type="individual" wx:if="{{hasIndividual}}">
+    <image src="{{raceDetail.groupPicUrls[0]}}"></image>
+    <text>个人组</text>
+  </view>
+  <view class="item {{ selectedGroupType === 'relay' ? 'active' : '' }}" bindtap="changeGroup" data-title="团队组"
+    data-type="relay" wx:if="{{hasRelay}}">
+    <image src="{{raceDetail.groupPicUrls[1]}}"></image><text>团队组</text>
+  </view>
+  <view class="item {{ selectedGroupType === 'family' ? 'active' : '' }}" bindtap="changeGroup" data-title="亲子组"
+    data-type="family" wx:if="{{hasFamily}}">
+    <image src="{{raceDetail.groupPicUrls[2]}}"></image><text>亲子组</text>
+  </view>
 </view>
 <block wx:if="{{ selectedGroupType === 'individual'}}">
   <view class="title">请选择组别</view>
@@ -25,7 +35,8 @@
           <label for="p{{index}}" class="info" wx:if="{{item.desc}}">{{item.desc}}</label>
         </view>
         <view class="flex-none radio">
-          <radio id="p{{index}}" disabled="{{item.expired ? true : false}}" checked="{{cateId===item._id ? true : false}}" data-index="{{index}}" value="{{item._id}}" />
+          <radio id="p{{index}}" disabled="{{item.expired ? true : false}}"
+            checked="{{cateId===item._id ? true : false}}" data-index="{{index}}" value="{{item._id}}" />
         </view>
       </view>
     </radio-group>
@@ -34,13 +45,15 @@
 <block wx:elif="{{ selectedGroupType === 'relay'}}">
   <view class="title">团队信息</view>
   <view class="input">
-    <input type="text" maxlength="{{64}}" confirm-type="done" data-group="relay" bindblur="saveTeamTitle" placeholder="请填写团队名称" />
+    <input type="text" maxlength="{{64}}" confirm-type="done" data-group="relay" bindblur="saveTeamTitle"
+      placeholder="请填写团队名称" />
   </view>
 </block>
 <block wx:else>
   <view class="title">家庭信息</view>
   <view class="input">
-    <input type="text" maxlength="{{64}}" confirm-type="done" data-group="family" bindblur="saveTeamTitle" placeholder="请填写家庭队名" />
+    <input type="text" maxlength="{{64}}" confirm-type="done" data-group="family" bindblur="saveTeamTitle"
+      placeholder="请填写家庭队名" />
   </view>
 </block>
 <view class="bottom">
@@ -53,8 +66,10 @@
 <view class="box" wx:if="{{selectedCateId !== null }}">
   <view class="title">报名优惠费用</view>
   <view class="desc flex column">
-    <text wx:if="{{cates[selectedCateId].enableEarlierBirdPrice}}">{{cates[selectedCateId].earlierPriceEndTime}}前报名享受优惠价格{{cates[selectedCateId].earlierBirdPrice}}元；</text>
-    <text wx:if="{{cates[selectedCateId].enableEarlyBirdPrice}}">{{cates[selectedCateId].earlyPriceEndTime}}前报名享受优惠价格{{cates[selectedCateId].earlyBirdPrice}}元；</text>
+    <text
+      wx:if="{{cates[selectedCateId].enableEarlierBirdPrice}}">{{cates[selectedCateId].earlierPriceEndTime}}前报名享受优惠价格{{cates[selectedCateId].earlierBirdPrice}}元；</text>
+    <text
+      wx:if="{{cates[selectedCateId].enableEarlyBirdPrice}}">{{cates[selectedCateId].earlyPriceEndTime}}前报名享受优惠价格{{cates[selectedCateId].earlyBirdPrice}}元；</text>
   </view>
   <view class="title">退改规则</view>
   <view class="desc flex column">
@@ -68,6 +83,7 @@
     <text>各组别优惠价格及退改政策，请点击选择组别后查看报名优惠价格。</text>
   </view>
 </view>
-<van-popup show="{{ show }}" round closeable bind:close="onClose" custom-style="height: 680rpx; padding: 20rpx; width:680rpx; overflow-y: auto;" bind:close="onClose">
+<van-popup show="{{ show }}" round closeable bind:close="onClose"
+  custom-style="height: 680rpx; padding: 20rpx; width:680rpx; overflow-y: auto;" bind:close="onClose">
   <towxml nodes="{{raceDetail.disclaimer}}" />
 </van-popup>

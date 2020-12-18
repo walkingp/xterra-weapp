@@ -12,7 +12,7 @@ Page({
     id: "",
     cateId: null,
     isValid: false,
-    step: 0,
+    step: 2,
     group: 0,
     order: null,
     prevEnabled: true,

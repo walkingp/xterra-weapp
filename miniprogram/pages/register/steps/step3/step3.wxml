@@ -18,3 +18,13 @@
   </view>
 </view>
 <userlist profiles="{{order.profiles}}" />
+<view class="box">
+  <view class="title">使用优惠券</view>
+  <view class="radio">
+    <van-radio-group value="{{ radio }}" bind:change="onChange">
+      <van-radio name="1">优惠券 1</van-radio>
+      <van-radio name="2">优惠券 2</van-radio>
+    </van-radio-group>
+    <van-button icon="plus" plain type="primary" size="small">添加优惠券</van-button>
+  </view>
+</view>

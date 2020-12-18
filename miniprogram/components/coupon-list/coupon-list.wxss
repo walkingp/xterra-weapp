@@ -1,0 +1,54 @@
+.coupon{
+  display: flex;
+  align-items: center;
+  box-shadow: 0 0 4rpx 4rpx rgba(0,0,0,.05);
+  font-size: 24rpx;
+  height: 100rpx;
+}
+.left{
+  height: 100rpx;
+  width: 100rpx;
+  position: relative;
+  text-align: center;
+}
+.left text{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  line-height: 1;
+  z-index: 2;
+}
+.left::before{
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right:0;
+  height:50%;
+  background:radial-gradient(circle at right top, transparent 10rpx, #FF6420 10rpx, #FF6420 10rpx)  
+}
+.left::after{
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right:0;
+  height:50%;
+  background:radial-gradient(circle at right bottom, transparent 10rpx, #FF6420 10rpx, #FF6420 10rpx)
+}
+.right{
+  padding: 0 20rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.right text{
+  line-height: 1;
+  padding-bottom: 10rpx;
+}
+
+.right text.title{
+  font-weight: bold;
+}

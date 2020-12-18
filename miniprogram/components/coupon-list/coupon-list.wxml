@@ -1,0 +1,9 @@
+<view class="list">
+  <view class="coupon">
+    <view class="left"><text>优惠券</text></view>
+    <view class="right">
+      <text class="title">米高测试专用</text>
+      <text>可全额抵扣报名费，仅限一人使用一次。</text>
+    </view>
+  </view>
+</view>

@@ -36,3 +36,6 @@
 .gray{
   color: #999;
 }
+van-button{
+  margin-top: 10rpx;
+}
