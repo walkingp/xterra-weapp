@@ -15,7 +15,8 @@
     "pages/my/profile/profile",
     "pages/my/registration/registration",
     "pages/register/refund/refund",
-    "pages/events/query/query"
+    "pages/events/query/query",
+    "pages/events/info/info"
   ],
   "window": {
     "backgroundColor": "#ffffff",
