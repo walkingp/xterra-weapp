@@ -11,7 +11,7 @@
         <van-field label="请输入手机号" name="phoneNum" value="{{ phoneNum }}" placeholder="请输入11位手机号" border="{{ false }}"
           bind:change="onChange" />
         <van-cell border="{{ false }}">
-          <van-button type="primary" form-type="submit" block>查询</van-button>
+          <button form-type="submit" class="primary block">查询</button>
         </van-cell>
       </van-cell-group>
     </form>
