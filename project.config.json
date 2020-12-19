@@ -148,6 +148,12 @@
           "pathName": "pages/events/query/query",
           "query": "id=0bcbdde05fc3a636006efd9971c76de4",
           "scene": null
+        },
+        {
+          "name": "装备要求",
+          "pathName": "pages/events/kits/kits",
+          "query": "id=0bcbdde05fc3a636006efd9971c76de4",
+          "scene": null
         }
       ]
     }
