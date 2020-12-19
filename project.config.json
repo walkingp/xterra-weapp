@@ -31,14 +31,15 @@
     "useIsolateContext": true,
     "useCompilerModule": true,
     "userConfirmedUseCompilerModuleSwitch": false,
-    "minifyWXSS": true,
+    "userConfirmedBundleSwitch": false,
     "packNpmManually": true,
     "packNpmRelationList": [
       {
         "packageJsonPath": "./miniprogram/package.json",
         "miniprogramNpmDistDir": "./miniprogram/"
       }
-    ]
+    ],
+    "minifyWXSS": true
   },
   "appid": "wx491fb14c7948a753",
   "projectname": "XTERRA",
@@ -140,6 +141,12 @@
           "name": "申请退款",
           "pathName": "pages/register/refund/refund",
           "query": "id=cc9f30fe5fd4e0a200188ffe4d0ace16",
+          "scene": null
+        },
+        {
+          "name": "查询报名和成绩",
+          "pathName": "pages/events/query/query",
+          "query": "id=0bcbdde05fc3a636006efd9971c76de4",
           "scene": null
         }
       ]

@@ -1,0 +1,51 @@
+<view class="container">
+  <view class="box">
+    <form bindsubmit="query">
+      <view class="title">查询报名和成绩</view>
+      <view class="cover">
+        <banner-list list="{{raceDetail.picUrls}}"></banner-list>
+      </view>
+      <van-cell-group>
+        <van-cell title="{{raceDetail.title}}" size="large" border="{{ false }}" />
+        <van-cell title="请选择查询者" bind:click="showAction" border="{{ false }}" is-link value="{{defaultName}}" />
+        <van-field label="请输入手机号" name="phoneNum" value="{{ phoneNum }}" placeholder="请输入11位手机号" border="{{ false }}"
+          bind:change="onChange" />
+        <van-cell border="{{ false }}">
+          <van-button type="primary" form-type="submit" block>查询</van-button>
+        </van-cell>
+      </van-cell-group>
+    </form>
+    <van-action-sheet show="{{ show }}" actions="{{ actions }}" bind:close="onClose" bind:select="onSelect" />
+  </view>
+  <view class="box">
+    <van-tabs active="{{ active }}" bind:change="onChange">
+      <van-tab title="报名">
+        <van-cell-group wx:if="{{searchedReg}}">
+          <van-cell title="姓名" border="{{ false }}" value="{{searchedReg.trueName}}" />
+          <van-cell title="性别" border="{{ false }}" value="{{searchedReg.gender}}" />
+          <van-cell title="证件类型" border="{{ false }}" value="{{searchedReg.cardType}}" />
+          <van-cell title="证件号码" border="{{ false }}" value="{{searchedReg.cardNo}}" />
+          <van-cell title="报名状态" border="{{ false }}" value="{{searchedReg.statusText}}" />
+          <van-cell title="报名时间" border="{{ false }}" value="{{searchedReg.regDate}}" />
+        </van-cell-group>
+        <block wx:else>
+          <van-empty image="search" description="没有查询到报名" />
+        </block>
+      </van-tab>
+      <van-tab title="成绩">
+        <van-cell-group wx:if="{{searchResult}}">
+          <van-cell title="姓名" border="{{ false }}" value="本人" />
+          <van-cell title="性别" border="{{ false }}" value="本人" />
+          <van-cell title="组别" border="{{ false }}" value="本人" />
+          <van-cell title="号码" border="{{ false }}" value="本人" />
+          <van-cell title="完赛成绩" border="{{ false }}" value="本人" />
+          <van-cell title="组别排名" border="{{ false }}" value="本人" />
+          <van-cell title="总排名" border="{{ false }}" value="本人" />
+        </van-cell-group>
+        <block wx:else>
+          <van-empty image="search" description="没有查询到成绩" />
+        </block>
+      </van-tab>
+    </van-tabs>
+  </view>
+</view>

@@ -141,6 +141,11 @@ export const getRegistrationByOrderNum = async orderNum => {
   return data.length ? data[0] : null;
 }
 
+export const getRegistrationByPhoneNum = async phoneNum => {
+  const data = await getCollectionByWhere({ dbName: 'start-list', filter: { phoneNum } });
+  return data.length ? data[0] : null;
+}
+
 export const getRaceDetail = async id => {
   const data = await getCollectionById({ dbName: 'race', id });
   return data;
