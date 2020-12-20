@@ -38,6 +38,11 @@ export const getCollectionById = (args) => {
   })
 }
 
+export const getSingleCollectionByWhere = async arg => {
+  const data = await getCollectionByWhere(arg);
+  return data.length ? data[0] : null;
+}
+
 export const getCollectionByWhere = (args) => {
   const { dbName, filter } = args;
   return new Promise(async (resolve, reject) => {

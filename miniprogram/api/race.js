@@ -1,4 +1,4 @@
-import { getPaginations, getCollectionById, getCollectionByWhere } from "../utils/cloud"
+import { getPaginations, getCollectionById, getCollectionByWhere, getSingleCollectionByWhere } from "../utils/cloud"
 const dayjs = require("dayjs");
 
 export const getBannerList = async ( position = 'index', size = 5) => {
@@ -165,6 +165,24 @@ export const getRaceDetail = async id => {
   const data = await getCollectionById({ dbName: 'race', id });
   return data;
 }
+
+export const getCouponDetail = async coupon => {
+  const data = await getSingleCollectionByWhere({ dbName: 'coupon', filter: { coupon }});
+  return data;
+}
+
+export const updateCoupon = async param => {
+  const { id } = param;
+  delete param.id;
+  const db = wx.cloud.database();
+  const result = await db.collection("coupon").doc(id).update({
+    data: {
+      ...param
+    }
+  });
+  debugger
+  return result;
+};
 
 export const updateOrderStatus = async param => {
   const { id, status, statusText, out_trade_no, refundTime } = param;

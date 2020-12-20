@@ -1,30 +1,18 @@
-<view class="box">
-  <view class="title">报名信息：</view>
-  <view class="cell">
-    <label>比赛名称：</label>
-    <text>{{order.raceTitle}}</text>
-  </view>
-  <view class="cell">
-    <label>报名类别：</label>
-    <text>{{order.cateTitle}}</text>
-  </view>
-  <view class="cell">
-    <label>总费用：</label>
-    <text>￥{{order.totalFee}}</text>
-  </view>
-  <view class="cell">
-    <label>订单状态：</label>
-    <text>待支付</text>
-  </view>
+<view class="box info">
+  <form bindsubmit="addCoupon">
+    <view class="title">报名信息：</view>
+    <van-cell title="比赛名称" value="{{order.raceTitle}}" />
+    <van-cell title="报名类别" value="{{order.cateTitle}}" />
+    <van-cell title="总费用" value="￥{{order.totalFee}}" />
+    <van-cell title="选择优惠券" value="{{coupon}}" bind:click="showAction" is-link />
+    <van-field wx:if="{{inputVisible}}" name="coupon" focus="{{inputVisible}}" value="{{ code }}" center clearable
+      label="优惠券代码" placeholder="请输入12位优惠券代码" use-button-slot>
+      <van-button slot="button" size="small" form-type="submit" type="primary">添加</van-button>
+    </van-field>
+    <van-cell title="订单状态" value="待支付" />
+    <van-cell title="最终费用" value="待支付" />
+  </form>
 </view>
 <userlist profiles="{{order.profiles}}" />
-<view class="box info">
-  <view class="title">使用优惠券</view>
-  <van-cell title="选择优惠券" value="{{coupon}}" border="{{ false }}" is-link />
-  <van-cell-group>
-    <van-field border="{{ false }}" value="{{ sms }}" center clearable label="优惠券代码" placeholder="请输入12位优惠券代码" border="{{ false }}"
-      use-button-slot>
-      <van-button slot="button" size="small" type="primary">添加</van-button>
-    </van-field>
-  </van-cell-group>
-</view>
+<van-action-sheet show="{{ show }}" actions="{{ actions }}" cancel-text="取消" bind:close="onClose" bind:cancel="onClose"
+  bind:select="onSelect" />

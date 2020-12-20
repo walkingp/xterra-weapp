@@ -27,18 +27,3 @@
 .box.info .title{
   padding: 0 30rpx;
 }
-.box label{
-  color: #999;
-  display: inline-block;
-  width: 200rpx;
-}
-.list .cell{
-  padding: 5rpx 0;
-  border-bottom: solid 2rpx #f1f1f1;
-}
-.list .cell:last-child{
-  border-bottom: none;
-}
-.gray{
-  color: #999;
-}
