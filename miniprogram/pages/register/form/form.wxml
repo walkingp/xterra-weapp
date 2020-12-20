@@ -21,7 +21,11 @@
       <van-cell title="衣服尺码" required name="tSize" border="{{ false }}" is-link value="{{tSize}}" bind:click="showPicker"
         data-type="tsize" />
       <van-cell title="住址所属地区" required name="region" is-link border="{{ false }}" value="{{region}}" bind:click="showAddr" />
-      <van-field value="{{ addr }}" required name="addr" label="家庭住址" placeholder="如：xx路xx号xx室" border="{{ false }}" />
+      <van-field value="{{ addr }}" required name="addr" label="家庭住址" placeholder="如：xx路xx号xx室" border="{{ false }}" use-button-slot
+  >
+    <van-button slot="button" bind:click="selectAddr" size="small" type="primary"
+      >使用微信地址</van-button
+    ></van-field>
     </van-cell-group>
     <van-cell-group title="紧急联系人信息">
       <van-field value="{{ contactUser }}" required name="contactUser" label="姓名" placeholder="请输入真实姓名" border="{{ false }}"

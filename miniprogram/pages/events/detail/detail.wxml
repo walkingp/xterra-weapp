@@ -39,12 +39,12 @@
     </view>
     <view class="section icons">
       <van-grid border="{{false}}" column-num="4">
-        <van-grid-item icon="orders-o" url="/pages/events/events" link-type="switchTab" text="报名查询" />
+        <van-grid-item icon="orders-o" url="/pages/events/query/query?id={{detail._id}}" text="报名查询" />
         <van-grid-item icon="photo-o" url="/pages/profile/profile" link-type="switchTab" text="照片查询" />
         <van-grid-item icon="notes-o" url="/pages/community/community" link-type="switchTab" text="成绩查询" />
-        <van-grid-item icon="paid" url="/pages/events/events" text="装备要求" />
-        <van-grid-item icon="hotel-o" url="/pages/events/events" text="交通住宿" />
-        <van-grid-item icon="flower-o" url="/pages/events/events" text="美食美景" />
+        <van-grid-item icon="paid" url="/pages/events/kits/kits?id={{detail._id}}" text="装备要求" />
+        <van-grid-item icon="hotel-o" url="/pages/events/info/info?id={{detail._id}}&type=traffic" text="交通住宿" />
+        <van-grid-item icon="flower-o" url="/pages/events/info/info?id={{detail._id}}&type=cuisine" text="美食美景" />
       </van-grid>
     </view>
     <view class="section icons">

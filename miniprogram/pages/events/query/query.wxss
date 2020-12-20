@@ -1,0 +1,10 @@
+
+.title{
+  font-size: 28rpx;
+  color: #333;
+  font-weight: bold;
+  padding-bottom: 20rpx;
+}
+form .van-cell{
+  padding: var(--cell-vertical-padding,10px) 0;
+}

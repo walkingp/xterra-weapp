@@ -1,0 +1,30 @@
+<view class="container">
+  <view class="hd">
+    强制装备
+  </view>
+  <view class="list">
+    <van-checkbox-group value="{{ mandatoryKits }}" data-type="m" wx:if="{{mandatoryEquips.length}}" bind:change="onChange">
+      <van-cell-group>
+        <van-cell wx:for="{{ mandatoryEquips }}" wx:key="index" title="{{ item }}" value-class="value-class" clickable
+          data-index="{{ index }}" data-type="m" bind:click="toggle">
+          <van-checkbox checked-color="#07c160" catch:tap="noop" class="checkboxes-m{{ index }}" name="{{ item }}" />
+        </van-cell>
+      </van-cell-group>
+    </van-checkbox-group>
+    <van-empty image="error" description="组委会暂未添加强制装备" wx:else />
+  </view>
+  <view class="hd">
+    推荐装备
+  </view>
+  <view class="list">
+    <van-checkbox-group value="{{ optionalKits }}" bind:change="onChange" wx:if="{{optionalEquips.length}}">
+      <van-cell-group>
+        <van-cell wx:for="{{ optionalEquips }}" data-type="o" wx:key="index" title="{{ item }}" value-class="value-class" clickable
+          data-index="{{ index }}" data-type="o" bind:click="toggle">
+          <van-checkbox checked-color="#07c160" catch:tap="noop" class="checkboxes-o{{ index }}" name="{{ item }}" />
+        </van-cell>
+      </van-cell-group>
+    </van-checkbox-group>
+    <van-empty image="error" description="组委会暂未添加强制装备" wx:else />
+  </view>
+</view>

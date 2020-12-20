@@ -28,12 +28,6 @@ image.icon{
 .text .title{
   padding: 0;
 }
-button.van-action-sheet__item{
-  border: none;
-  height: auto;
-  height: 100rpx;
-  color: #333;
-}
 .ft{
   padding: 20rpx;
 }
