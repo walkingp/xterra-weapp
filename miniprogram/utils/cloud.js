@@ -34,7 +34,7 @@ export const sendTencentEmail = ({ templateId, data, to, subject }) => {
       name: 'sendTencentCloudMail',
       data: { templateId, data, to, subject }
     }).then(res => {
-      resolve(res.result.data);
+      resolve(res.data);
     }).catch(reject)
   })
 }

@@ -42,6 +42,7 @@ export const sendRegEmail = async (type, order) => {
     discountFee,
     paidFee
   };
+  debugger
   const values = Object.keys(dataSource).map(item => {
     return {
       key: `{{${item}}}`,

@@ -70,12 +70,6 @@ XTERRA官方小程序，主要功能:
 [CMS](https://xterra-c2969f-1258173660.tcloudbaseapp.com)
 xterra/xterra2020
 
-## 账户类：
-XTERRA阿里云
-账号：xterraplanet 
-密码：decor525$
-
-
 12-14
 姓、名
 微信号
@@ -93,3 +87,14 @@ AF001
 登录验证手机号
 
 报名人关系
+
+12-21
+强制装备 组别
+模板内容自定义动态数据
+
+优惠券只能对应指定赛事和组别
+优惠券折扣百分比
+
+优先xplogging报名功能
+
+生成成绩证书

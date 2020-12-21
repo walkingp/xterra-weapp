@@ -195,6 +195,7 @@ Component({
           return item.isActive && !item.isUsed && dayjs().isBefore(dayjs(item.expiredDate))
         });
         let actions = [];
+        const { _order } = this.data;
         if(coupons.length){
           actions = coupons.map(item=> {
             return {
@@ -208,24 +209,23 @@ Component({
             type: 'none',
             name: '不使用优惠券'
           });
-        }
-        const { _order } = this.data;
-        const couponValue = coupons[0].value;
-        const isFree = coupons[0].type === 'free';
-        const discountFee = isFree ? _order.totalFee : couponValue;
-        const paidFee = isFree ? 0 : _order.totalFee - couponValue < 0 ? 0 : _order.totalFee - couponValue;
-        if(_order){
-          this.setData({
-            coupon: `${coupons[0].title}`,
-            discountFee,
-            paidFee,
-            actions: [...actions, ...this.data.actions]
-          })
-          this.triggerEvent('couponChanged',{
-            couponId: coupons[0]._id,
-            discountFee,
-            paidFee
-          })
+          const couponValue = coupons[0].value;
+          const isFree = coupons[0].type === 'free';
+          const discountFee = isFree ? _order.totalFee : couponValue;
+          const paidFee = isFree ? 0 : _order.totalFee - couponValue < 0 ? 0 : _order.totalFee - couponValue;
+          if(_order){
+            this.setData({
+              coupon: `${coupons[0].title}`,
+              discountFee,
+              paidFee,
+              actions: [...actions, ...this.data.actions]
+            })
+            this.triggerEvent('couponChanged',{
+              couponId: coupons[0]._id,
+              discountFee,
+              paidFee
+            })
+          }
         }
       });
     }
