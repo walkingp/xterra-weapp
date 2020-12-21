@@ -12,7 +12,7 @@ Page({
     id: "",
     cateId: null,
     isValid: false,
-    step: 2,
+    step: 0,
     group: 0,
     order: null,
     prevEnabled: true,
@@ -31,6 +31,13 @@ Page({
         text: '完成报名',
       },
     ],
+  },
+  couponChanged(e){
+    const { couponId, discountFee, paidFee } = e.detail;
+    app.globalData.order.discountFee = discountFee;
+    app.globalData.order.paidFee = paidFee;
+    app.globalData.order.couponId = couponId;
+    debugger;
   },
   onComplete(e){
     const { prevEnabled, nextEnabled } = e.detail;
@@ -143,8 +150,9 @@ Page({
   },
   
   confirmOrder: function(e) {
-    const { order } = this.data;
+    const { order } = app.globalData;
     const that = this;
+    debugger;
     payNow(order, () => {
       that.setData({
         step: 4

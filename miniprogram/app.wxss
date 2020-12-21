@@ -18,43 +18,7 @@ page{
   background-color: #F5F5F5;
   min-height: 100vh;
 }
-button{
-  border: solid 2rpx #DF1042;
-  height: 64rpx;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 30rpx!important;
-  background-color: #fff;
-  border-radius: 5rpx;
-  color: #DF1042;
-  font-size: 30rpx;
-  letter-spacing: 4rpx;
-}
-button.primary{
-  background-color: #DF1042!important;
-  color: #fff;
-}
-button.secondary{
-  border: solid 2rpx #666;
-  color: #666;
-}
-button.mini{
-  height: 60rpx;
-  font-size: 26rpx;
-}
-button[disabled]{
-  background-color: #d6d6d6!important;
-  color: #fff!important;
-  border-color: #d6d6d6!important;
-}
 
-button.van-action-sheet__item{
-  border: none;
-  height: auto;
-  height: 100rpx;
-  color: #333;
-}
 .h2w.h2w-light {
   background-color: transparent!important;
 }

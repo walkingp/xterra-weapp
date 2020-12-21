@@ -9,7 +9,7 @@
               data-type="{{item.type}}">
               <view class="swiper-item">
                 <image class="cover" src="{{item.picUrl}}" mode="aspectFill"></image>
-                <button>查看详情</button>
+                <button class="button">查看详情</button>
               </view>
             </swiper-item>
           </block>
@@ -29,7 +29,7 @@
       <view class="list">
         <view class="item">
           <image class="cover" src="{{item.bigPic}}" mode="aspectFill" />
-          <button>查看详情</button>
+          <button class="button">查看详情</button>
         </view>
       </view>
     </swiper-item>

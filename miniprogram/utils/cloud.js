@@ -27,6 +27,18 @@ export const sendEmail = ({ html, from, to, subject }) => {
   })
 }
 
+
+export const sendTencentEmail = ({ templateId, data, to, subject }) => {
+  return new Promise((resolve, reject) => {
+    wx.cloud.callFunction({
+      name: 'sendTencentCloudMail',
+      data: { templateId, data, to, subject }
+    }).then(res => {
+      resolve(res.result.data);
+    }).catch(reject)
+  })
+}
+
 export const getCollectionById = (args) => {
   const { dbName, id } = args;
   return new Promise(async (resolve, reject) => {

@@ -1,20 +1,25 @@
 import dayjs from "dayjs";
-import { orderStatus } from "../config/const";
+import { emailTemplateType, orderStatus } from "../config/const";
 import { sendRegEmail } from "./email";
-import { updateOrderStatus } from "./race";
+import { updateCoupon, updateOrderStatus } from "./race";
 import { sendRegSMS } from "./sms";
 
 export const payNow = function(detail, callback) {
-  wx.showLoading({
-    title: '支付中',
-  })
-  const that = this;
+  const { paidFee } = detail;
   const nonceStr = Math.random().toString(36).substr(2, 15)
   const timeStamp = parseInt(Date.now() / 1000) + ''
   const out_trade_no = "otn" + nonceStr + timeStamp
-  const total_fee = (detail.totalFee*100).toString();
+  const total_fee = (paidFee * 100).toString();
 
   getApp().globalData.out_trade_no = out_trade_no;
+
+  if(paidFee <= 0){
+    updateStatuses(detail, callback);
+    return;
+  }
+  wx.showLoading({
+    title: '支付中',
+  });
 
   wx.cloud.callFunction({
     name: "payment",
@@ -51,27 +56,7 @@ function pay(payData, detail, callback) {
           out_trade_no: "test0004"
         },
         success: function(){
-          // 重要：此处更新保存out_trade_no，用于退款
-          const { id } = detail;
-          const { out_trade_no } = getApp().globalData;
-
-          getApp().globalData.out_trade_no = null;
-          updateOrderStatus({ id, ...orderStatus.paid, out_trade_no }).then(res=>{
-            saveStartlist(detail);
-            console.log(res);
-            wx.showToast({
-              icon: 'success',
-              title: '支付成功',
-              success: async function(){
-                await sendEmailSMS(detail);
-                wx.hideLoading({
-                  success: (res) => {
-                    callback();
-                  },
-                })
-              }
-            })
-          })
+          updateStatuses(detail, callback);
         }
       })
     },
@@ -84,7 +69,7 @@ function pay(payData, detail, callback) {
           title: '支付失败',
           success: function(){
             wx.redirectTo({
-              url: `/pages/register/status/status?id=${order._id}`,
+              url: `/pages/register/status/status?id=${detail.id}`,
             })
           }
         })
@@ -95,6 +80,49 @@ function pay(payData, detail, callback) {
     }
   })
 };
+function updateStatuses(detail, callback){
+  // 重要：此处更新保存out_trade_no，用于退款
+  const { id } = detail;
+  const { out_trade_no } = getApp().globalData;
+
+  getApp().globalData.out_trade_no = null;
+  updateOrderStatus({ id, ...orderStatus.paid, out_trade_no }).then(res=>{
+
+    saveStartlist(detail);
+    console.log(res);
+    wx.showToast({
+      icon: 'success',
+      title: '支付成功',
+      success: async function(){
+        debugger
+        if(detail.couponId){
+          await updateCouponStatus(detail.couponId);
+        }
+        await sendEmailSMS(detail);
+        wx.hideLoading({
+          success: (res) => {
+            callback && callback();
+          },
+        })
+      }
+    })
+  })  
+}
+async function updateCouponStatus(id){
+  const { userId, trueName } = getApp().globalData;
+  const param = {
+    id,
+    assignedUserId: userId,
+    assignedTrueName: trueName,
+    usedTime: new Date(),
+    isUsed: true
+  }
+  const res = await updateCoupon(param)
+  const { updated } = res.stats;
+  if(updated){
+    console.log('优惠券使用成功')
+  }
+}
 function saveStartlist(detail){
   const { profiles, id, orderNum, userId, userName, userInfo, status, statusText, orderType, raceId, raceTitle, racePic, cateId, cateTitle, groupType, groupText, out_trade_no } = detail;
 
@@ -140,7 +168,7 @@ function sendEmail(order) {
     orderNum,
     cateTitle,
     totalFee,
-    paidFee, trueName, email, orderDate, cateNum, catePrice
+    paidFee, trueName, email, orderDate, cateNum, catePrice, discountFee
   } = order;
   const values = {
     raceId,
@@ -153,9 +181,10 @@ function sendEmail(order) {
     cateTitle,
     catePrice,
     totalFee,
+    discountFee,
     paidFee
   };
-  return sendRegEmail(values);
+  return sendRegEmail(emailTemplateType.registration.value, values);
 }
 
 

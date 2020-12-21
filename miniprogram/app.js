@@ -23,9 +23,10 @@ App({
                   console.log(res.result.data);
                   //如果成功获取到
                   //将获取到的用户资料写入app.js全局变量
-                  that.globalData.userInfo = res.result.data
-                  that.globalData.userId = res.result.data._id
-                  that.globalData.userName = res.result.data.nickname
+                  that.globalData.userInfo = res.result.data;
+                  that.globalData.userId = res.result.data._id;
+                  that.globalData.userName = res.result.data.nickname;
+                  that.globalData.trueName = res.result.data.truename || res.result.data.nickname;
                   that.globalData.isLogined = true
 
                   resolve({

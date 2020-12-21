@@ -172,17 +172,15 @@ export const getCouponDetail = async coupon => {
 }
 
 export const updateCoupon = async param => {
-  const { id } = param;
-  delete param.id;
-  const db = wx.cloud.database();
-  const result = await db.collection("coupon").doc(id).update({
-    data: {
-      ...param
-    }
-  });
-  debugger
-  return result;
-};
+  return new Promise((resolve, reject) => {
+    wx.cloud.callFunction({
+      name: 'updateCoupon',
+      data: param
+    }).then(res => {
+      resolve(res.result);
+    }).catch(reject)
+  })
+}
 
 export const updateOrderStatus = async param => {
   const { id, status, statusText, out_trade_no, refundTime } = param;

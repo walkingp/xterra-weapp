@@ -1,4 +1,5 @@
 @import "./../../../../style/mi.flex.wxss";
+@import "./../../../../style/app.common.wxss";
 .title{
   font-size: 28rpx;
   color: #333;

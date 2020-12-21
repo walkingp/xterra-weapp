@@ -72,3 +72,33 @@
 .sticky{
   position: sticky;
 }
+button.button{
+  border: solid 2rpx #DF1042;
+  height: 64rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 30rpx!important;
+  background-color: #fff;
+  border-radius: 5rpx;
+  color: #DF1042;
+  font-size: 30rpx;
+  letter-spacing: 4rpx;
+}
+button.button.primary{
+  background-color: #DF1042!important;
+  color: #fff;
+}
+button.button.secondary{
+  border: solid 2rpx #666;
+  color: #666;
+}
+button.button.mini{
+  height: 60rpx;
+  font-size: 26rpx;
+}
+button.button[disabled]{
+  background-color: #d6d6d6!important;
+  color: #fff!important;
+  border-color: #d6d6d6!important;
+}

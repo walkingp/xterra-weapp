@@ -9,8 +9,14 @@
       label="优惠券代码" placeholder="请输入12位优惠券代码" use-button-slot>
       <van-button slot="button" size="small" form-type="submit" type="primary">添加</van-button>
     </van-field>
+    <van-cell title="优惠金额">
+      <view class="van-cell-text">￥{{discountFee}}</view>
+      <van-tag type="danger" wx:if="{{discountFee}}">优惠券</van-tag>
+    </van-cell>
     <van-cell title="订单状态" value="待支付" />
-    <van-cell title="最终费用" value="待支付" />
+    <van-cell title="最终费用">
+      <van-tag type="danger" size="medium">￥{{paidFee}}</van-tag>
+    </van-cell>
   </form>
 </view>
 <userlist profiles="{{order.profiles}}" />

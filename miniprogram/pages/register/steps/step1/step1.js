@@ -155,6 +155,9 @@ Component({
       this.triggerEvent('onComplete', { prevEnabled: true, nextEnabled: agreed });
     },
     async fetch() {
+      wx.showLoading({
+        title: '加载中……'
+      });
       const {
         raceId
       } = this.properties;
@@ -176,6 +179,9 @@ Component({
         if(cateId){
           that.selectCate(cateId);
         }
+        wx.hideLoading({
+          success: (res) => {},
+        })
       });
     }
   }

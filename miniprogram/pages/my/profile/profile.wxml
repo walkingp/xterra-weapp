@@ -21,6 +21,6 @@
     </view>
   </view>
   <view class="footer flex align-center justify-center">
-    <button bindtap="gotoAdd">添加新报名人</button>
+    <button class="button" bindtap="gotoAdd">添加新报名人</button>
   </view>
 </view>

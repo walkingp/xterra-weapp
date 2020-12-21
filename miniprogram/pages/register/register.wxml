@@ -10,7 +10,7 @@
       <step2 raceId="{{id}}" bind:onComplete="onComplete" />
     </view>
     <view class="step3" wx:if="{{step===2 || step === 3}}">
-      <step3 order="{{order}}" id="step3" bind:onComplete="onComplete" />
+      <step3 order="{{order}}" id="step3" bind:onComplete="onComplete" bind:couponChanged="couponChanged" />
     </view>
     <view class="step4" wx:if="{{step===4}}">
       <step4 />

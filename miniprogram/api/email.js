@@ -2,7 +2,7 @@ import {
   emailTemplateType
 } from "../config/const";
 import {
-  getCollectionByWhere, sendEmail
+  getCollectionByWhere, sendTencentEmail
 } from "../utils/cloud"
 
 export const getTemplateDetail = async type => {
@@ -15,7 +15,7 @@ export const getTemplateDetail = async type => {
   return data;
 }
 
-export const sendRegEmail = async order => {
+export const sendRegEmail = async (type, order) => {
   const {
     raceId,
     raceTitle,
@@ -26,6 +26,7 @@ export const sendRegEmail = async order => {
     catePrice,
     cateNum,
     totalFee,
+    discountFee,
     paidFee,
     email
   } = order;
@@ -38,6 +39,7 @@ export const sendRegEmail = async order => {
     catePrice,
     cateNum,
     totalFee,
+    discountFee,
     paidFee
   };
   const values = Object.keys(dataSource).map(item => {
@@ -46,11 +48,12 @@ export const sendRegEmail = async order => {
       value: order[item]
     }
   });
-  getTemplateDetail(emailTemplateType.registration.value).then(res => {
+  getTemplateDetail(type).then(res => {
     if (res.length > 0) {
       console.log(res);
       const template = res[0];
       let {
+        templateId,
         tempFileUrl,
         title
       } = template;
@@ -70,11 +73,12 @@ export const sendRegEmail = async order => {
               html = html.replace(item.key, item.value)
             });
             title = title.replace("{{raceTitle}}", raceTitle);
-            const data = await sendEmail({
-              from: 'XTERRA<1289657692@qq.com>', // 发件地址
+            debugger
+            const data = await sendTencentEmail({
+              templateId: +templateId,
+              data: dataSource,
               to: email, // 收件列表
               subject: title, // 标题
-              html: html
             })
             await saveSentEmail({
               title,

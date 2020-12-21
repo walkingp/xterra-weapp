@@ -1,4 +1,5 @@
 @import "./../../../../style/mi.flex.wxss";
+@import "./../../../../style/app.common.wxss";
 .groups .item{
   height: 244rpx;
   width: 220rpx;
