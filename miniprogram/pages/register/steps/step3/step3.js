@@ -160,7 +160,6 @@ Component({
           })
           break;
         default:
-          debugger;
           const detail = await getCouponDetail(couponId);
           this.checkCouponValid(detail);
           const discountFee = detail.type === 'free' ? _order.totalFee : detail.value;
@@ -222,7 +221,6 @@ Component({
             paidFee,
             actions: [...actions, ...this.data.actions]
           })
-          debugger
           this.triggerEvent('couponChanged',{
             couponId: coupons[0]._id,
             discountFee,

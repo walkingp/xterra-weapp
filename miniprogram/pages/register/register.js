@@ -37,7 +37,6 @@ Page({
     app.globalData.order.discountFee = discountFee;
     app.globalData.order.paidFee = paidFee;
     app.globalData.order.couponId = couponId;
-    debugger;
   },
   onComplete(e){
     const { prevEnabled, nextEnabled } = e.detail;
@@ -152,7 +151,6 @@ Page({
   confirmOrder: function(e) {
     const { order } = app.globalData;
     const that = this;
-    debugger;
     payNow(order, () => {
       that.setData({
         step: 4

@@ -254,6 +254,7 @@ Page({
     return birthday;
   },
   selectAddr(){
+    const that = this;
     wx.getSetting({
       success(res) {
         console.log("vres.authSetting['scope.address']：",res.authSetting['scope.address'])
@@ -261,7 +262,12 @@ Page({
           wx.chooseAddress({
             success(res) {
               const { provinceName, cityName, countyName, detailInfo, userName, telNumber, postalCode } = res;
-              debugger
+              const region = `${provinceName}${cityName}${countyName}`;
+              const addr = detailInfo;
+              that.setData({
+                region,
+                addr
+              });
             }
           })
         } else {
@@ -273,10 +279,15 @@ Page({
               }
             })
           } else {
-            console.log("eee")
             wx.chooseAddress({
               success(res) {
-                
+                const { provinceName, cityName, countyName, detailInfo, userName, telNumber, postalCode } = res;
+                const region = `${provinceName}${cityName}${countyName}`;
+                const addr = detailInfo;
+                that.setData({
+                  region,
+                  addr
+                });
               }
             })
           }

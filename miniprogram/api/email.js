@@ -73,7 +73,6 @@ export const sendRegEmail = async (type, order) => {
               html = html.replace(item.key, item.value)
             });
             title = title.replace("{{raceTitle}}", raceTitle);
-            debugger
             const data = await sendTencentEmail({
               templateId: +templateId,
               data: dataSource,

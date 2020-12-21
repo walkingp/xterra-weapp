@@ -94,7 +94,6 @@ function updateStatuses(detail, callback){
       icon: 'success',
       title: '支付成功',
       success: async function(){
-        debugger
         if(detail.couponId){
           await updateCouponStatus(detail.couponId);
         }
