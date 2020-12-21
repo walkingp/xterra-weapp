@@ -16,7 +16,7 @@
 .main button{
   position: absolute;
   left: 50%;
-  bottom: 160rpx;
+  bottom: 140rpx;
   transform: translateX(-50%);
   background-color: transparent;
   border: solid 2rpx #fff!important;

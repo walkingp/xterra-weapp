@@ -154,6 +154,12 @@
           "pathName": "pages/events/kits/kits",
           "query": "id=0bcbdde05fc3a636006efd9971c76de4",
           "scene": null
+        },
+        {
+          "name": "修改资料",
+          "pathName": "pages/my/edit/edit",
+          "query": "",
+          "scene": null
         }
       ]
     }

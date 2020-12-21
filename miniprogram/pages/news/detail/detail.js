@@ -9,7 +9,6 @@ Page({
    */
   data: {
     id: null,
-    loading: true,
     detail: null
   },
 
@@ -26,13 +25,19 @@ Page({
   },
 
   async fetch(id){
+    wx.showLoading({
+      title: '加载中……',
+    })
     const detail = await getNewsDetail(id);
     console.log(detail);
     detail.formatDate = dayjs(new Date(detail.postTime)).format("MM月DD日");
     detail.content = app.towxml(detail.content,'html');
     this.setData({
-      loading: false,
       detail
+    }, () => {
+      wx.hideLoading({
+        success: (res) => {},
+      })
     })
   },
 

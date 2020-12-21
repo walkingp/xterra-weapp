@@ -17,7 +17,8 @@
     "pages/register/refund/refund",
     "pages/events/query/query",
     "pages/events/info/info",
-    "pages/events/kits/kits"
+    "pages/events/kits/kits",
+    "pages/my/edit/edit"
   ],
   "window": {
     "backgroundColor": "#ffffff",

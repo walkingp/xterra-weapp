@@ -40,13 +40,32 @@ Page({
       })
     }
   },
-  gotoAbout(e) {
-    const {
-      url
-    } = e.currentTarget.dataset;
+  redirect(e){
+    const { url } = e.currentTarget.dataset;
     wx.navigateTo({
       url
-    });
+    })
+  },
+  tap(e){
+    const { src, type, url } = e.currentTarget.dataset;
+    const { banners } = this.data;
+    const urls = banners.map(item=>item.picUrl);
+    switch(type){
+      case 'preview':
+        wx.previewImage({
+          urls,
+          current: src
+        });
+        break;
+      case 'navigate':
+        if(!url.startsWith('/')){
+          url = '/' + url;
+        }
+        wx.navigateTo({
+          url,
+        });
+        break;
+    }
   },
   async fetch() {
     wx.showLoading({

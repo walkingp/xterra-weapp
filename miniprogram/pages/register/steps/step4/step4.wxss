@@ -1,4 +1,5 @@
 @import "./../../../../style/mi.flex.wxss";
+@import "./../../../../style/app.common.wxss";
 
 .box{
   min-height: 600rpx;

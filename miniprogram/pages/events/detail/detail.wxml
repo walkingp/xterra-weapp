@@ -50,12 +50,16 @@
     <view class="section icons">
       <view class="hd">
         <text>赛事新闻</text>
-        <navigator url="">更多</navigator>
       </view>
       <view class="bd">
-        <news-list list="{{news}}" type="list" />
+        <block wx:if="{{news.length}}">
+          <news-list list="{{news}}" type="list" />
+        </block>
+        <block wx:else>
+          
+        </block>
       </view>
-      <view class="ft flex align-center justify-center">
+      <view class="ft flex align-center justify-center" wx:if="{{news.length}}">
         查看更多
         <van-icon name="arrow-down" />
       </view>

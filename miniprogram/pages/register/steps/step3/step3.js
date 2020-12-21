@@ -192,7 +192,7 @@ Component({
         })
         let coupons = await getMyCoupons(userId);
         coupons = coupons.filter(item=>{
-          return item.isActive && !item.isUsed && dayjs().isBefore(dayjs(detail.expiredDate))
+          return item.isActive && !item.isUsed && dayjs().isBefore(dayjs(item.expiredDate))
         });
         let actions = [];
         if(coupons.length){
