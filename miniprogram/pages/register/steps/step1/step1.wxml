@@ -1,21 +1,24 @@
-<view class="title">
-  请选择报名类型
-</view>
-<view class="groups flex align-center">
-  <view class="item {{ selectedGroupType === 'individual' ? 'active' : '' }}" bindtap="changeGroup" data-title="个人组"
-    data-type="individual" wx:if="{{hasIndividual}}">
-    <image src="{{raceDetail.groupPicUrls[0]}}"></image>
-    <text>个人组</text>
+
+<block wx:if="{{raceDetail.groupPicUrls.length > 1}}">
+  <view class="title">
+    请选择报名类型
   </view>
-  <view class="item {{ selectedGroupType === 'relay' ? 'active' : '' }}" bindtap="changeGroup" data-title="团队组"
-    data-type="relay" wx:if="{{hasRelay}}">
-    <image src="{{raceDetail.groupPicUrls[1]}}"></image><text>团队组</text>
+  <view class="groups flex align-center">
+    <view class="item {{ selectedGroupType === 'individual' ? 'active' : '' }}" bindtap="changeGroup" data-title="个人组"
+      data-type="individual" wx:if="{{hasIndividual}}">
+      <image src="{{raceDetail.groupPicUrls[0]}}"></image>
+      <text>个人组</text>
+    </view>
+    <view class="item {{ selectedGroupType === 'relay' ? 'active' : '' }}" bindtap="changeGroup" data-title="团队组"
+      data-type="relay" wx:if="{{hasRelay}}">
+      <image src="{{raceDetail.groupPicUrls[1]}}"></image><text>团队组</text>
+    </view>
+    <view class="item {{ selectedGroupType === 'family' ? 'active' : '' }}" bindtap="changeGroup" data-title="亲子组"
+      data-type="family" wx:if="{{hasFamily}}">
+      <image src="{{raceDetail.groupPicUrls[2]}}"></image><text>亲子组</text>
+    </view>
   </view>
-  <view class="item {{ selectedGroupType === 'family' ? 'active' : '' }}" bindtap="changeGroup" data-title="亲子组"
-    data-type="family" wx:if="{{hasFamily}}">
-    <image src="{{raceDetail.groupPicUrls[2]}}"></image><text>亲子组</text>
-  </view>
-</view>
+</block>
 <block wx:if="{{ selectedGroupType === 'individual'}}">
   <view class="title">请选择组别</view>
   <view class="cates">
@@ -27,8 +30,13 @@
             <view class="flex-none">
               <label for="p{{index}}" class="label">{{item.priceLabel}}</label>
               <block wx:if="{{!item.expired}}">
-                <label for="p{{index}}" class="unit">￥</label>
-                <label for="p{{index}}" class="price">{{item.price}}</label>
+                <block wx:if="{{item.regPrice === 0}}">
+                  <label for="p{{index}}" class="unit">免费</label>
+                </block>
+                <block wx:else>
+                  <label for="p{{index}}" class="unit">￥</label>
+                  <label for="p{{index}}" class="price">{{item.price}}</label>
+                </block>
               </block>
             </view>
           </view>

@@ -55,3 +55,8 @@ swiper{
 .header .title{
   font-weight: bold;
 }
+.empty{
+  font-size: 24rpx;
+  color: #999;
+  padding-top: 20rpx;
+}

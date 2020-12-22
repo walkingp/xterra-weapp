@@ -41,12 +41,14 @@ Page({
         type: 'preview'
       }
     });
-    detail.routePics = detail.routePics.map(item=> {
-      return {
-        picUrl: item,
-        type: 'preview'
-      }
-    });
+    if(detail.routePics){
+      detail.routePics = detail.routePics.map(item=> {
+        return {
+          picUrl: item,
+          type: 'preview'
+        }
+      });
+    }
 
     let markers = null;
     if(detail.coordinate){

@@ -29,6 +29,12 @@ Page({
 
   onCompleted(arg){
     const { isLogined, userInfo } = arg.detail;
+    if(!userInfo.phonenumber){ // 修改资料
+      wx.redirectTo({
+        url: '/pages/my/edit/edit',
+      });
+      return;
+    }
     console.log(arg)
     this.setData({
       isLogined,

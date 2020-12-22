@@ -9,6 +9,7 @@ Page({
   data: {
     loading: false,
     races: [],
+    allRaces: [],
     banners: [],
     locations: [
       { text: '地区', value: '' },
@@ -51,6 +52,7 @@ Page({
     });
     const banners = await getBannerList("race");
     this.setData({
+      allRaces: races,
       races,
       banners,
       loading: false
@@ -60,7 +62,21 @@ Page({
       })
     })
   },
-
+  onFilterChanged(e){
+    const { type } = e.currentTarget.dataset;
+    const { allRaces } = this.data;
+    const value = e.detail;
+    switch(type){
+      case 'region':
+        
+        break;
+      case 'status':
+        break;
+      case 'type':
+        break;
+    }
+    debugger;
+  },
   /**
    * 生命周期函数--监听页面加载
    */

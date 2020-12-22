@@ -18,7 +18,7 @@
     <van-cell-group title="其他信息">
       <van-cell title="血型" required name="bloodType" border="{{ false }}" is-link value="{{bloodType}}" bind:click="showPicker"
         data-type="blood" />
-      <van-cell title="衣服尺码" required name="tSize" border="{{ false }}" is-link value="{{tSize}}" bind:click="showPicker"
+      <van-cell title="衣服尺码" hidden="{{true}}" required name="tSize" border="{{ false }}" is-link value="{{tSize}}" bind:click="showPicker"
         data-type="tsize" />
       <van-cell title="住址所属地区" required name="region" is-link border="{{ false }}" value="{{region}}" bind:click="showAddr" />
       <van-field value="{{ addr }}" required name="addr" label="家庭住址" placeholder="如：xx路xx号xx室" border="{{ false }}" use-button-slot

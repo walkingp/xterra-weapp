@@ -6,7 +6,8 @@
         <view class="flex-none">
           <text class="price"> {{item.priceLabel}}</text>
           <block wx:if="{{!item.expired}}">
-            <text class="price">￥{{item.price}}元</text>
+            <text class="price" wx:if="{{item.regPrice === 0}}">免费</text>
+            <text class="price" wx:else>￥{{item.regPrice}}元</text>
           </block>
         </view>
       </view>
@@ -19,7 +20,6 @@
 </block>
 <block wx:else>
   <view class="empty">
-    <icon class="icon-box-img" type="info" size="64"></icon>
     <text>暂无组别</text>
   </view>
 </block>

@@ -28,11 +28,11 @@ Page({
   },
   mainSwiperChanged(e) {
     const {
-      current
+      currentItemId
     } = e.detail;
-    if (current === 3) {
+    if (currentItemId === '10') {
       wx.showTabBar({
-        animation: current === 2,
+        animation: true,
       });
     } else {
       wx.hideTabBar({

@@ -47,10 +47,7 @@
   justify-content: space-between;
 }
 .section .hd.pb{
-  padding-bottom: 30rpx;
-}
-.section .bd{
-  min-height: 100rpx;
+  padding-bottom: 20rpx;
 }
 .section .ft{
   font-size: 22rpx;

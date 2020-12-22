@@ -2,9 +2,9 @@
   <banner-list list="{{banners}}" />
   <view class="selector">
     <van-dropdown-menu>
-      <van-dropdown-item value="{{ location }}" options="{{ locations }}" />
-      <van-dropdown-item value="{{ status }}" options="{{ statuses }}" />
-      <van-dropdown-item value="{{ type }}" options="{{ types }}" />
+      <van-dropdown-item bind:change="onFilterChanged" data-type="region" value="{{ location }}" options="{{ locations }}" />
+      <van-dropdown-item bind:change="onFilterChanged" data-type="status" value="{{ status }}" options="{{ statuses }}" />
+      <van-dropdown-item bind:change="onFilterChanged" data-type="type" value="{{ type }}" options="{{ types }}" />
     </van-dropdown-menu>
   </view>
   <view class="box list">

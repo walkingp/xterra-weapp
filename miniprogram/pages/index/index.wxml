@@ -25,15 +25,15 @@
         </view>
       </view>
     </swiper-item>
-    <swiper-item class="main" item-id="{{index+1}}" wx:for="{{races}}" wx:key="_id" wx:if="{{index<2}}">
+    <!--<swiper-item class="main" item-id="{{index+1}}" wx:for="{{races}}" wx:key="_id" wx:if="{{index<2}}">
       <view class="list">
         <view class="item">
           <image class="cover" src="{{item.bigPic}}" mode="aspectFill" />
           <button bindtap="redirect" data-url="/pages/events/detail/detail?id={{item._id}}" class="button">查看详情</button>
         </view>
       </view>
-    </swiper-item>
-    <swiper-item class="main" item-id="3">
+    </swiper-item>-->
+    <swiper-item class="main" item-id="10">
       <view class="news">
         <view class="title flex align-center space-between">
           <text class="title">新闻动态</text>
