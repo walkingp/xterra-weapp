@@ -29,7 +29,7 @@ Page({
     });
     const detail = await getRaceDetail(id);
     console.log(detail);
-    detail.cates = detail.catesName.join('/');
+    detail.cates = detail.catesName ? detail.catesName.join('/') : '/';
     detail.raceDate = dayjs(new Date(detail.raceDate)).format("YYYY年MM月DD日");
     detail.endRegTime = dayjs(new Date(detail.endRegTime)).format("YYYY年MM月DD日 hh:mm:ss");
     detail.admission = app.towxml(detail.admission,'html'); // 报名须知

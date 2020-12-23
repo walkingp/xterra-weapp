@@ -46,7 +46,7 @@ Page({
     })
     const races = await getRaceIndexList();
     races.map(item=>{
-      item.cates = item.catesName.join('/');
+      item.cates = item.catesName ? item.catesName.join('/') : '/';
       item.raceDate = dayjs(new Date(item.raceDate)).format("MM月DD日");
       return item;
     });

@@ -73,20 +73,20 @@ Page({
     });
     const banners = await getBannerList();
     const news = await getNewsIndexList();
-    const races = await getRaceIndexList();
+    // const races = await getRaceIndexList();
     news.map(item => {
       item.formatDate = dayjs(new Date(item.postTime)).format("MM月DD日");
       return item;
     });
-    races.map(item => {
-      item.cates = item.catesName.join('/');
-      item.raceDate = dayjs(new Date(item.raceDate)).format("MM月DD日");
-      return item;
-    });
-    console.log(races);
+    // races.map(item => {
+    //   item.cates = item.catesName ? item.catesName.join('/') : '/';
+    //   item.raceDate = dayjs(new Date(item.raceDate)).format("MM月DD日");
+    //   return item;
+    // });
+    //console.log(races);
     this.setData({
       loading: false,
-      races,
+      //races,
       news,
       banners
     }, () => {
