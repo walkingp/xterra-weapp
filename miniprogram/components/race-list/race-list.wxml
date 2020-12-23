@@ -20,3 +20,9 @@
     </navigator>
   </view>
 </block>
+<block wx:else>
+  <view class="flex align-center column justify-center empty">
+    <image src="./../../images/empty@2x.png" />
+    <text>暂无数据，请检查数据或者更改过滤条件</text>
+  </view>
+</block>

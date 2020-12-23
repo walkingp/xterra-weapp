@@ -64,18 +64,52 @@ Page({
   },
   onFilterChanged(e){
     const { type } = e.currentTarget.dataset;
-    const { allRaces } = this.data;
     const value = e.detail;
+    let region = '', status = '', _type = '';
     switch(type){
       case 'region':
-        
+        region = value;
         break;
       case 'status':
+        status = value;
         break;
       case 'type':
+        _type = value;
         break;
     }
-    debugger;
+    let { races, allRaces } = this.data;
+    if(region === ''){
+      if(status === ''){
+        if(type === ''){
+          races = allRaces;
+        }else{
+          races = allRaces.filter(item=> item.type === value);
+        }
+      }else{
+        if(type === ''){
+          races = allRaces.filter(item=> item.status === value);
+        }else{
+          races = allRaces.filter(item=> item.status === status && item.type === _type);
+        }
+      }
+    }else{
+      if(status === ''){
+        if(type === ''){
+          races = allRaces.filter(item=> item.region === value);
+        }else{
+          races = allRaces.filter(item=> item.type === _type && item.region === region);
+        }
+      }else{
+        if(type === ''){
+          races = allRaces.filter(item=> item.status === status && item.region === region);
+        }else{
+          races = allRaces.filter(item=> item.status === status && item.region === region && item.type === _type);
+        }
+      }
+    }
+    this.setData({
+      races
+    })
   },
   /**
    * 生命周期函数--监听页面加载

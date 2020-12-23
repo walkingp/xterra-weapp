@@ -39,3 +39,15 @@
   white-space: nowrap;
   overflow: hidden;
 }
+.empty{
+  height: 100%;
+}
+.empty image{
+  width: 228rpx;
+  height: 168rpx;
+}
+.empty text{
+  font-size: 26rpx;
+  color: #999;
+  padding-top: 30rpx;
+}
