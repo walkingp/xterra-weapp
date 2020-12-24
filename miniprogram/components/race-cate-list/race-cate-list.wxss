@@ -35,3 +35,6 @@
   font-size: 24rpx;
   color: #999;
 }
+.top{
+  white-space: nowrap;
+}

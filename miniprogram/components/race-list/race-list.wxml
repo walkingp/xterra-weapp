@@ -11,7 +11,7 @@
           <image src="{{item.picUrls[0]}}" mode="aspectFill"></image>
         </view>
         <view class="flex-auto text flex column space-betwee info">
-          <text>性质：{{item.title}}</text>
+          <text>类型：{{item.type}}</text>
           <text>组别：{{item.cates}}</text>
           <text>地点：{{item.location}}</text>
           <text>时间：{{item.raceDate}}</text>

@@ -9,15 +9,19 @@
       <view class="info">
         <view class="cells">
           <view class="cell">
-            <text>时间：</text>
+            <text>{{type}}时间：</text>
             <text class="bold">{{detail.raceDate}}</text>
           </view>
           <view class="cell">
-            <text>地点：</text>
+            <text>{{type}}地点：</text>
             <text class="bold">{{detail.location}}</text>
           </view>
           <view class="cell">
-            <text>组别：</text>
+            <text>{{type}}类型：</text>
+            <text class="bold">{{detail.type}}</text>
+          </view>
+          <view class="cell" wx:if="{{detail.cates!=='/'}}">
+            <text>{{type}}组别：</text>
             <text class="bold">{{detail.cates}}</text>
           </view>
           <view class="cell">
@@ -41,15 +45,15 @@
       <van-grid border="{{false}}" column-num="4">
         <van-grid-item icon="orders-o" url="/pages/events/query/query?id={{detail._id}}" text="报名查询" />
         <van-grid-item icon="photo-o" url="/pages/profile/profile" link-type="switchTab" text="照片查询" />
-        <van-grid-item icon="notes-o" url="/pages/community/community" link-type="switchTab" text="成绩查询" />
+        <van-grid-item wx:if="{{detail.isEnded}}" icon="notes-o" url="/pages/community/community" link-type="switchTab" text="成绩查询" />
         <van-grid-item icon="paid" url="/pages/events/kits/kits?id={{detail._id}}" text="装备要求" />
         <van-grid-item icon="hotel-o" url="/pages/events/info/info?id={{detail._id}}&type=traffic" text="交通住宿" />
-        <van-grid-item hidden="{{detail.cates === 'X-Plogging'}}" icon="flower-o" url="/pages/events/info/info?id={{detail._id}}&type=cuisine" text="美食美景" />
+        <van-grid-item wx:if="{{detail.type !== 'X-Plogging' && detail.showCuisine}}" icon="flower-o" url="/pages/events/info/info?id={{detail._id}}&type=cuisine" text="美食美景" />
       </van-grid>
     </view>
     <view class="section icons">
       <view class="hd">
-        <text>赛事新闻{{detail.cates}}</text>
+        <text>{{type}}新闻</text>
       </view>
       <view class="bd">
         <block wx:if="{{news.length}}">
@@ -68,7 +72,7 @@
     </view>
     <view class="section icons">
       <view class="hd pb">
-        <text>赛事组别</text>
+        <text>{{type}}组别</text>
       </view>
       <view class="bd">
         <race-cate-list raceId="{{detail._id}}" list="{{cates}}" />
@@ -81,14 +85,16 @@
       </view>
     </view>
     <view class="section content">
-      <van-tabs sticky active="{{ 0 }}" bind:change="onChange">
-        <van-tab title="比赛规程">
-          <towxml nodes="{{detail.content}}" />
-        </van-tab>
-        <van-tab title="报名须知">
+      <van-tabs sticky active="{{ active }}" bind:change="onChange">
+        <block wx:if="{{detail.showContent}}">
+          <van-tab name="content" title="比赛规程">
+            <towxml nodes="{{detail.content}}" />
+          </van-tab>
+        </block>
+        <van-tab name="admission" title="报名须知" wx:if="{{detail.showAdminssion}}">
           <towxml nodes="{{detail.admission}}" />
         </van-tab>
-        <van-tab title="赛事流程">
+        <van-tab name="flow" title="{{type}}流程" wx:if="{{detail.showFlow}}">
           <towxml nodes="{{detail.flow}}" />
         </van-tab>
       </van-tabs>

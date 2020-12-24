@@ -29,7 +29,7 @@
 }
 .text{
   overflow: hidden;
-  text-emphasis: none;
+  text-overflow: ellipsis;
   height: 160rpx;
   justify-content: space-between;
 }

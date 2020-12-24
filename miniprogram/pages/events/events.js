@@ -32,6 +32,7 @@ Page({
       { text: '运动类型', value: '' },
       { text: '铁人三项', value: '铁人三项' },
       { text: '越野跑', value: '越野跑' },
+      { text: '山地车', value: '山地车' },
       { text: 'X-Plogging', value: 'X-Plogging' },
       { text: '训练营', value: '训练营' },
       { text: '其他', value: '其他' },

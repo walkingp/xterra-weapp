@@ -20,7 +20,7 @@ Page({
     const { statuses } = this.data;
     const list = await getFeedIndexList(statuses[0]);
     list.map(item=>{      
-      item.addedDate = dayjs(new Date(item.addedDate)).format("MM月DD日 hh:mm");
+      item.addedDate = dayjs(new Date(item.addedDate)).format("MM月DD日 HH:mm");
       return item;
     })
     this.setData({

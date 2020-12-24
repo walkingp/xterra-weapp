@@ -15,7 +15,9 @@ Page({
     loading: false,
     detail: null,
     news: [],
-    cates: []
+    cates: [],
+    type: '活动',
+    active: 'content'
   },
   register(){
     const { id } = this.data;
@@ -27,14 +29,32 @@ Page({
     wx.showLoading({
       title: '加载中...',
     });
+    let { active } = this.data;
     const detail = await getRaceDetail(id);
+
     console.log(detail);
     detail.cates = detail.catesName ? detail.catesName.join('/') : '/';
+    detail.isEnded = dayjs(new Date(detail.raceDate)).isBefore(dayjs());// 是否截止
     detail.raceDate = dayjs(new Date(detail.raceDate)).format("YYYY年MM月DD日");
-    detail.endRegTime = dayjs(new Date(detail.endRegTime)).format("YYYY年MM月DD日 hh:mm:ss");
+    detail.endRegTime = dayjs(new Date(detail.endRegTime)).format("YYYY年MM月DD日 HH:mm:ss");
+    detail.showAdminssion = detail.admission && detail.admission !== '<p>欢迎使用富文本编辑器</p>';
     detail.admission = app.towxml(detail.admission,'html'); // 报名须知
+    detail.showContent = detail.content && detail.content !== '<p>欢迎使用富文本编辑器</p>';
     detail.content = app.towxml(detail.content,'html');
+    detail.showFlow = detail.flow && detail.flow !== '<p>欢迎使用富文本编辑器</p>';
     detail.flow = app.towxml(detail.flow,'html');
+    detail.showCuisine = app.towxml(detail.cuisine,'html'); // 美食美景
+    if(detail.showContent){
+      active = 'content'
+    }else{
+      if(detail.showAdminssion){
+        active = 'admission'
+      }else{
+        if(detail.showFlow){
+          active = 'flow';
+        }
+      }
+    }
     detail.picUrls = detail.picUrls.map(item=> {
       return {
         picUrl: item,
@@ -66,12 +86,19 @@ Page({
     }
 
     const cates = await getRaceCatesList(id);
+    cates.map(item=>{
+      item.desc = item.desc.trim();
+      return item;
+    })
     const news = await getRaceNewsList(id);
     news.map(item=>{
       item.formatDate = dayjs(new Date(item.postTime)).format("MM月DD日");
       return item;
     });
+    const type =  ['越野跑', '铁人三项', '山地车'].indexOf(detail.type) >= 0 ? '赛事' : '活动';
     this.setData({
+      type,
+      active,
       loading: false,
       cates,
       news,
