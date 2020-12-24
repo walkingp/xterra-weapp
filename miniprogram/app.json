@@ -18,7 +18,8 @@
     "pages/events/query/query",
     "pages/events/info/info",
     "pages/events/kits/kits",
-    "pages/my/edit/edit"
+    "pages/my/edit/edit",
+    "pages/events/form/form"
   ],
   "window": {
     "backgroundColor": "#ffffff",

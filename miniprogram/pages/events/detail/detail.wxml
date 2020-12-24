@@ -3,18 +3,18 @@
     <view class="section">
       <banner-list list="{{detail.picUrls}}"></banner-list>
       <view class="flex space-between align-center header">
-        <text class="title">{{detail.title}}</text>
+        <text selectable="{{true}}" class="title">{{detail.title}}</text>
         <text class="status ing">{{detail.status}}</text>
       </view>
       <view class="info">
         <view class="cells">
           <view class="cell">
             <text>{{type}}时间：</text>
-            <text class="bold">{{detail.raceDate}}</text>
+            <text selectable="{{true}}" class="bold">{{detail.raceDate}}</text>
           </view>
           <view class="cell">
             <text>{{type}}地点：</text>
-            <text class="bold">{{detail.location}}</text>
+            <text selectable="{{true}}" class="bold">{{detail.location}}</text>
           </view>
           <view class="cell">
             <text>{{type}}类型：</text>
@@ -25,6 +25,10 @@
             <text class="bold">{{detail.cates}}</text>
           </view>
           <view class="cell">
+            <text>报名开始时间：</text>
+            <text class="bold">{{detail.regStartTimeStr}}</text>
+          </view>
+          <view class="cell">
             <text>报名截止时间：</text>
             <text class="bold">{{detail.endRegTime}}</text>
           </view>
@@ -33,13 +37,13 @@
     </view>
     <view class="section location" wx:if="{{detail.coordinate}}">
       <view class="hd">
-        <text>地点</text>
+        <text>{{type}}地点</text>
       </view>
       <view class="map">
         <map id="map" markers="{{markers}}" longitude="{{detail.coordinate[0]}}" latitude="{{detail.coordinate[1]}}"
           scale="11" subkey="{{mapKey}}" layer-style="1" bindtap="showLocation" bindregionchange="regionchange"></map>
       </view>
-      <view class="text">{{detail.location}}</view>
+      <view selectable="{{true}}" class="text">{{detail.location}}</view>
     </view>
     <view class="section icons">
       <van-grid border="{{false}}" column-num="4">
@@ -100,7 +104,7 @@
       </van-tabs>
     </view>
   </view>
-  <view class="bottom flex-none flex justify-center align-center">
+  <view wx:if="{{cates.length}}" class="bottom flex-none flex justify-center align-center">
     <button bindtap="register" class="button">立即报名</button>
   </view>
 </view>

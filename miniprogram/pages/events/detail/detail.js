@@ -17,7 +17,8 @@ Page({
     news: [],
     cates: [],
     type: '活动',
-    active: 'content'
+    active: 'content',
+    regBtnEnabled: false
   },
   register(){
     const { id } = this.data;
@@ -37,13 +38,15 @@ Page({
     detail.isEnded = dayjs(new Date(detail.raceDate)).isBefore(dayjs());// 是否截止
     detail.raceDate = dayjs(new Date(detail.raceDate)).format("YYYY年MM月DD日");
     detail.endRegTime = dayjs(new Date(detail.endRegTime)).format("YYYY年MM月DD日 HH:mm:ss");
+    detail.regStartTimeStr = dayjs(new Date(detail.regStartTime)).format("YYYY年MM月DD日 HH:mm:ss");
     detail.showAdminssion = detail.admission && detail.admission !== '<p>欢迎使用富文本编辑器</p>';
     detail.admission = app.towxml(detail.admission,'html'); // 报名须知
     detail.showContent = detail.content && detail.content !== '<p>欢迎使用富文本编辑器</p>';
     detail.content = app.towxml(detail.content,'html');
     detail.showFlow = detail.flow && detail.flow !== '<p>欢迎使用富文本编辑器</p>';
     detail.flow = app.towxml(detail.flow,'html');
-    detail.showCuisine = app.towxml(detail.cuisine,'html'); // 美食美景
+    detail.showCuisine = detail.cuisine && detail.cuisine !== '<p>欢迎使用富文本编辑器</p>';
+    detail.cuisine = app.towxml(detail.cuisine,'html'); // 美食美景
     if(detail.showContent){
       active = 'content'
     }else{
@@ -95,8 +98,13 @@ Page({
       item.formatDate = dayjs(new Date(item.postTime)).format("MM月DD日");
       return item;
     });
+    
+    // 最下方按钮状态 有组别 && (报名状态为“报名中” || 报名开始时间)
+    const regBtnEnabled = cates.length > 0 && (detail.status === '报名中' || dayjs().isAfter(dayjs(new Date(detail.regStartTime))));
+
     const type =  ['越野跑', '铁人三项', '山地车'].indexOf(detail.type) >= 0 ? '赛事' : '活动';
     this.setData({
+      regBtnEnabled,
       type,
       active,
       loading: false,
@@ -118,7 +126,6 @@ Page({
       id
     });
     this.fetch(id);
-
   },
   showLocation(e) {
     const {

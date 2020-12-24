@@ -141,8 +141,31 @@ export const getMyRegistrations = async (userId, size = 100) => {
   return data;
 }
 
+export const getFieldsByCateId = async (cateId, size = 100) => {
+  let data = await getPaginations({
+    dbName: 'fields',
+    orderBy: {
+      order: 'desc',
+      _createTime: 'asc'
+    },
+    pageIndex: 1,
+    pageSize: size
+  })
+  const cateDetail = await getRaceCateDetail(cateId);
+  data = data.filter(item=> cateDetail.fields.indexOf(item._id) >= 0);
+  data.map(item => {
+    item.value = item.defaultValue;
+    return item;
+  })
+  return data;
+}
 export const getProfileDetail = async id => {
   const data = await getCollectionById({ dbName: 'profile', id });
+  return data;
+}
+
+export const getRaceCateDetail = async id => {
+  const data = await getCollectionById({ dbName: 'race-cates', id });
   return data;
 }
 

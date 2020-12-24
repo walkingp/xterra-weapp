@@ -160,6 +160,12 @@
           "pathName": "pages/my/edit/edit",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "动态表单",
+          "pathName": "pages/events/form/form",
+          "query": "id=21ded5cb5fe30441000a9f8512985ff7",
+          "scene": null
         }
       ]
     }

@@ -1,0 +1,64 @@
+<view class="container">
+  <form bindsubmit="saveData" class="list">
+    <view class="title">{{action === 'edit' ? '修改联系人' : '添加联系人'}}</view>
+    <van-cell-group title="基本信息">
+      <van-cell title="与本人关系" required name="relation" is-link border="{{ false }}" value="{{relation}}"
+        bind:click="showPicker" data-type="relation" />
+      <block wx:for="{{fields}}" wx:key="_id">
+        <block wx:if="{{item.type==='text'}}">
+          <van-field value="{{ item.value || item.defaultValue }}" error-message="{{ item.error }}" bind:blur="onInputChanged" data-id="{{item._id}}"
+            type="text" data-type="{{item.type}}" required="{{ item.isRequired }}" name="{{ item.key }}"
+            label="{{ item.title }}" placeholder="{{ item.desc }}" border="{{ false }}" />
+        </block>
+        <block wx:if="{{item.type==='phone'}}">
+          <van-field value="{{ item.value || item.defaultValue }}" bind:blur="onInputChanged" data-id="{{item._id}}"
+            type="digit" data-type="{{item.type}}" required="{{ item.isRequired }}" name="{{ item.key }}"
+            label="{{ item.title }}" placeholder="{{ item.desc }}" border="{{ false }}" />
+        </block>
+        <block wx:if="{{item.type==='email'}}">
+          <van-field value="{{ item.value || item.defaultValue }}" bind:blur="onInputChanged" data-id="{{item._id}}"
+            type="text" data-type="{{item.type}}" required="{{ item.isRequired }}" name="{{ item.key }}"
+            label="{{ item.title }}" placeholder="{{ item.desc }}" border="{{ false }}" />
+        </block>
+        <block wx:if="{{item.type==='textarea'}}">
+          <van-field value="{{ item.value || item.defaultValue }}" bind:blur="onInputChanged" data-id="{{item._id}}"
+            autosize type="textarea" data-type="{{item.type}}" required="{{ item.isRequired }}" name="{{ item.key }}"
+            label="{{ item.title }}" placeholder="{{ item.desc }}" border="{{ false }}" />
+        </block>
+        <block wx:if="{{item.type==='radiobox'}}">
+          <van-cell title="{{ item.title }}" data-id="{{item._id}}" data-options="{{item.options}}" required
+            name="{{ item.key }}" is-link border="{{ false }}" value="{{ item.value || item.defaultValue || '请选择' }}"
+            bind:click="showPicker" data-type="{{ item.key }}" />
+        </block>
+        <block wx:if="{{item.type==='checkbox'}}">
+          <van-cell title="{{ item.title }}" data-id="{{item._id}}" data-options="{{item.options}}" required
+            name="{{ item.key }}" is-link border="{{ false }}" value="{{ item.value || item.defaultValue || '请选择' }}"
+            bind:click="showPicker" data-type="{{ item.key }}" />
+        </block>
+        <block wx:if="{{item.type==='region'}}">
+          <van-cell title="{{ item.title }}" data-id="{{item._id}}" required name="{{ item.key }}" is-link
+            border="{{ false }}" value="{{ item.region || item.defaultValue || '请选择' }}" bind:click="showAddr"
+            data-type="{{ item.key }}" />
+        </block>
+        <block wx:if="{{item.type==='date'}}">
+          <van-cell title="{{ item.title }}" data-id="{{item._id}}" required name="{{ item.key }}" is-link
+            border="{{ false }}" value="{{ item.value || item.defaultValue || '请选择'}}" bind:click="onShowDate"
+            data-type="{{ item.key }}" />
+        </block>
+      </block>
+    </van-cell-group>
+    <van-cell-group>
+      <van-cell><button type="primary" class="button" bindtap="submitData">保存</button></van-cell>
+    </van-cell-group>
+  </form>
+
+  <van-action-sheet show="{{ showAction }}" cancel-text="取消" actions="{{ actions }}" bind:cancel="onCancel"
+    bind:close="onClose" bind:select="onSelect" />
+  <van-popup show="{{ showAddrPicker }}" position="bottom" bind:close="onClose" data-type="addr">
+    <van-area area-list="{{ areaList }}" value="{{areaValue}}" bind:confirm="onAddConfirm" />
+  </van-popup>
+  <van-popup show="{{ showDatePicker }}" position="bottom" bind:close="onClose" data-type="date">
+    <van-datetime-picker type="date" value="{{ defaultBirthDate }}" min-date="{{ minDate }}" bind:cancel="onDateCancel"
+      max-date="{{ maxDate }}" bind:confirm="onDateConfirm" />
+  </van-popup>
+</view>

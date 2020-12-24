@@ -1,5 +1,4 @@
 <view class="container">
-  <banner-list list="{{detail.picUrls}}"></banner-list>
   <view class="content">
     <towxml nodes="{{content}}" />
   </view>
