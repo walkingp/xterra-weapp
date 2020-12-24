@@ -120,6 +120,7 @@ Component({
         });
       }
       app.globalData.order = {
+        type: this.properties.raceDetail.type,
         price: relayCate.price,
         raceId: this.properties.raceId,
         raceTitle: this.properties.raceDetail.title,

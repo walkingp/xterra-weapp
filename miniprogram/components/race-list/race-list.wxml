@@ -12,7 +12,8 @@
         </view>
         <view class="flex-auto text flex column space-betwee info">
           <text>类型：{{item.type}}</text>
-          <text>组别：{{item.cates}}</text>
+          <text wx:if="{{item.type==='X-Plogging'}}">费用：{{item.feeType}}</text>          
+          <text wx:else>组别：{{item.cates}}</text>
           <text>地点：{{item.location}}</text>
           <text>时间：{{item.raceDate}}</text>
         </view>

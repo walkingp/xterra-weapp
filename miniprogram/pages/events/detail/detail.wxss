@@ -40,7 +40,7 @@ swiper{
 }
 .cell text{
   letter-spacing: 2rpx;
-  color: #666;
+  color: #999;
 }
 .cell .bold{
   color: #333;

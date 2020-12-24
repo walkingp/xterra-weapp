@@ -27,7 +27,7 @@ Component({
         current: e.detail.current
       })
     },
-    tap(e){
+    tapItem(e){
       const { src, type, url } = e.currentTarget.dataset;
       const { list } = this.properties;
       const urls = list.map(item=>item.picUrl);

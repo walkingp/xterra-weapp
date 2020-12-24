@@ -1,7 +1,7 @@
 <view class="box info">
   <form bindsubmit="addCoupon">
     <view class="title">报名信息：</view>
-    <van-cell title="比赛名称" value="{{order.raceTitle}}" />
+    <van-cell title="{{type}}名称" value="{{order.raceTitle}}" />
     <van-cell title="报名类别" value="{{order.cateTitle}}" />
     <van-cell title="总费用" value="￥{{order.totalFee}}" />
     <van-cell title="选择优惠券" value="{{coupon}}" bind:click="showAction" is-link />

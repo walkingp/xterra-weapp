@@ -64,14 +64,14 @@
       placeholder="请填写家庭队名" />
   </view>
 </block>
-<view class="bottom">
+<view class="bottom flex align-center">
   <checkbox-group bindchange="checkAgreement">
     <checkbox name="agreed" value="true" id="accepted"></checkbox>
   </checkbox-group>
   <label for="accepted">我已认真阅读并且同意</label>
   <text class="link" bindtap="showDisclaimer">《免责协议》</text>
 </view>
-<view class="box" wx:if="{{selectedCateId !== null }}">
+<view class="box" wx:if="{{selectedCateId !== null && (cates[selectedCateId].enableEarlierBirdPrice || cates[selectedCateId].enableEarlyBirdPrice) }}">
   <view class="title">报名优惠费用</view>
   <view class="desc flex column">
     <text

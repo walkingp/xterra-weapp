@@ -1,7 +1,7 @@
 <view class="swiper">
-  <swiper class="{{list.length === 1 ? 'disabled' : ''}}" bindchange="swiperChange" indicator-dots="{{false}}" autoplay="{{true}}">
+  <swiper bindchange="swiperChange" indicator-dots="{{false}}" autoplay="{{true}}">
     <block wx:for="{{list}}" wx:key="_id">
-      <swiper-item bindtap="tap" data-src="{{item.picUrl}}" data-url="{{item.redirectUrl}}" data-type="{{item.type}}">
+      <swiper-item bindtap="tapItem" data-src="{{item.picUrl}}" data-url="{{item.redirectUrl}}" data-type="{{item.type}}">
         <view class="swiper-item">
           <image src="{{item.picUrl}}" mode="aspectFill"></image>
         </view>

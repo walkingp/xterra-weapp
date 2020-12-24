@@ -21,6 +21,7 @@ Component({
     }
   },
   data: {
+    type: '活动',
     userId: null,
     userInfo: null,
     coupon: '暂无',
@@ -46,6 +47,7 @@ Component({
     'order': function (detail) {
       if (detail && detail.id) {
         this.setData({
+          type: ['越野跑', '铁人三项', '山地车'].indexOf(detail.type) < 0 ? '活动' : '赛事',
           _order: detail
         })
         this.triggerEvent('onComplete', {
