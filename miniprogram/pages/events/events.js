@@ -78,36 +78,25 @@ Page({
         _type = value;
         break;
     }
-    let { races, allRaces } = this.data;
-    if(region === ''){
-      if(status === ''){
-        if(type === ''){
-          races = allRaces;
-        }else{
-          races = allRaces.filter(item=> item.type === value);
-        }
-      }else{
-        if(type === ''){
-          races = allRaces.filter(item=> item.status === value);
-        }else{
-          races = allRaces.filter(item=> item.status === status && item.type === _type);
-        }
-      }
-    }else{
-      if(status === ''){
-        if(type === ''){
-          races = allRaces.filter(item=> item.region === value);
-        }else{
-          races = allRaces.filter(item=> item.type === _type && item.region === region);
-        }
-      }else{
-        if(type === ''){
-          races = allRaces.filter(item=> item.status === status && item.region === region);
-        }else{
-          races = allRaces.filter(item=> item.status === status && item.region === region && item.type === _type);
-        }
-      }
+    const filters = {
+      region: region,
+      status: status,
+      type: _type
     }
+    // https://blog.csdn.net/xuxu_qkz/article/details/81067912
+    const keys = Object.keys(filters);
+    let { races, allRaces } = this.data;
+    races = allRaces.filter(item=>{
+      const exist = keys.every(key=> {
+        if(filters[key]){
+          return item[key] === filters[key];
+        }else{
+          return true;
+        }
+      });
+      return exist ? item : null;
+    })
+
     this.setData({
       races
     })
