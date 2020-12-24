@@ -36,17 +36,17 @@ export const sendRegEmail = async (type, order) => {
     orderNum,
     orderDate,
     cateTitle,
-    catePrice,
-    cateNum,
-    totalFee,
-    discountFee,
+    catePrice: catePrice.toString(),
+    cateNum: cateNum.toString(),
+    totalFee: totalFee.toString(),
+    discountFee: discountFee.toString(),
     paidFee
   };
-  debugger
+  debugger;
   const values = Object.keys(dataSource).map(item => {
     return {
       key: `{{${item}}}`,
-      value: order[item]
+      value: order[item].toString()
     }
   });
   getTemplateDetail(type).then(res => {

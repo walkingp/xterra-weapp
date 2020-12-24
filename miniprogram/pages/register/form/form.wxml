@@ -5,6 +5,9 @@
       <van-cell title="与本人关系" required name="relation" is-link border="{{ false }}" value="{{relation}}" bind:click="showPicker"
         data-type="relation" />
       <van-field value="{{ trueName }}" required name="trueName" label="姓名" placeholder="请输入真实姓名" border="{{ false }}" />
+      <van-field value="{{ pinyinLast }}" wx:if="{{!isPlogging}}" required name="pinyinLast" label="拼音姓" placeholder="如：Zhang" border="{{ false }}" />
+      <van-field value="{{ pinyinFirst }}" wx:if="{{!isPlogging}}" required name="pinyinFirst" label="拼音名" placeholder="如：San" border="{{ false }}" />
+      <van-field value="{{ wechatId }}" wx:if="{{isPlogging}}" required name="wechatId" label="微信号" placeholder="可以被添加的微信号" border="{{ false }}" />
       <van-cell title="证件类型" required name="cardType" is-link border="{{ false }}" value="{{cardType}}" bind:click="showPicker"
         data-type="card" />
       <van-field value="{{ cardNo }}" required name="cardNo" label="证件号码" placeholder="请输入证件号" bind:blur="onCardNoChange"
@@ -16,9 +19,9 @@
       <van-field value="{{ email }}" required name="email" label="邮箱" placeholder="请输入邮箱，用于接收报名邮件" border="{{ false }}" />
     </van-cell-group>
     <van-cell-group title="其他信息">
-      <van-cell title="血型" required name="bloodType" border="{{ false }}" is-link value="{{bloodType}}" bind:click="showPicker"
+      <van-cell title="血型" wx:if="{{!isPlogging}}" required name="bloodType" border="{{ false }}" is-link value="{{bloodType}}" bind:click="showPicker"
         data-type="blood" />
-      <van-cell title="衣服尺码" hidden="{{true}}" required name="tSize" border="{{ false }}" is-link value="{{tSize}}" bind:click="showPicker"
+      <van-cell title="衣服尺码" wx:if="{{!isPlogging}}" required name="tSize" border="{{ false }}" is-link value="{{tSize}}" bind:click="showPicker"
         data-type="tsize" />
       <van-cell title="住址所属地区" required name="region" is-link border="{{ false }}" value="{{region}}" bind:click="showAddr" />
       <van-field value="{{ addr }}" required name="addr" label="家庭住址" placeholder="如：xx路xx号xx室" border="{{ false }}" use-button-slot
@@ -33,7 +36,11 @@
       <van-field value="{{ contactUserPhone }}" required name="contactUserPhone" label="手机号" placeholder="请输入11位手机号"
         border="{{ false }}" />
     </van-cell-group>
-    <van-cell-group title="完赛资质">
+    <van-cell-group title="相关信息" wx:if="{{isPlogging}}">
+      <van-cell title="是否参加过X-Plogging" required name="plogging" border="{{ false }}" is-link value="{{plogging}}" bind:click="showPicker"
+        data-type="plogging" />
+    </van-cell-group>
+    <van-cell-group title="完赛资质" wx:if="{{false}}">
       <van-cell title="完赛资质" name="file" label="请提供一年内全马成绩">
         <view slot="">
           <van-uploader accept="image" max-count="{{1}}" upload-text="仅限图片" file-list="{{ fileList }}"

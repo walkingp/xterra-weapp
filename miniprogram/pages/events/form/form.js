@@ -49,7 +49,6 @@ Page({
         item.value = e.detail.name;
       }
     });
-    debugger
     this.setData({
       fields
     });
@@ -86,7 +85,6 @@ Page({
     }catch(e){
       console.error(e)
     }
-    debugger;
   },
   showAddr(e){
     const { id } = e.currentTarget.dataset;

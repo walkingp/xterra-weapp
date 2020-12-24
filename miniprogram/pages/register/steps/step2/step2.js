@@ -11,6 +11,9 @@ Component({
     raceId: {
       type: String
     },
+    cateId: {
+      type: String
+    },
   },
 
   /**
@@ -56,6 +59,7 @@ Component({
       const totalFee = app.globalData.order.price * profiles.length;
       app.globalData.order.totalFee = totalFee.toFixed(2);
       app.globalData.order.paidFee = totalFee.toFixed(2);
+      app.globalData.order.discountFee = 0;
       this.triggerEvent('onComplete', { prevEnabled: true, nextEnabled: profileIds.length > 0 });
     },
     gotoAdd(e){

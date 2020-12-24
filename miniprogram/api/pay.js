@@ -144,6 +144,7 @@ function saveStartlist(detail){
 async function sendEmailSMS(order){
   const {
     raceId,
+    discountFee,
     raceTitle,
     profiles,
     orderNum,
@@ -155,7 +156,7 @@ async function sendEmailSMS(order){
   await profiles.forEach(async profile => {
     const { trueName, phoneNum, email } = profile;
     const orderDate = dayjs(new Date()).format("YYYY年MM月DD日 HH:mm:ss");
-    const params = { orderDate, catePrice: price, cateNum: profiles.length, raceId, raceTitle, orderNum, cateTitle, price, totalFee, paidFee, trueName, phoneNum, email };
+    const params = { discountFee, orderDate, catePrice: price, cateNum: profiles.length, raceId, raceTitle, orderNum, cateTitle, price, totalFee, paidFee, trueName, phoneNum, email };
     await sendEmail(params);
     await sendSms(params);
   }) 

@@ -50,7 +50,8 @@ export const getRaceCatesList = async ( raceId, size = 20) => {
      
   cates.map(cate=>{
     const now = dayjs(new Date());
-    if(now.isBefore(cate.regEndTime)){if(cate.enableEarlierBirdPrice){
+    if(now.isBefore(cate.regEndTime)){
+      if(cate.enableEarlierBirdPrice){
         if(now.isBefore(cate.earlierPriceEndTime)){
           cate.price = cate.earlierBirdPrice;
           cate.priceLabel = '早早鸟价';
@@ -66,7 +67,10 @@ export const getRaceCatesList = async ( raceId, size = 20) => {
           cate.price = cate.regPrice;
           cate.priceLabel = '正常价';
         }
-      } 
+      } else{
+        cate.price = cate.regPrice;
+        cate.priceLabel = '正常价';
+      }
     }else{ // 已超报名截止时间
       cate.expired = true;
       cate.priceLabel = '报名已结束';

@@ -4,7 +4,7 @@
       <view class="top flex space-between">
         <text class="title flex-auto">{{item.title}}</text>
         <view class="flex-none">
-          <text class="price"> {{item.priceLabel}}</text>
+          <text class="price" wx:if="{{item.regPrice !== 0}}"> {{item.priceLabel}}</text>
           <block wx:if="{{!item.expired}}">
             <text class="price" wx:if="{{item.regPrice === 0}}">免费</text>
             <text class="price" wx:else>￥{{item.regPrice}}元</text>

@@ -1,4 +1,4 @@
-import { getProfileDetail } from "../../../api/race";
+import { getProfileDetail, getRaceDetail } from "../../../api/race";
 // miniprogram/pages/register/form/form.js
 import areaList from "./../../../config/area";
 const dayjs = require("dayjs");
@@ -13,10 +13,19 @@ Page({
     userId: null,
     userInfo: null,
 
+    pinyinLast: null,
+    pinyinFirst: null,
+    wechatId: null,
+
     raceId: null,
+    raceDetail: null,
+
     id: null,
     action: null,
     detail: null,
+
+    plogging: '否',
+    ploggings: ['是', '否'],
 
     areaList: areaList,
     showAddrPicker: false,
@@ -37,6 +46,7 @@ Page({
     cardTypes: ['身份证', '护照', '军官证', '其他'],
     bloodTypes: ['O', 'A', 'B', 'AB'],
     birthDate: '未选择',
+    isPlogging: false,
     
     minDate: new Date(1920, 1, 1).getTime(),
     maxDate: new Date().getTime(),
@@ -67,6 +77,7 @@ Page({
   async fetch(id){
     const detail = await getProfileDetail(id);
     
+    
     this.setData({
       detail
     });
@@ -77,8 +88,8 @@ Page({
   },
   async saveData(e){
     let profile = e.detail.value;
-    const { id, relation, cardType, gender, birthDate, bloodType, tSize, region, userId, userInfo, raceId, action } = this.data;
-    profile = { ...profile, relation, cardType, gender, birthDate, bloodType, tSize, region, birthDate: new Date(birthDate), createdAt: new Date(), userId, userName: userInfo.nickname }
+    const { id, relation, cardType, gender, birthDate, bloodType, tSize, region, userId, userInfo, raceId, action, plogging } = this.data;
+    profile = { ...profile, relation, cardType, gender, birthDate, bloodType, tSize, plogging, region, birthDate: new Date(birthDate), createdAt: new Date(), userId, userName: userInfo.nickname }
 
     const db = wx.cloud.database();
     if(action === 'edit'){
@@ -117,6 +128,11 @@ Page({
     })
     console.log(value);
     switch (actionType) {
+      case 'plogging':
+        this.setData({
+          plogging: value
+        })
+        break;
       case 'relation':
         this.setData({
           relation: value
@@ -159,6 +175,9 @@ Page({
     switch (type) {
       case 'relation':
         columns = this.data.relations;
+        break;
+      case 'plogging':
+        columns = this.data.ploggings;
         break;
       case 'gender':
         columns = this.data.genders;
@@ -217,7 +236,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: async function (options) {
     const { id, action, raceId } = options;
     this.setData({
       raceId,
@@ -226,6 +245,13 @@ Page({
     });
     if(action === 'edit'){
       this.fetch(id)
+    }
+    if(raceId){      
+      const raceDetail = await getRaceDetail(raceId);
+      const isPlogging = raceDetail.type === 'X-Plogging';
+      this.setData({
+        isPlogging
+      });  
     }
     app.checkLogin().then(res=>{
       const { isLogined, userId, userInfo } = res;

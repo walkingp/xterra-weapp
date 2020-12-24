@@ -28,7 +28,7 @@
           <view class="flex align-center space-between">
             <label for="p{{index}}" class="hd flex-auto">{{item.title}}</label>
             <view class="flex-none">
-              <label for="p{{index}}" class="label">{{item.priceLabel}}</label>
+              <label for="p{{index}}" class="label" wx:if="{{item.regPrice !== 0}}">{{item.priceLabel}}</label>
               <block wx:if="{{!item.expired}}">
                 <block wx:if="{{item.regPrice === 0}}">
                   <label for="p{{index}}" class="unit">免费</label>
