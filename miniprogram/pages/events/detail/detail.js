@@ -18,7 +18,10 @@ Page({
     cates: [],
     type: '活动',
     active: 'content',
-    regBtnEnabled: false
+    regBtnEnabled: false,
+    pageIndex: 1,
+    pageSize: 1,
+    hasMoreData: true
   },
   register(){
     const { id } = this.data;
@@ -30,7 +33,7 @@ Page({
     wx.showLoading({
       title: '加载中...',
     });
-    let { active } = this.data;
+    let { active, pageIndex, pageSize } = this.data;
     const detail = await getRaceDetail(id);
 
     console.log(detail);
@@ -93,7 +96,7 @@ Page({
       item.desc = item.desc.trim();
       return item;
     })
-    const news = await getRaceNewsList(id);
+    const news = await getRaceNewsList(id, pageIndex, pageSize);
     news.map(item=>{
       item.formatDate = dayjs(new Date(item.postTime)).format("MM月DD日");
       return item;
@@ -113,6 +116,27 @@ Page({
       markers,
       detail
     }, ()=>{
+      wx.hideLoading({
+        success: (res) => {},
+      })
+    });
+  },
+  async loadMoreNews(){
+    wx.showLoading({
+      title: '加载中……',
+    })
+    let { id, pageIndex, pageSize, news } = this.data;
+    pageIndex = pageIndex + 1;
+    const newData = await getRaceNewsList(id, pageIndex, pageSize);
+    newData.map(item=>{
+      item.formatDate = dayjs(new Date(item.postTime)).format("MM月DD日");
+      return item;
+    });
+    this.setData({
+      hasMoreData: newData.length > 0,
+      pageIndex,
+      news: [...news, ...newData]
+    }, () => {
       wx.hideLoading({
         success: (res) => {},
       })

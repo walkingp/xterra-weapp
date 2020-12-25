@@ -69,7 +69,7 @@
           </view>
         </block>
       </view>
-      <view class="ft flex align-center justify-center" wx:if="{{news.length}}">
+      <view bindtap="loadMoreNews" class="ft flex align-center justify-center" wx:if="{{news.length && hasMoreData}}">
         查看更多
         <van-icon name="arrow-down" />
       </view>
