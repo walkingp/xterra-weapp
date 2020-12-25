@@ -115,18 +115,47 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-    if(app.globalData.step){
-      const { step } = app.globalData;
+  onLoad: function (options) {    
+    app.checkLogin().then(res=>{    
+      const { isLogined, userId, userInfo } = res;
+      if(!isLogined){
+        wx.showToast({
+          icon: 'none',
+          title: '请先登录',
+          success: function(){
+            setTimeout(() => {
+              wx.switchTab({
+                url: '/pages/my/my',
+              })
+            }, 1000);
+          }
+        });
+        return;
+      }
+      if(app.globalData.step){
+        const { step } = app.globalData;
+        this.setData({
+          step
+        });
+      }
+      const { id, cateId } = options;
       this.setData({
-        step
+        id, cateId
       });
-    }
-    const { id, cateId } = options;
-    this.setData({
-      id, cateId
+      this.fetch(id);
+    }).catch(err=>{
+      wx.showToast({
+        icon: 'none',
+        title: '请先登录',
+        success: function(){
+          setTimeout(() => {
+            wx.switchTab({
+              url: '/pages/my/my',
+            })
+          }, 1000);
+        }
+      });
     });
-    this.fetch(id);
   },
 
   async fetch(id){

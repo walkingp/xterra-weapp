@@ -15,10 +15,17 @@
     <van-cell title="血型" border="{{ false }}" value="{{profile.bloodType}}" />
     <van-cell title="衣服尺寸" border="{{ false }}" value="{{profile.tSize}}" />
     <van-cell title="家庭住址" border="{{ false }}" value="{{profile.region + profile.addr}}" />
-  </van-cell-group>  
+  </van-cell-group>
   <van-cell-group title="紧急联系人信息">
     <van-cell title="紧急联系人" border="{{ false }}" value="{{profile.contactUser}}" />
     <van-cell title="紧急联系人手机" border="{{ false }}" value="{{profile.contactUserPhone}}" />
+  </van-cell-group>  
+  <van-cell-group title="完赛资质" wx:if="{{profile.certPic}}">
+    <van-cell value="成绩证书">
+    <view>
+      {{profile.certPic}}
+    </view>
+  </van-cell>
   </van-cell-group>  
   <van-cell-group title="相关信息" wx:if="{{profile.isPlogginged}}">
     <van-cell title="是否参加过X-Plogging" border="{{ false }}" value="{{profile.isPlogginged}}" />

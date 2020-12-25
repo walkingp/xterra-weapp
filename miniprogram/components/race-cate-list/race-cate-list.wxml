@@ -6,8 +6,12 @@
         <view class="flex-none">
           <text class="price" wx:if="{{item.regPrice !== 0}}">{{item.priceLabel}}</text>
           <block wx:if="{{!item.expired}}">
-            <text class="price" wx:if="{{item.regPrice === 0}}">免费</text>
-            <text class="price" wx:else>￥{{item.regPrice}}元</text>
+            <block wx:if="{{item.regPrice === 0}}">
+              <text class="price">免费</text>
+            </block>
+            <block wx:else>
+              <text class="price">￥{{item.price}}</text>
+            </block>
           </block>
         </view>
       </view>

@@ -46,7 +46,17 @@ Page({
     wx.showLoading({
       title: '加载中',
     })
-    const races = await getRaceIndexList();
+    let races = await getRaceIndexList();
+    const { region, status, type } = this.data;
+    if(type){
+      races = races.filter(item => item.type === type);
+    }
+    if(region){
+      races = races.filter(item => item.region === region);
+    }
+    if(status){
+      races = races.filter(item => item.status === status);
+    }
     races.map(item=>{
       item.cates = item.catesName ? item.catesName.join('/') : '/';
       item.raceDate = dayjs(new Date(item.raceDate)).format("MM月DD日");
@@ -110,6 +120,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    const { region, status, type } = options;
+    this.setData({
+      region, status, type
+    })
     this.fetch();
   },
 

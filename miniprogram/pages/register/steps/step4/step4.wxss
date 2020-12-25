@@ -18,11 +18,17 @@
   color: #999;
 
 }
+.bold{
+  font-weight: bold;
+}
 .email{
   color: #BA0C2F;
   padding: 0 4rpx;
   font-weight: bold;
 }
 .text button{
+  margin-top: 40rpx;
+}
+.contact{
   margin-top: 40rpx;
 }

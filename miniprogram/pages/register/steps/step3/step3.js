@@ -45,6 +45,7 @@ Component({
 
   observers: {
     'order': function (detail) {
+      debugger
       if (detail && detail.id) {
         this.setData({
           type: ['越野跑', '铁人三项', '山地车'].indexOf(detail.type) < 0 ? '活动' : '赛事',
@@ -183,53 +184,67 @@ Component({
       wx.showLoading({
         title: '加载中……',
       })
-      app.checkLogin().then(async res => {
-        const {
-          userId,
-          userInfo
-        } = res;
-        this.setData({
-          userId,
-          userInfo,
-        })
-        let coupons = await getMyCoupons(userId);
-        coupons = coupons.filter(item=>{
-          return item.isActive && !item.isUsed && dayjs().isBefore(dayjs(item.expiredDate))
-        });
-        let actions = [];
-        const { _order } = this.data;
-        if(coupons.length){
-          actions = coupons.map(item=> {
-            return {
-              name: item.title,
-              couponId: item._id,
-              subname: '优惠金额：' + (item.type === 'free' ? '全免' : item.value),
-              disabled: item.isActive || item.isUsed
-            };
-          });
-          actions.push({
-            type: 'none',
-            name: '不使用优惠券'
-          });
-          const couponValue = coupons[0].value;
-          const isFree = coupons[0].type === 'free';
-          const discountFee = isFree ? _order.totalFee : couponValue;
-          const paidFee = isFree ? 0 : _order.totalFee - couponValue < 0 ? 0 : _order.totalFee - couponValue;
-          if(_order){
-            this.setData({
-              coupon: `${coupons[0].title}`,
-              discountFee,
-              paidFee,
-              actions: [...actions, ...this.data.actions]
-            })
-            this.triggerEvent('couponChanged',{
-              couponId: coupons[0]._id,
-              discountFee,
-              paidFee
-            })
-          }
-        }
+      const {
+        userId,
+        userInfo
+      } = app.globalData;
+      this.setData({
+        userId,
+        userInfo,
+      })
+      let coupons = await getMyCoupons(userId);
+      coupons = coupons.filter(item=>{
+        return item.isActive && !item.isUsed && dayjs().isBefore(dayjs(item.expiredDate))
       });
+      let actions = [];
+      const { order } = getApp().globalData;
+      debugger;
+      if(coupons.length){
+        actions = coupons.map(item=> {
+          return {
+            name: item.title,
+            couponId: item._id,
+            subname: '优惠金额：' + (item.type === 'free' ? '全免' : item.value),
+            disabled: item.isActive || item.isUsed
+          };
+        });
+        actions.push({
+          type: 'none',
+          name: '不使用优惠券'
+        });
+        const couponValue = coupons[0].value;
+        const isFree = coupons[0].type === 'free';
+        const discountFee = isFree ? order.totalFee : couponValue;
+        const paidFee = isFree ? 0 : order.totalFee - couponValue < 0 ? 0 : order.totalFee - couponValue;
+        if(order){
+          this.setData({
+            coupon: `${coupons[0].title}`,
+            discountFee,
+            paidFee,
+            actions: [...actions, ...this.data.actions]
+          }, () => {
+            wx.hideLoading({
+              success: (res) => {},
+            })
+          })
+          this.triggerEvent('couponChanged',{
+            couponId: coupons[0]._id,
+            discountFee,
+            paidFee
+          })
+        }
+      }else{
+        const discountFee = 0;
+        const paidFee = order.totalFee;
+        this.setData({
+          discountFee,
+          paidFee
+        }, () => {
+          wx.hideLoading({
+            success: (res) => {},
+          })
+        })
+      }
     }
   }
 })

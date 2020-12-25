@@ -1,4 +1,4 @@
-import { getProfileDetail, getRaceDetail } from "../../../api/race";
+import { getMyProfiles, getMyRegistrations, getProfileDetail, getRaceCateDetail, getRaceDetail } from "../../../api/race";
 // miniprogram/pages/register/form/form.js
 import areaList from "./../../../config/area";
 const dayjs = require("dayjs");
@@ -20,6 +20,9 @@ Page({
     raceId: null,
     raceDetail: null,
 
+    cateId: null,
+    cateDetail: null,
+
     id: null,
     action: null,
     detail: null,
@@ -38,8 +41,8 @@ Page({
     gender: '未选择',
     tSize: '未选择',
     region: '未选择',
-    birthDate: '未选择',
     relation: '本人',
+    nation: '中国',
     relations: ['本人', '家人', '同事', '朋友', '其他'],
     defaultBirthDate: new Date(1990,5,15).getTime(),
     genders: ['男', '女'],
@@ -51,7 +54,12 @@ Page({
     minDate: new Date(1920, 1, 1).getTime(),
     maxDate: new Date().getTime(),
     tSizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
-    isView: false
+    isView: false,
+
+    myProfiles: [],
+
+    fileList: [],
+    certPic: null
   },
   onDateConfirm(e){
     console.log(e.detail);
@@ -81,16 +89,44 @@ Page({
     this.setData({
       detail
     });
-    const { relation, trueName, cardType, gender, birthDate, bloodType, tSize, region, addr, cardNo, contactUser, contactUserPhone, email, phoneNum } = detail;
+    const { certPic, relation, nation, trueName, cardType, gender, birthDate, bloodType, tSize, region, addr, cardNo, contactUser, contactUserPhone, email, phoneNum } = detail;
+    if(certPic){
+      this.setData({
+        fileList: [
+          {
+            url: certPic
+          }
+        ]
+      })
+    }
     this.setData({
-      relation: relation || '本人', trueName, cardType, gender, birthDate: dayjs(birthDate).format("YYYY-MM-DD"), bloodType, tSize, region, addr, cardNo, contactUser, contactUserPhone, email, phoneNum
+      certPic, relation: relation || '本人', nation, trueName, cardType, gender, birthDate: dayjs(birthDate).format("YYYY-MM-DD"), bloodType, tSize, region, addr, cardNo, contactUser, contactUserPhone, email, phoneNum
     })
+    
+  },
+
+  async fetchMyProfiles(userId){
+    const myProfiles = await getMyProfiles(userId);
+    let { relation, relations } = this.data;
+    const existedMe = myProfiles.find(item => item.relation === '本人');
+    if(existedMe){
+      relation = '其他';
+      relations.splice(0, 1);
+      this.setData({
+        relation, relations
+      });
+    }
+    this.setData({
+      myProfiles
+    });
   },
   async saveData(e){
     let profile = e.detail.value;
-    const { id, relation, cardType, gender, birthDate, bloodType, tSize, region, userId, userInfo, raceId, action, plogging } = this.data;
-    profile = { ...profile, relation, cardType, gender, birthDate, bloodType, tSize, plogging, region, birthDate: new Date(birthDate), createdAt: new Date(), userId, userName: userInfo.nickname }
-
+    const { id, certPic, relation, cardType, gender, birthDate, bloodType, tSize, region, userId, userInfo, raceId, action, plogging } = this.data;
+    if(birthDate === '未选择'){
+      birthDate = new Date(1900,1,1)
+    }
+    profile = { ...profile, certPic, relation, cardType, gender, birthDate, bloodType, tSize, plogging, region, birthDate: new Date(birthDate), createdAt: new Date(), userId, userName: userInfo.nickname }
     const db = wx.cloud.database();
     if(action === 'edit'){
       const res = await db.collection("profile").doc(id).update({
@@ -237,31 +273,53 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: async function (options) {
-    const { id, action, raceId } = options;
-    this.setData({
-      raceId,
-      action,
-      isView: action === 'view',
-      id
-    });
-    if(action === 'edit'){
-      this.fetch(id)
-    }
-    if(raceId){      
-      const raceDetail = await getRaceDetail(raceId);
-      const isPlogging = raceDetail.type === 'X-Plogging';
-      this.setData({
-        isPlogging
-      });  
-    }
-    app.checkLogin().then(res=>{
+    app.checkLogin().then(async res=>{
       const { isLogined, userId, userInfo } = res;
       this.setData({
         isLogined,
         userId,
         userInfo
       });
-    })
+      this.fetchMyProfiles(userId);
+      
+      const { id, action, raceId, cateId } = options;
+      this.setData({
+        raceId,
+        action,
+        isView: action === 'view',
+        cateId,
+        id
+      });
+      if(action === 'edit'){
+        this.fetch(id)
+      }
+      if(raceId){      
+        const raceDetail = await getRaceDetail(raceId);
+        
+        const isPlogging = raceDetail.type === 'X-Plogging';
+        this.setData({
+          isPlogging
+        });  
+      }
+      if(cateId){
+        const cateDetail = await getRaceCateDetail(cateId);
+        this.setData({
+          cateDetail
+        })
+      }
+    }).catch(err=>{
+      wx.showToast({
+        icon: 'none',
+        title: '请先登录',
+        success: function(){
+          setTimeout(() => {
+            wx.switchTab({
+              url: '/pages/my/my',
+            })
+          }, 1000);
+        }
+      });
+    });
   },
   getGenderFromIdCard(idCard){
     return parseInt(idCard.substr(16, 1)) % 2 == 1 ? '男' : '女';
@@ -279,6 +337,41 @@ Page({
     }
 
     return birthday;
+  },
+  uploadToCloud(event) {
+    const {
+      file
+    } = event.detail;
+    wx.cloud.init();
+    const that = this;
+    if (!file) {
+      wx.showToast({
+        title: '请选择图片',
+        icon: 'none'
+      });
+    } else {
+      wx.showLoading({
+        title: '上传中...',
+      })
+      const suffix = /\.\w+$/.exec(file.url)[0];
+      wx.cloud.uploadFile({
+        cloudPath: `upload/certs/${new Date().getTime()}${suffix}`,
+        filePath: file.url, 
+        success: async (result) => {
+          that.setData({
+            certPic: result.fileID,
+            fileList: [{ url: result.fileID }]
+          });
+    
+          wx.hideLoading({
+            success: (res) => {},
+          })
+        },
+        fail: err => {
+          console.error(err);
+        }
+      });
+    }
   },
   selectAddr(){
     const that = this;

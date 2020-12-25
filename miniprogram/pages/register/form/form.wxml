@@ -7,6 +7,7 @@
       <van-field value="{{ trueName }}" required name="trueName" label="姓名" placeholder="请输入真实姓名" border="{{ false }}" />
       <van-field value="{{ pinyinLast }}" wx:if="{{!isPlogging}}" required name="pinyinLast" label="拼音姓" placeholder="如：Zhang" border="{{ false }}" />
       <van-field value="{{ pinyinFirst }}" wx:if="{{!isPlogging}}" required name="pinyinFirst" label="拼音名" placeholder="如：San" border="{{ false }}" />
+      <van-field value="{{ nation }}" required name="nation" label="国籍" placeholder="请输入国籍" border="{{ false }}" />
       <van-field value="{{ wechatId }}" wx:if="{{isPlogging}}" required name="wechatId" label="微信号" placeholder="可以被添加的微信号" border="{{ false }}" />
       <van-cell title="证件类型" required name="cardType" is-link border="{{ false }}" value="{{cardType}}" bind:click="showPicker"
         data-type="card" />
@@ -40,11 +41,10 @@
       <van-cell title="是否参加过X-Plogging" required name="plogging" border="{{ false }}" is-link value="{{plogging}}" bind:click="showPicker"
         data-type="plogging" />
     </van-cell-group>
-    <van-cell-group title="完赛资质" wx:if="{{false}}">
-      <van-cell title="完赛资质" name="file" label="请提供一年内全马成绩">
+    <van-cell-group title="完赛资质" wx:if="{{cateDetail.isCheckCert}}">
+      <van-cell title="完赛资质" name="file" label="{{cateDetail.certTitle}}">
         <view slot="">
-          <van-uploader accept="image" max-count="{{1}}" upload-text="仅限图片" file-list="{{ fileList }}"
-            bind:after-read="afterRead" />
+          <van-uploader accept="image" max-count="{{1}}" upload-text="仅限图片" bind:after-read="uploadToCloud" file-list="{{ fileList }}" />
         </view>
       </van-cell>
     </van-cell-group>

@@ -180,7 +180,8 @@ Component({
         hasFamily,
         cates: cates.filter(item=>item.type === 'individual')
       }, () => {
-        const { cateId } = this.data;
+      debugger
+        const { cateId } = that.data;
         if(cateId){
           that.selectCate(cateId);
         }

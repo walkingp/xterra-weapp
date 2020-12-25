@@ -147,5 +147,14 @@ Page({
     this.setData({
       showDatePicker: false
     })
+  },  
+  onDateConfirm(e){
+    debugger
+    console.log(e.detail);
+    this.setData({
+      birthDate: dayjs(e.detail).format("YYYY年MM月DD日"),
+      defaultBirthDate: e.detail,
+      showDatePicker: false
+    })
   },
 })

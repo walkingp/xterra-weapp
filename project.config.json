@@ -74,7 +74,7 @@
         {
           "name": "赛事列表",
           "pathName": "pages/events/events",
-          "query": "",
+          "query": "type=X-Plogging",
           "scene": null
         },
         {
@@ -170,7 +170,7 @@
         {
           "name": "报名跳转添加资料",
           "pathName": "pages/register/form/form",
-          "query": "action=add&raceId=b45a21d55fe30169000a26693c7ad4f9&cateId=21ded5cb5fe30441000a9f8512985ff7",
+          "query": "action=add&raceId=0bcbdde05fc3a636006efd9971c76de4&cateId=0bcbdde05fc3a69f006f008159baed49",
           "scene": null
         },
         {

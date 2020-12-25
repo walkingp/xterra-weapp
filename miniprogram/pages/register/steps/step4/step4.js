@@ -4,14 +4,28 @@ Component({
    * 组件的属性列表
    */
   properties: {
-
+    order: {
+      type: Object
+    }
   },
-
+  observers: {
+    'order': function (detail) {
+      if (detail && detail.id) {
+        let emails = [];
+        detail.profiles.forEach(item=> {
+          emails.push(item.email);
+        })
+        this.setData({
+          emails
+        })
+      }
+    }
+  },
   /**
    * 组件的初始数据
    */
   data: {
-
+    emails: []
   },
 
   /**
@@ -21,6 +35,7 @@ Component({
 
     redirect(e){
       const { url } = e.currentTarget.dataset;
+      app.globalData.step = 0;
       wx.navigateTo({
         url
       })

@@ -104,7 +104,7 @@
       </van-tabs>
     </view>
   </view>
-  <view wx:if="{{cates.length}}" class="bottom flex-none flex justify-center align-center">
+  <view wx:if="{{regBtnEnabled}}" class="bottom flex-none flex justify-center align-center">
     <button bindtap="register" class="button">立即报名</button>
   </view>
 </view>
