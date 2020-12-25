@@ -11,13 +11,20 @@ Page({
     races: []
   },
   async fetch(){
+    wx.showLoading({
+      title: '加载中……',
+    })
     const news = await getNewsIndexList();
     news.map(item=>{
-      item.formatDate = dayjs(new Date(item.postTime)).format("MM月DD日");
+      item.formatDate = dayjs(new Date(item.postTime)).format("YYYY年MM月DD日");
       return item;
     });
     this.setData({
       news
+    }, () => {
+      wx.hideLoading({
+        success: (res) => {},
+      })
     })
   },
 

@@ -1,5 +1,6 @@
 const { getRaceIndexList, getBannerList } = require("./../../api/race");
 const dayjs = require("dayjs");
+const { raceStatus } = require("../../config/const");
 // miniprogram/pages/index/index.js
 Page({
 
@@ -49,6 +50,10 @@ Page({
     races.map(item=>{
       item.cates = item.catesName ? item.catesName.join('/') : '/';
       item.raceDate = dayjs(new Date(item.raceDate)).format("MM月DD日");
+
+      const status = raceStatus.find(s => s.value === item.status);
+      item.status = status;
+
       return item;
     });
     const banners = await getBannerList("race");

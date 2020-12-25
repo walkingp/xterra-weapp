@@ -82,6 +82,11 @@ button.button{
   font-size: 30rpx;
   letter-spacing: 4rpx;
 }
+button.button.button-hover{
+  background-color: transparent;
+  font-weight: bold;
+  color: #DF1042;
+}
 button.button.primary{
   background-color: #DF1042!important;
   color: #fff;

@@ -12,6 +12,7 @@
 }
 .info{
   padding: 30rpx 0;
+  font-size: 24rpx;
   color: #999;
 }
 .cate {

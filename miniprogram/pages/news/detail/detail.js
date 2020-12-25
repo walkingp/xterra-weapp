@@ -30,7 +30,7 @@ Page({
     })
     const detail = await getNewsDetail(id);
     console.log(detail);
-    detail.formatDate = dayjs(new Date(detail.postTime)).format("MM月DD日");
+    detail.formatDate = dayjs(new Date(detail.postTime)).format("YYYY年MM月DD日");
     detail.content = app.towxml(detail.content,'html');
     this.setData({
       detail

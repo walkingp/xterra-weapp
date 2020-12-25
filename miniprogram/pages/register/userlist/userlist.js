@@ -10,6 +10,10 @@ Component({
   properties: {
     profiles: {
       type: Array
+    },
+    action:{
+      type: String,
+      value: 'edit'
     }
   },
 

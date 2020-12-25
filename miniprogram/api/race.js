@@ -88,7 +88,7 @@ export const getRaceCatesList = async ( raceId, size = 20) => {
   return cates;
 }
 
-export const getRaceIndexList = async ( size = 20) => {
+export const getRaceIndexList = async ( size = 40) => {
   const data = await getPaginations({
     dbName: 'race',
     orderBy: {

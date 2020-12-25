@@ -5,7 +5,7 @@
   <block wx:if="{{list.length}}">
     <navigator url="/pages/news/detail/detail?id={{item._id}}" class="item flex" wx:for="{{list}}" wx:key="_id">
       <view class="cover flex-none">
-        <image src="{{item.coverUrl}}" mode="widthFix"></image>
+        <image lazy-load="{{true}}" src="{{item.coverUrl}}" mode="widthFix"></image>
       </view>
       <view class="flex-auto flex column">
         <text class="title overflow-2">{{item.title}}</text>

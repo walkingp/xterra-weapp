@@ -10,6 +10,8 @@ Page({
    */
   data: {
     refundEnabled: true,
+    raceDetail: null,
+    raceId: null,
     id: null,
     detail: null,
     showRefundBtn: false,
@@ -49,6 +51,10 @@ Page({
     const { raceId } = detail;
     const raceDetail = await getRaceDetail(raceId);
     if(raceDetail){
+      this.setData({
+        raceDetail,
+        raceId
+      })
       const enabled = raceDetail.enabledRefund && dayjs(new Date()).isBefore(dayjs(raceDetail.refundLastDate));
       if(!enabled){
         this.setData({

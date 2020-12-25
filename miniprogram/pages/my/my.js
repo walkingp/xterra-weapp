@@ -17,6 +17,9 @@ Page({
   onLoad: function (options) {
     app.checkLogin().then(res=>{
       const { userInfo, isLogined } = res;
+      if(['男', '女'].indexOf(userInfo.gender) < 0){
+        userInfo.gender = userInfo.gender === 0 ? '男' : '女'
+      }
       this.setData({
         userInfo,
         isLogined

@@ -110,7 +110,7 @@
         {
           "name": "报名状态",
           "pathName": "pages/register/status/status",
-          "query": "id=be7fb3985fdad3180000aec81f534ab6",
+          "query": "id=023ce9555fe56500000bf3bb501f1270",
           "scene": null
         },
         {
@@ -140,7 +140,7 @@
         {
           "name": "申请退款",
           "pathName": "pages/register/refund/refund",
-          "query": "id=cc9f30fe5fd4e0a200188ffe4d0ace16",
+          "query": "id=023ce9555fe56500000bf3bb501f1270",
           "scene": null
         },
         {
@@ -171,6 +171,12 @@
           "name": "报名跳转添加资料",
           "pathName": "pages/register/form/form",
           "query": "action=add&raceId=b45a21d55fe30169000a26693c7ad4f9&cateId=21ded5cb5fe30441000a9f8512985ff7",
+          "scene": null
+        },
+        {
+          "name": "报名完成查看联系人",
+          "pathName": "pages/register/form/view/view",
+          "query": "orderId=023ce9555fe56500000bf3bb501f1270&id=92d9b75b5fd0d64e000d37f07ddab6ea",
           "scene": null
         }
       ]

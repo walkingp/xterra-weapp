@@ -41,7 +41,7 @@ Page({
     birthDate: '未选择',
     relation: '本人',
     relations: ['本人', '家人', '同事', '朋友', '其他'],
-    defaultBirthDate: new Date(1990,6,15).getTime(),
+    defaultBirthDate: new Date(1990,5,15).getTime(),
     genders: ['男', '女'],
     cardTypes: ['身份证', '护照', '军官证', '其他'],
     bloodTypes: ['O', 'A', 'B', 'AB'],
@@ -50,7 +50,8 @@ Page({
     
     minDate: new Date(1920, 1, 1).getTime(),
     maxDate: new Date().getTime(),
-    tSizes: ['XXS', 'XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL']
+    tSizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
+    isView: false
   },
   onDateConfirm(e){
     console.log(e.detail);
@@ -75,8 +76,7 @@ Page({
     });
   },
   async fetch(id){
-    const detail = await getProfileDetail(id);
-    
+    const detail = await getProfileDetail(id);   
     
     this.setData({
       detail
@@ -241,6 +241,7 @@ Page({
     this.setData({
       raceId,
       action,
+      isView: action === 'view',
       id
     });
     if(action === 'edit'){

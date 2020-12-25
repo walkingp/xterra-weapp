@@ -13,7 +13,20 @@
     </view>
     <van-icon class="flex-none" name="arrow" />
   </navigator>
-  <userlist profiles="{{detail.profiles}}" />
+  <view class="box">
+    <view class="title">报名人资料：</view>
+    <view class="list">
+      <navigator url="/pages/register/form/view/view?orderId={{id}}&id={{item._id}}" class="cell flex align-center" wx:for="{{detail.profiles}}" wx:key="_id">
+        <view class="flex-auto">
+          <text>{{item.trueName}}</text>
+          <text class="gray">（{{item.phoneNum}}）</text>
+        </view>
+        <view class="flex-none">
+          <van-icon name="arrow" />
+        </view>
+      </navigator>
+    </view>
+  </view>
   <view class="box info">
     <view class="title">报名信息：</view>
     <view class="list">
@@ -57,8 +70,8 @@
       </view>
     </view>
     <view class="ft flex justify-end align-center">
-      <button bindtap="confirmOrder" disabled="{{!showPayBtn}}" class="button mini">立即支付</button>
-      <button bindtap="redirect" disabled="{{!refundEnabled}}" data-url="/pages/register/refund/refund?id={{detail._id}}" class="button secondary mini" wx:if="{{showRefundBtn}}">申请退款</button>
+      <button bindtap="confirmOrder" wx:if="{{showPayBtn}}" class="button mini">立即支付</button>
+      <button bindtap="redirect" wx:if="{{refundEnabled}}" data-url="/pages/register/refund/refund?id={{detail._id}}" class="button secondary mini" wx:if="{{showRefundBtn}}">{{detail.raceType === 'X-Plogging' ? '取消活动' : '申请退款'}}</button>
       <button bindtap="redirect" data-url="/pages/my/registration/registration" class="button mini">我的报名</button>
     </view>
   </view>

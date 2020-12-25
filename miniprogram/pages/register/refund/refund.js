@@ -14,6 +14,7 @@ Page({
     refundMoney: 0,
     disabled: true,//仅付款成功时可退款
     policyText: null,
+    isPlogging: false,
     actions: [
       {
         name: '填错信息',
@@ -54,8 +55,22 @@ Page({
   },
 
   //退款
-  refund: function() {
-    const { detail, raceDetail, refundMoney } = this.data;
+  refund: async function() {    
+    const { detail, isPlogging, raceDetail, refundMoney } = this.data;
+    debugger
+    if(isPlogging || refundMoney === 0){
+      await updateOrderStatus({id:detail._id, ...orderStatus.refunded, refundTime: new Date() });
+      wx.showToast({
+        icon: "success",
+        title: '取消成功',
+        success: function(){
+          wx.redirectTo({
+            url: '/pages/my/registration/registration',
+          })
+        }
+      })
+      return;
+    }
     const total_fee = +detail.totalFee * 100;
     const refund_fee = refundMoney * 100;
     wx.cloud.callFunction({
@@ -97,14 +112,22 @@ Page({
     const raceDetail = await getRaceDetail(detail.raceId);
     let refundMoney = 0;
     let canRefund = false;
+    let isPlogging = false;
     if(raceDetail){
-      const { enabledRefund, refundRate, refundLastDate } = raceDetail;
+      const { enabledRefund, refundRate, refundLastDate, raceDate } = raceDetail;
       policyText = `${dayjs(refundLastDate).format('YYYY年MM月DD日')}前可申请退款${(refundRate*100).toFixed(0)}%`
       refundMoney = detail.totalFee * refundRate;
       const isDateValid = dayjs(new Date()).isBefore(dayjs(refundLastDate));
-      canRefund = enabledRefund && isDateValid;
+      const isPaied = detail.status === orderStatus.paid.status;
+      canRefund = enabledRefund && isDateValid && isPaied;
+      isPlogging = raceDetail.type === 'X-Plogging';
+      if(isPlogging){
+        policyText = 'n/a';
+        canRefund = isPaied && dayjs(new Date()).isBefore(dayjs(raceDate));
+      }
     }
     this.setData({
+      isPlogging,
       refundMoney,
       policyText,
       disabled,

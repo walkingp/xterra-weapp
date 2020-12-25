@@ -123,7 +123,7 @@ async function updateCouponStatus(id){
   }
 }
 function saveStartlist(detail){
-  const { profiles, id, orderNum, userId, userName, userInfo, status, statusText, orderType, raceId, raceTitle, racePic, cateId, cateTitle, groupType, groupText, out_trade_no } = detail;
+  const { profiles, id, orderNum, userId, userName, userInfo, status, statusText, orderType, raceId, raceDate, raceType, raceTitle, racePic, cateId, cateTitle, groupType, groupText, out_trade_no } = detail;
 
   const db = wx.cloud.database();
   profiles.forEach(async item=>{
@@ -134,7 +134,7 @@ function saveStartlist(detail){
       data: {
         ...item,
         createdAt: new Date(),
-        id, orderNum, userId, userName, userInfo, status, statusText, orderType, raceId, raceTitle, racePic, cateId, cateTitle, groupType, groupText, out_trade_no
+        id, orderNum, userId, userName, userInfo, status, statusText, orderType, raceId, raceDate, raceType, raceTitle, racePic, cateId, cateTitle, groupType, groupText, out_trade_no
       }
     });
     console.log(result)
@@ -186,7 +186,6 @@ function sendEmail(order) {
   };
   return sendRegEmail(emailTemplateType.registration.value, values);
 }
-
 
 function sendSms({ phoneNum, trueName, raceId, raceTitle, cateTitle}){
   sendRegSMS({

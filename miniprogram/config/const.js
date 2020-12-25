@@ -4,10 +4,11 @@ export const storageKey = {
 };
 
 export const raceStatus = [
-  { text: '报名中', value: 'ing', bgColor: '#49AA19', textColor: '#fff' },
-  { text: '名额已满', value: 'full', bgColor: '#444', textColor: '#fff' },
-  { text: '报名已截止', value: 'end', bgColor: '#444', textColor: '#fff' },
-  { text: '比赛已结束', value: 'expired', bgColor: '#444', textColor: '#fff' },
+  { text: '未开始报名', value: '未开始报名', bgColor: '#FCE9E3', textColor: '#EA6D44' },
+  { text: '报名中', value: '报名中', bgColor: '#E4F1F0', textColor: '#49A499' },
+  { text: '名额已满', value: '名额已满', bgColor: '#F5DBE0', textColor: '#B90B2E' },
+  { text: '报名已截止', value: '报名已截止', bgColor: '#EEEDED', textColor: '#999' },
+  { text: '比赛已结束', value: '比赛已结束', bgColor: '#EEEDED', textColor: '#999' },
 ];
 
 export const feedStatus = {

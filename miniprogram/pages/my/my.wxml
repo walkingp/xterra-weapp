@@ -10,7 +10,7 @@
             <image src="{{userInfo.avatarUrl}}" class="avatar"></image>
             <view class="info flex column space-between">
               <text class="userName">{{userInfo.nickname}}</text>
-              <text>性别：{{userInfo.gender === 0 ? '男' : '女'}}</text>
+              <text>性别：{{ userInfo.gender }}</text>
               <text>积分：0</text>
             </view>
           </view>
@@ -35,8 +35,8 @@
       <view class="list">
         <van-grid border="{{false}}">
           <van-grid-item icon="/images/icons/trophy.svg" url="/pages/my/registration/registration" text="我的报名" />
-          <van-grid-item icon="/images/icons/post.svg" url="/pages/profile/profile" text="社区发贴" />
-          <van-grid-item icon="/images/icons/doc.svg" url="/pages/community/community" text="兑换记录" />
+          <!-- <van-grid-item icon="/images/icons/post.svg" url="/pages/profile/profile" text="社区发贴" />
+          <van-grid-item icon="/images/icons/doc.svg" url="/pages/community/community" text="兑换记录" /> -->
           <van-grid-item icon="/images/icons/card.svg" url="/pages/my/profile/profile" text="报名资料" />
         </van-grid>
       </view>

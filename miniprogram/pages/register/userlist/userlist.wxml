@@ -2,7 +2,7 @@
 <view class="box">
   <view class="title">报名人资料：</view>
   <view class="list">
-    <navigator url="/pages/register/form/form?action=edit&id={{item._id}}" class="cell flex align-center" wx:for="{{profiles}}" wx:key="_id">
+    <navigator url="/pages/register/form/form?action={{action}}&id={{item._id}}" class="cell flex align-center" wx:for="{{profiles}}" wx:key="_id">
       <view class="flex-auto">
         <text>{{item.trueName}}</text>
         <text class="gray">（{{item.phoneNum}}）</text>

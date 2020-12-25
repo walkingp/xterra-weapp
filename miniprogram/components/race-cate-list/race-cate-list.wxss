@@ -31,6 +31,10 @@
 .btn{
   margin-left: 20rpx;
 }
+.btn .limit{
+  font-size: 24prx!important;
+  columns: #999!important;
+}
 .empty{
   font-size: 24rpx;
   color: #999;

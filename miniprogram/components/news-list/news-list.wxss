@@ -36,6 +36,7 @@
   color: white;
 }
 .summary{
+  padding-top: 10rpx;
   font-size: 22rpx;
   color: #999;
 }

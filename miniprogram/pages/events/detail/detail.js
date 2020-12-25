@@ -1,6 +1,7 @@
 const { getRaceDetail, getRaceCatesList, getRaceNewsList } = require("./../../../api/race");
 const dayjs = require("dayjs");
 const config = require("../../../config/config");
+const { raceStatus } = require("../../../config/const");
 const app = getApp();
 // miniprogram/pages/index/index.js
 Page({
@@ -20,7 +21,7 @@ Page({
     active: 'content',
     regBtnEnabled: false,
     pageIndex: 1,
-    pageSize: 1,
+    pageSize: 2,
     hasMoreData: true
   },
   register(){
@@ -35,6 +36,9 @@ Page({
     });
     let { active, pageIndex, pageSize } = this.data;
     const detail = await getRaceDetail(id);
+
+    const status = raceStatus.find(s => s.value === detail.status);
+    detail.status = status;
 
     console.log(detail);
     detail.cates = detail.catesName ? detail.catesName.join('/') : '/';
