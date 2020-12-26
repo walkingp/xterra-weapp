@@ -57,7 +57,6 @@ Page({
   //退款
   refund: async function() {    
     const { detail, isPlogging, raceDetail, refundMoney } = this.data;
-    debugger
     if(isPlogging || refundMoney === 0){
       await updateOrderStatus({id:detail._id, ...orderStatus.refunded, refundTime: new Date() });
       wx.showToast({

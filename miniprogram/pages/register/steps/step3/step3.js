@@ -45,7 +45,6 @@ Component({
 
   observers: {
     'order': function (detail) {
-      debugger
       if (detail && detail.id) {
         this.setData({
           type: ['越野跑', '铁人三项', '山地车'].indexOf(detail.type) < 0 ? '活动' : '赛事',
@@ -198,7 +197,6 @@ Component({
       });
       let actions = [];
       const { order } = getApp().globalData;
-      debugger;
       if(coupons.length){
         actions = coupons.map(item=> {
           return {

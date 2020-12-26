@@ -11,6 +11,7 @@ Page({
   data: {
     id: "",
     cateId: null,
+    type: 'inidividual',
     isValid: false,
     step: 0,
     group: 0,
@@ -138,9 +139,9 @@ Page({
           step
         });
       }
-      const { id, cateId } = options;
+      const { id, cateId, type } = options;
       this.setData({
-        id, cateId
+        id, cateId, type: type || 'individual'
       });
       this.fetch(id);
     }).catch(err=>{

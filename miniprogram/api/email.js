@@ -42,7 +42,6 @@ export const sendRegEmail = async (type, order) => {
     discountFee: discountFee.toString(),
     paidFee
   };
-  debugger;
   const values = Object.keys(dataSource).map(item => {
     return {
       key: `{{${item}}}`,

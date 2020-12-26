@@ -149,7 +149,6 @@ Page({
     })
   },  
   onDateConfirm(e){
-    debugger
     console.log(e.detail);
     this.setData({
       birthDate: dayjs(e.detail).format("YYYY年MM月DD日"),

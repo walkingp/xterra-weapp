@@ -34,6 +34,23 @@ export const getRaceNewsList = async ( raceId, pageIndex = 1, size = 5) => {
   return data;
 }
 
+export const getRaceCateTeamList = async ( raceId, size = 100) => {
+  const teams = await getPaginations({
+    dbName: 'registration',
+    filter: {
+      raceId,
+      groupType: 'relay',
+      status: 0
+    },
+    orderBy: {
+      addedDate: 'asc'
+    },
+    pageIndex: 1,
+    pageSize: size
+  });
+  return teams;
+};
+
 export const getRaceCatesList = async ( raceId, size = 20) => {
   const cates = await getPaginations({
     dbName: 'race-cates',

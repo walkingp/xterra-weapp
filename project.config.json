@@ -104,7 +104,7 @@
         {
           "name": "报名",
           "pathName": "pages/register/register",
-          "query": "id=0bcbdde05fc3a636006efd9971c76de4",
+          "query": "id=0bcbdde05fc3a636006efd9971c76de4&type=relay",
           "scene": null
         },
         {
@@ -177,6 +177,12 @@
           "name": "报名完成查看联系人",
           "pathName": "pages/register/form/view/view",
           "query": "orderId=023ce9555fe56500000bf3bb501f1270&id=92d9b75b5fd0d64e000d37f07ddab6ea",
+          "scene": null
+        },
+        {
+          "name": "报名成绩查询",
+          "pathName": "pages/events/query/query",
+          "query": "id=0bcbdde05fc3a636006efd9971c76de4&type=relay",
           "scene": null
         }
       ]
