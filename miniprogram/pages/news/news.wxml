@@ -1,3 +1,11 @@
 <view class="container">
-  <news-list list="{{news}}" />
+  <view class="selector">
+    <van-dropdown-menu>
+      <van-dropdown-item bind:change="onFilterChanged" data-type="type" value="{{ type }}" options="{{ types }}" />
+      <van-dropdown-item bind:change="onFilterChanged" data-type="status" value="{{ order }}" options="{{ orders }}" />
+    </van-dropdown-menu>
+  </view>
+  <view class="box list">
+    <news-list list="{{news}}" />
+  </view>
 </view>

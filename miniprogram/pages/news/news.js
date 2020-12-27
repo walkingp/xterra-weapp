@@ -8,7 +8,20 @@ Page({
    */
   data: {
     loading: false,
-    races: []
+    races: [],
+    orders: [
+      { text: '排序', value: '' },
+      { text: '按时间倒序', value: '按时间倒序' },
+      { text: '按时间正序', value: '按时间正序' }
+    ],
+    types: [
+      { text: '分类', value: '' },
+      { text: '赛事', value: '赛事' },
+      { text: '人物', value: '人物' },
+      { text: '新闻', value: '新闻' }
+    ],
+    order: '',
+    type: ''
   },
   async fetch(){
     wx.showLoading({

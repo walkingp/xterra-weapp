@@ -1,0 +1,11 @@
+.selector{
+  margin: 20rpx 0;
+  border-radius: 10rpx;
+  overflow: hidden;
+}
+.list{
+  min-height: 400rpx;
+}
+.container{
+  padding-top: 0;
+}
