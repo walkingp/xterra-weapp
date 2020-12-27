@@ -8,7 +8,7 @@
       <van-cell-group>
         <van-cell title="{{raceDetail.title}}" size="large" border="{{ false }}" />
         <van-cell title="请选择查询者" bind:click="showAction" border="{{ false }}" is-link value="{{defaultName}}" />
-        <van-field label="请输入手机号" name="phoneNum" value="{{ phoneNum }}" placeholder="请输入11位手机号" border="{{ false }}"
+        <van-field label="或者直接输入手机号" title-width="10em" name="phoneNum" value="{{ phoneNum }}" placeholder="请输入11位手机号" border="{{ false }}"
           bind:change="onChange" />
         <van-cell border="{{ false }}">
           <button form-type="submit" class="primary button block">查询</button>
@@ -17,9 +17,9 @@
     </form>
     <van-action-sheet show="{{ show }}" actions="{{ actions }}" bind:close="onClose" bind:select="onSelect" />
   </view>
-  <view class="box">
-    <van-tabs active="{{ active }}" bind:change="onChange">
-      <van-tab title="报名">
+  <view class="box result">
+    <van-tabs active="{{ type }}" bind:change="onChange">
+      <van-tab title="报名" name="registration">
         <van-cell-group wx:if="{{searchedReg}}">
           <van-cell title="姓名" border="{{ false }}" value="{{searchedReg.trueName}}" />
           <van-cell title="性别" border="{{ false }}" value="{{searchedReg.gender}}" />
@@ -32,15 +32,20 @@
           <van-empty image="search" description="没有查询到报名" />
         </block>
       </van-tab>
-      <van-tab title="成绩">
+      <van-tab title="成绩" name="result">
         <van-cell-group wx:if="{{searchResult}}">
-          <van-cell title="姓名" border="{{ false }}" value="本人" />
-          <van-cell title="性别" border="{{ false }}" value="本人" />
-          <van-cell title="组别" border="{{ false }}" value="本人" />
-          <van-cell title="号码" border="{{ false }}" value="本人" />
-          <van-cell title="完赛成绩" border="{{ false }}" value="本人" />
-          <van-cell title="组别排名" border="{{ false }}" value="本人" />
-          <van-cell title="总排名" border="{{ false }}" value="本人" />
+          <van-cell title="姓名" border="{{ false }}" value="{{searchResult.trueName}}" />
+          <van-cell title="性别" border="{{ false }}" value="{{searchResult.gender}}" />
+          <van-cell wx:if="{{!isPlogging}}" title="组别" border="{{ false }}" value="{{searchResult.cate}}" />
+          <van-cell wx:if="{{!isPlogging}}" title="号码" border="{{ false }}" value="{{searchResult.bib}}" />
+          <van-cell wx:if="{{!isPlogging}}" title="完赛成绩" border="{{ false }}" value="{{searchResult.roughTime}}" />
+          <van-cell wx:if="{{!isPlogging}}" title="净时间" border="{{ false }}" value="{{searchResult.netTime}}" />
+          <van-cell wx:if="{{!isPlogging}}" title="组别排名" border="{{ false }}" value="{{searchResult.divRank}}" />
+          <van-cell wx:if="{{!isPlogging}}" title="总排名" border="{{ false }}" value="{{searchResult.overalRank}}" />
+          <van-cell title="{{isPlogging ? '活动状态' : '完赛状态'}}" border="{{ false }}" value="{{searchResult.status}}" />
+          <van-cell border="{{ false }}">
+            <button class="primary button block">下载证书</button>
+          </van-cell>
         </van-cell-group>
         <block wx:else>
           <van-empty image="search" description="没有查询到成绩" />

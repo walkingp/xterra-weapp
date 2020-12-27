@@ -58,10 +58,13 @@ Component({
     checked: false,
     relayTeamTitle: null,
     familyTeamTitle: null,
-    radio: '1',
+    groupUserType: 'owner',
     actions: [],
     showTeams: false,
-    teamTitle: '请选择'
+    teamTitle: '请选择',
+    focus: true,
+    relayCate: null,
+    familyCate: null
   },
 
   /**
@@ -80,22 +83,29 @@ Component({
     },
     onSelectTeam(e){
       const { name } = e.detail;
+      
       this.setData({
         teamTitle: name
       })
+      
+      const agreed = this.data.checked && name !== null;
+      this.triggerEvent('onComplete', { prevEnabled: true, nextEnabled: agreed });
     },
-    onChange(event) {
+    onGroupTypeChange(event) {
+      const name = event.detail;
       this.setData({
-        radio: event.detail,
+        groupUserType: name,
+        focus: groupUserType === 'owner'
       });
       this.triggerEvent('onComplete', { prevEnabled: true, nextEnabled: false });
     },
-    onClick(event) {
+    onGroupTypeClick(event) {
       const { name } = event.currentTarget.dataset;
       this.setData({
-        radio: name,
+        groupUserType: name,
         teamTitle: '请选择'
       });
+      this.triggerEvent('onComplete', { prevEnabled: true, nextEnabled: false });
     },
     onClose(){
       this.setData({
@@ -109,7 +119,7 @@ Component({
     },
     checkAgreement(e){
       const checked = e.detail.value.length > 0;
-      const { selectedCateId, selectedGroupType, relayTeamTitle, familyTeamTitle } = this.data;
+      const { selectedCateId, selectedGroupType, relayTeamTitle, familyTeamTitle, groupUserType,teamTitle } = this.data;
       this.setData({
         checked
       });
@@ -119,7 +129,7 @@ Component({
           valid = valid && selectedCateId !== null;
           break;
         case 'relay':
-          valid = valid && !!relayTeamTitle;
+          valid = valid && (groupUserType === 'owner' ? !!relayTeamTitle : teamTitle !== '请选择');
           break;
         case 'individual':
           valid = valid && !!familyTeamTitle;
@@ -146,18 +156,32 @@ Component({
     // 团队报名
     saveTeamTitle(e){
       const { value } = e.detail;
+      if(!value){
+        return;
+      }
       const { group } = e.currentTarget.dataset;
-      const { allCates, checked } = this.data;
+      const { allCates, checked, groupUserType } = this.data;
       const relayCate = allCates.find(item=>item.type === group);
-      if(group === 'relay'){
+      if(group === 'relay'){ // 团队
+        // 此处区分团队负责和或者加入团队
+        if(groupUserType === 'owner'){
+          this.saveOrderData(relayCate, value);
+        }else if(groupUserType === 'member'){
+
+        }
         this.setData({
           relayTeamTitle: value
         });
-      }else{
+      }else{ // 家庭
+        this.saveOrderData(relayCate, value);
         this.setData({
           familyTeamTitle: value
         });
       }
+      const agreed = checked && !!value;
+      this.triggerEvent('onComplete', { prevEnabled: true, nextEnabled: agreed });
+    },
+    saveOrderData(relayCate, value){
       app.globalData.order = {
         type: this.properties.raceDetail.type,
         price: relayCate.price,
@@ -172,8 +196,6 @@ Component({
         groupType: this.data.selectedGroupType,
         groupText: this.data.selectedGroupText
       };
-      const agreed = checked && !!value;
-      this.triggerEvent('onComplete', { prevEnabled: true, nextEnabled: agreed });
     },
     selectCate(value){
       const selectedCateId = this.data.cates.findIndex(item=>item._id === value);
@@ -220,22 +242,30 @@ Component({
       } = this.properties;
       let cates = await getRaceCatesList(raceId);
 
-      const hasIndividual = cates.filter(item=>item.type === 'individual').length > 0;
       const hasRelay = cates.filter(item=>item.type === 'relay').length > 0;
       const hasFamily = cates.filter(item=>item.type === 'family').length > 0; 
+      const hasIndividual = cates.filter(item=>item.type === 'individual').length > 0;
 
       const that = this;
       console.log(cates);
       const { type } = this.properties;
       const selectedGroupText = raceGroups[type].groupText;
+
+      const relayCates = cates.slice().find(item=>item.type === 'relay');
+      const familyCates = cates.slice().find(item=>item.type === 'family');
+      
+      cates = cates.filter(item=>item.type === 'individual');
       this.setData({
         selectedGroupType: type,
         selectedGroupText,
+        focus: type === 'relay',
         allCates: cates,
         hasIndividual,
         hasRelay,
         hasFamily,
-        cates: cates.filter(item=>item.type === 'individual')
+        cates: cates.filter(item=>item.type === 'individual'),
+        relayCates,
+        familyCates
       }, () => {
         const { cateId } = that.data;
         if(cateId){

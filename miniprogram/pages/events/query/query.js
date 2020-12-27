@@ -1,5 +1,6 @@
 const { getMyProfiles, getRegistrationByPhoneNum, getRaceDetail } = require("../../../api/race");
 const dayjs = require("dayjs");
+const { searchResultByNameOrPhone } = require("../../../api/result");
 const app = getApp();
 Page({
 
@@ -9,14 +10,15 @@ Page({
   data: {
     raceId: null,
     raceDetail: null,
-    active: 0,
     show: false,
     defaultName: '请选择',
     phoneNum: '',
     profiles: [],
     actions: [],
     searchedReg: null,
-    searchResult: null
+    searchResult: null,
+    isPlogging: false,
+    type: 'registration'
   },
   onClose() {
     this.setData({ show: false });
@@ -38,6 +40,19 @@ Page({
       title: '查询中……',
     })
     const { phoneNum } = e.detail.value;
+    const { type, raceId } = this.data;
+    if(type === 'result'){
+      const searchResult = await searchResultByNameOrPhone(phoneNum, raceId);
+      console.log(searchResult)
+      this.setData({
+        searchResult
+      }, () => {
+        wx.hideLoading({
+          success: (res) => {},
+        })
+      })
+      return;
+    }
     const searchedReg = await getRegistrationByPhoneNum(phoneNum);
     console.log(searchedReg)
     searchedReg.regDate = dayjs(searchedReg.createdAt).format("YYYY-MM-DD HH:mm:ss");
@@ -85,13 +100,18 @@ Page({
     wx.showLoading({
       title: '加载中',
     })
-    const { id } = options;
-    if(id){
-      this.setData({
-        raceId: id
+    const { id, type } = options;
+
+    if(!id){
+      wx.navigateBack({
+        delta: 1,
       })
-      this.fetchRaceDetail(id);
     }
+    this.setData({
+      type,
+      raceId: id
+    })
+    this.fetchRaceDetail(id);
     app.checkLogin().then(res => {
       this.fetch();
     })
@@ -105,6 +125,7 @@ Page({
       }
     });
     this.setData({
+      isPlogging: raceDetail.type === 'X-Plogging',
       raceDetail
     })
   },

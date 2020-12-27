@@ -184,6 +184,18 @@
           "pathName": "pages/events/query/query",
           "query": "id=0bcbdde05fc3a636006efd9971c76de4&type=relay",
           "scene": null
+        },
+        {
+          "name": "报名Plogging",
+          "pathName": "pages/events/detail/detail",
+          "query": "id=b45a21d55fe30169000a26693c7ad4f9",
+          "scene": null
+        },
+        {
+          "name": "查看成绩",
+          "pathName": "pages/events/query/query",
+          "query": "id=b45a21d55fe30169000a26693c7ad4f9&type=result",
+          "scene": null
         }
       ]
     }

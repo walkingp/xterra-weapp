@@ -61,6 +61,18 @@ Page({
         if(!url.startsWith('/')){
           url = '/' + url;
         }
+        const isTabbar = url.indexOf("/pages/news/news") >= 0 || url.indexOf("pages/events/events") >= 0;
+        if(isTabbar){
+          wx.showTabBar({
+            animation: true,
+            success: ()=>{
+              wx.switchTab({
+                url,
+              })
+            }
+          })          
+          return;
+        }
         wx.navigateTo({
           url,
         });
