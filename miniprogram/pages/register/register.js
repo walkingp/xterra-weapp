@@ -179,7 +179,6 @@ Page({
   },
   
   confirmOrder: function(e) {
-    debugger
     const { order } = app.globalData;
     const that = this;
     payNow(order, () => {

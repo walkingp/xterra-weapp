@@ -1,0 +1,6 @@
+.box image{
+  width: 100%!important;
+}
+.cert{
+  min-height: 700rpx;
+}

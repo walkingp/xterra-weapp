@@ -1,0 +1,11 @@
+<view class="container">
+  <view class="box cert">
+    <image src="{{certUrl}}" mode="widthFix" wx:if="{{certUrl}}" />
+    <image bindload="onImageLoad" src="{{tempFileUrl}}" mode="widthFix" wx:else />
+  </view>
+  <van-cell border="{{ false }}">
+    <button disabled="{{!certUrl}}" bindtap="onTapImg" class="primary button block">保存到本地</button>
+  </van-cell>
+  <poster id="poster" config="{{posterConfig}}" bind:success="onPosterSuccess" bind:fail="onPosterFail">
+  </poster>
+</view>

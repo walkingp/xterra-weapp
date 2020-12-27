@@ -23,3 +23,8 @@ miniprogram-sm-crypto@^0.2.1:
   integrity sha512-ia2yxDK5W8XAmoK6/kv59l/RaNVOZisjkaNp5KtKO+dCW+gvVceI2v+kb7nJGIGeR4JcLNRSYC0/wG9mJQMqeA==
   dependencies:
     jsbn "^1.1.0"
+
+wxa-plugin-canvas@^1.1.12:
+  version "1.1.12"
+  resolved "https://registry.yarnpkg.com/wxa-plugin-canvas/-/wxa-plugin-canvas-1.1.12.tgz#639a9857e4849ca6bac3552c96d5441beb9e28f6"
+  integrity sha512-iMmGFjXYminWm/yni0n/MprSUReAQpIL9LWLsJfr0Na/pt4Chzs2VbLsEtflZx11qtrDcfM7+1eCgj1ju6TN4w==

@@ -20,7 +20,8 @@
     "pages/events/kits/kits",
     "pages/my/edit/edit",
     "pages/events/form/form",
-    "pages/register/form/view/view"
+    "pages/register/form/view/view",
+    "pages/events/cert/cert"
   ],
   "window": {
     "backgroundColor": "#ffffff",

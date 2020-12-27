@@ -129,6 +129,13 @@ Page({
       raceDetail
     })
   },
+  viewCert(e){
+    const { id } = e.currentTarget.dataset;
+    const { raceDetail } = this.data;
+    wx.navigateTo({
+      url: `/pages/events/cert/cert?raceId=${raceDetail._id}&id=${id}`,
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

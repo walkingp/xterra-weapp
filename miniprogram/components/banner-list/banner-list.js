@@ -39,7 +39,6 @@ Component({
           });
           break;
         case 'navigate':
-          debugger
           if(!url.startsWith('/')){
             url = '/' + url;
           }
