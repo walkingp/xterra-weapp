@@ -2,11 +2,12 @@
   <form bindsubmit="saveData" class="list">
     <van-cell-group title="优惠券信息">
       <van-field required name="title" label="优惠券名称" value="优惠券" placeholder="优惠券名称，如：卢湾跑团专属优惠券" border="{{ false }}" />
-      <van-cell value="{{ type }}" required name="type" is-link bind:click="onShowAction" label="优惠券类型" border="{{ false }}" />
+      <van-cell value="{{ type }}" required name="type" data-type="type" is-link bind:click="onShowAction" label="优惠券类型" border="{{ false }}" />
       <van-field required name="value" value="{{0}}" label="价格金额" type="digit" placeholder="0表示可全额抵扣" border="{{ false }}" />
       <van-field required name="num" label="生成数量" value="{{1}}" type="digit" placeholder="如一次生成10张优惠券" border="{{ false }}" />
-      <van-cell value="{{ expiredDate }}" required name="expiredDate" is-link bind:click="showDate" label="过期时间"
-        border="{{ false }}" />
+      <van-cell value="{{ expiredDate }}" required name="expiredDate" is-link bind:click="showDate" label="过期时间" border="{{ false }}" />
+      <van-cell value="{{ race }}" name="race" data-type="race" is-link bind:click="onShowAction" label="可使用比赛" border="{{ false }}" />
+      <van-cell value="{{ cate }}" name="cate" data-type="cate" is-link bind:click="onShowAction" label="可使用组别" border="{{ false }}" />
     </van-cell-group>
     <van-cell-group>
       <van-cell><button type="primary" class="button" form-type="submit">立即生成</button></van-cell>
@@ -38,6 +39,8 @@
     <van-cell title="是否有效" value="{{detail.isActive}}" border="{{ false }}" />
     <van-cell title="过期时间" value="{{detail.expiredDate}}" border="{{ false }}" />
     <van-cell title="价格金额" value="{{detail.value}}" border="{{ false }}" />
+    <van-cell title="可使用比赛" value="{{detail.raceTitle}}" border="{{ false }}" />
+    <van-cell title="可使用组别" value="{{detail.cateTitle}}" border="{{ false }}" />
     <van-cell title="是否已使用" value="{{detail.isUsed}}" border="{{ false }}" />
     <van-cell title="指派给" value="{{detail.assignedTrueName}}" border="{{ false }}" />
     <van-cell title="使用时间" value="{{detail.usedTime}}" border="{{ false }}" />

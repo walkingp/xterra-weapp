@@ -1,6 +1,7 @@
 // miniprogram/pages/admin/coupon/coupon.js
 const dayjs = require("dayjs");
-const { getCouponList, getCouponDetail } = require("../../../api/coupon");
+const { getCouponList, getCouponDetail, } = require("../../../api/coupon");
+const { fetchNotFreeRaces, fetchNotFreeCates } = require("../../../api/race");
 const app = getApp();
 Page({
 
@@ -18,7 +19,11 @@ Page({
     coupons: [],
     detail: null,
     showDetail: false,
-    actions: [
+    selectedRaceId: null,
+    selectedCateId: null,
+    actionType: null,
+    actions: [],
+    types: [
       {
         name: '全额抵扣券',
         value: 'free'
@@ -26,7 +31,9 @@ Page({
         name: '减免券',
         value: 'partial'
       }
-    ]
+    ],
+    race: '不限制',
+    cate: '不限制'
   },
   async showDetail(e){
     const { id } = e.currentTarget.dataset;
@@ -49,7 +56,7 @@ Page({
   },
   saveData(e){
     const { value } = e.detail;
-    const { typeValue, expiredDate } = this.data;
+    const { typeValue, expiredDate, selectedCateId, selectedRaceId, race, cate } = this.data;
     const { title} = value;
     const num = +value.num;
     if(typeValue === ''){
@@ -88,7 +95,11 @@ Page({
         expiredDate,
         value: + value.value,
         expiredDate,
-        type: typeValue
+        type: typeValue,
+        raceId: selectedRaceId,
+        cateId: selectedCateId,
+        raceTitle: race,
+        cateTitle: cate
       }
     }).then(res => {
       wx.showToast({
@@ -104,9 +115,31 @@ Page({
       })
     })
   },
-  onShowAction(){
+  onShowAction(e){
+    const { type } = e.currentTarget.dataset;
+    const { types, races, cates } = this.data;
+    switch(type){
+      case 'type':
+        this.setData({
+          actions: types,
+          showAction: true
+        })
+        break;
+      case 'race':
+        this.setData({
+          actions: races,
+          showAction: true
+        })
+        break;
+      case 'cate':
+        this.setData({
+          actions: cates,
+          showAction: true
+        })
+        break;
+    }
     this.setData({
-      showAction: true
+      actionType: type
     })
   },
   onClose() {
@@ -115,10 +148,29 @@ Page({
 
   onSelect(e) {
     const { name, value } = e.detail;
-    this.setData({
-      type: name,
-      typeValue: value
-    })
+    const { actionType } = this.data;
+    switch(actionType){
+      case 'type':
+        this.setData({
+          type: name,
+          typeValue: value
+        })
+        break;
+      case 'race':
+        this.setData({
+          race: name,
+          selectedRaceId: value
+        }, () => {
+          this.fetchCates();
+        })
+        break;
+      case 'cate':
+        this.setData({
+          cate: name,
+          selectedCateId: value
+        })
+        break;
+    }
   },
   /**
    * 生命周期函数--监听页面加载
@@ -136,16 +188,42 @@ Page({
     });
     this.fetch();
   },
+  async fetchRaces(){
+    let races = await fetchNotFreeRaces();
+    races = races.map(item=>{
+      return {
+        name: item.title,
+        value: item._id
+      }
+    });
+    this.setData({
+      races
+    })
+  },
+  async fetchCates(){
+    const { selectedRaceId } = this.data;
+    let cates = await fetchNotFreeCates(selectedRaceId);
+    cates = cates.map(item=>{
+      return {
+        name: item.title,
+        value: item._id
+      }
+    });
+    this.setData({
+      cates
+    })
+  },
   async fetch(){
     const coupons = await getCouponList();
-    const { actions } = this.data;
+    const { types } = this.data;
     coupons.map(item=>{
-      item.typeText = actions.find(a=>a.value === item.type).name;
+      item.typeText = types.find(a=>a.value === item.type).name;
       return item;
     })
     this.setData({
       coupons
     })
+    this.fetchRaces();
   },
 
   /**

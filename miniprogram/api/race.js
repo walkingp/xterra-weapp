@@ -182,6 +182,38 @@ export const getMyCoupons = async (userId, size = 100) => {
   return data;
 }
 
+export const fetchNotFreeRaces = async (size = 50) => {
+  const data = await getPaginations({
+    dbName: 'race',
+    filter: {
+      feeType: '收费',
+      //isActive: true
+    },
+    orderBy: {
+      addedDate: 'desc'
+    },
+    pageIndex: 1,
+    pageSize: size
+  })
+  return data;
+};
+
+export const fetchNotFreeCates = async (raceId, size = 50) => {
+  const db = wx.cloud.database();
+  const _ = db.command;
+  const data = await getPaginations({
+    dbName: 'race-cates',
+    filter: {
+      raceId,
+      regPrice: _.gt(0),
+      isActive: true
+    },
+    pageIndex: 1,
+    pageSize: size
+  })
+  return data;
+};
+
 export const getMyRegistrations = async (userId, size = 100) => {
   const data = await getPaginations({
     dbName: 'registration',

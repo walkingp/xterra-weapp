@@ -91,6 +91,22 @@ Component({
         });
         return;
       }
+      // 与赛事组别不符
+      const { raceId, cateId } = this.data._order;
+      if(detail.raceId && detail.raceId !== raceId){
+        wx.showToast({
+          title: '当前比赛不可使用',
+          icon: 'none'
+        });
+        return;
+      }
+      if(detail.cateId && detail.cateId !== cateId){
+        wx.showToast({
+          title: '当前组别不可使用',
+          icon: 'none'
+        });
+        return;
+      }
     },
     async addCoupon(e){
       wx.showLoading({
