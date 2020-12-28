@@ -48,9 +48,19 @@
       <view class="list">
         <van-grid border="{{false}}">
           <van-grid-item icon="/images/icons/call.svg" url="/pages/page/page?id=contact" text="联系我们" />
-          <van-grid-item icon=" /images/icons/help.svg" url="/pages/page/page?id=help" text="帮助中心" />
+          <van-grid-item icon="/images/icons/help.svg" url="/pages/page/page?id=help" text="帮助中心" />
           <van-grid-item icon="/images/icons/building.svg" url="/pages/page/page?id=about" text="关于XTERRA" />
           <van-grid-item icon="/images/icons/doc.svg" url="/pages/page/page?id=rule" text="积分规则" />
+        </van-grid>
+      </view>
+    </view>
+    <view class="box admin">
+      <view class="flex space-between">
+        <text class="hd">管理员专用</text>
+      </view>
+      <view class="list">
+        <van-grid border="{{false}}">
+          <van-grid-item icon="coupon-o" url="/pages/admin/coupon/coupon" text="生成优惠券" />
         </van-grid>
       </view>
     </view>

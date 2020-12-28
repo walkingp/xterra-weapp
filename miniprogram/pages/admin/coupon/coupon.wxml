@@ -1,0 +1,46 @@
+<view class="container">
+  <form bindsubmit="saveData" class="list">
+    <van-cell-group title="优惠券信息">
+      <van-field required name="title" label="优惠券名称" value="优惠券" placeholder="优惠券名称，如：卢湾跑团专属优惠券" border="{{ false }}" />
+      <van-cell value="{{ type }}" required name="type" is-link bind:click="onShowAction" label="优惠券类型" border="{{ false }}" />
+      <van-field required name="value" value="{{0}}" label="价格金额" type="digit" placeholder="0表示可全额抵扣" border="{{ false }}" />
+      <van-field required name="num" label="生成数量" value="{{1}}" type="digit" placeholder="如一次生成10张优惠券" border="{{ false }}" />
+      <van-cell value="{{ expiredDate }}" required name="expiredDate" is-link bind:click="showDate" label="过期时间"
+        border="{{ false }}" />
+    </van-cell-group>
+    <van-cell-group>
+      <van-cell><button type="primary" class="button" form-type="submit">立即生成</button></van-cell>
+    </van-cell-group>
+  </form>
+  <view class="box">
+    <van-cell-group title="优惠券">
+      <van-cell wx:for="{{coupons}}" bind:click="showDetail" data-id="{{item._id}}" is-link wx:key="_id" title="{{item.coupon}}({{item.typeText}})" value="{{item.isUsed ? '已使用' : '未使用'}}" />
+    </van-cell-group>
+  </view>
+</view>
+
+<van-action-sheet show="{{ showAction }}" actions="{{ actions }}" cancel-text="取消" bind:close="onClose" bind:cancel="onClose" bind:select="onSelect" />
+<van-popup show="{{ showDatePicker }}" position="bottom" bind:close="onClose" data-type="date">
+  <van-datetime-picker type="date" value="{{ defaultBirthDate }}" min-date="{{ minDate }}" bind:cancel="onDateCancel"
+    max-date="{{ maxDate }}" bind:confirm="onDateConfirm" />
+</van-popup>
+<van-popup
+  show="{{ showDetail }}"
+  closeable
+  position="bottom"
+  bind:close="onCloseDetail">
+  <van-cell-group title="优惠券明细">
+    <van-cell title="标题" value="{{detail.title}}" border="{{ false }}" />
+    <van-cell title="类型" value="{{detail.type}}" border="{{ false }}" />
+    <van-cell title="优惠券代码" value="{{detail.coupon}}" border="{{ false }}" />
+    <van-cell title="描述" value="{{detail.desc}}" border="{{ false }}" />
+    <van-cell title="来源" value="{{detail.source}}" border="{{ false }}" />
+    <van-cell title="是否有效" value="{{detail.isActive}}" border="{{ false }}" />
+    <van-cell title="过期时间" value="{{detail.expiredDate}}" border="{{ false }}" />
+    <van-cell title="价格金额" value="{{detail.value}}" border="{{ false }}" />
+    <van-cell title="是否已使用" value="{{detail.isUsed}}" border="{{ false }}" />
+    <van-cell title="指派给" value="{{detail.assignedTrueName}}" border="{{ false }}" />
+    <van-cell title="使用时间" value="{{detail.usedTime}}" border="{{ false }}" />
+    <van-cell title="使用人" value="{{detail.trueName}}" border="{{ false }}" />
+  </van-cell-group>
+  </van-popup>

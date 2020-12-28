@@ -1,0 +1,5 @@
+/* miniprogram/pages/admin/coupon/coupon.wxss */
+.box{
+  padding: 0;
+  margin-top: 20rpx;
+}

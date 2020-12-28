@@ -21,7 +21,8 @@
     "pages/my/edit/edit",
     "pages/events/form/form",
     "pages/register/form/view/view",
-    "pages/events/cert/cert"
+    "pages/events/cert/cert",
+    "pages/admin/coupon/coupon"
   ],
   "window": {
     "backgroundColor": "#ffffff",
