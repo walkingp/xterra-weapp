@@ -1,14 +1,14 @@
 <van-tabs active="{{ active }}" bind:change="onChange">
   <van-tab title="全部报名">
-    <reg-list list="{{regs}}" />
+    <reg-list bind:onRemoved="onRemoved" list="{{regs}}" />
   </van-tab>
   <van-tab title="已完成">
-    <reg-list list="{{regsFinished}}" />
+    <reg-list bind:onRemoved="onRemoved" list="{{regsFinished}}" />
   </van-tab>
   <van-tab title="待付款">
-    <reg-list list="{{regsFailed}}" />
+    <reg-list bind:onRemoved="onRemoved" list="{{regsFailed}}" />
   </van-tab>
   <van-tab title="已取消">
-    <reg-list list="{{regsWithdrew}}" />
+    <reg-list bind:onRemoved="onRemoved" list="{{regsWithdrew}}" />
   </van-tab>
 </van-tabs>

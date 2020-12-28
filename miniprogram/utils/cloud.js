@@ -50,6 +50,37 @@ export const getCollectionById = (args) => {
   })
 }
 
+export const removeCollectionById = (args) => {
+  const { dbName, id } = args;
+  return new Promise(async (resolve, reject) => {
+    await wx.cloud.database().collection(dbName).doc(id).remove({
+      success: function(res){
+        resolve(res.stats.removed);
+      }
+    }).catch(err=>{
+      reject(err)
+    });
+  })
+}
+
+export const hideCollectionById = (args) => {
+  const { dbName, id } = args;
+  return new Promise(async (resolve, reject) => {
+    try{
+      await wx.cloud.database().collection(dbName).doc(id).update({
+        data: {
+          isActive: false
+        },
+        success: function(res){
+          resolve(res.stats);
+        }
+      })
+    } catch(e) {
+      reject(e)
+    }
+  })
+}
+
 export const getSingleCollectionByWhere = async arg => {
   const data = await getCollectionByWhere(arg);
   return data.length ? data[0] : null;

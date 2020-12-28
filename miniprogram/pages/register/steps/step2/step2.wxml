@@ -4,7 +4,8 @@
   <checkbox-group bindchange="checkboxChanged">
     <view class="item flex align-center space-between" wx:for="{{profiles}}" wx:key="_id">
       <view class="flex-auto flex align-center">
-        <checkbox id="i{{index}}" value="{{item._id}}" />
+        <checkbox id="i{{index}}" value="{{item._id}}" wx:if="{{item.registered}}" disabled="{{true}}" />
+        <checkbox id="i{{index}}" value="{{item._id}}" wx:else />
         <label class="hd" for="i{{index}}">{{item.trueName}}</label>
         <label for="i{{index}}" class="label">({{item.relation}})</label>
         <label for="i{{index}}" class="label gender">{{item.gender}}</label>

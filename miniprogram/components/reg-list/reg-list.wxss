@@ -9,6 +9,7 @@
 }
 .gray{
   color: #999;
+  padding-left: 10rpx;
 }
 .bd{
   padding: 20rpx 0;

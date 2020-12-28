@@ -1,5 +1,5 @@
 const {
-  getMyProfiles
+  getMyProfilesWithCate, checkIsRegistered
 } = require("../../../../api/race")
 const app = getApp();
 // pages/register/userlist/userlist.js
@@ -11,10 +11,8 @@ Component({
     raceId: {
       type: String
     },
-    cateId: {
-      type: String
-    },
   },
+
 
   /**
    * 组件的初始数据
@@ -38,7 +36,9 @@ Component({
       })
       app.checkLogin().then(async res => {
         const { userId } = res;
-        const profiles = await getMyProfiles(userId);
+        const { cateId } = app.globalData.order;
+        let profiles = await getMyProfilesWithCate(userId, cateId);
+        console.log(profiles)
         this.setData({
           profiles
         }, () => {

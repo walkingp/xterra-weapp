@@ -3,8 +3,11 @@
     <navigator url="/pages/register/status/status?id={{item._id}}" class="item flex column" wx:for="{{list}}"
       wx:key="_id">
       <view class="hd flex space-between align-center">
-        <text class="title">{{item.raceTitle}}</text>
-        <text class="gray">{{item.regDate}}</text>
+        <view class="flex align-center">
+          <text class="title">{{item.raceTitle}}</text>
+          <text class="gray">{{item.regDate}}</text>
+        </view>
+        <van-icon catchtap="onShowDelete" data-id="{{item._id}}" name="ellipsis" />
       </view>
       <view class="flex align-center bd">
         <view class="cover flex-none">
@@ -34,11 +37,15 @@
   </view>
 </block>
 <block wx:else>
-<view class="box">
-  <van-empty
-  class="custom-image"
-  image="/images/empty@2x.png"
-  description="暂无数据"
-/>
-</view>
+  <view class="box">
+    <van-empty class="custom-image" image="/images/empty@2x.png" description="暂无数据" />
+  </view>
 </block>
+<van-action-sheet
+  show="{{ show }}"
+  actions="{{ actions }}"
+  bind:close="onClose"
+  bind:cancel="onClose"
+  bind:select="onSelect"
+  cancel-text="取消"
+/>

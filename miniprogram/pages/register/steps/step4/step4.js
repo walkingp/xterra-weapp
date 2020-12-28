@@ -1,3 +1,4 @@
+const app = getApp();
 // pages/register/steps/step4/step4.js
 Component({
   /**

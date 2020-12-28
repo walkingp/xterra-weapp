@@ -1,4 +1,4 @@
-import { getPaginations, getCollectionById, getCollectionByWhere, getSingleCollectionByWhere } from "../utils/cloud"
+import { getPaginations, getCollectionById, getCollectionByWhere, getSingleCollectionByWhere, hideCollectionById } from "../utils/cloud"
 const dayjs = require("dayjs");
 
 export const getBannerList = async ( position = 'index', size = 5) => {
@@ -15,6 +15,11 @@ export const getBannerList = async ( position = 'index', size = 5) => {
     pageSize: size
   })
   return data;
+}
+
+export const checkIsRegistered = async (cateId, profileId) => {
+  const existed = await getSingleCollectionByWhere({ dbName: 'start-list', filter: { cateId, profileId }});
+  return existed ? true : false;
 }
 
 export const getRaceNewsList = async ( raceId, pageIndex = 1, size = 5) => {
@@ -135,6 +140,33 @@ export const getMyProfiles = async (userId, size = 20) => {
   return data;
 }
 
+export const getMyProfilesWithCate = async (userId, cateId, size = 20) => {
+  const data = await getPaginations({
+    dbName: 'profile',
+    filter: {
+      userId,
+    },
+    orderBy: {
+      createdAt: 'desc'
+    },
+    pageIndex: 1,
+    pageSize: size
+  })
+  await Promise.all(
+    data.map(async item => {
+      const registered = await checkIsRegistered(cateId, item._id)
+      item.registered = registered;
+      return item;
+    })
+  ) 
+  return data;
+}
+
+export const removeRegistration = async id => {
+  const data = await hideCollectionById({ dbName: 'registration', id })
+  return data;
+}
+
 export const getMyCoupons = async (userId, size = 100) => {
   const data = await getPaginations({
     dbName: 'coupon',
@@ -155,6 +187,7 @@ export const getMyRegistrations = async (userId, size = 100) => {
     dbName: 'registration',
     filter: {
       userId,
+      isActive: true
     },
     orderBy: {
       addedDate: 'desc'

@@ -128,13 +128,13 @@ function saveStartlist(detail){
   const db = wx.cloud.database();
   profiles.forEach(async item=>{
     delete item._openid;
-    delete item._id;
+    const profileId = item._id;
     console.log(item);
     const result = await db.collection("start-list").add({
       data: {
         ...item,
         createdAt: new Date(),
-        id, orderNum, userId, userName, userInfo, status, statusText, orderType, raceId, raceDate, raceType, raceTitle, racePic, cateId, cateTitle, groupType, groupText, out_trade_no
+        id, orderNum, profileId, userId, userName, userInfo, status, statusText, orderType, raceId, raceDate, raceType, raceTitle, racePic, cateId, cateTitle, groupType, groupText, out_trade_no
       }
     });
     console.log(result)
