@@ -1,6 +1,7 @@
 const { getRaceIndexList, getBannerList } = require("./../../api/race");
 const dayjs = require("dayjs");
 const { raceStatus } = require("../../config/const");
+const app = getApp();
 // miniprogram/pages/index/index.js
 Page({
 
@@ -30,7 +31,7 @@ Page({
       { text: '比赛已结束', value: '比赛已结束' },
     ],
     types: [
-      { text: '运动类型', value: '' },
+      { text: '活动类型', value: '' },
       { text: '铁人三项', value: '铁人三项' },
       { text: '越野跑', value: '越野跑' },
       { text: '山地车', value: '山地车' },
@@ -120,7 +121,21 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    const { region, status, type } = options;
+    let { region, status, type } = options;
+    const { tabBarLink } = app.globalData;
+    if(tabBarLink){
+      const args = tabBarLink.substr(tabBarLink.indexOf('?')+1);
+      const arr = args.split('&');
+      arr.forEach(item => {
+        const keys = item.split('=');
+        let obj = {};
+        obj[keys[0]] = keys[1];
+        if(keys[0] === 'type'){
+          type = keys[1];
+        }
+      })
+      app.globalData.tabBarLink = null;
+    }
     this.setData({
       region, status, type
     })

@@ -89,7 +89,7 @@ Page({
     this.setData({
       detail
     });
-    const { certPic, relation, nation, trueName, cardType, gender, birthDate, bloodType, tSize, region, addr, cardNo, contactUser, contactUserPhone, email, phoneNum } = detail;
+    const { certPic, relation, club, nation, trueName, cardType, gender, birthDate, bloodType, tSize, region, addr, cardNo, contactUser, contactUserPhone, email, phoneNum } = detail;
     if(certPic){
       this.setData({
         fileList: [
@@ -100,16 +100,16 @@ Page({
       })
     }
     this.setData({
-      certPic, relation: relation || '本人', nation, trueName, cardType, gender, birthDate: dayjs(birthDate).format("YYYY-MM-DD"), bloodType, tSize, region, addr, cardNo, contactUser, contactUserPhone, email, phoneNum
+      certPic, relation: relation || '本人', club, nation, trueName, cardType, gender, birthDate: dayjs(birthDate).format("YYYY-MM-DD"), bloodType, tSize, region, addr, cardNo, contactUser, contactUserPhone, email, phoneNum
     })
     
   },
 
   async fetchMyProfiles(userId){
     const myProfiles = await getMyProfiles(userId);
-    let { relation, relations } = this.data;
+    let { relation, relations, action } = this.data;
     const existedMe = myProfiles.find(item => item.relation === '本人');
-    if(existedMe){
+    if(existedMe && action !== 'edit'){
       relation = '其他';
       relations.splice(0, 1);
       this.setData({

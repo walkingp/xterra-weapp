@@ -44,12 +44,20 @@
           <van-cell wx:if="{{!isPlogging}}" title="总排名" border="{{ false }}" value="{{searchResult.overalRank}}" />
           <van-cell title="{{isPlogging ? '活动状态' : '完赛状态'}}" border="{{ false }}" value="{{searchResult.status}}" />
           <van-cell border="{{ false }}">
-            <button data-id="{{searchResult._id}}" bindtap="viewCert" class="primary button block">下载证书</button>
+            <button data-id="{{searchResult._id}}" plain bindtap="viewCert" class="button block">下载证书</button>
           </van-cell>
         </van-cell-group>
         <block wx:else>
           <van-empty image="search" description="没有查询到成绩" />
         </block>
+      </van-tab>
+      <van-tab title="管理员" name="admin" wx:if="{{isPlogging && isAdmin}}">
+        <van-cell-group>
+          <van-cell border="{{ false }}">
+            <button plain bindtap="viewCert" bindtap="batchDone" class="button block">一键设置全部完成</button>
+          </van-cell>
+          <van-cell wx:for="{{users}}" wx:key="_id" is-link title="{{item.trueName}}" value="状态未知" />
+        </van-cell-group>
       </van-tab>
     </van-tabs>
   </view>

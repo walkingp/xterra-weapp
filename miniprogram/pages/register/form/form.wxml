@@ -15,9 +15,10 @@
         border="{{ false }}" />
       <van-cell title="性别" name="gender" required is-link border="{{ false }}" value="{{gender}}" bind:click="showPicker"
         data-type="gender" />
-        <van-field value="{{ phoneNum }}" required name="phoneNum" label="手机号" placeholder="请输入手机号" border="{{ false }}" />
-        <van-cell value="{{ birthDate }}" required name="birthDate" is-link bind:click="showDate" label="出生日期" border="{{ false }}" />
+      <van-field value="{{ phoneNum }}" required name="phoneNum" label="手机号" placeholder="请输入手机号" border="{{ false }}" />
+      <van-cell value="{{ birthDate }}" required name="birthDate" is-link bind:click="showDate" label="出生日期" border="{{ false }}" />
       <van-field value="{{ email }}" required name="email" label="邮箱" placeholder="请输入邮箱，用于接收报名邮件" border="{{ false }}" />
+      <van-field value="{{ club }}" required name="club" label="所属俱乐部" placeholder="请输入俱乐部名称" border="{{ false }}" />
     </van-cell-group>
     <van-cell-group title="其他信息">
       <van-cell title="血型" wx:if="{{!isPlogging}}" required name="bloodType" border="{{ false }}" is-link value="{{bloodType}}" bind:click="showPicker"

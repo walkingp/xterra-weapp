@@ -8,11 +8,12 @@ Page({
    */
   data: {
     loading: false,
-    races: [],
+    news: [],
+    allNews: [],
     orders: [
       { text: '排序', value: '' },
-      { text: '按时间倒序', value: '按时间倒序' },
-      { text: '按时间正序', value: '按时间正序' }
+      { text: '按时间倒序', value: 'desc' },
+      { text: '按时间正序', value: 'asc' }
     ],
     types: [
       { text: '分类', value: '' },
@@ -20,8 +21,29 @@ Page({
       { text: '人物', value: '人物' },
       { text: '新闻', value: '新闻' }
     ],
-    order: '',
+    order: 'desc',
     type: ''
+  },
+  onFilterChanged(e){
+    const { type } = e.currentTarget.dataset;
+    const value = e.detail;
+    let order = '',  _type = '';
+    switch(type){
+      case 'order':
+        order = value;
+        break;
+      case 'type':
+        _type = value;
+        break;
+    }
+    const { allNews } = this.data;
+    const news = _type !== "" ? allNews.filter(item => item.cate === _type) : allNews;
+    news.sort((a,b) => {
+      return order === 'asc' ? a.postTime - b.postTime : b.postTime - a.postTime;
+    })
+    this.setData({
+      news
+    });
   },
   async fetch(){
     wx.showLoading({
@@ -33,6 +55,7 @@ Page({
       return item;
     });
     this.setData({
+      allNews: news,
       news
     }, () => {
       wx.hideLoading({

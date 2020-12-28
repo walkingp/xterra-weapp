@@ -1,6 +1,6 @@
 import { getCollectionById, getPaginations } from "../utils/cloud"
 
-export const getNewsIndexList = async (pageIndex = 1, pageSize = 10) => {
+export const getNewsIndexList = async ( order = 'desc', pageIndex = 1, pageSize = 100) => {
   const data = await getPaginations({
     dbName: 'news',
     filter: {
@@ -8,7 +8,7 @@ export const getNewsIndexList = async (pageIndex = 1, pageSize = 10) => {
     },
     orderBy: {
       order: 'desc',
-      _createdTime: 'desc'
+      postTime: order
     },
     pageIndex,
     pageSize

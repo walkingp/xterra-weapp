@@ -108,6 +108,9 @@ export const getRaceCatesList = async ( raceId, size = 20) => {
 export const getRaceIndexList = async ( size = 40) => {
   const data = await getPaginations({
     dbName: 'race',
+    filter: {
+      isActive: true
+    },
     orderBy: {
       raceDate: 'desc'
     },
@@ -203,6 +206,11 @@ export const getRegistrationByOrderNum = async orderNum => {
 export const getRegistrationByPhoneNum = async phoneNum => {
   const data = await getCollectionByWhere({ dbName: 'start-list', filter: { phoneNum } });
   return data.length ? data[0] : null;
+}
+
+export const getStartedUsersByRaceId = async raceId => {
+  const data = await getCollectionByWhere({ dbName: 'start-list', filter: { raceId } });
+  return data;
 }
 
 export const getRaceDetail = async id => {

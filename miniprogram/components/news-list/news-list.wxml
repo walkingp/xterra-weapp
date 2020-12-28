@@ -3,7 +3,7 @@
 </block>
 <block wx:else>
   <block wx:if="{{list.length}}">
-    <navigator url="/pages/news/detail/detail?id={{item._id}}" class="item flex" wx:for="{{list}}" wx:key="_id">
+    <view bindtap="redirect" data-wechaturl="{{item.wechatUrl}}" data-url="/pages/news/detail/detail?id={{item._id}}" class="item flex" wx:for="{{list}}" wx:key="_id">
       <view class="cover flex-none">
         <image lazy-load="{{true}}" src="{{item.coverUrl}}" mode="widthFix"></image>
       </view>
@@ -15,6 +15,6 @@
           <text class="date text-gray">{{item.formatDate}}</text>
         </view>
       </view>
-    </navigator>
+    </view>
   </block>
 </block>

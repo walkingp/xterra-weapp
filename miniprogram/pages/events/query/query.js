@@ -1,4 +1,4 @@
-const { getMyProfiles, getRegistrationByPhoneNum, getRaceDetail } = require("../../../api/race");
+const { getMyProfiles, getRegistrationByPhoneNum, getRaceDetail, getStartedUsersByRaceId } = require("../../../api/race");
 const dayjs = require("dayjs");
 const { searchResultByNameOrPhone } = require("../../../api/result");
 const app = getApp();
@@ -18,7 +18,9 @@ Page({
     searchedReg: null,
     searchResult: null,
     isPlogging: false,
-    type: 'registration'
+    type: 'registration',
+    isAdmin: false,
+    users: []
   },
   onClose() {
     this.setData({ show: false });
@@ -34,6 +36,9 @@ Page({
     this.setData({
       phoneNum: name === '自定义...' ? '' : phoneNum
     })
+  },
+  batchDone(){
+
   },
   async query(e){
     wx.showLoading({
@@ -93,6 +98,26 @@ Page({
       })
     });
   },
+  onChange(e){
+    const { name } = e.detail;
+    if(name === 'admin'){
+      this.fetchStartedUsers();
+    }
+  },
+  async fetchStartedUsers(){
+    wx.showLoading({
+      title: '加载中……',
+    })
+    const { raceId } = this.data;
+    const users = await getStartedUsersByRaceId(raceId);
+    this.setData({
+      users
+    }, () => {
+      wx.hideLoading({
+        success: (res) => {},
+      })
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -113,6 +138,10 @@ Page({
     })
     this.fetchRaceDetail(id);
     app.checkLogin().then(res => {
+      const isAdmin = res.userInfo.role === 'admin';
+      this.setData({
+        isAdmin
+      })
       this.fetch();
     })
   },

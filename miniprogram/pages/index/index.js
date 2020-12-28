@@ -1,6 +1,7 @@
 const {
   getBannerList
 } = require("../../api/race");
+const app = getApp();
 const {
   getNewsIndexList
 } = require("../../api/news");
@@ -47,7 +48,7 @@ Page({
     })
   },
   tap(e){
-    const { src, type, url } = e.currentTarget.dataset;
+    let { src, type, url } = e.currentTarget.dataset;
     const { banners } = this.data;
     const urls = banners.map(item=>item.picUrl);
     switch(type){
@@ -63,6 +64,7 @@ Page({
         }
         const isTabbar = url.indexOf("/pages/news/news") >= 0 || url.indexOf("pages/events/events") >= 0;
         if(isTabbar){
+          app.globalData.tabBarLink = url;
           wx.showTabBar({
             animation: true,
             success: ()=>{

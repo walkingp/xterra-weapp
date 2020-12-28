@@ -29,11 +29,11 @@
 }
 .cate{
   border-radius: 20rpx;
-  background-color: #DD312C;
   padding: 5rpx 20rpx;
   margin-right: 10rpx;
   font-size: 24rpx;
-  color: white;
+  background-color: #E4F1F0;
+  color: #49A499;
 }
 .summary{
   padding-top: 10rpx;

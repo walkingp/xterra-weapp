@@ -102,16 +102,16 @@
         "selectedIconPath": "images/tabs/home_fill@2x.png"
       },
       {
+        "pagePath": "pages/events/events",
+        "text": "活动",
+        "iconPath": "images/tabs/events@2x.png",
+        "selectedIconPath": "images/tabs/events_fill@2x.png"
+      },
+      {
         "pagePath": "pages/news/news",
         "text": "媒体中心",
         "iconPath": "images/tabs/community@2x.png",
         "selectedIconPath": "images/tabs/community_fill@2x.png"
-      },
-      {
-        "pagePath": "pages/events/events",
-        "text": "赛事活动",
-        "iconPath": "images/tabs/events@2x.png",
-        "selectedIconPath": "images/tabs/events_fill@2x.png"
       },
       {
         "pagePath": "pages/my/my",

@@ -1,5 +1,7 @@
 <view class="container">
-  <banner-list list="{{banners}}" />
+  <block wx:if="{{banners.length}}">
+    <banner-list list="{{banners}}" />
+  </block>
   <view class="selector">
     <van-dropdown-menu>
       <van-dropdown-item bind:change="onFilterChanged" data-type="region" value="{{ location }}" options="{{ locations }}" />

@@ -1,5 +1,6 @@
 const { getPloggingTemplate, getCertTemplate, getCertFields } = require("../../../api/cert");
 const { getRaceDetail } = require("../../../api/race");
+import { getResultDetail } from "../../../api/result";
 import Poster from "./../../../miniprogram_dist/wxa-plugin-canvas/poster/poster";
 Page({
 
@@ -64,8 +65,38 @@ Page({
       // handle error
     })
   },
-  onCreatePoster() {
-    const { width, height, tempFileUrl, fields } = this.data;
+  async formatFields(){
+    const { fields, id } = this.data;
+    const result = await getResultDetail(id);
+    fields.map(item=>{
+      switch(item.key){
+        case 'trueName':
+          item.value = result.trueName;
+          break;
+        case 'cityName':
+          item.value = result.city;
+          break;
+        case 'year':
+          item.value = new Date(result.raceDate).getFullYear();
+          break;
+        case 'month':
+          item.value = new Date(result.raceDate).getMonth() + 1;
+          break;
+        case 'date':
+          item.value = new Date(result.raceDate).getDate();
+          break;
+      }
+      return item;
+    })
+    this.setData({
+      fields
+    })
+  },
+  async onCreatePoster() {
+    await this.formatFields();
+
+    const { width, height, tempFileUrl, fields, id } = this.data;
+
     const texts = fields.map(item=>{
       return {
         textAlign: 'center',

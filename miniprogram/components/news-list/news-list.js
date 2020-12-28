@@ -33,6 +33,17 @@ Component({
    * 组件的方法列表
    */
   methods: {
-
+    redirect(e){
+      const { url, wechaturl } = e.currentTarget.dataset;
+      if(wechaturl){
+        wx.navigateTo({
+          url: `/pages/more/webview/webview?url=${wechaturl}`,
+        })
+        return;
+      }
+      wx.navigateTo({
+        url,
+      })
+    }
   }
 })
