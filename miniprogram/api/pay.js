@@ -98,6 +98,7 @@ function updateStatuses(detail, callback){
           await updateCouponStatus(detail.couponId);
         }
         await sendEmailSMS(detail);
+        await updateRaceCate(detail);
         wx.hideLoading({
           success: (res) => {
             callback && callback();
@@ -199,3 +200,14 @@ function sendSms({ phoneNum, trueName, raceId, raceTitle, cateTitle}){
     title: '发送成功',
   })
 };
+
+// 更新race-cates下users
+async function updateRaceCate(order){
+  const { cateId } = order
+  const data = { cateId };
+  const res = await wx.cloud.callFunction({
+    name: 'updateRaceCate',
+    data
+  })
+  console.log(res);
+}

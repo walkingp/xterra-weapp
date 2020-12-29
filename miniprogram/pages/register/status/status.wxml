@@ -53,7 +53,7 @@
       </view>
       <view class="cell">
         <label>优惠金额：</label>
-        <text>￥{{detail.totalFee}}</text>
+        <text>￥{{detail.discountFee}}</text>
       </view>
       <view class="cell">
         <label>实付费用：</label>

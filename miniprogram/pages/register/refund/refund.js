@@ -56,6 +56,9 @@ Page({
 
   //退款
   refund: async function() {    
+    wx.showLoading({
+      title: '退款中'
+    })
     const { detail, isPlogging, raceDetail, refundMoney } = this.data;
     if(isPlogging || refundMoney === 0){
       await updateOrderStatus({id:detail._id, ...orderStatus.refunded, refundTime: new Date() });
@@ -71,7 +74,8 @@ Page({
       return;
     }
     const total_fee = +detail.totalFee * 100;
-    const refund_fee = refundMoney * 100;
+    const refund_fee = Math.floor(refundMoney * 100);
+    const that = this;
     wx.cloud.callFunction({
       name: "payment",
       data: {
@@ -83,12 +87,18 @@ Page({
         refund_desc: `报名费退款：${raceDetail.title}`
       },
       async success(res) {
-        await updateOrderStatus({id:detail._id, ...orderStatus.refunded, refundTime: new Date() })
+        const id = detail._id;
+        await updateOrderStatus({ id, ...orderStatus.refunded, refundTime: new Date() })
         wx.showToast({
           icon: "success",
           title: '退款成功',
           success: function(){
-            
+            that.updateCateUser();
+            setTimeout(() => {
+              wx.redirectTo({
+                url: `/pages/register/status/status?id=${id}`,
+              })              
+            }, 1000);
           }
         })
         console.log("云函数payment提交成功：", res)
@@ -101,6 +111,20 @@ Page({
         console.log("云函数payment提交失败：", res)
       }
     })
+  },
+  async updateCateUser(){
+    const { id } = this.data;
+    const { cateId } = this.data.detail;
+    debugger
+    const res = await wx.cloud.callFunction({
+      name: 'updateRaceCate',
+      data: {
+        action: 'cancel',
+        id,
+        cateId
+      }
+    })
+    console.log(res);
   },
   async fetch( id ) {
     const detail = await getRegistrationDetail(id);
@@ -115,7 +139,7 @@ Page({
     if(raceDetail){
       const { enabledRefund, refundRate, refundLastDate, raceDate } = raceDetail;
       policyText = `${dayjs(refundLastDate).format('YYYY年MM月DD日')}前可申请退款${(refundRate*100).toFixed(0)}%`
-      refundMoney = detail.totalFee * refundRate;
+      refundMoney = (Math.floor(detail.totalFee * refundRate*100)/100).toFixed(2);
       const isDateValid = dayjs(new Date()).isBefore(dayjs(refundLastDate));
       const isPaied = detail.status === orderStatus.paid.status || detail.status === orderStatus.pending.status;
       canRefund = enabledRefund && isDateValid && isPaied;

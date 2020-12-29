@@ -41,6 +41,7 @@ Page({
     detail.status = status;
 
     console.log(detail);
+    detail.isPlogging = detail.type === 'X-Plogging';
     detail.cates = detail.catesName ? detail.catesName.join('/') : '/';
     detail.isEnded = dayjs(new Date(detail.raceDate)).isBefore(dayjs());// 是否截止
     detail.raceDate = dayjs(new Date(detail.raceDate)).format("YYYY年MM月DD日");
@@ -48,7 +49,7 @@ Page({
     detail.regStartTimeStr = dayjs(new Date(detail.regStartTime)).format("YYYY年MM月DD日 HH:mm:ss");
     detail.showAdminssion = detail.admission && detail.admission !== '<p>欢迎使用富文本编辑器</p>';
     detail.admission = app.towxml(detail.admission,'html'); // 报名须知
-    detail.showContent = detail.content && detail.content !== '<p>欢迎使用富文本编辑器</p>';
+    detail.showContent = !detail.isPlogging && detail.content && detail.content !== '<p>欢迎使用富文本编辑器</p>';
     detail.content = app.towxml(detail.content,'html');
     detail.showFlow = detail.flow && detail.flow !== '<p>欢迎使用富文本编辑器</p>';
     detail.flow = app.towxml(detail.flow,'html');

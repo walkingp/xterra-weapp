@@ -4,7 +4,7 @@
     <van-cell title-width="120rpx" title="{{type}}名称" value="{{order.raceTitle}}" />
     <van-cell title-width="120rpx" title="报名类别" value="{{order.cateTitle}}" />
     <van-cell title-width="120rpx" title="总费用" value="￥{{order.totalFee}}" />
-    <van-cell title-width="120rpx" title="选择优惠券" value="{{coupon}}" bind:click="showAction" is-link />
+    <van-cell title-width="150rpx" title="选择优惠券" value="{{coupon}}" bind:click="showAction" is-link />
     <van-field wx:if="{{inputVisible}}" name="coupon" focus="{{inputVisible}}" value="{{ code }}" center clearable
       label="优惠券代码" placeholder="请输入12位优惠券代码" use-button-slot>
       <van-button slot="button" size="small" form-type="submit" type="primary">添加</van-button>

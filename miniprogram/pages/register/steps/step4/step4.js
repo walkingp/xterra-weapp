@@ -1,5 +1,5 @@
 const config = require("../../../../config/config");
-
+const dayjs = require("dayjs");
 const app = getApp();
 // pages/register/steps/step4/step4.js
 Component({
