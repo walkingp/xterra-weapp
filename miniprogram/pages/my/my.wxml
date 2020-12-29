@@ -54,7 +54,7 @@
         </van-grid>
       </view>
     </view>
-    <view class="box admin">
+    <view class="box admin" wx:if="{{isAdmin}}">
       <view class="flex space-between">
         <text class="hd">管理员专用</text>
       </view>
