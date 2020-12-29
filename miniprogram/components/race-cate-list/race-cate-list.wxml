@@ -19,7 +19,7 @@
     </view>
     <view class="flex-none flex column space-between align-center btn" wx:if="{{!item.expired}}">
       <button data-url="/pages/register/register?id={{raceId}}&cateId={{item._id}}" bindtap="redirect" class="button">一键报名</button>
-      <view class="limit" style="font-size: 24rpx; color: #999; padding-top: 10rpx;" wx:if="{{item.limit > 0}}">限额{{item.limit}}人</view>
+      <view class="limit" style="font-size: 24rpx; color: #999; padding-top: 10rpx;" wx:if="{{item.limit > 0}}">已报{{item.users.length ? item.users.length : 0}}/{{item.limit}}人</view>
     </view>
   </view>
 </block>

@@ -37,24 +37,28 @@ const config = {
     },
     cancel: {
       title: '赛事活动取消通知',
-      templateId: 'fMTad-wVB9hRh0bkvNdzB5FloL7QQTY_6U_iZLRqn84',
-      templateNo: 19247,
+      templateId: 'URnfH_zgJQjLNp2ocUIwGOVRoY7cppOfRh9PisXxdQE',
+      templateNo: 13999,
       fields: [
         {
-          key: '申请人',
-          name: '姓名'
+          key: 'thing1',
+          name: '活动名称'
         },
         {
-          key: 'time3',
-          name: '参赛时间'
+          key: 'time2',
+          name: '活动时间'
+        },
+        {
+          key: 'thing3',
+          name: '取消原因'
         },
         {
           key: 'thing4',
-          name: '比赛场地'
+          name: '取消人'
         },
         {
-          key: 'phrase5',
-          name: '处理结果'
+          key: 'thing5',
+          name: '备注'
         }
       ]
     },

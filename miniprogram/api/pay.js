@@ -196,9 +196,6 @@ function sendSms({ phoneNum, trueName, raceId, raceTitle, cateTitle}){
     raceTitle,
     cateTitle
   })
-  wx.showToast({
-    title: '发送成功',
-  })
 };
 
 // 更新race-cates下users

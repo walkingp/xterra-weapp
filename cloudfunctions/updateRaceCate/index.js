@@ -20,6 +20,24 @@ exports.main = async (event, context) => {
       const p2 = await startListTable.where({ cardNo, cateId }).remove();
       console.log(p2);
     })
+  }else if(action === 'batch') {
+    const all = await cateTable.get();
+    all.data.forEach(async cate => {
+      let users = [];
+      const cid = cate._id;
+      const result = await startListTable.where({ cateId: cid }).limit(1000).get();
+      users = result.data.map(item => {
+        const { userId, userName, trueName, gender, userInfo } = item;
+        return {
+          userId, userName, trueName, gender, userInfo
+        }
+      });
+      await cateTable.doc(cid).update({
+        data: {
+          users
+        }
+      })
+    })
   }
   let users = [];
   const result = await startListTable.where({ cateId }).limit(1000).get();
@@ -29,8 +47,7 @@ exports.main = async (event, context) => {
       userId, userName, trueName, gender, userInfo
     }
   });
-  const res = await cateTable.doc(cateId).get();
-  cateTable.doc(cateId).update({
+  await cateTable.doc(cateId).update({
     data: {
       users
     }

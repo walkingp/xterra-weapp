@@ -28,7 +28,8 @@ App({
                   that.globalData.userId = res.result.data._id;
                   that.globalData.userName = res.result.data.nickname;
                   that.globalData.trueName = res.result.data.truename || res.result.data.nickname;
-                  that.globalData.isLogined = true
+                  that.globalData.isLogined = true;
+                  that.globalData.isAdmin = res.result.data.role === 'admin';
 
                   resolve({
                     userInfo: res.result.data,

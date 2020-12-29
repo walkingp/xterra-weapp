@@ -22,7 +22,8 @@ Page({
     regBtnEnabled: false,
     pageIndex: 1,
     pageSize: 2,
-    hasMoreData: true
+    hasMoreData: true,
+    isAdmin: false
   },
   register(){
     const { id } = this.data;
@@ -34,8 +35,13 @@ Page({
     wx.showLoading({
       title: '加载中...',
     });
-    let { active, pageIndex, pageSize } = this.data;
+    let { active, userId, pageIndex, pageSize, isAdmin } = this.data;
     const detail = await getRaceDetail(id);
+    if(detail.leaders.indexOf(userId) >= 0 && !isAdmin){
+      this.setData({
+        isAdmin: true
+      })
+    }
 
     const status = raceStatus.find(s => s.value === detail.status);
     detail.status = status;
@@ -150,6 +156,15 @@ Page({
   onLoad: function (options) {
     const { id } = options;
     const { mapKey } = config;
+
+    app.checkLogin().then(res => {
+      const { userId } = res;
+      const isAdmin = res.userInfo.role === 'admin';
+      this.setData({
+        userId,
+        isAdmin
+      });
+    });
     this.setData({
       mapKey,
       id

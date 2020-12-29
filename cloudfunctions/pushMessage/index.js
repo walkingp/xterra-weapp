@@ -3,25 +3,11 @@ cloud.init()
 
 exports.main = async (event, context) => {
   console.log(event)
-  switch (event.action) {
-    case 'requestSubscribeMessage': {
-      return requestSubscribeMessage(event)
-    }
-    case 'sendSubscribeMessage': {
-      return sendSubscribeMessage(event)
-    }
-  }
-}
-
-const templateId = 'Hb-YkJGF4ovdN9tu4VbA7243-JW6jS_4a9XeGUosUjE';
-
-async function requestSubscribeMessage(event) {
-  // 此处为模板 ID，开发者需要到小程序管理后台 - 订阅消息 - 公共模板库中添加模板，
-  // 然后在我的模板中找到对应模板的 ID，填入此处
-  return templateId // 如 'N_J6F05_bjhqd6zh2h1LHJ9TAv9IpkCiAJEpSw0PrmQ'
+  return sendSubscribeMessage(event);
 }
 
 async function sendSubscribeMessage(event) {
+  const { templateId } = event;
   const { OPENID } = cloud.getWXContext()
   const { page, action, ...rest } = event;
   const sendResult = await cloud.openapi.subscribeMessage.send({

@@ -49,7 +49,7 @@ Page({
     const isPlogging = raceDetail.type === 'X-Plogging';
     this.setData({
       detail,
-      showRefundBtn: detail.status === orderStatus.pending.status || detail.status === orderStatus.paid.status,
+      showRefundBtn: (isPlogging && detail.status === orderStatus.pending.status) || detail.status === orderStatus.paid.status,
       showPayBtn: detail.status === orderStatus.pending.status || detail.status === orderStatus.failed.status,
     });
     if(raceDetail){

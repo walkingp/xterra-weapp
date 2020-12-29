@@ -22,7 +22,8 @@
     "pages/events/form/form",
     "pages/register/form/view/view",
     "pages/events/cert/cert",
-    "pages/admin/coupon/coupon"
+    "pages/admin/coupon/coupon",
+    "pages/events/users/users"
   ],
   "window": {
     "backgroundColor": "#ffffff",

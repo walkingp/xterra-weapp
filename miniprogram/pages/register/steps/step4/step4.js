@@ -54,17 +54,20 @@ Component({
     },
     sendMessage() {
       const { order } = this.properties;
-      const { _id } = order;
+      const { id, profiles } = order;
+      const trueName = profiles.map(item => item.trueName).join();
+      const phoneNum = profiles.map(item => item.phoneNum).join();
       wx.cloud.callFunction({
         name: "pushMessage",
         data: {
+          templateId: config.messageTemplates.registration.templateId,
           action: 'sendSubscribeMessage',
-          page: `pages/register/status/status?id=${_id}`,
+          page: `pages/register/status/status?id=${id}`,
           name1: {
-            value: order.trueName
+            value: trueName
           },
           phone_number2: {
-            value: order.profiles[0]?.phoneNum
+            value: phoneNum
           },
           thing3: {
             value: order.raceTitle
@@ -73,7 +76,7 @@ Component({
             value: order.paidFee
           },
           time5: {
-            value: dayjs().format('YYYY年MM月DD日') 
+            value: dayjs(order.raceDate).format('YYYY年MM月DD日') 
           }
         },
         success: res => {
