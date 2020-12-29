@@ -134,7 +134,8 @@ Page({
         });
         return;
       }
-      if(app.globalData.step){
+      // 添加报名人后返回
+      if(app.globalData.step && app.globalData.step === 1){
         const { step } = app.globalData;
         this.setData({
           step
