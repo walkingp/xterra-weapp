@@ -42,9 +42,15 @@ Page({
     }
   },
   redirect(e){
-    const { url } = e.currentTarget.dataset;
+    const { url, wechaturl } = e.currentTarget.dataset;
+    if(wechaturl){
+      wx.navigateTo({
+        url: `/pages/more/webview/webview?url=${wechaturl}`,
+      })
+      return;
+    }
     wx.navigateTo({
-      url
+      url,
     })
   },
   tap(e){

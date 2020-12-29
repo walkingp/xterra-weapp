@@ -174,7 +174,6 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
   },
 
   /**
@@ -212,10 +211,23 @@ Page({
 
   },
 
+  onShareTimeline: function (res) {
+    const { detail } = this.data;
+    return {
+      title: detail.title,
+      imageUrl: "",
+      path: `/pages/events/detail/detail?id=${detail._id}`
+    }
+  },
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    const { detail } = this.data;
+    return {
+      title: detail.title,
+      imageUrl: "",
+      path: `/pages/events/detail/detail?id=${detail._id}`
+    }
   }
 })

@@ -186,5 +186,16 @@ Page({
         step: 4
       })
     });
+  },
+    /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+    const { detail } = this.data;
+    return {
+      title: detail.title,
+      imageUrl: "",
+      path: `/pages/register/register?id=${detail._id}`
+    }
   }
 })

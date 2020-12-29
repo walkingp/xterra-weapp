@@ -8,7 +8,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    id: null
+    id: null,
+    detail: null
   },
 
   /**
@@ -86,6 +87,11 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    const { detail } = this.data;
+    return {
+      title: detail.title,
+      imageUrl: "",
+      path: `/pages/page/page?id=${detail._id}`
+    }
   }
 })

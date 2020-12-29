@@ -50,7 +50,7 @@
           <van-grid-item icon="/images/icons/call.svg" url="/pages/page/page?id=contact" text="联系我们" />
           <van-grid-item icon="/images/icons/help.svg" url="/pages/page/page?id=help" text="帮助中心" />
           <van-grid-item icon="/images/icons/building.svg" url="/pages/page/page?id=about" text="关于XTERRA" />
-          <van-grid-item icon="/images/icons/doc.svg" url="/pages/page/page?id=rule" text="积分规则" />
+          <!-- <van-grid-item icon="/images/icons/doc.svg" url="/pages/page/page?id=rule" text="积分规则" /> -->
         </van-grid>
       </view>
     </view>

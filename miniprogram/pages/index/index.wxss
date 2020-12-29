@@ -124,7 +124,7 @@
 	font-size: 26rpx;
 }
 .news .item{
-	min-height: 340rpx;
+	min-height: 326rpx;
 	max-height: 380rpx;
 	display: flex;
 	flex-direction: column;
@@ -141,15 +141,18 @@
 .news .item .desc{
 	padding: 20rpx;
 	overflow: hidden;
-	max-height: 100rpx;
+	max-height: 90rpx;
+	font-size: 26rpx;
 }
 .news .list{
-	columns: 2;
+	display: grid;
+  grid-template-columns: repeat(2, 1fr); 
+  grid-gap: 20rpx;
 }
 
 .news .list .item{
 	max-height: 280rpx!important;
-	min-height: 280rpx!important;
+	min-height: 260rpx!important;
 }
 .news .list .item image{
 	height: 160rpx!important;

@@ -1,5 +1,5 @@
 const config = require("./config/config");
-
+require('./utils/libs.js');
 //app.js
 App({
   towxml: require('/towxml/index'),

@@ -146,7 +146,9 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    wx.showTabBar({
+      animation: true,
+    })
   },
 
   /**
@@ -188,6 +190,10 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    return {
+      title: '活动 - XTERRA',
+      imageUrl: "",
+      path: `/pages/events/events`
+    }
   }
 })

@@ -37,15 +37,15 @@
         <view class="title flex align-center space-between">
           <text class="title">新闻动态</text>
         </view>
-        <navigator url="/pages/news/detail/detail?id={{news[0]._id}}" class="cover item">
+        <view bindtap="redirect" data-wechaturl="{{news[0].wechatUrl}}" data-url="/pages/news/detail/detail?id={{news[0]._id}}" class="cover item">
           <image src="{{news[0].coverUrl}}" mode="aspectFill" />
           <view class="desc overflow-2">{{news[0].title}}</view>
-        </navigator>
+        </view>
         <view class="list">
-          <navigator url="/pages/news/detail/detail?id={{item._id}}" class="item" wx:for="{{news}}" wx:if="{{index>0}}" wx:key="_id">
+          <view bindtap="redirect" data-wechaturl="{{item.wechatUrl}}" data-url="/pages/news/detail/detail?id={{item._id}}" class="item" wx:for="{{news}}" wx:if="{{index>0}}" wx:key="_id">
             <image src="{{item.coverUrl}}" mode="aspectFill"></image>
             <view class="desc overflow-2">{{item.title}}</view>
-          </navigator>
+          </view>
         </view>
       </view>
     </swiper-item>
