@@ -42,20 +42,24 @@ Page({
   },
   async fetch( id ) {
     const detail = await getRegistrationDetail(id);
-    detail.orderTime = dayjs(detail.addedDate).format("YYYY-MM-DD HH:mm:ss");
-    this.setData({
-      detail,
-      showRefundBtn: detail.status === orderStatus.paid.status,
-      showPayBtn: detail.status === orderStatus.pending.status || detail.status === orderStatus.failed.status,
-    });
     const { raceId } = detail;
     const raceDetail = await getRaceDetail(raceId);
+    detail.orderTime = dayjs(detail.addedDate).format("YYYY-MM-DD HH:mm:ss");
+    const isBeforeRaceDate = dayjs(new Date()).isBefore(dayjs(raceDetail.raceDate));
+    const isPlogging = raceDetail.type === 'X-Plogging';
+    this.setData({
+      detail,
+      showRefundBtn: detail.status === orderStatus.pending.status || detail.status === orderStatus.paid.status,
+      showPayBtn: detail.status === orderStatus.pending.status || detail.status === orderStatus.failed.status,
+    });
     if(raceDetail){
       this.setData({
         raceDetail,
         raceId
       })
-      const enabled = raceDetail.enabledRefund && dayjs(new Date()).isBefore(dayjs(raceDetail.refundLastDate));
+      // 可取消活动时间
+      const isBeforeRefundDate = raceDetail.enabledRefund && dayjs(new Date()).isBefore(dayjs(raceDetail.refundLastDate));
+      const enabled = (isPlogging || isBeforeRefundDate) && isBeforeRaceDate;
       if(!enabled){
         this.setData({
           refundEnabled: false

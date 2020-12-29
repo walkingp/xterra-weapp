@@ -37,7 +37,7 @@ Component({
     redirect(e){
       const { url } = e.currentTarget.dataset;
       app.globalData.step = 0;
-      wx.navigateTo({
+      wx.redirectTo({
         url
       })
     },

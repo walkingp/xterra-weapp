@@ -117,7 +117,7 @@ Page({
       policyText = `${dayjs(refundLastDate).format('YYYY年MM月DD日')}前可申请退款${(refundRate*100).toFixed(0)}%`
       refundMoney = detail.totalFee * refundRate;
       const isDateValid = dayjs(new Date()).isBefore(dayjs(refundLastDate));
-      const isPaied = detail.status === orderStatus.paid.status;
+      const isPaied = detail.status === orderStatus.paid.status || detail.status === orderStatus.pending.status;
       canRefund = enabledRefund && isDateValid && isPaied;
       isPlogging = raceDetail.type === 'X-Plogging';
       if(isPlogging){
