@@ -53,7 +53,7 @@ Page({
     
     minDate: new Date(1920, 1, 1).getTime(),
     maxDate: new Date().getTime(),
-    tSizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
+    tSizes: ['S', 'M', 'L', 'XL'],
     isView: false,
 
     myProfiles: [],
@@ -122,7 +122,36 @@ Page({
   },
   async saveData(e){
     let profile = e.detail.value;
+    const { trueName, cardNo,phoneNum, email } = profile;
     const { id, certPic, relation, cardType, gender, birthDate, bloodType, tSize, region, userId, userInfo, raceId, action, plogging } = this.data;
+    if(!trueName){
+      wx.showToast({
+        title: '姓名不可为空',
+        icon: 'none'
+      })
+      return;
+    }
+    if(!cardNo){
+      wx.showToast({
+        title: '证件号码不可为空',
+        icon: 'none'
+      })
+      return;
+    }
+    if(!phoneNum){
+      wx.showToast({
+        title: '手机号不可为空',
+        icon: 'none'
+      })
+      return;
+    }
+    if(!email){
+      wx.showToast({
+        title: '邮箱不可为空',
+        icon: 'none'
+      })
+      return;
+    }
     if(birthDate === '未选择'){
       birthDate = new Date(1900,1,1)
     }

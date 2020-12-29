@@ -46,7 +46,7 @@ Page({
     });
     const regsFinished = regs.filter(item=>item.status === orderStatus.paid.status );
     const regsFailed = regs.filter(item=>item.status === orderStatus.failed.status );
-    const regsWithdrew = regs.filter(item=>item.status === orderStatus.withdrew.status );
+    const regsWithdrew = regs.filter(item=>item.status === orderStatus.withdrew.status ||item.status === orderStatus.refunded.status);
     this.setData({
       regs,
       regsFinished,

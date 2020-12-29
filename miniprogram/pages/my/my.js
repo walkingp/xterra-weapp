@@ -7,7 +7,8 @@ Page({
    */
   data: {
     isLogined: false,
-    userInfo: null
+    userInfo: null,
+    isAdmin: false
   },
   async fetch(){
   },
@@ -20,9 +21,12 @@ Page({
       if(['男', '女'].indexOf(userInfo.gender) < 0){
         userInfo.gender = userInfo.gender === 0 ? '男' : '女'
       }
+      
+      const isAdmin = res.userInfo.role === 'admin';
       this.setData({
         userInfo,
-        isLogined
+        isLogined,
+        isAdmin
       }, () => {
         this.fetch();
       })

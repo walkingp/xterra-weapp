@@ -89,6 +89,7 @@ Page({
     order.userInfo = app.globalData.userInfo;
     order.status = orderStatus.pending.status; // 待支付
     order.statusText = orderStatus.pending.statusText;
+    order.isActive = true;
     order.orderType = '微信支付';
     wx.cloud.callFunction({
       name: 'saveOrder',

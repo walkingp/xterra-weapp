@@ -32,7 +32,7 @@
         </view>
       </view>
     </swiper-item>-->
-    <swiper-item class="main" item-id="10">
+    <swiper-item class="main" item-id="10" style="overflow-y: auto;">
       <view class="news">
         <view class="title flex align-center space-between">
           <text class="title">新闻动态</text>

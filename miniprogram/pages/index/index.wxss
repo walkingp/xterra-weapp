@@ -2,7 +2,8 @@
   padding: 0;
 }
 .main{
-  min-height: 100vh;
+	min-height: 100vh;
+	overflow: auto!important;
 }
 .swiper{
 	height: 100vh;
@@ -12,7 +13,10 @@
   height: 100%;
 }
 .swiper .swiper-item{
-  position: relative;
+	position: relative;
+}
+.swiper .swiper-item:last-child{
+	overflow: auto;
 }
 .main button{
   position: absolute;
