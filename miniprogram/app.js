@@ -1,4 +1,5 @@
-const config = require("./config/config");
+const config = require('./config/config.js');
+
 require('./utils/libs.js');
 //app.js
 App({
