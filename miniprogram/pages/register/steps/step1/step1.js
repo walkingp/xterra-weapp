@@ -198,8 +198,9 @@ Component({
       };
     },
     selectCate(value){
-      const selectedCateId = this.data.cates.findIndex(item=>item._id === value);
-      const selectedCate = this.data.cates.find(item=>item._id === value);
+      const { cates } = this.data;
+      const selectedCateId = cates.findIndex(item=>item._id === value);
+      const selectedCate = cates.find(item=>item._id === value);
       this.setData({
         selectedCateId
       });
