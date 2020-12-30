@@ -23,7 +23,8 @@ Page({
     pageIndex: 1,
     pageSize: 2,
     hasMoreData: true,
-    isAdmin: false
+    isAdmin: false,
+    isSuperAdmin: false
   },
   register(){
     const { id } = this.data;
@@ -37,7 +38,7 @@ Page({
     });
     let { active, userId, pageIndex, pageSize, isAdmin } = this.data;
     const detail = await getRaceDetail(id);
-    if(detail.leaders && detail?.leaders.indexOf(userId) >= 0 && !isAdmin){
+    if(detail.leaders && detail?.leaders.indexOf(userId) >= 0){
       this.setData({
         isAdmin: true
       })
@@ -159,10 +160,10 @@ Page({
 
     app.checkLogin().then(res => {
       const { userId } = res;
-      const isAdmin = res.userInfo.role === 'admin';
+      const isSuperAdmin = res.userInfo.role === 'admin';
       this.setData({
         userId,
-        isAdmin
+        isSuperAdmin
       });
     });
     this.setData({
