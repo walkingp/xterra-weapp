@@ -36,9 +36,10 @@ Page({
     wx.showLoading({
       title: '加载中...',
     });
-    let { active, userId, pageIndex, pageSize, isAdmin } = this.data;
+    let { active, pageIndex, pageSize, isAdmin } = this.data;
+    const { userId } = app.globalData;
     const detail = await getRaceDetail(id);
-    if(detail.leaders && detail?.leaders.indexOf(userId) >= 0){
+    if(detail.leaders && detail.leaders.indexOf(userId) >= 0 && !isAdmin){
       this.setData({
         isAdmin: true
       })

@@ -17,7 +17,7 @@ exports.main = async (event, context) => {
     const { title } = race.data;
     console.log(`开始读取${title}报名人数`);
     const res = await usersTable.where({ raceId }).limit(1000).get();
-    let users = [['姓名', '性别', '手机号', '微信号','国籍','证件类型','证件号码','出生日期','邮箱','所属俱乐部','血型','衣服尺码','住址','紧急联系人','紧急联系人手机']];
+    let users = [['姓名', '性别', '手机号', '微信号','国籍','证件类型','证件号码','出生日期','邮箱','所属俱乐部','血型','衣服尺码','住址','紧急联系人','紧急联系人手机', '是否参加过X-Plogging']];
     res.data.forEach(item => {
       let user = [];
       user.push(item.trueName);
@@ -35,6 +35,7 @@ exports.main = async (event, context) => {
       user.push(item.region + item.addr);
       user.push(item.contactUser);
       user.push(item.contactUserPhone);
+      user.push(item.plogging);
       users.push(user);
     })
     users.push(res.data);

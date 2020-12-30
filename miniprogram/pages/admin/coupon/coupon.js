@@ -14,6 +14,7 @@ Page({
     type: '全额抵扣券',
     typeValue: 'free',
     expiredDate: dayjs().add(14, 'day').format("YYYY-MM-DD HH:mm:ss"),
+    currentDate: new Date().getTime(),
     minDate: new Date().getTime(),
     maxDate: new Date(dayjs().add(1, 'year').format("YYYY-MM-DD HH:mm:ss")),
     coupons: [],
@@ -35,6 +36,35 @@ Page({
     race: '不限制',
     cate: '不限制'
   },
+  showDate(){
+    this.setData({
+      currentDate: new Date(dayjs().add(14, 'day')).getTime(),
+      showDatePicker: true
+    })
+  },  
+  onClose(e){
+    const { type } = e.currentTarget.dataset;
+    switch(type){
+      case 'date':
+        this.setData({
+          showDatePicker: false
+        })
+        break;
+    }
+  },
+  onDateConfirm(e){
+    console.log(e.detail);
+    this.setData({
+      expiredDate: dayjs(e.detail).format("YYYY-MM-DD HH:mm:ss"),
+      currentDate: e.detail,
+      showDatePicker: false
+    })
+  },
+  onDateCancel(){
+    this.setData({
+      showDatePicker: false
+    })
+  },  
   async showDetail(e){
     const { id } = e.currentTarget.dataset;
     const detail = await getCouponDetail(id);

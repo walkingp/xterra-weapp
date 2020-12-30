@@ -1,8 +1,10 @@
 .status{
   padding: 0 20rpx;
   height: 40rpx;
-  line-height: 40rpx;
-  border-radius: 30rpx;
+  border-radius: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: #fff;
   font-size: 22rpx;
 }
