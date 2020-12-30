@@ -8,7 +8,6 @@
   flex: none;
 }
 .history-table-wrap{
-  flex: auto;
   overflow-y: scroll;
   overflow-x: hidden;
 }
@@ -37,9 +36,6 @@
 .th4,.td4{
   width: 40%;
 }
-.tbody{
-  padding: 0 20rpx;
-}
 .th1, .th2, .td1,.td2{
   width: 150rpx;
 }
@@ -54,4 +50,7 @@
 .td{
   font-size: 24rpx;
   color: #666;
+}
+.buttons{
+  padding: 20rpx;
 }

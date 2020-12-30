@@ -13,8 +13,8 @@
           <view class="th th3">出生日期</view>
           <view class="th th4">手机号</view>
         </view>
-        <view class="tr tbody" wx:for="{{users}}" wx:key="_id">
-          <view class="td td1">{{item.trueName}}</view>
+        <view class="tr tbody" wx:for="{{users}}" wx:key="_id" bindtap="showDetail" data-id="{{item._id}}">
+          <view class="td td1"><van-icon name="arrow" />{{item.trueName}}</view>
           <view class="td td2">{{item.gender}}</view>
           <view class="td td3">{{item.birthDate}}</view>
           <view class="td td4">{{item.phoneNum}}</view>
@@ -22,4 +22,42 @@
       </view>
     </scroll-view>
   </view>
+  <view class="buttons">
+    <button bindtap="exportCSV" class="button">生成完整报名并下载</button>
+  </view>
+  <view class="box" wx:if="{{fileUrl}}">
+    <view>{{fileUrl}}</view>
+    <view><button bindtap="copy" data-text="{{fileUrl}}" class="button">复制地址</button></view>
+  </view>
 </view>
+<van-popup
+  show="{{ show }}"
+  closeable
+  position="bottom"
+  bind:close="onClose">
+  <van-cell-group title="报名明细">
+    <van-cell title="姓名" value="{{detail.trueName}}" border="{{ false }}" />
+    <van-cell title="微信id" value="{{detail.wechatid}}" bindtap="copy" data-text="{{detail.wehcatid}}" border="{{ false }}" />
+    <van-cell title="性别" value="{{detail.gender}}" border="{{ false }}" />
+    <van-cell title="国籍" value="{{detail.nation}}" border="{{ false }}" />
+    <van-cell title="证件类型" value="{{detail.cardType}}" border="{{ false }}" />
+    <van-cell title="证件号码" value="{{detail.cardNo}}" border="{{ false }}" />
+    <van-cell title="手机号" value="{{detail.phoneNum}}" border="{{ false }}" />
+    <van-cell title="出生日期" value="{{detail.birthDate}}" border="{{ false }}" />
+    <van-cell title="组别" value="{{detail.cateTitle}}" border="{{ false }}" />
+    <van-cell title="邮箱" value="{{detail.email}}" border="{{ false }}" />
+    <van-cell title="所属俱乐部" value="{{detail.club}}" border="{{ false }}" />
+  </van-cell-group>
+  <van-cell-group title="其他信息">
+    <van-cell title="血型" value="{{detail.bloodType}}" border="{{ false }}" />
+    <van-cell title="衣服尺码" value="{{detail.tSize}}" border="{{ false }}" />
+    <van-cell title="住址" value="{{detail.region + detail.addr}}" border="{{ false }}" />
+  </van-cell-group>
+  <van-cell-group title="紧急联系人信息">
+    <van-cell title="紧急联系人" value="{{detail.contactUser}}" border="{{ false }}" />
+    <van-cell title="紧急联系人手机号" value="{{detail.contactUserPhone}}" border="{{ false }}" />
+  </van-cell-group>
+  <van-cell-group title="相关信息">
+    <van-cell title="是否参加过X-Plogging" value="{{detail.isPlogging}}" border="{{ false }}" />
+  </van-cell-group>
+</van-popup>

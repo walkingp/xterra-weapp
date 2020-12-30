@@ -37,7 +37,7 @@ Page({
     });
     let { active, userId, pageIndex, pageSize, isAdmin } = this.data;
     const detail = await getRaceDetail(id);
-    if(detail.leaders.indexOf(userId) >= 0 && !isAdmin){
+    if(detail.leaders && detail?.leaders.indexOf(userId) >= 0 && !isAdmin){
       this.setData({
         isAdmin: true
       })

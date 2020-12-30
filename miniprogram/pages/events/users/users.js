@@ -1,7 +1,7 @@
 const { getPaginations } = require("../../../utils/cloud")
 const app = getApp();
 const dayjs = require("dayjs");
-const { getRaceDetail } = require("../../../api/race");
+const { getRaceDetail, getStartUserDetail } = require("../../../api/race");
 // miniprogram/pages/events/users/users.js
 Page({
 
@@ -11,7 +11,9 @@ Page({
   data: {
     id: null,
     detail: null,
-    users: []
+    race: null,
+    users: [],
+    show: false
   },
 
   /**
@@ -24,14 +26,58 @@ Page({
     })
     this.fetch(id);
   },
+  onClose(){
+    this.setData({
+      show: false
+    })
+  },
+  copy(e){
+    const { text } = e.currentTarget.dataset;
+    wx.setClipboardData({
+      data: text,
+    })
+  },
+  call(e){
+    const { phone } = e.currentTarget.dataset;
+    wx.makePhoneCall({
+      phoneNumber: phone
+    })
+  },
+  async showDetail(e){
+    const { id } = e.currentTarget.dataset;
+    const detail = await getStartUserDetail(id);
+    detail.birthDate = dayjs(new Date(detail.birthDate)).format("YYYY-MM-DD");
+    this.setData({
+      show: true,
+      detail
+    })
+  },
+
+  async exportCSV(){
+    const that = this;
+    const { id } = this.data;
+    wx.cloud.callFunction({
+      name: 'exportCSV',
+      data: {
+        raceId: id
+      },
+      success(res){
+        const fileUrl = res.result.fileList[0].tempFileURL;
+        console.log(fileUrl)
+        that.setData({
+          fileUrl
+        })
+      }
+    })
+  },
 
   async fetch(raceId){
     wx.showLoading({
       title: '加载中',
     })
-    const detail = await getRaceDetail(raceId);
+    const race = await getRaceDetail(raceId);
     wx.setNavigationBarTitle({
-      title: detail.title,
+      title: race.title,
     })
 
     const users = await getPaginations({
@@ -50,7 +96,7 @@ Page({
     })
 
     this.setData({
-      users, detail
+      users, race
     }, () => {
       wx.hideLoading({
         success: (res) => {},

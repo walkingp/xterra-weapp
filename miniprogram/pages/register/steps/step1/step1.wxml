@@ -42,7 +42,7 @@
           <label for="p{{index}}" class="info" wx:if="{{item.desc}}">{{item.desc}}</label>
         </view>
         <view class="flex-none radio">
-          <radio id="p{{index}}" disabled="{{item.expired ? true : false}}"
+          <radio id="p{{index}}" disabled="{{item.expired || item.isFull ? true : false}}"
             checked="{{cateId===item._id ? true : false}}" data-index="{{index}}" value="{{item._id}}" />
         </view>
       </view>

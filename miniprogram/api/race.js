@@ -104,6 +104,10 @@ export const getRaceCatesList = async ( raceId, size = 20) => {
     if(cate.enableEarlyBirdPrice){
       cate.earlyPriceEndTime = dayjs(cate.earlyPriceEndTime).format("YYYY年MM月DD日");
     }
+    // 是否超出限制
+    if(cate.limit && cate.limit > 0 && cate.users && cate.users.length){
+      cate.isFull = cate.users.length >= cate.limit
+    }
 
     return cate;
   });
@@ -263,6 +267,10 @@ export const getRegistrationDetail = async id => {
   return data;
 }
 
+export const getStartUserDetail = async id => {
+  const data = await getCollectionById({ dbName: 'start-list', id });
+  return data;
+}
 export const getRegistrationByOrderNum = async orderNum => {
   const data = await getCollectionByWhere({ dbName: 'registration', filter: { orderNum } });
   return data.length ? data[0] : null;
