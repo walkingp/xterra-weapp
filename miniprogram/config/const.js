@@ -78,3 +78,38 @@ export const emailTemplateType = {
     value: 'registration'
   }
 }
+
+export const raceResultStatus = {
+  notStarted: {
+    title: '比赛未开始',
+    value: 'notStart'
+  },
+  racing: {
+    title: '比赛中',
+    value: 'racing'
+  },
+  DNS: {
+    title: 'DNS',
+    value: 'DNS'
+  },
+  DSQ: {
+    title: 'DSQ',
+    value: 'DSQ'
+  },
+  DNF: {
+    title: 'DNF',
+    value: 'DNF'
+  },
+  done: {
+    title: '已完赛',
+    value: 'done'
+  },
+  lapped: {
+    title: '被套圈',
+    value: 'lapped'
+  },
+  penalty: {
+    title: '罚时',
+    value: 'penalty'
+  }
+}

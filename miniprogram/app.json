@@ -85,6 +85,7 @@
     "van-search": "@vant/weapp/search/index",
     "van-picker": "@vant/weapp/picker/index",
     "van-steps": "@vant/weapp/steps/index",
+    "van-circle": "@vant/weapp/circle/index",
     "van-loading": "@vant/weapp/loading/index"
   },
   "permission": {
