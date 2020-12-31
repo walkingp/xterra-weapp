@@ -24,6 +24,11 @@ miniprogram-sm-crypto@^0.2.1:
   dependencies:
     jsbn "^1.1.0"
 
+wl-pinyin@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/wl-pinyin/-/wl-pinyin-1.0.1.tgz#18a7ed255cefe63100071e259751de8e4dbb402d"
+  integrity sha512-cn7MSdsJoaC6a4w94OoScCui2OuJhVNOZ/DL0g+6ZHWkDxKvwUQPC5NQiOOsBGql65YTgV5DTZRUzvJ1ATbTOw==
+
 wxa-plugin-canvas@^1.1.12:
   version "1.1.12"
   resolved "https://registry.yarnpkg.com/wxa-plugin-canvas/-/wxa-plugin-canvas-1.1.12.tgz#639a9857e4849ca6bac3552c96d5441beb9e28f6"

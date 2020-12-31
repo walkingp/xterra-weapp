@@ -4,11 +4,11 @@
     <van-cell-group title="基本信息">
       <van-cell title="与本人关系" required name="relation" is-link border="{{ false }}" value="{{relation}}" bind:click="showPicker"
         data-type="relation" />
-      <van-field value="{{ trueName }}" required name="trueName" label="姓名" placeholder="请输入真实姓名" border="{{ false }}" />
+      <van-field value="{{ trueName }}" required name="trueName" bind:blur="onNameChange" label="姓名" placeholder="请输入真实姓名" border="{{ false }}" />
       <van-field value="{{ pinyinLast }}" wx:if="{{!isPlogging}}" required name="pinyinLast" label="拼音姓" placeholder="如：Zhang" border="{{ false }}" />
       <van-field value="{{ pinyinFirst }}" wx:if="{{!isPlogging}}" required name="pinyinFirst" label="拼音名" placeholder="如：San" border="{{ false }}" />
       <van-field value="{{ nation }}" required name="nation" label="国籍" placeholder="请输入国籍" border="{{ false }}" />
-      <van-field value="{{ wechatId }}" wx:if="{{isPlogging}}" required name="wechatId" label="微信号" placeholder="可以被添加的微信号" border="{{ false }}" />
+      <van-field value="{{ wechatId }}" required name="wechatId" label="微信号" placeholder="可以被添加的微信号" border="{{ false }}" />
       <van-cell title="证件类型" required name="cardType" is-link border="{{ false }}" value="{{cardType}}" bind:click="showPicker"
         data-type="card" />
       <van-field value="{{ cardNo }}" required name="cardNo" label="证件号码" placeholder="请输入证件号" bind:blur="onCardNoChange"

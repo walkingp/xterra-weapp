@@ -1,6 +1,7 @@
 import { getMyProfiles, getMyRegistrations, getProfileDetail, getRaceCateDetail, getRaceDetail } from "../../../api/race";
 // miniprogram/pages/register/form/form.js
 import areaList from "./../../../config/area";
+import p from "wl-pinyin";
 const dayjs = require("dayjs");
 const app = getApp();
 Page({
@@ -61,6 +62,26 @@ Page({
     fileList: [],
     certPic: null
   },
+  onNameChange(e){
+    const { value } = e.detail;
+    const isChinese = new RegExp("[\\u4E00-\\u9FFF]+","g").test(value);
+    if(!isChinese){
+      const index = value.lastIndexOf(' ');
+      this.setData({
+        pinyinFirst: value.substr(0, index),
+        pinyinLast: value.substr(index + 1)
+      })
+      return;
+    }
+    const xing = value.substr(0,1);
+    const ming = value.substr(1);
+    const pinyinFirst = p.getPinyin(ming);
+    const pinyinLast = p.getPinyin(xing);
+    this.setData({
+      pinyinFirst: pinyinFirst.replace(pinyinFirst[0],pinyinFirst[0].toUpperCase()).replace(/\s/g,""),
+      pinyinLast: pinyinLast.replace(pinyinLast[0], pinyinLast[0].toUpperCase())
+    })
+  },
   onDateConfirm(e){
     console.log(e.detail);
     this.setData({
@@ -89,7 +110,7 @@ Page({
     this.setData({
       detail
     });
-    const { pinyinLast, pinyinFirst, certPic, relation, club, nation, trueName, cardType, gender, birthDate, bloodType, tSize, region, addr, cardNo, contactUser, contactUserPhone, email, phoneNum } = detail;
+    const { wechatId, pinyinLast, pinyinFirst, certPic, relation, club, nation, trueName, cardType, gender, birthDate, bloodType, tSize, region, addr, cardNo, contactUser, contactUserPhone, email, phoneNum } = detail;
     if(certPic){
       this.setData({
         fileList: [
@@ -100,7 +121,7 @@ Page({
       })
     }
     this.setData({
-      pinyinLast, pinyinFirst, certPic, relation: relation || '本人', club, nation, trueName, cardType, gender, birthDate: dayjs(birthDate).format("YYYY-MM-DD"), bloodType, tSize, region, addr, cardNo, contactUser, contactUserPhone, email, phoneNum
+      wechatId, pinyinLast, pinyinFirst, certPic, relation: relation || '本人', club, nation, trueName, cardType, gender, birthDate: dayjs(birthDate).format("YYYY-MM-DD"), bloodType, tSize, region, addr, cardNo, contactUser, contactUserPhone, email, phoneNum
     })
     
   },
