@@ -89,7 +89,7 @@ Page({
     this.setData({
       detail
     });
-    const { certPic, relation, club, nation, trueName, cardType, gender, birthDate, bloodType, tSize, region, addr, cardNo, contactUser, contactUserPhone, email, phoneNum } = detail;
+    const { pinyinLast, pinyinFirst, certPic, relation, club, nation, trueName, cardType, gender, birthDate, bloodType, tSize, region, addr, cardNo, contactUser, contactUserPhone, email, phoneNum } = detail;
     if(certPic){
       this.setData({
         fileList: [
@@ -100,7 +100,7 @@ Page({
       })
     }
     this.setData({
-      certPic, relation: relation || '本人', club, nation, trueName, cardType, gender, birthDate: dayjs(birthDate).format("YYYY-MM-DD"), bloodType, tSize, region, addr, cardNo, contactUser, contactUserPhone, email, phoneNum
+      pinyinLast, pinyinFirst, certPic, relation: relation || '本人', club, nation, trueName, cardType, gender, birthDate: dayjs(birthDate).format("YYYY-MM-DD"), bloodType, tSize, region, addr, cardNo, contactUser, contactUserPhone, email, phoneNum
     })
     
   },

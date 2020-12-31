@@ -198,9 +198,9 @@ Component({
       };
     },
     selectCate(value){
-      const { cates } = this.data;
-      const selectedCateId = cates.findIndex(item=>item._id === value);
-      const selectedCate = cates.find(item=>item._id === value);
+      const { allCates } = this.data;
+      const selectedCateId = allCates.findIndex(item=>item._id === value);
+      const selectedCate = allCates.find(item=>item._id === value);
       this.setData({
         selectedCateId
       });
@@ -213,7 +213,7 @@ Component({
         racePic: this.properties.raceDetail.picUrls,
         cateIndex: selectedCateId,
         cateId: value,
-        cateTitle: this.data.cates[selectedCateId].title,
+        cateTitle: allCates[selectedCateId].title,
         groupType: this.data.selectedGroupType,
         groupText: this.data.selectedGroupText
       };
@@ -255,7 +255,6 @@ Component({
       const relayCates = cates.slice().find(item=>item.type === 'relay');
       const familyCates = cates.slice().find(item=>item.type === 'family');
       
-      cates = cates.filter(item=>item.type === 'individual');
       this.setData({
         selectedGroupType: type,
         selectedGroupText,

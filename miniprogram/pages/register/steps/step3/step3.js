@@ -115,7 +115,10 @@ Component({
       const { coupon } = e.detail.value;
       const detail = await getCouponDetail(coupon);
       if(detail){
-        this.checkCouponValid(detail);
+        const valided = this.checkCouponValid(detail);
+        if(!valided){
+          return;
+        }
         const { userId, userInfo } = this.data;
         const param = {
           id: detail._id,
@@ -179,7 +182,10 @@ Component({
           break;
         default:
           const detail = await getCouponDetail(couponId);
-          this.checkCouponValid(detail);
+          const valid = this.checkCouponValid(detail);
+          if(!valid){
+            return;
+          }
           const discountFee = detail.type === 'free' ? _order.totalFee : detail.value;
           const margin = _order.totalFee - detail.value < 0 ? 0 : _order.totalFee - detail.value;
           const paidFee = detail.type === 'free' ? 0 : margin;
@@ -201,36 +207,39 @@ Component({
       })
       const {
         userId,
-        userInfo
-      } = app.globalData;
-      this.setData({
-        userId,
         userInfo,
-      })
-      let coupons = await getMyCoupons(userId);
-      coupons = coupons.filter(item=>{
-        return item.isActive && !item.isUsed && dayjs().isBefore(dayjs(item.expiredDate))
-      });
-      let actions = [];
-      const { order } = getApp().globalData;
-      if(coupons.length){
-        actions = coupons.map(item=> {
-          return {
-            name: item.title,
-            couponId: item._id,
-            subname: '优惠金额：' + (item.type === 'free' ? '全免' : item.value),
-            disabled: item.isActive || item.isUsed
-          };
+        order
+      } = app.globalData;
+      if(order){
+        const { raceId, cateId } = order;
+        this.setData({
+          userId,
+          userInfo,
+        })
+        let coupons = await getMyCoupons(userId);
+        coupons = coupons.filter(item=>{
+          const isRaceValid = !item.raceId || (item.raceId && item.raceId === raceId);
+          const isCateValid = !item.cateId || (item.cateId && item.cateId === cateId);
+          return item.isActive && !item.isUsed && dayjs().isBefore(dayjs(item.expiredDate)) && isRaceValid && isCateValid
         });
-        actions.push({
-          type: 'none',
-          name: '不使用优惠券'
-        });
-        const couponValue = coupons[0].value;
-        const isFree = coupons[0].type === 'free';
-        const discountFee = isFree ? order.totalFee : couponValue;
-        const paidFee = isFree ? 0 : order.totalFee - couponValue < 0 ? 0 : order.totalFee - couponValue;
-        if(order){
+        let actions = [];
+        if(coupons.length){
+          actions = coupons.map(item=> {
+            return {
+              name: item.title,
+              couponId: item._id,
+              subname: '优惠金额：' + (item.type === 'free' ? '全免' : item.value),
+              disabled: item.isActive || item.isUsed
+            };
+          });
+          actions.push({
+            type: 'none',
+            name: '不使用优惠券'
+          });
+          const couponValue = coupons[0].value;
+          const isFree = coupons[0].type === 'free';
+          const discountFee = isFree ? order.totalFee : couponValue;
+          const paidFee = isFree ? 0 : order.totalFee - couponValue < 0 ? 0 : order.totalFee - couponValue;
           this.setData({
             coupon: `${coupons[0].title}`,
             discountFee,
@@ -245,6 +254,17 @@ Component({
             couponId: coupons[0]._id,
             discountFee,
             paidFee
+          })
+        }else{
+          const discountFee = 0;
+          const paidFee = order.totalFee;
+          this.setData({
+            discountFee,
+            paidFee
+          }, () => {
+            wx.hideLoading({
+              success: (res) => {},
+            })
           })
         }
       }else{
