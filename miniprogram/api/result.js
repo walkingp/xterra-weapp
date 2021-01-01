@@ -1,8 +1,13 @@
 import { getCollectionByWhere, getSingleCollectionByWhere } from "../utils/cloud"
 
 export const searchResultByNameOrPhone = async (key, raceId) => {
-  const data = await getCollectionByWhere({ dbName: 'race-result', filter: { phoneNum: key, raceId } });
-  return data.length ? data[0] : null;
+  const data = await getSingleCollectionByWhere({ dbName: 'race-result', filter: { phoneNum: key, raceId } });
+  return data;
+}
+
+export const searchPloggingResultByNameOrPhone = async (key, raceId) => {
+  const data = await getSingleCollectionByWhere({ dbName: 'start-list', filter: { phoneNum: key, raceId } });
+  return data;
 }
 
 export const getResultDetail = async id => {

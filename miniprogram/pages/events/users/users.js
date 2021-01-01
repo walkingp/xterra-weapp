@@ -37,6 +37,9 @@ Page({
     value: 20,
     stats: '已报名'
   },
+  updateStatus(e){
+    const { id } = e.currentTarget.dataset;
+  },
   setFinished() {
     const {
       cateId

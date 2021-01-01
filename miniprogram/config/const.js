@@ -80,7 +80,7 @@ export const emailTemplateType = {
 }
 
 export const raceResultStatus = {
-  notStarted: {
+  notStart: {
     title: '比赛未开始',
     value: 'notStart'
   },
@@ -111,5 +111,9 @@ export const raceResultStatus = {
   penalty: {
     title: '罚时',
     value: 'penalty'
+  },
+  norecord: {
+    title: '无成绩记录',
+    value: 'norecord'
   }
 }

@@ -14,16 +14,31 @@ Page({
     width: 100,
     height: 100,
     certUrl: null,
-    fields: []
+    fields: [],
+    isPlogging: false,
+    type: null,
+    isMillionForrest: false
   },
-
+  redirect(){
+    const { isMillionForrest, raceId } = this.data;
+    const url = isMillionForrest ? `/pages/events/cert/cert?raceId=${raceId}` : `/pages/events/cert/cert?raceId=${raceId}&type=million-forrest`;
+    wx.navigateTo({
+      url
+    });
+  },
+  backTo(){
+    wx.navigateBack({
+      delta: 1,
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    const { id, raceId } = options;
+    const { id, raceId, type } = options;
     this.setData({
-      id, raceId
+      id, raceId, type,
+      isMillionForrest: type === 'million-forrest'
     })
     this.fetchRaceDetail(raceId);
   },
@@ -44,8 +59,15 @@ Page({
 
     let cert = null;
     const raceDetail = await getRaceDetail(id);
-    if(raceDetail.type === 'X-Plogging'){
-      cert = await getPloggingTemplate()
+    const isPlogging = raceDetail.type === 'X-Plogging';
+    this.setData({
+      isPlogging
+    })
+    if(isPlogging){
+      const temps = await getPloggingTemplate();
+      const { isMillionForrest } = this.data;
+      // 百万森林
+      cert = isMillionForrest ? temps[1] : temps[0];
     }else{
       cert = await getCertTemplate(raceDetail._id);
     }
@@ -66,7 +88,7 @@ Page({
     })
   },
   async formatFields(){
-    const { fields, id } = this.data;
+    let { fields, id, isMillionForrest } = this.data;
     const result = await getResultDetail(id);
     fields.map(item=>{
       switch(item.key){
@@ -88,6 +110,16 @@ Page({
       }
       return item;
     })
+    if(isMillionForrest){
+      fields = [{
+        color: "#000",
+        fontSize: 80,
+        key: "trueName",
+        posX: 528,
+        posY: 420,
+        value: result.trueName
+      }]
+    }
     this.setData({
       fields
     })

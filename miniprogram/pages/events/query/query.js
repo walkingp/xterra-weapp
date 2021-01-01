@@ -1,6 +1,7 @@
 const { getMyProfiles, getRegistrationByPhoneNum, getRaceDetail, getStartedUsersByRaceId } = require("../../../api/race");
 const dayjs = require("dayjs");
-const { searchResultByNameOrPhone } = require("../../../api/result");
+const { searchResultByNameOrPhone, searchPloggingResultByNameOrPhone } = require("../../../api/result");
+const { raceResultStatus } = require("../../../config/const");
 const app = getApp();
 Page({
 
@@ -45,9 +46,23 @@ Page({
       title: '查询中……',
     })
     const { phoneNum } = e.detail.value;
-    const { type, raceId } = this.data;
+    const { type, raceId, isPlogging } = this.data;
     if(type === 'result'){
-      const searchResult = await searchResultByNameOrPhone(phoneNum, raceId);
+      let searchResult = null;
+      if(isPlogging){
+        searchResult = await searchPloggingResultByNameOrPhone(phoneNum, raceId);
+        const { finishedStatus } = searchResult;
+        if(finishedStatus !== raceResultStatus.done.value){
+          wx.showToast({
+            icon: 'none',
+            title: '没有查询到完赛记录',
+          })
+          return;
+        }
+        searchResult.statusText = raceResultStatus[finishedStatus].title;
+      }else{
+        searchResult = await searchResultByNameOrPhone(phoneNum, raceId);
+      }
       console.log(searchResult)
       this.setData({
         searchResult
@@ -110,6 +125,11 @@ Page({
     })
     const { raceId } = this.data;
     const users = await getStartedUsersByRaceId(raceId);
+    users.map(item => {
+      const status = item.finishedStatus;
+      item.statusText = raceResultStatus[status].title;
+      return item;
+    });
     this.setData({
       users
     }, () => {
