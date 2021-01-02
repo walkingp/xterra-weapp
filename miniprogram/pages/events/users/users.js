@@ -8,7 +8,8 @@ const {
   getRaceCatesList,
   getAllRaces
 } = require("../../../api/race");
-const {updateStartListStatus } = require("../../../api/result");
+const {updateStartListStatus, updateStartListStatusByUser } = require("../../../api/result");
+const { raceResultStatus } = require("../../../config/const");
 // miniprogram/pages/events/users/users.js
 Page({
 
@@ -16,6 +17,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    startListId: null,
     raceId: null,
     cateId: null,
     detail: null,
@@ -35,10 +37,29 @@ Page({
     }],
     show: false,
     value: 20,
-    stats: '已报名'
+    stats: '已报名',
+    buttonText: '置为已完成'
   },
-  updateStatus(e){
-    const { id } = e.currentTarget.dataset;
+  async updateStatus(e){
+    wx.showLoading({
+      title: '操作中',
+    })
+    const { detail } = this.data;
+    let { finishedStatus, userId, cateId } = detail;
+    if(finishedStatus === raceResultStatus.done.value){
+      finishedStatus = raceResultStatus.DNS.value;
+    }else if(finishedStatus === raceResultStatus.notStart.value || finishedStatus === raceResultStatus.DNS.value){
+      finishedStatus = raceResultStatus.done.value;
+    }
+    const data = await updateStartListStatusByUser({cateId, userId,finishedStatus});
+    this.fetchCates();
+    wx.hideLoading({
+      success: (res) => {
+        this.setData({
+          show: false
+        })
+      },
+    })
   },
   setFinished() {
     const {
@@ -161,8 +182,12 @@ Page({
       users
     } = this.data;
     const detail = users.find(item => item._id === id);
+    detail.statusText = raceResultStatus[detail.finishedStatus].title;
+    const buttonText = detail.finishedStatus === raceResultStatus.notStart.value || detail.finishedStatus === raceResultStatus.notStart.value ? '置为已完成' : '置为未完成'
     this.setData({
+      startListId: id,
       show: true,
+      buttonText,
       detail
     })
   },

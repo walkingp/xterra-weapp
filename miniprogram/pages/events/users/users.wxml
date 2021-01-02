@@ -1,6 +1,6 @@
 <view class="container">
   <van-dropdown-menu class="top">
-    <van-dropdown-item bind:change="onChange" data-type="race" value="{{ raceValue }}" options="{{ races }}" />
+    <van-dropdown-item bind:change="onChange" disabled="{{isSuperAdmin}}" data-type="race" value="{{ raceValue }}" options="{{ races }}" />
     <van-dropdown-item bind:change="onChange" disabled="{{raceValue===''}}" data-type="cate" value="{{ cateValue }}"
       options="{{ cates }}" />
   </van-dropdown-menu>
@@ -27,6 +27,7 @@
               <view class="td td4">{{item.phoneNum}}</view>
               <view class="td td5">
                 <van-icon name="success" wx:if="{{item.finishedStatus === 'done'}}" />
+                <van-icon name="question-o" wx:if="{{item.finishedStatus === 'notStart'}}" />
                 <van-icon name="cross" wx:if="{{item.finishedStatus === 'DNS'}}" />
               </view>
             </view>
@@ -53,7 +54,7 @@
 <van-popup show="{{ show }}" closeable position="bottom" bind:close="onClose">
   <van-cell-group title="报名明细">
     <van-cell title="报名时间" value="{{detail.regDate}}" border="{{ false }}" />
-    <van-cell title="状态" value="{{detail.finishedStatus}}" border="{{ false }}" />
+    <van-cell title="状态" value="{{detail.statusText}}" border="{{ false }}" />
     <van-cell title="姓名" value="{{detail.trueName}}" border="{{ false }}" />
     <van-cell title="微信id" value="{{detail.wechatid}}" bindtap="copy" data-text="{{detail.wehcatid}}"
       border="{{ false }}" />
@@ -80,6 +81,6 @@
     <van-cell title="是否参加过X-Plogging" value="{{detail.isPlogging}}" border="{{ false }}" />
   </van-cell-group>
   <van-cell-group>
-    <van-cell><button type="primary" class="button" data-id="{{}}" bindtap="updateStatus">置为已完成</button></van-cell>
+    <van-cell><button type="primary" class="button" bindtap="updateStatus">{{buttonText}}</button></van-cell>
   </van-cell-group>
 </van-popup>

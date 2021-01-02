@@ -29,3 +29,19 @@ export const updateStartListStatus = async ({cateId, finishedStatus = "done"}) =
     }).catch(reject)
   })
 }
+
+export const updateStartListStatusByUser = async ({cateId, userId, finishedStatus = "done"}) => {
+  return new Promise((resolve, reject) => {
+    wx.cloud.callFunction({
+      name: 'updateStartList',
+      data: {
+        action: 'single',
+        userId,
+        cateId,
+        finishedStatus
+      }
+    }).then(res => {
+      resolve(res.result);
+    }).catch(reject)
+  })
+}
