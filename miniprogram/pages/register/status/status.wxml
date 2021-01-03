@@ -5,7 +5,7 @@
   </view>
   <navigator url="/pages/events/detail/detail?id={{detail.raceId}}" class="box flex align-center space-between">
     <view class="flex-auto flex align-center">
-      <image src="./../../../images/avatar@2x.png" class="image"></image>
+      <image src="{{detail.racePic[0]}}" mode="aspectFill" class="image"></image>
       <view class="text flex column">
         <text class="title">{{detail.raceTitle}}</text>
         <text class="cate">{{detail.cateTitle}}</text>
@@ -27,6 +27,23 @@
       </navigator>
     </view>
   </view>
+  <view class="box" wx:if="{{detail.teamTitle}}">
+    <view class="title">团队：{{detail.teamTitle}}</view>
+    <view class="list">
+      <view class="cell flex align-center" wx:for="{{members}}" wx:key="_id">
+        <view class="flex-auto">
+          <text>{{item.trueName}}</text>
+          <text class="gray">（{{item.phoneNum}}）</text>
+        </view>
+        <view class="flex-none">
+          <text class="gray">（{{item.isTeamLeader ? '领队' : '队员'}}）</text>
+        </view>
+      </view>
+    </view>
+    <view class="ft flex justify-center align-center">
+      <button class="button mini" open-type="share">邀请报名</button>
+    </view>
+  </view>
   <view class="box info">
     <view class="title">报名信息：</view>
     <view class="list">
@@ -46,6 +63,10 @@
       <view class="cell">
         <label>报名组别：</label>
         <text>{{detail.cateTitle}}</text>
+      </view>
+      <view class="cell" wx:if="{{detail.teamTitle}}">
+        <label>团队名：</label>
+        <text>{{detail.teamTitle}}</text>
       </view>
       <view class="cell">
         <label>报名费用：</label>

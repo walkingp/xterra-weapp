@@ -53,7 +53,7 @@ Page({
     detail.cates = detail.catesName ? detail.catesName.join('/') : '/';
     detail.isEnded = dayjs(new Date(detail.raceDate)).isBefore(dayjs());// 是否截止
     detail.raceDate = dayjs(new Date(detail.raceDate)).format("YYYY年MM月DD日");
-    detail.endRegTime = dayjs(new Date(detail.endRegTime)).format("YYYY年MM月DD日 HH:mm:ss");
+    detail.endRegTimeStr = dayjs(new Date(detail.endRegTime)).format("YYYY年MM月DD日 HH:mm:ss");
     detail.regStartTimeStr = dayjs(new Date(detail.regStartTime)).format("YYYY年MM月DD日 HH:mm:ss");
     detail.showAdminssion = detail.admission && detail.admission !== '<p>欢迎使用富文本编辑器</p>';
     detail.admission = app.towxml(detail.admission,'html'); // 报名须知
@@ -116,8 +116,10 @@ Page({
     });
     
     // 最下方按钮状态 有组别 && (报名状态为“报名中” || 报名开始时间)
-    const regBtnEnabled = cates.length > 0 && (detail.status === '报名中' || dayjs().isAfter(dayjs(new Date(detail.regStartTime))));
-
+    const isAfterStartTime = dayjs().isAfter(dayjs(new Date(detail.regStartTime)));
+    const isBeforeEndTime = dayjs().isBefore(dayjs(new Date(detail.endRegTime)));
+    const isDateValid = isAfterStartTime && isBeforeEndTime;
+    const regBtnEnabled = cates.length > 0 && (detail.status === '报名中' || isDateValid);
     const type =  ['越野跑', '铁人三项', '山地车'].indexOf(detail.type) >= 0 ? '赛事' : '活动';
     this.setData({
       regBtnEnabled,

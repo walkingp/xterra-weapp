@@ -92,7 +92,7 @@ function updateStatuses(detail, callback){
     console.log(res);
     wx.showToast({
       icon: 'success',
-      title: '支付成功',
+      title: '报名成功',
       success: async function(){
         if(detail.couponId){
           await updateCouponStatus(detail.couponId);
@@ -124,18 +124,20 @@ async function updateCouponStatus(id){
   }
 }
 function saveStartlist(detail){
-  const { profiles, id, orderNum, userId, userName, userInfo, status, statusText, orderType, raceId, raceDate, raceType, raceTitle, racePic, cateId, cateTitle, groupType, groupText, out_trade_no } = detail;
-
+  const { isTeamLeader, teamTitle, profiles, id, orderNum, userId, userName, userInfo, orderType, raceId, raceDate, raceType, raceTitle, racePic, cateId, cateTitle, groupType, groupText, out_trade_no } = detail;
   const db = wx.cloud.database();
   profiles.forEach(async item=>{
     delete item._openid;
+    delete item._id;
     const profileId = item._id;
     console.log(item);
     const result = await db.collection("start-list").add({
       data: {
         ...item,
+        status: orderStatus.paid.status,
+        statusText: orderStatus.paid.statusText, 
         createdAt: new Date(),
-        id, orderNum, profileId, userId, userName, userInfo, status, statusText, orderType, raceId, raceDate, raceType, raceTitle, racePic, cateId, cateTitle, groupType, groupText, out_trade_no
+        isTeamLeader, teamTitle, id, orderNum, profileId, userId, userName, userInfo, orderType, raceId, raceDate, raceType, raceTitle, racePic, cateId, cateTitle, groupType, groupText, out_trade_no
       }
     });
     console.log(result)

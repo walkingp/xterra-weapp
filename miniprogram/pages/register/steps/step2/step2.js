@@ -56,7 +56,16 @@ Component({
       });
       app.globalData.order.profiles = profiles;
       app.globalData.order.profileCount = profiles.length;
-      const totalFee = app.globalData.order.price * profiles.length;
+      let totalFee = 0;
+      const { groupType, isTeamLeader } = app.globalData.order;
+      if(groupType === 'individual'){
+        totalFee = app.globalData.order.price * profiles.length;
+      }else if(groupType === 'relay'){
+        totalFee = isTeamLeader ? app.globalData.order.price : 0;
+      }else{
+        totalFee = app.globalData.order.price;
+      }
+      
       app.globalData.order.totalFee = totalFee.toFixed(2);
       app.globalData.order.paidFee = totalFee.toFixed(2);
       app.globalData.order.discountFee = 0;

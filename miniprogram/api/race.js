@@ -1,3 +1,4 @@
+import { orderStatus } from "../config/const";
 import { getPaginations, getCollectionById, getCollectionByWhere, getSingleCollectionByWhere, hideCollectionById } from "../utils/cloud"
 const dayjs = require("dayjs");
 
@@ -17,8 +18,8 @@ export const getBannerList = async ( position = 'index', size = 5) => {
   return data;
 }
 
-export const checkIsRegistered = async (cateId, profileId) => {
-  const existed = await getSingleCollectionByWhere({ dbName: 'start-list', filter: { cateId, profileId }});
+export const checkIsRegistered = async (cateId, cardNo ) => {
+  const existed = await getSingleCollectionByWhere({ dbName: 'start-list', filter: { cateId, cardNo }});
   return existed ? true : false;
 }
 
@@ -45,7 +46,8 @@ export const getRaceCateTeamList = async ( raceId, size = 100) => {
     filter: {
       raceId,
       groupType: 'relay',
-      status: 0
+      status: orderStatus.paid.status,
+      isTeamLeader: true
     },
     orderBy: {
       addedDate: 'asc'
@@ -54,6 +56,22 @@ export const getRaceCateTeamList = async ( raceId, size = 100) => {
     pageSize: size
   });
   return teams;
+};
+export const checkTeamExisted = async ({cateId, teamTitle}) => {
+  debugger
+  const teams = await getCollectionByWhere({
+    dbName: 'registration',
+    filter: {
+      cateId,
+      groupType: 'relay',
+      status: orderStatus.paid.status,
+      teamTitle
+    }
+  });
+  if(teams.length){
+    return true;
+  }
+  return false;
 };
 
 export const getRaceCatesList = async ( raceId, size = 20) => {
@@ -78,8 +96,18 @@ export const getRaceCatesList = async ( raceId, size = 20) => {
           cate.price = cate.earlierBirdPrice;
           cate.priceLabel = '早早鸟价';
         }else{
-          cate.price = cate.earlyBirdPrice;
-          cate.priceLabel = '早鸟价';
+          if(cate.enableEarlyBirdPrice){
+            if(now.isBefore(cate.earlyPriceEndTime)){
+              cate.price = cate.earlyBirdPrice;
+              cate.priceLabel = '早鸟价';
+            }else{
+              cate.price = cate.regPrice;
+              cate.priceLabel = '正常价';
+            }
+          }else{
+            cate.price = cate.regPrice;
+            cate.priceLabel = '正常价';
+          }
         }
       }else if(cate.enableEarlyBirdPrice){
         if(now.isBefore(cate.earlyPriceEndTime)){
@@ -170,7 +198,7 @@ export const getMyProfilesWithCate = async (userId, cateId, size = 20) => {
   })
   await Promise.all(
     data.map(async item => {
-      const registered = await checkIsRegistered(cateId, item._id)
+      const registered = await checkIsRegistered(cateId, item.cardNo)
       item.registered = registered;
       return item;
     })

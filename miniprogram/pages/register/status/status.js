@@ -2,6 +2,7 @@ const { getRegistrationDetail, updateOrderStatus, getRaceDetail } = require("../
 const dayjs = require("dayjs");
 const { orderStatus } = require("../../../config/const");
 const { payNow } = require("../../../api/pay");
+const { getUserListByTeam } = require("../../../api/result");
 const app = getApp();
 Page({
 
@@ -16,6 +17,7 @@ Page({
     detail: null,
     showRefundBtn: false,
     showPayBtn: false,
+    members: []
   },
 
   /**
@@ -66,7 +68,18 @@ Page({
         });
       }
     }
+    if(detail.teamTitle){
+      this.fetchTeamList();
+    }
     console.log(detail);
+  },
+  async fetchTeamList(){
+    const { detail } = this.data;
+    const { cateId, teamTitle } = detail;
+    const members = await getUserListByTeam({ cateId, teamTitle });
+    this.setData({
+      members
+    })
   },
   redirect(e){
     const { url } = e.currentTarget.dataset;
@@ -79,5 +92,17 @@ Page({
     payNow(detail, () => {
       this.fetch(detail._id);
     });
+  },
+  onShareAppMessage: function( options ){
+    const { detail } = this.data;
+    if( options.from == 'button' ){
+      const path = `/pages/register/register?id=${detail.raceId}&type=relay&teamTitle=${detail.teamTitle}`;
+      console.log(path)
+      return {
+        title: `邀请你加入${detail.raceTitle}: ${detail.teamTitle}`,
+        imageUrl: detail.racePic[0],
+        path
+      }
+　　}
   }
 })

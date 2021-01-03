@@ -32,3 +32,6 @@
 .contact{
   margin-top: 40rpx;
 }
+.margin-left-xl{
+  margin-left: 20rpx;
+}

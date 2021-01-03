@@ -1,5 +1,5 @@
 const {
-  getRaceCatesList, getRaceCateTeamList
+  getRaceCatesList, getRaceCateTeamList, checkTeamExisted
 } = require("../../../../api/race");
 const { raceGroups } = require("../../../../config/const");
 
@@ -21,6 +21,9 @@ Component({
     },
     raceDetail: {
       type: Object
+    },
+    _teamTitle: {
+      type: String
     }
   },
   observers: {
@@ -36,6 +39,15 @@ Component({
           selectedCateId: cateId
         })
         this.triggerEvent('onComplete', { prevEnabled: false, nextEnabled: true });
+      }
+    },
+    '_teamTitle': function (_teamTitle) {
+      if(_teamTitle){
+        this.setData({
+          teamTitle: _teamTitle,
+          isInvited: true,
+          groupUserType: 'member'
+        })
       }
     }
   },
@@ -60,13 +72,14 @@ Component({
     familyTeamTitle: null,
     groupUserType: 'owner',
     actions: [],
+    allTeams: [],
     showTeams: false,
     teamTitle: '请选择',
     focus: true,
     relayCate: null,
-    familyCate: null
+    familyCate: null,
+    isInvited: false
   },
-
   /**
    * 组件的方法列表
    */
@@ -87,6 +100,22 @@ Component({
       this.setData({
         teamTitle: name
       })
+      const { relayCate } = this.data;
+      app.globalData.order = {
+        type: this.properties.raceDetail.type,
+        price: 0, // 队员无需支付费用
+        raceId: this.properties.raceId,
+        raceTitle: this.properties.raceDetail.title,
+        racePic: this.properties.raceDetail.picUrls,
+        raceType: this.properties.raceDetail.type,
+        raceDate: this.properties.raceDetail.raceDate,
+        cateId: relayCate._id,
+        cateTitle: relayCate.title,
+        teamTitle: name,
+        isTeamLeader: this.data.groupUserType === 'owner',
+        groupType: this.data.selectedGroupType,
+        groupText: this.data.selectedGroupText
+      };
       
       const agreed = this.data.checked && name !== null;
       this.triggerEvent('onComplete', { prevEnabled: true, nextEnabled: agreed });
@@ -131,7 +160,7 @@ Component({
         case 'relay':
           valid = valid && (groupUserType === 'owner' ? !!relayTeamTitle : teamTitle !== '请选择');
           break;
-        case 'individual':
+        case 'family':
           valid = valid && !!familyTeamTitle;
           break;
       }
@@ -141,7 +170,9 @@ Component({
     changeGroup(e){
       const { type, title } = e.currentTarget.dataset;
       const { allCates } = this.data;
-      const cates = allCates.filter(item=> item.type === type);  
+      const cates = allCates.filter(item=> item.type === type);
+      if(type === 'relay' || type === 'family'){
+      }
       this.setData({
         cates,
         selectedGroupType: type,
@@ -154,20 +185,29 @@ Component({
       this.selectCate(value);
     },
     // 团队报名
-    saveTeamTitle(e){
+    async saveTeamTitle(e){
       const { value } = e.detail;
       if(!value){
         return;
       }
-      const { group } = e.currentTarget.dataset;
       const { allCates, checked, groupUserType } = this.data;
+      const { group } = e.currentTarget.dataset;
       const relayCate = allCates.find(item=>item.type === group);
+      const existed = await checkTeamExisted({ cateId: relayCate._id, teamTitle: value });
+      
+      if(existed){
+        wx.showToast({
+          title: '此队员已经存在，请更换其他队名',
+          icon: 'none'
+        })
+        return;
+      }
       if(group === 'relay'){ // 团队
         // 此处区分团队负责和或者加入团队
         if(groupUserType === 'owner'){
           this.saveOrderData(relayCate, value);
         }else if(groupUserType === 'member'){
-
+          this.saveOrderData(relayCate, value);
         }
         this.setData({
           relayTeamTitle: value
@@ -193,6 +233,7 @@ Component({
         cateId: relayCate._id,
         cateTitle: relayCate.title,
         teamTitle: value,
+        isTeamLeader: this.data.groupUserType === 'owner',
         groupType: this.data.selectedGroupType,
         groupText: this.data.selectedGroupText
       };
@@ -223,7 +264,7 @@ Component({
     },
     async fetchTeams(raceId){
       const teams = await getRaceCateTeamList(raceId);
-      const actions = teams.map(item => {
+      const actions = teams.slice().map(item => {
         return {
           name: item.teamTitle,
           subname: `已报${item.profiles.length}人`,
@@ -231,6 +272,8 @@ Component({
         }
       });
       this.setData({
+        teams,
+        allTeams: teams,
         actions
       })
     },
@@ -252,9 +295,22 @@ Component({
       const { type } = this.properties;
       const selectedGroupText = raceGroups[type].groupText;
 
-      const relayCates = cates.slice().find(item=>item.type === 'relay');
-      const familyCates = cates.slice().find(item=>item.type === 'family');
+      const relayCate = cates.slice().find(item=>item.type === 'relay');
+      const familyCate = cates.slice().find(item=>item.type === 'family');
       
+      const { selectedCateId } = this.data;
+      if(!selectedCateId){
+        let selectedCateId = null;
+        if(type === 'relay'){
+          selectedCateId = relayCate._id;
+        }else if(type === 'family'){
+          selectedCateId = familyCate._id;
+        }
+        this.setData({
+          selectedCateId
+        })
+      }
+
       this.setData({
         selectedGroupType: type,
         selectedGroupText,
@@ -264,8 +320,8 @@ Component({
         hasRelay,
         hasFamily,
         cates: cates.filter(item=>item.type === 'individual'),
-        relayCates,
-        familyCates
+        relayCate,
+        familyCate
       }, () => {
         const { cateId } = that.data;
         if(cateId){

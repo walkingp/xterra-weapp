@@ -110,7 +110,7 @@
         {
           "name": "报名状态",
           "pathName": "pages/register/status/status",
-          "query": "id=023ce9555fe56500000bf3bb501f1270",
+          "query": "id=b45a21d55ff1960c036ded733a1d6194",
           "scene": null
         },
         {
@@ -213,6 +213,12 @@
           "name": "报名名单",
           "pathName": "pages/events/users/users",
           "query": "id=0bcbdde05fc3a636006efd9971c76de4",
+          "scene": null
+        },
+        {
+          "name": "邀请报名页面",
+          "pathName": "pages/register/register",
+          "query": "id=0bcbdde05fc3a636006efd9971c76de4&type=relay&teamTitle=米高测试3",
           "scene": null
         }
       ]

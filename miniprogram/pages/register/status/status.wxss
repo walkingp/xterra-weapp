@@ -17,6 +17,7 @@ image.icon{
   width: 196rpx;
   height: 145rpx;
   border-radius: 10rpx;
+  margin-right: 20rpx;
 }
 .info{
   margin-top: 20rpx;

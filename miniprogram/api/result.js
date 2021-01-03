@@ -30,6 +30,11 @@ export const updateStartListStatus = async ({cateId, finishedStatus = "done"}) =
   })
 }
 
+export const getUserListByTeam = async ({cateId, teamTitle}) => {
+  const data = await getCollectionByWhere({ dbName: 'start-list', filter: { teamTitle, cateId } });
+  return data;
+}
+
 export const updateStartListStatusByUser = async ({cateId, userId, finishedStatus = "done"}) => {
   return new Promise((resolve, reject) => {
     wx.cloud.callFunction({

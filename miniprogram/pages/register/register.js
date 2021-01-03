@@ -18,6 +18,7 @@ Page({
     order: null,
     prevEnabled: true,
     nextEnabled: false,
+    teamTitle: null,
     steps: [
       {
         text: '选择组别',
@@ -91,6 +92,7 @@ Page({
     order.statusText = orderStatus.pending.statusText;
     order.isActive = true;
     order.orderType = '微信支付';
+    debugger
     wx.cloud.callFunction({
       name: 'saveOrder',
       data: {
@@ -141,9 +143,9 @@ Page({
           step
         });
       }
-      const { id, cateId, type } = options;
+      const { id, cateId, type, teamTitle } = options;
       this.setData({
-        id, cateId, type: type || 'individual'
+        id, cateId, type: type || 'individual', teamTitle
       });
       this.fetch(id);
     }).catch(err=>{
@@ -192,11 +194,20 @@ Page({
     /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-    const { detail } = this.data;
+  onShareAppMessage: function (options) {
+    const { detail, order } = this.data;
+    if( options.from == 'button' ){
+      const path = `/pages/register/register?id=${order.raceId}&type=relay&teamTitle=${order.teamTitle}`;
+      console.log(path)
+      return {
+        title: `邀请你加入${order.raceTitle}: ${order.teamTitle}`,
+        imageUrl: order.racePic[0],
+        path
+      }
+　　}
     return {
       title: detail.title,
-      imageUrl: "",
+      imageUrl: detail.picUrls[0],
       path: `/pages/register/register?id=${detail._id}`
     }
   }

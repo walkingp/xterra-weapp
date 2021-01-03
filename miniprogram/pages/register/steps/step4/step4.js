@@ -95,6 +95,6 @@ Component({
       } = e.currentTarget.dataset;
       app.globalData.step = 0;
       this.receiveMessage();
-    },
+    }
   }
 })

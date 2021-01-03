@@ -97,6 +97,13 @@ Page({
   },
   onCardNoChange(e){
     const idCard = e.detail.value;
+    const { myProfiles } = this.data;
+    if(myProfiles.find(item => item.cardNo === idCard)){
+      wx.showToast({
+        title: '此证件号码已经添加过',
+        icon: 'none'
+      })
+    }
     const gender = this.getGenderFromIdCard(idCard);
     const birthDate = this.getBirthdayFromIdCard(idCard);
     this.setData({
@@ -144,7 +151,7 @@ Page({
   async saveData(e){
     let profile = e.detail.value;
     const { trueName, cardNo,phoneNum, email } = profile;
-    const { id, certPic, relation, cardType, gender, birthDate, bloodType, tSize, region, userId, userInfo, raceId, action, plogging } = this.data;
+    const { myProfiles, id, certPic, relation, cardType, gender, birthDate, bloodType, tSize, region, userId, userInfo, raceId, action, plogging } = this.data;
     if(!trueName){
       wx.showToast({
         title: '姓名不可为空',
@@ -155,6 +162,13 @@ Page({
     if(!cardNo){
       wx.showToast({
         title: '证件号码不可为空',
+        icon: 'none'
+      })
+      return;
+    }
+    if(myProfiles.find(item => item.cardNo === cardNo)){
+      wx.showToast({
+        title: '此证件号码已经添加过',
         icon: 'none'
       })
       return;

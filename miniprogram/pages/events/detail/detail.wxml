@@ -30,7 +30,7 @@
           </view>
           <view class="cell">
             <text>报名截止时间：</text>
-            <text class="bold">{{detail.endRegTime}}</text>
+            <text class="bold">{{detail.endRegTimeStr}}</text>
           </view>
         </view>
       </view>
