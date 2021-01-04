@@ -188,7 +188,7 @@ Component({
           }
           const discountFee = detail.type === 'free' ? _order.totalFee : detail.value;
           const margin = _order.totalFee - detail.value < 0 ? 0 : _order.totalFee - detail.value;
-          const paidFee = detail.type === 'free' ? 0 : margin;
+          const paidFee = detail.type === 'free' ? 0 : +margin.toFixed(2);
           this.setData({
             discountFee,
             paidFee
