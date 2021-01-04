@@ -101,6 +101,13 @@ Component({
         teamTitle: name
       })
       const { relayCate } = this.data;
+      if(relayCate.limit > 0 && relayCate.users.length >= relayCate.limit){
+        wx.showToast({
+          title: '当前团队已报满',
+          icon: 'none'
+        });
+        return;
+      }
       app.globalData.order = {
         type: this.properties.raceDetail.type,
         price: 0, // 队员无需支付费用
