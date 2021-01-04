@@ -193,6 +193,9 @@ Page({
   },
 
   async exportCSV() {
+    wx.showToast({
+      title: '加载中……',
+    })
     const that = this;
     const {
       cateId
@@ -203,7 +206,6 @@ Page({
         cateId
       },
       success(res) {
-        debugger
         if(!res.result.fileList){
           wx.showToast({
             icon: 'none',
@@ -211,10 +213,28 @@ Page({
           })
           return;
         }
-        const fileUrl = res.result.fileList[0].tempFileURL;
-        console.log(fileUrl)
+        const url = res.result.fileList[0].tempFileURL;
+        wx.downloadFile({
+          // 示例 url，并非真实存在
+          url,
+          success: function (res) {
+            const filePath = res.tempFilePath
+            wx.openDocument({
+              filePath: filePath,
+              fileType: 'xlsx',
+              showMenu: true,
+              success: function (res) {
+                wx.hideLoading({
+                  success: (res) => {},
+                })
+                console.log('打开文档成功')
+              }
+            })
+          }
+        })
+        console.log(url)
         that.setData({
-          fileUrl
+          url
         })
       }
     })

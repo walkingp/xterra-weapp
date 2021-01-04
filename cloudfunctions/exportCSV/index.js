@@ -38,7 +38,6 @@ exports.main = async (event, context) => {
       user.push(item.plogging);
       users.push(user);
     })
-    users.push(res.data);
 
     console.log(`共有报名人数${users.length}`);
 

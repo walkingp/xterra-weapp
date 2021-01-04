@@ -1,6 +1,6 @@
 <view class="container">
   <van-dropdown-menu class="top">
-    <van-dropdown-item bind:change="onChange" disabled="{{isSuperAdmin}}" data-type="race" value="{{ raceValue }}" options="{{ races }}" />
+    <van-dropdown-item bind:change="onChange" disabled="{{!isSuperAdmin}}" data-type="race" value="{{ raceValue }}" options="{{ races }}" />
     <van-dropdown-item bind:change="onChange" disabled="{{raceValue===''}}" data-type="cate" value="{{ cateValue }}"
       options="{{ cates }}" />
   </van-dropdown-menu>
