@@ -129,8 +129,11 @@ Page({
     }
     this.setData({
       wechatId, pinyinLast, pinyinFirst, certPic, relation: relation || '本人', club, nation, trueName, cardType, gender, birthDate: dayjs(birthDate).format("YYYY-MM-DD"), bloodType, tSize, region, addr, cardNo, contactUser, contactUserPhone, email, phoneNum
+    }, ()=>{
+      wx.hideLoading({
+        success: (res) => {},
+      })
     })
-    
   },
 
   async fetchMyProfiles(userId){
@@ -150,7 +153,7 @@ Page({
   },
   async saveData(e){
     let profile = e.detail.value;
-    const { trueName, cardNo,phoneNum, email } = profile;
+    const { trueName, cardNo,phoneNum, email, wechatId } = profile;
     const { myProfiles, id, certPic, relation, cardType, gender, birthDate, bloodType, tSize, region, userId, userInfo, raceId, action, plogging } = this.data;
     if(!trueName){
       wx.showToast({
@@ -166,7 +169,7 @@ Page({
       })
       return;
     }
-    if(myProfiles.find(item => item.cardNo === cardNo)){
+    if(action !== 'edit' && myProfiles.find(item => item.cardNo === cardNo)){
       wx.showToast({
         title: '此证件号码已经添加过',
         icon: 'none'
@@ -190,7 +193,7 @@ Page({
     if(birthDate === '未选择'){
       birthDate = new Date(1900,1,1)
     }
-    profile = { ...profile, certPic, relation, cardType, gender, birthDate, bloodType, tSize, plogging, region, birthDate: new Date(birthDate), createdAt: new Date(), userId, userName: userInfo.nickname }
+    profile = { ...profile, wechatId, certPic, relation, cardType, gender, birthDate, bloodType, tSize, plogging, region, birthDate: new Date(birthDate), createdAt: new Date(), userId, userName: userInfo.nickname }
     const db = wx.cloud.database();
     if(action === 'edit'){
       const res = await db.collection("profile").doc(id).update({
@@ -337,6 +340,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: async function (options) {
+    wx.showLoading({
+      title: '加载中……',
+    })
     app.checkLogin().then(async res=>{
       const { isLogined, userId, userInfo } = res;
       this.setData({
