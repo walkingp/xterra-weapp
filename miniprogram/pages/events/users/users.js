@@ -203,6 +203,14 @@ Page({
         cateId
       },
       success(res) {
+        debugger
+        if(!res.result.fileList){
+          wx.showToast({
+            icon: 'none',
+            title: '生成失败',
+          })
+          return;
+        }
         const fileUrl = res.result.fileList[0].tempFileURL;
         console.log(fileUrl)
         that.setData({
