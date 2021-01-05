@@ -68,28 +68,28 @@ Component({
           title: '优惠券已失败',
           icon: 'none'
         });
-        return;
+        return false;
       }
       if(detail.isUsed){
         wx.showToast({
           title: '优惠券已使用',
           icon: 'none'
         });
-        return;
+        return false;
       }
       if(detail.assignedUserId){
         wx.showToast({
           title: '优惠券已被占用',
           icon: 'none'
         });
-        return;
+        return false;
       }
       if(dayjs().isAfter(dayjs(detail.expiredDate))){
         wx.showToast({
           title: '优惠券已过期',
           icon: 'none'
         });
-        return;
+        return false;
       }
       // 与赛事组别不符
       const { raceId, cateId } = this.data._order;
@@ -98,15 +98,16 @@ Component({
           title: '当前比赛不可使用',
           icon: 'none'
         });
-        return;
+        return false;
       }
       if(detail.cateId && detail.cateId !== cateId){
         wx.showToast({
           title: '当前组别不可使用',
           icon: 'none'
         });
-        return;
+        return false;
       }
+      return true;
     },
     async addCoupon(e){
       wx.showLoading({
