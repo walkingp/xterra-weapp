@@ -5,16 +5,16 @@
   <view class="groups flex align-center">
     <view class="item {{ selectedGroupType === 'individual' ? 'active' : '' }}" bindtap="changeGroup" data-title="个人组"
       data-type="individual" wx:if="{{hasIndividual}}">
-      <image src="{{raceDetail.groupPicUrls[0]}}"></image>
+      <image mode="aspectFill" src="{{raceDetail.groupPicUrls[0]}}"></image>
       <text>个人组</text>
     </view>
     <view class="item {{ selectedGroupType === 'relay' ? 'active' : '' }}" bindtap="changeGroup" data-title="团队组"
       data-type="relay" wx:if="{{hasRelay}}">
-      <image src="{{raceDetail.groupPicUrls[1]}}"></image><text>团队组</text>
+      <image mode="aspectFill" src="{{raceDetail.groupPicUrls[1]}}"></image><text>团队组</text>
     </view>
     <view class="item {{ selectedGroupType === 'family' ? 'active' : '' }}" bindtap="changeGroup" data-title="亲子组"
       data-type="family" wx:if="{{hasFamily}}">
-      <image src="{{raceDetail.groupPicUrls[2]}}"></image><text>亲子组</text>
+      <image mode="aspectFill" src="{{raceDetail.groupPicUrls[2]}}"></image><text>亲子组</text>
     </view>
   </view>
 </block>
@@ -67,7 +67,7 @@
       <van-field focus="{{ focus }}" value="{{ value }}" wx:else maxlength="{{64}}" confirm-type="done" data-group="relay" bind:blur="saveTeamTitle" label="新建团队" data-group="relay" placeholder="请填写团队名称" />
     </block>
     <block wx:if="{{groupUserType === 'member'}}">
-      <van-cell title="选择已有团队" value="{{'已过期'}}" border="{{ false }}" wx:if="{{relayCate.expired}}" />
+      <van-cell title="选择已有团队" value="{{'报名已截止'}}" border="{{ false }}" wx:if="{{relayCate.expired}}" />
       <van-cell title="您的被邀请团队" value="{{teamTitle}}" border="{{ false }}" wx:elif="{{isInvited}}" />
       <van-cell is-link title="选择已有团队" bind:click="onShowTeam" value="{{teamTitle}}" border="{{ false }}" wx:else />
     </block>
@@ -77,7 +77,7 @@
   <view class="title">家庭信息</view>
   <view class="input">
     <input type="text" maxlength="{{64}}" confirm-type="done" disabled="{{familyCate.expired}}" data-group="family" bindblur="saveTeamTitle"
-      placeholder="请填写家庭队名" />
+      placeholder="{{familyCate.expired ? '报名已截止' : '请填写家庭队名'}}" />
   </view>
 </block>
 <view class="bottom flex align-center">
@@ -112,6 +112,10 @@
     <text>团队负责人报名时可选择一次录入多名团员资料，也可在创建团队后分享给其他成员填写资料；</text>
     <text>费用由团队负责人支付；</text>
     <text>团队成员报名时请注意选择正确团队。</text>
+  </view>
+  <view class="desc" wx:if="{{selectedGroupType === 'family'}}">
+    <text wx:if="{{familyCate.teamSizeLimit}}">团队人数上限{{familyCate.teamSizeLimit}}人；</text>
+    <text>必须一次完成报名，人数不可少于2人；</text>
   </view>
 </view>
 <van-popup show="{{ show }}" round closeable bind:close="onClose"

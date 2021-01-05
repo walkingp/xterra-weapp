@@ -196,7 +196,6 @@ Page({
     const { id, profiles } = detail;
     const trueName = profiles.map(item => item.trueName).join();
     const remark = isPlogging ? 'X-Plogging为免费公益活动，若频繁取消将有可能影响以后的报名' : '报名费用将自动退回微信支付';
-    debugger
     wx.cloud.callFunction({
       name: "pushMessage",
       data: {

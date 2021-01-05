@@ -92,7 +92,6 @@ Page({
     order.statusText = orderStatus.pending.statusText;
     order.isActive = true;
     order.orderType = '微信支付';
-    debugger
     wx.cloud.callFunction({
       name: 'saveOrder',
       data: {

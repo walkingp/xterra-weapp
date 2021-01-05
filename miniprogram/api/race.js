@@ -58,7 +58,6 @@ export const getRaceCateTeamList = async ( raceId, size = 100) => {
   return teams;
 };
 export const checkTeamExisted = async ({cateId, teamTitle}) => {
-  debugger
   const teams = await getCollectionByWhere({
     dbName: 'registration',
     filter: {

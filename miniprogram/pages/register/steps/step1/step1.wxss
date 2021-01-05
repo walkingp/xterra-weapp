@@ -3,13 +3,13 @@
 .groups .item{
   height: 244rpx;
   width: 220rpx;
-  border-radius: 10rpx;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
 }
 .groups .item image{
+  border-radius: 10rpx;
   position: absolute;
   left: 0;
   right: 0;

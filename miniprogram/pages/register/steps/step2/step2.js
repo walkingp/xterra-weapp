@@ -67,8 +67,8 @@ Component({
         totalFee = app.globalData.order.price;
       }
       
-      app.globalData.order.totalFee = totalFee.toFixed(2);
-      app.globalData.order.paidFee = totalFee.toFixed(2);
+      app.globalData.order.totalFee = +totalFee.toFixed(2);
+      app.globalData.order.paidFee = +totalFee.toFixed(2);
       app.globalData.order.discountFee = 0;
       this.triggerEvent('onComplete', { prevEnabled: true, nextEnabled: profileIds.length > 0 });
     },
