@@ -69,7 +69,7 @@
 }
 
 .cates .item{
-  height: 100rpx;
+  min-height: 100rpx;
   display: flex;
   align-items: center;
   border-radius: 10rpx;
@@ -82,6 +82,7 @@
   font-size: 22rpx;
   color: #999;
   display: block;
+  padding: 5rpx 0 10rpx 0;
 }
 .cates .item .hd{
   font-weight: bold;

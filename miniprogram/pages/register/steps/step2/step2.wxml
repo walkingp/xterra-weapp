@@ -4,14 +4,15 @@
   <checkbox-group bindchange="checkboxChanged">
     <view class="item flex align-center space-between" wx:for="{{profiles}}" wx:key="_id">
       <view class="flex-auto flex align-center">
-        <checkbox id="i{{index}}" value="{{item._id}}" wx:if="{{item.registered || !item.isValid}}" disabled="{{true}}" />
+        <checkbox id="i{{index}}" value="{{item._id}}" wx:if="{{item.registered || !item.isValid || !item.isAgeValid}}" disabled="{{true}}" />
         <checkbox id="i{{index}}" value="{{item._id}}" wx:else />
         <label class="hd" for="i{{index}}">{{item.trueName}}</label>
         <label for="i{{index}}" class="label">({{item.relation}})</label>
         <label for="i{{index}}" class="label gender">{{item.gender}}</label>
         <label for="i{{index}}" class="unit">{{item.phoneNum}}</label>
         <label for="i{{index}}" class="error" wx:if="{{!item.isValid}}">资料不完整</label>
-        <label for="i{{index}}" class="blank flex-auto">b</label>
+        <label for="i{{index}}" class="error" wx:elif="{{!item.isAgeValid}}">年龄未达到</label>
+        <label for="i{{index}}" class="blank flex-auto" wx:else>b</label>
       </view>
       <navigator wx:if="{{item.registered === false}}" url="/pages/register/form/form?action=edit&raceId={{raceId}}&cateId={{cateId}}&id={{item._id}}">编辑</navigator>
     </view>

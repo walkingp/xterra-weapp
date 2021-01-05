@@ -36,7 +36,7 @@
   <van-cell-group title="优惠券明细">
     <van-cell title="标题" value="{{detail.title}}" border="{{ false }}" />
     <van-cell title="类型" value="{{detail.type}}" border="{{ false }}" />
-    <van-cell title="优惠券代码" value="{{detail.coupon}}" border="{{ false }}" />
+    <van-cell title="优惠券代码" bindtap="copy" data-text="{{detail.coupon}}" value="{{detail.coupon}}(点击复制)" border="{{ false }}" />
     <van-cell title="描述" value="{{detail.desc}}" border="{{ false }}" />
     <van-cell title="来源" value="{{detail.source}}" border="{{ false }}" />
     <van-cell title="是否有效" value="{{detail.isActive}}" border="{{ false }}" />

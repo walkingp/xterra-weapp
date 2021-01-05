@@ -77,6 +77,7 @@ Component({
         });
         return false;
       }
+      debugger
       if(detail.assignedUserId){
         wx.showToast({
           title: '优惠券已被占用',
@@ -136,7 +137,8 @@ Component({
               const { _order } = this.data;
               const discountFee = detail.type === 'free' ? _order.totalFee : detail.value;
               const margin = _order.totalFee - detail.value < 0 ? 0 : _order.totalFee - detail.value;
-              const paidFee = detail.type === 'free' ? 0 : margin;
+              let paidFee = detail.type === 'free' ? 0 : margin;
+              paidFee = +paidFee.toFixed(2);
               this.setData({
                 inputVisible: false,
                 discountFee,

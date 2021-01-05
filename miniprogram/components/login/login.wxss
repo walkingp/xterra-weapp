@@ -22,7 +22,8 @@
   background: transparent;
   border: none;
   color: #9F9F9F;
-  padding: 0!important;
   margin: 0;
-  font-size: 32rpx;
+  font-size: 32rpx;    
+  position: absolute;
+  padding: 30rpx 200rpx!important;
 }

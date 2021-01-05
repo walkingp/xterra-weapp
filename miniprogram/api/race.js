@@ -199,8 +199,10 @@ export const getMyProfilesWithCate = async (userId, cateId, size = 20) => {
     data.map(async item => {
       const registered = await checkIsRegistered(cateId, item.cardNo)
       item.registered = registered;
-      const isValid = await checkIsValid(cateId, item._id);
+      const { isValid, isAgeValid } = await checkIsValid(cateId, item._id);
+    
       item.isValid = isValid;
+      item.isAgeValid = isAgeValid;
       return item;
     })
   ) 
@@ -213,7 +215,10 @@ export const checkIsValid = async (cateId, profileId) => {
   const { trueName, phoneNum, wechatId, cardNo, cardType, certPic, club } = profile;
   const hasBasicInfo = trueName && phoneNum && cardNo && cardType;
   const isCertValid = !cate.isCheckCert || (cate.isCheckCert && !!certPic);
-  return hasBasicInfo && isCertValid;
+
+  const age = new Date().getFullYear() - profile.birthDate.getFullYear();
+  const isAgeValid = cate.minAge === 0 || cate.minAge <= age;
+  return { isValid: hasBasicInfo && isCertValid, isAgeValid };
 };
 
 export const removeRegistration = async id => {

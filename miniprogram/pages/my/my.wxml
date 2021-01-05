@@ -61,6 +61,7 @@
       <view class="list">
         <van-grid border="{{false}}">
           <van-grid-item icon="coupon-o" url="/pages/admin/coupon/coupon" text="生成优惠券" />
+          <van-grid-item icon="friends-o" url="/pages/events/users/users" text="报名明细" />
         </van-grid>
       </view>
     </view>

@@ -42,6 +42,14 @@ Page({
       showDatePicker: true
     })
   },  
+  copy(e) {
+    const {
+      text
+    } = e.currentTarget.dataset;
+    wx.setClipboardData({
+      data: text,
+    })
+  },
   onClose(e){
     const { type } = e.currentTarget.dataset;
     switch(type){

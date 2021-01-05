@@ -1,6 +1,6 @@
 <view class="login" wx:if="{{!isLogined}}">
   <image class="userinfo-avatar" src="./../../images/avatar@2x.png"></image>
-  <button class="button weui-btn btnLogin weui-btn_primary" bindgetuserinfo="onGotUserInfo" open-type="getUserInfo">未登录</button>
+  <button class="button weui-btn btnLogin weui-btn_primary" bindgetuserinfo="onGotUserInfo" open-type="getUserInfo">现在登录</button>
 </view>
 <view class="login" wx:else>
   <view class="userinfo-avatar">

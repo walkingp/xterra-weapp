@@ -1,5 +1,5 @@
 const {
-  getMyProfilesWithCate, checkIsRegistered
+  getMyProfilesWithCate, getRaceCatesList
 } = require("../../../../api/race")
 const app = getApp();
 // pages/register/userlist/userlist.js
@@ -18,7 +18,9 @@ Component({
    * 组件的初始数据
    */
   data: {
-    profiles: []
+    profiles: [],
+    cates: [],
+    cate: null
   },
   lifetimes: {
     attached: function () {
@@ -39,8 +41,16 @@ Component({
         const { cateId } = app.globalData.order;
         let profiles = await getMyProfilesWithCate(userId, cateId);
         console.log(profiles)
+        
+        const {
+          raceId
+        } = this.properties;
+        const cates = await getRaceCatesList(raceId);
+        const cate = cates.find(item => item._id === cateId);
         this.setData({
           cateId,
+          cates,
+          cate,
           profiles
         }, () => {
           wx.hideLoading({
@@ -51,7 +61,7 @@ Component({
     },
     checkboxChanged(e){
       const profileIds = e.detail.value;
-      let { profiles } = this.data;
+      let { profiles, cate } = this.data;
       profiles = profiles.filter(item => {
         return profileIds.includes(item._id);
       });

@@ -99,8 +99,8 @@ Page({
   },
   onCardNoChange(e){
     const idCard = e.detail.value;
-    const { myProfiles } = this.data;
-    if(myProfiles.find(item => item.cardNo === idCard)){
+    const { myProfiles, action } = this.data;
+    if(action !== 'edit' && myProfiles.find(item => item.cardNo === idCard)){
       wx.showToast({
         title: '此证件号码已经添加过',
         icon: 'none'
@@ -110,7 +110,8 @@ Page({
     const birthDate = this.getBirthdayFromIdCard(idCard);
     this.setData({
       gender,
-      birthDate
+      birthDate,
+      defaultBirthDate: new Date(birthDate)
     });
   },
   async fetch(id){
@@ -377,6 +378,9 @@ Page({
           cateDetail
         })
       }
+      wx.hideLoading({
+        success: (res) => {},
+      })
     }).catch(err=>{
       wx.showToast({
         icon: 'none',
