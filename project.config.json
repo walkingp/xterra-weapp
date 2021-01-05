@@ -19,7 +19,7 @@
     "checkSiteMap": true,
     "uploadWithSourceMap": true,
     "compileHotReLoad": false,
-    "useMultiFrameRuntime": false,
+    "useMultiFrameRuntime": true,
     "useApiHook": true,
     "babelSetting": {
       "ignore": [],
@@ -39,7 +39,8 @@
         "miniprogramNpmDistDir": "./miniprogram/"
       }
     ],
-    "minifyWXSS": true
+    "minifyWXSS": true,
+    "useApiHostProcess": true
   },
   "appid": "wx491fb14c7948a753",
   "projectname": "XTERRA",

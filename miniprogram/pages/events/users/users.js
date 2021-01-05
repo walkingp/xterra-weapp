@@ -214,6 +214,7 @@ Page({
           return;
         }
         const url = res.result.fileList[0].tempFileURL;
+        const fileName = url.substr(url.lastIndexOf('/') + 1);
         wx.downloadFile({
           // 示例 url，并非真实存在
           url,
@@ -228,7 +229,11 @@ Page({
                   success: (res) => {},
                 })
                 console.log('打开文档成功')
-              }
+              },
+              fail: function (res) {    
+                console.error(res)
+                wx.showToast({title: '打开文档失败', icon: 'none', duration: 2000})    
+              },
             })
           }
         })
@@ -242,15 +247,16 @@ Page({
   async fetchAllRaces() {
     const {
       userId,
-      isSuperAdmin
+      isSuperAdmin,
+      detail,
     } = this.data;
     let races = await getAllRaces();
     // 过滤仅有自己的权限的比赛
-    if (!isSuperAdmin) {
-      races = races.filter(item => {
-        return item.leaders && detail.leaders.indexOf(userId) >= 0
-      })
-    }
+    // if (!isSuperAdmin) {
+    //   races = races.filter(item => {
+    //     return item.leaders && item.leaders.indexOf(userId) >= 0
+    //   })
+    // }
     races = races.map(race => {
       return {
         text: `${race.title}`,
