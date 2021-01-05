@@ -40,6 +40,7 @@ Component({
         let profiles = await getMyProfilesWithCate(userId, cateId);
         console.log(profiles)
         this.setData({
+          cateId,
           profiles
         }, () => {
           wx.hideLoading({

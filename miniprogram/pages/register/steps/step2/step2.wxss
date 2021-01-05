@@ -25,6 +25,11 @@
   font-size: 24rpx;
   color: #999;
 }
+.cates .item .error{
+  color: #f00;
+  padding-left: 10rpx;
+  font-size: 24rpx;
+}
 .gender{
   padding-left: 20rpx;
 }

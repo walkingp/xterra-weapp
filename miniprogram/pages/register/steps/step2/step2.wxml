@@ -4,15 +4,16 @@
   <checkbox-group bindchange="checkboxChanged">
     <view class="item flex align-center space-between" wx:for="{{profiles}}" wx:key="_id">
       <view class="flex-auto flex align-center">
-        <checkbox id="i{{index}}" value="{{item._id}}" wx:if="{{item.registered}}" disabled="{{true}}" />
+        <checkbox id="i{{index}}" value="{{item._id}}" wx:if="{{item.registered && !item.isValid}}" disabled="{{true}}" />
         <checkbox id="i{{index}}" value="{{item._id}}" wx:else />
         <label class="hd" for="i{{index}}">{{item.trueName}}</label>
         <label for="i{{index}}" class="label">({{item.relation}})</label>
         <label for="i{{index}}" class="label gender">{{item.gender}}</label>
         <label for="i{{index}}" class="unit">{{item.phoneNum}}</label>
+        <label for="i{{index}}" class="error" wx:if="{{!item.isValid && !item.registered}}">资源不完整</label>
         <label for="i{{index}}" class="blank flex-auto">b</label>
       </view>
-      <navigator url="/pages/register/form/form?action=edit&raceId={{raceId}}&cateId={{cateId}}&id={{item._id}}">编辑</navigator>
+      <navigator wx:if="{{item.registered === false}}" url="/pages/register/form/form?action=edit&raceId={{raceId}}&cateId={{cateId}}&id={{item._id}}">编辑</navigator>
     </view>
   </checkbox-group>
   </block>

@@ -220,6 +220,12 @@
           "pathName": "pages/register/register",
           "query": "id=0bcbdde05fc3a636006efd9971c76de4&type=relay&teamTitle=米高测试3",
           "scene": null
+        },
+        {
+          "name": "完赛资质",
+          "pathName": "pages/register/form/form",
+          "query": "action=edit&raceId=0bcbdde05fc3a636006efd9971c76de4&cateId=53176a855fd57b7f0017b8c41d73bcd7&id=846bf2595fd0d6b1000dd7471a1d6b7a",
+          "scene": null
         }
       ]
     }

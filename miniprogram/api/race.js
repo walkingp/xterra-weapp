@@ -200,11 +200,22 @@ export const getMyProfilesWithCate = async (userId, cateId, size = 20) => {
     data.map(async item => {
       const registered = await checkIsRegistered(cateId, item.cardNo)
       item.registered = registered;
+      const isValid = await checkIsValid(cateId, item._id);
+      item.isValid = isValid;
       return item;
     })
   ) 
   return data;
 }
+
+export const checkIsValid = async (cateId, profileId) => {
+  const cate = await getCollectionById({ dbName: 'race-cates', id: cateId });
+  const profile = await getCollectionById({ dbName: 'profile', id: profileId });
+  const { trueName, phoneNum, wechatId, cardNo, cardType, certPic, club } = profile;
+  const hasBasicInfo = trueName && phoneNum && cardNo && cardType;
+  const isCertValid = !cate.isCheckCert || (cate.isCheckCert && !!certPic);
+  return hasBasicInfo && isCertValid;
+};
 
 export const removeRegistration = async id => {
   const data = await hideCollectionById({ dbName: 'registration', id })

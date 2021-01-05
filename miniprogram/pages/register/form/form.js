@@ -60,7 +60,9 @@ Page({
     myProfiles: [],
 
     fileList: [],
-    certPic: null
+    certPic: null,
+
+    hasCert: null
   },
   onNameChange(e){
     const { value } = e.detail;
@@ -112,14 +114,12 @@ Page({
     });
   },
   async fetch(id){
-    const detail = await getProfileDetail(id);   
-    
-    this.setData({
-      detail
-    });
+    let detail = await getProfileDetail(id);
+
     const { wechatId, pinyinLast, pinyinFirst, certPic, relation, club, nation, trueName, cardType, gender, birthDate, bloodType, tSize, region, addr, cardNo, contactUser, contactUserPhone, email, phoneNum } = detail;
     if(certPic){
       this.setData({
+        hasCert: true,
         fileList: [
           {
             url: certPic
@@ -127,6 +127,9 @@ Page({
         ]
       })
     }
+    this.setData({
+      detail
+    });
     this.setData({
       wechatId, pinyinLast, pinyinFirst, certPic, relation: relation || '本人', club, nation, trueName, cardType, gender, birthDate: dayjs(birthDate).format("YYYY-MM-DD"), bloodType, tSize, region, addr, cardNo, contactUser, contactUserPhone, email, phoneNum
     }, ()=>{

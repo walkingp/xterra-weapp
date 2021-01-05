@@ -193,8 +193,8 @@ Page({
   },
 
   async exportCSV() {
-    wx.showToast({
-      title: '加载中……',
+    wx.showLoading({
+      title: '生成中……',
     })
     const that = this;
     const {
