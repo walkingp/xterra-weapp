@@ -220,6 +220,12 @@
           "pathName": "pages/register/register",
           "query": "id=0bcbdde05fc3a636006efd9971c76de4&type=relay&teamTitle=米高测试3",
           "scene": null
+        },
+        {
+          "name": "报名正式比赛",
+          "pathName": "pages/register/register",
+          "query": "id=21ded5cb5fe59992000dc46f4b31b4f8",
+          "scene": null
         }
       ]
     }

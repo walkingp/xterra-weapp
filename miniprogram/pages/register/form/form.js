@@ -128,7 +128,7 @@ Page({
       })
     }
     this.setData({
-      wechatId, pinyinLast, pinyinFirst, certPic, relation: relation || '本人', club, nation, trueName, cardType, gender, birthDate: dayjs(birthDate).format("YYYY-MM-DD"), bloodType, tSize, region, addr, cardNo, contactUser, contactUserPhone, email, phoneNum
+      wechatId, pinyinLast, pinyinFirst, certPic, relation: relation || '本人', club, nation, trueName, cardType, gender, defaultBirthDate: birthDate.getTime(), birthDate: dayjs(birthDate).format("YYYY-MM-DD"), bloodType, tSize, region, addr, cardNo, contactUser, contactUserPhone, email, phoneNum
     }, ()=>{
       wx.hideLoading({
         success: (res) => {},
@@ -154,7 +154,7 @@ Page({
   async saveData(e){
     let profile = e.detail.value;
     const { trueName, cardNo,phoneNum, email, wechatId } = profile;
-    const { myProfiles, id, certPic, relation, cardType, gender, birthDate, bloodType, tSize, region, userId, userInfo, raceId, action, plogging } = this.data;
+    const { myProfiles, id, certPic, relation, cardType, gender, birthDate, defaultBirthDate, bloodType, tSize, region, userId, userInfo, raceId, action, plogging } = this.data;
     if(!trueName){
       wx.showToast({
         title: '姓名不可为空',
@@ -191,9 +191,9 @@ Page({
       return;
     }
     if(birthDate === '未选择'){
-      birthDate = new Date(1900,1,1)
+      defaultBirthDate = new Date(1900,1,1)
     }
-    profile = { ...profile, wechatId, certPic, relation, cardType, gender, birthDate, bloodType, tSize, plogging, region, birthDate: new Date(birthDate), createdAt: new Date(), userId, userName: userInfo.nickname }
+    profile = { ...profile, wechatId, certPic, relation, cardType, gender, birthDate, bloodType, tSize, plogging, region, birthDate: new Date(defaultBirthDate), createdAt: new Date(), userId, userName: userInfo.nickname }
     const db = wx.cloud.database();
     if(action === 'edit'){
       const res = await db.collection("profile").doc(id).update({
