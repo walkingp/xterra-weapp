@@ -217,7 +217,7 @@ export const checkIsValid = async (cateId, profileId) => {
   const isCertValid = !cate.isCheckCert || (cate.isCheckCert && !!certPic);
 
   const age = new Date().getFullYear() - profile.birthDate.getFullYear();
-  const isAgeValid = cate.minAge === 0 || cate.minAge <= age;
+  const isAgeValid = !cate.minAge || cate.minAge <= age;
   return { isValid: hasBasicInfo && isCertValid, isAgeValid };
 };
 

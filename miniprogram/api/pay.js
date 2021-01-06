@@ -164,7 +164,7 @@ async function sendEmailSMS(order){
     await sendSms(params);
   }) 
 }
-function sendEmail(order) {
+async function sendEmail(order) {
   const {
     raceId,
     raceTitle,
@@ -187,11 +187,11 @@ function sendEmail(order) {
     discountFee,
     paidFee
   };
-  return sendRegEmail(emailTemplateType.registration.value, values);
+  await sendRegEmail(emailTemplateType.registration.value, values);
 }
 
-function sendSms({ phoneNum, trueName, raceId, raceTitle, cateTitle}){
-  sendRegSMS({
+async function sendSms({ phoneNum, trueName, raceId, raceTitle, cateTitle}){
+  await sendRegSMS({
     mobile: phoneNum,
     trueName,
     raceId,
