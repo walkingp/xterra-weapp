@@ -1,6 +1,9 @@
 //云函数实现微信支付
 const cloud = require('wx-server-sdk')
-cloud.init()
+cloud.init({
+  // API 调用都保持和云函数当前所在环境一致
+  env: cloud.DYNAMIC_CURRENT_ENV
+})
 
 // 步骤1、引入tenpay微信支付
 const tenpay = require('tenpay');

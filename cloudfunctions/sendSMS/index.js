@@ -4,7 +4,10 @@ const appid = 1400462274 // 替换成您申请的云短信 AppID 以及 AppKey
 const appkey = "d5307b26bde380361253fc45765adfb5"
 const smsSign = "XTERRA" // 替换成您所申请的签名
 
-cloud.init()
+cloud.init({
+  // API 调用都保持和云函数当前所在环境一致
+  env: cloud.DYNAMIC_CURRENT_ENV
+})
 
 // 云函数入口函数
 exports.main = async (event, context) => new Promise((resolve, reject) => {    
