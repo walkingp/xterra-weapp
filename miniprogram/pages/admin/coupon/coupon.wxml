@@ -20,10 +20,22 @@
     </van-cell-group>
   </form>
   <view class="box">
-    <van-cell-group title="优惠券">
-      <van-cell wx:for="{{coupons}}" bind:click="showDetail" data-id="{{item._id}}" is-link wx:key="_id"
-        title="{{item.coupon}}({{item.typeText}})" value="{{item.isUsed ? '已使用' : '未使用'}}" />
-    </van-cell-group>
+  <van-tabs active="{{ 0 }}" bind:change="onChange">
+    <van-tab title="未使用">
+      <van-cell wx:for="{{activeCoupons}}" title-width="400rpx" bind:click="showDetail" data-id="{{item._id}}" is-link wx:key="_id"
+        title="{{item.coupon}}" value="{{item.typeText}}{{item.value === 0 ? '' : '(￥' + item.value + ')'}}" />
+      <van-cell>
+        <button class="button">导出全部未使用优惠券</button>
+      </van-cell>
+    </van-tab>
+    <van-tab title="已使用">
+      <van-cell wx:for="{{usedCoupons}}" title-width="400rpx" bind:click="showDetail" data-id="{{item._id}}" is-link wx:key="_id"
+        title="{{item.coupon}}" value="{{item.typeText}}" />
+      <van-cell>
+        <button class="button">导出全部已使用优惠券</button>
+      </van-cell>
+    </van-tab>
+  </van-tabs>
   </view>
 </view>
 

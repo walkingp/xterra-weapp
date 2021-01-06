@@ -18,6 +18,8 @@ Page({
     minDate: new Date().getTime(),
     maxDate: new Date(dayjs().add(1, 'year').format("YYYY-MM-DD HH:mm:ss")),
     coupons: [],
+    activeCoupons: [],
+    usedCoupons: [],
     detail: null,
     showDetail: false,
     selectedRaceId: null,
@@ -259,7 +261,9 @@ Page({
       return item;
     })
     this.setData({
-      coupons
+      coupons,
+      activeCoupons: coupons.slice().filter(item => item.isUsed === false),
+      usedCoupons: coupons.slice().filter(item => item.isUsed)
     })
     this.fetchRaces();
   },
