@@ -1,7 +1,6 @@
-import { getMyProfiles, getMyRegistrations, getProfileDetail, getRaceCateDetail, getRaceDetail } from "../../../api/race";
+import { getMyProfiles, getMyRegistrations, getPinyin, getProfileDetail, getRaceCateDetail, getRaceDetail } from "../../../api/race";
 // miniprogram/pages/register/form/form.js
 import areaList from "./../../../config/area";
-import p from "wl-pinyin";
 const dayjs = require("dayjs");
 const app = getApp();
 Page({
@@ -64,7 +63,7 @@ Page({
 
     hasCert: null
   },
-  onNameChange(e){
+  async onNameChange(e){
     const { value } = e.detail;
     const isChinese = new RegExp("[\\u4E00-\\u9FFF]+","g").test(value);
     if(!isChinese){
@@ -77,8 +76,11 @@ Page({
     }
     const xing = value.substr(0,1);
     const ming = value.substr(1);
-    const pinyinFirst = p.getPinyin(ming);
-    const pinyinLast = p.getPinyin(xing);
+    
+    let pinyinFirst = await getPinyin(ming);
+    let pinyinLast = await getPinyin(xing);
+    pinyinFirst = pinyinFirst.join('');
+    pinyinLast = pinyinLast.join('');
     this.setData({
       pinyinFirst: pinyinFirst.replace(pinyinFirst[0],pinyinFirst[0].toUpperCase()).replace(/\s/g,""),
       pinyinLast: pinyinLast.replace(pinyinLast[0], pinyinLast[0].toUpperCase())

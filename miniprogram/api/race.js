@@ -362,6 +362,18 @@ export const updateCoupon = async param => {
   })
 }
 
+export const getPinyin = async word => {
+  return new Promise((resolve, reject) => {
+    wx.cloud.callFunction({
+      name: 'getPinyin',
+      data: { word }
+    }).then(res => {
+      resolve(res.result);
+    }).catch(reject)
+  })
+
+}
+
 export const updateOrderStatus = async param => {
   const { id, status, statusText, out_trade_no, refundTime } = param;
   return new Promise((resolve, reject) => {
