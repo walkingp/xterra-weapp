@@ -81,6 +81,7 @@ export const sendRegEmail = async (type, order) => {
                 to: email, // 收件列表
                 subject: title, // 标题
               })
+              console.log('邮件发送：', data)
               await saveSentEmail({
                 title,
                 email,

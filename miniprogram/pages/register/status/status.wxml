@@ -40,7 +40,7 @@
         </view>
       </view>
     </view>
-    <view class="ft flex justify-center align-center">
+    <view class="ft flex justify-center align-center" wx:if="{{detail.groupType === 'relay'}}">
       <button class="button mini" open-type="share">邀请报名</button>
     </view>
   </view>

@@ -7,7 +7,7 @@
     <text class="gray contact">如有任何报名问题，请与客服人员及时联系</text>
     
     <view class="ft flex justify-center align-center">
-      <button class="button mini" open-type="share">邀请报名</button>
+      <button class="button mini" open-type="share" wx:if="{{order.type === 'relay'}}">邀请报名</button>
       <button bindtap="redirect" data-url="/pages/my/registration/registration" class="button mini margin-left-xl">返回我的报名</button>
     </view>
   </view>

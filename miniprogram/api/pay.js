@@ -62,7 +62,8 @@ function pay(payData, detail, callback) {
     },
     fail(res) {
       console.log("支付失败：", res);
-      updateOrderStatus({ id: detail.id, ...orderStatus.failed }).then(res=>{
+      const { paidFee, discountFee } = detail;
+      updateOrderStatus({ id: detail.id, ...orderStatus.failed, paidFee, discountFee }).then(res=>{
         console.log(res);
         wx.showToast({
           icon: 'none',
@@ -82,12 +83,11 @@ function pay(payData, detail, callback) {
 };
 function updateStatuses(detail, callback){
   // 重要：此处更新保存out_trade_no，用于退款
-  const { id } = detail;
+  const { id, paidFee, discountFee } = detail;
   const { out_trade_no } = getApp().globalData;
 
   getApp().globalData.out_trade_no = null;
-  updateOrderStatus({ id, ...orderStatus.paid, out_trade_no }).then(res=>{
-
+  updateOrderStatus({ id, ...orderStatus.paid, out_trade_no, paidFee, discountFee }).then(res=>{
     saveStartlist(detail);
     console.log(res);
     wx.showToast({
@@ -156,13 +156,23 @@ async function sendEmailSMS(order){
     totalFee,
     paidFee
   } = order;
-  await profiles.forEach(async profile => {
-    const { trueName, phoneNum, email } = profile;
-    const orderDate = dayjs(new Date()).format("YYYY年MM月DD日 HH:mm:ss");
-    const params = { discountFee, orderDate, catePrice: price, cateNum: profiles.length, raceId, raceTitle, orderNum, cateTitle, price, totalFee, paidFee, trueName, phoneNum, email };
-    await sendEmail(params);
-    await sendSms(params);
-  }) 
+  return new Promise((res1, rej1) => {
+    let promises = [];
+    profiles.forEach(async profile => {
+      let p = new Promise(async (resolve, reject) =>{
+        const { trueName, phoneNum, email } = profile;
+        const orderDate = dayjs(new Date()).format("YYYY年MM月DD日 HH:mm:ss");
+        const params = { discountFee, orderDate, catePrice: price, cateNum: profiles.length, raceId, raceTitle, orderNum, cateTitle, price, totalFee, paidFee, trueName, phoneNum, email };
+        await sendEmail(params);
+        await sendSms(params);
+        resolve('success')
+      });
+      promises.push(p);
+    }) 
+    Promise.all(promises).then(res=>{
+      res1(res)
+    })
+  })
 }
 async function sendEmail(order) {
   const {

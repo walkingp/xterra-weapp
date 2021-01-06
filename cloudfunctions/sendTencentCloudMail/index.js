@@ -36,9 +36,11 @@ exports.main = async (event, context) => {
   client.SendEmail(params).then(
     (data) => {
       console.log(data);
+      return data;
     },
     (err) => {
       console.error("error", err);
+      return err;
     }
   );  
 }
