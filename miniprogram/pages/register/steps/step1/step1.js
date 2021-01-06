@@ -1,3 +1,4 @@
+const dayjs = require("dayjs");
 const {
   getRaceCatesList, getRaceCateTeamList, checkTeamExisted
 } = require("../../../../api/race");
@@ -41,6 +42,15 @@ Component({
         this.triggerEvent('onComplete', { prevEnabled: false, nextEnabled: true });
       }
     },
+    'raceDetail': function (detail) {
+      if(detail){
+        const isSameYear = new Date(detail.refundLastDate).getFullYear() === new Date().getFullYear();
+        this.setData({
+          refundRateStr: Math.floor(detail.refundRate * 100),
+          lastRefundDate: dayjs(detail.refundLastDate).format(isSameYear ? "MM月DD日" : "YYYY年MM月DD")
+        })
+      }
+    },
     '_teamTitle': function (_teamTitle) {
       if(_teamTitle){
         this.setData({
@@ -49,7 +59,7 @@ Component({
           groupUserType: 'member'
         })
       }
-    }
+    },
   },
 
   /**
@@ -61,6 +71,8 @@ Component({
     allCates: [],
     earlierPriceEndTime: '',
     earlyPriceEndTime: '',
+    lastRefundDate: '',
+    refundRateStr: null,
     hasIndividual: false,
     hasRelay: false,
     hasFamily: false,

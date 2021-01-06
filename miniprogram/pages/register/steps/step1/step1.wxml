@@ -98,7 +98,7 @@
   </view>
   <view class="title">退改规则</view>
   <view class="desc flex column">
-    <text>11月15日前申请退款可退回50%；11月15日后不可申请退款</text>
+    <text>{{lastRefundDate}}前申请退款可退回{{refundRateStr}}%；{{lastRefundDate}}后不可申请退款</text>
   </view>
 </view>
 <view class="box empty" wx:else>
