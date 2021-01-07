@@ -195,7 +195,7 @@
         {
           "name": "查询成绩",
           "pathName": "pages/events/query/query",
-          "query": "id=b45a21d55fe30169000a26693c7ad4f9&type=result",
+          "query": "raceId=b45a21d55fe30169000a26693c7ad4f9&type=result",
           "scene": null
         },
         {

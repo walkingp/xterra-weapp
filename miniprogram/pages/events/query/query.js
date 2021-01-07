@@ -1,7 +1,17 @@
-const { getMyProfiles, getRegistrationByPhoneNum, getRaceDetail, getStartedUsersByRaceId } = require("../../../api/race");
+const {
+  getMyProfiles,
+  getRegistrationByPhoneNum,
+  getRaceDetail,
+  getStartedUsersByRaceId,
+  getRaceCatesList
+} = require("../../../api/race");
 const dayjs = require("dayjs");
-const { searchResultByNameOrPhone, searchPloggingResultByNameOrPhone } = require("../../../api/result");
-const { raceResultStatus } = require("../../../config/const");
+const {
+  searchResultByNameOrPhone
+} = require("../../../api/result");
+const {
+  raceResultStatus
+} = require("../../../config/const");
 const app = getApp();
 Page({
 
@@ -10,10 +20,12 @@ Page({
    */
   data: {
     raceId: null,
+    cateId: null,
     raceDetail: null,
     show: false,
     defaultName: '请选择',
-    phoneNum: '',
+    defaultCate: '请选择',
+    cardNo: '',
     profiles: [],
     actions: [],
     searchedReg: null,
@@ -24,45 +36,65 @@ Page({
     users: []
   },
   onClose() {
-    this.setData({ show: false });
-  },
-  showAction(e){
     this.setData({
+      show: false
+    });
+  },
+  showAction(e) {
+    const { cates, profiles } = this.data;
+    const { type } = e.currentTarget.dataset;
+    let actions = null;
+    switch(type){
+      case "profile":
+        actions = profiles;
+        break;
+      case "cate":
+        actions = cates;
+        break;
+    }
+    this.setData({
+      actions,
       show: true
     })
   },
   onSelect(event) {
-    const { name, phoneNum } = event.detail;
+    const {
+      name,
+      cardNo
+    } = event.detail;
 
     this.setData({
-      phoneNum: name === '自定义...' ? '' : phoneNum
+      cardNo: name === '自定义...' ? '' : cardNo
     })
   },
-  batchDone(){
+  batchDone() {
 
   },
-  async query(e){
+  async query(e) {
     wx.showLoading({
       title: '查询中……',
     })
-    const { phoneNum } = e.detail.value;
-    const { type, raceId, isPlogging } = this.data;
-    if(type === 'result'){
-      let searchResult = null;
-      if(isPlogging){
-        searchResult = await searchPloggingResultByNameOrPhone(phoneNum, raceId);
-        const { finishedStatus } = searchResult;
-        if(finishedStatus !== raceResultStatus.done.value){
-          wx.showToast({
-            icon: 'none',
-            title: '没有查询到完赛记录',
-          })
-          return;
-        }
-        searchResult.statusText = raceResultStatus[finishedStatus].title;
-      }else{
-        searchResult = await searchResultByNameOrPhone(phoneNum, raceId);
+    const {
+      cardNo
+    } = e.detail.value;
+    const {
+      type,
+      cateId,
+      isPlogging
+    } = this.data;
+    if (type === 'result') {
+      let searchResult = await searchResultByNameOrPhone(cardNo, cateId);
+      const {
+        finishedStatus
+      } = searchResult;
+      if (finishedStatus !== raceResultStatus.done.value) {
+        wx.showToast({
+          icon: 'none',
+          title: '没有查询到完赛记录',
+        })
+        return;
       }
+      searchResult.statusText = raceResultStatus[finishedStatus].title;
       console.log(searchResult)
       this.setData({
         searchResult
@@ -73,7 +105,7 @@ Page({
       })
       return;
     }
-    const searchedReg = await getRegistrationByPhoneNum(phoneNum);
+    const searchedReg = await getRegistrationByPhoneNum(cardNo);
     console.log(searchedReg)
     searchedReg.regDate = dayjs(searchedReg.createdAt).format("YYYY-MM-DD HH:mm:ss");
     this.setData({
@@ -84,46 +116,68 @@ Page({
       })
     })
   },
-  async fetch(){
-    const { userId } = app.globalData;
-    if(!userId){
+  async fetch() {
+    const { raceId } = this.data;
+    const {
+      userId
+    } = app.globalData;
+    if (!userId) {
       return;
     }
+    let cates = await getRaceCatesList(raceId);
+    cates = cates.map(item => {
+      return {
+        name: item.title,
+        id: item._id
+      }
+    });
+
     let profiles = await getMyProfiles(userId);
     profiles = profiles.map(item => {
       return {
         relation: item.relation,
         name: item.trueName,
-        phoneNum: item.phoneNum
+        cardNo: item.cardNo
       }
     });
-    profiles.push({ name: '自定义...' });
+    profiles.push({
+      name: '自定义...'
+    });
     const found = profiles.find(item => item.relation === '本人');
-    if(found){
-      const { phoneNum, name } = found;
+    if (found) {
+      const {
+        cardNo,
+        name
+      } = found;
       this.setData({
-        phoneNum, defaultName: name
+        cardNo,
+        defaultName: name
       })
     }
     this.setData({
-      actions: profiles
-    },() => {
+      cates,
+      profiles
+    }, () => {
       wx.hideLoading({
         success: (res) => {},
       })
     });
   },
-  onChange(e){
-    const { name } = e.detail;
-    if(name === 'admin'){
+  onChange(e) {
+    const {
+      name
+    } = e.detail;
+    if (name === 'admin') {
       this.fetchStartedUsers();
     }
   },
-  async fetchStartedUsers(){
+  async fetchStartedUsers() {
     wx.showLoading({
       title: '加载中……',
     })
-    const { raceId } = this.data;
+    const {
+      raceId
+    } = this.data;
     const users = await getStartedUsersByRaceId(raceId);
     users.map(item => {
       const status = item.finishedStatus;
@@ -142,18 +196,21 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    const { id, type } = options;
+    const {
+      raceId,
+      type
+    } = options;
 
-    if(!id){
+    if (!raceId) {
       wx.navigateBack({
         delta: 1,
       })
     }
     this.setData({
       type,
-      raceId: id
+      raceId
     })
-    this.fetchRaceDetail(id);
+    this.fetchRaceDetail(raceId);
     app.checkLogin().then(res => {
       const isAdmin = res.userInfo.role === 'admin';
       this.setData({
@@ -162,9 +219,9 @@ Page({
       this.fetch();
     })
   },
-  async fetchRaceDetail(id){
+  async fetchRaceDetail(id) {
     const raceDetail = await getRaceDetail(id);
-    raceDetail.picUrls = raceDetail.picUrls.map(item=> {
+    raceDetail.picUrls = raceDetail.picUrls.map(item => {
       return {
         picUrl: item,
         type: 'preview'
@@ -175,9 +232,13 @@ Page({
       raceDetail
     })
   },
-  viewCert(e){
-    const { id } = e.currentTarget.dataset;
-    const { raceDetail } = this.data;
+  viewCert(e) {
+    const {
+      id
+    } = e.currentTarget.dataset;
+    const {
+      raceDetail
+    } = this.data;
     wx.navigateTo({
       url: `/pages/events/cert/cert?raceId=${raceDetail._id}&id=${id}`,
     })

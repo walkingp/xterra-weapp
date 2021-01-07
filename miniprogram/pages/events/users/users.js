@@ -19,6 +19,7 @@ Page({
    */
   data: {
     startListId: null,
+    city: null,
     raceId: null,
     cateId: null,
     detail: null,
@@ -39,22 +40,25 @@ Page({
     show: false,
     value: 20,
     stats: '已报名',
-    buttonText: '置为已完成'
+    buttonText: '置为已完成',
+    isPlogging:false
   },
   async updateStatus(e){
     wx.showLoading({
       title: '操作中',
     })
-    const { detail } = this.data;
-    let { finishedStatus, userId, cateId } = detail;
+    const { city, detail } = this.data;
+    let { finishedStatus, cardNo, cateId } = detail;
     if(finishedStatus === raceResultStatus.done.value){
       finishedStatus = raceResultStatus.DNS.value;
     }else if(finishedStatus === raceResultStatus.notStart.value || finishedStatus === raceResultStatus.DNS.value){
       finishedStatus = raceResultStatus.done.value;
     }
-    const data = await updateStartListStatusByUser({cateId, userId,finishedStatus});
+    const data = await updateStartListStatusByUser({cateId, cardNo, city, finishedStatus});
     this.fetchCates();
-    wx.hideLoading({
+    wx.showToast({
+      icon: 'success',
+      title: '已修改',
       success: (res) => {
         this.setData({
           show: false
@@ -64,7 +68,7 @@ Page({
   },
   setFinished() {
     const {
-      cateId
+      cateId, city
     } = this.data;
     const that = this;
     wx.showModal({
@@ -73,6 +77,7 @@ Page({
       success: async function (sm) {
         if (sm.confirm) {
           const res = await updateStartListStatus({
+            city,
             cateId
           });
           wx.showToast({
@@ -184,7 +189,7 @@ Page({
     } = this.data;
     const detail = users.find(item => item._id === id);
     detail.statusText = raceResultStatus[detail.finishedStatus].title;
-    const buttonText = detail.finishedStatus === raceResultStatus.notStart.value || detail.finishedStatus === raceResultStatus.notStart.value ? '置为已完成' : '置为未完成'
+    const buttonText = detail.finishedStatus === raceResultStatus.notStart.value || detail.finishedStatus === raceResultStatus.DNS.value ? '置为已完成' : '置为未完成'
     this.setData({
       startListId: id,
       show: true,
@@ -228,18 +233,7 @@ Page({
     })
   },
   async fetchAllRaces() {
-    const {
-      userId,
-      isSuperAdmin,
-      detail,
-    } = this.data;
     let races = await getAllRaces();
-    // 过滤仅有自己的权限的比赛
-    // if (!isSuperAdmin) {
-    //   races = races.filter(item => {
-    //     return item.leaders && item.leaders.indexOf(userId) >= 0
-    //   })
-    // }
     races = races.map(race => {
       return {
         text: `${race.title}`,
@@ -258,14 +252,20 @@ Page({
       raceId,
       cateId
     } = this.data;
+    let race = null;
+    if(raceId){
+      race = await getRaceDetail(raceId);
+      this.setData({
+        city: race.city || race.title.replace(/.*Plogging\s+(.+?)站/,'$1'),
+        isPlogging: race.type === 'X-Plogging'
+      });
+      wx.setNavigationBarTitle({
+        title: race.title,
+      })
+    }
     wx.showLoading({
       title: '加载中',
     })
-    const race = await getRaceDetail(raceId);
-    wx.setNavigationBarTitle({
-      title: race.title,
-    })
-
 
     let cates = [{
       text: '请选择',
@@ -284,11 +284,10 @@ Page({
     })
     cates.push(..._cates);
 
+    const filter = cateId ? { cateId } : null;
     let users = await getPaginations({
       dbName: 'start-list',
-      filter: {
-        cateId
-      },
+      filter,
       orderBy: {
         createdAt: 'desc'
       },

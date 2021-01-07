@@ -1,12 +1,7 @@
 import { getCollectionByWhere, getSingleCollectionByWhere } from "../utils/cloud"
 
-export const searchResultByNameOrPhone = async (key, raceId) => {
-  const data = await getSingleCollectionByWhere({ dbName: 'race-result', filter: { phoneNum: key, raceId } });
-  return data;
-}
-
-export const searchPloggingResultByNameOrPhone = async (key, raceId) => {
-  const data = await getSingleCollectionByWhere({ dbName: 'start-list', filter: { phoneNum: key, raceId } });
+export const searchResultByNameOrPhone = async (cardNo, raceId) => {
+  const data = await getSingleCollectionByWhere({ dbName: 'race-result', filter: { cardNo, raceId } });
   return data;
 }
 
@@ -15,18 +10,29 @@ export const getResultDetail = async id => {
   return data;
 }
 
-export const updateStartListStatus = async ({cateId, finishedStatus = "done"}) => {
+export const updateStartListStatus = async ({cateId, city, finishedStatus = "done"}) => {
   return new Promise((resolve, reject) => {
     wx.cloud.callFunction({
       name: 'updateStartList',
       data: {
         action: 'batch',
+        city,
         cateId,
         finishedStatus
       }
     }).then(res => {
       resolve(res.result);
-    }).catch(reject)
+      wx.showToast({
+        icon: 'success',
+        title: '操作成功',
+      })
+    }).catch(err=>{
+      wx.showToast({
+        icon: 'none',
+        title: '操作失败',
+      })
+      console.error(err)
+    })
   })
 }
 
@@ -35,18 +41,21 @@ export const getUserListByTeam = async ({cateId, teamTitle}) => {
   return data;
 }
 
-export const updateStartListStatusByUser = async ({cateId, userId, finishedStatus = "done"}) => {
+export const updateStartListStatusByUser = async ({cateId, cardNo, city, finishedStatus = "done"}) => {
   return new Promise((resolve, reject) => {
     wx.cloud.callFunction({
       name: 'updateStartList',
       data: {
         action: 'single',
-        userId,
+        cardNo,
         cateId,
+        city,
         finishedStatus
       }
     }).then(res => {
       resolve(res.result);
-    }).catch(reject)
+    }).catch(err => {
+      console.error(err);
+    })
   })
 }

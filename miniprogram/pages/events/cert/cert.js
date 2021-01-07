@@ -90,6 +90,7 @@ Page({
   async formatFields(){
     let { fields, id, isMillionForrest } = this.data;
     const result = await getResultDetail(id);
+    debugger
     fields.map(item=>{
       switch(item.key){
         case 'trueName':
