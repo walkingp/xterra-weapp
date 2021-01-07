@@ -16,7 +16,7 @@
         </van-cell>
       </van-cell-group>
     </form>
-    <van-action-sheet show="{{ show }}" actions="{{ actions }}" bind:close="onClose" bind:select="onSelect" />
+    <van-action-sheet show="{{ show }}" cancel-text="取消" actions="{{ actions }}" bind:cancel="onClose" bind:close="onClose" bind:select="onSelect" />
   </view>
   <view class="box result">
     <van-tabs active="{{ type }}" bind:change="onChange">
