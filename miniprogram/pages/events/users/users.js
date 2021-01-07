@@ -10,6 +10,7 @@ const {
 } = require("../../../api/race");
 const {updateStartListStatus, updateStartListStatusByUser } = require("../../../api/result");
 const { raceResultStatus } = require("../../../config/const");
+const { exportReport } = require("../../../api/user");
 // miniprogram/pages/events/users/users.js
 Page({
 
@@ -200,46 +201,28 @@ Page({
     const {
       cateId
     } = this.data;
-    wx.cloud.callFunction({
-      name: 'exportCSV',
-      data: {
-        cateId
-      },
-      success(res) {
-        if(!res.result.fileList){
-          wx.showToast({
-            icon: 'none',
-            title: '生成失败',
-          })
-          return;
-        }
-        const url = res.result.fileList[0].tempFileURL;
-        const fileName = url.substr(url.lastIndexOf('/') + 1);
-        wx.downloadFile({
-          // 示例 url，并非真实存在
-          url,
+    const res = await exportReport(cateId);
+    const url = res.fileList[0].tempFileURL;
+    const fileName = url.substr(url.lastIndexOf('/') + 1);
+    wx.downloadFile({
+      // 示例 url，并非真实存在
+      url,
+      success: function (res) {
+        const filePath = res.tempFilePath
+        wx.openDocument({
+          filePath: filePath,
+          fileType: 'xlsx',
+          showMenu: true,
           success: function (res) {
-            const filePath = res.tempFilePath
-            wx.openDocument({
-              filePath: filePath,
-              fileType: 'xlsx',
-              showMenu: true,
-              success: function (res) {
-                wx.hideLoading({
-                  success: (res) => {},
-                })
-                console.log('打开文档成功')
-              },
-              fail: function (res) {    
-                console.error(res)
-                wx.showToast({title: '打开文档失败', icon: 'none', duration: 2000})    
-              },
+            wx.hideLoading({
+              success: (res) => {},
             })
-          }
-        })
-        console.log(url)
-        that.setData({
-          url
+            console.log('打开文档成功')
+          },
+          fail: function (res) {    
+            console.error(res)
+            wx.showToast({title: '打开文档失败', icon: 'none', duration: 2000})    
+          },
         })
       }
     })

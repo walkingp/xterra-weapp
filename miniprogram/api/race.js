@@ -216,9 +216,16 @@ export const checkIsValid = async (cateId, profileId) => {
   const hasBasicInfo = trueName && phoneNum && cardNo && cardType;
   const isCertValid = !cate.isCheckCert || (cate.isCheckCert && !!certPic);
 
-  const age = new Date().getFullYear() - profile.birthDate.getFullYear();
-  const isAgeValid = !cate.minAge || cate.minAge <= age;
-  return { isValid: hasBasicInfo && isCertValid, isAgeValid };
+  if(Date.parse(profile.birthDate)){
+    const age = new Date().getFullYear() - profile.birthDate.getFullYear();
+    const isAgeValid = !cate.minAge || cate.minAge <= age;
+    return { isValid: hasBasicInfo && isCertValid, isAgeValid };
+  }
+  wx.showToast({
+    title: '出生日期格式不正确',
+    icon: 'none'
+  })
+  return { isValid: hasBasicInfo && isCertValid, isAgeValid: false };
 };
 
 export const removeRegistration = async id => {
