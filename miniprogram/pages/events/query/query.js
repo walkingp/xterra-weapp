@@ -32,6 +32,7 @@ Page({
     searchResult: null,
     isPlogging: false,
     type: 'registration',
+    actionType: null,
     isAdmin: false,
     users: []
   },
@@ -53,18 +54,28 @@ Page({
         break;
     }
     this.setData({
+      actionType: type,
       actions,
       show: true
     })
   },
   onSelect(event) {
-    const {
-      name,
-      cardNo
-    } = event.detail;
-
+    const { actionType } = this.data;
+    if(actionType === 'profile'){
+      const {
+        name,
+        cardNo
+      } = event.detail;
+  
+      this.setData({
+        cardNo: name === '自定义...' ? '' : cardNo
+      })
+      return;
+    }
+    const { id, name } = event.detail;
     this.setData({
-      cardNo: name === '自定义...' ? '' : cardNo
+      defaultCate: name,
+      cateId: id
     })
   },
   batchDone() {

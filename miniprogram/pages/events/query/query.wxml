@@ -7,7 +7,7 @@
       </view>
       <van-cell-group>
         <van-cell title="{{raceDetail.title}}" size="large" border="{{ false }}" />
-        <van-cell title="请选择分站" bind:click="showAction" data-type="cate" border="{{ false }}" is-link value="{{defaultCate}}" />
+        <van-cell wx:if="{{isPlogging}}" title="请选择分站" bind:click="showAction" data-type="cate" border="{{ false }}" is-link value="{{defaultCate}}" />
         <van-cell title="请选择查询者" bind:click="showAction" data-type="profile" border="{{ false }}" is-link value="{{defaultName}}" />
         <van-field label="或者直接输入证件号" title-width="10em" name="cardNo" value="{{ cardNo }}" placeholder="请输入11位手机号" border="{{ false }}"
           bind:change="onChange" />
