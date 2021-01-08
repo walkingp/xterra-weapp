@@ -239,6 +239,24 @@
           "pathName": "pages/events/cert/cert",
           "query": "raceId=ce805e785fe2c45d0008e6431622c51f&cateId=21ded5cb5fe2d140000a55f67fe4dbb8&id=be7fb3985ff7f338032d215e6dc67407&type=million-forrest",
           "scene": null
+        },
+        {
+          "name": "管理员：比赛列表",
+          "pathName": "pages/admin/events/events",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "管理员：比赛全部报名",
+          "pathName": "pages/admin/events/registration/registration",
+          "query": "raceId=b45a21d55fe30169000a26693c7ad4f9",
+          "scene": null
+        },
+        {
+          "name": "管理员：查看已报名完成名单",
+          "pathName": "pages/admin/events/start-list/start-list",
+          "query": "raceId=b45a21d55fe30169000a26693c7ad4f9",
+          "scene": null
         }
       ]
     }

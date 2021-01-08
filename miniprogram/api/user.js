@@ -15,7 +15,7 @@ export const exportReport = async cateId => {
     const { title } = cate.data;
     console.log(`开始读取${title}报名人数`);
     const res = await usersTable.where({ cateId }).limit(1000).get();
-    let users = [['姓名', '性别', '手机号', '微信号','国籍','证件类型','证件号码','出生日期','邮箱','所属俱乐部','血型','衣服尺码','住址','紧急联系人','紧急联系人手机', '是否参加过X-Plogging']];
+    let users = [['姓名', '性别', '手机号', '微信号','国籍','证件类型','证件号码','出生日期','邮箱','所属俱乐部','血型','衣服尺码', '省份', '住址','紧急联系人','紧急联系人手机', '是否参加过X-Plogging']];
     res.data.forEach(item => {
       let user = [];
       user.push(item.trueName);
@@ -30,7 +30,8 @@ export const exportReport = async cateId => {
       user.push(item.club);
       user.push(item.bloodType);
       user.push(item.tSize);
-      user.push(item.region + item.addr);
+      user.push(item.region);
+      user.push(item.addr);
       user.push(item.contactUser);
       user.push(item.contactUserPhone);
       user.push(item.plogging);

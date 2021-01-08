@@ -24,6 +24,11 @@ miniprogram-sm-crypto@^0.2.1:
   dependencies:
     jsbn "^1.1.0"
 
+miniprogram-table-component@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/miniprogram-table-component/-/miniprogram-table-component-1.1.0.tgz#85f48dcf40fa00851496b3586a406d49f46f179f"
+  integrity sha512-TRgo+2ouPqPI42EcXUM/5BndZAueWtk0v2tDmImujYPtmFWiQT/lmgL9TgUFWowfoFM5HsKrLqagIrMKXj9bRw==
+
 wxa-plugin-canvas@^1.1.12:
   version "1.1.12"
   resolved "https://registry.yarnpkg.com/wxa-plugin-canvas/-/wxa-plugin-canvas-1.1.12.tgz#639a9857e4849ca6bac3552c96d5441beb9e28f6"

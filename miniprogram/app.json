@@ -23,7 +23,10 @@
     "pages/register/form/view/view",
     "pages/events/cert/cert",
     "pages/admin/coupon/coupon",
-    "pages/events/users/users"
+    "pages/events/users/users",
+    "pages/admin/events/events",
+    "pages/admin/events/registration/registration",
+    "pages/admin/events/start-list/start-list"
   ],
   "window": {
     "backgroundColor": "#ffffff",
@@ -34,6 +37,7 @@
   },
   "sitemapLocation": "sitemap.json",
   "usingComponents": {
+    "table": "../../../miniprogram_npm/miniprogram-table-component",
     "towxml": "/towxml/towxml",
     "login": "/components/login/login",
     "loader": "/components/loader/loader",
