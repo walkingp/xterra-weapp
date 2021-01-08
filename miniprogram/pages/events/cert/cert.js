@@ -20,8 +20,8 @@ Page({
     isMillionForrest: false
   },
   redirect(){
-    const { isMillionForrest, raceId } = this.data;
-    const url = isMillionForrest ? `/pages/events/cert/cert?raceId=${raceId}` : `/pages/events/cert/cert?raceId=${raceId}&type=million-forrest`;
+    const { isMillionForrest, raceId, cateId, id } = this.data;
+    const url = isMillionForrest ? `/pages/events/cert/cert?raceId=${raceId}&cateId=${cateId}&id=${id}` : `/pages/events/cert/cert?raceId=${raceId}&cateId=${cateId}&id=${id}&type=million-forrest`;
     wx.navigateTo({
       url
     });
@@ -35,9 +35,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    const { id, raceId, type } = options;
+    const { id, raceId, cateId, type } = options;
     this.setData({
-      id, raceId, type,
+      id, raceId, type, cateId,
       isMillionForrest: type === 'million-forrest'
     })
     this.fetchRaceDetail(raceId);
@@ -50,7 +50,9 @@ Page({
     this.onCreatePoster();
   },
   async fetchRaceDetail(id){
-
+    wx.showLoading({
+      title: '加载中',
+    });
     const fields = await getCertFields(id);
     console.log(fields)
     this.setData({
@@ -62,6 +64,9 @@ Page({
     const isPlogging = raceDetail.type === 'X-Plogging';
     this.setData({
       isPlogging
+    })
+    wx.setNavigationBarTitle({
+      title: raceDetail.title,
     })
     if(isPlogging){
       const temps = await getPloggingTemplate();
@@ -82,15 +87,21 @@ Page({
       const url = res.fileList[0].tempFileURL;
       this.setData({
         tempFileUrl: url
+      }, () => {
+        wx.hideLoading({
+          success: (res) => {},
+        })
       })
     }).catch(error => {
-      // handle error
+      wx.showToast({
+        icon: 'none',
+        title: '生成失败',
+      });
     })
   },
   async formatFields(){
     let { fields, id, isMillionForrest } = this.data;
     const result = await getResultDetail(id);
-    debugger
     fields.map(item=>{
       switch(item.key){
         case 'trueName':

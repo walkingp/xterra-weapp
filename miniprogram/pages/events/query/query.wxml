@@ -52,7 +52,7 @@
           <van-empty image="search" description="没有查询到{{isPlogging ? '证书' : '成绩'}}" />
         </block>
       </van-tab>
-      <van-tab title="管理员" name="admin" wx:if="{{isPlogging && isAdmin}}">
+      <van-tab title="管理员" name="admin" wx:if="{{false && isPlogging && isAdmin}}">
         <van-cell-group>
           <van-cell border="{{ false }}" wx:if="{{false}}">
             <button plain bindtap="viewCert" bindtap="batchDone" class="button block">一键设置全部完成</button>

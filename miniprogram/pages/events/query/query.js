@@ -1,6 +1,6 @@
 const {
   getMyProfiles,
-  getRegistrationByPhoneNum,
+  getRegistrationByCardNo,
   getRaceDetail,
   getStartedUsersByRaceId,
   getRaceCatesList
@@ -27,6 +27,8 @@ Page({
     defaultCate: '请选择',
     cardNo: '',
     profiles: [],
+    allCates: [],
+    cates: [],
     actions: [],
     searchedReg: null,
     searchResult: null,
@@ -82,30 +84,39 @@ Page({
 
   },
   async query(e) {
+    const {
+      type,
+      cateId,
+      raceId,
+      isPlogging
+    } = this.data;
+    if(isPlogging && !cateId){
+      wx.showToast({
+        icon: 'none',
+        title: '请选择分站',
+      });
+      return;
+    }
     wx.showLoading({
       title: '查询中……',
     })
     const {
       cardNo
     } = e.detail.value;
-    const {
-      type,
-      cateId,
-      isPlogging
-    } = this.data;
+    const id = isPlogging ? cateId : raceId;
     if (type === 'result') {
-      let searchResult = await searchResultByNameOrPhone(cardNo, cateId);
+      let searchResult = await searchResultByNameOrPhone(cardNo, id, isPlogging);
       const {
-        finishedStatus
+        status
       } = searchResult;
-      if (finishedStatus !== raceResultStatus.done.value) {
+      if (status !== raceResultStatus.done.value) {
         wx.showToast({
           icon: 'none',
           title: '没有查询到完赛记录',
         })
         return;
       }
-      searchResult.statusText = raceResultStatus[finishedStatus].title;
+      searchResult.statusText = raceResultStatus[status].title;
       console.log(searchResult)
       this.setData({
         searchResult
@@ -116,7 +127,7 @@ Page({
       })
       return;
     }
-    const searchedReg = await getRegistrationByPhoneNum(cardNo);
+    const searchedReg = await getRegistrationByCardNo(cardNo, id, isPlogging);
     console.log(searchedReg)
     searchedReg.regDate = dayjs(searchedReg.createdAt).format("YYYY-MM-DD HH:mm:ss");
     this.setData({
@@ -135,8 +146,8 @@ Page({
     if (!userId) {
       return;
     }
-    let cates = await getRaceCatesList(raceId);
-    cates = cates.map(item => {
+    const allCates = await getRaceCatesList(raceId);
+    const cates = allCates.map(item => {
       return {
         name: item.title,
         id: item._id
@@ -166,6 +177,7 @@ Page({
       })
     }
     this.setData({
+      allCates,
       cates,
       profiles
     }, () => {
@@ -178,6 +190,9 @@ Page({
     const {
       name
     } = e.detail;
+    this.setData({
+      type: name
+    })
     if (name === 'admin') {
       this.fetchStartedUsers();
     }
@@ -248,10 +263,10 @@ Page({
       id
     } = e.currentTarget.dataset;
     const {
-      raceDetail
+      raceDetail, cateId
     } = this.data;
     wx.navigateTo({
-      url: `/pages/events/cert/cert?raceId=${raceDetail._id}&id=${id}`,
+      url: `/pages/events/cert/cert?raceId=${raceDetail._id}&cateId=${cateId}&id=${id}`,
     })
   },
   /**
