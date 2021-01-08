@@ -155,6 +155,9 @@ Page({
     if (!userId) {
       return;
     }
+    wx.showLoading({
+      title: '加载中……',
+    })
     const allCates = await getRaceCatesList(raceId);
     const cates = allCates.map(item => {
       return {
