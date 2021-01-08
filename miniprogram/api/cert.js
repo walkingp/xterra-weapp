@@ -28,3 +28,15 @@ export const getCertFields = (raceId, isPlogging) => {
     }).catch(err=>reject(err))
   });
 }
+
+export const getMillionForrestNum = async () => {
+  const db = wx.cloud.database();
+  const _ = db.command;
+  const userTable = db.collection('race-result');
+  const res = await userTable.where({
+    millionForrestNo: _.not(_.eq(null))
+  }).count();
+  const count = res.total;
+  const num = new Date().getFullYear() + (count + 1).toString().padStart(5,'0');
+  return num;
+}

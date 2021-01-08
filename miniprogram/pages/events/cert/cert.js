@@ -124,7 +124,15 @@ Page({
     })
     if(isMillionForrest){
       fields = [{
-        color: "#000",
+        color: "#333",
+        fontSize: 40,
+        key: "millionForrestNo",
+        posX: 310,
+        posY: 200,
+        textAlign: 'left',
+        value: result.millionForrestNo
+      },{
+        color: "#333",
         fontSize: 80,
         key: "trueName",
         posX: 528,
