@@ -10,9 +10,15 @@ export const getCertTemplate = async raceId => {
   return data;
 }
 
-export const getCertFields = raceId => {
+export const getCertFields = (raceId, isPlogging) => {
   return new Promise(async (resolve, reject) => {
-    const cert = await getCertTemplate(raceId);
+    let cert = null;
+    if(isPlogging){
+      cert = await getPloggingTemplate();
+      cert = cert[0]
+     }else{
+      cert = await getCertTemplate(raceId);
+     }
     const db = wx.cloud.database();
     const _ = db.command;
     db.collection("cert-field").where({

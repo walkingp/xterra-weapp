@@ -7,7 +7,7 @@ const {
 } = require("../../../api/race");
 const dayjs = require("dayjs");
 const {
-  searchResultByNameOrPhone
+  searchResultByCardNo
 } = require("../../../api/result");
 const {
   raceResultStatus
@@ -103,9 +103,17 @@ Page({
     const {
       cardNo
     } = e.detail.value;
-    const id = isPlogging ? cateId : raceId;
+    const param = isPlogging ? { cateId } : { raceId };
     if (type === 'result') {
-      let searchResult = await searchResultByNameOrPhone(cardNo, id, isPlogging);
+      let searchResult = await searchResultByCardNo({ cardNo, ...param });
+      if(!searchResult){
+        wx.showToast({
+          icon: 'none',
+          title: '没有查询到完赛记录',
+        })
+        wx.hideLoading();
+        return;
+      }
       const {
         status
       } = searchResult;
@@ -114,6 +122,7 @@ Page({
           icon: 'none',
           title: '没有查询到完赛记录',
         })
+        wx.hideLoading();
         return;
       }
       searchResult.statusText = raceResultStatus[status].title;
@@ -125,18 +134,18 @@ Page({
           success: (res) => {},
         })
       })
-      return;
-    }
-    const searchedReg = await getRegistrationByCardNo(cardNo, id, isPlogging);
-    console.log(searchedReg)
-    searchedReg.regDate = dayjs(searchedReg.createdAt).format("YYYY-MM-DD HH:mm:ss");
-    this.setData({
-      searchedReg
-    }, () => {
-      wx.hideLoading({
-        success: (res) => {},
+    }else{
+      const searchedReg = await getRegistrationByCardNo({cardNo, ...param});
+      console.log(searchedReg)
+      searchedReg.regDate = dayjs(searchedReg.createdAt).format("YYYY-MM-DD HH:mm:ss");
+      this.setData({
+        searchedReg
+      }, () => {
+        wx.hideLoading({
+          success: (res) => {},
+        })
       })
-    })
+    }
   },
   async fetch() {
     const { raceId } = this.data;

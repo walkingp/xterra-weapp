@@ -46,9 +46,9 @@ Page({
     })
   },  
   onChange(e) {
-    const value = e.detail;
+    const { name } = e.detail;
     this.setData({
-      active: value
+      active: name
     })
   },
   async exportData(){
@@ -56,7 +56,7 @@ Page({
       title: '导出中',
     })
     const { active } = this.data;
-    const res = await exportCouponList(active === '1');
+    const res = await exportCouponList(active === 1);
     const url = res.fileList[0].tempFileURL;
     const fileName = url.substr(url.lastIndexOf('/') + 1);
     wx.downloadFile({

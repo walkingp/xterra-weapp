@@ -53,11 +53,6 @@ Page({
     wx.showLoading({
       title: '加载中',
     });
-    const fields = await getCertFields(id);
-    console.log(fields)
-    this.setData({
-      fields
-    });
 
     let cert = null;
     const raceDetail = await getRaceDetail(id);
@@ -68,6 +63,11 @@ Page({
     wx.setNavigationBarTitle({
       title: raceDetail.title,
     })
+    const fields = await getCertFields(id, isPlogging);
+    console.log(fields)
+    this.setData({
+      fields
+    });
     if(isPlogging){
       const temps = await getPloggingTemplate();
       const { isMillionForrest } = this.data;

@@ -10,11 +10,11 @@ const startListTable = db.collection("start-list");
 const resultTable = db.collection("race-result");
 
 async function inserResult(user, city) {
-  const { raceType, cateId, cardType, cardNo,  gender, phoneNum, raceDate, raceId, status: finishedStatus, trueName } = user;
+  const { raceType, cateId, cardType, cardNo,  gender, phoneNum, raceDate, raceId, trueName } = user;
   if(raceType !== 'X-Plogging'){
     return;
   }
-  const data = { city, cateId, cardType, cardNo, gender, phoneNum, raceDate, raceId, status: finishedStatus, trueName };
+  const data = { city, cateId, cardType, cardNo, gender, phoneNum, raceDate, raceId, status: 'done', trueName };
   const existed = await resultTable.where({ cateId, cardNo }).get();
   if(existed.data.length === 0){
     await resultTable.add({

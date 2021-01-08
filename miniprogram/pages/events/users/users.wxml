@@ -55,27 +55,27 @@
   <van-cell-group title="报名明细">
     <van-cell title="报名时间" value="{{detail.regDate}}" border="{{ false }}" />
     <van-cell title="状态" value="{{detail.statusText}}" border="{{ false }}" />
-    <van-cell title="姓名" value="{{detail.trueName}}" border="{{ false }}" />
-    <van-cell title="微信id" value="{{detail.wechatid}}" bindtap="copy" data-text="{{detail.wehcatid}}"
+    <van-cell title="姓名" value="{{detail.trueName}}" bindtap="copy" value-class="copyable" data-text="{{detail.trueName}}" border="{{ false }}" />
+    <van-cell title="微信id" value="{{detail.wechatid}}" bindtap="copy" value-class="copyable" data-text="{{detail.wehcatid}}"
       border="{{ false }}" />
     <van-cell title="性别" value="{{detail.gender}}" border="{{ false }}" />
     <van-cell title="国籍" value="{{detail.nation}}" border="{{ false }}" />
     <van-cell title="证件类型" value="{{detail.cardType}}" border="{{ false }}" />
-    <van-cell title="证件号码" value="{{detail.cardNo}}" border="{{ false }}" />
-    <van-cell title="手机号" value="{{detail.phoneNum}}" border="{{ false }}" />
+    <van-cell title="证件号码" value="{{detail.cardNo}}" bindtap="copy" value-class="copyable" data-text="{{detail.cardNo}}" border="{{ false }}" />
+    <van-cell title="手机号" value="{{detail.phoneNum}}" bindtap="copy" value-class="copyable" data-text="{{detail.phoneNum}}" border="{{ false }}" />
     <van-cell title="出生日期" value="{{detail.birthDate}}" border="{{ false }}" />
     <van-cell title="组别" value="{{detail.cateTitle}}" border="{{ false }}" />
-    <van-cell title="邮箱" value="{{detail.email}}" border="{{ false }}" />
-    <van-cell title="所属俱乐部" value="{{detail.club}}" border="{{ false }}" />
+    <van-cell title="邮箱" value="{{detail.email}}" bindtap="copy" value-class="copyable" data-text="{{detail.email}}" border="{{ false }}" />
+    <van-cell title="所属俱乐部" value="{{detail.club}}" bindtap="copy" value-class="copyable" data-text="{{detail.club}}" border="{{ false }}" />
   </van-cell-group>
   <van-cell-group title="其他信息">
     <van-cell title="血型" value="{{detail.bloodType}}" border="{{ false }}" />
     <van-cell title="衣服尺码" value="{{detail.tSize}}" border="{{ false }}" />
-    <van-cell title="住址" value="{{detail.region + detail.addr}}" border="{{ false }}" />
+    <van-cell title="住址" value="{{detail.region + detail.addr}}" bindtap="copy" value-class="copyable" data-text="{{detail.region + detail.addr}}" border="{{ false }}" />
   </van-cell-group>
   <van-cell-group title="紧急联系人信息">
-    <van-cell title="紧急联系人" value="{{detail.contactUser}}" border="{{ false }}" />
-    <van-cell title="紧急联系人手机号" value="{{detail.contactUserPhone}}" border="{{ false }}" />
+    <van-cell title="紧急联系人" value="{{detail.contactUser}}" bindtap="copy" value-class="copyable" data-text="{{detail.contactUser}}" border="{{ false }}" />
+    <van-cell title="紧急联系人手机号" value="{{detail.contactUserPhone}}" bindtap="copy" value-class="copyable" data-text="{{detail.contactUserPhone}}" border="{{ false }}" />
   </van-cell-group>
   <van-cell-group title="相关信息">
     <van-cell title="是否参加过X-Plogging" value="{{detail.isPlogging}}" border="{{ false }}" />
