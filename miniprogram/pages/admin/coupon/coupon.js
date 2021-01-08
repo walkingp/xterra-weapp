@@ -1,6 +1,6 @@
 // miniprogram/pages/admin/coupon/coupon.js
 const dayjs = require("dayjs");
-const { getCouponList, getCouponDetail, } = require("../../../api/coupon");
+const { getCouponList, getCouponDetail, exportCouponList, } = require("../../../api/coupon");
 const { fetchNotFreeRaces, fetchNotFreeCates } = require("../../../api/race");
 const app = getApp();
 Page({
@@ -26,6 +26,7 @@ Page({
     selectedCateId: null,
     actionType: null,
     actions: [],
+    active: 0,
     types: [
       {
         name: '全额抵扣券',
@@ -44,6 +45,43 @@ Page({
       showDatePicker: true
     })
   },  
+  onChange(e) {
+    const value = e.detail;
+    this.setData({
+      active: value
+    })
+  },
+  async exportData(){
+    wx.showLoading({
+      title: '导出中',
+    })
+    const { active } = this.data;
+    const res = await exportCouponList(active === '1');
+    const url = res.fileList[0].tempFileURL;
+    const fileName = url.substr(url.lastIndexOf('/') + 1);
+    wx.downloadFile({
+      // 示例 url，并非真实存在
+      url,
+      success: function (res) {
+        const filePath = res.tempFilePath
+        wx.openDocument({
+          filePath: filePath,
+          fileType: 'xlsx',
+          showMenu: true,
+          success: function (res) {
+            wx.hideLoading({
+              success: (res) => {},
+            })
+            console.log('打开文档成功')
+          },
+          fail: function (res) {    
+            console.error(res)
+            wx.showToast({title: '打开文档失败', icon: 'none', duration: 2000})    
+          },
+        })
+      }
+    })
+  },
   copy(e) {
     const {
       text
