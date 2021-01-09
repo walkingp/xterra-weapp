@@ -61,5 +61,5 @@
   color: #666;
 }
 .buttons{
-  padding: 20rpx;
+  padding: 0 20rpx 20rpx 20rpx;
 }

@@ -34,6 +34,7 @@
           </view>
         </scroll-view>
       </view>
+      <progress percent="{{value}}%" text="{{ stats }}" />
       <view class="buttons flex align-center">
         <button bindtap="exportCSV" class="button">生成报表</button>
         <button wx:if="{{isPlogging}}" bindtap="setFinished" class="button">设置为全部已完成</button>
@@ -41,9 +42,6 @@
       <view class="box" wx:if="{{fileUrl}}">
         <view>{{fileUrl}}</view>
         <view><button bindtap="copy" data-text="{{fileUrl}}" class="button">复制地址</button></view>
-      </view>
-      <view class="report flex align-center none justify-center">
-        <van-circle value="{{ value }}" stroke-width="6" text="{{stats}}" />
       </view>
     </block>
     <block wx:else>

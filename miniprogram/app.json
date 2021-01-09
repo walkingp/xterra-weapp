@@ -39,6 +39,7 @@
   "usingComponents": {
     "table": "../../../miniprogram_npm/miniprogram-table-component",
     "towxml": "/towxml/towxml",
+    "progress": "/components/progress/progress",
     "login": "/components/login/login",
     "loader": "/components/loader/loader",
     "banner-list": "/components/banner-list/banner-list",

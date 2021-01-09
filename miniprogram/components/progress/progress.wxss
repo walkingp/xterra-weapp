@@ -1,0 +1,26 @@
+.progress {
+  display: flex;
+  width: 690rpx;
+  margin: 10rpx auto;
+  align-items: center;
+}
+.progress .field{
+  flex: auto;
+  background: #fff;
+  justify-content: flex-start;
+  border-radius: 100px;
+  align-items: center;
+  position: relative;
+  height: 8px;
+}
+.progress text{
+  flex: none;
+  padding-left: 20rpx;
+  font-size: 24rpx;
+  color: #ccc;
+}
+.progress-value {
+  border-radius: 100px;
+  background: #1890ff;
+  height: 8px;
+}
