@@ -257,6 +257,11 @@
           "pathName": "pages/admin/events/start-list/start-list",
           "query": "raceId=b45a21d55fe30169000a26693c7ad4f9",
           "scene": null
+        },
+        {
+          "name": "管理员：生成二维码",
+          "pathName": "pages/admin/qrcode/qrcode",
+          "scene": null
         }
       ]
     }

@@ -26,7 +26,8 @@
     "pages/events/users/users",
     "pages/admin/events/events",
     "pages/admin/events/registration/registration",
-    "pages/admin/events/start-list/start-list"
+    "pages/admin/events/start-list/start-list",
+    "pages/admin/qrcode/qrcode"
   ],
   "window": {
     "backgroundColor": "#ffffff",

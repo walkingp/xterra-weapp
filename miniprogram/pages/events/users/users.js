@@ -312,7 +312,7 @@ Page({
       stats: `已报名${users.length}人`,
       users,
       race,
-      cates
+      cates,
     }, () => {
       wx.hideLoading({
         success: (res) => {},
