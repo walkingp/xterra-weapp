@@ -1,8 +1,20 @@
-import { getCollectionById } from "../utils/cloud";
+import { getCollectionById, getPaginations } from "../utils/cloud";
 const dayjs = require("dayjs");
 
 export const getUserDetail = async id => {
   const data = await getCollectionById({ dbName: 'userlist', id });
+  return data;
+}
+
+export const getStartListList = async ( cateId, size = 1000) => {
+  const data = await getPaginations({
+    dbName: 'start-list',
+    filter: {
+      cateId
+    },
+    pageIndex: 1,
+    pageSize: size
+  })
   return data;
 }
 
@@ -14,7 +26,7 @@ export const exportReport = async cateId => {
     const cate = await cateTable.doc(cateId).get();
     const { title } = cate.data;
     console.log(`开始读取${title}报名人数`);
-    const res = await usersTable.where({ cateId }).limit(1000).get();
+    const res = await getStartListList(cateId);
     let users = [['姓名', '性别', '手机号', '微信号','国籍','证件类型','证件号码','出生日期','邮箱','所属俱乐部','血型','衣服尺码', '省份', '住址','紧急联系人','紧急联系人手机', '是否参加过X-Plogging']];
     res.data.forEach(item => {
       let user = [];
