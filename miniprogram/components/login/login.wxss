@@ -25,5 +25,5 @@
   margin: 0;
   font-size: 32rpx;    
   position: absolute;
-  padding: 30rpx 200rpx!important;
+  padding: 30rpx 150rpx!important;
 }
