@@ -97,7 +97,7 @@ function updateStatuses(detail, callback){
         if(detail.couponId){
           await updateCouponStatus(detail.couponId);
         }
-        await sendEmailSMS(detail);
+        sendEmailSMS(detail);
         await updateRaceCate(detail);
         wx.hideLoading({
           success: (res) => {
@@ -126,21 +126,26 @@ async function updateCouponStatus(id){
 function saveStartlist(detail){
   const { isTeamLeader, teamTitle, profiles, id, orderNum, userId, userName, userInfo, orderType, raceId, raceDate, raceType, raceTitle, racePic, cateId, cateTitle, groupType, groupText, out_trade_no } = detail;
   const db = wx.cloud.database();
+  const userTable = db.collection("start-list");
   profiles.forEach(async item=>{
     delete item._openid;
     delete item._id;
     const profileId = item._id;
     console.log(item);
-    const result = await db.collection("start-list").add({
-      data: {
-        ...item,
-        status: orderStatus.paid.status,
-        statusText: orderStatus.paid.statusText, 
-        createdAt: new Date(),
-        isTeamLeader, teamTitle, id, orderNum, profileId, userId, userName, userInfo, orderType, raceId, raceDate, raceType, raceTitle, racePic, cateId, cateTitle, groupType, groupText, out_trade_no
-      }
-    });
-    console.log(result)
+    const { cardNo } = item;
+    const existed = await userTable.where({ cateId, cardNo }).get();
+    if(existed.data.length === 0){
+      const result = await userTable.add({
+        data: {
+          ...item,
+          status: orderStatus.paid.status,
+          statusText: orderStatus.paid.statusText, 
+          createdAt: new Date(),
+          isTeamLeader, teamTitle, id, orderNum, profileId, userId, userName, userInfo, orderType, raceId, raceDate, raceType, raceTitle, racePic, cateId, cateTitle, groupType, groupText, out_trade_no
+        }
+      });
+      console.log(result)
+    }
   })
 }
 
@@ -156,23 +161,15 @@ async function sendEmailSMS(order){
     totalFee,
     paidFee
   } = order;
-  return new Promise((res1, rej1) => {
-    let promises = [];
-    profiles.forEach(async profile => {
-      let p = new Promise(async (resolve, reject) =>{
-        const { trueName, phoneNum, email } = profile;
-        const orderDate = dayjs(new Date()).format("YYYY年MM月DD日 HH:mm:ss");
-        const params = { discountFee, orderDate, catePrice: price, cateNum: profiles.length, raceId, raceTitle, orderNum, cateTitle, price, totalFee, paidFee, trueName, phoneNum, email };
-        await sendEmail(params);
-        await sendSms(params);
-        resolve('success')
-      });
-      promises.push(p);
-    }) 
-    Promise.all(promises).then(res=>{
-      res1(res)
-    })
-  })
+  profiles.forEach(async profile => {
+    let p = new Promise(async (resolve, reject) =>{
+      const { trueName, phoneNum, email } = profile;
+      const orderDate = dayjs(new Date()).format("YYYY年MM月DD日 HH:mm:ss");
+      const params = { discountFee, orderDate, catePrice: price, cateNum: profiles.length, raceId, raceTitle, orderNum, cateTitle, price, totalFee, paidFee, trueName, phoneNum, email };
+      await sendEmail(params);
+      await sendSms(params);
+    });
+  }) 
 }
 async function sendEmail(order) {
   const {
