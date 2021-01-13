@@ -97,7 +97,7 @@ function updateStatuses(detail, callback){
         if(detail.couponId){
           await updateCouponStatus(detail.couponId);
         }
-        sendEmailSMS(detail);
+        await sendEmailSMS(detail);
         await updateRaceCate(detail);
         wx.hideLoading({
           success: (res) => {
@@ -161,14 +161,12 @@ async function sendEmailSMS(order){
     totalFee,
     paidFee
   } = order;
-  profiles.forEach(async profile => {
-    let p = new Promise(async (resolve, reject) =>{
-      const { trueName, phoneNum, email } = profile;
-      const orderDate = dayjs(new Date()).format("YYYY年MM月DD日 HH:mm:ss");
-      const params = { discountFee, orderDate, catePrice: price, cateNum: profiles.length, raceId, raceTitle, orderNum, cateTitle, price, totalFee, paidFee, trueName, phoneNum, email };
-      await sendEmail(params);
-      await sendSms(params);
-    });
+  await profiles.forEach(async profile => {
+    const { trueName, phoneNum, email } = profile;
+    const orderDate = dayjs(new Date()).format("YYYY年MM月DD日 HH:mm:ss");
+    const params = { discountFee, orderDate, catePrice: price, cateNum: profiles.length, raceId, raceTitle, orderNum, cateTitle, price, totalFee, paidFee, trueName, phoneNum, email };
+    await sendEmail(params);
+    await sendSms(params);
   }) 
 }
 async function sendEmail(order) {
