@@ -261,6 +261,13 @@
         {
           "name": "管理员：生成二维码",
           "pathName": "pages/admin/qrcode/qrcode",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "管理员：财务信息",
+          "pathName": "pages/admin/events/finance/finance",
+          "query": "raceId=0bcbdde05fc3a636006efd9971c76de4",
           "scene": null
         }
       ]

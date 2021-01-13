@@ -78,6 +78,10 @@ Page({
         type: 'startlist'
       },
       {
+        name: '查看财务信息',
+        type: 'finance'
+      },
+      {
         name: '查看比赛成绩',
         disabled: true,
         type: 'result'
@@ -111,6 +115,11 @@ Page({
       case 'startlist':
         wx.navigateTo({
           url: `/pages/admin/events/start-list/start-list?raceId=${currentId}`,
+        })
+        break;
+      case 'finance':
+        wx.navigateTo({
+          url: `/pages/admin/events/finance/finance?raceId=${currentId}`,
         })
         break;
       case 'result':

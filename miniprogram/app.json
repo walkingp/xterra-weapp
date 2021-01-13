@@ -27,7 +27,8 @@
     "pages/admin/events/events",
     "pages/admin/events/registration/registration",
     "pages/admin/events/start-list/start-list",
-    "pages/admin/qrcode/qrcode"
+    "pages/admin/qrcode/qrcode",
+    "pages/admin/events/finance/finance"
   ],
   "window": {
     "backgroundColor": "#ffffff",
