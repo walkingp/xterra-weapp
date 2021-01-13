@@ -220,6 +220,9 @@ Page({
     wx.downloadFile({
       // 示例 url，并非真实存在
       url,
+      header: {
+        "content-type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+      },
       success: function (res) {
         const filePath = res.tempFilePath
         wx.openDocument({

@@ -1,7 +1,7 @@
 .progress {
   display: flex;
-  width: 690rpx;
-  margin: 10rpx auto;
+  width: 100%;
+  margin: 0 auto 10rpx auto;
   align-items: center;
 }
 .progress .field{

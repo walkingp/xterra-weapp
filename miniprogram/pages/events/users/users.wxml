@@ -34,10 +34,12 @@
           </view>
         </scroll-view>
       </view>
-      <progress percent="{{value}}%" text="{{ stats }}" />
-      <view class="buttons flex align-center">
-        <button bindtap="exportCSV" class="button">生成报表</button>
-        <button wx:if="{{isPlogging}}" bindtap="setFinished" class="button">设置为全部已完成</button>
+      <view class="flex-none padding-md">
+        <progress percent="{{value}}%" text="{{ stats }}" />
+        <view class="buttons flex align-center">
+          <button bindtap="exportCSV" class="button">生成报表</button>
+          <button wx:if="{{isPlogging}}" bindtap="setFinished" class="button">设置为全部已完成</button>
+        </view>
       </view>
       <view class="box" wx:if="{{fileUrl}}">
         <view>{{fileUrl}}</view>
