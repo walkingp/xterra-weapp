@@ -1,0 +1,6 @@
+<view class="progress">
+  <view class="field">
+    <view class="progress-value" style="width: {{percent}};"></view>
+  </view>
+  <text>{{text}}</text>
+</view>

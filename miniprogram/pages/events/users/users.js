@@ -42,6 +42,14 @@ Page({
     stats: '已报名',
     buttonText: '置为已完成',
     isPlogging:false
+  },  
+  copy(e) {
+    const {
+      text
+    } = e.currentTarget.dataset;
+    wx.setClipboardData({
+      data: text,
+    })
   },
   async updateStatus(e){
     wx.showLoading({
@@ -304,7 +312,7 @@ Page({
       stats: `已报名${users.length}人`,
       users,
       race,
-      cates
+      cates,
     }, () => {
       wx.hideLoading({
         success: (res) => {},

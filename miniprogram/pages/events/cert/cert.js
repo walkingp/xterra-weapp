@@ -53,11 +53,6 @@ Page({
     wx.showLoading({
       title: '加载中',
     });
-    const fields = await getCertFields(id);
-    console.log(fields)
-    this.setData({
-      fields
-    });
 
     let cert = null;
     const raceDetail = await getRaceDetail(id);
@@ -68,6 +63,11 @@ Page({
     wx.setNavigationBarTitle({
       title: raceDetail.title,
     })
+    const fields = await getCertFields(id, isPlogging);
+    console.log(fields)
+    this.setData({
+      fields
+    });
     if(isPlogging){
       const temps = await getPloggingTemplate();
       const { isMillionForrest } = this.data;
@@ -124,7 +124,15 @@ Page({
     })
     if(isMillionForrest){
       fields = [{
-        color: "#000",
+        color: "#333",
+        fontSize: 40,
+        key: "millionForrestNo",
+        posX: 310,
+        posY: 200,
+        textAlign: 'left',
+        value: result.millionForrestNo
+      },{
+        color: "#333",
         fontSize: 80,
         key: "trueName",
         posX: 528,

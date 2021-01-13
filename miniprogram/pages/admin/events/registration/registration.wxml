@@ -1,0 +1,13 @@
+<view class="list">
+  <table 
+    headers="{{headers}}" 
+    header-row-class-name="fs-xs"
+    row-class-name="fs-xs"
+    cell-class-name="fs-xs cell"
+    data="{{ results }}" 
+    stripe="{{ stripe }}"
+    border="{{ border }}"
+    bind:rowClick="onRowClick"
+/>
+<view class="stats fs-xs text-grey padding-sm text-center">总计 <text class="text-red bold">{{results.length}}</text> 条记录</view>
+</view>

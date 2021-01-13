@@ -10,9 +10,15 @@ export const getCertTemplate = async raceId => {
   return data;
 }
 
-export const getCertFields = raceId => {
+export const getCertFields = (raceId, isPlogging) => {
   return new Promise(async (resolve, reject) => {
-    const cert = await getCertTemplate(raceId);
+    let cert = null;
+    if(isPlogging){
+      cert = await getPloggingTemplate();
+      cert = cert[0]
+     }else{
+      cert = await getCertTemplate(raceId);
+     }
     const db = wx.cloud.database();
     const _ = db.command;
     db.collection("cert-field").where({
@@ -21,4 +27,16 @@ export const getCertFields = raceId => {
       resolve(res.data)
     }).catch(err=>reject(err))
   });
+}
+
+export const getMillionForrestNum = async () => {
+  const db = wx.cloud.database();
+  const _ = db.command;
+  const userTable = db.collection('race-result');
+  const res = await userTable.where({
+    millionForrestNo: _.not(_.eq(null))
+  }).count();
+  const count = res.total;
+  const num = new Date().getFullYear() + (count + 1).toString().padStart(5,'0');
+  return num;
 }

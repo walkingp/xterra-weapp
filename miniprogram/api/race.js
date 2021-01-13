@@ -338,8 +338,7 @@ export const getRegistrationByOrderNum = async orderNum => {
   return data.length ? data[0] : null;
 }
 
-export const getRegistrationByCardNo = async (cardNo, id, isPlogging) => {
-  const filter = isPlogging ? { cardNo, cateId: id } : { cardNo, raceId: id }
+export const getRegistrationByCardNo = async (filter) => {
   const data = await getSingleCollectionByWhere({ dbName: 'start-list', filter});
   return data;
 }

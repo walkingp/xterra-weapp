@@ -201,7 +201,7 @@
         {
           "name": "下载证书",
           "pathName": "pages/events/cert/cert",
-          "query": "raceId=b45a21d55fe30169000a26693c7ad4f9&id=9f2a34705fe8891c00c8e9e675f1c2ac",
+          "query": "raceId=ce805e785fe2c45d0008e6431622c51f&cateId=21ded5cb5fe2d140000a55f67fe4dbb8&id=ce805e785ff7d0dd03ab518343d83639",
           "scene": null
         },
         {
@@ -232,6 +232,35 @@
           "name": "报名正式比赛",
           "pathName": "pages/register/register",
           "query": "id=21ded5cb5fe59992000dc46f4b31b4f8",
+          "scene": null
+        },
+        {
+          "name": "百万森林证书",
+          "pathName": "pages/events/cert/cert",
+          "query": "raceId=ce805e785fe2c45d0008e6431622c51f&cateId=21ded5cb5fe2d140000a55f67fe4dbb8&id=be7fb3985ff7f338032d215e6dc67407&type=million-forrest",
+          "scene": null
+        },
+        {
+          "name": "管理员：比赛列表",
+          "pathName": "pages/admin/events/events",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "管理员：比赛全部报名",
+          "pathName": "pages/admin/events/registration/registration",
+          "query": "raceId=b45a21d55fe30169000a26693c7ad4f9",
+          "scene": null
+        },
+        {
+          "name": "管理员：查看已报名完成名单",
+          "pathName": "pages/admin/events/start-list/start-list",
+          "query": "raceId=b45a21d55fe30169000a26693c7ad4f9",
+          "scene": null
+        },
+        {
+          "name": "管理员：生成二维码",
+          "pathName": "pages/admin/qrcode/qrcode",
           "scene": null
         }
       ]

@@ -1,0 +1,21 @@
+<view class="list">
+  <table 
+    headers="{{headers}}" 
+    header-row-class-name="fs-xs"
+    row-class-name="fs-xs"
+    cell-class-name="fs-xs cell"
+    data="{{ races }}" 
+    stripe="{{ stripe }}"
+    border="{{ border }}"
+    bind:rowClick="onRowClick"
+/>
+<view wx:if="{{!loading}}" class="stats fs-xs text-grey padding-sm text-center">总计 <text class="text-red bold">{{races.length}}</text> 条记录</view>
+<van-action-sheet
+  show="{{ show }}"
+  actions="{{ actions }}"
+  bind:close="onClose"
+  bind:cancel="onClose"
+  bind:select="onSelect"
+  cancel-text="取消"
+/>
+</view>

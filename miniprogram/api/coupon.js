@@ -31,10 +31,10 @@ export const exportCouponList = async (isUsed = false) => {
       coupon.push(item.coupon);
       coupon.push(item.type === 'free' ? '全额抵扣券' : '减免券');
       coupon.push(item.value);
-      coupon.push(item.isused ? '已使用' : '未使用');
+      coupon.push(item.isUsed ? '已使用' : '未使用');
       coupon.push(item.assignedUserName);
       coupon.push(item.raceTitle);
-      coupon.push(item.raceTitle);
+      coupon.push(item.cateTitle);
       coupon.push(dayjs(item.expiredDate).format("YYYY-MM-DD"));
       coupons.push(coupon);
     })

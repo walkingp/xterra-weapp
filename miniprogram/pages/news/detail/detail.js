@@ -1,4 +1,6 @@
-const { getNewsDetail } = require("../../../api/news");
+const {
+  getNewsDetail
+} = require("../../../api/news");
 const app = getApp();
 const dayjs = require("dayjs");
 // miniprogram/pages/news/detail/detail.js
@@ -16,7 +18,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    const { id } = options;
+    const {
+      id
+    } = options;
 
     this.setData({
       id
@@ -24,14 +28,27 @@ Page({
     this.fetch(id);
   },
 
-  async fetch(id){
+  async fetch(id) {
     wx.showLoading({
       title: '加载中……',
     })
     const detail = await getNewsDetail(id);
     console.log(detail);
     detail.formatDate = dayjs(new Date(detail.postTime)).format("YYYY年MM月DD日");
-    detail.content = app.towxml(detail.content,'html');
+    detail.content = app.towxml(detail.content, 'html', {
+      events: {
+        tap: e => {
+          const target = e.currentTarget.dataset.data;
+          if (target.tag === 'img') {
+            const url = target.attr.src;
+            wx.previewImage({
+              current: url,
+              urls: [url],
+            })
+          }
+        }
+      }
+    });
     this.setData({
       detail
     }, () => {
