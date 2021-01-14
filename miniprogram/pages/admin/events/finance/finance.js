@@ -21,14 +21,14 @@ Page({
         label: '组别'
       },
       {
-        prop: 'statusText',
-        width: 150,
-        label: '报名状态'
-      },
-      {
         prop: 'profiles',
         width: 152,
         label: '报名人'
+      },
+      {
+        prop: 'statusText',
+        width: 150,
+        label: '报名状态'
       },
       {
         prop: 'totalFee',
@@ -44,6 +44,11 @@ Page({
         prop: 'paidFee',
         width: 152,
         label: '实付金额'
+      },
+      {
+        prop: 'refundFee',
+        width: 152,
+        label: '退款金额'
       },
       {
         prop: 'addedDate',

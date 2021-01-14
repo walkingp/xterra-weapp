@@ -28,8 +28,8 @@
   color: #fff!important;
   width: 200rpx;
 }
-.swiper-item image.cover{
-  height: 100%!important;
+.swiper-item image{
+  height: 100vh!important;
   width: 100%;
 }
 

@@ -73,7 +73,7 @@ export const checkTeamExisted = async ({cateId, teamTitle}) => {
   return false;
 };
 
-export const getRaceCatesList = async ( raceId, size = 20) => {
+export const getRaceCatesList = async ( raceId, size = 500) => {
   const cates = await getPaginations({
     dbName: 'race-cates',
     filter: {
