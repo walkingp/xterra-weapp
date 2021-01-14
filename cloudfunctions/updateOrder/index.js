@@ -10,7 +10,7 @@ const orderTable = db.collection("registration")
 const _ = db.command
 // 云函数入口函数
 exports.main = async (event, context) => {
-  const { id, status, statusText, out_trade_no, refundTime, paidFee, discountFee } = event;
+  const { id, status, statusText, out_trade_no, refundTime, refundFee, paidFee, discountFee } = event;
   let data = { status, statusText };
   if(out_trade_no){
     data.out_trade_no = out_trade_no;
@@ -20,6 +20,9 @@ exports.main = async (event, context) => {
   }
   if(paidFee !== undefined){
     data.paidFee = paidFee;
+  }
+  if(refundFee !== undefined){
+    data.refundFee = refundFee;
   }
   if(refundTime){
     data.refundTime = refundTime;

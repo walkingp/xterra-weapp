@@ -61,8 +61,10 @@ Page({
       title: '退款中'
     })
     const { detail, isPlogging, raceDetail, refundMoney } = this.data;
+    const total_fee = +detail.totalFee * 100;
+    const refund_fee = Math.floor(refundMoney * 100);
     if(isPlogging || refundMoney === 0){
-      await updateOrderStatus({id:detail._id, ...orderStatus.refunded, refundTime: new Date() });
+      await updateOrderStatus({id:detail._id, ...orderStatus.refunded, refundFee: refund_fee, refundTime: new Date() });
       
       wx.showToast({
         icon: "success",
@@ -75,22 +77,20 @@ Page({
       })
       return;
     }
-    const total_fee = +detail.totalFee * 100;
-    const refund_fee = Math.floor(refundMoney * 100);
     const that = this;
     wx.cloud.callFunction({
       name: "payment",
       data: {
         command: "refund",
         out_trade_no: detail.out_trade_no,
-        body: raceDetail.raceTitle,
+        body: raceDetail.title,
         total_fee,
         refund_fee,
         refund_desc: `报名费退款：${raceDetail.title}`
       },
       async success(res) {
         const id = detail._id;
-        await updateOrderStatus({ id, ...orderStatus.refunded, refundTime: new Date() })
+        await updateOrderStatus({ id, ...orderStatus.refunded, refundFee: refund_fee, refundTime: new Date() })
         wx.showToast({
           icon: "success",
           title: '退款成功',

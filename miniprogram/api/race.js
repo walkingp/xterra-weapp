@@ -382,7 +382,7 @@ export const getPinyin = async word => {
 }
 
 export const updateOrderStatus = async param => {
-  const { id, status, statusText, out_trade_no, refundTime, discountFee, paidFee } = param;
+  const { id, status, statusText, out_trade_no, refundTime, discountFee, paidFee, refundFee } = param;
   return new Promise((resolve, reject) => {
     wx.cloud.callFunction({
       name: 'updateOrder',
@@ -392,6 +392,7 @@ export const updateOrderStatus = async param => {
         statusText,
         out_trade_no,
         refundTime,
+        refundFee,
         discountFee,
         paidFee
       }
