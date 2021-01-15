@@ -61,7 +61,7 @@ Page({
       title: '退款中'
     })
     const { detail, isPlogging, raceDetail, refundMoney } = this.data;
-    const total_fee = +detail.totalFee * 100;
+    const total_fee = +detail.paidFee * 100;
     const refund_fee = Math.floor(refundMoney * 100);
     if(isPlogging || refundMoney === 0){
       await updateOrderStatus({id:detail._id, ...orderStatus.refunded, refundFee: refund_fee, refundTime: new Date() });
@@ -140,7 +140,7 @@ Page({
     if(raceDetail){
       const { enabledRefund, refundRate, refundLastDate, raceDate } = raceDetail;
       policyText = `${dayjs(refundLastDate).format('YYYY年MM月DD日')}前可申请退款${(refundRate*100).toFixed(0)}%`
-      refundMoney = (Math.floor(detail.totalFee * refundRate*100)/100).toFixed(2);
+      refundMoney = (Math.floor(detail.paidFee * refundRate*100)/100).toFixed(2);
       const isDateValid = dayjs(new Date()).isBefore(dayjs(refundLastDate));
       const isPaied = detail.status === orderStatus.paid.status || detail.status === orderStatus.pending.status;
       canRefund = enabledRefund && isDateValid && isPaied;

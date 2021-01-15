@@ -78,7 +78,7 @@
       </view>
       <view class="cell">
         <label>实付费用：</label>
-        <text class="price">￥{{detail.totalFee}}</text>
+        <text class="price">￥{{detail.paidFee}}</text>
       </view>
       <view class="cell">
         <label>付款方式</label>

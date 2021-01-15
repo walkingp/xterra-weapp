@@ -1,5 +1,5 @@
 import { orderStatus } from "../config/const";
-import { getPaginations, getCollectionById, getCollectionByWhere, getSingleCollectionByWhere, hideCollectionById } from "../utils/cloud"
+import { getPaginations, getCollectionById, getCollectionByWhere, getSingleCollectionByWhere, hideCollectionById, removeCollectionByWhere } from "../utils/cloud"
 const dayjs = require("dayjs");
 
 export const getBannerList = async ( position = 'index', size = 5) => {
@@ -229,7 +229,14 @@ export const checkIsValid = async (cateId, profileId) => {
 };
 
 export const removeRegistration = async id => {
+  const regDetail = await getCollectionById ({ dbName: 'registration', id });
+  const { profiles, cateId } = regDetail;
+  profiles.forEach(async p => {
+    const { cardNo } = p;
+    const res = await removeCollectionByWhere({ dbName: 'start-list', filter: { cateId, cardNo } });
+  })
   const data = await hideCollectionById({ dbName: 'registration', id })
+  // delete record from start-list
   return data;
 }
 

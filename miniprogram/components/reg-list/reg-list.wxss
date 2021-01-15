@@ -9,10 +9,17 @@
 }
 .gray{
   color: #999;
+  white-space: nowrap;
   padding-left: 10rpx;
 }
+.small{
+  font-size: 24rpx;
+}
 .bd{
-  padding: 20rpx 0;
+  padding-top: 20rpx;
+}
+.margin-right-md{
+  margin-right: 10rpx;
 }
 .ft{
   border-top: solid 2rpx #f1f1f1;
@@ -59,7 +66,7 @@
   color: #DF1042;
 }
 .fee{
-  padding-bottom: 20rpx;
+  padding-bottom: 10rpx;
   color: #999;
 }
 .fee .bold{

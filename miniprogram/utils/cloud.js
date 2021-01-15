@@ -63,6 +63,19 @@ export const removeCollectionById = (args) => {
   })
 }
 
+export const removeCollectionByWhere = (args) => {
+  const { dbName, filter } = args;
+  return new Promise(async (resolve, reject) => {
+    await wx.cloud.database().collection(dbName).where(filter).remove({
+      success: function(res){
+        resolve(res.stats.removed);
+      }
+    }).catch(err=>{
+      reject(err)
+    });
+  })
+}
+
 export const hideCollectionById = (args) => {
   const { dbName, id } = args;
   return new Promise(async (resolve, reject) => {
