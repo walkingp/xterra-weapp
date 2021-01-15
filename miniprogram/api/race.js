@@ -235,6 +235,21 @@ export const removeRegistration = async id => {
     const { cardNo } = p;
     const res = await removeCollectionByWhere({ dbName: 'start-list', filter: { cateId, cardNo } });
   })
+  const db = wx.cloud.database();
+  const cateTable = db.collection("race-cates");
+  const startListTable = db.collection("start-list");
+  const result = await startListTable.where({ cateId }).limit(1000).get();
+  const users = result.data.map(item => {
+    const { userId, userName, trueName, gender, userInfo } = item;
+    return {
+      userId, userName, trueName, gender, userInfo
+    }
+  });
+  await cateTable.doc(cateId).update({
+    data: {
+      users
+    }
+  })
   const data = await hideCollectionById({ dbName: 'registration', id })
   // delete record from start-list
   return data;

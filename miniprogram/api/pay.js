@@ -90,8 +90,8 @@ function updateStatuses(detail, callback){
   const { out_trade_no } = getApp().globalData;
 
   getApp().globalData.out_trade_no = null;
-  updateOrderStatus({ id, ...orderStatus.paid, out_trade_no, paidFee, discountFee }).then(res=>{
-    saveStartlist(detail);
+  updateOrderStatus({ id, ...orderStatus.paid, out_trade_no, paidFee, discountFee }).then(async res=>{
+    await saveStartlist(detail);
     console.log(res);
     wx.showToast({
       icon: 'success',
