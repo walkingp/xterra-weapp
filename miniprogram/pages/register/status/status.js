@@ -43,6 +43,9 @@ Page({
     })
   },
   async fetch( id ) {
+    wx.showLoading({
+      title: '加载中……',
+    })
     const detail = await getRegistrationDetail(id);
     const { raceId } = detail;
     const raceDetail = await getRaceDetail(raceId);
@@ -72,6 +75,9 @@ Page({
       this.fetchTeamList();
     }
     console.log(detail);
+    wx.hideLoading({
+      success: (res) => {},
+    })
   },
   async fetchTeamList(){
     const { detail } = this.data;

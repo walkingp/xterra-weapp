@@ -45,9 +45,8 @@ Component({
         },
         fail: res => {
           console.log(res);
-          wx.showToast({
-            icon: 'none',
-            title: '用户已拒绝，请选择接受消息来获得最新通知',
+          wx.redirectTo({
+            url: `/pages/my/registration/registration`
           })
         }
       });

@@ -82,6 +82,9 @@ function pay(payData, detail, callback) {
   })
 };
 function updateStatuses(detail, callback){
+  wx.showLoading({
+    title: '处理中……',
+  })
   // 重要：此处更新保存out_trade_no，用于退款
   const { id, paidFee, discountFee } = detail;
   const { out_trade_no } = getApp().globalData;
@@ -94,15 +97,10 @@ function updateStatuses(detail, callback){
       icon: 'success',
       title: '支付成功',
       success: async function(){
-        wx.showLoading({
-          title: '发送邮件和短信中',
-        })
         if(detail.couponId){
           await updateCouponStatus(detail.couponId);
         }
-        debugger
         await sendEmailSMS(detail);
-        debugger
         await updateRaceCate(detail);
         wx.hideLoading({
           success: (res) => {
@@ -146,6 +144,7 @@ function saveStartlist(detail){
           status: orderStatus.paid.status,
           statusText: orderStatus.paid.statusText, 
           createdAt: new Date(),
+          isCertApproved: raceType === 'X-Plogging',
           isTeamLeader, teamTitle, id, orderNum, profileId, userId, userName, userInfo, orderType, raceId, raceDate, raceType, raceTitle, racePic, cateId, cateTitle, groupType, groupText, out_trade_no
         }
       });

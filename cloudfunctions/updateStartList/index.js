@@ -16,7 +16,7 @@ async function inserResult(user, city, index) {
     return;
   }
   const millionForrestNo = await generateMillionForrestNumber(index);
-  const data = { millionForrestNo, city, cateId, cardType, cardNo, gender, phoneNum, raceDate, raceId, status: 'done', isCertApproved: true, trueName };
+  const data = { millionForrestNo, city, cateId, cardType, cardNo, gender, phoneNum, raceDate, raceId, status: 'done', trueName };
   const existed = await resultTable.where({ cateId, cardNo }).get();
   if(existed.data.length === 0){
     await resultTable.add({

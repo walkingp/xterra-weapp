@@ -128,6 +128,9 @@ Page({
     console.log(res);
   },
   async fetch( id ) {
+    wx.showLoading({
+      title: '加载中……',
+    })
     const detail = await getRegistrationDetail(id);
     detail.orderTime = dayjs(detail.addedDate).format("YYYY-MM-DD HH:mm:ss");
     const disabled = detail.status !== orderStatus.paid;
@@ -158,6 +161,10 @@ Page({
       canRefund,
       raceDetail,
       detail
+    }, () => {
+      wx.hideLoading({
+        success: (res) => {},
+      })
     });
     console.log(detail);
   },
