@@ -92,12 +92,17 @@ function updateStatuses(detail, callback){
     console.log(res);
     wx.showToast({
       icon: 'success',
-      title: '报名成功',
+      title: '支付成功',
       success: async function(){
+        wx.showLoading({
+          title: '发送邮件和短信中',
+        })
         if(detail.couponId){
           await updateCouponStatus(detail.couponId);
         }
+        debugger
         await sendEmailSMS(detail);
+        debugger
         await updateRaceCate(detail);
         wx.hideLoading({
           success: (res) => {

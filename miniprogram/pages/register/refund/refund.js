@@ -63,7 +63,7 @@ Page({
     const { detail, isPlogging, raceDetail, refundMoney } = this.data;
     const total_fee = +detail.paidFee * 100;
     const refund_fee = Math.floor(refundMoney * 100);
-    if(isPlogging || refundMoney === 0){
+    if(isPlogging || refund_fee === 0){
       await updateOrderStatus({id:detail._id, ...orderStatus.refunded, refundFee: refund_fee, refundTime: new Date() });
       
       wx.showToast({

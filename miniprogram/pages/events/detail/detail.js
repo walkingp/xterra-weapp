@@ -106,7 +106,7 @@ Page({
 
     const cates = await getRaceCatesList(id);
     cates.map(item=>{
-      item.desc = item.desc.trim();
+      item.desc = item.desc ? item.desc.trim() : "无描述";
       return item;
     })
     const news = await getRaceNewsList(id, pageIndex, pageSize);
