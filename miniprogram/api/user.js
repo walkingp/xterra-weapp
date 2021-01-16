@@ -1,4 +1,5 @@
 import { getCollectionById, getPaginations } from "../utils/cloud";
+import { getAllRegistrationsByRaceId } from "./registration";
 const dayjs = require("dayjs");
 
 export const getUserDetail = async id => {
@@ -60,6 +61,62 @@ export const exportReport = async cateId => {
         name: 'exportCSV',
         data: {
           data: users,
+          fileName,
+          sheetName
+        },
+        success(res) {
+          resolve(res.result)
+        }
+      });
+    }catch(err){
+      reject(err)
+    }
+  })
+}
+
+export const exportFinanceReport = async raceId => {
+  const db = wx.cloud.database()
+  const raceTable = db.collection("race");
+  return new Promise(async (resolve, reject) => {
+    const race = await raceTable.doc(raceId).get();
+    const { title } = race.data;
+    console.log(`开始读取${title}报名人数`);
+    const res = await getAllRegistrationsByRaceId(raceId);
+    
+    res.map(item => {
+      item.addedDate = dayjs(item.addedDate).format("YYYY-MM-DD HH:mm:ss");
+      item.profiles = item.profiles.map(p=>p.trueName).join()
+    });
+    let orders = [['订单编号', '订单提交人', '类别', '赛事', '组别', '报名人数', '报名人', '订单状态', '订单金额', '优惠金额', '实付金额', '退款金额', '支付方式' ,'下单时间']];
+    res.forEach(item => {
+      let user = [];
+      user.push(item.orderNum);
+      user.push(item.userName);
+      user.push(item.groupText);
+      user.push(item.raceTitle);
+      user.push(item.cateTitle);
+      user.push(item.profileCount);
+      user.push(item.profiles);
+      user.push(item.statusText);
+      user.push(item.totalFee);
+      user.push(item.discountFee);
+      user.push(item.paidFee);
+      user.push(item.refundFee);
+      user.push(item.orderType);
+      user.push(item.addedDate);
+      orders.push(user);
+    })
+  
+    console.log(`共有订单${orders.length}`);
+  
+    const dateStr = dayjs().format("YYYY-MM-DD-HH-mm-ss");
+    const fileName =  `${title}-${dateStr}完整订单表.xlsx`;
+    const sheetName = '完整订单表';
+    try{
+      wx.cloud.callFunction({
+        name: 'exportCSV',
+        data: {
+          data: orders,
           fileName,
           sheetName
         },

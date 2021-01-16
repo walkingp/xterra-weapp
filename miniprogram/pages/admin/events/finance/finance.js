@@ -1,6 +1,7 @@
 const { getRaceDetail } = require("../../../../api/race");
 const { getAllRegistrationsByRaceId } = require("../../../../api/registration");
 const dayjs = require("dayjs");
+const { exportFinanceReport } = require("../../../../api/user");
 // miniprogram/pages/admin/events/registration/registration.js
 Page({
 
@@ -101,6 +102,45 @@ Page({
         success: (res) => {},
       })
     });
+  },
+  
+  async exportCSV() {
+    wx.showLoading({
+      title: '生成中……',
+    })
+    const that = this;
+    const {
+      raceId
+    } = this.data;
+    
+    const res = await exportFinanceReport(raceId);
+    const url = res.fileList[0].tempFileURL;
+    const fileName = url.substr(url.lastIndexOf('/') + 1);
+    wx.downloadFile({
+      // 示例 url，并非真实存在
+      url,
+      header: {
+        "content-type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+      },
+      success: function (res) {
+        const filePath = res.tempFilePath
+        wx.openDocument({
+          filePath: filePath,
+          fileType: 'xlsx',
+          showMenu: true,
+          success: function (res) {
+            wx.hideLoading({
+              success: (res) => {},
+            })
+            console.log('打开文档成功')
+          },
+          fail: function (res) {    
+            console.error(res)
+            wx.showToast({title: '打开文档失败', icon: 'none', duration: 2000})    
+          },
+        })
+      }
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
