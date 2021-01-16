@@ -58,14 +58,17 @@ Page({
     const { active } = this.data;
     const res = await exportCouponList(active === 1);
     const url = res.fileList[0].tempFileURL;
-    const fileName = url.substr(url.lastIndexOf('/') + 1);
+    const filePath =  wx.env.USER_DATA_PATH + url.substr(url.lastIndexOf('/'));
+    console.log(filePath)
     wx.downloadFile({
-      // 示例 url，并非真实存在
       url,
+      filePath,
+      header: {
+        "content-type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+      },
       success: function (res) {
-        const filePath = res.tempFilePath
         wx.openDocument({
-          filePath: filePath,
+          filePath,
           fileType: 'xlsx',
           showMenu: true,
           success: function (res) {
