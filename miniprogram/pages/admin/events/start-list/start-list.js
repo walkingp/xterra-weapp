@@ -1,6 +1,7 @@
 const { getRaceDetail } = require("../../../../api/race");
 const { getAllStartListByRaceId } = require("../../../../api/registration");
 const dayjs = require("dayjs");
+const { exportRegReportByRaceId } = require("../../../../api/user");
 const app = getApp();
 // miniprogram/pages/admin/events/registration/registration.js
 Page({
@@ -168,6 +169,44 @@ Page({
 
   },
 
+  async exportCSV() {
+    wx.showLoading({
+      title: '生成中……',
+    })
+    const that = this;
+    const {
+      raceId
+    } = this.data;
+    
+    const res = await exportRegReportByRaceId(raceId);
+    const url = res.fileList[0].tempFileURL;
+    const filePath =  wx.env.USER_DATA_PATH + url.substr(url.lastIndexOf('/'));
+    wx.downloadFile({
+      // 示例 url，并非真实存在
+      url,
+      filePath,
+      header: {
+        "content-type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+      },
+      success: function (res) {
+        wx.openDocument({
+          filePath,
+          fileType: 'xlsx',
+          showMenu: true,
+          success: function (res) {
+            wx.hideLoading({
+              success: (res) => {},
+            })
+            console.log('打开文档成功')
+          },
+          fail: function (res) {    
+            console.error(res)
+            wx.showToast({title: '打开文档失败', icon: 'none', duration: 2000})    
+          },
+        })
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面显示
    */

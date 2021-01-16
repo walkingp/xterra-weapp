@@ -83,6 +83,7 @@ Page({
     pinyinFirst = pinyinFirst.join('');
     pinyinLast = pinyinLast.join('');
     this.setData({
+      nation: '中国',
       pinyinFirst: pinyinFirst.replace(pinyinFirst[0],pinyinFirst[0].toUpperCase()).replace(/\s/g,""),
       pinyinLast: pinyinLast.replace(pinyinLast[0], pinyinLast[0].toUpperCase())
     })
