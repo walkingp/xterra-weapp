@@ -1,5 +1,6 @@
 const { getAllRaces } = require("../../../api/race")
 const dayjs = require("dayjs");
+const app = getApp();
 // miniprogram/pages/admin/events/events.js
 Page({
 
@@ -145,7 +146,24 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.fetch();
+    app.checkLogin().then(res => {
+      const isAdmin = res.userInfo.role === 'admin';
+      if(!isAdmin){
+        wx.showToast({
+          icon: 'none',
+          title: '你没有管理员权限',
+          success: () => {
+            setTimeout(() => {
+              wx.switchTab({
+                url: '/pages/my/my',
+              })
+            }, 1000);
+          }
+        })
+      }else{
+        this.fetch();
+      }
+    });
   },
   async fetch(){
     const races = await getAllRaces();

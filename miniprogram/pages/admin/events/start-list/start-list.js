@@ -1,6 +1,7 @@
 const { getRaceDetail } = require("../../../../api/race");
 const { getAllStartListByRaceId } = require("../../../../api/registration");
 const dayjs = require("dayjs");
+const app = getApp();
 // miniprogram/pages/admin/events/registration/registration.js
 Page({
 
@@ -108,11 +109,28 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    const { raceId } = options;
-    this.setData({
-      raceId
-    })
-    this.fetch();
+    app.checkLogin().then(res => {
+      const isAdmin = res.userInfo.role === 'admin';
+      if(!isAdmin){
+        wx.showToast({
+          icon: 'none',
+          title: '你没有管理员权限',
+          success: () => {
+            setTimeout(() => {
+              wx.switchTab({
+                url: '/pages/my/my',
+              })
+            }, 1000);
+          }
+        })
+      }else{
+        const { raceId } = options;
+        this.setData({
+          raceId
+        })
+        this.fetch();
+      }
+    });
   },
   onCellClick(e){
     console.log(e.detail.target.dataset.it);
