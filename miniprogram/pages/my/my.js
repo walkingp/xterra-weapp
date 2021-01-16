@@ -35,7 +35,7 @@ Page({
   },
 
   onCompleted(arg){
-    const { isLogined, userInfo } = arg.detail;
+    const { isLogined, isAdmin, userInfo } = arg.detail;
     if(!userInfo.phonenumber){ // 修改资料
       wx.redirectTo({
         url: '/pages/my/edit/edit',
@@ -44,6 +44,7 @@ Page({
     }
     console.log(arg)
     this.setData({
+      isAdmin,
       isLogined,
       userInfo
     })

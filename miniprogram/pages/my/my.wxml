@@ -28,7 +28,7 @@
         <login bind:onCompleted="onCompleted" />
       </block>
     </view>
-    <view class="box my">
+    <view class="box my" wx:if="{{isLogined}}">
       <view class="flex space-between">
         <text class="hd">我的信息</text>
       </view>
@@ -41,7 +41,7 @@
         </van-grid>
       </view>
     </view>
-    <view class="box other">
+    <view class="box other {{isLogined ? '' : 'margin-top-lg'}}">
       <view class="flex space-between">
         <text class="hd">其他</text>
       </view>

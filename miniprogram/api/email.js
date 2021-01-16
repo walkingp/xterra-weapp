@@ -93,13 +93,13 @@ export const sendRegEmail = async (type, order) => {
               console.log(data);
               resolve(data);
             },
-            fail: function (res) {
-              console.log(res)
-              reject(res);
+            fail: function (err) {
+              console.log(err)
+              reject(err);
             }
           });
-        }).catch(error => {
-          // handle error
+        }).catch(err => {
+          reject(err);
         })
       }
     })

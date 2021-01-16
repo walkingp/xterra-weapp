@@ -27,7 +27,6 @@ export const sendEmail = ({ html, from, to, subject }) => {
   })
 }
 
-
 export const sendTencentEmail = ({ templateId, data, to, subject }) => {
   return new Promise((resolve, reject) => {
     wx.cloud.callFunction({
@@ -53,26 +52,24 @@ export const getCollectionById = (args) => {
 export const removeCollectionById = (args) => {
   const { dbName, id } = args;
   return new Promise(async (resolve, reject) => {
-    await wx.cloud.database().collection(dbName).doc(id).remove({
-      success: function(res){
-        resolve(res.stats.removed);
-      }
-    }).catch(err=>{
-      reject(err)
-    });
+    try {
+      const res = await wx.cloud.database().collection(dbName).doc(id).remove();      
+      resolve(res.stats.removed);
+    } catch(e) {
+      reject(e)
+    }
   })
 }
 
 export const removeCollectionByWhere = (args) => {
   const { dbName, filter } = args;
   return new Promise(async (resolve, reject) => {
-    await wx.cloud.database().collection(dbName).where(filter).remove({
-      success: function(res){
-        resolve(res.stats.removed);
-      }
-    }).catch(err=>{
-      reject(err)
-    });
+    try {
+      const res = await wx.cloud.database().collection(dbName).doc(id).remove();      
+      resolve(res.stats.removed);
+    } catch(e) {
+      reject(e)
+    }
   })
 }
 

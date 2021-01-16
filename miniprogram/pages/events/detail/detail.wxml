@@ -10,27 +10,27 @@
         <view class="cells">
           <view class="cell">
             <text>{{type}}时间：</text>
-            <text selectable="{{true}}" class="bold">{{detail.raceDate}}</text>
+            <text selectable="{{true}}" class="text">{{detail.raceDate}}</text>
           </view>
           <view class="cell">
             <text>{{type}}地点：</text>
-            <text selectable="{{true}}" class="bold">{{detail.location}}</text>
+            <text selectable="{{true}}" class="text">{{detail.location}}</text>
           </view>
           <view class="cell">
             <text>{{type}}类型：</text>
-            <text class="bold">{{detail.type}}</text>
+            <text class="text">{{detail.type}}</text>
           </view>
           <view class="cell" wx:if="{{detail.cates!=='/'}}">
             <text>{{type}}组别：</text>
-            <text class="bold">{{detail.cates}}</text>
+            <text class="text">{{detail.cates}}</text>
           </view>
           <view class="cell">
             <text>报名开始时间：</text>
-            <text class="bold">{{detail.regStartTimeStr}}</text>
+            <text class="text">{{detail.regStartTimeStr}}</text>
           </view>
           <view class="cell">
             <text>报名截止时间：</text>
-            <text class="bold">{{detail.endRegTimeStr}}</text>
+            <text class="text">{{detail.endRegTimeStr}}</text>
           </view>
         </view>
       </view>

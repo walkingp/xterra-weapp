@@ -64,7 +64,7 @@ Page({
     const total_fee = +detail.paidFee * 100;
     const refund_fee = Math.floor(refundMoney * 100);
     if(isPlogging || refund_fee === 0){
-      await updateOrderStatus({id:detail._id, ...orderStatus.refunded, refundFee: refund_fee, refundTime: new Date() });
+      await updateOrderStatus({id:detail._id, ...orderStatus.refunded, refundFee: refundMoney, refundTime: new Date() });
       
       wx.showToast({
         icon: "success",
@@ -90,7 +90,7 @@ Page({
       },
       async success(res) {
         const id = detail._id;
-        await updateOrderStatus({ id, ...orderStatus.refunded, refundFee: refund_fee, refundTime: new Date() })
+        await updateOrderStatus({ id, ...orderStatus.refunded, refundFee: refundMoney, refundTime: new Date() })
         wx.showToast({
           icon: "success",
           title: '退款成功',

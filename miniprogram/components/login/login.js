@@ -12,7 +12,8 @@ Component({
    * 组件的初始数据
    */
   data: {
-    isLogined: false
+    isLogined: false,
+    isAdmin: false
   },
 
   /**
@@ -47,6 +48,7 @@ Component({
                 app.globalData.isAdmin = isAdmin
 
                 _this.setData({
+                  isAdmin,
                   isLogined: true,
                   isAdmin
                 })
@@ -131,7 +133,8 @@ Component({
           detail,
           isLoaded: true          
         },()=>{
-          this.triggerEvent('onCompleted', { isLogined: true, userInfo: detail })
+          const isAdmin = detail.role === 'admin';
+          this.triggerEvent('onCompleted', { isLogined: true, isAdmin,  userInfo: detail })
         })
       }
     },

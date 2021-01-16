@@ -38,22 +38,46 @@ Component({
     receiveMessage() {
       const templateId = config.messageTemplates.registration.templateId;
       const that = this;
-      wx.requestSubscribeMessage({
-        tmplIds: [templateId],
-        success: async res => {
-          that.sendMessage();
-        },
-        fail: res => {
-          console.log(res);
-          wx.redirectTo({
-            url: `/pages/my/registration/registration`
-          })
+      wx.getSetting({
+        withSubscriptions: true, //是否同时获取用户订阅消息的订阅状态，默认不获取
+        success: (res) => {
+          console.log(res)
+          if (res.subscriptionsSetting && res.subscriptionsSetting.itemSettings &&
+            res.subscriptionsSetting.itemSettings[message] == "reject") {
+            wx.redirectTo({
+              url: `/pages/my/registration/registration`
+            })
+          } else {
+            try{
+              wx.requestSubscribeMessage({
+                tmplIds: [templateId],
+                success: async res => {
+                  that.sendMessage();
+                },
+                fail: res => {
+                  console.log(res);
+                  wx.redirectTo({
+                    url: `/pages/my/registration/registration`
+                  })
+                }
+              });
+            }catch{
+              wx.redirectTo({
+                url: `/pages/my/registration/registration`
+              })
+            }
+          }
         }
       });
     },
     sendMessage() {
-      const { order } = this.properties;
-      const { id, profiles } = order;
+      const {
+        order
+      } = this.properties;
+      const {
+        id,
+        profiles
+      } = order;
       const trueName = profiles.map(item => item.trueName).join();
       const phoneNum = profiles.map(item => item.phoneNum).join();
       wx.cloud.callFunction({
@@ -75,7 +99,7 @@ Component({
             value: order.paidFee
           },
           time5: {
-            value: dayjs(order.raceDate).format('YYYY年MM月DD日') 
+            value: dayjs(order.raceDate).format('YYYY年MM月DD日')
           }
         },
         success: res => {
@@ -84,7 +108,9 @@ Component({
           })
         },
         fail: res => {
-          console.error(res)
+          wx.redirectTo({
+            url: `/pages/my/registration/registration`
+          })
         }
       })
     },

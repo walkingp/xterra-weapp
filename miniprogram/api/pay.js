@@ -144,7 +144,7 @@ function saveStartlist(detail){
           status: orderStatus.paid.status,
           statusText: orderStatus.paid.statusText, 
           createdAt: new Date(),
-          isCertApproved: raceType === 'X-Plogging',
+          isCertApproved: true,
           isTeamLeader, teamTitle, id, orderNum, profileId, userId, userName, userInfo, orderType, raceId, raceDate, raceType, raceTitle, racePic, cateId, cateTitle, groupType, groupText, out_trade_no
         }
       });

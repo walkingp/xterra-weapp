@@ -42,7 +42,7 @@ swiper{
   letter-spacing: 2rpx;
   color: #999;
 }
-.cell .bold{
+.cell .text{
   color: #333;
 }
 .info{
