@@ -13,7 +13,7 @@
       <step3 order="{{order}}" id="step3" bind:onComplete="onComplete" bind:couponChanged="couponChanged" />
     </view>
     <view class="step4" wx:if="{{step===4}}">
-      <step4 order="{{order}}" />
+      <step4 order="{{order}}" bind:onPaiedComplete="onPaiedComplete" />
     </view>
   </view>
   <view class="buttons flex-none">

@@ -65,6 +65,7 @@ export const sendRegEmail = async (type, order) => {
           // get temp file URL
           console.log(res.fileList)
           const fileUrl = res.fileList[0].tempFileURL;
+          debugger
   
           wx.request({
             url: fileUrl,

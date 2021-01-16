@@ -119,6 +119,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {    
+    wx.showLoading({
+      title: '检查登录中',
+    })
     app.checkLogin().then(res=>{    
       const { isLogined, userId, userInfo } = res;
       if(!isLogined){
@@ -188,6 +191,11 @@ Page({
       that.setData({
         step: 4
       })
+    });
+  },
+  onPaiedComplete(){
+    this.setData({
+      step: 4
     });
   },
     /**

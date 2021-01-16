@@ -90,6 +90,7 @@ function updateStatuses(detail, callback){
   const { out_trade_no } = getApp().globalData;
 
   getApp().globalData.out_trade_no = null;
+  const that = this;
   updateOrderStatus({ id, ...orderStatus.paid, out_trade_no, paidFee, discountFee }).then(async res=>{
     await saveStartlist(detail);
     console.log(res);
@@ -97,14 +98,29 @@ function updateStatuses(detail, callback){
       icon: 'success',
       title: '支付成功',
       success: async function(){
+        wx.showLoading({
+          title: '处理订单中',
+        })
         if(detail.couponId){
           await updateCouponStatus(detail.couponId);
         }
+        wx.showLoading({
+          title: '发送邮件中',
+        })
         await sendEmailSMS(detail);
+        wx.showLoading({
+          title: '发送短信中',
+        })
         await updateRaceCate(detail);
-        wx.hideLoading({
+        wx.showToast({
+          icon: 'success',
+          title: '报名成功',
           success: (res) => {
-            callback && callback();
+            if(callback){
+              callback();
+            }else{
+              that.triggerEvent('onPaiedComplete');
+            }
           },
         })
       }
@@ -165,6 +181,7 @@ async function sendEmailSMS(order){
     totalFee,
     paidFee
   } = order;
+  debugger
   await profiles.forEach(async profile => {
     const { trueName, phoneNum, email } = profile;
     const orderDate = dayjs(new Date()).format("YYYY年MM月DD日 HH:mm:ss");
@@ -196,17 +213,19 @@ async function sendEmail(order) {
     discountFee,
     paidFee
   };
-  await sendRegEmail(emailTemplateType.registration.value, values);
+  const res = await sendRegEmail(emailTemplateType.registration.value, values);
+  console.log(res);
 }
 
 async function sendSms({ phoneNum, trueName, raceId, raceTitle, cateTitle}){
-  await sendRegSMS({
+  const res = await sendRegSMS({
     mobile: phoneNum,
     trueName,
     raceId,
     raceTitle,
     cateTitle
   })
+  console.log(res);
 };
 
 // 更新race-cates下users

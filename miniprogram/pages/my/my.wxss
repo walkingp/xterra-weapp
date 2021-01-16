@@ -38,6 +38,6 @@ image.avatar{
 .right navigator+navigator{
   margin-left: 10rpx;
 }
-.admin .list{
+.list{
   padding-top: 20rpx;
 }

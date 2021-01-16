@@ -33,7 +33,20 @@ Page({
       return;
     }
     const detail = res[0];
-    detail.content = app.towxml(detail.content,'html');
+    detail.content = app.towxml(detail.content,'html',{
+      events: {
+        tap: e => {
+          const target = e.currentTarget.dataset.data;
+          if (target.tag === 'img') {
+            const url = target.attr.src;
+            wx.previewImage({
+              current: url,
+              urls: [url],
+            })
+          }
+        }
+      }
+    });
     wx.setNavigationBarTitle({
       title: detail.title,
     })
