@@ -69,6 +69,7 @@ Page({
     if(!isChinese){
       const index = value.lastIndexOf(' ');
       this.setData({
+        nation: '',
         pinyinFirst: value.substr(0, index),
         pinyinLast: value.substr(index + 1)
       })
@@ -156,11 +157,18 @@ Page({
   },
   async saveData(e){
     let profile = e.detail.value;
-    const { trueName, cardNo,phoneNum, email, wechatId } = profile;
+    const { trueName, cardNo, phoneNum, nation, email, wechatId } = profile;
     const { myProfiles, id, certPic, relation, cardType, gender, birthDate, defaultBirthDate, bloodType, tSize, region, userId, userInfo, raceId, action, plogging } = this.data;
     if(!trueName){
       wx.showToast({
         title: '姓名不可为空',
+        icon: 'none'
+      })
+      return;
+    }
+    if(!nation){
+      wx.showToast({
+        title: '国籍不可为空',
         icon: 'none'
       })
       return;

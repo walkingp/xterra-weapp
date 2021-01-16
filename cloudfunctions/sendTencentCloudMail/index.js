@@ -18,7 +18,7 @@ const clientConfig = {
 // 云函数入口函数
 exports.main = async (event, context) => {
   const { templateId, to, subject, data } = event;
-  console.log("Start to sendemail")
+  console.log("Start to sendemail", event)
   //开始发送邮件
   const client = new SesClient(clientConfig);
   const params = {
