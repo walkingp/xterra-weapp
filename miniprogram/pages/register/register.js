@@ -102,6 +102,7 @@ Page({
       const { id, orderNum } = res.result;
       
       app.globalData.order.id = id._id;
+      app.globalData.order._id = id._id;
       app.globalData.order.orderNum = orderNum;
       console.log(app.globalData.order);
       const { order } = app.globalData;

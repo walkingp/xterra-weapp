@@ -97,8 +97,17 @@ Page({
     const { detail } = this.data;
     console.log(detail);
     console.table(app.globalData.order);
+    const that = this;
     payNow(detail, () => {
-      this.fetch(detail._id);
+      wx.showToast({
+        icon: 'success',
+        title: '支付成功',
+        success(){
+          setTimeout(() => {
+            that.fetch(detail._id);            
+          }, 2000);
+        }
+      })
     });
   },
   onShareAppMessage: function( options ){

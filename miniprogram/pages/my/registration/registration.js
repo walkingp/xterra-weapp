@@ -30,8 +30,24 @@ Page({
     })
     app.checkLogin().then(res => {
       this.fetch();
+      this.watchChanges();
     })
-
+  },
+  watchChanges(){
+    const db = wx.cloud.database();
+    const that = this;
+    db.collection('registration').watch({
+      onChange: function(snapshot) {
+        const { type } = snapshot;
+        if(type !== 'init'){
+          that.fetch();
+        }
+        console.log('snapshot', snapshot)
+      },
+      onError: function(err) {
+        console.error('the watch closed because of error', err)
+      }
+    })
   },
 
   async fetch(){

@@ -70,7 +70,7 @@ function pay(payData, detail, callback) {
           title: '支付失败',
           success: function(){
             wx.redirectTo({
-              url: `/pages/register/status/status?id=${detail.id}`,
+              url: `/pages/register/status/status?id=${detail._id}`,
             })
           }
         })
