@@ -60,3 +60,6 @@ button{
   padding: 0 10rpx;
   color: #0078D4;
 }
+.cell image{
+  vertical-align: baseline;
+}

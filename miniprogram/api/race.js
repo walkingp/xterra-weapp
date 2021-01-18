@@ -314,7 +314,8 @@ export const getMyRegistrations = async (userId, size = 100) => {
     },
     pageIndex: 1,
     pageSize: size
-  })
+  });
+  
   return data;
 }
 
@@ -355,6 +356,12 @@ export const getStartUserDetail = async id => {
   const data = await getCollectionById({ dbName: 'start-list', id });
   return data;
 }
+
+export const getStartUserDetailByOrderNum = async orderNum => {
+  const data = await getSingleCollectionByWhere({ dbName: 'start-list', filter: { orderNum  }});
+  return data;
+}
+
 export const getRegistrationByOrderNum = async orderNum => {
   const data = await getCollectionByWhere({ dbName: 'registration', filter: { orderNum } });
   return data.length ? data[0] : null;

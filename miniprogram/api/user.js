@@ -30,10 +30,18 @@ export const getStartListListByRaceId = async ( raceId, size = 1000) => {
   })
   return data;
 }
+
+export const updateStartListCert = async (id, certRecheckUrl) => {
+  const db = wx.cloud.database()
+  const usersTable = db.collection("start-list")
+  return await usersTable.doc(id).update({
+    data: {certRecheckUrl}
+  });
+};
+
 export const exportReport = async cateId => {
   const db = wx.cloud.database()
   const cateTable = db.collection("race-cates");
-  const usersTable = db.collection("start-list")
   return new Promise(async (resolve, reject) => {
     const cate = await cateTable.doc(cateId).get();
     const { title } = cate.data;

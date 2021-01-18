@@ -89,6 +89,28 @@
         <label>订单状态：</label>
         <text>{{detail.statusText}}</text>
       </view>
+      <view class="cell" wx:if="{{orderDetail}}">
+        <label>报名审核：</label>
+        <text wx:if="{{orderDetail.isCertApproved}}" class="text-green">已审核通过</text>
+        <text wx:else class="text-red">未审核通过</text>
+      </view>
+      <block wx:if="{{orderDetail && !orderDetail.isCertApproved}}">
+        <view class="cell">
+          <label>拒绝原因：</label>
+          <text class="text-red">{{orderDetail.rejectReason || '无'}}</text>
+        </view>
+        <view class="cell flex align-center">
+          <label class="flex-none">成绩证书：</label>
+          <view class="line flex align-center" bindtap="preview" data-url="{{certPic}}">
+            <van-icon size="22px" name="{{certPic}}" />
+            <text class="copy">点击查看</text>
+          </view>
+          <view class="line flex align-center margin-left-md" bindtap="upload">
+            <van-icon size="22px" name="edit" />
+            <text class="copy">重新上传</text>
+          </view>
+        </view>
+      </block>
     </view>
     <view class="ft flex justify-end align-center">
       <button bindtap="redirect" disabled="{{!refundEnabled}}" data-url="/pages/register/refund/refund?id={{detail._id}}" class="button secondary mini" wx:if="{{showRefundBtn}}">{{detail.raceType === 'X-Plogging' ? '取消活动' : '申请退款'}}</button>

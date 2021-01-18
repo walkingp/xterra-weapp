@@ -1,8 +1,9 @@
-const { getRegistrationDetail, updateOrderStatus, getRaceDetail } = require("../../../api/race");
+const { getRegistrationDetail, updateOrderStatus, getRaceDetail, getStartUserDetailByOrderNum } = require("../../../api/race");
 const dayjs = require("dayjs");
 const { orderStatus } = require("../../../config/const");
 const { payNow } = require("../../../api/pay");
 const { getUserListByTeam } = require("../../../api/result");
+const { updateStartListCert } = require("../../../api/user");
 const app = getApp();
 Page({
 
@@ -12,14 +13,23 @@ Page({
   data: {
     refundEnabled: true,
     raceDetail: null,
+    orderDetail: null,
     raceId: null,
     id: null,
     detail: null,
     showRefundBtn: false,
     showPayBtn: false,
-    members: []
+    members: [],
+    certPic: null
   },
 
+  preview(e){
+    const { url } = e.currentTarget.dataset;
+    wx.previewImage({
+      urls: [ url ],
+      current: url
+    });
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -42,6 +52,47 @@ Page({
       }
     })
   },
+  upload(event) {
+    const that = this;
+    const { orderDetail } = this.data;
+    wx.chooseImage({
+      count: 1,
+      sizeType: ['original', 'compressed'],
+      sourceType: ['album', 'camera'],
+      success (res) {
+        // tempFilePath可以作为img标签的src属性显示图片
+        const tempFilePaths = res.tempFilePaths;        
+        wx.cloud.init();
+        if (tempFilePaths.length === 0) {
+          wx.showToast({
+            title: '请选择图片',
+            icon: 'none'
+          });
+        } else {
+          wx.showLoading({
+            title: '上传中...',
+          })
+          const suffix = /\.\w+$/.exec(tempFilePaths[0])[0];
+          wx.cloud.uploadFile({
+            cloudPath: `upload/certs/${new Date().getTime()}${suffix}`,
+            filePath: tempFilePaths[0], 
+            success: async (result) => {
+              that.setData({
+                certPic: result.fileID,
+              });
+              const res = await updateStartListCert(orderDetail._id, result.fileID);     
+              wx.hideLoading({
+                success: (res) => {},
+              })
+            },
+            fail: err => {
+              console.error(err);
+            }
+          });
+        }
+      }
+    })
+  },
   async fetch( id ) {
     wx.showLoading({
       title: '加载中……',
@@ -58,9 +109,15 @@ Page({
       showPayBtn: detail.status === orderStatus.pending.status || detail.status === orderStatus.failed.status,
     });
     if(raceDetail){
+      const orderDetail = await getStartUserDetailByOrderNum(detail.orderNum);
+      const { certPic, certRecheckUrl } = orderDetail;
       this.setData({
+        certPic: certRecheckUrl ? certRecheckUrl: certPic,
         raceDetail,
+        orderDetail,
         raceId
+      }, () => {
+        this.watchChanges();
       })
       // 可取消活动时间
       const isBeforeRefundDate = raceDetail.enabledRefund && dayjs(new Date()).isBefore(dayjs(raceDetail.refundLastDate));
@@ -78,6 +135,40 @@ Page({
     wx.hideLoading({
       success: (res) => {},
     })
+  },
+  
+  watchChanges(){
+    const db = wx.cloud.database()
+    const that = this;
+    const { orderDetail, id } = this.data;
+    const { orderNum } = orderDetail;
+    if(!orderNum){
+      return;
+    }
+    db.collection('start-list').where({ orderNum }).watch({
+      onChange: function(snapshot) {
+        const { type } = snapshot;
+        if(type !== 'init'){
+          that.fetch(id);
+        }
+        console.log('snapshot', snapshot)
+      },
+      onError: function(err) {
+        console.error('the watch closed because of error', err)
+      }
+    });
+    db.collection('registration').doc(id).watch({
+      onChange: function(snapshot) {
+        const { type } = snapshot;
+        if(type !== 'init'){
+          that.fetch(id);
+        }
+        console.log('snapshot', snapshot)
+      },
+      onError: function(err) {
+        console.error('the watch closed because of error', err)
+      }
+    });
   },
   async fetchTeamList(){
     const { detail } = this.data;

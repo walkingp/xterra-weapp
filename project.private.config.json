@@ -1,4 +1,5 @@
 {
+  "setting": {},
   "condition": {
     "plugin": {
       "list": []
@@ -26,7 +27,7 @@
         {
           "name": "赛事列表",
           "pathName": "pages/events/events",
-          "query": "type=X-Plogging",
+          "query": "",
           "scene": null
         },
         {
@@ -62,7 +63,7 @@
         {
           "name": "报名状态",
           "pathName": "pages/register/status/status",
-          "query": "id=b45a21d56004f58b052ea2fd1fc5b1ba",
+          "query": "id=21ded5cb6005231c05643144452341b4",
           "scene": null
         },
         {

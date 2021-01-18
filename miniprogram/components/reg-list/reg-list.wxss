@@ -12,6 +12,10 @@
   white-space: nowrap;
   padding-left: 10rpx;
 }
+.red{
+  color: #DF1042;
+  font-size: 24rpx;
+}
 .small{
   font-size: 24rpx;
 }

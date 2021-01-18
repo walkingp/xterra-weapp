@@ -53,7 +53,7 @@ export const orderStatus = {
   refunded: {
     status: 6, 
     statusText: '已退款',
-    textColor: '#0b8235'
+    textColor: '#DF1042'
   },
 }
 

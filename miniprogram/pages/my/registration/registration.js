@@ -1,4 +1,4 @@
-const { getMyRegistrations } = require("../../../api/race")
+const { getMyRegistrations, getStartUserDetailByOrderNum } = require("../../../api/race")
 const app = getApp();
 const dayjs = require("dayjs");
 const { orderStatus } = require("../../../config/const");
@@ -53,13 +53,15 @@ Page({
   async fetch(){
     const { userId } = app.globalData;
     const regs = await getMyRegistrations(userId);
-    regs.map(item => {
+    regs.map(async item => {
       item.regDate = dayjs(item.addedDate).format("YYYY-MM-DD");
       item.showPayButton = item.status === orderStatus.pending.status || item.status === orderStatus.failed.status;
       const key = Object.keys(orderStatus).find(key => orderStatus[key].status === item.status);;
       item.textColor = orderStatus[key].textColor;
+      
       return item;
     });
+    console.log(regs);
     const regsFinished = regs.filter(item=>item.status === orderStatus.paid.status );
     const regsFailed = regs.filter(item=>item.status === orderStatus.failed.status );
     const regsWithdrew = regs.filter(item=>item.status === orderStatus.withdrew.status ||item.status === orderStatus.refunded.status);

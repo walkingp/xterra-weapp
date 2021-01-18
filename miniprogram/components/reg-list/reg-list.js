@@ -1,5 +1,5 @@
 const {
-  removeRegistration
+  removeRegistration, getStartUserDetailByOrderNum
 } = require("../../api/race");
 
 // components/reg-list/reg-list.js
@@ -12,7 +12,6 @@ Component({
       type: Array
     }
   },
-
   /**
    * 组件的初始数据
    */
