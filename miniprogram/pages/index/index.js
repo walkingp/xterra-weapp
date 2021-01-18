@@ -5,9 +5,6 @@ const app = getApp();
 const {
   getNewsIndexList
 } = require("../../api/news");
-const {
-  getRaceIndexList
-} = require("../../api/race");
 const dayjs = require("dayjs");
 // miniprogram/pages/index/index.js
 Page({
@@ -94,17 +91,10 @@ Page({
     });
     const banners = await getBannerList();
     const news = await getNewsIndexList();
-    // const races = await getRaceIndexList();
     news.map(item => {
       item.formatDate = dayjs(new Date(item.postTime)).format("MM月DD日");
       return item;
     });
-    // races.map(item => {
-    //   item.cates = item.catesName ? item.catesName.join('/') : '/';
-    //   item.raceDate = dayjs(new Date(item.raceDate)).format("MM月DD日");
-    //   return item;
-    // });
-    //console.log(races);
     this.setData({
       loading: false,
       //races,
@@ -116,6 +106,23 @@ Page({
       })
     });
   },
+  watchChanges(dbName){
+    const db = wx.cloud.database()
+    const that = this;
+    db.collection(dbName).watch({
+      onChange: function(snapshot) {
+        const { type } = snapshot;
+        if(type !== 'init'){
+          that.fetch();
+        }
+        console.log('snapshot', snapshot)
+      },
+      onError: function(err) {
+        console.error('the watch closed because of error', err)
+      }
+    })
+  },
+  
   /**
    * 生命周期函数--监听页面加载
    */
@@ -124,5 +131,7 @@ Page({
       animation: true,
     })
     this.fetch();
+    this.watchChanges('banner');
+    this.watchChanges('news');
   },
 })

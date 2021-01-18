@@ -150,6 +150,7 @@ Page({
         id, cateId, type: type || 'individual', teamTitle
       });
       this.fetch(id);
+      this.watchChanges();
     }).catch(err=>{
       wx.showToast({
         icon: 'none',
@@ -164,7 +165,38 @@ Page({
       });
     });
   },
-
+  onReady(){
+    this.step1 = this.selectComponent('#step1');
+  },
+  watchChanges(){
+    const db = wx.cloud.database()
+    const that = this;
+    const { id } = this.data;
+    db.collection('race').doc(id).watch({
+      onChange: function(snapshot) {
+        const { type } = snapshot;
+        if(type !== 'init'){
+          that.fetch(id);
+        }
+        console.log('snapshot', snapshot)
+      },
+      onError: function(err) {
+        console.error('the watch closed because of error', err)
+      }
+    })
+    db.collection('race-cates').where({ raceId: id }).watch({
+      onChange: function(snapshot) {
+        const { type } = snapshot;
+        if(type !== 'init'){
+          that.step1.fetch();
+        }
+        console.log('snapshot', snapshot)
+      },
+      onError: function(err) {
+        console.error('the watch closed because of error', err)
+      }
+    })
+  },
   async fetch(id){
     wx.showLoading({
       title: '加载中',

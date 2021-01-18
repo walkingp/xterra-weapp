@@ -140,6 +140,7 @@ Page({
       region, status, type
     })
     this.fetch();
+    this.watchChanges('race');
   },
 
   /**
@@ -148,6 +149,22 @@ Page({
   onReady: function () {
     wx.showTabBar({
       animation: true,
+    })
+  },
+  watchChanges(dbName){
+    const db = wx.cloud.database()
+    const that = this;
+    db.collection(dbName).watch({
+      onChange: function(snapshot) {
+        const { type } = snapshot;
+        if(type !== 'init'){
+          that.fetch();
+        }
+        console.log('snapshot', snapshot)
+      },
+      onError: function(err) {
+        console.error('the watch closed because of error', err)
+      }
     })
   },
 

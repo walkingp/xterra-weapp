@@ -174,6 +174,7 @@ Page({
       id
     });
     this.fetch(id);
+    this.watchChanges()
   },
   showLocation(e) {
     const {
@@ -186,6 +187,36 @@ Page({
       name: detail.title,
       address: detail.location
     });
+  },
+  
+  watchChanges(){
+    const db = wx.cloud.database()
+    const that = this;
+    const { id } = this.data;
+    db.collection('race').doc(id).watch({
+      onChange: function(snapshot) {
+        const { type } = snapshot;
+        if(type !== 'init'){
+          that.fetch(id);
+        }
+        console.log('snapshot', snapshot)
+      },
+      onError: function(err) {
+        console.error('the watch closed because of error', err)
+      }
+    })
+    db.collection('race-cates').where({ raceId: id }).watch({
+      onChange: function(snapshot) {
+        const { type } = snapshot;
+        if(type !== 'init'){
+          that.fetch(id);
+        }
+        console.log('snapshot', snapshot)
+      },
+      onError: function(err) {
+        console.error('the watch closed because of error', err)
+      }
+    })
   },
   regionchange(e){
 

@@ -69,8 +69,24 @@ Page({
    */
   onLoad: function (options) {
     this.fetch();
+    this.watchChanges();
   },
 
+  watchChanges(){
+    const db = wx.cloud.database()
+    const watcher = db.collection('news').watch({
+      onChange: function(snapshot) {
+        const { type } = snapshot;
+        if(type !== 'init'){
+          this.fetch();
+        }
+        console.log('snapshot', snapshot)
+      },
+      onError: function(err) {
+        console.error('the watch closed because of error', err)
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
