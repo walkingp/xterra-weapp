@@ -95,6 +95,8 @@ Page({
   },
   confirmOrder: function(e) {
     const { detail } = this.data;
+    console.log(detail);
+    console.table(app.globalData.order);
     payNow(detail, () => {
       this.fetch(detail._id);
     });

@@ -63,7 +63,7 @@ function pay(payData, detail, callback) {
     fail(res) {
       console.log("支付失败：", res);
       const { paidFee, discountFee } = detail;
-      updateOrderStatus({ id: detail.id, ...orderStatus.failed, paidFee, discountFee }).then(res=>{
+      updateOrderStatus({ id: detail._id, ...orderStatus.failed, paidFee, discountFee }).then(res=>{
         console.log(res);
         wx.showToast({
           icon: 'none',
@@ -86,12 +86,12 @@ function updateStatuses(detail, callback){
     title: '处理中……',
   })
   // 重要：此处更新保存out_trade_no，用于退款
-  const { id, paidFee, discountFee } = detail;
+  const { _id, paidFee, discountFee } = detail;
   const { out_trade_no } = getApp().globalData;
 
   getApp().globalData.out_trade_no = null;
   const that = this;
-  updateOrderStatus({ id, ...orderStatus.paid, out_trade_no, paidFee, discountFee }).then(async res=>{
+  updateOrderStatus({ id: _id, ...orderStatus.paid, out_trade_no, paidFee, discountFee }).then(async res=>{
     await saveStartlist(detail);
     console.log(res);
     wx.showToast({
@@ -181,7 +181,6 @@ async function sendEmailSMS(order){
     totalFee,
     paidFee
   } = order;
-  debugger
   await profiles.forEach(async profile => {
     const { trueName, phoneNum, email } = profile;
     const orderDate = dayjs(new Date()).format("YYYY年MM月DD日 HH:mm:ss");

@@ -218,6 +218,7 @@ Page({
   
   confirmOrder: function(e) {
     const { order } = app.globalData;
+    console.log(order);
     const that = this;
     payNow(order, () => {
       that.setData({

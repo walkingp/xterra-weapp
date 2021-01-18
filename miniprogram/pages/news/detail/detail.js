@@ -26,6 +26,7 @@ Page({
       id
     });
     this.fetch(id);
+    this.watchChanges();
   },
 
   async fetch(id) {
@@ -58,6 +59,23 @@ Page({
     })
   },
 
+  watchChanges(){
+    const db = wx.cloud.database()
+    const that = this;
+    const { id } = this.data;
+    db.collection('news').doc(id).watch({
+      onChange: function(snapshot) {
+        const { type } = snapshot;
+        if(type !== 'init'){
+          that.fetch(id);
+        }
+        console.log('snapshot', snapshot)
+      },
+      onError: function(err) {
+        console.error('the watch closed because of error', err)
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
