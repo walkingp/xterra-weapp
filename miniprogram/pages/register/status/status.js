@@ -110,9 +110,13 @@ Page({
     });
     if(raceDetail){
       const orderDetail = await getStartUserDetailByOrderNum(detail.orderNum);
-      const { certPic, certRecheckUrl } = orderDetail;
+      if(orderDetail){
+        const { certPic, certRecheckUrl } = orderDetail;
+        this.setData({
+          certPic: certRecheckUrl ? certRecheckUrl: certPic
+        });
+      }
       this.setData({
-        certPic: certRecheckUrl ? certRecheckUrl: certPic,
         raceDetail,
         orderDetail,
         raceId
@@ -141,22 +145,24 @@ Page({
     const db = wx.cloud.database()
     const that = this;
     const { orderDetail, id } = this.data;
-    const { orderNum } = orderDetail;
-    if(!orderNum){
-      return;
-    }
-    db.collection('start-list').where({ orderNum }).watch({
-      onChange: function(snapshot) {
-        const { type } = snapshot;
-        if(type !== 'init'){
-          that.fetch(id);
-        }
-        console.log('snapshot', snapshot)
-      },
-      onError: function(err) {
-        console.error('the watch closed because of error', err)
+    if(orderDetail){
+      const { orderNum } = orderDetail;
+      if(!orderNum){
+        return;
       }
-    });
+      db.collection('start-list').where({ orderNum }).watch({
+        onChange: function(snapshot) {
+          const { type } = snapshot;
+          if(type !== 'init'){
+            that.fetch(id);
+          }
+          console.log('snapshot', snapshot)
+        },
+        onError: function(err) {
+          console.error('the watch closed because of error', err)
+        }
+      });
+    }
     db.collection('registration').doc(id).watch({
       onChange: function(snapshot) {
         const { type } = snapshot;
