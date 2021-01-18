@@ -65,9 +65,10 @@ Page({
         });
         break;
       case 'navigate':
-        if(!url.startsWith('/')){
+         if(!url.startsWith('/')){
           url = '/' + url;
         }
+        url = url.replace('.html', '');
         const isTabbar = url.indexOf("/pages/news/news") >= 0 || url.indexOf("pages/events/events") >= 0;
         if(isTabbar){
           app.globalData.tabBarLink = url;

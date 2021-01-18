@@ -19,13 +19,11 @@ export const getCouponDetail = async id => {
 }
 
 export const exportCouponList = async (isUsed = false) => {
-  const db = wx.cloud.database()
-  const couponTable = db.collection("coupon");
   return new Promise(async (resolve, reject) => {
-    console.log(`开始读取优惠券`);
-    const res = await couponTable.where({ isUsed }).limit(1000).get();
+    console.log(`开始读取优惠券`);    
+    const res = await getPaginations({ dbName: 'coupon', filter: { isUsed }, pageSize: 1000 });
     let coupons = [['优惠券名称', '优惠券代码','类型','金额', '是否已使用', '指派','可用比赛','可用组别','过期时间']];
-    res.data.forEach(item => {
+    res.forEach(item => {
       let coupon = [];
       coupon.push(item.title);
       coupon.push(item.coupon);
