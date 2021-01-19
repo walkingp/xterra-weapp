@@ -1,1 +1,6 @@
-/* miniprogram/pages/admin/events/registration/registration.wxss */
+.list{
+  height: 100vh;
+}
+.table{
+  overflow: auto;
+}

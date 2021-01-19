@@ -1,16 +1,10 @@
-<view class="list">
-  <table 
-    headers="{{headers}}" 
-    header-row-class-name="fs-xs"
-    row-class-name="fs-xs"
-    cell-class-name="fs-xs cell"
-    data="{{ results }}" 
-    stripe="{{ stripe }}"
-    border="{{ border }}"
-    bind:rowClick="onRowClick"
-/>
-<view class="stats fs-xs text-grey padding-sm text-center">
-  总计 <text class="text-red bold">{{results.length}}</text> 条记录
-  <button type="primary" class="button" bindtap="exportCSV">导出财务报表</button>
-</view>
+<view class="list flex column">
+  <view class="table flex-auto">
+    <table headers="{{headers}}" header-row-class-name="fs-xs" row-class-name="fs-xs" cell-class-name="fs-xs cell"
+      data="{{ results }}" stripe="{{ stripe }}" border="{{ border }}" bind:rowClick="onRowClick" />
+  </view>
+  <view class="stats flex-none fs-xs text-grey padding-sm text-center">
+    总计 <text class="text-red bold">{{results.length}}</text> 条记录
+    <button type="primary" class="button" bindtap="exportCSV">导出财务报表</button>
+  </view>
 </view>

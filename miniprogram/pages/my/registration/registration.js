@@ -13,7 +13,8 @@ Page({
     regsFinished: [],
     regsUnpaid: [],
     regsWithdrew: [],
-    active: 0
+    active: 0,
+    userId: null
   },
   onChange(e){
 
@@ -29,6 +30,10 @@ Page({
       title: '加载中……',
     })
     app.checkLogin().then(res => {
+      const { userId } = res;
+      this.setData({
+        userId
+      })
       this.fetch();
       this.watchChanges();
     })
@@ -36,7 +41,8 @@ Page({
   watchChanges(){
     const db = wx.cloud.database();
     const that = this;
-    db.collection('registration').watch({
+    const { userId } = this.data;
+    db.collection('registration').where({ userId }).watch({
       onChange: function(snapshot) {
         const { type } = snapshot;
         if(type !== 'init'){
