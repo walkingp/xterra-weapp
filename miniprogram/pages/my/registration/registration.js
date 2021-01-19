@@ -58,13 +58,18 @@ Page({
 
   async fetch(){
     const { userId } = app.globalData;
-    const regs = await getMyRegistrations(userId);
+    const _regs = await getMyRegistrations(userId);
+    let regs = _regs.slice();
+    for(let i = 0, len = regs.length; i < len; i++){
+      const orderDetail = await getStartUserDetailByOrderNum(regs[i].orderNum);
+      regs[i].isCertApproved = orderDetail ? orderDetail.isCertApproved : false;
+    }
     regs.map(async item => {
       item.regDate = dayjs(item.addedDate).format("YYYY-MM-DD");
       item.showPayButton = item.status === orderStatus.pending.status || item.status === orderStatus.failed.status;
       const key = Object.keys(orderStatus).find(key => orderStatus[key].status === item.status);;
       item.textColor = orderStatus[key].textColor;
-      
+
       return item;
     });
     console.log(regs);
