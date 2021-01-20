@@ -1,1 +1,6 @@
-/* miniprogram/pages/admin/finance/finance.wxss */
+.list{
+  height: 100vh;
+}
+.table{
+  overflow: auto;
+}

@@ -27,6 +27,11 @@ Page({
         label: '报名状态'
       },
       {
+        prop: 'isCertApproved',
+        width: 150,
+        label: '审核通过'
+      },
+      {
         prop: 'gender',
         width: 80,
         label: '性别'

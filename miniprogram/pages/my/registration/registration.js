@@ -13,7 +13,8 @@ Page({
     regsFinished: [],
     regsUnpaid: [],
     regsWithdrew: [],
-    active: 0
+    active: 0,
+    userId: null
   },
   onChange(e){
 
@@ -29,6 +30,10 @@ Page({
       title: '加载中……',
     })
     app.checkLogin().then(res => {
+      const { userId } = res;
+      this.setData({
+        userId
+      })
       this.fetch();
       this.watchChanges();
     })
@@ -36,7 +41,8 @@ Page({
   watchChanges(){
     const db = wx.cloud.database();
     const that = this;
-    db.collection('registration').watch({
+    const { userId } = this.data;
+    db.collection('registration').where({ userId }).watch({
       onChange: function(snapshot) {
         const { type } = snapshot;
         if(type !== 'init'){
@@ -52,13 +58,18 @@ Page({
 
   async fetch(){
     const { userId } = app.globalData;
-    const regs = await getMyRegistrations(userId);
+    const _regs = await getMyRegistrations(userId);
+    let regs = _regs.slice();
+    for(let i = 0, len = regs.length; i < len; i++){
+      const orderDetail = await getStartUserDetailByOrderNum(regs[i].orderNum);
+      regs[i].isCertApproved = orderDetail ? orderDetail.isCertApproved : false;
+    }
     regs.map(async item => {
       item.regDate = dayjs(item.addedDate).format("YYYY-MM-DD");
       item.showPayButton = item.status === orderStatus.pending.status || item.status === orderStatus.failed.status;
       const key = Object.keys(orderStatus).find(key => orderStatus[key].status === item.status);;
       item.textColor = orderStatus[key].textColor;
-      
+
       return item;
     });
     console.log(regs);
