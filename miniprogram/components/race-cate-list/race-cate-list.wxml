@@ -5,7 +5,7 @@
         <text class="title flex-auto">{{item.title}}</text>
         <view class="flex-none">
           <text class="price" wx:if="{{item.regPrice !== 0}}">{{item.priceLabel}}</text>
-          <block wx:if="{{!item.expired}}">
+          <block wx:if="{{item.isStartReg && !item.expired}}">
             <block wx:if="{{item.regPrice === 0}}">
               <text class="price">免费</text>
             </block>
@@ -17,12 +17,13 @@
       </view>
       <text class="desc">{{item.desc}}</text>
     </view>
-    <view class="flex-none flex column space-between align-center btn" wx:if="{{!item.expired && !item.isFull}}">
+    <view class="flex-none flex column space-between align-center btn" wx:if="{{item.isStartReg && !item.expired && !item.isFull}}">
       <button data-url="/pages/register/register?id={{raceId}}&cateId={{item._id}}&type={{item.type}}" bindtap="redirect" class="button">一键报名</button>
       <view class="limit" style="font-size: 24rpx; color: #999; padding-top: 10rpx;" wx:if="{{item.limit > 0}}">已报{{item.users.length ? item.users.length : 0}}/{{item.limit}}人</view>
     </view>
     <view class="flex-none flex column space-between align-center btn" wx:else>
       <view class="limit" style="font-size: 24rpx; color: #999; padding-top: 10rpx;" wx:if="{{item.isFull}}">名额已满</view>
+      <view class="limit" style="font-size: 24rpx; color: #999; padding-top: 10rpx;" wx:if="{{!item.isStartReg}}">报名未开始</view>
     </view>
   </view>
 </block>

@@ -3,6 +3,3 @@
   border-radius: 10rpx;
   overflow: hidden;
 }
-.list{
-  min-height: 400rpx;
-}

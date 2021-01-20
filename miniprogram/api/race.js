@@ -89,7 +89,8 @@ export const getRaceCatesList = async ( raceId, size = 500) => {
      
   cates.map(cate=>{
     const now = dayjs(new Date());
-    if(now.isBefore(cate.regEndTime)){
+    cate.isStartReg = cate.regStartTime ? now.isAfter(cate.regStartTime, 'second') : true;
+    if(now.isBefore(cate.regEndTime, 'second')){
       if(cate.enableEarlierBirdPrice){
         if(now.isBefore(cate.earlierPriceEndTime)){
           cate.price = cate.earlierBirdPrice;

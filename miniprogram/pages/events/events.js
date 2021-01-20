@@ -48,6 +48,9 @@ Page({
       title: '加载中',
     })
     let races = await getRaceIndexList();
+    this.setData({
+      allRaces: races.slice()
+    });
     const { region, status, type } = this.data;
     if(type){
       races = races.filter(item => item.type === type);
@@ -69,7 +72,6 @@ Page({
     });
     const banners = await getBannerList("race");
     this.setData({
-      allRaces: races,
       races,
       banners,
       loading: false
@@ -99,6 +101,7 @@ Page({
       status: status,
       type: _type
     }
+    debugger
     // https://blog.csdn.net/xuxu_qkz/article/details/81067912
     const keys = Object.keys(filters);
     let { races, allRaces } = this.data;
