@@ -166,6 +166,9 @@ Page({
     });
   },
   async fetch(){
+    wx.showLoading({
+      title: '加载中……',
+    })
     const races = await getAllRaces();
     console.log(races)
     races.map(item => {
@@ -176,6 +179,10 @@ Page({
     this.setData({
       races,
       loading: false
+    }, () => {
+      wx.hideLoading({
+        success: (res) => {},
+      })
     })
   },
   /**

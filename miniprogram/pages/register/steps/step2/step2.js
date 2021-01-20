@@ -65,6 +65,14 @@ Component({
       profiles = profiles.filter(item => {
         return profileIds.includes(item._id);
       });
+      if(profiles.length > cate.teamSizeLimit){
+        wx.showToast({
+          icon: 'none',
+          title: `已经超出报名人数限制`,
+        });
+        this.triggerEvent('onComplete', { prevEnabled: true, nextEnabled: false }); 
+        return;
+      }
       app.globalData.order.profiles = profiles;
       app.globalData.order.profileCount = profiles.length;
       let totalFee = 0;
