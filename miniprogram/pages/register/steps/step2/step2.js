@@ -65,7 +65,7 @@ Component({
       profiles = profiles.filter(item => {
         return profileIds.includes(item._id);
       });
-      if(profiles.length > cate.teamSizeLimit){
+      if(groupType !== 'individual' && profiles.length > cate.teamSizeLimit && cate.teamSizeLimit > 0){
         wx.showToast({
           icon: 'none',
           title: `已经超出报名人数限制`,
