@@ -7,7 +7,7 @@
           <text class="title">{{item.raceTitle}}</text>
           <text class="gray">{{item.regDate}}</text>
         </view>
-        <van-icon catchtap="onShowDelete" data-id="{{item._id}}" name="ellipsis" />
+        <van-icon class="icon" catchtap="onShowDelete" data-id="{{item._id}}" name="ellipsis" />
       </view>
       <view class="flex align-center bd">
         <view class="cover flex-none">
@@ -31,7 +31,7 @@
       </view>
       <view class="ft flex space-between align-center">
         <text class="flex-none status" style="color:{{item.textColor}};">{{item.statusText}}</text>
-        <text wx:if="{{!item.isCertApproved}}" class="red">审核不通过</text>
+        <text wx:if="{{item.status === 1 && !item.isCertApproved}}" class="red">审核不通过</text>
         <view class="buttons flex-auto justify-end flex align-center">
           <button class="button secondary">查看详情</button>
           <button wx:if="{{item.showPayButton}}" class="button primary">去支付</button>
