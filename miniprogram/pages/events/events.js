@@ -48,6 +48,15 @@ Page({
       title: '加载中',
     })
     let races = await getRaceIndexList();
+    races.map(item=>{
+      item.cates = item.catesName ? item.catesName.join('/') : '/';
+      item.raceDate = dayjs(new Date(item.raceDate)).format("MM月DD日");
+
+      const status = raceStatus.find(s => s.value === item.status);
+      item.status = status;
+
+      return item;
+    });
     this.setData({
       allRaces: races.slice()
     });
@@ -61,15 +70,6 @@ Page({
     if(status){
       races = races.filter(item => item.status === status);
     }
-    races.map(item=>{
-      item.cates = item.catesName ? item.catesName.join('/') : '/';
-      item.raceDate = dayjs(new Date(item.raceDate)).format("MM月DD日");
-
-      const status = raceStatus.find(s => s.value === item.status);
-      item.status = status;
-
-      return item;
-    });
     const banners = await getBannerList("race");
     this.setData({
       races,
