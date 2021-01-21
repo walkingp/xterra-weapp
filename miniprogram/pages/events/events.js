@@ -101,7 +101,6 @@ Page({
       status: status,
       type: _type
     }
-    debugger
     // https://blog.csdn.net/xuxu_qkz/article/details/81067912
     const keys = Object.keys(filters);
     let { races, allRaces } = this.data;

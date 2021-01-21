@@ -9,8 +9,8 @@ export const payNow = function(detail, callback) {
   const nonceStr = Math.random().toString(36).substr(2, 15)
   const timeStamp = parseInt(Date.now() / 1000) + ''
   const out_trade_no = "otn" + nonceStr + timeStamp
-  const total_fee = (paidFee * 100).toString();
-
+  const total_fee = Math.round(paidFee * 100);
+  console.log('total_fee', total_fee);
   getApp().globalData.out_trade_no = out_trade_no;
 
   if(paidFee <= 0){

@@ -24,14 +24,16 @@
             <text>{{type}}组别：</text>
             <text class="text">{{detail.cates}}</text>
           </view>
-          <view class="cell">
-            <text>报名开始时间：</text>
-            <text class="text">{{detail.regStartTimeStr}}</text>
-          </view>
-          <view class="cell">
-            <text>报名截止时间：</text>
-            <text class="text">{{detail.endRegTimeStr}}</text>
-          </view>
+          <block wx:if="{{!detail.isPlogging}}">
+            <view class="cell">
+              <text>报名开始时间：</text>
+              <text class="text">{{detail.regStartTimeStr}}</text>
+            </view>
+            <view class="cell">
+              <text>报名截止时间：</text>
+              <text class="text">{{detail.endRegTimeStr}}</text>
+            </view>
+          </block>
         </view>
       </view>
     </view>
