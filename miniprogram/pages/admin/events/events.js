@@ -80,7 +80,13 @@ Page({
       },
       {
         name: '查看财务信息',
+        subname: '查看目前报名费用明细',
         type: 'finance'
+      },
+      {
+        name: '导入线下报名',
+        subname: '导入已经上传的Excel文件',
+        type: 'import'
       },
       {
         name: '查看比赛成绩',
@@ -126,6 +132,11 @@ Page({
       case 'result':
         wx.navigateTo({
           url: `/pages/admin/events/result/result?raceId=${currentId}`,
+        })
+        break;
+      case 'import':
+        wx.navigateTo({
+          url: `/pages/admin/events/upload/upload?raceId=${currentId}`,
         })
         break;
       case 'copy':

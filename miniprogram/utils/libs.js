@@ -1,5 +1,4 @@
 const config = require("../config/config");
-
 const oldPage = Page;
 Page = function(app) {
   const oldOnLoad  =  app.onLoad;

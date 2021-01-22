@@ -269,6 +269,12 @@
           "pathName": "pages/admin/events/finance/finance",
           "query": "raceId=0bcbdde05fc3a636006efd9971c76de4",
           "scene": null
+        },
+        {
+          "name": "导入报名",
+          "pathName": "pages/admin/events/upload/upload",
+          "query": "raceId=0bcbdde05fc3a636006efd9971c76de4",
+          "scene": null
         }
       ]
     }

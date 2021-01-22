@@ -111,7 +111,6 @@ Page({
           icon: 'none',
           title: '没有查询到完赛记录',
         })
-        wx.hideLoading();
         return;
       }
       const {
@@ -137,6 +136,13 @@ Page({
     }else{
       const searchedReg = await getRegistrationByCardNo({cardNo, ...param});
       console.log(searchedReg)
+      if(!searchedReg){
+        wx.showToast({
+          icon: 'none',
+          title: '没有结果',
+        });
+        return;
+      }
       searchedReg.regDate = dayjs(searchedReg.createdAt).format("YYYY-MM-DD HH:mm:ss");
       this.setData({
         searchedReg

@@ -7,7 +7,7 @@
           <text class="title">{{item.raceTitle}}</text>
           <text class="gray">{{item.regDate}}</text>
         </view>
-        <van-icon class="icon" catchtap="onShowDelete" data-id="{{item._id}}" name="ellipsis" />
+        <van-icon wx:if="{{item.status !== 1}}" class="icon" catchtap="onShowDelete" data-id="{{item._id}}" name="ellipsis" />
       </view>
       <view class="flex align-center bd">
         <view class="cover flex-none">

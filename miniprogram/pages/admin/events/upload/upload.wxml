@@ -1,0 +1,20 @@
+<van-cell-group title="导入线下报名">
+  <van-cell title="赛事名称" title-width="100px" value="{{detail.title || '加载中..'}}" />
+  <van-cell title="模板文件" value="点击下载" wx:if="{{detail.templateFile}}" is-link />
+  <van-cell title="模板文件" value="模板未上传" wx:else />
+  <van-cell title="导入方式" data-type="mode" value="{{mode}}" bindtap="showMode" is-link />
+</van-cell-group>
+<van-radio-group value="{{ radio }}" bind:change="onChange">
+  <van-cell-group title="导入线下报名">
+    <van-cell title="{{item.title}}({{item.fileName}})" wx:for="{{files}}" wx:key="_id" clickable data-name="{{index}}"
+      bind:click="onClick">
+      {{item.isImported ? '已导入' : '未导入'}}
+      <van-radio slot="right-icon" name="{{index}}" />
+    </van-cell>
+  </van-cell-group>
+</van-radio-group>
+<van-cell>
+  <button bindtap="saveNow" class="button">现在导入</button>
+</van-cell>
+<van-action-sheet show="{{ show }}" cancel-text="取消" actions="{{ actions }}" bind:cancel="onClose" bind:close="onClose"
+  bind:select="onSelect" />
