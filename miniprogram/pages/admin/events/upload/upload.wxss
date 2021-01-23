@@ -1,1 +1,3 @@
-/* miniprogram/pages/admin/events/upload/upload.wxss */
+.copyable{
+  text-decoration: underline;
+}

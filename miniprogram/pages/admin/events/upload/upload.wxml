@@ -1,20 +1,66 @@
-<van-cell-group title="导入线下报名">
-  <van-cell title="赛事名称" title-width="100px" value="{{detail.title || '加载中..'}}" />
-  <van-cell title="模板文件" value="点击下载" bindtap="downloadTemplate" wx:if="{{detail.templateFile}}" is-link />
-  <van-cell title="模板文件" value="模板未上传" wx:else />
-  <van-cell title="导入方式" data-type="mode" value="{{mode}}" bindtap="showMode" is-link />
-</van-cell-group>
-<van-radio-group value="{{ radio }}" bind:change="onChange">
-  <van-cell-group title="导入线下报名">
-    <van-cell title="{{item.title}}({{item.fileName}})" wx:for="{{files}}" wx:key="_id" clickable data-name="{{index}}"
-      bind:click="onClick">
-      {{item.isImported ? '已导入' : '未导入'}}
-      <van-radio slot="right-icon" name="{{index}}" />
+<van-tabs active="{{ 0 }}" bind:change="onChange">
+  <van-tab title="立即导入">
+    <van-cell-group>
+      <van-cell title="赛事名称" title-width="100px" value="{{detail.title || '加载中..'}}" />
+      <van-cell title="模板文件" value="点击下载" bindtap="downloadTemplate" wx:if="{{detail.templateFile}}" is-link />
+      <van-cell title="模板文件" value="模板未上传" wx:else />
+      <van-cell title="导入方式" data-type="mode" value="{{mode}}" bindtap="showMode" is-link />
+    </van-cell-group>
+    <van-radio-group value="{{ radio }}" bind:change="onChange">
+      <van-cell-group title="导入线下报名">
+        <van-cell title="{{item.title}}({{item.fileName}})" wx:for="{{files}}" wx:key="_id" clickable
+          data-name="{{index}}" bind:click="onClick">
+          {{item.isImported ? '已导入' : '未导入'}}
+          <van-radio slot="right-icon" name="{{index}}" />
+        </van-cell>
+      </van-cell-group>
+    </van-radio-group>
+    <van-cell>
+      <button bindtap="saveNow" class="button">现在导入</button>
     </van-cell>
-  </van-cell-group>
-</van-radio-group>
-<van-cell>
-  <button bindtap="saveNow" class="button">现在导入</button>
-</van-cell>
-<van-action-sheet show="{{ show }}" cancel-text="取消" actions="{{ actions }}" bind:cancel="onClose" bind:close="onClose"
-  bind:select="onSelect" />
+    <van-action-sheet show="{{ show }}" cancel-text="取消" actions="{{ actions }}" bind:cancel="onClose"
+      bind:close="onClose" bind:select="onSelect" />
+  </van-tab>
+  <van-tab title="导入历史">
+    <block wx:for="{{users}}" wx:key="_id">
+      <van-cell bindtap="showDetail" data-id="{{item._id}}" title="{{item.trueName}}-{{item.gender}}-{{item.cateTitle}}"
+        is-link value="{{item.formattedDate}}" />
+    </block>
+    <van-popup show="{{ showModal }}" closeable position="bottom" bind:close="closeDetail">
+      <van-cell-group title="报名明细">
+        <van-cell title="导入时间" value="{{detail.formattedDate}}" border="{{ false }}" />
+        <van-cell title="状态" value="{{detail.statusText}}" border="{{ false }}" />
+        <van-cell title="姓名" value="{{detail.trueName}}" bindtap="copy" value-class="copyable"
+          data-text="{{detail.trueName}}" border="{{ false }}" />
+        <van-cell title="性别" value="{{detail.gender}}" border="{{ false }}" />
+        <van-cell title="国籍" value="{{detail.nation}}" border="{{ false }}" />
+        <van-cell title="证件类型" value="{{detail.cardType}}" border="{{ false }}" />
+        <van-cell title="证件号码" value="{{detail.cardNo}}" bindtap="copy" value-class="copyable"
+          data-text="{{detail.cardNo}}" border="{{ false }}" />
+        <van-cell title="手机号" value="{{detail.phoneNum}}" bindtap="copy" value-class="copyable"
+          data-text="{{detail.phoneNum}}" border="{{ false }}" />
+        <van-cell title="出生日期" value="{{detail.formattedBirthDate}}" border="{{ false }}" />
+        <van-cell title="组别" value="{{detail.cateTitle}}" border="{{ false }}" />
+        <van-cell title="邮箱" value="{{detail.email}}" bindtap="copy" value-class="copyable" data-text="{{detail.email}}"
+          border="{{ false }}" />
+        <van-cell title="所属俱乐部" value="{{detail.club}}" bindtap="copy" value-class="copyable"
+          data-text="{{detail.club}}" border="{{ false }}" />
+      </van-cell-group>
+      <van-cell-group title="其他信息">
+        <van-cell title="血型" value="{{detail.bloodType}}" border="{{ false }}" />
+        <van-cell title="衣服尺码" value="{{detail.tSize}}" border="{{ false }}" />
+        <van-cell title="住址" title-width="80px" value="{{detail.region + detail.addr}}" bindtap="copy" value-class="copyable"
+          data-text="{{detail.region + detail.addr}}" border="{{ false }}" />
+      </van-cell-group>
+      <van-cell-group title="紧急联系人信息">
+        <van-cell title="紧急联系人" value="{{detail.contactUser}}" bindtap="copy" value-class="copyable"
+          data-text="{{detail.contactUser}}" border="{{ false }}" />
+        <van-cell title="紧急联系人手机号" value="{{detail.contactUserPhone}}" bindtap="copy" value-class="copyable"
+          data-text="{{detail.contactUserPhone}}" border="{{ false }}" />
+      </van-cell-group>
+      <van-cell-group>
+        <van-cell><button type="primary" class="button" bindtap="closeDetail">关闭</button></van-cell>
+      </van-cell-group>
+    </van-popup>
+  </van-tab>
+</van-tabs>

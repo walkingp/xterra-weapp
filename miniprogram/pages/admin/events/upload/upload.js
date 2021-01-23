@@ -1,5 +1,6 @@
-const { getRaceDetail } = require("../../../../api/race");
-const { getExcels } = require("../../../../api/upload");
+const dayjs = require("dayjs");
+const { getRaceDetail, getStartUserDetail } = require("../../../../api/race");
+const { getExcels, getImportedUsers } = require("../../../../api/upload");
 
 const app = getApp();
 Page({
@@ -16,7 +17,33 @@ Page({
     radio: '0',
     type: '',
     mode: '跳过',
-    selectedIndex: 0
+    selectedIndex: 0,
+    users: [],
+    showModal: false,
+    detail: null
+  },
+  copy(e) {
+    const {
+      text
+    } = e.currentTarget.dataset;
+    wx.setClipboardData({
+      data: text,
+    })
+  },
+  async showDetail(e){
+    const { id } = e.currentTarget.dataset;
+    const detail = await getStartUserDetail(id);
+    detail.formattedDate = dayjs(detail.createdAt).format("M月D日 HH:mm:ss");
+    detail.formattedBirthDate = dayjs(detail.birthDate).format("YYYY年M月D日");
+    this.setData({
+      detail,
+      showModal: true
+    })
+  },
+  closeDetail(){
+    this.setData({
+      showModal: false
+    })
   },
   downloadTemplate(){
     wx.showLoading({
@@ -175,8 +202,14 @@ Page({
         name,
         subname: file.isImported ? '上次导入过' : '未导入过'
       }
+    });
+    const users = await getImportedUsers(raceId);
+    users.map(item=>{
+      item.formattedDate = dayjs(item.createdAt).format("M月D日 HH:mm:ss");
+      return item;
     })
     this.setData({
+      users,
       detail,
       files,
       actions
