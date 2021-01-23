@@ -18,6 +18,44 @@ Page({
     mode: '追加',
     selectedIndex: 0
   },
+  downloadTemplate(){
+    wx.showLoading({
+      title: '打开中',
+    })
+    const { detail } = this.data;
+    const { templateFile,title } = detail;
+    wx.cloud.getTempFileURL({
+      fileList: [templateFile],
+      success: res =>{
+        const url = res.fileList[0].tempFileURL;
+        const filePath =  wx.env.USER_DATA_PATH + '/' + title + '线下报名模板.xlsx';
+        wx.downloadFile({
+          url,
+          filePath,
+          header: {
+            "content-type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+          },
+          success: function (res) {
+            wx.openDocument({
+              filePath,
+              fileType: 'xlsx',
+              showMenu: true,
+              success: function (res) {
+                wx.hideLoading({
+                  success: (res) => {},
+                })
+                console.log('打开文档成功')
+              },
+              fail: function (res) {    
+                console.error(res)
+                wx.showToast({title: '打开文档失败', icon: 'none', duration: 2000})    
+              },
+            })
+          }
+        })
+      }
+    })
+  },
   showMode(){
     const actions = [
       {
@@ -51,20 +89,34 @@ Page({
     });
   },
   saveNow(){
-    const { selectedIndex, files, raceId } = this.data;
+    const { selectedIndex, files, raceId, mode } = this.data;
     const file = files[selectedIndex].tmplFile;
-    debugger
+    if(!file){
+      wx.showToast({
+        title: '未选择文件',
+        icon: 'none'
+      });
+      return;
+    }
     wx.cloud.callFunction({
       name: 'importCSV',
       data: {
         fileID: file,
-        raceId
+        raceId,
+        mode: mode === '覆盖' ? 'replace' : 'append'
       },
       success(res){
-        debugger
+        const { succCount, failedCount } = res.result;
+        wx.showToast({
+          icon: 'none',
+          title: `${succCount}条导入成功，${failedCount}条导入失败。`,
+        })
       },
       fail(err){
-        debugger
+        wx.showToast({
+          icon: 'none',
+          title: `全部导入失败`,
+        })
       }
     });
   },

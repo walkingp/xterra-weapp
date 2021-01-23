@@ -1,6 +1,6 @@
 <van-cell-group title="导入线下报名">
   <van-cell title="赛事名称" title-width="100px" value="{{detail.title || '加载中..'}}" />
-  <van-cell title="模板文件" value="点击下载" wx:if="{{detail.templateFile}}" is-link />
+  <van-cell title="模板文件" value="点击下载" bindtap="downloadTemplate" wx:if="{{detail.templateFile}}" is-link />
   <van-cell title="模板文件" value="模板未上传" wx:else />
   <van-cell title="导入方式" data-type="mode" value="{{mode}}" bindtap="showMode" is-link />
 </van-cell-group>
