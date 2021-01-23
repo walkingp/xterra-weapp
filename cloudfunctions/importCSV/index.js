@@ -85,47 +85,49 @@ async function insertSingle(raceId, row, mode){
     const cateId = cate._id;
     const { type, raceId } = cate;
     const race = await raceTable.doc(raceId).get();
-    const raceTitle = race.title;
-    const racePic = race.picUrls;
+    const raceTitle = race.data.title;
+    const racePic = race.data.picUrls;
 
     const groupText = cates[type].groupText;
     const existed = await startListTable.where({ cateId, cardNo }).get();
-    if(existed.data.length === 0){
-      const orderNum = orderNumber();
-      const data = {
-        addr, birthDate, bloodType, cardNo, cardType, cateId, cateTitle, club, contactUser, contactUserPhone,
-        createdAt: new Date(),
-        racePic,
-        email, gender, groupText, groupType: type, isAgeValid: true, isCertApproved: true, isValid: true,
-        nation, orderNum,
-        orderType: '线下团报',
-        phoneNum, pinyinFirst, pinyinLast,
-        raceId, raceTitle, 
-        region: province + city + country,
-        status: 1, statusText: '已支付',
-        tSize, trueName,
-        postCode,
-        age
-      };
-
-      let result = await startListTable.add({
-        data
-      });
-      console.log('start-list', result);
-      result = await insertRegistration(data);
-      console.log('registration', result);
-      ++ succCount;
-      return;
-    }else{
-      // 追加或者覆盖
+    if(existed.data.length > 0){
+      if(mode === 'replace'){ //覆盖
+        await startListTable.where({ cateId, cardNo }).remove();
+      }else if(mode === 'ignore'){
+        return;
+      }
     }
+    const orderNum = orderNumber();
+    const data = {
+      addr, birthDate, bloodType, cardNo, cardType, cateId, cateTitle, club, contactUser, contactUserPhone,
+      createdAt: new Date(),
+      racePic,
+      email, gender, groupText, groupType: type, isAgeValid: true, isCertApproved: true, isValid: true,
+      nation, orderNum,
+      orderType: '线下团报',
+      phoneNum, pinyinFirst, pinyinLast,
+      raceId, raceTitle, 
+      region: province + city + country,
+      status: 1, statusText: '已支付',
+      tSize, trueName,
+      postCode,
+      age
+    };
+
+    let result = await startListTable.add({
+      data
+    });
+    console.log('start-list', result);
+    result = await insertRegistration(data);
+    console.log('registration', result);
+    ++ succCount;
   }
   ++ failedCount;
 }
 
 async function insertRegistration(param){
   // out_trade_no, paidFee, price, totalFee, userId, userInfo, userName
-  const { addr, birthDate, bloodType, cardNo, cardType, contactUser, contactUserPhone, email, gender, phoneNum, region, tSize, trueName, cateId, cateTitle, groupType, groupText, orderNum, orderType, raceTitle, status, statusText } = param;
+  const { racePic, addr, birthDate, bloodType, cardNo, cardType, contactUser, contactUserPhone, email, gender, phoneNum, region, tSize, trueName, cateId, cateTitle, groupType, groupText, orderNum, orderType, raceTitle, status, statusText } = param;
   const existed = await regTable.where({ orderNum }).get();
   if(existed.data.length === 0){
     const profiles = [{ racePic, addr, birthDate, bloodType, cardNo, cardType, contactUser, contactUserPhone, email, gender, phoneNum, region, tSize, trueName }];

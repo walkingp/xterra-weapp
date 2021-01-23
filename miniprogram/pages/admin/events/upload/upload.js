@@ -15,7 +15,7 @@ Page({
     files: [],
     radio: '0',
     type: '',
-    mode: '追加',
+    mode: '跳过',
     selectedIndex: 0
   },
   downloadTemplate(){
@@ -59,8 +59,8 @@ Page({
   showMode(){
     const actions = [
       {
-        name: '追加',
-        subname: '直接追加到团队'
+        name: '跳过',
+        subname: '如遇到相同证件号的直接跳过'
       },
       {
         name: '覆盖',
@@ -98,12 +98,15 @@ Page({
       });
       return;
     }
+    wx.showLoading({
+      title: '导入中',
+    })
     wx.cloud.callFunction({
       name: 'importCSV',
       data: {
         fileID: file,
         raceId,
-        mode: mode === '覆盖' ? 'replace' : 'append'
+        mode: mode === '覆盖' ? 'replace' : 'ignore'
       },
       success(res){
         const { succCount, failedCount } = res.result;
@@ -113,6 +116,7 @@ Page({
         })
       },
       fail(err){
+        console.error(err);
         wx.showToast({
           icon: 'none',
           title: `全部导入失败`,
