@@ -10,12 +10,18 @@ Page({
   data: {
     isLogined: false,
     userInfo: null,
-    isAdmin: false
+    isAdmin: false,
+    version: null,
+    versions: { develop: '开发版', trial: '体验版', release: '正式版' }
   },
   async fetch(){
-    const { userId } = this.data;
+    const { userId, versions } = this.data;
+    const res = wx.getAccountInfoSync().miniProgram;
+    const { envVersion } = res;
+    const version = versions[envVersion] +  (envVersion === 'release' ? res.version : '');
     const userInfo = await getCollectionById({ dbName: 'userlist', id: userId });
     this.setData({
+      version,
       userInfo
     });
   },
