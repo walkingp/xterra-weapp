@@ -3,9 +3,9 @@
 
 
 "@vant/weapp@^1.6.1":
-  version "1.6.1"
-  resolved "https://registry.yarnpkg.com/@vant/weapp/-/weapp-1.6.1.tgz#01c6f395c0a67f56b8caae36a551d268b1fe0605"
-  integrity sha512-HkQHodqmSPB0bTILo5DnM/avkpeSBfQHo42kN4HJa504SCNIc2DoF0VrAl/CaZB+2DMrElnEnM+//vf5rENtNQ==
+  version "1.6.6"
+  resolved "https://registry.yarnpkg.com/@vant/weapp/-/weapp-1.6.6.tgz#abe82834c94fb24d66c2e26bd79aa0fbff058620"
+  integrity sha512-0fBUVCuyCr3esvZXx4683dTJGHYz98d+HctJHMmTAPBYBe7XWO0CV65Fxx931LxWi4B+K++80hRagcOmZqV/7A==
 
 dayjs@^1.9.6:
   version "1.9.6"

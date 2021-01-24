@@ -44,7 +44,7 @@
   },
   "appid": "wx491fb14c7948a753",
   "projectname": "XTERRA",
-  "libVersion": "2.13.2",
+  "libVersion": "2.9.2",
   "simulatorType": "wechat",
   "simulatorPluginLibVersion": {},
   "cloudfunctionTemplateRoot": "cloudfunctionTemplate",

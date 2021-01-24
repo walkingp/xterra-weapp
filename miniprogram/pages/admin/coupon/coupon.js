@@ -9,6 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    isChecked: false,
     showAddrPicker: false,
     showAction: false,
     type: '全额抵扣券',
@@ -21,6 +22,7 @@ Page({
     activeCoupons: [],
     usedCoupons: [],
     detail: null,
+    value: 0,
     showDetail: false,
     selectedRaceId: null,
     selectedCateId: null,
@@ -38,6 +40,17 @@ Page({
     ],
     race: '不限制',
     cate: '不限制'
+  },
+  onChecked(e){
+    const checked = e.detail;
+    this.setData({
+      isChecked: checked,
+      value: 0.85
+    })
+  },
+  onValueChange(e){
+    debugger
+    const value = e.detail;
   },
   showDate(){
     this.setData({
