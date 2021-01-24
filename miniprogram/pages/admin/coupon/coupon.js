@@ -29,6 +29,8 @@ Page({
     actionType: null,
     actions: [],
     active: 0,
+    focus: false,
+    errorMsg: null,
     types: [
       {
         name: '全额抵扣券',
@@ -49,8 +51,29 @@ Page({
     })
   },
   onValueChange(e){
-    debugger
-    const value = e.detail;
+    const {value} = e.detail;
+    const { type,isChecked } = this.data;
+    if(type === '减免券' && isChecked){
+      if(value>1){
+        wx.showToast({
+          icon: 'none',
+          title: '折扣券仅可为0-1之间',
+        });
+        this.setData({
+          errorMsg: "折扣券仅限0-1之间2位小数",
+          focus: true
+        })
+        return;
+      }else{
+        this.setData({
+          errorMsg: null,
+          focus: false
+        })
+      }
+    }
+    this.setData({
+      value
+    });
   },
   showDate(){
     this.setData({
@@ -138,6 +161,7 @@ Page({
     detail.isUsed = detail.isUsed ? '已使用' : '未使用' 
     detail.usedTime = dayjs(detail.usedTime).format("YYYY-MM-DD HH:mm:ss");
     detail.type = detail.type === 'free' ? '全额抵扣券' : '减免券';
+    detail.value = detail.isOff ? detail.value * 100 + '%' : detail.value;
     this.setData({
       showDetail: true,
       detail
@@ -150,7 +174,26 @@ Page({
   },
   saveData(e){
     const { value } = e.detail;
-    const { typeValue, expiredDate, selectedCateId, selectedRaceId, race, cate } = this.data;
+    const { type, typeValue, expiredDate, selectedCateId, selectedRaceId, race, cate, isChecked } = this.data;
+    if(type === '减免券' && isChecked){
+      if(value.value>1){
+        wx.showToast({
+          icon: 'none',
+          title: '折扣券仅可为0-1之间',
+        });
+        this.setData({
+          errorMsg: "折扣券仅限0-1之间2位小数",
+          focus: true
+        })
+        return;
+      }else{
+        this.setData({
+          errorMsg: null,
+          focus: false
+        })
+      }
+    }
+
     const { title} = value;
     const num = +value.num;
     if(typeValue === ''){
@@ -193,7 +236,8 @@ Page({
         raceId: selectedRaceId,
         cateId: selectedCateId,
         raceTitle: race,
-        cateTitle: cate
+        cateTitle: cate,
+        isOff: isChecked
       }
     }).then(res => {
       wx.showToast({
@@ -312,6 +356,7 @@ Page({
     const { types } = this.data;
     coupons.map(item=>{
       item.typeText = types.find(a=>a.value === item.type).name;
+      item.value = item.isOff ? item.value * 100 + '%' : item.value;
       return item;
     })
     this.setData({

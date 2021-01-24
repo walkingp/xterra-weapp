@@ -134,8 +134,8 @@ Component({
             icon: 'none',
             success: ()=>{
               const { _order } = this.data;
-              const discountFee = detail.type === 'free' ? _order.totalFee : detail.value;
-              const margin = detail.vallue === 0 ? _order.toFixed : (_order.totalFee - detail.value < 0 ? 0 : _order.totalFee - detail.value);
+              const discountFee = detail.type === 'free' ? _order.totalFee :  +(detail.isOff ? (_order.totalFee * detail.value).toFixed(2) : detail.value);
+              const margin = detail.value === 0 ? _order.toFixed : (_order.totalFee - discountFee < 0 ? 0 : _order.totalFee - discountFee);
               let paidFee = detail.type === 'free' ? 0 : margin;
               paidFee = +paidFee.toFixed(2);
               this.setData({
@@ -188,7 +188,7 @@ Component({
           if(!valid){
             return;
           }
-          const discountFee = detail.type === 'free' ? _order.totalFee : detail.value;
+          const discountFee = detail.type === 'free' ? _order.totalFee : +(detail.isOff ? (_order.totalFee * detail.value).toFixed(2) : detail.value);
           const margin = _order.totalFee - detail.value < 0 ? 0 : _order.totalFee - detail.value;
           let paidFee = detail.type === 'free' ? 0 : +margin.toFixed(2);
           paidFee = +paidFee.toFixed(2);
@@ -231,7 +231,7 @@ Component({
             return {
               name: item.title,
               couponId: item._id,
-              subname: '优惠金额：' + (item.type === 'free' ? '全免' : item.value),
+              subname: '优惠金额：' + (item.type === 'free' ? '全免' : (item.isOff ? item.value * 100 + '%' : item.value)),
               disabled: item.isActive || item.isUsed
             };
           });
@@ -241,8 +241,9 @@ Component({
           });
           const couponValue = coupons[0].value;
           const isFree = coupons[0].type === 'free';
-          const discountFee = isFree ? order.totalFee : couponValue;
-          let paidFee = isFree ? 0 : order.totalFee - couponValue < 0 ? 0 : order.totalFee - couponValue;
+          const isOff = coupons[0].isOff;
+          const discountFee = isFree ? order.totalFee : (isOff ? +(order.totalFee * couponValue).toFixed(2) : couponValue);
+          let paidFee = isFree ? 0 : order.totalFee - discountFee < 0 ? 0 : +(order.totalFee - discountFee).toFixed(2);
           paidFee = +paidFee.toFixed(2);
           this.setData({
             coupon: `${coupons[0].title}`,

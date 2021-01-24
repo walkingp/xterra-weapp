@@ -17,7 +17,7 @@ const db = cloud.database()
 const couponTable = db.collection("coupon")
 // 云函数入口函数
 exports.main = async (event, context) => {
-  const { title, value, num, type, expiredDate, raceId, cateId, raceTitle, cateTitle } = event;
+  const { title, value, num, type, expiredDate, raceId, cateId, raceTitle, cateTitle, isOff } = event;
   const wxContext = cloud.getWXContext();
 
   let coupon = null;
@@ -40,7 +40,8 @@ exports.main = async (event, context) => {
         raceId,
         cateId,
         raceTitle, 
-        cateTitle
+        cateTitle,
+        isOff
       }
     })
   }
