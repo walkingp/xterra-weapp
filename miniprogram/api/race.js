@@ -408,8 +408,12 @@ export const getPinyin = async word => {
       resolve(res.result);
     }).catch(reject)
   })
-
 }
+
+export const checkIsJoinedPlogging = async cardNo => {
+  const data = await getSingleCollectionByWhere({ dbName: 'start-list', filter: { cardNo, raceType: 'X-Plogging' }});
+  return data;
+};
 
 export const updateOrderStatus = async param => {
   const { id, status, statusText, out_trade_no, refundTime, discountFee, paidFee, refundFee } = param;

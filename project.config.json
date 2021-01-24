@@ -117,7 +117,7 @@
         {
           "name": "添加报名人",
           "pathName": "pages/register/form/form",
-          "query": "",
+          "query": "raceId=79550af26007fa470037fb3f22aeea14",
           "scene": null
         },
         {

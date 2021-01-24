@@ -39,7 +39,7 @@
         border="{{ false }}" />
     </van-cell-group>
     <van-cell-group title="相关信息" wx:if="{{isPlogging}}">
-      <van-cell title="是否参加过X-Plogging" required name="plogging" border="{{ false }}" is-link value="{{plogging}}" bind:click="showPicker"
+      <van-cell title="是否参加过X-Plogging" required name="plogging" border="{{ false }}" is-link="{{!isPlogged}}" value="{{plogging}}" bind:click="showPicker"
         data-type="plogging" />
     </van-cell-group>
     <van-cell-group title="完赛资质" wx:if="{{cateDetail.isCheckCert || hasCert}}">

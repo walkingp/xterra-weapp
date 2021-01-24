@@ -1,4 +1,4 @@
-import { getMyProfiles, getMyRegistrations, getPinyin, getProfileDetail, getRaceCateDetail, getRaceDetail } from "../../../api/race";
+import { checkIsJoinedPlogging, getMyProfiles, getMyRegistrations, getPinyin, getProfileDetail, getRaceCateDetail, getRaceDetail } from "../../../api/race";
 // miniprogram/pages/register/form/form.js
 import areaList from "./../../../config/area";
 const dayjs = require("dayjs");
@@ -28,6 +28,7 @@ Page({
     detail: null,
 
     plogging: '否',
+    isPlogged: false,
     ploggings: ['是', '否'],
 
     areaList: areaList,
@@ -101,7 +102,7 @@ Page({
       showDatePicker: true
     })
   },
-  onCardNoChange(e){
+  async onCardNoChange(e){
     const idCard = e.detail.value;
     const { myProfiles, action } = this.data;
     if(action !== 'edit' && myProfiles.find(item => item.cardNo === idCard)){
@@ -110,9 +111,15 @@ Page({
         icon: 'none'
       })
     }
+    
+    let isPlogged = await checkIsJoinedPlogging(idCard);
+    isPlogged = !!isPlogged;
+    const plogging = isPlogged ? '是' : '否';
     const gender = this.getGenderFromIdCard(idCard);
     const birthDate = this.getBirthdayFromIdCard(idCard);
     this.setData({
+      isPlogged: !!isPlogged,
+      plogging,
       gender,
       birthDate,
       defaultBirthDate: new Date(birthDate)
@@ -286,6 +293,8 @@ Page({
   },
   showPicker(e) {
     const { type } = e.currentTarget.dataset;
+    const { isPlogged } = this.data;
+    let showAction = true;
     let columns = [];
     switch (type) {
       case 'relation':
@@ -293,6 +302,7 @@ Page({
         break;
       case 'plogging':
         columns = this.data.ploggings;
+        showAction = !isPlogged;
         break;
       case 'gender':
         columns = this.data.genders;
@@ -310,7 +320,7 @@ Page({
     this.setData({
       actionType: type,
       columns,
-      showAction: true
+      showAction
     })
   },
   showAddr(){
