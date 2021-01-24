@@ -14,7 +14,7 @@
       <van-field value="{{ email }}" required name="email" label="邮箱" placeholder="请输入邮箱，用于接收XTERRA邮件" border="{{ false }}" />-->
     </van-cell-group>
     <van-cell-group>
-      <van-cell><van-button type="primary" round block formType="submit">保存</van-button></van-cell>
+      <van-cell><button type="primary" form-type="submit" class="button">保存</button></van-cell>
     </van-cell-group>
   </form>
   <van-action-sheet

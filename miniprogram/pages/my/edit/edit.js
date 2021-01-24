@@ -1,4 +1,6 @@
+import { updatePoint } from "../../../api/points";
 import { getUserDetail } from "../../../api/user";
+import { pointRuleEnum } from "../../../config/const";
 import areaList from "./../../../config/area";
 const dayjs = require("dayjs");
 const app = getApp();
@@ -78,6 +80,11 @@ Page({
         phonenumber: phoneNum
       }
     });
+    // 加分
+    const data = await updatePoint(userId, pointRuleEnum.UpdateProfile,{
+      id: userId,
+      title: trueName
+    })
     wx.showToast({
       icon: 'success',
       title: '保存成功',
