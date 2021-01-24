@@ -29,7 +29,10 @@
     "pages/admin/events/start-list/start-list",
     "pages/admin/qrcode/qrcode",
     "pages/admin/events/finance/finance",
-    "pages/admin/events/upload/upload"
+    "pages/admin/events/upload/upload",
+    "pages/points/user/user",
+    "pages/points/billboard/billboard",
+    "pages/points/points"
   ],
   "window": {
     "backgroundColor": "#ffffff",

@@ -23,13 +23,20 @@ image.avatar{
   font-size: 32rpx;
   font-weight: bold;
 }
+.info navigator{
+  color: #fff;
+  font-size: 24rpx;
+}
+.info navigator text{
+  /* text-decoration: underline;
+  font-weight: bold; */
+}
 .my {
   margin-top: 20rpx;
 }
 .right{
   align-self: flex-start;
   display: flex;
-
 }
 .right image{
   width: 40rpx!important;

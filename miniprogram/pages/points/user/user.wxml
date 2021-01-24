@@ -1,0 +1,14 @@
+<view class="flex column align-center justify-center padding-y-xl">
+	<navigator url="/pages/profile/user/user?id={{detail._id}}">
+		<image src="{{detail.avatarUrl}}" class="avatar" />
+	</navigator>
+	<text class="fs-md padding-y-md">{{detail.nickname}}</text>
+	<text class="fs-sm text-grey">总积分：<text class="bold">{{detail.point}}</text></text>
+	<navigator url="/pages/page/page?id=3" class="fs-xs text-grey">(积分规则)</navigator>
+</view>
+<van-cell-group title="积分记录">
+	<van-skeleton row="10" wx:if="{{loading}}" />
+	<block wx:else>
+		<van-cell icon="{{item.extraData.isAdmin ? 'gift-o' : ''}}" title-width="500rpx" title="{{item.rule.title}}" label="{{item.formattedDate}}" value="{{ item.rule.point>0 ? '+' + item.rule.point : item.rule.point}}" wx:for="{{points}}" wx:key="_id" />
+	</block>
+</van-cell-group>

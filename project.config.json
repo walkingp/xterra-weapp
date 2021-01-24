@@ -275,6 +275,12 @@
           "pathName": "pages/admin/events/upload/upload",
           "query": "raceId=0bcbdde05fc3a636006efd9971c76de4",
           "scene": null
+        },
+        {
+          "name": "用户积分",
+          "pathName": "pages/points/user/user",
+          "query": "userId=04db790c71365c0be61fae4e3e526141",
+          "scene": null
         }
       ]
     }

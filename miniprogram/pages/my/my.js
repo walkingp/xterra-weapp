@@ -1,4 +1,6 @@
-
+const { updatePoint } = require("../../api/points");
+const { getCollectionById } = require("../../utils/cloud");
+const { pointRuleEnum } = require("./../../config/const");
 const app = getApp();
 Page({
 
@@ -11,13 +13,18 @@ Page({
     isAdmin: false
   },
   async fetch(){
+    const { userId } = this.data;
+    const userInfo = await getCollectionById({ dbName: 'userlist', id: userId });
+    this.setData({
+      userInfo
+    });
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     app.checkLogin().then(res=>{
-      const { userInfo, isLogined } = res;
+      const { userId, userInfo, isLogined } = res;
       if(['男', '女'].indexOf(userInfo.gender) < 0){
         userInfo.gender = userInfo.gender === 0 ? '男' : '女'
       }
@@ -25,13 +32,38 @@ Page({
       const isAdmin = res.userInfo.role === 'admin';
       this.setData({
         userInfo,
+        userId,
         isLogined,
         isAdmin
-      }, () => {
+      }, async () => {
         this.fetch();
+        // 加分
+        let data = await updatePoint(userId, pointRuleEnum.SignUp, {
+          id: userId,
+          title: '加入'
+        })
+        this.watchChanges();
       })
     }).catch(err=>{
     });
+  },
+  
+  watchChanges(){
+    const { userId } = this.data;
+    const db = wx.cloud.database()
+    const that = this;
+    db.collection('userlist').doc(userId).watch({
+      onChange: function(snapshot) {
+        const { type } = snapshot;
+        if(type !== 'init'){
+          that.fetch();
+        }
+        console.log('snapshot', snapshot)
+      },
+      onError: function(err) {
+        console.error('the watch closed because of error', err)
+      }
+    })
   },
 
   onCompleted(arg){

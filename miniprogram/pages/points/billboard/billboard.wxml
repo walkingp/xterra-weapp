@@ -1,0 +1,34 @@
+<view class="container">
+	<header hasBackIcon="{{true}}" title="积分榜" />
+	<view class="flex-auto main">
+		<van-skeleton title avatar row="20" loading="{{ loading }}">
+			<view class="table flex column">
+				<view class="th flex">
+					<view class="hd flex-auto flex">
+						<text class="flex justify-center index">排名</text>
+						<text>姓名</text>
+					</view>
+					<view class="ft flex-none">
+						<text>积分</text>
+					</view>
+				</view>
+				<navigator url="/pages/profile/points/points?userId={{item._id}}" class="td flex" wx:for="{{users}}" wx:key="_id">
+					<view class="hd flex-auto flex">
+						<view class="flex-none flex justify-center index align-center medal medal{{index+1}}">
+							<view class=""></view>
+							<text>{{index+1}}</text>
+						</view>
+						<view class="flex flex-auto align-center">
+							<image class="flex-none" src="{{item.userData.avatarUrl}}"></image>
+							<text class="flex-auto">{{item.userData.nickName}}</text>
+						</view>
+					</view>
+					<view class="ft flex-none flex align-center">
+						<text class="point">{{item.point}}</text>
+					</view>
+				</navigator>
+			</view>
+		</van-skeleton>
+		<van-divider contentPosition="center">只显示前200位</van-divider>
+	</view>
+</view>

@@ -117,3 +117,27 @@ export const raceResultStatus = {
     value: 'norecord'
   }
 }
+export const pointRuleEnum = {
+  SignUp: 0,
+  UpdateProfile: 1,
+  AdminCustom: 99
+};
+// 注意cloudfunctions也需要同步更新
+export const pointRules = [
+  {
+    id: 0,
+    title: '注册会员',
+    point: 100
+  },
+  {
+    id: 1,
+    title: '完善资料',
+    point: 50
+  },
+  {
+    id: 99,
+    title: '管理员手工添加',
+    point: 10,
+    once: false
+  }
+]

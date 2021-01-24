@@ -1,0 +1,60 @@
+.container{  
+  min-height: 100vh;
+}
+.header{
+  font-size: 28rpx;
+  font-weight: bold;
+  border-bottom: solid 2rpx #eee;
+}
+.header navigator{
+  color: #ccc;
+}
+.main{
+  background-color: #fff;
+  padding: 20rpx 30rpx 30rpx 20rpx;
+  font-size: 24rpx;
+}
+.th{
+  color: #ccc;
+  padding: 10rpx 0;
+}
+.td{
+  padding: 10rpx 0;
+}
+.th .index, .td .index{
+  width: 60rpx;
+  margin-right: 40rpx;
+}
+.td image{
+  width: 64rpx;
+  height: 64rpx;
+  margin-right: 10rpx;
+  border-radius: 50%;
+}
+.point{
+  font-weight: bold;
+}
+.medal{
+  width: 35rpx;
+  color: #999;
+  font-weight: bold;
+}
+
+.medal1{
+  background-color: #FFBD49;
+  border-radius: 50%;
+  border: solid 10rpx #FFDF75;
+  color: white;
+}
+.medal2{
+  background-color: #EAE8E9;
+  border-radius: 50%;
+  border: solid 10rpx #F9F4F3;
+  color: white;
+}
+.medal3{
+  background-color: #FBA95E;
+  border-radius: 50%;
+  border: solid 10rpx #FFC68B;
+  color: white;
+}
