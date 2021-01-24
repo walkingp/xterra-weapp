@@ -1,2 +1,35 @@
-<!--miniprogram/pages/points/points.wxml-->
-<text>miniprogram/pages/points/points.wxml</text>
+<view class="main">
+  <view class="top">
+    <view class="flex align-center space-between">
+      <view class="flex align-center">
+        <image class="avatar" src="{{userInfo.avatarUrl}}" />
+        <view class="flex column">
+          <text>我的积分</text>
+          <text class="point">{{ userInfo.point }}</text>
+        </view>
+      </view>
+      <navigator>规则说明</navigator>
+    </view>
+    <view class="zone flex align-center space-between">
+      <view class="item flex align-center column">
+        <image src="./../../images/icons/profit.png" />
+        <text>赚取积分</text>
+      </view>
+      <view class="item flex align-center column">
+        <image src="./../../images/icons/history.png" />
+        <text>积分记录</text>
+      </view>
+      <view class="item flex align-center column">
+        <image src="./../../images/icons/exchange.png" />
+        <text>兑换积分</text>
+      </view>
+    </view>
+  </view>
+  <view class="bottom">
+    <view class="flex cate align-center space-between">
+      <text>热门兑换</text>
+      <navigator>全部</navigator>
+    </view>
+    <point-goods list="{{list}}" />
+  </view>
+</view>

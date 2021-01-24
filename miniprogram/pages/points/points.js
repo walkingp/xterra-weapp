@@ -1,3 +1,5 @@
+const { getPointGoodsIndexList } = require("../../api/points");
+const app = getApp();
 // miniprogram/pages/points/points.js
 Page({
 
@@ -5,14 +7,27 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    list: [],
+    userInfo: null
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    app.checkLogin().then(res=>{
+      const { userId, userInfo, isLogined } = res;
+      this.setData({
+        userInfo
+      });
+      this.fetch();
+    });
+  },
+  async fetch(){
+    const list = await getPointGoodsIndexList();
+    this.setData({
+      list
+    })
   },
 
   /**

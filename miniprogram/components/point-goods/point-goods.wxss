@@ -1,0 +1,36 @@
+image.cover{
+  width: 142rpx;
+  height: 142rpx;
+}
+.list{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.item{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: calc(50% - 15rpx);
+  background-color: #fff;
+  border-radius: 10rpx;
+  padding: 20rpx 0;
+}
+.title{
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333;
+  padding: 20rpx;
+}
+.info{
+  display: flex;
+  justify-content: space-between;
+  font-size: 24rpx;
+  color: #999;
+  width: 100%;
+  padding: 0 20rpx;
+}
+.point{
+  color: #FF811C;
+  padding-right: 5rpx;
+}

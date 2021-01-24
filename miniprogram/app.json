@@ -47,6 +47,7 @@
     "towxml": "/towxml/towxml",
     "progress": "/components/progress/progress",
     "login": "/components/login/login",
+    "point-goods": "/components/point-goods/point-goods",
     "loader": "/components/loader/loader",
     "banner-list": "/components/banner-list/banner-list",
     "coupon-list": "/components/coupon-list/coupon-list",

@@ -1,0 +1,13 @@
+<view class="list">
+  <navigator url="/pages/points/detail/detail?id={{item._id}}" class="item" wx:for="{{list}}" wx:key="_id">
+    <image mode="aspectFit" class="cover" src="{{item.coverUrls[0]}}"></image>
+    <text class="title">{{item.title}}</text>
+    <view class="info">
+      <view class="flex">
+        <text class="point">{{item.point}}</text>
+        <text>积分</text>
+      </view>
+      <text>{{item.exchangedCount}}人已兑换</text>
+    </view>
+  </navigator>
+</view>
