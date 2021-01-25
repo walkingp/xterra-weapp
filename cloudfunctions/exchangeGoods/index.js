@@ -35,7 +35,11 @@ exports.main = async (event, context) => {
         id: goods._id,
         title: '兑换积分商品'
       },
-      point: goods.data.point,
+      rule: {
+        point: goods.data.point,
+        title: '兑换积分商品:' + goods.data.title
+      },
+      point: -goods.data.point,
       userId
     }
   });

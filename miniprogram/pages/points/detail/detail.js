@@ -23,6 +23,9 @@ Page({
       content: `您是否确认使用${detail.point}积分兑换当前商品？`,
       success (res) {
         if (res.confirm) {
+          wx.showLoading({
+            title: '兑换中',
+          })
           wx.cloud.callFunction({
             name: 'exchangeGoods',
             data: {
@@ -31,7 +34,8 @@ Page({
               count: 1
             },
             success: function(res){
-              if(res.code === 1){
+              debugger
+              if(res.result.code === 1){
                 wx.showToast({
                   title: '兑换成功',
                   icon: 'success'
@@ -40,9 +44,15 @@ Page({
               }else{
                 wx.showToast({
                   icon: 'none',
-                  title: res.msg,
+                  title: res.result.msg,
                 })
               }
+            },
+            fail: function(err){
+              wx.showToast({
+                icon: 'none',
+                title: '兑换失败'
+              })
             }
           })
         } else if (res.cancel) {
