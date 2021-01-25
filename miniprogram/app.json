@@ -32,7 +32,8 @@
     "pages/admin/events/upload/upload",
     "pages/points/user/user",
     "pages/points/billboard/billboard",
-    "pages/points/points"
+    "pages/points/points",
+    "pages/points/detail/detail"
   ],
   "window": {
     "backgroundColor": "#ffffff",

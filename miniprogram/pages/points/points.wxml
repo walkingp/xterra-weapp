@@ -5,10 +5,10 @@
         <image class="avatar" src="{{userInfo.avatarUrl}}" />
         <view class="flex column">
           <text>我的积分</text>
-          <text class="point">{{ userInfo.point }}</text>
+          <navigator url="/pages/points/user/user?userId={{userId}}" class="point">{{ userInfo.point }}</navigator>
         </view>
       </view>
-      <navigator>规则说明</navigator>
+      <navigator class="link" url="/pages/page/page?id=rule">规则说明</navigator>
     </view>
     <view class="zone flex align-center space-between">
       <view class="item flex align-center column">

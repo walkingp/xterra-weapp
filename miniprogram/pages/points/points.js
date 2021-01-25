@@ -8,6 +8,7 @@ Page({
    */
   data: {
     list: [],
+    userId: null,
     userInfo: null
   },
 
@@ -18,6 +19,8 @@ Page({
     app.checkLogin().then(res=>{
       const { userId, userInfo, isLogined } = res;
       this.setData({
+        isLogined,
+        userId,
         userInfo
       });
       this.fetch();

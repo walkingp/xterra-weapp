@@ -1,0 +1,43 @@
+.main{
+  height: 100vh;
+}
+.top{
+  overflow: auto;
+}
+swiper, swiper image{
+  height: 400rpx;
+  width: 100%;
+}
+.info{
+  margin-bottom: 20rpx;
+  background-color: #fff;
+  padding: 20rpx;
+}
+.price{
+  font-size: 24rpx;
+  color: #ccc;
+  border-bottom: solid 2rpx #f1f1f1;
+  padding-bottom: 20rpx;
+}
+.price text{
+  color: #d00;
+  font-weight: bold;
+  font-size: 36rpx;
+}
+.point{
+  color: #d00;
+  font-weight: bold;
+  font-size: 30rpx;
+}
+.title{
+  font-weight: bold;
+  font-size: 30rpx;
+  padding: 20rpx 0;
+}
+.desc{
+  font-size: 24rpx;
+}
+.h2w{
+  padding: 0 30rpx;
+  font-size: 28rpx;
+}

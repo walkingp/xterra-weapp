@@ -44,7 +44,7 @@
   },
   "appid": "wx491fb14c7948a753",
   "projectname": "XTERRA",
-  "libVersion": "2.10.4",
+  "libVersion": "2.14.1",
   "simulatorType": "wechat",
   "simulatorPluginLibVersion": {},
   "cloudfunctionTemplateRoot": "cloudfunctionTemplate",
@@ -286,6 +286,12 @@
           "name": "积分商城",
           "pathName": "pages/points/points",
           "query": "",
+          "scene": null
+        },
+        {
+          "name": "积分商品详情",
+          "pathName": "pages/points/detail/detail",
+          "query": "id=1526e12a600d9570009ada625fe1acaf",
           "scene": null
         }
       ]

@@ -5,12 +5,12 @@
   font-size: 28rpx;
   padding: 30rpx 50rpx;
 }
-.top text.point{
+.top navigator.point{
   color: #FDE6A2;
   font-size: 38rpx;
   margin-top: 10rpx;
 }
-.top navigator{
+.top navigator.link{
   border: solid 2rpx #4f4d4d;
   color: #E3E1E1;
   border-radius: 30rpx;
