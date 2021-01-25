@@ -15,7 +15,27 @@ Page({
     userId: null,
     userInfo: null
   },
-
+  buyNow(){
+    const { userId, detail } = this.data;
+    wx.showModal({
+      title: '兑换确认',
+      content: `您是否确认使用${detail.point}积分兑换当前商品？`,
+      success (res) {
+        if (res.confirm) {
+          wx.cloud.callFunction({
+            name: 'exchangeGoods',
+            data: {
+              goodId: detail._id,
+              userId,
+              count: 1
+            }
+          })
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */

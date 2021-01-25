@@ -26,6 +26,6 @@
   <view class="bottom flex-none padding-md flex align-center space-between">
     <view class="text-grey fs-sm">需要积分：<text class="point">{{detail.point}}</text></view>
     <van-button icon="shopping-cart-o" size="normal" wx:if="{{userInfo.point<detail.point}}" disabled="{{true}}" block round color="linear-gradient(to right, rgb(255, 96, 52), rgb(238, 10, 36))">积分不足</van-button>
-    <van-button icon="shopping-cart-o" size="normal" wx:else block round color="linear-gradient(to right, rgb(255, 96, 52), rgb(238, 10, 36))">立即兑换</van-button>
+    <van-button icon="shopping-cart-o" bindtap="buyNow" size="normal" wx:else block round color="linear-gradient(to right, rgb(255, 96, 52), rgb(238, 10, 36))">立即兑换</van-button>
   </view>
 </view>
