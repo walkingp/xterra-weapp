@@ -35,7 +35,7 @@ exports.main = async (event, context) => {
         id: goods._id,
         title: '兑换积分商品'
       },
-      point: goods.point,
+      point: goods.data.point,
       userId
     }
   });
@@ -46,7 +46,7 @@ exports.main = async (event, context) => {
   });
   await usersTable.doc(userId).update({
     data: {
-      point: _.inc(-goods.point)
+      point: _.inc(-goods.data.point)
     }
   });
 

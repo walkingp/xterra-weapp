@@ -10,7 +10,11 @@
       </block>
     </swiper>
     <view class="info flex column">
-      <view class="price">价值<text>{{detail.value}}</text></view>
+      <view class="price">
+        价值
+        <text>{{detail.value}}</text>
+        剩余：{{detail.count}}
+      </view>
       <text class="title">{{detail.title}}</text>
       <text class="desc">{{detail.summary}}</text>
     </view>
@@ -23,7 +27,7 @@
       </van-tab>
     </van-tabs>
   </view>
-  <view class="bottom flex-none padding-md flex align-center space-between">
+  <view class="bottom flex-none flex align-center space-between">
     <view class="text-grey fs-sm">需要积分：<text class="point">{{detail.point}}</text></view>
     <van-button icon="shopping-cart-o" size="normal" wx:if="{{userInfo.point<detail.point}}" disabled="{{true}}" block round color="linear-gradient(to right, rgb(255, 96, 52), rgb(238, 10, 36))">积分不足</van-button>
     <van-button icon="shopping-cart-o" bindtap="buyNow" size="normal" wx:else block round color="linear-gradient(to right, rgb(255, 96, 52), rgb(238, 10, 36))">立即兑换</van-button>

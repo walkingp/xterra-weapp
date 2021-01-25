@@ -16,6 +16,7 @@ Page({
     userInfo: null
   },
   buyNow(){
+    const that = this;
     const { userId, detail } = this.data;
     wx.showModal({
       title: '兑换确认',
@@ -28,6 +29,20 @@ Page({
               goodId: detail._id,
               userId,
               count: 1
+            },
+            success: function(res){
+              if(res.code === 1){
+                wx.showToast({
+                  title: '兑换成功',
+                  icon: 'success'
+                });
+                this.fetch();
+              }else{
+                wx.showToast({
+                  icon: 'none',
+                  title: res.msg,
+                })
+              }
             }
           })
         } else if (res.cancel) {

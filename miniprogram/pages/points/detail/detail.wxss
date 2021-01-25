@@ -4,6 +4,9 @@
 .top{
   overflow: auto;
 }
+.bottom{
+  padding: 20rpx 30rpx;
+}
 swiper, swiper image{
   height: 400rpx;
   width: 100%;
