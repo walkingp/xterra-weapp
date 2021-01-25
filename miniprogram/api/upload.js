@@ -4,6 +4,9 @@ const dayjs = require("dayjs");
 export const getExcels = async ( raceId, pageIndex = 1, pageSize = 100) => {
   const data = await getPaginations({
     dbName: 'excels',
+    filter: {
+      raceId
+    },
     orderBy: {
       _createTime: 'desc'
     },

@@ -134,7 +134,7 @@ Component({
             icon: 'none',
             success: ()=>{
               const { _order } = this.data;
-              const discountFee = detail.type === 'free' ? _order.totalFee :  +(detail.isOff ? (_order.totalFee * detail.value).toFixed(2) : detail.value);
+              const discountFee = detail.type === 'free' ? _order.totalFee :  +(detail.isOff ? (_order.totalFee - _order.totalFee * detail.value).toFixed(2) : detail.value);
               const margin = detail.value === 0 ? _order.toFixed : (_order.totalFee - discountFee < 0 ? 0 : _order.totalFee - discountFee);
               let paidFee = detail.type === 'free' ? 0 : margin;
               paidFee = +paidFee.toFixed(2);
@@ -188,7 +188,7 @@ Component({
           if(!valid){
             return;
           }
-          const discountFee = detail.type === 'free' ? _order.totalFee : +(detail.isOff ? (_order.totalFee * detail.value).toFixed(2) : detail.value);
+          const discountFee = detail.type === 'free' ? _order.totalFee : +(detail.isOff ? (_order.totalFee - _order.totalFee * detail.value).toFixed(2) : detail.value);
           const margin = _order.totalFee - detail.value < 0 ? 0 : _order.totalFee - detail.value;
           let paidFee = detail.type === 'free' ? 0 : +margin.toFixed(2);
           paidFee = +paidFee.toFixed(2);
@@ -242,7 +242,7 @@ Component({
           const couponValue = coupons[0].value;
           const isFree = coupons[0].type === 'free';
           const isOff = coupons[0].isOff;
-          const discountFee = isFree ? order.totalFee : (isOff ? +(order.totalFee * couponValue).toFixed(2) : couponValue);
+          const discountFee = isFree ? order.totalFee : (isOff ? +(order.totalFee - order.totalFee * couponValue).toFixed(2) : couponValue);
           let paidFee = isFree ? 0 : order.totalFee - discountFee < 0 ? 0 : +(order.totalFee - discountFee).toFixed(2);
           paidFee = +paidFee.toFixed(2);
           this.setData({

@@ -4,7 +4,7 @@
       <van-cell title="赛事名称" title-width="100px" value="{{detail.title || '加载中..'}}" />
       <van-cell title="模板文件" value="点击下载" bindtap="downloadTemplate" wx:if="{{detail.templateFile}}" is-link />
       <van-cell title="模板文件" value="模板未上传" wx:else />
-      <van-cell title="导入方式" data-type="mode" value="{{mode}}" bindtap="showMode" is-link />
+      <van-cell title="遇重复证件号导入方式" data-type="mode" value="{{mode}}" bindtap="showMode" is-link />
     </van-cell-group>
     <van-radio-group value="{{ radio }}" bind:change="onChange">
       <van-cell-group title="导入线下报名">
@@ -16,7 +16,7 @@
       </van-cell-group>
     </van-radio-group>
     <van-cell>
-      <button bindtap="saveNow" class="button">现在导入</button>
+      <button bindtap="saveNow" disabled="{{files.length===0}}" class="button">{{files.length===0 ? '名单未上传' : '现在导入'}}</button>
     </van-cell>
     <van-action-sheet show="{{ show }}" cancel-text="取消" actions="{{ actions }}" bind:cancel="onClose"
       bind:close="onClose" bind:select="onSelect" />

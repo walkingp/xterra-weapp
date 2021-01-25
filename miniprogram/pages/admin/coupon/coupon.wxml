@@ -4,7 +4,7 @@
       <van-field required name="title" label="优惠券名称" value="优惠券" placeholder="优惠券名称，如：卢湾跑团专属优惠券" border="{{ false }}" />
       <van-cell value="{{ type }}" required name="type" data-type="type" is-link bind:click="onShowAction" label="优惠券类型"
         border="{{ false }}" />
-      <van-field required bind:blur="onValueChange" focus="{{focus}}" error-message="{{errorMsg}}" name="value" label="价格金额" value="{{value}}" type="digit" placeholder="0表示可全额抵扣"
+      <van-field required bind:blur="onValueChange" focus="{{focus}}" error-message="{{errorMsg}}" name="value" label="{{ isChecked ? '折扣比例' : '价格金额' }}" value="{{value}}" type="digit" placeholder="0表示可全额抵扣"
         border="{{ false }}" use-button-slot>
         <van-checkbox wx:if="{{type ==='减免券'}}" slot="button" value="{{ isChecked }}" bind:change="onChecked">折扣券{{value && isChecked && type ==='减免券' ? value * 100 + '%' : ''}}</van-checkbox>
       </van-field>
