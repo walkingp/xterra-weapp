@@ -13,6 +13,11 @@ Page({
     result: ["0", "1", "2", "5", "6"],
     headers: [
       {
+        prop: 'orderNum',
+        width: 300,
+        label: '订单编号',
+      },
+      {
         prop: 'userName',
         width: 200,
         label: '订单提交人',

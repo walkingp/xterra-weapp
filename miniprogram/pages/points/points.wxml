@@ -17,7 +17,7 @@
       </view>
       <view class="item flex align-center column">
         <image src="./../../images/icons/history.png" />
-        <text>积分记录</text>
+        <text>兑换记录</text>
       </view>
       <view class="item flex align-center column">
         <image src="./../../images/icons/exchange.png" />
