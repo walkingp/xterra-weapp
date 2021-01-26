@@ -19,6 +19,24 @@ export const updatePoint = (userId, type, extraData) => {
   });
 }
 
+export const getExchangedGods = async userId => {
+  return new Promise((resolve, reject) =>{
+    wx.cloud.callFunction({
+      name: 'getPointExchangedGoods',
+      data: {
+        userId
+      },
+      success: function(res){
+        resolve(res.result.list)
+      },
+      fail: function(err) {
+        reject(err)
+      }
+    })
+
+  })
+}
+
 export const getPointGoodsIndexList = async ( pageIndex = 1, pageSize = 10) => {
   const data = await getPaginations({
     dbName: 'goods',

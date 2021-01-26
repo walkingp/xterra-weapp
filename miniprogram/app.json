@@ -33,7 +33,10 @@
     "pages/points/user/user",
     "pages/points/billboard/billboard",
     "pages/points/points",
-    "pages/points/detail/detail"
+    "pages/points/detail/detail",
+    "pages/points/my/my",
+    "components/exchanged/exchanged",
+    "pages/points/status/status"
   ],
   "window": {
     "backgroundColor": "#ffffff",
@@ -47,6 +50,7 @@
     "table": "../../../miniprogram_npm/miniprogram-table-component",
     "towxml": "/towxml/towxml",
     "progress": "/components/progress/progress",
+    "exchanged": "/components/exchanged/exchanged",
     "login": "/components/login/login",
     "point-goods": "/components/point-goods/point-goods",
     "loader": "/components/loader/loader",
@@ -67,6 +71,7 @@
     "van-cell-group": "@vant/weapp/cell-group/index",
     "van-field": "@vant/weapp/field/index",
     "van-uploader": "@vant/weapp/uploader/index",
+    "van-card": "@vant/weapp/card/index",
     "van-panel": "@vant/weapp/panel/index",
     "van-row": "@vant/weapp/row/index",
     "van-tab": "@vant/weapp/tab/index",

@@ -1,0 +1,11 @@
+<van-tabs active="{{ 0 }}" bind:change="onChange">
+  <van-tab title="全部兑换">
+    <exchanged list="{{list}}" />
+  </van-tab>
+  <van-tab title="已发货">
+    <exchanged list="{{sentList}}" />
+  </van-tab>
+  <van-tab title="未发货">
+    <exchanged list="{{unsentList}}" />
+  </van-tab>
+</van-tabs>

@@ -20,7 +20,7 @@ Page({
     const { userId, detail } = this.data;
     wx.showModal({
       title: '兑换确认',
-      content: `您是否确认使用${detail.point}积分兑换当前商品？`,
+      content: `积分使用后不可退还，是否确认使用${detail.point}积分兑换当前商品？`,
       success (res) {
         if (res.confirm) {
           wx.showLoading({

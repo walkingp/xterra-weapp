@@ -1,0 +1,18 @@
+<van-card
+  num="1"
+  price="{{good.value}}"
+  desc="{{good.summary}}"
+  title="{{good.title}}"
+  link-type="redirectTo"
+  thumb-link="/pages/points/detail/detail?id={{detail.goodId}}"
+  thumb="{{ good.coverUrls[0] }}"
+/>
+<van-cell-group title="兑换明细">
+  <van-cell title="使用积分" value="{{detail.point}}" />
+  <van-cell title="兑换时间" value="{{detail.date}}" />
+  <van-cell title="物流状态" value="{{detail.statusText}}" />
+  <block wx:if="{{detail.status === 1}}">
+    <van-cell title="快递公司" value="{{detail.expressCompany}}" />
+    <van-cell title="快递单号" value="{{detail.expressNum}}" />
+  </block>
+</van-cell-group>

@@ -1,0 +1,10 @@
+<van-cell-group>
+  <block wx:if="{{list.length}}">
+    <van-cell is-link link-type="navigateTo" url="/pages/points/status/status?id={{item._id}}"
+      title="{{item.goods[0].title}}（积分：{{item.point}}）" wx:for="{{list}}" wx:key="_id" value="{{item.statusText}}"
+      label="{{item.date}}" border="{{ false }}" />
+  </block>
+  <block wx:else>
+    <van-empty description="暂无数据" />
+  </block>
+</van-cell-group>

@@ -11,18 +11,18 @@
       <navigator class="link" url="/pages/page/page?id=rule">规则说明</navigator>
     </view>
     <view class="zone flex align-center space-between">
-      <view class="item flex align-center column">
+      <navigator class="item flex align-center column">
         <image src="./../../images/icons/profit.png" />
         <text>赚取积分</text>
-      </view>
-      <view class="item flex align-center column">
+      </navigator>
+      <navigator url="/pages/points/my/my" class="item flex align-center column">
         <image src="./../../images/icons/history.png" />
         <text>兑换记录</text>
-      </view>
-      <view class="item flex align-center column">
+      </navigator>
+      <navigator class="item flex align-center column">
         <image src="./../../images/icons/exchange.png" />
         <text>兑换积分</text>
-      </view>
+      </navigator>
     </view>
   </view>
   <view class="bottom">

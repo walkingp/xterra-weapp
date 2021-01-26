@@ -293,6 +293,18 @@
           "pathName": "pages/points/detail/detail",
           "query": "id=1526e12a600d9570009ada625fe1acaf",
           "scene": null
+        },
+        {
+          "name": "兑换记录",
+          "pathName": "pages/points/my/my",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "积分兑换明细",
+          "pathName": "pages/points/status/status",
+          "query": "id=3b020ca360101d6e00fe7a501fb33de2",
+          "scene": null
         }
       ]
     }

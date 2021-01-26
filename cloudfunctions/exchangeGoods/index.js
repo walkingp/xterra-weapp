@@ -11,6 +11,7 @@ const _ = db.command;
 const goodsTable = db.collection("goods");
 const pointsTable = db.collection("points");
 const usersTable = db.collection("userlist");
+const historyTable = db.collection("point-goods");
 // 云函数入口函数
 exports.main = async (event, context) => {
   const { goodId, userId, count } = event;
@@ -46,6 +47,14 @@ exports.main = async (event, context) => {
   await goodsTable.doc(goodId).update({
     data: {
       count: _.inc(-1)
+    }
+  });
+  await historyTable.add({
+    data: {
+      goodId,
+      userId,
+      point: goods.data.point,
+      createdAt: new Date()
     }
   });
   await usersTable.doc(userId).update({
