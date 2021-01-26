@@ -13,6 +13,8 @@
   <van-cell title="物流状态" value="{{detail.statusText}}" />
   <block wx:if="{{detail.status === 1}}">
     <van-cell title="快递公司" value="{{detail.expressCompany}}" />
-    <van-cell title="快递单号" value="{{detail.expressNum}}" />
+    <van-cell title="快递单号">
+      <text bindtap="copy" data-text="{{detail.expressNum}}">{{detail.expressNum}}</text>
+    </van-cell>
   </block>
 </van-cell-group>

@@ -13,6 +13,14 @@ Page({
     good: null
   },
 
+  copy(e) {
+    const {
+      text
+    } = e.currentTarget.dataset;
+    wx.setClipboardData({
+      data: text,
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
