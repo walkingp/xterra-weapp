@@ -1,0 +1,12 @@
+<view class="top">
+  <van-search value="{{ value }}" placeholder="请输入搜索关键词" />
+</view>
+<view class="main">
+  <van-tabs active="{{ 0 }}" bind:change="onChange">
+    <van-tab title="最新">
+      <community-list list="{{list}}" />
+    </van-tab>
+    <van-tab title="推荐">内容 2</van-tab>
+    <van-tab title="热门">内容 3</van-tab>
+  </van-tabs>
+</view>

@@ -36,7 +36,9 @@
     "pages/points/detail/detail",
     "pages/points/my/my",
     "components/exchanged/exchanged",
-    "pages/points/status/status"
+    "pages/points/status/status",
+    "pages/community/index/index",
+    "pages/community/detail/detail"
   ],
   "window": {
     "backgroundColor": "#ffffff",
@@ -55,6 +57,7 @@
     "point-goods": "/components/point-goods/point-goods",
     "loader": "/components/loader/loader",
     "banner-list": "/components/banner-list/banner-list",
+    "community-list": "/components/community-list/community-list",
     "coupon-list": "/components/coupon-list/coupon-list",
     "news-list": "/components/news-list/news-list",
     "race-list": "/components/race-list/race-list",

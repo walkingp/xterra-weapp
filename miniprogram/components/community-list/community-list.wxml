@@ -1,0 +1,20 @@
+<view class="masonry">
+  <navigator url="/page/community/detail/detail?id={{item._id}}" class="item" wx:for="{{list}}" wx:key="_id" wx:for-index="idx">
+    <view class="item__content">
+      <image class="thumb" bindtap="preview" src="{{item.picUrls[0]}}" mode="aspectFill"></image>
+      <view class="content">
+        <text class="desc">{{item.content}}</text>
+        <view class="user">
+          <view class="left">
+            <image src="{{item.avatarUrl}}" mode="aspectFill" />
+            <text>{{item.nickName}}</text>
+          </view>
+          <view class="right">
+            <van-icon size="36rpx" name="comment-o" />
+            <text>{{item.comments}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </navigator>
+</view>

@@ -305,6 +305,12 @@
           "pathName": "pages/points/status/status",
           "query": "id=3b020ca360101d6e00fe7a501fb33de2",
           "scene": null
+        },
+        {
+          "name": "社区新首页",
+          "pathName": "pages/community/index/index",
+          "query": "",
+          "scene": null
         }
       ]
     }
