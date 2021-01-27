@@ -1,20 +1,46 @@
 <view class="masonry">
-  <navigator url="/page/community/detail/detail?id={{item._id}}" class="item" wx:for="{{list}}" wx:key="_id" wx:for-index="idx">
+  <view class="item" wx:for="{{list}}" wx:key="_id" wx:for-index="idx">
     <view class="item__content">
-      <image class="thumb" bindtap="preview" src="{{item.picUrls[0]}}" mode="aspectFill"></image>
+      <image class="thumb" bindtap="preview" data-url="{{item.picUrls[0]}}" data-urls="{{item.picUrls}}"
+        src="{{item.picUrls[0]}}" mode="aspectFill"></image>
       <view class="content">
         <text class="desc">{{item.content}}</text>
         <view class="user">
           <view class="left">
-            <image src="{{item.avatarUrl}}" mode="aspectFill" />
+            <image class="avatar" src="{{item.avatarUrl}}" mode="aspectFill" />
             <text>{{item.nickName}}</text>
           </view>
-          <view class="right">
+          <view class="right" data-id="{{item._id}}" bindtap="showComment">
             <van-icon size="36rpx" name="comment-o" />
             <text>{{item.comments}}</text>
           </view>
         </view>
       </view>
     </view>
-  </navigator>
+  </view>
 </view>
+
+<van-popup show="{{ show }}" closeable custom-style="height: 80%" position="bottom" bind:close="onClose">
+  <view class="modal">
+    <view class="header">{{comments.length}}条回复</view>
+    <view class="comments">
+      <view class="comment" wx:for="{{comments}}" wx:key="_id">
+        <navigator class="icon">
+          <image class="avatar" src="{{item.avatarUrl}}" mode="aspectFill" />
+        </navigator>
+        <view class="text">
+          <navigator>{{item.nickName}}</navigator>
+          <text class="date">{{item.dateStr}}</text>
+          <view class="content">{{item.content}}</view>
+        </view>
+      </view>
+    </view>
+    <view class="footer">
+      <view class="user">
+        <image class="avatar" src="{{userInfo.avatarUrl}}" mode="aspectFill" />
+      </view>
+      <input type="text" placeholder="请输入回复内容" />
+      <button form-type="submit">回复</button>
+    </view>
+  </view>
+</van-popup>

@@ -6,7 +6,11 @@
     <van-tab title="最新">
       <community-list list="{{list}}" />
     </van-tab>
-    <van-tab title="推荐">内容 2</van-tab>
-    <van-tab title="热门">内容 3</van-tab>
+    <van-tab title="推荐">
+      <community-list list="{{list}}" />
+    </van-tab>
+    <van-tab title="热门">
+      <community-list list="{{list}}" />
+    </van-tab>
   </van-tabs>
 </view>
