@@ -1,5 +1,5 @@
 <view class="masonry">
-  <view class="item" wx:for="{{list}}" wx:key="_id" wx:for-index="idx">
+  <navigator url="/pages/community/detail/detail?id={{item._id}}" class="item" wx:for="{{list}}" wx:key="_id" wx:for-index="idx">
     <view class="item__content">
       <image class="thumb" bindtap="preview" data-url="{{item.picUrls[0]}}" data-urls="{{item.picUrls}}"
         src="{{item.picUrls[0]}}" mode="aspectFill"></image>
@@ -17,7 +17,7 @@
         </view>
       </view>
     </view>
-  </view>
+  </navigator>
 </view>
 
 <van-popup show="{{ show }}" closeable custom-style="height: 80%" position="bottom" bind:close="onClose">

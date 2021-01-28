@@ -1,3 +1,6 @@
+const dayjs = require("dayjs");
+const { getCollectionById } = require("../../../utils/cloud");
+
 // miniprogram/pages/community/detail/detail.js
 Page({
 
@@ -5,14 +8,29 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    id: null,
+    detail: null,
+    comments: null
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    const { id } = options;
+    this.setData({
+      id
+    },()=>{
+      this.fetch();
+    })
+  },
+  async fetch(){
+    const { id } = this.data;
+    const detail = await getCollectionById({dbName: 'feed', id});
+    detail.dateStr = dayjs(detail.addedDate).format("MM-DD HH:mm:ss");
+    this.setData({
+      detail
+    });
   },
 
   /**

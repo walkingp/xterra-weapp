@@ -317,6 +317,12 @@
           "pathName": "pages/community/detail/detail",
           "query": "id=0bcbdde05fc904ee009f45091944e4d2",
           "scene": null
+        },
+        {
+          "name": "动态详情",
+          "pathName": "pages/community/detail/detail",
+          "query": "id=0bcbdde05fc904ee009f45091944e4d2",
+          "scene": null
         }
       ]
     }
