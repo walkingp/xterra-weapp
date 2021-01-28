@@ -1,0 +1,4 @@
+<van-grid border="{{ false }}">
+  <van-grid-item icon="cart-circle-o" bind:click="syncData" text="同步数据">
+  </van-grid-item>
+</van-grid>

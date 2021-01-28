@@ -38,7 +38,8 @@
     "components/exchanged/exchanged",
     "pages/points/status/status",
     "pages/community/index/index",
-    "pages/community/detail/detail"
+    "pages/community/detail/detail",
+    "pages/admin/tool/tool"
   ],
   "window": {
     "backgroundColor": "#ffffff",

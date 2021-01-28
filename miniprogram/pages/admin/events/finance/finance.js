@@ -17,6 +17,11 @@ Page({
         width: 300,
         label: '订单编号',
       },
+      // {
+      //   prop: 'out_trade_no',
+      //   width: 300,
+      //   label: '商家订单编号',
+      // },
       {
         prop: 'userName',
         width: 200,
@@ -112,7 +117,7 @@ Page({
     const results = await getAllRegistrationsByRaceId(raceId);
     results.map(item => {
       item.addedDate = dayjs(item.addedDate).format("YYYY-MM-DD HH:mm:ss");
-      item.profiles = item.profiles.map(p=>p.trueName).join()
+      item.profiles = item.profiles && item.profiles.length ? item.profiles.map(p=>p.trueName).join() : ''
     });
     this.setData({
       detail,

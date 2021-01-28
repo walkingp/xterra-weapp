@@ -135,6 +135,26 @@ export const pointRules = [
     point: 50
   },
   {
+    id: 2,
+    title: '报名赛事活动',
+    point: 50
+  },
+  {
+    id: 3,
+    title: '发贴',
+    point: 5
+  },
+  {
+    id: 4,
+    title: '点赞或评论',
+    point: 2
+  },
+  {
+    id: 5,
+    title: '打卡',
+    point: 2
+  },
+  {
     id: 99,
     title: '管理员手工添加',
     point: 10,
