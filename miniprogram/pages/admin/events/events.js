@@ -83,11 +83,11 @@ Page({
         subname: '查看目前报名费用明细',
         type: 'finance'
       },
-      {
-        name: '导入线下报名',
-        subname: '导入已经上传的Excel文件',
-        type: 'import'
-      },
+      // {
+      //   name: '导入线下报名',
+      //   subname: '导入已经上传的Excel文件',
+      //   type: 'import'
+      // },
       {
         name: '查看比赛成绩',
         disabled: true,

@@ -17,11 +17,11 @@ Page({
         width: 300,
         label: '订单编号',
       },
-      // {
-      //   prop: 'out_trade_no',
-      //   width: 300,
-      //   label: '商家订单编号',
-      // },
+      {
+        prop: 'out_trade_no',
+        width: 300,
+        label: '商家订单编号',
+      },
       {
         prop: 'userName',
         width: 200,

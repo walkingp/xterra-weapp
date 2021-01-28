@@ -17,8 +17,18 @@ Page({
         label: '姓名'
       },
       {
+        prop: 'pinyinFirst',
+        width: 152,
+        label: '拼音名'
+      },
+      {
+        prop: 'pinyinLast',
+        width: 152,
+        label: '拼音姓'
+      },
+      {
         prop: 'cateTitle',
-        width: 352,
+        width: 100,
         label: '组别'
       },
       {
