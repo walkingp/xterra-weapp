@@ -168,7 +168,7 @@ export const exportFinanceReport = async raceId => {
     
     res.map(item => {
       item.addedDate = dayjs(item.addedDate).format("YYYY-MM-DD HH:mm:ss");
-      item.profiles = item.profiles.map(p=>p.trueName).join()
+      item.profiles = item.profiles && item.profiles.length ? item.profiles.map(p=>p.trueName).join() : '';
     });
     let orders = [['订单编号', '订单提交人', '类别', '赛事', '组别', '报名人数', '报名人', '订单状态', '订单金额', '优惠金额', '实付金额', '退款金额', '支付方式' ,'下单时间']];
     res.forEach(item => {
