@@ -1,0 +1,15 @@
+<view class="flex column">
+  <view class="flex-none top flex justify-center">
+    <van-image round width="50px" height="50px" src="{{detail.avatarUrl}}" />
+  </view>
+  <van-cell-group class="" title="基本资料">
+    <van-cell title="微信昵称" value="{{detail.nickname}}" />
+    <van-cell title="真实姓名" value="{{detail.truename}}" />
+    <van-cell title="性别" value="{{detail.gender}}" />
+    <van-cell title="手机号" value="{{detail.phonenumber}}" />
+    <van-cell title="单元格" value="内容" label="描述信息" border="{{ false }}" />
+  </van-cell-group>
+  <van-cell>
+    <van-button block type="primary">确定检录</van-button>
+  </van-cell>
+</view>

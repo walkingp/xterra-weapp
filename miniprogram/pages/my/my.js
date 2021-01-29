@@ -14,6 +14,18 @@ Page({
     version: null,
     versions: { develop: '开发版', trial: '体验版', release: '正式版' }
   },
+  scanQR(){
+    wx.scanCode({
+      onlyFromCamera: true,
+      success (res) {
+        console.log(res);
+        const {result} = res;
+        wx.navigateTo({
+          url: '/pages/admin/volunteer/checkin/checkin?userId=' + result,
+        })
+      }
+    })
+  },
   async fetch(){
     const { userId, versions } = this.data;
     const res = wx.getAccountInfoSync().miniProgram;

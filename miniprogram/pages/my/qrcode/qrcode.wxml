@@ -1,0 +1,5 @@
+<view class="main flex column">
+  <view class="flex-auto flex align-center justify-center">
+    <canvas style="width: 750rpx; height: 750rpx;" canvas-id="myQrcode"></canvas>
+  </view>
+</view>

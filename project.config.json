@@ -323,6 +323,24 @@
           "pathName": "pages/community/detail/detail",
           "query": "id=0bcbdde05fc904ee009f45091944e4d2",
           "scene": null
+        },
+        {
+          "name": "二维码",
+          "pathName": "pages/my/qrcode/qrcode",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "志愿者：签到检录",
+          "pathName": "pages/admin/volunteer/checkin/checkin",
+          "query": "userId=04db790c71365c0be61fae4e3e526141",
+          "scene": null
+        },
+        {
+          "name": "比赛现场签到",
+          "pathName": "pages/my/checkin/checkin",
+          "query": "",
+          "scene": null
         }
       ]
     }

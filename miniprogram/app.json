@@ -39,7 +39,11 @@
     "pages/points/status/status",
     "pages/community/index/index",
     "pages/community/detail/detail",
-    "pages/admin/tool/tool"
+    "pages/admin/tool/tool",
+    "pages/my/qrcode/qrcode",
+    "pages/admin/volunteer/volunteer",
+    "pages/admin/volunteer/checkin/checkin",
+    "pages/my/checkin/checkin"
   ],
   "window": {
     "backgroundColor": "#ffffff",

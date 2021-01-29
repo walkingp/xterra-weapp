@@ -15,13 +15,17 @@
             </view>
           </view>
         </view>
-        <view class="right">
+        <view class="right flex align-center">
           <navigator url="/pages/my/edit/edit">
             <image src="./../../images/icons/edit.svg"></image>
           </navigator>
           <navigator hidden="{{true}}" url="">
             <image src="./../../images/icons/mall.svg"></image>
           </navigator>
+          <navigator style="margin-top: 8rpx;" url="/pages/my/qrcode/qrcode">
+            <van-icon size="20px" color="white" name="qr" />
+          </navigator>
+          <van-icon bindtap="scanQR" size="20px" color="white" name="scan" />
         </view>
       </block>
       <block wx:else>
