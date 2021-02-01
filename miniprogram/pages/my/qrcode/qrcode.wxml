@@ -1,5 +1,9 @@
 <view class="main flex column">
-  <view class="flex-auto flex align-center justify-center">
-    <canvas style="width: 750rpx; height: 750rpx;" canvas-id="myQrcode"></canvas>
+  <view class="flex-auto flex column align-center justify-center zone">
+    <image class="avatar" src="{{userInfo.avatarUrl}}" />
+    <text class="fs-xl bold margin-top-md">{{userInfo.truename}}</text>
+    <text class="fs-sm text-grey padding-y-md">{{userInfo.phonenumber}}</text>
+    <canvas style="width: 400rpx; height: 400rpx;" canvas-id="myQrcode"></canvas>
+    <text class="fs-sm text-grey">扫描检录二维码</text>
   </view>
 </view>

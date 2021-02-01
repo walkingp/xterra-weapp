@@ -29,8 +29,8 @@ Page({
     const { userId, userInfo } = this.data;
     const { avatarUrl } = userInfo;
     drawQrcode({
-      width: 375,
-      height: 375,
+      width: 200,
+      height: 200,
       x: 20,
       y: 0,
       canvasId: 'myQrcode',

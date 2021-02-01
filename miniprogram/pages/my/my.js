@@ -11,6 +11,7 @@ Page({
     isLogined: false,
     userInfo: null,
     isAdmin: false,
+    isVolunteer: false,
     version: null,
     versions: { develop: '开发版', trial: '体验版', release: '正式版' }
   },
@@ -48,11 +49,13 @@ Page({
       }
       
       const isAdmin = res.userInfo.role === 'admin';
+      const isVolunteer = res.userInfo.role === 'volunteer' || isAdmin;
       this.setData({
         userInfo,
         userId,
         isLogined,
-        isAdmin
+        isAdmin,
+        isVolunteer
       }, async () => {
         this.fetch();
         // 加分

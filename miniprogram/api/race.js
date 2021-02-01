@@ -27,7 +27,6 @@ export const getRaceNewsList = async ( raceId, pageIndex = 1, size = 5) => {
   const data = await getPaginations({
     dbName: 'news',
     filter: {
-      cate: '赛事',
       raceId,
       isActive: true
     },

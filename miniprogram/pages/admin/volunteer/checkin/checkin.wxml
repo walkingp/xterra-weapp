@@ -2,14 +2,19 @@
   <view class="flex-none top flex justify-center">
     <van-image round width="50px" height="50px" src="{{detail.avatarUrl}}" />
   </view>
-  <van-cell-group class="" title="基本资料">
+  <van-cell-group title="基本资料">
     <van-cell title="微信昵称" value="{{detail.nickname}}" />
     <van-cell title="真实姓名" value="{{detail.truename}}" />
     <van-cell title="性别" value="{{detail.gender}}" />
     <van-cell title="手机号" value="{{detail.phonenumber}}" />
     <van-cell title="单元格" value="内容" label="描述信息" border="{{ false }}" />
   </van-cell-group>
+  <van-cell-group title="赛事信息">
+    <van-cell title="赛事名称" title-width="80px" value="{{race.raceTitle}}" />
+    <van-cell title="组别信息" value="{{race.cateTitle}}" />
+  </van-cell-group>
   <van-cell>
-    <van-button block type="primary">确定检录</van-button>
+    <van-button style="margin-right: 10rpx; " bindtap="confirm" type="info">资料正常，发送给用户</van-button>
+    <van-button bindtap="confirm" type="primary">确定检录</van-button>
   </van-cell>
 </view>

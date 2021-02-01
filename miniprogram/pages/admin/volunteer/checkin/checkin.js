@@ -1,4 +1,5 @@
-const { getCollectionById } = require("../../../../utils/cloud");
+const { getRaceDetail, getMyRegistrations } = require("../../../../api/race");
+const { getCollectionById, getCollectionByWhere } = require("../../../../utils/cloud");
 const app = getApp();
 // miniprogram/pages/admin/volunteer/checkin/checkin.js
 Page({
@@ -8,7 +9,20 @@ Page({
    */
   data: {
     userId: null,
-    detail: null
+    detail: null,
+    currentRaceId: null,
+    race: null
+  },
+
+  async getCurrentRaceId(){
+    const { userId } = this.data;
+    const races = await getCollectionByWhere({ dbName: 'start-list', filter: { userId }});
+    const race = races[0];// TODO
+    this.setData({
+      race
+    });
+  },
+  confirm(){
 
   },
 
@@ -20,16 +34,28 @@ Page({
     this.setData({ userId });
     app.checkLogin().then(res=>{
       const { userId, userInfo, isLogined } = res;
-
+      if(!isLogined){
+        wx.redirectTo({
+          url: '/pages/my/my',
+        })
+      }
+      this.getCurrentRaceId();
       this.fetch();
     });
   },
   async fetch(){
+    wx.showLoading({
+      title: '加载中',
+    })
     const { userId } = this.data;
     const detail = await getCollectionById({ dbName: 'userlist', id: userId });
     console.log(detail);
     this.setData({
       detail
+    }, () => {
+      wx.hideLoading({
+        success: (res) => {},
+      })
     });
   },
   /**

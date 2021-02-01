@@ -1,3 +1,10 @@
 .main{
   height: 100vh;
+  background-color: #22a6b3;
+  padding: 50rpx 30rpx 300rpx 30rpx;
+  overflow: hidden;
+}
+.zone{
+  background-color: #fff;
+  border-radius: 20rpx;
 }

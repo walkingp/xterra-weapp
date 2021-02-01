@@ -25,7 +25,6 @@
           <navigator style="margin-top: 8rpx;" url="/pages/my/qrcode/qrcode">
             <van-icon size="20px" color="white" name="qr" />
           </navigator>
-          <van-icon bindtap="scanQR" size="20px" color="white" name="scan" />
         </view>
       </block>
       <block wx:else>
@@ -55,6 +54,17 @@
           <van-grid-item icon="/images/icons/help.svg" url="/pages/page/page?id=help" text="帮助中心" />
           <van-grid-item icon="/images/icons/building.svg" url="/pages/page/page?id=about" text="关于XTERRA" />
           <!-- <van-grid-item icon="/images/icons/doc.svg" url="/pages/page/page?id=rule" text="积分规则" /> -->
+        </van-grid>
+      </view>
+    </view>
+    <view class="box admin" wx:if="{{isVolunteer}}">
+      <view class="flex space-between">
+        <text class="hd">志愿者</text>
+      </view>
+      <view class="list">
+        <van-grid border="{{false}}">
+          <van-grid-item icon="scan" bindtap="scanQR" text="赛事检录" />
+          <van-grid-item icon="friends-o" url="/pages/events/users/users" text="我的检录" />
         </van-grid>
       </view>
     </view>
