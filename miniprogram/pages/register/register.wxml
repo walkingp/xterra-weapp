@@ -7,7 +7,7 @@
       <step1 id="step1" cateId="{{cateId}}" type="{{type}}" raceId="{{id}}" _teamTitle="{{teamTitle}}" raceDetail="{{detail}}" bind:onComplete="onComplete" />
     </view>
     <view class="step2" wx:if="{{step===1}}">
-      <step2 cateId="{{cateId}}" raceId="{{id}}" bind:onComplete="onComplete" />
+      <step2 id="step2" cateId="{{cateId}}" raceId="{{id}}" raceDetail="{{detail}}" bind:onComplete="onComplete" />
     </view>
     <view class="step3" wx:if="{{step===2 || step === 3}}">
       <step3 order="{{order}}" id="step3" bind:onComplete="onComplete" bind:couponChanged="couponChanged" />

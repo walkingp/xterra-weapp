@@ -86,7 +86,7 @@ Page({
     const results = await getAllRegistrationsByRaceId(raceId);
     results.map(item => {
       item.addedDate = dayjs(item.addedDate).format("YYYY-MM-DD HH:mm:ss");
-      item.profiles = item.profiles.map(p=>p.trueName).join()
+      item.profiles = item.profiles && item.profiles.length ? item.profiles.map(p=>p.trueName).join() : ''
     });
     this.setData({
       detail,

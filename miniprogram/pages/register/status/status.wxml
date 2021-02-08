@@ -36,11 +36,16 @@
           <text class="gray">（{{item.phoneNum}}）</text>
         </view>
         <view class="flex-none">
+        <block wx:if="{{detail.type === '铁人三项'}}">
+          <text class="gray">（{{item.sportItems}}）</text>
+        </block>
+        <block wx:else>
           <text class="gray">（{{item.isTeamLeader ? '领队' : '队员'}}）</text>
+        </block>
         </view>
       </view>
     </view>
-    <view class="ft flex justify-center align-center" wx:if="{{detail.groupType === 'relay'}}">
+    <view class="ft flex justify-center align-center" wx:if="{{detail.groupType === 'relay' && detail.type !== '铁人三项'}}">
       <button class="button mini" open-type="share">邀请报名</button>
     </view>
   </view>

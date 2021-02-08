@@ -141,6 +141,7 @@ Component({
     },
     onGroupTypeChange(event) {
       const name = event.detail;
+      const { groupUserType } = this.data;
       this.setData({
         groupUserType: name,
         focus: groupUserType === 'owner'
@@ -294,6 +295,10 @@ Component({
         teams,
         allTeams: teams,
         actions
+      }, () =>{        
+        wx.hideLoading({
+          success: (res) => {},
+        })
       })
     },
     async fetch() {
@@ -346,9 +351,6 @@ Component({
         if(cateId){
           that.selectCate(cateId);
         }
-        wx.hideLoading({
-          success: (res) => {},
-        })
       });
     }
   }

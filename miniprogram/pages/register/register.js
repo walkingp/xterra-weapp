@@ -14,6 +14,7 @@ Page({
     type: 'inidividual',
     isValid: false,
     step: 0,
+    isRelay: false,
     group: 0,
     order: null,
     prevEnabled: true,
@@ -41,10 +42,12 @@ Page({
     app.globalData.order.couponId = couponId;
   },
   onComplete(e){
-    const { prevEnabled, nextEnabled } = e.detail;
+    const { prevEnabled, nextEnabled, isRelay, isFinished } = e.detail;
     this.setData({
       prevEnabled,
-      nextEnabled
+      nextEnabled,
+      isRelay,
+      isFinished
     });
   },
   prevStep(e){
@@ -58,7 +61,13 @@ Page({
     app.globalData.step = step;
   },
   nextStep(e){
-    let { step } = this.data;
+    let { step, isRelay, isFinished } = this.data;
+    
+    if(isRelay && !isFinished){
+      this.step2 = this.selectComponent("#step2");
+      this.step2.showRelayOption();
+      return;
+    }
     step = step + 1;
     this.setData({
       nextEnabled: false,

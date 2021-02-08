@@ -6,6 +6,9 @@
   font-weight: bold;
   padding: 30rpx 0;
 }
+.box{
+  margin-top: 20rpx;
+}
 .cates .item{
   height: 88rpx;
   display: flex;
@@ -14,6 +17,9 @@
   background-color: #fff;
   padding: 0 30rpx;
   margin-bottom: 20rpx;
+}
+.value-class {
+  flex: none !important;
 }
 .blank{
   color: transparent;

@@ -11,6 +11,9 @@ Component({
     raceId: {
       type: String
     },
+    raceDetail: {
+      type: Object
+    }
   },
 
 
@@ -19,8 +22,20 @@ Component({
    */
   data: {
     profiles: [],
+    selectedProfiles: [],
+    selectedSports: [],
+    currentProfileId: null,
+    currentIndex: null,
     cates: [],
-    cate: null
+    cate: null,
+    show: false,
+    showRelay: false,
+    sports: ['游泳','自行车','跑步'],
+    actions: [
+      { name: '游泳' },
+      { name: '自行车' },
+      { name: '跑步' }
+    ]
   },
   lifetimes: {
     attached: function () {
@@ -32,6 +47,106 @@ Component({
    * 组件的方法列表
    */
   methods: {
+    showPicker(e){
+      const { selectedProfiles } = this.data;
+      if(selectedProfiles.length < 3){
+        return false;
+      }
+      const { id } = e.currentTarget.dataset;
+      this.setData({
+        currentProfileId: id,
+        show: true
+      })
+    },
+    onClose() {
+      this.setData({ show: false });
+    },
+    onChange(event) {
+      const { profileIndex } = this.data;
+      this.setData({
+        [`result[${profileIndex}]`]: event.detail
+      });
+    },
+  
+    toggle(event) {
+      const { index } = event.currentTarget.dataset;
+      const checkbox = this.selectComponent(`.checkboxes-${index}`);
+      const willChecked = checkbox.data.value === false;
+      const profileIndex = +index.substr(0,1);
+      if(this.data.result){
+        if(this.data.result[profileIndex] && this.data.result[profileIndex].length === 2 && willChecked){
+          wx.showToast({
+            icon: 'none',
+            title: '每人最多只可报2个项目',
+          })
+          return;
+        }
+        if(this.data.result[1-profileIndex] && willChecked){
+          if(this.data.result[1-profileIndex].indexOf(checkbox.data.name) >= 0){
+            wx.showToast({
+              icon: 'none',
+              title: '每个项目仅限1人报名',
+            })
+            return;
+          }
+        }
+      } 
+      this.setData({
+        profileIndex
+      });
+      
+      checkbox.toggle();
+      let totalSelected = 0;
+      const { result } = this.data;
+      if(this.data.result[0]){
+        totalSelected += result[0].length;
+      }
+      if(this.data.result[1]){
+        totalSelected += result[1].length;
+      }
+      const { selectedProfiles } = this.data;
+      selectedProfiles.map((item, index) => {
+        item.sportItems = result[index] && result[index].length ? result[index].join() : '';
+        return item;
+      })
+      this.setData({
+        selectedProfiles
+      });
+      const nextEnabled = totalSelected === 3;
+      if(nextEnabled){          
+        app.globalData.order.profiles = selectedProfiles;
+        app.globalData.order.profileCount = selectedProfiles.length;
+      }
+      this.triggerEvent('onComplete', { prevEnabled: true, nextEnabled, isRelay: true, isFinished: true });
+    },
+    onSelect(event) {
+      const { name } = event.detail;
+      let { selectedProfiles, currentProfileId, actions } = this.data;
+      const found = selectedProfiles.find(item=>item.sportItems === name);
+      if(found){
+        selectedProfiles.map(item=>{
+          if(item.sportItems === name){
+            item.sportItems = '';
+          }
+        });
+      }
+      selectedProfiles.map(item=>{
+        if(item._id ===currentProfileId){
+          item.sportItems = name;
+        }
+        return item;
+      });
+      this.setData({
+        actions,
+        selectedProfiles
+      });
+      const nextEnabled = selectedProfiles.filter(item=>item.sportItems).length === 3;
+      if(nextEnabled){          
+        app.globalData.order.profiles = selectedProfiles;
+        app.globalData.order.profileCount = selectedProfiles.length;
+      }
+      this.triggerEvent('onComplete', { prevEnabled: true, nextEnabled, isRelay: true, isFinished: true });
+    },
     async fetch() {
       wx.showLoading({
         title: '加载中……',
@@ -43,13 +158,14 @@ Component({
         console.log(profiles)
         
         const {
-          raceId
+          raceId, raceDetail
         } = this.properties;
         const cates = await getRaceCatesList(raceId);
         const cate = cates.find(item => item._id === cateId);
         this.setData({
           cateId,
           cates,
+          isRelay: cate.type  === 'relay' && raceDetail.type === '铁人三项',
           cate,
           profiles
         }, () => {
@@ -59,11 +175,24 @@ Component({
         });
       })
     },
+    showRelayOption(){
+      this.setData({
+        showRelay: true
+      })
+      this.triggerEvent('onComplete', { prevEnabled: true, nextEnabled: false });
+    },
     checkboxChanged(e){
       const profileIds = e.detail.value;
-      let { profiles, cate } = this.data;
+      let { profiles, cate, isRelay } = this.data;
       profiles = profiles.filter(item => {
         return profileIds.includes(item._id);
+      });
+      profiles.map(item=>{
+        item.sportItems = '';
+        return item;
+      });
+      this.setData({
+        selectedProfiles: profiles
       });
       if(groupType !== 'individual' && profiles.length > cate.teamSizeLimit && cate.teamSizeLimit > 0){
         wx.showToast({
@@ -90,7 +219,12 @@ Component({
       app.globalData.order.totalFee = +totalFee.toFixed(2);
       app.globalData.order.paidFee = +totalFee.toFixed(2);
       app.globalData.order.discountFee = 0;
-      this.triggerEvent('onComplete', { prevEnabled: true, nextEnabled: profileIds.length >= minProfiles });
+      let nextEnabled = profileIds.length >= minProfiles;
+      if(isRelay){
+        nextEnabled = nextEnabled && profileIds.length >= 2;
+      }
+
+      this.triggerEvent('onComplete', { prevEnabled: true, nextEnabled, isRelay, isFinished: false });
     },
     gotoAdd(e){
       const { url } = e.currentTarget.dataset;

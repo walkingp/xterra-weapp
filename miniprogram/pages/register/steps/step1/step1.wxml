@@ -57,7 +57,7 @@
         <van-radio disabled="{{relayCate.expired}}" slot="right-icon" name="owner" />
       </van-cell>
       <van-cell title="我是团队成员" clickable data-name="member" bind:click="onGroupTypeClick">
-        <van-radio disabled="{{relayCate.expired}}" slot="right-icon" name="member" />
+        <van-radio disabled="{{relayCate.expired || raceDetail.type === '铁人三项'}}" slot="right-icon" name="member" />
       </van-cell>
     </van-cell-group>
   </van-radio-group>
@@ -108,6 +108,7 @@
     <text>各组别优惠价格及退改政策，请点击选择组别后查看报名优惠价格。</text>
   </view>
   <view class="desc" wx:if="{{selectedGroupType === 'relay'}}">
+    <text wx:if="{{selectedGroupType === 'relay'}}">铁三比赛中接力报名由队长一人完成，须由2-3位成员完成；</text>
     <text>团队人数上限{{relayCate.teamSizeLimit}}人；</text>
     <text>团队负责人报名时可选择一次录入多名团员资料，也可在创建团队后分享给其他成员填写资料；</text>
     <text>费用由团队负责人支付；</text>
