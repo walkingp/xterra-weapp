@@ -1,0 +1,9 @@
+<view class="main flex column align-center">
+  <view class="flex-auto body">
+    <towxml nodes="{{detail.agreement}}" />
+  </view>
+  <view class="flex-none bottom">
+    <van-button round type="danger">不同意</van-button>
+    <van-button round type="primary">同 意</van-button>
+  </view>
+</view>

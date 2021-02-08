@@ -43,7 +43,8 @@
     "pages/my/qrcode/qrcode",
     "pages/admin/volunteer/volunteer",
     "pages/admin/volunteer/checkin/checkin",
-    "pages/my/checkin/checkin"
+    "pages/my/checkin/checkin",
+    "pages/admin/volunteer/agreement/agreement"
   ],
   "window": {
     "backgroundColor": "#ffffff",

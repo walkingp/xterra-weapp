@@ -1,4 +1,5 @@
 const { getRaceDetail, getMyRegistrations } = require("../../../../api/race");
+const { checkInUser } = require("../../../../api/user");
 const { getCollectionById, getCollectionByWhere } = require("../../../../utils/cloud");
 const app = getApp();
 // miniprogram/pages/admin/volunteer/checkin/checkin.js
@@ -41,7 +42,13 @@ Page({
       }
       this.getCurrentRaceId();
       this.fetch();
+      this.scaned();
     });
+  },
+  async scaned(){
+    const { userId } = this.data;
+    const res = await checkInUser(userId)
+    debugger
   },
   async fetch(){
     wx.showLoading({

@@ -21,9 +21,9 @@ Page({
         userId, userInfo
       }, () => {
         this.draw();
+        this.watchChanges();
       })
     });
-
   },
   draw(){
     const { userId, userInfo } = this.data;
@@ -31,7 +31,7 @@ Page({
     drawQrcode({
       width: 200,
       height: 200,
-      x: 20,
+      x: 0,
       y: 0,
       canvasId: 'myQrcode',
       // ctx: wx.createCanvasContext('myQrcode'),
@@ -47,6 +47,33 @@ Page({
     })
   },
 
+  watchChanges(){
+    const db = wx.cloud.database()
+    const that = this;
+    const { userId } = this.data;
+    db.collection('userlist').doc(userId).watch({
+      onChange: function(snapshot) {
+        const { type } = snapshot;
+        if(type !== 'init'){
+          wx.showToast({
+            icon:'success',
+            title: '扫描成功',
+            success(){
+              setTimeout(() => {
+                wx.navigateTo({
+                  url: '/pages/admin/volunteer/agreement/agreement?raceId=',
+                })
+              }, 1000);
+            }
+          })
+        }
+        console.log('snapshot', snapshot)
+      },
+      onError: function(err) {
+        console.error('the watch closed because of error', err)
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

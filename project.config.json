@@ -341,6 +341,12 @@
           "pathName": "pages/my/checkin/checkin",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "检录：选手签署比赛协议",
+          "pathName": "pages/admin/volunteer/agreement/agreement",
+          "query": "raceId=0bcbdde05fc3a636006efd9971c76de4",
+          "scene": null
         }
       ]
     }

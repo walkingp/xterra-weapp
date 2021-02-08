@@ -1,4 +1,4 @@
-import { getCollectionById, getPaginations } from "../utils/cloud";
+import { getCollectionById, getPaginations, getSingleCollectionByWhere } from "../utils/cloud";
 import { getAllRegistrationsByRaceId } from "./registration";
 const dayjs = require("dayjs");
 
@@ -212,3 +212,13 @@ export const exportFinanceReport = async raceId => {
     }
   })
 }
+
+export const checkInUser = async (userId) => {
+  const db = wx.cloud.database();
+  const _ = db.command;
+  return await db.collection("userlist").doc(userId).update({
+    data: {
+      checkInTime: _.inc(1)
+    }
+  })
+};

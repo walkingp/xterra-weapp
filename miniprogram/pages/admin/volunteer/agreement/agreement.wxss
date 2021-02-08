@@ -1,0 +1,15 @@
+.main{
+  height: 100vh;
+  padding: 20rpx;
+}
+.body{
+  overflow: auto;
+}
+.bottom{
+  padding-top: 20rpx;
+  border-top: solid 2rpx #eee;
+}
+van-button+van-button{
+  width: 200rpx!important;
+  margin-left: 20rpx;
+}
