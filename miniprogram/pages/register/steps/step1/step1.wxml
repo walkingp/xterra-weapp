@@ -56,8 +56,8 @@
       <van-cell title="我是团队负责人" clickable data-name="owner" bind:click="onGroupTypeClick">
         <van-radio disabled="{{relayCate.expired}}" slot="right-icon" name="owner" />
       </van-cell>
-      <van-cell title="我是团队成员" clickable data-name="member" bind:click="onGroupTypeClick">
-        <van-radio disabled="{{relayCate.expired || raceDetail.type === '铁人三项'}}" slot="right-icon" name="member" />
+      <van-cell wx:if="{{raceDetail.type !== '铁人三项'}}" title="我是团队成员" clickable data-name="member" bind:click="onGroupTypeClick">
+        <van-radio disabled="{{relayCate.expired }}" slot="right-icon" name="member" />
       </van-cell>
     </van-cell-group>
   </van-radio-group>

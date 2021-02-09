@@ -72,7 +72,7 @@ Component({
       const { main } = event.currentTarget.dataset;
       const items = event.detail;
       const {result}  = this.data;
-      if(result && result[main] && result[main].length === 2){
+      if(result && result[main] && result[main].length === 2 && items.length === 3){
         wx.showToast({
           icon: 'none',
           title: '每人最多只可报2个项目',
@@ -80,9 +80,9 @@ Component({
         return;
       }
       if(result && result[1-main]){
-        const isFirstItemsValid = result[main] && items.every(val => result[main].includes(val));
-        const isSecondValid = result[1-main] && items.every(val => result[1-main].includes(val));
-        if(isFirstItemsValid || isSecondValid){
+        const allItems = [...result[1-main],...items];
+        const mergedItems = [...new Set([...result[1-main],...items])];
+        if(allItems.length > mergedItems.length){
           wx.showToast({
             icon: 'none',
             title: '每个项目仅限1人报名',
