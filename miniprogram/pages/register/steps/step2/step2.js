@@ -61,13 +61,41 @@ Component({
     onClose() {
       this.setData({ show: false });
     },
-    onChange(event) {
-      const { profileIndex } = this.data;
+    check(e){
+      const { index } = e.currentTarget.dataset;
       this.setData({
-        [`result[${profileIndex}]`]: event.detail
-      });
+        profileIndex: index
+      })
     },
-  
+    noop() {},
+    onChange(event) {
+      const { main } = event.currentTarget.dataset;
+      const items = event.detail;
+      const {result}  = this.data;
+      if(result && result[main] && result[main].length === 2){
+        wx.showToast({
+          icon: 'none',
+          title: '每人最多只可报2个项目',
+        })
+        return;
+      }
+      if(result && result[1-main]){
+        const isFirstItemsValid = result[main] && items.every(val => result[main].includes(val));
+        const isSecondValid = result[1-main] && items.every(val => result[1-main].includes(val));
+        if(isFirstItemsValid || isSecondValid){
+          wx.showToast({
+            icon: 'none',
+            title: '每个项目仅限1人报名',
+          })
+          return;
+        }
+      }
+      this.setData({
+        [`result[${main}]`]: event.detail
+      });
+      this.checkNextStepEnabled();
+    },
+    noop() {},
     toggle(event) {
       const { index } = event.currentTarget.dataset;
       const checkbox = this.selectComponent(`.checkboxes-${index}`);
@@ -96,6 +124,9 @@ Component({
       });
       
       checkbox.toggle();
+      this.checkNextStepEnabled();
+    },
+    checkNextStepEnabled(){
       let totalSelected = 0;
       const { result } = this.data;
       if(this.data.result[0]){

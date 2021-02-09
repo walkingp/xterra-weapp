@@ -33,7 +33,7 @@
 </block>
 <block wx:else>
   <view class="title">请设置接力成员</view>
-  <block wx:for="{{selectedProfiles}}" wx:key="_id">
+  <block wx:for="{{selectedProfiles}}" wx:for-index="index" wx:key="_id">
     <van-cell title="{{item.trueName}}" is-link="{{selectedProfiles.length === 3}}" border="{{ false }}"
       bindtap="showPicker" data-id="{{item._id}}">
       <block wx:if="{{selectedProfiles.length === 3}}">
@@ -43,11 +43,11 @@
         <text>请选择项目</text>
       </block>
     </van-cell>
-    <van-checkbox-group value="{{ result[index] }}" bind:change="onChange" wx:if="{{selectedProfiles.length<3}}">
+    <van-checkbox-group value="{{ result[index] }}" data-main="{{index}}" bind:change="onChange" wx:if="{{selectedProfiles.length<3}}">
       <van-cell-group>
         <van-cell wx:for="{{ sports }}" wx:for-item="sport" wx:for-index="idx" wx:key="idx" title="{{ sport }}"
           value-class="value-class" clickable data-index="{{ index + '-' + idx }}" bind:click="toggle">
-          <van-checkbox catch:tap="noop" class="checkboxes-{{ index + '-' + idx }}" name="{{ sport }}" />
+          <van-checkbox catch:tap="noop" data-index="{{ index}}" class="checkboxes-{{ index + '-' + idx }}" name="{{ sport }}" />
         </van-cell>
       </van-cell-group>
     </van-checkbox-group>
