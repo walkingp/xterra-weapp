@@ -14,7 +14,6 @@
     <van-cell title="组别信息" value="{{race.cateTitle}}" />
   </van-cell-group>
   <van-cell>
-    <van-button style="margin-right: 10rpx; " bindtap="confirm" type="info">资料正常，发送给用户</van-button>
-    <van-button bindtap="confirm" type="primary">确定检录</van-button>
+    <van-button block round bindtap="confirm" type="primary">确定检录</van-button>
   </van-cell>
 </view>

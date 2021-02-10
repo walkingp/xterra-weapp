@@ -92,9 +92,9 @@
   <view class="title">报名优惠费用</view>
   <view class="desc flex column">
     <text
-      wx:if="{{cates[selectedCateId].enableEarlierBirdPrice}}">{{cates[selectedCateId].earlierPriceEndTime}}前报名享受优惠价格{{cates[selectedCateId].earlierBirdPrice}}元；</text>
+      wx:if="{{allCates[selectedCateId].enableEarlierBirdPrice}}">{{allCates[selectedCateId].earlierPriceEndTime}}前报名享受优惠价格{{allCates[selectedCateId].earlierBirdPrice}}元；</text>
     <text
-      wx:if="{{cates[selectedCateId].enableEarlyBirdPrice}}">{{cates[selectedCateId].earlyPriceEndTime}}前报名享受优惠价格{{cates[selectedCateId].earlyBirdPrice}}元；</text>
+      wx:if="{{allCates[selectedCateId].enableEarlyBirdPrice}}">{{allCates[selectedCateId].earlyPriceEndTime}}前报名享受优惠价格{{allCates[selectedCateId].earlyBirdPrice}}元；</text>
   </view>
   <view class="title">退改规则</view>
   <view class="desc flex column">

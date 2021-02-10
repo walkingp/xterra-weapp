@@ -6,7 +6,7 @@
   </view>
   <view class="flex-none">
     <van-cell>
-      <van-button block type="primary">我已认真阅读并同意免责协议</van-button>
+      <van-button block round type="primary">我已认真阅读并同意免责协议</van-button>
     </van-cell>
   </view>
 </view>

@@ -48,7 +48,6 @@ Page({
   async scaned(){
     const { userId } = this.data;
     const res = await checkInUser(userId)
-    debugger
   },
   async fetch(){
     wx.showLoading({
