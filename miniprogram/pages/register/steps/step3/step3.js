@@ -113,7 +113,8 @@ Component({
       wx.showLoading({
         title: '请稍等',
       })
-      const { coupon } = e.detail.value;
+      let { coupon } = e.detail.value;
+      coupon = coupon.trim();
       const detail = await getCouponDetail(coupon);
       if(detail){
         const valided = this.checkCouponValid(detail);
@@ -151,6 +152,11 @@ Component({
             }
           })
         }
+      }else{
+        wx.showToast({
+          icon: 'none',
+          title: '优惠券无效',
+        })
       }
     },
     showAction(e){
