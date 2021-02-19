@@ -1,11 +1,9 @@
 .main{
-  min-height: 100vh;
+  height: 100vh;
+  background-color: #fff;
 }
 .top{
   overflow: auto;
-}
-.bottom{
-  padding: 20rpx 30rpx;
 }
 swiper, swiper image{
   height: 400rpx;
@@ -20,7 +18,52 @@ swiper, swiper image{
 }
 .summary{
   padding: 10rpx 20rpx;
-  line-height: 1.5;
+  line-height: 1.8;
   color: #666;
   font-size: 26rpx;
+}
+.bottom{
+  padding: 15rpx 30rpx;
+  border-top: solid 2rpx #eee;
+}
+.bottom input{
+  background-color: #f1f1f1;
+  padding: 15rpx;
+  border-radius: 10rpx;
+}
+.bottom button{
+  font-size: 24rpx;
+  padding-left: 20rpx;
+  padding-right: 0;
+  color: #666;
+  width: auto!important;
+  display: inline-block;
+  margin: 0!important;
+  letter-spacing: 4rpx;
+  background-color: #fff;
+}
+.bottom button::after{
+  display: none!important;
+  content: none;
+}
+.comments .title{
+  font-weight: bold;
+  padding: 20rpx;
+  font-size: 26rpx;
+}
+.comment{
+  font-size: 24rpx;
+  padding: 10rpx 20rpx;
+}
+.comment navigator{
+  font-weight: bold;
+  margin-right: 20rpx;
+}
+.comment .content{
+  padding: 10rpx 0;
+  line-height: 1.8;
+  border-bottom: 2rpx solid #f1f1f1;
+}
+.comment:last-child .content{
+  border-bottom: none;
 }

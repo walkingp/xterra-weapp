@@ -1,12 +1,13 @@
 <view class="main flex column">
-  <view class="top">
+  <view class="top flex-auto">
     <view class="user flex space-between align-center">
       <navigator class="left flex align-center">
         <image class="avatar" src="{{detail.avatarUrl}}" mode="aspectFill" />
         <text>{{detail.nickName}}</text>
       </navigator>
       <view class="right">
-        <button>关注</button>
+        <text>{{detail.dateStr}}</text>
+        <!-- <button>关注</button> -->
       </view>
     </view>
     <swiper indicator-dots="{{true}}" autoplay="{{true}}">
@@ -18,13 +19,31 @@
         </swiper-item>
       </block>
     </swiper>
-  </view>
-  <view class="title">{{detail.title}}</view>
-  <view class="summary">
-    {{detail.content}}
-  </view>
-  <view class="flex space-between align-center">
-    <text>{{detail.dateStr}}</text>
-    <view>喜欢</view>
-  </view>
+    <view class="title">{{detail.title}}</view>
+    <view class="summary">
+      {{detail.content}}
+    </view>
+    <view class="comments">
+      <view class="title">所有评论<text wx:if="{{comments.length}}">（{{comments.length}}）</text></view>
+      <view class="comment flex" wx:for="{{comments}}" wx:key="index">
+        <navigator class="flex justify-center">
+          <image class="avatar" src="{{item.avatarUrl}}" mode="aspectFill" />
+        </navigator>
+        <view class="flex-auto flex column">
+          <view class="info flex align-center space-between">
+            <navigator>{{item.nickName}}</navigator>
+            <text class="text-grey">{{item.dateStr}}</text>
+          </view>
+          <text class="content">{{item.content}}</text>
+        </view>
+      </view>
+    </view>
+  </view>  
+  <form bindsubmit="addComment" class="bottom flex-none">
+    <view class="flex space-between align-center">
+      <input type="text" name="content" bindconfirm="confirm" confirm-type="send"  value="{{value}}" placeholder="评论内容" disabled="{{!isLogined}}" class="flex-auto" />
+      <button form-type="submit" wx:if="{{isLogined}}" class="flex-none">发表评论</button>
+      <button form-type="submit" wx:else class="flex-none">请先登录</button>
+    </view>
+  </form>
 </view>

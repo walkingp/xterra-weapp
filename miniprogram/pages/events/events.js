@@ -51,6 +51,7 @@ Page({
     races.map(item=>{
       item.cates = item.catesName ? item.catesName.join('/') : '/';
       item.raceDate = dayjs(new Date(item.raceDate)).format("MM月DD日");
+      item.isPlogging = item.type === 'X-Plogging';
 
       const status = raceStatus.find(s => s.value === item.status);
       item.status = status;

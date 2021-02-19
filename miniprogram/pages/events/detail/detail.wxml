@@ -4,7 +4,7 @@
       <banner-list list="{{detail.picUrls}}"></banner-list>
       <view class="flex space-between align-center header">
         <text selectable="{{true}}" class="title">{{detail.title}}</text>
-        <text class="status" style="background-color:{{detail.status.bgColor}}; color: {{detail.status.textColor}};">{{detail.status.text}}</text>
+        <text wx:if="{{!detail.isPlogging}}" class="status" style="background-color:{{detail.status.bgColor}}; color: {{detail.status.textColor}};">{{detail.status.text}}</text>
       </view>
       <view class="info">
         <view class="cells">

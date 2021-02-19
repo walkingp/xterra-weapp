@@ -111,18 +111,7 @@ App({
         console.log("是否更新版本:", res.hasUpdate)
       })
       updateManager.onUpdateReady(function () {
-        wx.showModal({
-          title: config.appTitle,
-          content: '发现新版本，请重启当前小程序~',
-          confirmColor: '#2f8dd6',
-          confirmText: '确定重启',
-          showCancel: false,
-          success: function (res) {
-            if (res.confirm) {
-              updateManager.applyUpdate()
-            }
-          }
-        })
+        updateManager.applyUpdate();
       })
     }
   }  

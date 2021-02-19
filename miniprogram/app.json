@@ -60,6 +60,7 @@
     "progress": "/components/progress/progress",
     "exchanged": "/components/exchanged/exchanged",
     "login": "/components/login/login",
+    "comment": "/components/comment/comment",
     "point-goods": "/components/point-goods/point-goods",
     "loader": "/components/loader/loader",
     "banner-list": "/components/banner-list/banner-list",
