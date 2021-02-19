@@ -44,7 +44,8 @@
     "pages/admin/volunteer/volunteer",
     "pages/admin/volunteer/checkin/checkin",
     "pages/my/checkin/checkin",
-    "pages/admin/volunteer/agreement/agreement"
+    "pages/admin/volunteer/agreement/agreement",
+    "pages/community/new/new"
   ],
   "window": {
     "backgroundColor": "#ffffff",
@@ -60,7 +61,6 @@
     "progress": "/components/progress/progress",
     "exchanged": "/components/exchanged/exchanged",
     "login": "/components/login/login",
-    "comment": "/components/comment/comment",
     "point-goods": "/components/point-goods/point-goods",
     "loader": "/components/loader/loader",
     "banner-list": "/components/banner-list/banner-list",

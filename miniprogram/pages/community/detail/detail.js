@@ -62,7 +62,6 @@ Page({
       detail
     });
   },
-
   
   watchChanges(){
     const db = wx.cloud.database()
@@ -124,12 +123,12 @@ Page({
           that.fetch();
         }
       });
-      return;
+    }else{
+      wx.showToast({
+        icon: 'none',
+        title: '评论失败，可能包含不合法字符',
+      })
     }
-    wx.showToast({
-      icon: 'none',
-      title: '评论失败，可能包含不合法字符',
-    })
   },
 
   /**

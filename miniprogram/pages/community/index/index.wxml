@@ -1,5 +1,11 @@
-<view class="top">
-  <van-search value="{{ value }}" placeholder="请输入搜索关键词" />
+<view class="top flex align-center">
+  <van-search class="flex-auto" value="{{ value }}" placeholder="请输入搜索关键词" />
+  <navigator url="/pages/community/new/new" class="flex-none">
+    <van-icon size="24px" name="add-o" />
+  </navigator>
+  <navigator class="flex-none">
+    <van-icon class="flex-none margin-x-md" size="24px" name="manager-o" />
+  </navigator>
 </view>
 <view class="main">
   <van-tabs active="{{ 0 }}" bind:change="onChange">

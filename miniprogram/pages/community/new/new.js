@@ -1,8 +1,5 @@
-const { getFeedIndexList } = require("./../../../api/feed");
-const { feedStatus } = require("./../../../config/const");
-const dayjs = require("dayjs");
+// miniprogram/pages/community/new/new.js
 const app = getApp();
-// miniprogram/pages/community/community.js
 Page({
 
   /**
@@ -10,43 +7,37 @@ Page({
    */
   data: {
     isLogined: false,
-    statuses: [
-      feedStatus.normal,
-      feedStatus.top
-    ]
+    userId: null,
+    userInfo: null
   },
-  async fetch(){
-    wx.showLoading({
-      title: '加载中…',
-    })
-    const { statuses } = this.data;
-    const list = await getFeedIndexList(statuses[0]);
-    list.map(item=>{      
-      item.addedDate = dayjs(new Date(item.addedDate)).format("MM月DD日 HH:mm");
-      return item;
-    })
-    console.log(list)
-    this.setData({
-      list
-    }, () => {
-      wx.hideLoading({
-        success: (res) => {},
-      })
-    })
-  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     app.checkLogin().then(res=>{    
       const { isLogined, userId, userInfo } = res;
+      if(!isLogined){
+        wx.showToast({
+          icon: 'none',
+          title: '请先登录',
+          success: function(){
+            setTimeout(() => {
+              wx.switchTab({
+                url: '/pages/my/my',
+              })
+            }, 1000);
+          }
+        });
+        return;
+      }
+
       this.setData({
         isLogined,
         userId,
         userInfo
       });
     });
-    this.fetch();
   },
 
   /**

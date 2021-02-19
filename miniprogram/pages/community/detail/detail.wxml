@@ -25,23 +25,29 @@
     </view>
     <view class="comments">
       <view class="title">所有评论<text wx:if="{{comments.length}}">（{{comments.length}}）</text></view>
-      <view class="comment flex" wx:for="{{comments}}" wx:key="index">
-        <navigator class="flex justify-center">
-          <image class="avatar" src="{{item.avatarUrl}}" mode="aspectFill" />
-        </navigator>
-        <view class="flex-auto flex column">
-          <view class="info flex align-center space-between">
-            <navigator>{{item.nickName}}</navigator>
-            <text class="text-grey">{{item.dateStr}}</text>
+      <block wx:if="{{comments.length}}">
+        <view class="comment flex" wx:for="{{comments}}" wx:key="index">
+          <navigator class="flex justify-center">
+            <image class="avatar" src="{{item.avatarUrl}}" mode="aspectFill" />
+          </navigator>
+          <view class="flex-auto flex column">
+            <view class="info flex align-center space-between">
+              <navigator>{{item.nickName}}</navigator>
+              <text class="text-grey">{{item.dateStr}}</text>
+            </view>
+            <text class="content">{{item.content}}</text>
           </view>
-          <text class="content">{{item.content}}</text>
         </view>
-      </view>
+      </block>
+      <block wx:else>
+        <van-empty description="暂无评论" />      
+      </block>
     </view>
-  </view>  
+  </view>
   <form bindsubmit="addComment" class="bottom flex-none">
     <view class="flex space-between align-center">
-      <input type="text" name="content" bindconfirm="confirm" confirm-type="send"  value="{{value}}" placeholder="评论内容" disabled="{{!isLogined}}" class="flex-auto" />
+      <input type="text" name="content" bindconfirm="confirm" confirm-type="send" value="{{value}}" placeholder="评论内容"
+        disabled="{{!isLogined}}" class="flex-auto" />
       <button form-type="submit" wx:if="{{isLogined}}" class="flex-none">发表评论</button>
       <button form-type="submit" wx:else class="flex-none">请先登录</button>
     </view>

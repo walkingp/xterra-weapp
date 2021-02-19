@@ -1,1 +1,3 @@
-/* miniprogram/pages/community/index/index.wxss */
+.top{
+  background-color: #fff;
+}

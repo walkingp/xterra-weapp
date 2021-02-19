@@ -347,6 +347,12 @@
           "pathName": "pages/admin/volunteer/agreement/agreement",
           "query": "raceId=0bcbdde05fc3a636006efd9971c76de4",
           "scene": null
+        },
+        {
+          "name": "发表动态",
+          "pathName": "pages/community/new/new",
+          "query": "raceId=0bcbdde05fc3a636006efd9971c76de4",
+          "scene": null
         }
       ]
     }

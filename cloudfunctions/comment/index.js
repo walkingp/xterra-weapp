@@ -6,6 +6,7 @@ cloud.init({
 
 const db = cloud.database()
 const replyTable = db.collection("reply")
+const feedTable = db.collection("feed")
 
 // 云函数入口函数
 exports.main = async (event, context) => {
@@ -35,6 +36,12 @@ exports.main = async (event, context) => {
         nickName
       }
     });
+    const count = await replyTable.where({ feedId, isActive: true }).count();
+    await feedTable.doc(feedId).update({
+      data: {
+        comments: count.total
+      }
+    })
     return {
       code: 0,
       ...res
