@@ -3,7 +3,7 @@
   <navigator url="/pages/community/new/new" class="flex-none">
     <van-icon size="24px" name="add-o" />
   </navigator>
-  <navigator class="flex-none">
+  <navigator url="/pages/community/user/user?id={{userId}}" class="flex-none">
     <van-icon class="flex-none margin-x-md" size="24px" name="manager-o" />
   </navigator>
 </view>
@@ -13,10 +13,7 @@
       <community-list list="{{list}}" />
     </van-tab>
     <van-tab title="推荐">
-      <community-list list="{{list}}" />
-    </van-tab>
-    <van-tab title="热门">
-      <community-list list="{{list}}" />
+      <community-list list="{{recommendedList}}" />
     </van-tab>
   </van-tabs>
 </view>

@@ -9,6 +9,7 @@ Page({
    */
   data: {
     isLogined: false,
+    userId: null,
     userInfo: null,
     isAdmin: false,
     isVolunteer: false,

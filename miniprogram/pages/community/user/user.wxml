@@ -1,0 +1,15 @@
+<view class="main flex column">
+  <view class="top flex column justify-center align-center" style="background:url({{uInfo.avatarUrl}}) no-repeat center center; background-size: cover;">
+    <image class="avatar flex-none" src="{{uInfo.avatarUrl}}" />
+    <view class="flex-auto">
+      <text>{{uInfo.nickname}}</text>
+    </view>
+  </view>
+  <view class="bottom">
+    <van-tabs>
+      <van-tab title="动态">
+        <community-list list="{{list}}" />
+      </van-tab>
+    </van-tabs>
+  </view>
+</view>

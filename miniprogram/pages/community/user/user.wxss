@@ -1,0 +1,14 @@
+.top{
+  height: 300rpx;
+  background-color: #fff;
+  margin-bottom: 20rpx;
+  padding: 20rpx;
+  color: #fff;
+  text-shadow: 2rpx 2rpx 4rpx #000000;
+}
+.top .avatar{
+  width: 120rpx;
+  height: 120rpx;
+  margin-right: 20rpx;
+  margin-bottom: 10rpx;
+}

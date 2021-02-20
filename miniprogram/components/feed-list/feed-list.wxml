@@ -18,7 +18,7 @@
     <view class="pics">
       <van-row gutter="10">
         <van-col span="{{item.cols}}" wx:for="{{item.picUrls}}" wx:key="item" wx:for-item="pic">
-          <image bindtap="preview" data-src="{{pic}}" data-index="{{idx}}" src="{{pic}}" mode="aspectFill"></image>
+          <image catchtap="preview" data-src="{{pic}}" data-index="{{idx}}" src="{{pic}}" mode="aspectFill"></image>
         </van-col>
       </van-row>      
     </view>

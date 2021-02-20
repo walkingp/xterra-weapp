@@ -1,23 +1,30 @@
-const { getFeedIndexList } = require("./../../../api/feed");
-const { feedStatus } = require("./../../../config/const");
+const { getFeedIndexList, getFeedsByUserId } = require("../../../api/feed");
 const dayjs = require("dayjs");
+const { getUserDetail } = require("../../../api/user");
 const app = getApp();
-// miniprogram/pages/community/community.js
+// miniprogram/pages/community/user/user.js
 Page({
 
   /**
    * 页面的初始数据
    */
+
   data: {
     isLogined: false,
     list: [],
-    recommendedList: []
+    recommendedList: [],
+    uid: null,
+    uInfo: null,
+    userId: null,
+    userInfo: null
   },
   async fetch(){
     wx.showLoading({
       title: '加载中…',
     })
-    const list = await getFeedIndexList();
+    const { uid } = this.data;
+    const uInfo = await getUserDetail(uid);
+    const list = await getFeedsByUserId(uid);
     list.map(item=>{      
       item.addedDate = dayjs(new Date(item.addedDate)).format("MM月DD日 HH:mm");
       return item;
@@ -25,6 +32,7 @@ Page({
     const recommendedList = list.filter(item => item.status === '3')
     console.log(list)
     this.setData({
+      uInfo,
       list,
       recommendedList
     }, () => {
@@ -37,6 +45,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    const { id } = options;
+    this.setData({
+      uid: id
+    })
     app.checkLogin().then(res=>{    
       const { isLogined, userId, userInfo } = res;
       this.setData({

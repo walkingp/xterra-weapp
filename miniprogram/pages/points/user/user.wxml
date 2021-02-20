@@ -9,6 +9,6 @@
 <van-cell-group title="积分记录">
 	<van-skeleton row="10" wx:if="{{loading}}" />
 	<block wx:else>
-		<van-cell icon="{{item.extraData.isAdmin ? 'gift-o' : ''}}" title-width="500rpx" title="{{item.rule.title}}" label="{{item.formattedDate}}" value="{{ item.rule.point>0 ? '+' + item.rule.point : item.rule.point}}" wx:for="{{points}}" wx:key="_id" />
+		<van-cell icon="{{item.extraData.isAdmin ? 'gift-o' : ''}}" title-width="500rpx" title="{{item.rule.title}}" label="{{item.formattedDate}}" value="{{ item.point > 0 ? '+' + item.point : item.point }}" wx:for="{{points}}" wx:key="_id" />
 	</block>
 </van-cell-group>

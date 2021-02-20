@@ -45,7 +45,8 @@
     "pages/admin/volunteer/checkin/checkin",
     "pages/my/checkin/checkin",
     "pages/admin/volunteer/agreement/agreement",
-    "pages/community/new/new"
+    "pages/community/new/new",
+    "pages/community/user/user"
   ],
   "window": {
     "backgroundColor": "#ffffff",
@@ -139,10 +140,16 @@
         "selectedIconPath": "images/tabs/events_fill@2x.png"
       },
       {
-        "pagePath": "pages/news/news",
-        "text": "媒体中心",
+        "pagePath": "pages/community/index/index",
+        "text": "社区",
         "iconPath": "images/tabs/community@2x.png",
         "selectedIconPath": "images/tabs/community_fill@2x.png"
+      },
+      {
+        "pagePath": "pages/news/news",
+        "text": "媒体中心",
+        "iconPath": "images/tabs/news.png",
+        "selectedIconPath": "images/tabs/news-fill.png"
       },
       {
         "pagePath": "pages/my/my",

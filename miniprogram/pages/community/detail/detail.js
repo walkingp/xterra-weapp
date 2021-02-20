@@ -87,7 +87,9 @@ Page({
   },
   addComment(e){
     const { content } = e.detail.value;
-    this.addCommentFunc(content);
+    if(content){
+      this.addCommentFunc(content);
+    }
   },
 
   async addCommentFunc(content){
