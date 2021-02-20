@@ -1,5 +1,5 @@
 <view class="top flex align-center">
-  <van-search class="flex-auto" value="{{ value }}" placeholder="请输入搜索关键词" />
+  <van-search bindtap="gotoSearch" class="flex-auto" value="{{ value }}" placeholder="请输入搜索关键词" />
   <navigator url="/pages/community/new/new" class="flex-none">
     <van-icon size="24px" name="add-o" />
   </navigator>

@@ -1,0 +1,28 @@
+.main{
+  background-color: #fff;
+  min-height: 100vh;
+  font-size: 24rpx;
+  padding: 20rpx;
+}
+.title{
+  font-weight: bold;
+  padding: 20rpx 0;
+}
+.items{
+  margin-top: 20rpx;
+  flex-wrap: wrap;
+}
+.items text{
+  background-color: #f1f1f1;
+  padding: 8rpx 20rpx;
+  border-radius: 50rpx;
+  margin-right: 20rpx;
+  letter-spacing: 2rpx;
+  margin-bottom: 20rpx;
+}
+.van-search {
+  padding-left: 0!important;
+}
+.result{
+  margin-top: 20rpx;
+}

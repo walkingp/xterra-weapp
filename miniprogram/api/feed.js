@@ -15,6 +15,17 @@ export const getFeedIndexList = async (pageIndex = 1, pageSize = 10) => {
   return data;
 }
 
+export const searchFeed = async keyword => {
+  const db = wx.cloud.database();
+  const res = await db.collection('feed').where({
+    content: {
+      $regex: '.*' + keyword + '.*',
+      $options: '1'
+    }
+  }).limit(20).get();
+  return res;
+};
+
 export const getFeedsByUserId = async (userId, pageIndex = 1, pageSize = 10) => {
   const data = await getPaginations({
     dbName: 'feed',

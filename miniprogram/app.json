@@ -46,7 +46,8 @@
     "pages/my/checkin/checkin",
     "pages/admin/volunteer/agreement/agreement",
     "pages/community/new/new",
-    "pages/community/user/user"
+    "pages/community/user/user",
+    "pages/community/search/search"
   ],
   "window": {
     "backgroundColor": "#ffffff",

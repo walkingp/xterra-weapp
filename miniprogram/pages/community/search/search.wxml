@@ -1,0 +1,23 @@
+<view class="main flex column">
+  <view class="top flex align-center">
+    <van-search value="{{ value }}" use-action-slot bind:change="onChange" bind:search="onSearch" class="flex-auto"
+      value="{{ value }}" placeholder="请输入搜索关键词">
+      <view slot="action" bind:tap="onClick">搜索</view>
+    </van-search>
+  </view>
+  <view class="history">
+    <view class="title">搜索历史</view>
+    <view class="items flex">
+      <block wx:for="{{histories}}" wx:key="item">
+        <text bindtap="select" data-value="{{item}}">{{item}}</text>
+      </block>
+    </view>
+  </view>
+  <view class="result" wx:if="{{list.length}}">
+    <view class="title">搜索结果</view>
+    <community-list list="{{list}}" />
+  </view>
+  <view class="result" wx:else>
+    <van-empty wx:if="{{searched}}" description="未搜索到结果" />
+  </view>
+</view>

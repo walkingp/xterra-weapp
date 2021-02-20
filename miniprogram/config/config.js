@@ -5,7 +5,8 @@ const config = {
   appDescription: 'XTERRA官方小程序',
   mapKey: 'YOWBZ-MK263-F7G3H-YWGGY-RGHKQ-ACFNH',
   storageKey: {
-    kits: 'xterra.kits'
+    kits: 'xterra.kits',
+    searchHistory: 'searchHistory'
   },
   messageTemplates: {
     registration: {

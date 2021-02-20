@@ -1,7 +1,7 @@
 <view class="main flex column">
   <view class="top flex-auto">
     <view class="user flex space-between align-center">
-      <navigator class="left flex align-center">
+      <navigator url="/pages/community/user/user?id={{detail.userId}}" class="left flex align-center">
         <image class="avatar" src="{{detail.avatarUrl}}" mode="aspectFill" />
         <text>{{detail.nickName}}</text>
       </navigator>
@@ -21,13 +21,13 @@
     </swiper>
     <view class="title">{{detail.title}}</view>
     <view class="summary">
-      {{detail.content}}
+      <text selectable="{{true}}">{{detail.content}}</text>
     </view>
     <view class="comments">
       <view class="title">所有评论<text wx:if="{{comments.length}}">（{{comments.length}}）</text></view>
       <block wx:if="{{comments.length}}">
         <view class="comment flex" wx:for="{{comments}}" wx:key="index">
-          <navigator class="flex justify-center">
+          <navigator url="/pages/community/user/user?id={{item.userId}}" class="flex justify-center">
             <image class="avatar" src="{{item.avatarUrl}}" mode="aspectFill" />
           </navigator>
           <view class="flex-auto flex column">

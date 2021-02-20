@@ -359,6 +359,11 @@
           "pathName": "pages/community/user/user",
           "query": "id=04db790c71365c0be61fae4e3e526141",
           "scene": null
+        },
+        {
+          "name": "搜索页",
+          "pathName": "pages/community/search/search",
+          "scene": null
         }
       ]
     }
