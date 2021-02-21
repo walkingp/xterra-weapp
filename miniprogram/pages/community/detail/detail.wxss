@@ -10,7 +10,7 @@ swiper, swiper image{
   width: 100%;
 }
 .user{
-  padding: 10rpx 20rpx;
+  padding: 20rpx;
   font-size: 24rpx;
 }
 .user image{
@@ -66,4 +66,7 @@ swiper, swiper image{
 }
 .comment:last-child .content{
   border-bottom: none;
+}
+.van-icon__image{
+  margin-top: -15rpx;
 }

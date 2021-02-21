@@ -5,13 +5,13 @@
         <image class="avatar" src="{{detail.avatarUrl}}" mode="aspectFill" />
         <view class="flex column space-between">
           <text class="bold fs-md">{{detail.nickName}}</text>
-          <text class="text-grey fs-xs">{{detail.dateStr}}</text>          
+          <text class="text-grey fs-sm">{{detail.dateStr}}</text>
         </view>
       </navigator>
       <view class="right flex column" catchtap="giveKudos" data-id="{{detail._id}}">
         <van-icon size="24px" name="good-job" color="orange" wx:if="{{detail.kudosed}}" />
-			  <van-icon size="24px" name="good-job-o" wx:else />
-        <text wx:if="{{detail.kudos}}">{{detail.kudos}}人</text>
+        <van-icon size="24px" name="good-job-o" wx:else />
+        <text class="text-grey align-center fs-xs" wx:if="{{detail.kudos}}">{{detail.kudos}}人</text>
         <!-- <button>关注</button> -->
       </view>
     </view>
@@ -27,6 +27,18 @@
     <view class="title">{{detail.title}}</view>
     <view class="summary">
       <text selectable="{{true}}">{{detail.content}}</text>
+    </view>
+    <view class="comments">
+      <view class="flex justify-center text-grey fs-xs align-center" bindtap="showKudos" wx:if="{{detail.kudos_list.length}}">
+        <van-icon name="friends-o" size="18px" /> {{detail.kudos_list.length}}人觉得很赞 <van-icon name="arrow" />
+      </view>
+      <van-popup position="bottom" closeable close-icon="close" bind:close="onClose" show="{{ kudosVisible }}">
+        <van-cell-group title="点赞用户">
+          <block wx:for="{{detail.kudos_list}}" wx:key="userId">
+            <van-cell class="flex align-center" title="{{item.userInfo.nickname}}" icon="{{item.userInfo.avatarUrl}}" />
+          </block>
+        </van-cell-group>
+      </van-popup>
     </view>
     <view class="comments">
       <view class="title">所有评论<text wx:if="{{comments.length}}">（{{comments.length}}）</text></view>
@@ -45,13 +57,13 @@
         </view>
       </block>
       <block wx:else>
-        <van-empty description="暂无评论" />      
+        <van-empty description="暂无评论" />
       </block>
     </view>
   </view>
   <form bindsubmit="addComment" class="bottom flex-none">
     <view class="flex space-between align-center">
-      <input type="text" name="content" bindconfirm="confirm" confirm-type="send" value="{{value}}" placeholder="评论内容"
+      <input type="text" name="content" confirm-type="send" value="{{value}}" placeholder="评论内容"
         disabled="{{!isLogined}}" class="flex-auto" />
       <button form-type="submit" wx:if="{{isLogined}}" class="flex-none">发表评论</button>
       <button form-type="submit" wx:else class="flex-none">请先登录</button>

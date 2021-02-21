@@ -321,7 +321,7 @@
         {
           "name": "动态详情",
           "pathName": "pages/community/detail/detail",
-          "query": "id=0bcbdde05fc904ee009f45091944e4d2",
+          "query": "id=28ee4e3e6031da4d0694deaf01a13f4d",
           "scene": null
         },
         {
@@ -363,6 +363,7 @@
         {
           "name": "搜索页",
           "pathName": "pages/community/search/search",
+          "query": "",
           "scene": null
         }
       ]

@@ -24,14 +24,25 @@ const rules = [
   },
   {
     id: 4,
-    title: '点赞或评论',
+    title: '评论',
     point: 2,
     once: false
   },
   {
     id: 5,
+    title: '点赞',
+    point: 2,
+    once: false
+  },
+  {
+    id: 6,
     title: '打卡',
     point: 2
+  },
+  {
+    id: 7,
+    title: '取消点赞',
+    point: -2
   },
   {
     id: 99,
@@ -46,7 +57,9 @@ const pointRuleEnum = {
   SignUpEvent: 2,
   Post: 3,
   Comment: 4,
-  Tick: 5,
+  Kudos: 5,
+  Tick: 6,
+  CancelKudos: 7,
   AdminCustom: 99
 };
 

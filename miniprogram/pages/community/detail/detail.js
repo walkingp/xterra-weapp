@@ -18,9 +18,20 @@ Page({
     isLogined: false,
     userId: null,
     userInfo: null,
+    kudosVisible: false,
     value: ''
   },
 
+  showKudos(){
+    this.setData({
+      kudosVisible: true
+    })
+  },
+  onClose(){
+    this.setData({
+      kudosVisible: false
+    })
+  },
   preview(e){
     const { src } = e.currentTarget.dataset;
     const urls = this.data.detail.picUrls;
@@ -30,7 +41,7 @@ Page({
     });
   },
   async giveKudos(e){
-    const { userInfo, userId, isLogined } = this.data;
+    const { userInfo, userId, isLogined, detail } = this.data;
     if(!isLogined){
       wx.showToast({
         title: '请先登录',
@@ -48,7 +59,19 @@ Page({
     const {id} = e.currentTarget.dataset;
     console.log(id)
     const res = await giveKudos({ userId, userInfo, type: 'feed', id});
-    debugger
+    
+    // 加分
+    if(!detail.kudosed){
+      await updatePoint(userId, pointRuleEnum.Kudos, {
+        id: [id, userId].join(','),
+        title: '点赞'
+      });
+    }else{
+      await updatePoint(userId, pointRuleEnum.CancelKudos, {
+        id: [id, userId].join(','),
+        title: '取消点赞'
+      });
+    }
     this.fetchKudos(id);
     wx.hideLoading();
   },
@@ -61,6 +84,7 @@ Page({
       return;
     }
 
+    detail.dateStr = dayjs(detail.addedDate).format("YYYY-MM-DD HH:mm:ss");
     // 是否已经点赞
     const { userId } = this.data;
     detail.kudosed = detail.kudos_list ? detail.kudos_list.filter(item=>item.userId === userId).length > 0 : false;
@@ -102,6 +126,8 @@ Page({
       value: '',
       comments,
       detail
+    }, () => {
+      this.fetchKudos(id);
     });
   },
   
@@ -172,11 +198,6 @@ Page({
           that.fetch();
         }
       });
-    }else{
-      wx.showToast({
-        icon: 'none',
-        title: '评论失败，可能包含不合法字符',
-      })
     }
   },
 
