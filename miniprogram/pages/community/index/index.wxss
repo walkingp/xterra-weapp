@@ -1,3 +1,6 @@
 .top{
   background-color: #fff;
 }
+.camera{
+  margin-top: -24rpx;
+}

@@ -37,7 +37,16 @@ Page({
       return;
     }
   },
-
+  delPhoto(e) {
+    const {photolist} = this.data;
+    if (photolist.length) {
+      const id = e.currentTarget.dataset.id;
+      photolist.splice(id, 1);
+      this.setData({
+        photolist
+      })
+    }
+  },
   uploadPhoto() {
     var that = this;
     // 选择图片

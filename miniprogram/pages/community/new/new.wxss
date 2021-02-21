@@ -5,9 +5,9 @@
 textarea{
   min-height: 200rpx;
   border: solid 2rpx #eee;
-  padding: 10rpx;
+  padding: 20rpx;
   background-color: #fff;
-  border-radius: 5rpx;
+  border-radius: 10rpx;
   width: 100%;
   font-size: 24rpx;
   box-sizing: border-box;
@@ -27,7 +27,7 @@ textarea{
   content: "";
   display: inline-block;
   font-size: 80rpx;
-  background-color: #D6D6D6;
+  background-color: #ccc;
 }
 .post::after{
   height: 80rpx;

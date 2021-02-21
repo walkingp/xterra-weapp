@@ -42,6 +42,18 @@ export const getFeedsByUserId = async (userId, pageIndex = 1, pageSize = 10) => 
   return data;
 }
 
+export const getKudosFeedsByUserId = async (userId, pageIndex = 1, pageSize = 10) => {
+  return new Promise((resolve, reject) => {
+    wx.cloud.callFunction({
+      name: 'getKudosedFeeds',
+      data: { userId },
+      success: res => {
+        resolve(res)
+      },
+      fail: err => reject(err)
+    });
+  });
+}
 export const addFeed = ({ userId, avatarUrl, content, picUrls, nickName }) => {
   return new Promise((resolve, reject) => {
     wx.cloud.callFunction({

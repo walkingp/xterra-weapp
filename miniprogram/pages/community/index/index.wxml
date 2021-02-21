@@ -1,7 +1,7 @@
 <view class="top flex align-center">
   <van-search bindtap="gotoSearch" class="flex-auto" value="{{ value }}" placeholder="请输入搜索关键词" />
   <navigator url="/pages/community/new/new" class="flex-none">
-    <van-icon size="24px" name="add-o" />
+    <van-icon class="camera" size="24px" name="/images/icons/camera.svg" />
   </navigator>
   <navigator url="/pages/community/user/user?id={{userId}}" class="flex-none">
     <van-icon class="flex-none margin-x-md" size="24px" name="manager-o" />

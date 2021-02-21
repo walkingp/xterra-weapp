@@ -13,6 +13,9 @@
       <van-tab title="动态">
         <community-list list="{{list}}" />
       </van-tab>
+      <van-tab title="点赞">
+        <community-list list="{{kudosList}}" />
+      </van-tab>
     </van-tabs>
   </view>
 </view>

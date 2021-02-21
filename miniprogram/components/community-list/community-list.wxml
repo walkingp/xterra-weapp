@@ -10,8 +10,10 @@
             <image class="avatar" src="{{item.avatarUrl}}" mode="aspectFill" />
             <text>{{item.nickName}}</text>
           </view>
-          <view class="right" data-id="{{item._id}}" bindtap="showComment">
-            <van-icon size="36rpx" name="comment-o" />
+          <view class="right" data-id="{{item._id}}">
+            <van-icon size="36rpx" name="good-job-o" />
+            <text>{{item.kudos}}</text>
+            <van-icon size="36rpx" class="margin-left" name="comment-o" />
             <text>{{item.comments}}</text>
           </view>
         </view>

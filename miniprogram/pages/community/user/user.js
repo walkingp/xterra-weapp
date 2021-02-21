@@ -1,4 +1,4 @@
-const { getFeedIndexList, getFeedsByUserId } = require("../../../api/feed");
+const { getFeedIndexList, getFeedsByUserId, getKudosFeedsByUserId } = require("../../../api/feed");
 const dayjs = require("dayjs");
 const { getUserDetail } = require("../../../api/user");
 const app = getApp();
@@ -12,7 +12,7 @@ Page({
   data: {
     isLogined: false,
     list: [],
-    recommendedList: [],
+    kudosList: [],
     uid: null,
     uInfo: null,
     userId: null,
@@ -25,16 +25,13 @@ Page({
     const { uid } = this.data;
     const uInfo = await getUserDetail(uid);
     const list = await getFeedsByUserId(uid);
-    list.map(item=>{      
-      item.addedDate = dayjs(new Date(item.addedDate)).format("MM月DD日 HH:mm");
-      return item;
-    })
-    const recommendedList = list.filter(item => item.status === '3')
+    const res = await getKudosFeedsByUserId(uid);
+    const kudosList = res.result.list.map(item=>item.feeds[0]);
     console.log(list)
     this.setData({
       uInfo,
       list,
-      recommendedList
+      kudosList
     }, () => {
       wx.hideLoading({
         success: (res) => {},
