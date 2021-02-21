@@ -11,12 +11,12 @@ button::after{
 }
 .container{
   padding: 28rpx 30rpx;
+  padding-bottom: 60px;
 }
 page{
   --priamry-color: #BA0C2F;
   color: #333;
   background-color: #F5F5F5;
-  min-height: 100vh;
 }
 
 .h2w.h2w-light {

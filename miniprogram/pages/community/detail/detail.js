@@ -1,5 +1,7 @@
 const dayjs = require("dayjs");
 const { addComment } = require("../../../api/comment");
+const { updatePoint } = require("../../../api/points");
+const { pointRuleEnum } = require("../../../config/const");
 const { getCollectionById, getCollectionByWhere } = require("../../../utils/cloud");
 const app = getApp();
 // miniprogram/pages/community/detail/detail.js
@@ -118,6 +120,11 @@ Page({
     });
     const that = this;
     if(res.result.code === 0){
+      // 加分
+      await updatePoint(userId, pointRuleEnum.Comment, {
+        id: new Date().getTime(),
+        title: '发表评论'
+      });
       wx.showToast({
         icon: 'success',
         title: '评论成功',

@@ -4,7 +4,7 @@
 	</navigator>
 	<text class="fs-md padding-y-md">{{detail.nickname}}</text>
 	<text class="fs-sm text-grey">总积分：<text class="bold">{{detail.point}}</text></text>
-	<navigator url="/pages/page/page?id=3" class="fs-xs text-grey">(积分规则)</navigator>
+	<navigator url="/pages/page/page?id=rule" class="fs-xs text-grey">(积分规则)</navigator>
 </view>
 <van-cell-group title="积分记录">
 	<van-skeleton row="10" wx:if="{{loading}}" />

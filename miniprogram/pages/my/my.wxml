@@ -11,7 +11,7 @@
             <view class="info flex column space-between">
               <text class="userName">{{userInfo.nickname}}</text>
               <text>性别：{{ userInfo.gender }}</text>
-              <navigator url="/pages/points/user/user?userId={{userInfo._id}}">积分：<text>{{ 0 * userInfo.point }}</text></navigator>
+              <navigator url="/pages/points/user/user?userId={{userInfo._id}}">积分：<text>{{ userInfo.point }}</text></navigator>
             </view>
           </view>
         </view>

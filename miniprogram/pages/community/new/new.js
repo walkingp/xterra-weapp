@@ -2,6 +2,8 @@ const dayjs = require("dayjs");
 const {
   addFeed, checkTextSec
 } = require("../../../api/feed");
+const { updatePoint } = require("../../../api/points");
+const { pointRuleEnum } = require("../../../config/const");
 
 // miniprogram/pages/community/new/new.js
 const app = getApp();
@@ -119,7 +121,7 @@ Page({
       })
       await that.saveDB(content);
       wx.showToast({
-        title: "上传成功",
+        title: "发布成功",
       });
       wx.hideLoading();
       const url = ''
@@ -145,6 +147,12 @@ Page({
       content,
       picUrls: photolist,
       nickName: nickname
+    });
+    
+    // 加分
+    await updatePoint(userId, pointRuleEnum.Post, {
+      id: userId,
+      title: '发布新贴'
     });
     const id = res.result._id;
     wx.showToast({

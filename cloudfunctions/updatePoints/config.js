@@ -12,6 +12,28 @@ const rules = [
     once: true
   },
   {
+    id: 2,
+    title: '报名赛事活动',
+    point: 50
+  },
+  {
+    id: 3,
+    title: '发表新贴',
+    point: 5,
+    once: false
+  },
+  {
+    id: 4,
+    title: '点赞或评论',
+    point: 2,
+    once: false
+  },
+  {
+    id: 5,
+    title: '打卡',
+    point: 2
+  },
+  {
     id: 99,
     title: '管理员手工添加',
     point: 0,
@@ -21,6 +43,10 @@ const rules = [
 const pointRuleEnum = {
   SignUp: 0,
   UpdateProfile: 1,
+  SignUpEvent: 2,
+  Post: 3,
+  Comment: 4,
+  Tick: 5,
   AdminCustom: 99
 };
 

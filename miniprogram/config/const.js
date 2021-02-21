@@ -120,6 +120,10 @@ export const raceResultStatus = {
 export const pointRuleEnum = {
   SignUp: 0,
   UpdateProfile: 1,
+  SignUpEvent: 2,
+  Post: 3,
+  Comment: 4,
+  Tick: 5,
   AdminCustom: 99
 };
 // 注意cloudfunctions也需要同步更新
@@ -142,12 +146,14 @@ export const pointRules = [
   {
     id: 3,
     title: '发贴',
-    point: 5
+    point: 5,
+    once: false
   },
   {
     id: 4,
     title: '点赞或评论',
-    point: 2
+    point: 2,
+    once: false
   },
   {
     id: 5,

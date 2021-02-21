@@ -29,13 +29,9 @@ Page({
       currentItemId
     } = e.detail;
     if (currentItemId === '10') {
-      wx.showTabBar({
-        animation: true,
-      });
+      this.getTabBar().setData({ show: true });
     } else {
-      wx.hideTabBar({
-        animation: true,
-      })
+      this.getTabBar().setData({ show: true });
     }
   },
   redirect(e){
@@ -69,14 +65,12 @@ Page({
         const isTabbar = url.indexOf("/pages/news/news") >= 0 || url.indexOf("pages/events/events") >= 0;
         if(isTabbar){
           app.globalData.tabBarLink = url;
-          wx.showTabBar({
-            animation: true,
-            success: ()=>{
-              wx.switchTab({
-                url,
-              })
-            }
-          })          
+          
+          this.getTabBar().setData({ show: true }, () => {
+            wx.switchTab({
+              url,
+            })
+          });       
           return;
         }
         wx.navigateTo({
@@ -134,4 +128,11 @@ Page({
     this.watchChanges('banner');
     this.watchChanges('news');
   },
+  onShow(){    
+    if (typeof this.getTabBar === 'function' && this.getTabBar()) {
+      this.getTabBar().setData({
+        selected: 0
+      })
+    }
+  }
 })
