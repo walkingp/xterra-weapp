@@ -2,7 +2,7 @@
   <navigator url="/pages/community/detail/detail?id={{item._id}}" class="item" wx:for="{{list}}" wx:key="_id" wx:for-index="idx">
     <view class="item__content">
       <image class="thumb" data-url="{{item.picUrls[0]}}" data-urls="{{item.picUrls}}"
-        src="{{item.picUrls[0]}}" mode="aspectFill"></image>
+        src="{{item.picUrls[0]}}" mode="aspectFit"></image>
       <view class="content">
         <text class="desc">{{item.content}}</text>
         <view class="user">

@@ -3,10 +3,15 @@
     <view class="user flex space-between align-center">
       <navigator url="/pages/community/user/user?id={{detail.userId}}" class="left flex align-center">
         <image class="avatar" src="{{detail.avatarUrl}}" mode="aspectFill" />
-        <text>{{detail.nickName}}</text>
+        <view class="flex column space-between">
+          <text class="bold fs-md">{{detail.nickName}}</text>
+          <text class="text-grey fs-xs">{{detail.dateStr}}</text>          
+        </view>
       </navigator>
-      <view class="right">
-        <text>{{detail.dateStr}}</text>
+      <view class="right flex column" catchtap="giveKudos" data-id="{{detail._id}}">
+        <van-icon size="24px" name="good-job" color="orange" wx:if="{{detail.kudosed}}" />
+			  <van-icon size="24px" name="good-job-o" wx:else />
+        <text wx:if="{{detail.kudos}}">{{detail.kudos}}人</text>
         <!-- <button>关注</button> -->
       </view>
     </view>

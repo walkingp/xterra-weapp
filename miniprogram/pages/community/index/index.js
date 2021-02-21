@@ -33,7 +33,7 @@ Page({
     const newData = await getFeedIndexList(pageIndex, pageSize);
     if (newData.length > 0) {
       newData.map(item => {
-        item.addedDate = dayjs(new Date(item.addedDate)).format("MM月DD日 HH:mm");
+        item.addedDate = dayjs(new Date(item.addedDate)).format("YYYY-MM-DD HH:mm");
         return item;
       })
       list = list.concat(newData);

@@ -1,5 +1,6 @@
 const dayjs = require("dayjs");
 const { addComment } = require("../../../api/comment");
+const { giveKudos } = require("../../../api/feed");
 const { updatePoint } = require("../../../api/points");
 const { pointRuleEnum } = require("../../../config/const");
 const { getCollectionById, getCollectionByWhere } = require("../../../utils/cloud");
@@ -28,6 +29,45 @@ Page({
       current: src
     });
   },
+  async giveKudos(e){
+    const { userInfo, userId, isLogined } = this.data;
+    if(!isLogined){
+      wx.showToast({
+        title: '请先登录',
+        success() {
+          setTimeout(function () {
+            wx.switchTab({
+              url: `/pages/my/my`,
+            })
+          }, 1000)
+        }
+      })
+      return false;
+    }
+    wx.showLoading()
+    const {id} = e.currentTarget.dataset;
+    console.log(id)
+    const res = await giveKudos({ userId, userInfo, type: 'feed', id});
+    debugger
+    this.fetchKudos(id);
+    wx.hideLoading();
+  },
+  async fetchKudos(id){
+    const detail = await getCollectionById({ dbName: 'feed', id });
+    if(!detail){
+      wx.showToast({
+        title: '数据不存在',
+      })
+      return;
+    }
+
+    // 是否已经点赞
+    const { userId } = this.data;
+    detail.kudosed = detail.kudos_list ? detail.kudos_list.filter(item=>item.userId === userId).length > 0 : false;
+    this.setData({
+      detail
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -52,7 +92,7 @@ Page({
   async fetch(){
     const { id } = this.data;
     const detail = await getCollectionById({dbName: 'feed', id});
-    detail.dateStr = dayjs(detail.addedDate).format("MM-DD HH:mm:ss");
+    detail.dateStr = dayjs(detail.addedDate).format("YYYY-MM-DD HH:mm:ss");
     const comments = await getCollectionByWhere({ dbName: 'reply', filter: { feedId: id }});
     comments.map(item=>{
       item.dateStr = dayjs(item.createdAt).format("MM-DD HH:mm:ss");

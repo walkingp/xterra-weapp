@@ -1,8 +1,11 @@
 <view class="main flex column">
   <view class="top flex column justify-center align-center" style="background:url({{uInfo.avatarUrl}}) no-repeat center center; background-size: cover;">
+    <view class="mask"></view>
     <image class="avatar flex-none" src="{{uInfo.avatarUrl}}" />
-    <view class="flex-auto">
-      <text>{{uInfo.nickname}}</text>
+    <view class="text flex-auto flex column align-center">
+      <text class="name">{{uInfo.nickname}}</text>
+      <text>性别：{{ uInfo.gender }}</text>
+      <navigator url="/pages/points/user/user?userId={{userInfo._id}}">积分：<text>{{ uInfo.point }}</text></navigator>
     </view>
   </view>
   <view class="bottom">

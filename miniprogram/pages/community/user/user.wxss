@@ -1,14 +1,35 @@
 .top{
+  position: relative;
   height: 300rpx;
   background-color: #fff;
-  margin-bottom: 20rpx;
   padding: 20rpx;
   color: #fff;
   text-shadow: 2rpx 2rpx 4rpx #000000;
+}
+.mask{
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,.6);
 }
 .top .avatar{
   width: 120rpx;
   height: 120rpx;
   margin-right: 20rpx;
+  margin-bottom: 10rpx;
+  z-index: 2;
+}
+.top .text{
+  z-index: 2;
+}
+
+.top text, .top navigator{
+  font-size: 22rpx;
+}
+.top .name{
+  font-size: 32rpx;
+  font-weight: bold;
   margin-bottom: 10rpx;
 }

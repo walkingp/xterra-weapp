@@ -54,11 +54,34 @@ export const addFeed = ({ userId, avatarUrl, content, picUrls, nickName }) => {
     });
   });
 }
+
 export const checkTextSec = ({ content }) => {
   return new Promise((resolve, reject) => {
     wx.cloud.callFunction({
       name: 'checkTextSec',
       data: { content },
+      success: res => {
+        resolve(res)
+      },
+      fail: err => reject(err)
+    });
+  });
+}
+
+export const giveKudos = ({userId, userInfo, id, type = 'feed'}) => {
+  return new Promise((resolve, reject) => {
+    wx.cloud.callFunction({
+      name: 'giveKudos',
+      data: { 
+        data: {
+          userInfo,
+          updatedAt: new Date(),
+          createdAt: new Date(),
+          userId,
+        },
+        type,
+        id
+       },
       success: res => {
         resolve(res)
       },
