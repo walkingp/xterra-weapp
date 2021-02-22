@@ -15,6 +15,22 @@ export const getFeedIndexList = async (pageIndex = 1, pageSize = 10) => {
   return data;
 }
 
+export const getRecommendedFeedIndexList = async (pageIndex = 1, pageSize = 10) => {
+  const data = await getPaginations({
+    dbName: 'feed',
+    filter: {
+      status: '3',
+      isActive: true
+    },
+    orderBy: {
+      addedDate: 'desc'
+    },
+    pageIndex,
+    pageSize
+  })
+  return data;
+}
+
 export const searchFeed = async keyword => {
   const db = wx.cloud.database();
   const res = await db.collection('feed').where({

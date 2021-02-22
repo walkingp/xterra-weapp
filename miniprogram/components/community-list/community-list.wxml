@@ -10,6 +10,9 @@
             <image class="avatar" src="{{item.avatarUrl}}" mode="aspectFill" />
             <text>{{item.nickName}}</text>
           </view>
+        </view>
+        <view class="user flex space-between align-center">
+          <text class="date">{{item.dateStr}}</text>
           <view class="right flex-none" data-id="{{item._id}}">
             <van-icon size="36rpx" name="good-job-o" />
             <text>{{item.kudos}}</text>

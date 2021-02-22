@@ -85,6 +85,9 @@ Page({
     for (let i = 0; i < photolist.length; i++) {
       promiseArr.push(new Promise((reslove, reject) => {
         let item = photolist[i];
+        if(item.startsWith('cloud')){
+          reslove();
+        }
         let suffix = /\.\w+$/.exec(item)[0]; //正则表达式返回文件的扩展名
         const folder = dayjs().format("YYYYMMDD");
         wx.cloud.uploadFile({
@@ -108,7 +111,7 @@ Page({
                     icon: 'none',
                     title: '图片含有违法信息',
                   })
-                  reject(err)
+                  reject('图片含有违法信息')
                 }
               })
             } catch (err) {

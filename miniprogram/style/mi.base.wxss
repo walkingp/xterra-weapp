@@ -1054,3 +1054,7 @@ h6,
 .bold{
   font-weight: bold;
 }
+
+.underline{
+  text-decoration: underline;
+}

@@ -3,9 +3,15 @@
     <view class="mask"></view>
     <image class="avatar flex-none" src="{{uInfo.avatarUrl}}" />
     <view class="text flex-auto flex column align-center">
-      <text class="name">{{uInfo.nickname}}</text>
-      <text>性别：{{ uInfo.gender }}</text>
-      <navigator url="/pages/points/user/user?userId={{userInfo._id}}">积分：<text>{{ uInfo.point }}</text></navigator>
+      <view class="flex align-center">
+        <text class="name">{{uInfo.nickname}}</text>
+        <van-icon class="gender" wx:if="{{uInfo.gender}}" name="/images/icons/{{ uInfo.gender === '女' ? 'female' : 'male'  }}.svg" size="14px" />
+      </view>
+      <navigator url="/pages/points/user/user?userId={{userInfo._id}}" class="flex margin-top-md align-center">
+        <van-icon name="gem" size="18px" class="margin-right-sm" />
+        <text>{{ uInfo.point }}</text>
+        <van-icon name="arrow" />
+      </navigator>
     </view>
   </view>
   <view class="bottom">

@@ -113,3 +113,8 @@ image.avatar{
   flex-direction: column;
   height: 100%;
 }
+.user .date{
+  font-size: 24rpx;
+  color: #ccc;
+  margin-left: 0;
+}

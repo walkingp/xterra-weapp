@@ -6,6 +6,9 @@
   color: #fff;
   text-shadow: 2rpx 2rpx 4rpx #000000;
 }
+.gender{
+  margin: -15rpx 0 0 10rpx;
+}
 .mask{
   position: absolute;
   left: 0;

@@ -49,8 +49,8 @@
           </navigator>
           <view class="flex-auto flex column">
             <view class="info flex align-center space-between">
-              <navigator>{{item.nickName}}</navigator>
-              <text class="text-grey">{{item.dateStr}}</text>
+              <navigator class="fs-xs" url="/pages/community/user/user?id={{item.userId}}">{{item.nickName}}</navigator>
+              <text class="text-grey fs-xs">{{item.dateStr}}</text>
             </view>
             <text class="content">{{item.content}}</text>
           </view>
@@ -65,7 +65,7 @@
     <view class="flex space-between align-center">
       <input type="text" name="content" confirm-type="send" value="{{value}}" placeholder="评论内容"
         disabled="{{!isLogined}}" class="flex-auto" />
-      <button form-type="submit" wx:if="{{isLogined}}" class="flex-none">发表评论</button>
+      <button form-type="submit" disabled="{{btnDisabled}}" wx:if="{{isLogined}}" class="flex-none">发表评论</button>
       <button form-type="submit" wx:else class="flex-none">请先登录</button>
     </view>
   </form>

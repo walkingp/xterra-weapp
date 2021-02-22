@@ -1,5 +1,5 @@
 const {
-  getFeedIndexList
+  getFeedIndexList, getRecommendedFeedIndexList
 } = require("./../../../api/feed");
 const dayjs = require("dayjs");
 const app = getApp();
@@ -33,13 +33,16 @@ Page({
     const newData = await getFeedIndexList(pageIndex, pageSize);
     if (newData.length > 0) {
       newData.map(item => {
-        item.addedDate = dayjs(new Date(item.addedDate)).format("YYYY-MM-DD HH:mm");
+        item.dateStr = dayjs(new Date(item.addedDate)).format("MM-DD HH:mm:ss");
         return item;
       })
       list = list.concat(newData);
     }
-    const recommendedList = list.filter(item => item.status === '3');
-    console.log(list)
+    const recommendedList = await getRecommendedFeedIndexList();
+    recommendedList.map(item => {
+      item.dateStr = dayjs(new Date(item.addedDate)).format("MM-DD HH:mm:ss");
+      return item;
+    })
     this.setData({
       list,
       recommendedList

@@ -1,4 +1,4 @@
-const { getFeedIndexList, getFeedsByUserId, getKudosFeedsByUserId } = require("../../../api/feed");
+const { getFeedsByUserId, getKudosFeedsByUserId } = require("../../../api/feed");
 const dayjs = require("dayjs");
 const { getUserDetail } = require("../../../api/user");
 const app = getApp();
@@ -25,9 +25,16 @@ Page({
     const { uid } = this.data;
     const uInfo = await getUserDetail(uid);
     const list = await getFeedsByUserId(uid);
+    list.map(item => {
+      item.dateStr = dayjs(new Date(item.addedDate)).format("MM-DD HH:mm:ss");
+      return item;
+    })
     const res = await getKudosFeedsByUserId(uid);
     const kudosList = res.result.list.map(item=>item.feeds[0]);
-    console.log(list)
+    kudosList.map(item => {
+      item.dateStr = dayjs(new Date(item.addedDate)).format("MM-DD HH:mm:ss");
+      return item;
+    })
     this.setData({
       uInfo,
       list,

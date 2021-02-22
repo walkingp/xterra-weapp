@@ -19,6 +19,7 @@ Page({
     userId: null,
     userInfo: null,
     kudosVisible: false,
+    btnDisabled: false,
     value: ''
   },
 
@@ -161,6 +162,9 @@ Page({
   },
 
   async addCommentFunc(content){
+    this.setData({
+      btnDisabled: true
+    });
     const { id, isLogined, userId, userInfo } = this.data;
     if(!isLogined){
       wx.showToast({
@@ -199,6 +203,9 @@ Page({
         }
       });
     }
+    this.setData({
+      btnDisabled: false
+    })
   },
 
   /**

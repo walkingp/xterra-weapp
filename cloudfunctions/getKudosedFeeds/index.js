@@ -16,6 +16,9 @@ exports.main = async (event, context) => {
   .match({
     userId
   })
+  .sort({
+    createdAt: -1
+  })
   .lookup({
     from: 'feed',
     localField: 'id',
