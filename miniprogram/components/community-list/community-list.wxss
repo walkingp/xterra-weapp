@@ -1,3 +1,4 @@
+@import "./../../style/mi.flex.wxss";
 .item{
   border-radius: 10rpx;
   background-color: #fff;

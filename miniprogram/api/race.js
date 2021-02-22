@@ -231,10 +231,25 @@ export const checkIsValid = async (cateId, profileId) => {
 export const removeRegistration = async id => {
   const regDetail = await getCollectionById ({ dbName: 'registration', id });
   const { profiles, cateId } = regDetail;
+  let promises = [];
   profiles.forEach(async p => {
-    const { cardNo } = p;
-    const res = await removeCollectionByWhere({ dbName: 'start-list', filter: { cateId, cardNo } });
+    const promise = new Promise(async (resolve, reject) => {
+      const { cardNo } = p;
+      const res = await removeCollectionByWhere({ dbName: 'start-list', filter: { cateId, cardNo } });
+      resolve(res);
+    });
+    promises.push(promise);
   })
+  Promise.all(promises).then(async res=>{
+    const data = await updateRaceCateUsers(cateId);
+    // delete record from start-list
+    return data;
+  }).catch(err=>{
+    console.error(err);
+  })  
+}
+
+export const updateRaceCateUsers = async cateId => {
   const db = wx.cloud.database();
   const cateTable = db.collection("race-cates");
   const startListTable = db.collection("start-list");
@@ -245,14 +260,13 @@ export const removeRegistration = async id => {
       userId, userName, trueName, gender, userInfo
     }
   });
-  await cateTable.doc(cateId).update({
+
+  const res = await cateTable.doc(cateId).update({
     data: {
       users
     }
   })
-  const data = await hideCollectionById({ dbName: 'registration', id })
-  // delete record from start-list
-  return data;
+  return res;
 }
 
 export const getMyCoupons = async (userId, size = 100) => {

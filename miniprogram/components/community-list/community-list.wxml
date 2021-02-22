@@ -5,12 +5,12 @@
         src="{{item.picUrls[0]}}" mode="aspectFit"></image>
       <view class="content">
         <text class="desc">{{item.content}}</text>
-        <view class="user">
-          <view class="left">
+        <view class="user flex align-center">
+          <view class="left flex-auto">
             <image class="avatar" src="{{item.avatarUrl}}" mode="aspectFill" />
             <text>{{item.nickName}}</text>
           </view>
-          <view class="right" data-id="{{item._id}}">
+          <view class="right flex-none" data-id="{{item._id}}">
             <van-icon size="36rpx" name="good-job-o" />
             <text>{{item.kudos}}</text>
             <van-icon size="36rpx" class="margin-left" name="comment-o" />

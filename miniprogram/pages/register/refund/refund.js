@@ -1,4 +1,4 @@
-const { getRegistrationDetail, updateOrderStatus, getRaceDetail } = require("../../../api/race");
+const { getRegistrationDetail, updateOrderStatus, getRaceDetail, removeRegistration, updateRaceCateUsers } = require("../../../api/race");
 const dayjs = require("dayjs");
 const { orderStatus } = require("../../../config/const");
 const config = require("../../../config/config");
@@ -60,13 +60,17 @@ Page({
     wx.showLoading({
       title: '退款中'
     })
-    const { detail, isPlogging, raceDetail, refundMoney } = this.data;
+    const { id, detail, isPlogging, raceDetail, refundMoney } = this.data;
     const total_fee = +detail.paidFee * 100;
     const refund_fee = Math.floor(refundMoney * 100);
     console.log("refund_fee", refund_fee);
     if(isPlogging || refund_fee === 0){
+      debugger
+      await removeRegistration(id);
+      
       await updateOrderStatus({id:detail._id, ...orderStatus.refunded, refundFee: refundMoney, refundTime: new Date() });
       
+      this.updateCateUser();
       wx.showToast({
         icon: "success",
         title: '取消成功',

@@ -19,8 +19,8 @@ Component({
       {
         pagePath: "/pages/community/index/index",
         bulge: true,
-        iconPath: "/images/tabs/community.png",
-        selectedIconPath: "/images/tabs/community.png"
+        iconPath: "/images/tabs/radar-filled.png",
+        selectedIconPath: "/images/tabs/radar-filled.png"
       },
       {
         pagePath: "/pages/news/news",

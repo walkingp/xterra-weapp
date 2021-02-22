@@ -1,6 +1,7 @@
 const {
   removeRegistration, getStartUserDetailByOrderNum
 } = require("../../api/race");
+const { hideCollectionById } = require("../../utils/cloud");
 
 // components/reg-list/reg-list.js
 Component({
@@ -48,6 +49,7 @@ Component({
     async removeReg(){
       const { selectedId } = this.data;
       const data = await removeRegistration(selectedId);
+      await hideCollectionById({ dbName: 'registration', id: selectedId })
       const that = this;
       if(data){
         wx.showToast({
