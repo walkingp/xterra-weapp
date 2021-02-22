@@ -36,7 +36,11 @@ Page({
         item.dateStr = dayjs(new Date(item.addedDate)).format("MM-DD HH:mm:ss");
         return item;
       })
-      list = list.concat(newData);
+      if(pageIndex>1){
+        list = list.concat(newData);
+      }else{
+        list = newData;
+      }
     }
     const recommendedList = await getRecommendedFeedIndexList();
     recommendedList.map(item => {
@@ -83,7 +87,11 @@ Page({
           type
         } = snapshot;
         if (type !== 'init') {
-          that.fetch();
+          that.setData({
+            pageIndex: 1
+          }, () => {
+            that.fetch();
+          })
         }
         console.log('snapshot', snapshot)
       },

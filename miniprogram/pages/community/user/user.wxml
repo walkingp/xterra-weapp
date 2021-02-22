@@ -1,16 +1,17 @@
 <view class="main flex column">
   <view class="top flex column justify-center align-center" style="background:url({{uInfo.avatarUrl}}) no-repeat center center; background-size: cover;">
     <view class="mask"></view>
-    <image class="avatar flex-none" src="{{uInfo.avatarUrl}}" />
+    <navigator class="user" wx:if="{{ uInfo.avatarUrl }}" url="/pages/points/user/user?userId={{userInfo._id}}">
+      <image class="avatar flex-none" src="{{uInfo.avatarUrl}}" />
+    </navigator>
     <view class="text flex-auto flex column align-center">
       <view class="flex align-center">
         <text class="name">{{uInfo.nickname}}</text>
         <van-icon class="gender" wx:if="{{uInfo.gender}}" name="/images/icons/{{ uInfo.gender === '女' ? 'female' : 'male'  }}.svg" size="14px" />
       </view>
-      <navigator url="/pages/points/user/user?userId={{userInfo._id}}" class="flex margin-top-md align-center">
+      <navigator wx:if="{{ uInfo.point }}" url="/pages/points/user/user?userId={{userInfo._id}}" class="flex margin-top-md align-center">
         <van-icon name="gem" size="18px" class="margin-right-sm" />
-        <text>{{ uInfo.point }}</text>
-        <van-icon name="arrow" />
+        <text class="underline">{{ uInfo.point }}</text>
       </navigator>
     </view>
   </view>

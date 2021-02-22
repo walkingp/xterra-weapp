@@ -35,7 +35,7 @@
       <van-popup position="bottom" closeable close-icon="close" bind:close="onClose" show="{{ kudosVisible }}">
         <van-cell-group title="点赞用户">
           <block wx:for="{{detail.kudos_list}}" wx:key="userId">
-            <van-cell class="flex align-center" title="{{item.userInfo.nickname}}" icon="{{item.userInfo.avatarUrl}}" />
+            <van-cell class="flex align-center" title="{{item.userInfo.nickname}}" is-link link-type="navigateTo" url="/pages/community/user/user?id={{item.userId}}" icon="{{item.userInfo.avatarUrl}}" />
           </block>
         </van-cell-group>
       </van-popup>
