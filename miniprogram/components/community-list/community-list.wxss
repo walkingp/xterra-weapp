@@ -21,8 +21,9 @@
 }
 .masonry {
   padding: 20rpx;
-  column-count: 2;
-  column-gap: 20rpx;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 10px;
 }
 .content .desc{  
   display: -webkit-box;
