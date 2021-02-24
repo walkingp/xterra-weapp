@@ -2,6 +2,7 @@ const {
   getMyProfilesWithCate, getRaceCatesList
 } = require("../../../../api/race")
 const app = getApp();
+const dayjs = require("dayjs");
 // pages/register/userlist/userlist.js
 Component({
   /**
@@ -225,13 +226,33 @@ Component({
       this.setData({
         selectedProfiles: profiles
       });
-      if(groupType !== 'individual' && profiles.length > cate.teamSizeLimit && cate.teamSizeLimit > 0){
-        wx.showToast({
-          icon: 'none',
-          title: `已经超出报名人数限制`,
-        });
-        this.triggerEvent('onComplete', { prevEnabled: true, nextEnabled: false }); 
-        return;
+      if(cate.type !== 'individual'){
+        if(profiles.length > cate.teamSizeLimit && cate.teamSizeLimit > 0){
+          wx.showToast({
+            icon: 'none',
+            title: `已经超出报名人数限制`,
+          });
+          
+          this.triggerEvent('onComplete', { prevEnabled: true, nextEnabled: false }); 
+          return;
+        }
+        // 必须有儿童和成人
+        let isValid = false;
+        if(cate.type === 'family'){
+          const hasChild = profiles.some(item=>{
+            const age = new Date().getFullYear() - new Date(item.birthDate).getFullYear();
+            return age < 18;
+          });
+          const hasParent = profiles.some(item=>{
+            const age = new Date().getFullYear() - new Date(item.birthDate).getFullYear();
+            return age > 18;
+          });
+          isValid = hasChild && hasParent;
+          if(!isValid){
+            this.triggerEvent('onComplete', { prevEnabled: true, nextEnabled: isValid }); 
+            return;
+          }
+        }
       }
       app.globalData.order.profiles = profiles;
       app.globalData.order.profileCount = profiles.length;
