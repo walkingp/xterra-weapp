@@ -1,6 +1,6 @@
 const dayjs = require("dayjs");
 const {
-  getRaceCatesList, getRaceCateTeamList, checkTeamExisted
+  getRaceCatesList, getRaceCateTeamList, checkTeamExisted, getStartListCountByCateId
 } = require("../../../../api/race");
 const { raceGroups } = require("../../../../config/const");
 
@@ -61,7 +61,12 @@ Component({
       }
     },
   },
-
+  lifetimes: {
+    // 生命周期函数，可以为函数，或一个在methods段中定义的方法名
+    attached: function () {
+      this.watchChanges();
+     },
+  },
   /**
    * 组件的初始数据
    */
@@ -185,7 +190,8 @@ Component({
           break;
       }
       
-      this.triggerEvent('onComplete', { prevEnabled: true, nextEnabled: valid });
+      const isFull = this.checkCateIsFull(selectedCateId);      
+      this.triggerEvent('onComplete', { prevEnabled: true, nextEnabled: valid && isFull});
     },
     changeGroup(e){
       const { type, title } = e.currentTarget.dataset;
@@ -258,7 +264,7 @@ Component({
         groupText: this.data.selectedGroupText
       };
     },
-    selectCate(value){
+    async selectCate(value){
       const { allCates } = this.data;
       const selectedCateId = allCates.findIndex(item=>item._id === value);
       const selectedCate = allCates.find(item=>item._id === value);
@@ -279,8 +285,25 @@ Component({
         groupText: this.data.selectedGroupText
       };
       
-      const agreed = this.data.checked && selectedCateId !== null;
-      this.triggerEvent('onComplete', { prevEnabled: true, nextEnabled: agreed });
+      const agreed = this.data.checked && selectedCateId !== null;      
+      const isFull = this.checkCateIsFull(value);      
+      this.triggerEvent('onComplete', { prevEnabled: true, nextEnabled: agreed && isFull});
+    },
+    async checkCateIsFull(cateId){
+      let usersCount = await getStartListCountByCateId(cateId);
+      const { allCates } = this.data;
+      const selectedCate = allCates.find(item=>item._id === cateId);
+      let isFull = false;
+      if(selectedCate && selectedCate.limit && selectedCate.limit > 0 && selectedCate.users && selectedCate.users.length){
+        isFull = Math.max(usersCount, selectedCate.users.length) >= selectedCate.limit;
+        if(isFull){
+          wx.showToast({
+            icon: 'none',
+            title: '该组别已经满额'
+          })
+        }
+      }
+      return isFull;
     },
     async fetchTeams(raceId){
       const teams = await getRaceCateTeamList(raceId);
@@ -301,6 +324,37 @@ Component({
         })
       })
     },
+    
+    watchChanges(){
+      const { raceId } = this.properties;
+      const db = wx.cloud.database()
+      const that = this;
+      db.collection('race').doc(raceId).watch({
+        onChange: function(snapshot) {
+          const { type } = snapshot;
+          if(type !== 'init'){
+            that.fetch();
+          }
+          console.log('snapshot', snapshot)
+        },
+        onError: function(err) {
+          console.error('the watch closed because of error', err)
+        }
+      })
+      db.collection('race-cates').where({ raceId }).watch({
+        onChange: function(snapshot) {
+          const { type } = snapshot;
+          if(type !== 'init'){
+            that.fetch();
+          }
+          console.log('snapshot', snapshot)
+        },
+        onError: function(err) {
+          console.error('the watch closed because of error', err)
+        }
+      })
+    },
+
     async fetch() {
       wx.showLoading({
         title: '加载中……'
@@ -309,7 +363,14 @@ Component({
         raceId
       } = this.properties;
       let cates = await getRaceCatesList(raceId);
+      cates.map(cate=>{
+        // 是否超出限制
+        if(cate.limit && cate.limit > 0 && cate.users && cate.users.length){
+          cate.isFull = cate.users.length >= cate.limit
+        }
 
+        return cate;
+      });
       const hasRelay = cates.filter(item=>item.type === 'relay').length > 0;
       const hasFamily = cates.filter(item=>item.type === 'family').length > 0; 
       const hasIndividual = cates.filter(item=>item.type === 'individual').length > 0;

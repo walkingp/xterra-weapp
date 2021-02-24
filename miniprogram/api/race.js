@@ -141,6 +141,12 @@ export const getRaceCatesList = async ( raceId, size = 500) => {
   return cates;
 }
 
+export const getStartListCountByCateId = async cateId => {
+  const db = wx.cloud.database();
+  const res = await db.collection("start-list").where({ cateId }).count();
+  return res.total;
+};
+
 export const getAllRaces = async ( size = 100) => {
   const data = await getPaginations({
     dbName: 'race',

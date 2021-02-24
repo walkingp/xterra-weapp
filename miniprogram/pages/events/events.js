@@ -152,6 +152,7 @@ Page({
   onReady: function () {
     this.getTabBar().setData({ show: true });
   },
+  
   watchChanges(dbName){
     const db = wx.cloud.database()
     const that = this;
