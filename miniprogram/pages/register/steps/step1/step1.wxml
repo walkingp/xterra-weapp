@@ -39,7 +39,7 @@
               </block>
             </view>
           </view>
-          <label for="p{{index}}" class="info" wx:if="{{item.desc}}">{{item.desc}}</label>
+          <label for="p{{index}}" class="info" wx:if="{{item.desc}}">{{item.desc}}{{item.isFull.toString()}}</label>
         </view>
         <view class="flex-none radio">
           <radio id="p{{index}}" disabled="{{item.expired || item.isFull ? true : false}}"

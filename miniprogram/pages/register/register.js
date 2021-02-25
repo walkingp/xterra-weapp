@@ -260,5 +260,13 @@ Page({
       imageUrl: detail.picUrls[0],
       path: `/pages/register/register?id=${detail._id}`
     }
+  },
+  onUnload: function () {
+    console.log(app.globalData.step);
+    const pages = getCurrentPages();
+    if(pages[pages.length - 2].route === 'pages/events/detail/detail'){
+      app.globalData.step = 0;
+    }
+    console.log("==onUnload==");
   }
 })

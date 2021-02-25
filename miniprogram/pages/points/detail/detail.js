@@ -34,7 +34,6 @@ Page({
               count: 1
             },
             success: function(res){
-              debugger
               if(res.result.code === 1){
                 wx.showToast({
                   title: '兑换成功',

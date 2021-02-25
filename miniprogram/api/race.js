@@ -72,73 +72,70 @@ export const checkTeamExisted = async ({cateId, teamTitle}) => {
   return false;
 };
 
-export const getRaceCatesList = async ( raceId, size = 500) => {
-  const cates = await getPaginations({
-    dbName: 'race-cates',
-    filter: {
-      raceId,
-      isActive: true
-    },
-    orderBy: {
-      order: 'desc'
-    },
-    pageIndex: 1,
-    pageSize: size
-  })
-     
-  cates.map(cate=>{
-    const now = dayjs(new Date());
-    cate.isStartReg = cate.regStartTime ? now.isAfter(cate.regStartTime, 'second') : true;
-    if(now.isBefore(cate.regEndTime, 'second')){
-      if(cate.enableEarlierBirdPrice){
-        if(now.isBefore(cate.earlierPriceEndTime)){
-          cate.price = cate.earlierBirdPrice;
-          cate.priceLabel = '早早鸟价';
-        }else{
-          if(cate.enableEarlyBirdPrice){
-            if(now.isBefore(cate.earlyPriceEndTime)){
-              cate.price = cate.earlyBirdPrice;
-              cate.priceLabel = '早鸟价';
-            }else{
+export const getRaceCatesList = async ( raceId, size = 500) => {  
+  return new Promise((resolve, reject) => {
+    wx.cloud.callFunction({
+      name: 'getRaceCatesList',
+      data: { raceId },
+      success: res => {
+        const cates = res.result.list;
+        cates.map(async cate=>{
+          const now = dayjs(new Date());
+          cate.isStartReg = cate.regStartTime ? now.isAfter(cate.regStartTime, 'second') : true;
+          if(now.isBefore(cate.regEndTime, 'second')){
+            if(cate.enableEarlierBirdPrice){
+              if(now.isBefore(cate.earlierPriceEndTime)){
+                cate.price = cate.earlierBirdPrice;
+                cate.priceLabel = '早早鸟价';
+              }else{
+                if(cate.enableEarlyBirdPrice){
+                  if(now.isBefore(cate.earlyPriceEndTime)){
+                    cate.price = cate.earlyBirdPrice;
+                    cate.priceLabel = '早鸟价';
+                  }else{
+                    cate.price = cate.regPrice;
+                    cate.priceLabel = '正常价';
+                  }
+                }else{
+                  cate.price = cate.regPrice;
+                  cate.priceLabel = '正常价';
+                }
+              }
+            }else if(cate.enableEarlyBirdPrice){
+              if(now.isBefore(cate.earlyPriceEndTime)){
+                cate.price = cate.earlyBirdPrice;
+                cate.priceLabel = '早鸟价';
+              }else{
+                cate.price = cate.regPrice;
+                cate.priceLabel = '正常价';
+              }
+            } else{
               cate.price = cate.regPrice;
               cate.priceLabel = '正常价';
             }
-          }else{
-            cate.price = cate.regPrice;
-            cate.priceLabel = '正常价';
+          }else{ // 已超报名截止时间
+            cate.expired = true;
+            cate.priceLabel = '报名已结束';
           }
-        }
-      }else if(cate.enableEarlyBirdPrice){
-        if(now.isBefore(cate.earlyPriceEndTime)){
-          cate.price = cate.earlyBirdPrice;
-          cate.priceLabel = '早鸟价';
-        }else{
-          cate.price = cate.regPrice;
-          cate.priceLabel = '正常价';
-        }
-      } else{
-        cate.price = cate.regPrice;
-        cate.priceLabel = '正常价';
-      }
-    }else{ // 已超报名截止时间
-      cate.expired = true;
-      cate.priceLabel = '报名已结束';
-    }
-    // 格式化
-    if(cate.enableEarlierBirdPrice){
-      cate.earlierPriceEndTime = dayjs(cate.earlierPriceEndTime).format("YYYY年MM月DD日");
-    }
-    if(cate.enableEarlyBirdPrice){
-      cate.earlyPriceEndTime = dayjs(cate.earlyPriceEndTime).format("YYYY年MM月DD日");
-    }
-    // 是否超出限制
-    if(cate.limit && cate.limit > 0 && cate.users && cate.users.length){
-      cate.isFull = cate.users.length >= cate.limit
-    }
-
-    return cate;
+          // 格式化
+          if(cate.enableEarlierBirdPrice){
+            cate.earlierPriceEndTime = dayjs(cate.earlierPriceEndTime).format("YYYY年MM月DD日");
+          }
+          if(cate.enableEarlyBirdPrice){
+            cate.earlyPriceEndTime = dayjs(cate.earlyPriceEndTime).format("YYYY年MM月DD日");
+          }
+          // 是否超出限制
+          if(cate.limit && cate.limit > 0 && cate.users && cate.users.length){
+            cate.isFull = cate.users.length >= cate.limit
+          }
+      
+          return cate;
+        });
+        resolve(cates);
+      },
+      fail: err => reject(err)
+    });
   });
-  return cates;
 }
 
 export const getStartListCountByCateId = async cateId => {

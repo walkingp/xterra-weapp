@@ -107,7 +107,6 @@ Page({
                 if (res.result.errCode === 0) {
                   reslove();
                 } else {
-                  debugger
                   wx.showToast({
                     icon: 'none',
                     title: '图片含有违法信息',

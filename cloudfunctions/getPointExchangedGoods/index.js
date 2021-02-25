@@ -19,6 +19,5 @@ exports.main = async (event, context) => {
     userId
   })
   .end();
-  debugger
   return res;
 }

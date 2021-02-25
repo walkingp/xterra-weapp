@@ -363,14 +363,6 @@ Component({
         raceId
       } = this.properties;
       let cates = await getRaceCatesList(raceId);
-      cates.map(cate=>{
-        // 是否超出限制
-        if(cate.limit && cate.limit > 0 && cate.users && cate.users.length){
-          cate.isFull = cate.users.length >= cate.limit
-        }
-
-        return cate;
-      });
       const hasRelay = cates.filter(item=>item.type === 'relay').length > 0;
       const hasFamily = cates.filter(item=>item.type === 'family').length > 0; 
       const hasIndividual = cates.filter(item=>item.type === 'individual').length > 0;
