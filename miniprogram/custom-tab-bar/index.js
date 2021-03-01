@@ -17,12 +17,6 @@ Component({
         selectedIconPath: "/images/tabs/events_fill@2x.png"
       },
       {
-        pagePath: "/pages/community/index/index",
-        bulge: true,
-        iconPath: "/images/tabs/radar-filled.png",
-        selectedIconPath: "/images/tabs/radar-filled.png"
-      },
-      {
         pagePath: "/pages/news/news",
         text: "媒体中心",
         iconPath: "/images/tabs/news.png",
