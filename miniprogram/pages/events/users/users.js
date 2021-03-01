@@ -156,6 +156,9 @@ Page({
         })
         await this.fetchCates();
         const currentCate = allCates.find(item => item._id === value);
+        if(!currentCate){
+          return;
+        }
         const {
           users
         } = this.data;

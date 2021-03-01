@@ -53,6 +53,7 @@
 </view>
 <van-popup show="{{ show }}" closeable position="bottom" bind:close="onClose">
   <van-cell-group title="报名明细">
+    <van-cell title="报名人" value="{{detail.userName}}" border="{{ false }}" />
     <van-cell title="报名时间" value="{{detail.regDate}}" border="{{ false }}" />
     <van-cell title="状态" value="{{detail.statusText}}" border="{{ false }}" />
     <van-cell title="姓名" value="{{detail.trueName}}" bindtap="copy" value-class="copyable" data-text="{{detail.trueName}}" border="{{ false }}" />
