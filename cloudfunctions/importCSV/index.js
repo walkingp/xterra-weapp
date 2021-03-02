@@ -45,7 +45,7 @@ function orderNumber() {
 }
 
 function formatDate(num){
-  return new Date(1900, 0, num -1);
+  return new Date(num);
 }
 
 const startListTable = db.collection("start-list");
@@ -107,7 +107,7 @@ async function insertSingle(raceId, row, mode){
       orderType: '线下团报',
       phoneNum, pinyinFirst, pinyinLast,
       raceId, raceTitle, 
-      region: province + city + country,
+      region: province + city + country || '',
       status: 1, statusText: '已支付',
       tSize, trueName,
       postCode,

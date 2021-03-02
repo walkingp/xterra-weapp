@@ -62,7 +62,7 @@ Page({
     let regs = _regs.slice();
     for(let i = 0, len = regs.length; i < len; i++){
       const orderDetail = await getStartUserDetailByOrderNum(regs[i].orderNum);
-      regs[i].isCertApproved = orderDetail ? orderDetail.isCertApproved : false;
+      regs[i].isCertApproved = orderDetail ? orderDetail.isCertApproved : true;
     }
     regs.map(async item => {
       item.regDate = dayjs(item.addedDate).format("YYYY-MM-DD");
