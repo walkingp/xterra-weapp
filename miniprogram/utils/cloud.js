@@ -106,3 +106,16 @@ export const getCollectionByWhere = (args) => {
     });
   })
 }
+
+export const getCollectionCount = (args) => {
+  const { dbName, filter } = args;
+  return new Promise(async (resolve, reject) => {
+    const res = filter ? wx.cloud.database().collection(dbName).where(filter) :
+    wx.cloud.database().collection(dbName);
+    await res.count().then(res=>{
+      resolve(res.total);
+    }).catch(err=>{
+      reject(err)
+    });
+  })
+}

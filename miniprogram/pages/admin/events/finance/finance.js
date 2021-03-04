@@ -3,6 +3,7 @@ const { getAllRegistrationsByRaceId } = require("../../../../api/registration");
 const dayjs = require("dayjs");
 const app = getApp();
 const { exportFinanceReport } = require("../../../../api/user");
+const { getCollectionCount } = require("../../../../utils/cloud");
 // miniprogram/pages/admin/events/registration/registration.js
 Page({
 
@@ -74,7 +75,8 @@ Page({
     races: [],
     msg: '暂无数据',
     detail: null,
-    results: []
+    results: [],
+    total: 0
   },
   onChange(event) {
     this.setData({
@@ -114,12 +116,14 @@ Page({
     })
     const { raceId } = this.data;
     const detail = await getRaceDetail(raceId);
-    const results = await getAllRegistrationsByRaceId(raceId);
+    const total = await getCollectionCount({ dbName: 'registration', filter: { raceId }});
+    const results = await getAllRegistrationsByRaceId(raceId, 200);
     results.map(item => {
       item.addedDate = dayjs(item.addedDate).format("YYYY-MM-DD HH:mm:ss");
       item.profiles = item.profiles && item.profiles.length ? item.profiles.map(p=>p.trueName).join() : ''
     });
     this.setData({
+      total,
       detail,
       results
     }, () => {
