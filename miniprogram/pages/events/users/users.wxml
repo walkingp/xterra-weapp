@@ -15,7 +15,8 @@
             <view class="tr">
               <view class="th th1">姓名</view>
               <view class="th th2">性别</view>
-              <view class="th th3">出生日期</view>
+              <view class="th th3" wx:if="{{isPlogging}}">是否参加过X-Plogging</view>
+              <view class="th th3" wx:else>出生日期</view>
               <view class="th th4">手机号</view>
               <view class="th th5">状态</view>
             </view>
@@ -23,7 +24,8 @@
               <view class="td td1">
                 <van-icon name="arrow" />{{item.trueName}}</view>
               <view class="td td2">{{item.gender}}</view>
-              <view class="td td3">{{item.birthDate}}</view>
+              <view class="td td3" wx:if="{{isPlogging}}">{{item.plogging}}</view>
+              <view class="td td3" wx:else>{{item.birthDate}}</view>
               <view class="td td4">{{item.phoneNum}}</view>
               <view class="td td5">
                 <van-icon name="success" wx:if="{{item.finishedStatus === 'done'}}" />
@@ -79,7 +81,7 @@
     <van-cell title="紧急联系人手机号" value="{{detail.contactUserPhone}}" bindtap="copy" value-class="copyable" data-text="{{detail.contactUserPhone}}" border="{{ false }}" />
   </van-cell-group>
   <van-cell-group title="相关信息">
-    <van-cell title="是否参加过X-Plogging" value="{{detail.isPlogging}}" border="{{ false }}" />
+    <van-cell title="是否参加过X-Plogging" value="{{detail.plogging}}" border="{{ false }}" />
   </van-cell-group>
   <van-cell-group>
     <van-cell><button type="primary" class="button" bindtap="updateStatus">{{buttonText}}</button></van-cell>
