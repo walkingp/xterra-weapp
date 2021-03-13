@@ -47,7 +47,8 @@
     "pages/admin/volunteer/agreement/agreement",
     "pages/community/new/new",
     "pages/community/user/user",
-    "pages/community/search/search"
+    "pages/community/search/search",
+    "pages/admin/events/fix/fix"
   ],
   "window": {
     "backgroundColor": "#ffffff",

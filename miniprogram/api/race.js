@@ -465,3 +465,14 @@ export const updateOrderStatus = async param => {
     }).catch(reject)
   })
 }
+
+export const getUnsavedStartList = async raceId => {
+  return new Promise((resolve, reject) => {
+    wx.cloud.callFunction({
+      name: 'getUnsavedStartList',
+      data: { raceId }
+    }).then(res => {
+      resolve(res);
+    }).catch(reject)
+  })
+}

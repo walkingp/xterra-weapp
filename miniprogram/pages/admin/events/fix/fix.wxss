@@ -1,0 +1,6 @@
+.list{
+  height: 100vh;
+}
+.table{
+  overflow: auto;
+}

@@ -10,7 +10,7 @@ const db = cloud.database()
 // 公共分页函数
 exports.main = async (event, context) => {
   const dbName = event.dbName;
-  let { filter, orderBy, pageIndex, pageSize } = event;
+  let { filter, orderBy, pageIndex, pageSize, field } = event;
   filter = event.filter ? event.filter : null;
   orderBy = event.orderBy ? event.orderBy : null;
   pageIndex = pageIndex ? pageIndex : 1;
@@ -24,6 +24,9 @@ exports.main = async (event, context) => {
   }
 
   let result = filter ? db.collection(dbName).where(filter) : db.collection(dbName);
+  if(field){
+    result = result.field(field);
+  }
   result = result.skip((pageIndex - 1) * pageSize).limit(pageSize);
   if(!orderBy){
     return result.get().then(res => {

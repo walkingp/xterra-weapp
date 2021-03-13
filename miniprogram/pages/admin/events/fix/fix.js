@@ -1,4 +1,4 @@
-const { getRaceDetail } = require("../../../../api/race");
+const { getRaceDetail, getUnsavedStartList } = require("../../../../api/race");
 const { getAllRegistrationsByRaceId } = require("../../../../api/registration");
 const dayjs = require("dayjs");
 const app = getApp();
@@ -116,8 +116,9 @@ Page({
     })
     const { raceId } = this.data;
     const detail = await getRaceDetail(raceId);
-    const total = await getCollectionCount({ dbName: 'registration', filter: { raceId }});
-    const results = await getAllRegistrationsByRaceId(raceId);
+    const res = await getUnsavedStartList(raceId);
+    const results = res.result.list;
+    const total = results.length;
     results.map(item => {
       item.addedDate = dayjs(item.addedDate).format("YYYY-MM-DD HH:mm:ss");
       item.profiles = item.profiles && item.profiles.length ? item.profiles.map(p=>p.trueName).join() : ''

@@ -221,6 +221,12 @@
           "pathName": "pages/admin/events/finance/finance",
           "query": "raceId=0bcbdde05fc3a636006efd9971c76de4",
           "scene": null
+        },
+        {
+          "name": "管理员：解决报名成功但未记录",
+          "pathName": "pages/admin/events/fix/fix",
+          "query": "raceId=21ded5cb5fe59992000dc46f4b31b4f8",
+          "scene": null
         }
       ]
     }
