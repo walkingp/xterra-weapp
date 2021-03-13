@@ -214,14 +214,17 @@ export const getMyProfilesWithCate = async (userId, cateId, size = 20) => {
 
 export const checkIsValid = async (cateId, profileId) => {
   const cate = await getCollectionById({ dbName: 'race-cates', id: cateId });
+  const race = await getRaceDetail(cate.raceId);
   const profile = await getCollectionById({ dbName: 'profile', id: profileId });
   const { trueName, phoneNum, wechatId, cardNo, cardType, certPic, club } = profile;
   const hasBasicInfo = trueName && phoneNum && cardNo && cardType;
   const isCertValid = !cate.isCheckCert || (cate.isCheckCert && !!certPic);
 
   if(Date.parse(profile.birthDate)){
-    const age = new Date().getFullYear() - profile.birthDate.getFullYear();
-    const isAgeValid = !cate.minAge || cate.minAge <= age;
+    const age = dayjs(race.raceDate).diff(dayjs(profile.birthDate), 'year');
+    const isMinAgeValid = !cate.minAge || cate.minAge <= age;
+    const isMaxAgeValid = !cate.maxAge || cate.maxAge >= age;
+    const isAgeValid = isMinAgeValid && isMaxAgeValid;
     return { isValid: hasBasicInfo && isCertValid, isAgeValid };
   }
   wx.showToast({
@@ -427,8 +430,19 @@ export const getPinyin = async word => {
 }
 
 export const checkIsJoinedPlogging = async cardNo => {
-  const data = await getSingleCollectionByWhere({ dbName: 'start-list', filter: { cardNo, raceType: 'X-Plogging' }});
+  const data = await getSingleCollectionByWhere({ dbName: 'start-list', filter: { cardNo, finishedStatus: "done", raceType: 'X-Plogging' }});
   return data;
+};
+
+export const updatePloggingStatus = async cardNo => {
+  const db = wx.cloud.database();
+  await db.collection("profile").where({
+    cardNo
+  }).update({
+    data: {
+      plogging: '是'
+    }
+  });
 };
 
 export const updateOrderStatus = async param => {

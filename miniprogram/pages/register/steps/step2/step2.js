@@ -1,5 +1,5 @@
 const {
-  getMyProfilesWithCate, getRaceCatesList
+  getMyProfilesWithCate, getRaceCatesList, checkIsJoinedPlogging, updatePloggingStatus
 } = require("../../../../api/race")
 const app = getApp();
 const dayjs = require("dayjs");
@@ -213,6 +213,13 @@ Component({
       })
       this.triggerEvent('onComplete', { prevEnabled: true, nextEnabled: false });
     },
+    async changeIsPlogging(cardNo){
+      const isPlogginged = await checkIsJoinedPlogging(cardNo);
+      if(!!isPlogginged){
+        await updatePloggingStatus(cardNo);
+      }
+      return !!isPlogginged;
+    },
     checkboxChanged(e){
       const profileIds = e.detail.value;
       let { profiles, cate, isRelay } = this.data;
@@ -220,6 +227,8 @@ Component({
         return profileIds.includes(item._id);
       });
       profiles.map(item=>{
+        const isPlogginged = this.changeIsPlogging(item.cardNo);
+        item.plogging = isPlogginged ? '是' : '否';
         item.sportItems = '';
         return item;
       });

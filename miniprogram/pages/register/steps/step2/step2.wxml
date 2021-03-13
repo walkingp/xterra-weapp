@@ -13,7 +13,7 @@
             <label for="i{{index}}" class="label gender">{{item.gender}}</label>
             <label for="i{{index}}" class="unit">{{item.phoneNum}}</label>
             <label for="i{{index}}" class="error" wx:if="{{!item.isValid}}">资料不完整</label>
-            <label for="i{{index}}" class="error" wx:elif="{{!item.isAgeValid}}">年龄未达到</label>
+            <label for="i{{index}}" class="error" wx:elif="{{!item.isAgeValid}}">年龄不符合</label>
             <label for="i{{index}}" class="blank flex-auto" wx:else>b</label>
           </view>
           <navigator wx:if="{{item.registered === false}}"
