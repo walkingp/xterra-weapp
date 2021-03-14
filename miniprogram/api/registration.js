@@ -2,7 +2,7 @@ import { raceStatus } from "../config/const";
 import { getPaginations } from "../utils/cloud"
 const dayjs = require("dayjs");
 
-export const getAllRegistrationsByRaceId = async (raceId, size = 1000) => {
+export const getAllRegistrationsByRaceId = async (raceId, pageIndex = 1, pageSize = 200) => {
   const data = await getPaginations({
     dbName: 'registration',
     filter: {
@@ -23,8 +23,8 @@ export const getAllRegistrationsByRaceId = async (raceId, size = 1000) => {
     orderBy: {
       addedDate: 'desc'
     },
-    pageIndex: 1,
-    pageSize: size
+    pageIndex,
+    pageSize
   })
   return data;
 }

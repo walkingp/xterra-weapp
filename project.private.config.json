@@ -219,7 +219,7 @@
         {
           "name": "管理员：财务信息",
           "pathName": "pages/admin/events/finance/finance",
-          "query": "raceId=0bcbdde05fc3a636006efd9971c76de4",
+          "query": "raceId=21ded5cb5fe59992000dc46f4b31b4f8",
           "scene": null
         },
         {

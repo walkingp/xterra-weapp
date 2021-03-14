@@ -11,6 +11,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    pageIndex: 1,
+    pageSize: 200,
     result: ["0", "1", "2", "5", "6"],
     headers: [
       {
@@ -114,10 +116,10 @@ Page({
     wx.showLoading({
       title: '加载中',
     })
-    const { raceId } = this.data;
+    const { raceId, pageIndex, pageSize } = this.data;
     const detail = await getRaceDetail(raceId);
     const total = await getCollectionCount({ dbName: 'registration', filter: { raceId }});
-    const results = await getAllRegistrationsByRaceId(raceId);
+    const results = await getAllRegistrationsByRaceId(raceId, pageIndex, pageSize);
     results.map(item => {
       item.addedDate = dayjs(item.addedDate).format("YYYY-MM-DD HH:mm:ss");
       item.profiles = item.profiles && item.profiles.length ? item.profiles.map(p=>p.trueName).join() : ''
@@ -142,10 +144,11 @@ Page({
     })
     const that = this;
     const {
+      total,
       raceId
     } = this.data;
     
-    const res = await exportFinanceReport(raceId);
+    const res = await exportFinanceReport(total, raceId);
     const url = res.fileList[0].tempFileURL;
     const filePath =  wx.env.USER_DATA_PATH + url.substr(url.lastIndexOf('/'));
     wx.downloadFile({
