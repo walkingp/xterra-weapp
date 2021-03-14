@@ -120,8 +120,9 @@ Page({
     const results = res.result.list;
     const total = results.length;
     results.map(item => {
-      item.addedDate = dayjs(item.addedDate).format("YYYY-MM-DD HH:mm:ss");
-      item.profiles = item.profiles && item.profiles.length ? item.profiles.map(p=>p.trueName).join() : ''
+      item.formattedDate = dayjs(item.addedDate).format("YYYY-MM-DD HH:mm:ss");
+      item.profilesStr = item.profiles && item.profiles.length ? item.profiles.map(p=>p.trueName).join() : ''
+      return item;
     });
     this.setData({
       total,
@@ -141,9 +142,29 @@ Page({
     wx.showLoading({
       title: '操作中……',
     });
+    const db = wx.cloud.database();
+    const userTable = db.collection("start-list");
     const { results } = this.data;
-    results.forEach(item=>{
-      const { cateId, cateTitle, groupText, groupType, orderType, profiles, raceDate, raceId, racePic, raceTitle, raceType,status, statusText, totalFee, userId, userInfo, userName } = item;
+    results.forEach(reg=>{
+      const { orderNum, out_trade_no, cateId, cateTitle, groupText, groupType, orderType, profiles, raceDate, raceId, racePic, raceTitle, raceType,status, statusText, totalFee, userId, userInfo, userName } = reg;
+      profiles.forEach(async item=>{
+        const { cardNo, wechatId } = item;
+        const existed = await userTable.where({ cateId, cardNo }).get();
+        if(existed.data.length === 0){
+          await userTable.add({
+            data: {
+              ...item,
+              cateId,
+              cateTitle,
+              orderNum, out_trade_no,
+              groupText, groupType, orderType,
+              wechatId,
+              source: '管理员修正',
+              raceDate, raceId, racePic, raceTitle, raceType,status, statusText, totalFee, userId, userInfo, userName
+            }
+          })
+        }
+      })
 
     });
   },
