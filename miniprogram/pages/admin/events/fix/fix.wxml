@@ -5,6 +5,6 @@
   </view>
   <view class="stats flex-none fs-xs text-grey padding-sm text-center">
     总计 <text class="text-red bold">{{total}}</text> 条记录
-    <button type="primary" class="button" bindtap="exportCSV">修正出发名单数据</button>
+    <button type="primary" class="button" bindtap="fixData">修正出发名单数据</button>
   </view>
 </view>

@@ -7,26 +7,26 @@ Component({
     list: [{
         pagePath: "/pages/index/index",
         text: "首页",
-        iconPath: "/images/tabs/home@2x.png",
-        selectedIconPath: "/images/tabs/home_fill@2x.png"
+        iconPath: "/pages/tabs/home@2x.png",
+        selectedIconPath: "/pages/tabs/home_fill@2x.png"
       },
       {
         pagePath: "/pages/events/events",
         text: "活动",
-        iconPath: "/images/tabs/events@2x.png",
-        selectedIconPath: "/images/tabs/events_fill@2x.png"
+        iconPath: "/pages/tabs/events@2x.png",
+        selectedIconPath: "/pages/tabs/events_fill@2x.png"
       },
       {
         pagePath: "/pages/news/news",
         text: "媒体中心",
-        iconPath: "/images/tabs/news.png",
-        selectedIconPath: "/images/tabs/news-fill.png"
+        iconPath: "/pages/tabs/news.png",
+        selectedIconPath: "/pages/tabs/news-fill.png"
       },
       {
         pagePath: "/pages/my/my",
         text: "我的",
-        iconPath: "/images/tabs/my@2x.png",
-        selectedIconPath: "/images/tabs/my_fill@2x.png"
+        iconPath: "/pages/tabs/my@2x.png",
+        selectedIconPath: "/pages/tabs/my_fill@2x.png"
       }
     ]
   },

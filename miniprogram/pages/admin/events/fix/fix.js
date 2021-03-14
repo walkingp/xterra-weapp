@@ -136,10 +136,21 @@ Page({
       })
     });
   },
+
+  async fixData(){
+    wx.showLoading({
+      title: '操作中……',
+    });
+    const { results } = this.data;
+    results.forEach(item=>{
+      const { cateId, cateTitle, groupText, groupType, orderType, profiles, raceDate, raceId, racePic, raceTitle, raceType,status, statusText, totalFee, userId, userInfo, userName } = item;
+
+    });
+  },
   
   async exportCSV() {
     wx.showLoading({
-      title: '生成中……',
+      title: '操作中……',
     })
     const that = this;
     const {
