@@ -2,6 +2,7 @@ const { getRaceDetail } = require("../../../../api/race");
 const { getAllStartListByRaceId } = require("../../../../api/registration");
 const dayjs = require("dayjs");
 const { exportRegReportByRaceId } = require("../../../../api/user");
+const { getCollectionCount } = require("../../../../utils/cloud");
 const app = getApp();
 // miniprogram/pages/admin/events/registration/registration.js
 Page({
@@ -160,6 +161,7 @@ Page({
     })
     const { raceId } = this.data;
     const detail = await getRaceDetail(raceId);
+    const total = await getCollectionCount({ dbName: 'start-list', filter: { raceId }});
     const results = await getAllStartListByRaceId(raceId);
     results.map(item => {
       item.createdAt = dayjs(item.createdAt).format("YYYY-MM-DD HH:mm:ss");
@@ -167,6 +169,7 @@ Page({
     });
     this.setData({
       detail,
+      total,
       results
     }, () => {
       wx.setNavigationBarTitle({
@@ -190,10 +193,10 @@ Page({
     })
     const that = this;
     const {
-      raceId
+      raceId, total
     } = this.data;
     
-    const res = await exportRegReportByRaceId(raceId);
+    const res = await exportRegReportByRaceId(total, raceId);
     const url = res.fileList[0].tempFileURL;
     const filePath =  wx.env.USER_DATA_PATH + url.substr(url.lastIndexOf('/'));
     wx.downloadFile({

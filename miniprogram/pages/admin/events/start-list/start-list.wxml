@@ -5,7 +5,7 @@
       bind:rowClick="onRowClick" />
   </view>
   <view class="stats flex-none fs-xs text-grey padding-sm text-center">
-    总计 <text class="text-red bold">{{results.length}}</text> 条记录
+    总计 <text class="text-red bold">{{total}}</text> 条记录
     <button type="primary" class="button" bindtap="exportCSV">导出完整报名报表</button>
   </view>
 </view>

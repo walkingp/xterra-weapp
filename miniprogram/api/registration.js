@@ -29,7 +29,7 @@ export const getAllRegistrationsByRaceId = async (raceId, pageIndex = 1, pageSiz
   return data;
 }
 
-export const getAllStartListByRaceId = async (raceId, size = 1000) => {
+export const getAllStartListByRaceId = async (raceId, size = 200) => {
   const data = await getPaginations({
     dbName: 'start-list',
     filter: {
