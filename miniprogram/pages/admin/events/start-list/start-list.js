@@ -119,9 +119,18 @@ Page({
     races: [],
     msg: '暂无数据',
     detail: null,
-    results: []
+    results: [],
+    pageIndex: 1,
+    pageSize: 200
   },
-
+  loadMore(){
+    const { pageIndex } = this.data;
+    this.setData({
+      pageIndex: pageIndex + 1
+    }, () => {
+      this.fetch();
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -159,18 +168,19 @@ Page({
     wx.showLoading({
       title: '加载中',
     })
-    const { raceId } = this.data;
+    const { results, raceId, pageIndex, pageSize } = this.data;
     const detail = await getRaceDetail(raceId);
     const total = await getCollectionCount({ dbName: 'start-list', filter: { raceId }});
-    const results = await getAllStartListByRaceId(raceId);
-    results.map(item => {
+    const newData = await getAllStartListByRaceId(raceId, pageIndex, pageSize);
+    newData.map(item => {
       item.createdAt = dayjs(item.createdAt).format("YYYY-MM-DD HH:mm:ss");
       item.birthDate = dayjs(item.birthDate).format("YYYY-MM-DD");
     });
+
     this.setData({
       detail,
       total,
-      results
+      results: results.concat(newData)
     }, () => {
       wx.setNavigationBarTitle({
         title: detail.title,

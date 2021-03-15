@@ -143,6 +143,12 @@
         "selectedIconPath": "pages/tabs/events_fill@2x.png"
       },
       {
+        "pagePath": "pages/community/index/index",
+        "text": "社区",
+        "iconPath": "pages/tabs/community@2x.png",
+        "selectedIconPath": "pages/tabs/community_fill@2x.png"
+      },
+      {
         "pagePath": "pages/news/news",
         "text": "媒体中心",
         "iconPath": "pages/tabs/news.png",

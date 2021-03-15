@@ -29,7 +29,7 @@ export const getAllRegistrationsByRaceId = async (raceId, pageIndex = 1, pageSiz
   return data;
 }
 
-export const getAllStartListByRaceId = async (raceId, size = 200) => {
+export const getAllStartListByRaceId = async (raceId, pageIndex, pageSize = 200) => {
   const data = await getPaginations({
     dbName: 'start-list',
     filter: {
@@ -38,8 +38,8 @@ export const getAllStartListByRaceId = async (raceId, size = 200) => {
     orderBy: {
       createdAt: 'desc'
     },
-    pageIndex: 1,
-    pageSize: size
+    pageIndex,
+    pageSize
   })
   return data;
 }
