@@ -148,7 +148,7 @@ Page({
       raceId
     } = this.data;
     
-    const res = await exportFinanceReport(total, raceId);
+    const res = await exportFinanceReport(raceId);
     const url = res.fileList[0].tempFileURL;
     const filePath =  wx.env.USER_DATA_PATH + url.substr(url.lastIndexOf('/'));
     wx.downloadFile({

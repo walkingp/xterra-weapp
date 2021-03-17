@@ -16,8 +16,8 @@ exports.main = async (event) => {
 
   const db = cloud.database()
   const raceTable = db.collection("race");
-  const regTable = db.collection("registration");
-  const total = await regTable.where({
+  const userTable = db.collection("start-list");
+  const total = await userTable.where({
     raceId
   }).count();
 
@@ -25,7 +25,7 @@ exports.main = async (event) => {
   const pageCount = Math.ceil(total.total / pageSize);
   let allUsers = [];
   for (let i = 1; i <= pageCount; i++) {
-    const user = await regTable.where({
+    const user = await userTable.where({
       raceId
     }).skip((i - 1) * pageSize).limit(pageSize).get();
     allUsers.push(user.data);
@@ -38,41 +38,47 @@ exports.main = async (event) => {
   console.log(`开始读取${title}报名人数`);
 
   const res = allUsers.flat();
-  res.map(item => {
-    item.addedDate = dayjs(item.addedDate).format("YYYY-MM-DD HH:mm:ss");
-    item.profiles = item.profiles && item.profiles.length ? item.profiles.map(p => p.trueName).join() : '';
-  });
-  let orders = [
-    ['订单编号', '订单提交人', '类别', '赛事', '组别', '报名人数', '报名人', '订单状态', '订单金额', '优惠金额', '实付金额', '退款金额', '支付方式', '下单时间']
-  ];
+  let cols = ['组别', '审核通过', '姓名', '性别', '手机号', '微信号', '国籍', '证件类型', '证件号码', '出生日期', '邮箱', '所属俱乐部', '血型', '衣服尺码', '省份', '住址', '紧急联系人', '紧急联系人手机'];
+  const isPlogging = race.type === 'X-Plogging';
+  if (isPlogging) {
+    cols.push('是否参加过X-Plogging');
+  }
+  let users = [cols];
   res.forEach(item => {
     let user = [];
-    user.push(item.orderNum);
-    user.push(item.userName);
-    user.push(item.groupText);
-    user.push(item.raceTitle);
     user.push(item.cateTitle);
-    user.push(item.profileCount);
-    user.push(item.profiles);
-    user.push(item.statusText);
-    user.push(item.totalFee);
-    user.push(item.discountFee);
-    user.push(item.paidFee);
-    user.push(item.refundFee);
-    user.push(item.orderType);
-    user.push(item.addedDate);
-    orders.push(user);
+    user.push(item.isCertApproved ? '是' : '否');
+    user.push(item.trueName);
+    user.push(item.gender);
+    user.push(item.phoneNum);
+    user.push(item.wechatid);
+    user.push(item.nation);
+    user.push(item.cardType);
+    user.push(item.cardNo);
+    user.push(dayjs(item.birthDate).format("YYYY-MM-DD"));
+    user.push(item.email);
+    user.push(item.club);
+    user.push(item.bloodType);
+    user.push(item.tSize);
+    user.push(item.region);
+    user.push(item.addr);
+    user.push(item.contactUser);
+    user.push(item.contactUserPhone);
+    if (isPlogging) {
+      user.push(item.plogging);
+    }
+    users.push(user);
   })
 
-  console.log(`共有订单${orders.length-1}`);
+  console.log(`共有报名人数${users.length-1}`);
 
   const dateStr = dayjs().format("YYYY-MM-DD-HH-mm-ss");
-  const fileName = `${title}-${dateStr}完整订单表.xlsx`;
-  const sheetName = '完整订单表';
+  const fileName = `${title}-${dateStr}完整报名表.xlsx`;
+  const sheetName = '完整报名表';
   try {
     const buffer = await xlsx.build([{
       name: sheetName,
-      data: orders
+      data: users
     }])
     console.log(`开始上传文件${fileName}`);
     const file = await cloud.uploadFile({
