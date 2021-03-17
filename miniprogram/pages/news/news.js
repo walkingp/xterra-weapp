@@ -1,5 +1,6 @@
 const { getNewsIndexList } = require("./../../api/news");
 const dayjs = require("dayjs");
+const config = require("../../config/config");
 // miniprogram/pages/index/index.js
 Page({
 
@@ -100,7 +101,7 @@ Page({
   onShow: function () {
     if (typeof this.getTabBar === 'function' && this.getTabBar()) {
       this.getTabBar().setData({
-        selected: 3
+        selected: config.version === 1 ? 2 : 3
       })
     }
   },

@@ -1,4 +1,5 @@
 const { updatePoint } = require("../../api/points");
+const config = require("../../config/config");
 const { getCollectionById } = require("../../utils/cloud");
 const { pointRuleEnum } = require("./../../config/const");
 const app = getApp();
@@ -123,7 +124,7 @@ Page({
     })
     if (typeof this.getTabBar === 'function' && this.getTabBar()) {
       this.getTabBar().setData({
-        selected: 4
+        selected: config.version === 1 ? 3 : 4
       })
     }
   },
