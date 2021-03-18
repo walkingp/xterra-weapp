@@ -37,7 +37,8 @@ exports.main = async (event) => {
   } = race.data;
   console.log(`开始读取${title}报名人数`);
 
-  const res = allUsers.flat();
+  let res = []
+  allUsers.forEach(item => res = res.concat(...item));
   res.map(item => {
     item.addedDate = dayjs(item.addedDate).format("YYYY-MM-DD HH:mm:ss");
     item.profiles = item.profiles && item.profiles.length ? item.profiles.map(p => p.trueName).join() : '';

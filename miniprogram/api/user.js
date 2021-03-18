@@ -109,7 +109,7 @@ export const exportReport = async cateId => {
   })
 }
 
-export const exportRegReportByRaceId = async (total, raceId) => {
+export const exportRegReportByRaceId = async (raceId) => {
   return new Promise((resolve, reject) => {
     try {
       wx.cloud.callFunction({

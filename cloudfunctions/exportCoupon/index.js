@@ -32,7 +32,8 @@ exports.main = async (event) => {
 
   console.log(`开始读取优惠券`);
 
-  const res = allUsers.flat();
+  let res = []
+  allUsers.forEach(item => res = res.concat(...item));
   let coupons = [
     ['优惠券名称', '优惠券代码', '类型', '金额', '是否已使用', '指派', '可用比赛', '可用组别', '过期时间']
   ];

@@ -206,7 +206,7 @@ Page({
       raceId, total
     } = this.data;
     
-    const res = await exportRegReportByRaceId(total, raceId);
+    const res = await exportRegReportByRaceId(raceId);
     const url = res.fileList[0].tempFileURL;
     const filePath =  wx.env.USER_DATA_PATH + url.substr(url.lastIndexOf('/'));
     wx.downloadFile({
