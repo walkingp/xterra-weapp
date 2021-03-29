@@ -1,5 +1,5 @@
 const { getPloggingTemplate, getCertTemplate, getCertFields } = require("../../../api/cert");
-const { getRaceDetail } = require("../../../api/race");
+const { getRaceDetail, getRaceCateDetail } = require("../../../api/race");
 import { getResultDetail } from "../../../api/result";
 import Poster from "./../../../miniprogram_dist/wxa-plugin-canvas/poster/poster";
 Page({
@@ -100,7 +100,8 @@ Page({
     })
   },
   async formatFields(){
-    let { fields, id, isMillionForrest } = this.data;
+    let { fields, id, isMillionForrest, cateId } = this.data;
+    const cateDetail = await getRaceCateDetail(cateId);
     const result = await getResultDetail(id);
     fields.map(item=>{
       switch(item.key){
@@ -111,13 +112,13 @@ Page({
           item.value = result.city;
           break;
         case 'year':
-          item.value = new Date(result.raceDate).getFullYear();
+          item.value = new Date(cateDetail.cateDate || result.raceDate).getFullYear();
           break;
         case 'month':
-          item.value = new Date(result.raceDate).getMonth() + 1;
+          item.value = new Date(cateDetail.cateDate || result.raceDate).getMonth() + 1;
           break;
         case 'date':
-          item.value = new Date(result.raceDate).getDate();
+          item.value = new Date(cateDetail.cateDate || result.raceDate).getDate();
           break;
       }
       return item;
@@ -137,6 +138,7 @@ Page({
         key: "trueName",
         posX: 528,
         posY: 420,
+        textAlign: 'left',
         value: result.trueName
       }]
     }

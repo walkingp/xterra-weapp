@@ -16,12 +16,12 @@ Component({
         iconPath: "/pages/tabs/events@2x.png",
         selectedIconPath: "/pages/tabs/events_fill@2x.png"
       },
-      // {
-      //   pagePath: "/pages/community/index/index",
-      //   bulge: true,
-      //   iconPath: "/pages/tabs/radar-filled.png",
-      //   selectedIconPath: "/pages/tabs/radar-filled.png"
-      // },
+      {
+        pagePath: "/pages/community/index/index",
+        bulge: true,
+        iconPath: "/pages/tabs/radar-filled.png",
+        selectedIconPath: "/pages/tabs/radar-filled.png"
+      },
       {
         pagePath: "/pages/news/news",
         text: "媒体中心",

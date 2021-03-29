@@ -227,6 +227,12 @@
           "pathName": "pages/admin/events/fix/fix",
           "query": "raceId=21ded5cb5fe59992000dc46f4b31b4f8",
           "scene": null
+        },
+        {
+          "name": "pages/events/query/query",
+          "pathName": "pages/events/query/query",
+          "query": "raceId=b45a21d55fe30169000a26693c7ad4f9&type=result",
+          "scene": null
         }
       ]
     }
