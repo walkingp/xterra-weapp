@@ -2,7 +2,7 @@
   <view class="top flex-auto">
     <view class="user flex space-between align-center">
       <navigator url="/pages/community/user/user?id={{detail.userId}}" class="left flex align-center">
-        <image class="avatar" src="{{detail.avatarUrl}}" mode="aspectFill" />
+        <image class="avatar" src="{{detail.avatarUrl}}" mode="aspectFit" />
         <view class="flex column space-between">
           <text class="bold fs-md">{{detail.nickName}}</text>
           <text class="text-grey fs-sm">{{detail.dateStr}}</text>
@@ -19,7 +19,7 @@
       <block wx:for="{{detail.picUrls}}" wx:key="item">
         <swiper-item>
           <view class="swiper-item">
-            <image lazy-load="{{true}}" bindtap="preview" data-src="{{item}}" src="{{item}}" mode="aspectFill"></image>
+            <image lazy-load="{{true}}" bindtap="preview" data-src="{{item}}" src="{{item}}" mode="aspectFit"></image>
           </view>
         </swiper-item>
       </block>
