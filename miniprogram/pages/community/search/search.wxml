@@ -1,6 +1,6 @@
 <view class="main flex column">
   <view class="top flex align-center">
-    <van-search value="{{ value }}" use-action-slot bind:change="onChange" bind:search="onSearch" class="flex-auto"
+    <van-search value="{{ value }}" focus="{{true}}" use-action-slot bind:change="onChange" bind:search="onSearch" class="flex-auto"
       value="{{ value }}" placeholder="请输入搜索关键词">
       <view slot="action" bind:tap="onClick">搜索</view>
     </van-search>

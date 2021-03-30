@@ -55,9 +55,11 @@ Page({
       })
     }
     const histories = wx.getStorageSync(config.storageKey.searchHistory);
-    this.setData({
-      histories
-    });
+    if(histories && histories.length){
+      this.setData({
+        histories
+      });
+    }
   },
   async fetch() {
     const {

@@ -189,6 +189,15 @@ Page({
       nickName: nickname
     });
     const that = this;
+    const db = wx.cloud.database();
+    const replyTable = db.collection("reply");
+    const feedTable = db.collection("feed");
+    const count = await replyTable.where({ feedId: id, isActive: true }).count();
+    await feedTable.doc(id).update({
+      data: {
+        comments: count.total
+      }
+    });
     if(res.result.code === 0){
       // 加分
       await updatePoint(userId, pointRuleEnum.Comment, {
@@ -202,6 +211,8 @@ Page({
           that.fetch();
         }
       });
+    }else{
+      that.fetch();
     }
     this.setData({
       btnDisabled: false
