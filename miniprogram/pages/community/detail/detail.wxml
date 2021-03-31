@@ -29,6 +29,11 @@
       <text selectable="{{true}}">{{detail.content}}</text>
     </view>
     <view class="comments">
+      <view class="flex column justify-center text-grey fs-md align-center" catchtap="giveKudos" data-id="{{detail._id}}">        
+        <van-icon size="28px" name="good-job" color="orange" wx:if="{{detail.kudosed}}" />
+        <van-icon size="28px" name="good-job-o" wx:else />
+        <text wx:if="{{detail.kudos_list.length === 0}}">现在点赞</text>
+      </view>
       <view class="flex justify-center text-grey fs-xs align-center" bindtap="showKudos" wx:if="{{detail.kudos_list.length}}">
         <van-icon name="friends-o" size="18px" /> {{detail.kudos_list.length}}人觉得很赞 <van-icon name="arrow" />
       </view>
