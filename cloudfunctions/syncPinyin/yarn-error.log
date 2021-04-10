@@ -1,0 +1,47 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Users\Administrator\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js
+
+PATH: 
+  C:\Program Files (x86)\Microsoft SDKs\Azure\CLI2\wbin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Calibre2\;C:\Program Files\TortoiseGit\bin;C:\Program Files\dotnet\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files\PuTTY\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files\nodejs\;C:\Program Files\Git\cmd;C:\Users\Administrator\AppData\Local\Microsoft\WindowsApps;C:\Users\Administrator\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Administrator\.dotnet\tools;C:\Users\Administrator\AppData\Roaming\npm;
+
+Yarn version: 
+  1.15.2
+
+Node version: 
+  14.15.4
+
+Platform: 
+  win32 x64
+
+Trace: 
+  Error: https://registry.yarnpkg.com/wx-server-sdk: tunneling socket could not be established, cause=connect ECONNREFUSED 127.0.0.1:1181
+      at ClientRequest.onError (C:\Users\Administrator\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:141027:17)
+      at Object.onceWrapper (events.js:422:26)
+      at ClientRequest.emit (events.js:315:20)
+      at Socket.socketErrorListener (_http_client.js:469:9)
+      at Socket.emit (events.js:315:20)
+      at emitErrorNT (internal/streams/destroy.js:106:8)
+      at emitErrorCloseNT (internal/streams/destroy.js:74:3)
+      at processTicksAndRejections (internal/process/task_queues.js:80:21)
+
+npm manifest: 
+  {
+    "name": "syncPinyin",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+      "wx-server-sdk": "~2.4.0"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

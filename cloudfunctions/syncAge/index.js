@@ -1,10 +1,7 @@
 // 云函数入口文件
 const cloud = require('wx-server-sdk')
 
-cloud.init({
-  // API 调用都保持和云函数当前所在环境一致
-  env: cloud.DYNAMIC_CURRENT_ENV
-})
+cloud.init()
 
 // 云函数入口函数
 exports.main = async (event, context) => {
@@ -12,12 +9,16 @@ exports.main = async (event, context) => {
 
   const db = cloud.database();
   const _ = db.command
-  const regTable = db.collection("registration");
   const userTable = db.collection('start-list');
-  const res = await userTable.where({ out_trade_no: _.eq(null)}).limit(1000).get();
-  res.data.forEach(item=>{
-    const data = await regTable.where({ orderNum: item.orderNum }).get()
-    console.log(data);
+  const res = await userTable.where({ age: _.exists(false) }).limit(1000).get();
+  res.data.forEach(async item=>{
+    const { birthDate, _id } = item;
+    const age = new Date().getFullYear() - new Date(birthDate).getFullYear();
+    await userTable.doc(_id).update({
+      data: {
+        age
+      }
+    })
   });
   return {
     event,

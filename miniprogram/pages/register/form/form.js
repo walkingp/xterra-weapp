@@ -109,7 +109,8 @@ Page({
       wx.showToast({
         title: '此证件号码已经添加过',
         icon: 'none'
-      })
+      });
+      return;
     }
     
     let isPlogged = await checkIsJoinedPlogging(idCard);

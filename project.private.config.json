@@ -233,6 +233,12 @@
           "pathName": "pages/events/query/query",
           "query": "raceId=b45a21d55fe30169000a26693c7ad4f9&type=result",
           "scene": null
+        },
+        {
+          "name": "管理员：导入名单",
+          "pathName": "pages/admin/events/upload/upload",
+          "query": "",
+          "scene": null
         }
       ]
     }

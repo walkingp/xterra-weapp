@@ -64,7 +64,8 @@
       </view>
       <view class="list">
         <van-grid border="{{false}}">
-          <van-grid-item icon="scan" bindtap="scanQR" text="赛事检录" />
+          <van-grid-item icon="scan" bindtap="scanQR" text="二维码检录" />
+          <van-grid-item icon="idcard" bindtap="scanIDCard" text="身份证检录" />
           <van-grid-item icon="friends-o" url="/pages/events/users/users" text="我的检录" />
         </van-grid>
       </view>

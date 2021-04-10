@@ -17,6 +17,9 @@ Page({
     version: null,
     versions: { develop: '开发版', trial: '体验版', release: '正式版' }
   },
+  scanIDCard(){
+
+  },
   scanQR(){
     wx.scanCode({
       onlyFromCamera: true,
