@@ -142,31 +142,36 @@ Page({
     wx.showLoading({
       title: '操作中……',
     });
-    const db = wx.cloud.database();
-    const userTable = db.collection("start-list");
-    const { results } = this.data;
-    results.forEach(reg=>{
-      const { orderNum, out_trade_no, cateId, cateTitle, groupText, groupType, orderType, profiles, raceDate, raceId, racePic, raceTitle, raceType,status, statusText, totalFee, userId, userInfo, userName } = reg;
-      profiles.forEach(async item=>{
-        const { cardNo, wechatId } = item;
-        const existed = await userTable.where({ cateId, cardNo }).get();
-        if(existed.data.length === 0){
-          await userTable.add({
-            data: {
-              ...item,
-              cateId,
-              cateTitle,
-              orderNum, out_trade_no,
-              groupText, groupType, orderType,
-              wechatId,
-              source: '管理员修正',
-              raceDate, raceId, racePic, raceTitle, raceType,status, statusText, totalFee, userId, userInfo, userName
-            }
-          })
-        }
+    try{
+      const db = wx.cloud.database();
+      const userTable = db.collection("start-list");
+      const { results } = this.data;
+      results.forEach(reg=>{
+        const { orderNum, out_trade_no, cateId, cateTitle, groupText, groupType, orderType, profiles, raceDate, raceId, racePic, raceTitle, raceType,status, statusText, totalFee, userId, userInfo, userName } = reg;
+        profiles.forEach(async item=>{
+          const { cardNo, wechatId } = item;
+          const existed = await userTable.where({ cateId, cardNo }).get();
+          if(existed.data.length === 0){
+            await userTable.add({
+              data: {
+                ...item,
+                cateId,
+                cateTitle,
+                orderNum, out_trade_no,
+                groupText, groupType, orderType,
+                wechatId,
+                source: '管理员修正',
+                raceDate, raceId, racePic, raceTitle, raceType,status, statusText, totalFee, userId, userInfo, userName
+              }
+            })
+          }
+        })
+      });
+    }catch{      
+      wx.hideLoading({
+        success: (res) => {},
       })
-
-    });
+    }
   },
   
   async exportCSV() {

@@ -83,15 +83,20 @@ Page({
         subname: '查看目前报名费用明细',
         type: 'finance'
       },
-      {
-        name: '导入线下报名',
-        subname: '导入已经上传的Excel文件',
-        type: 'import'
-      },
+      // {
+      //   name: '导入线下报名',
+      //   subname: '导入已经上传的Excel文件',
+      //   type: 'import'
+      // },
       {
         name: '查看比赛成绩',
         disabled: true,
         type: 'result'
+      },
+      {
+        name: '校正报名数据',
+        subname: '（管理员专用）当出现出发名单中无用户数据时使用',
+        type: 'fix'
       },
       {
         name: '复制分享链接',
@@ -127,6 +132,11 @@ Page({
       case 'finance':
         wx.navigateTo({
           url: `/pages/admin/events/finance/finance?raceId=${currentId}`,
+        })
+        break;
+      case 'fix':
+        wx.navigateTo({
+          url: `/pages/admin/events/fix/fix?raceId=${currentId}`,
         })
         break;
       case 'result':
