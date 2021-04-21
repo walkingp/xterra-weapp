@@ -4,3 +4,18 @@
 .camera{
   margin-top: -24rpx;
 }
+.bar{
+  position: fixed;
+  right: 50rpx;
+  bottom: 120rpx;
+}
+.bar van-icon{
+  padding: 10rpx;
+  background-color: #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 10rpx rgba(0,0,0,.2);
+  border: solid 4rpx rgba(0,0,0,.2);
+}
+.bar van-icon+van-icon{
+  margin-top: 20rpx;
+}

@@ -16,6 +16,17 @@ Page({
     list: [],
     recommendedList: []
   },
+  redirectTo(e){
+    const { url } = e.currentTarget.dataset;
+    wx.navigateTo({
+      url
+    });
+  },
+  backToTop(){
+    wx.pageScrollTo({
+      scrollTop: 0
+    })
+  },
   gotoSearch(){
     wx.navigateTo({
       url: '/pages/community/search/search',

@@ -16,4 +16,8 @@
       <community-list list="{{recommendedList}}" />
     </van-tab>
   </van-tabs>
+  <view class="bar flex column">
+    <van-icon bindtap="redirectTo" data-url="/pages/community/new/new" name="plus" size="30px" />
+    <van-icon bindtap="backToTop" name="back-top" size="30px" />
+  </view>
 </view>
