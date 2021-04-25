@@ -48,7 +48,8 @@
     "pages/community/new/new",
     "pages/community/user/user",
     "pages/community/search/search",
-    "pages/admin/events/fix/fix"
+    "pages/admin/events/fix/fix",
+    "pages/my/idcard/idcard"
   ],
   "window": {
     "backgroundColor": "#ffffff",
@@ -161,5 +162,11 @@
         "selectedIconPath": "pages/tabs/my_fill@2x.png"
       }
     ]
+  },
+  "plugins": {
+    "ocr-plugin": {
+      "version": "3.0.4",
+      "provider": "wx4418e3e031e551be"
+    }
   }
 }

@@ -18,7 +18,9 @@ Page({
     versions: { develop: '开发版', trial: '体验版', release: '正式版' }
   },
   scanIDCard(){
-
+    wx.navigateTo({
+      url: '/pages/my/idcard/idcard',
+    })
   },
   scanQR(){
     wx.scanCode({

@@ -1,0 +1,10 @@
+<ocr-navigator bind:onSuccess="success" certificateType="idCard" opposite="{{false}}">
+  <button type="primary">身份证正面识别</button>
+</ocr-navigator>
+<ocr-navigator bind:onSuccess="success" certificateType="idCard" opposite="{{true}}">
+  <button type="primary">身份证反面识别</button>
+</ocr-navigator>
+<camera device-position="back" flash="off" binderror="error" style="width: 100%; height: 300px;"></camera>
+<button type="primary" bindtap="takePhoto">拍照</button>
+<view>预览</view>
+<image mode="widthFix" src="{{src}}"></image>
