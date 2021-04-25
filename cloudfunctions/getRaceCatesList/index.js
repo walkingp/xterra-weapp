@@ -25,8 +25,6 @@ exports.main = async (event, context) => {
     "order", 'desc'
   ).get();
 
-  res.data
-
   const result = await Promise.all(res.data.map(async item=> {
     const count = await getCateUserCount(item._id);
     item.users = Array(count.total);
