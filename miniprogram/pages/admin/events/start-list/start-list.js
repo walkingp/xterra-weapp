@@ -18,6 +18,11 @@ Page({
         label: '姓名'
       },
       {
+        prop: 'bibNum',
+        width: 152,
+        label: '号码'
+      },
+      {
         prop: 'pinyinFirst',
         width: 152,
         label: '拼音名'

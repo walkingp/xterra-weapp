@@ -7,6 +7,6 @@
   <view class="stats flex-none fs-xs text-grey padding-sm text-center">
     总计 <text class="text-red bold">{{total}}</text> 条记录
     <button type="primary" class="button" bindtap="exportCSV">导出完整报名报表</button>
-    <button type="primary" class="button" bindtap="fixPinyin">校正数据</button>
+    <!-- <button type="primary" class="button" bindtap="fixPinyin">校正数据</button> -->
   </view>
 </view>
