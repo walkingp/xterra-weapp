@@ -1,10 +1,16 @@
-<ocr-navigator bind:onSuccess="success" certificateType="idCard" opposite="{{false}}">
-  <button type="primary">身份证正面识别</button>
-</ocr-navigator>
-<ocr-navigator bind:onSuccess="success" certificateType="idCard" opposite="{{true}}">
-  <button type="primary">身份证反面识别</button>
-</ocr-navigator>
-<camera device-position="back" flash="off" binderror="error" style="width: 100%; height: 300px;"></camera>
-<button type="primary" bindtap="takePhoto">拍照</button>
-<view>预览</view>
-<image mode="widthFix" src="{{src}}"></image>
+<image mode="widthFix" src="{{src}}" wx:if="{{src}}"></image>
+<camera device-position="back" flash="off" wx:else binderror="error" style="width: 100%; height: 300px;"></camera>
+<van-cell border="{{ false }}">
+  <button bindtap="takePhoto" class="primary button block">{{src ? '识别下一个' : '识别'}}</button>
+</van-cell>
+<van-cell-group wx:if="{{src && user}}">
+  <van-cell title="姓名" value="{{user.name}}" />
+  <van-cell title="性别" value="{{user.gender}}" />
+  <van-cell title="证件号" value="{{user.id}}" />
+  <!-- <van-cell title="民族" value="{{user.nationality}}" />
+  <van-cell title="生日" value="{{user.birth}}" />
+  <van-cell title="地址" title-width="50px" value="{{user.addr}}" /> -->
+  <van-cell border="{{ false }}">
+    <button bindtap="checkIn" class="primary button block">资料无误，确认检录</button>
+  </van-cell>
+</van-cell-group>

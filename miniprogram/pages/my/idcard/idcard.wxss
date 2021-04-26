@@ -5,3 +5,6 @@
 .intro {
   margin: 40rpx;
 }
+image{
+  width: 100vw;
+}

@@ -5,9 +5,21 @@ Page({
    * 页面的初始数据
    */
   data: {
+    user: null, 
+    src: null,//显示
+    imgUrl: null,//真实地址
+  },
+  checkIn(){
 
   },
   takePhoto() {
+    const { src } = this.data;
+    if(src){
+      this.setData({
+        src: null
+      });
+      return;
+    }
     const ctx = wx.createCameraContext()
     ctx.takePhoto({
       quality: 'high',
@@ -15,34 +27,73 @@ Page({
         this.setData({
           src: res.tempImagePath
         })
-        this.recogID(res.tempImagePath);
+        this.uploadImg(res.tempImagePath);
+      }
+    })
+  },
+  uploadImg(imgUrl) {
+    wx.showLoading({
+      title: '上传中',
+    })
+    const that = this
+    const suffix = /\.\w+$/.exec(imgUrl)[0];
+    wx.cloud.uploadFile({
+      cloudPath: `upload/ocr/${new Date().getTime()}${suffix}`,
+      filePath: imgUrl, // 文件路径
+      success: res => {
+        console.log("上传成功", res.fileID)
+        that.getImgUrl(res.fileID)
+      },
+      fail: err => {
+        console.log("上传失败", err)
+      }
+    })
+  },
+  getImgUrl(imgUrl) {
+    const that = this
+    wx.cloud.getTempFileURL({
+      fileList: [imgUrl],
+      success: res => {
+        const imgUrl = res.fileList[0].tempFileURL
+        console.log("获取图片url成功", imgUrl)
+        that.setData({
+          imgUrl: imgUrl
+        })
+        that.OCR(imgUrl)
+      },
+      fail: err => {
+        console.log("获取图片url失败", err)
+      }
+    })
+  },
+  OCR(imgUrl) {
+    wx.showLoading({
+      title: '识别中',
+    })
+    const that = this;
+    wx.cloud.callFunction({
+      name: "OCR",
+      data: {
+        imgUrl: imgUrl
+      },
+      success(res) {
+        that.setData({
+          user: res.result
+        }, () => {
+          wx.hideLoading()
+        })
+        console.log("识别成功", res)
+      },
+      fail(res) {
+        console.log("识别失败", res)
+        wx.showToast({
+          icon: 'none',
+          title: '识别失败',
+        })
       }
     })
   },
 
-  recogID(url){
-    wx.serviceMarket.invokeService({
-      service: 'wx79ac3de8be320b71', // '固定为服务商OCR的appid，非小程序appid',
-      api: 'OcrAllInOne',
-      data: {
-        img_url: url,
-        data_type: 3,
-        ocr_type: 1,
-      },
-    }).then(res => {
-      console.log('invokeService success', res)
-      wx.showModal({
-        title: 'cost',
-        content: (Date.now() - d) + '',
-      })
-    }).catch(err => {
-      console.error('invokeService fail', err)
-      wx.showModal({
-        title: 'fail',
-        content: err + '',
-      })
-    })
-  },
   error(e) {
     console.log(e.detail)
   },
