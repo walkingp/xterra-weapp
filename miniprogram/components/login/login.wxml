@@ -1,6 +1,7 @@
 <view class="login" wx:if="{{!isLogined}}">
   <image class="userinfo-avatar" src="./../../images/avatar@2x.png"></image>
-  <button class="button weui-btn btnLogin weui-btn_primary" bindgetuserinfo="onGotUserInfo" open-type="getUserInfo">点击登录</button>
+  <button wx:if="{{canIUseGetUserProfile}}" class="button weui-btn btnLogin weui-btn_primary" bindtap="getUserProfile"> 获取头像昵称 </button>
+  <button wx:else class="button weui-btn btnLogin weui-btn_primary" bindgetuserinfo="onGotUserInfo" open-type="getUserInfo">点击登录</button>
 </view>
 <view class="login" wx:else>
   <view class="userinfo-avatar">

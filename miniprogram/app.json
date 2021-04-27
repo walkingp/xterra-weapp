@@ -49,7 +49,8 @@
     "pages/community/user/user",
     "pages/community/search/search",
     "pages/admin/events/fix/fix",
-    "pages/my/idcard/idcard"
+    "pages/my/idcard/idcard",
+    "pages/admin/events/my-checkin/my-checkin"
   ],
   "window": {
     "backgroundColor": "#ffffff",

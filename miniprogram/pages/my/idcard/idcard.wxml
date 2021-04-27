@@ -1,16 +1,24 @@
 <image mode="widthFix" src="{{src}}" wx:if="{{src}}"></image>
 <camera device-position="back" flash="off" wx:else binderror="error" style="width: 100%; height: 300px;"></camera>
 <van-cell border="{{ false }}">
-  <button bindtap="takePhoto" class="primary button block">{{src ? '识别下一个' : '识别'}}</button>
+  <button disabled="{{loading}}" bindtap="takePhoto" type="primary">{{src ? '识别下一个' : '识别'}}</button>
 </van-cell>
 <van-cell-group wx:if="{{src && user}}">
   <van-cell title="姓名" value="{{user.name}}" />
   <van-cell title="性别" value="{{user.gender}}" />
   <van-cell title="证件号" value="{{user.id}}" />
+</van-cell-group>
+<van-cell-group wx:if="{{isChecked}}" title="参赛信息(共{{results.length}}条）">
+  <van-cell title-width="80px" title="比赛" value="{{race.title}}" />
+  <block wx:for="{{results}}" wx:key="_id">
+    <van-cell title="组别" value="{{item.cateTitle}}" />
+    <van-cell title="参赛号" value="{{item.bibNum}}" />
+    <van-cell title="状态" value="{{item.finishedStatus === 'notStart' || !item.finishedStatus ? '未检录' : '已检录'}}" />
+  </block>
   <!-- <van-cell title="民族" value="{{user.nationality}}" />
   <van-cell title="生日" value="{{user.birth}}" />
   <van-cell title="地址" title-width="50px" value="{{user.addr}}" /> -->
-  <van-cell border="{{ false }}">
-    <button bindtap="checkIn" class="primary button block">资料无误，确认检录</button>
+  <van-cell border="{{ false }}" wx:if="{{hasUnchecked}}">
+    <button bindtap="checkIn" disabled="{{loading}}" type="primary">资料无误，确认检录</button>
   </van-cell>
 </van-cell-group>

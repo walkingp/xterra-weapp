@@ -239,6 +239,12 @@
           "pathName": "pages/admin/events/upload/upload",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "我的检录",
+          "pathName": "pages/admin/events/my-checkin/my-checkin",
+          "query": "",
+          "scene": null
         }
       ]
     }

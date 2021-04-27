@@ -13,7 +13,17 @@ Component({
    */
   data: {
     isLogined: false,
-    isAdmin: false
+    isAdmin: false,
+    canIUseGetUserProfile:  false
+  },
+  lifetimes: {
+    attached: function () { 
+      if (wx.getUserProfile) {
+        this.setData({
+          canIUseGetUserProfile: true
+        })
+      }
+    },
   },
 
   /**
