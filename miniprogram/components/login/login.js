@@ -14,10 +14,10 @@ Component({
   data: {
     isLogined: false,
     isAdmin: false,
-    canIUseGetUserProfile:  false
+    canIUseGetUserProfile: false
   },
   lifetimes: {
-    attached: function () { 
+    attached: function () {
       if (wx.getUserProfile) {
         this.setData({
           canIUseGetUserProfile: true
@@ -30,6 +30,20 @@ Component({
    * 组件的方法列表
    */
   methods: {
+    getUserProfile(e) {
+      // 推荐使用wx.getUserProfile获取用户信息，开发者每次通过该接口获取用户个人信息均需用户确认
+      // 开发者妥善保管用户快速填写的头像昵称，避免重复弹窗
+      wx.getUserProfile({
+        desc: '用于完善会员资料', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
+        success: (res) => {
+          this.setData({
+            userInfo: res.userInfo,
+            hasUserInfo: true
+          })
+          this.callGetUserInfo();
+        }
+      })
+    },
     onGotUserInfo: function (e) {
       wx.showLoading({
         title: '登录中',
@@ -37,57 +51,60 @@ Component({
       var _this = this
       //需要用户同意授权获取自身相关信息
       if (e.detail.errMsg == "getUserInfo:ok") {
-        //将授权结果写入app.js全局变量
-        app.globalData.auth['scope.userInfo'] = true
-        //尝试获取云端用户信息
-        wx.cloud.callFunction({
-          name: 'get_setUserInfo',
-          data: {
-            getSelf: true
-          },
-          success: async res => {
-            if (res.errMsg == "cloud.callFunction:ok")
-              if (res.result) {
-                //如果成功获取到
-                //将获取到的用户资料写入app.js全局变量
-                console.log(res)
-                app.globalData.userInfo = res.result.data.userData
-                app.globalData.userId = res.result.data._id
-                app.globalData.isLogined = true
-                const isAdmin = res.result.data.isAdmin;
-                app.globalData.isAdmin = isAdmin
-
-                _this.setData({
-                  isAdmin,
-                  isLogined: true,
-                  isAdmin
-                })
-              } else {
-                //未成功获取到用户信息
-                //调用注册方法
-                console.log("未注册")
-                _this.register({
-                  nickName: e.detail.userInfo.nickName,
-                  gender: e.detail.userInfo.gender,
-                  avatarUrl: e.detail.userInfo.avatarUrl
-                })
-              }
-            await _this.fetch();
-            wx.hideLoading({
-              success: (res) => {},
-            })
-          },
-          fail: err => {
-            wx.showToast({
-              title: '请检查网络您的状态',
-              duration: 800,
-              icon: 'none'
-            })
-            console.error("get_setUserInfo调用失败", err.errMsg)
-          }
-        })
+        this.callGetUserInfo();
       } else
         console.log("未授权")
+    },
+    callGetUserInfo() {
+      //将授权结果写入app.js全局变量
+      app.globalData.auth['scope.userInfo'] = true
+      //尝试获取云端用户信息
+      wx.cloud.callFunction({
+        name: 'get_setUserInfo',
+        data: {
+          getSelf: true
+        },
+        success: async res => {
+          if (res.errMsg == "cloud.callFunction:ok")
+            if (res.result) {
+              //如果成功获取到
+              //将获取到的用户资料写入app.js全局变量
+              console.log(res)
+              app.globalData.userInfo = res.result.data.userData
+              app.globalData.userId = res.result.data._id
+              app.globalData.isLogined = true
+              const isAdmin = res.result.data.isAdmin;
+              app.globalData.isAdmin = isAdmin
+
+              _this.setData({
+                isAdmin,
+                isLogined: true,
+                isAdmin
+              })
+            } else {
+              //未成功获取到用户信息
+              //调用注册方法
+              console.log("未注册")
+              _this.register({
+                nickName: e.detail.userInfo.nickName,
+                gender: e.detail.userInfo.gender,
+                avatarUrl: e.detail.userInfo.avatarUrl
+              })
+            }
+          await _this.fetch();
+          wx.hideLoading({
+            success: (res) => {},
+          })
+        },
+        fail: err => {
+          wx.showToast({
+            title: '请检查网络您的状态',
+            duration: 800,
+            icon: 'none'
+          })
+          console.error("get_setUserInfo调用失败", err.errMsg)
+        }
+      })
     },
     register: function (e) {
       let _this = this
@@ -141,10 +158,14 @@ Component({
         console.log(detail)
         this.setData({
           detail,
-          isLoaded: true          
-        },()=>{
+          isLoaded: true
+        }, () => {
           const isAdmin = detail.role === 'admin';
-          this.triggerEvent('onCompleted', { isLogined: true, isAdmin,  userInfo: detail })
+          this.triggerEvent('onCompleted', {
+            isLogined: true,
+            isAdmin,
+            userInfo: detail
+          })
         })
       }
     },

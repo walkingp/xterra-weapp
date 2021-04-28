@@ -245,6 +245,12 @@
           "pathName": "pages/admin/events/my-checkin/my-checkin",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "志愿者检录",
+          "pathName": "pages/my/idcard/idcard",
+          "query": "id=0bcbdde05fc3a636006efd9971c76de4&type=relay",
+          "scene": null
         }
       ]
     }

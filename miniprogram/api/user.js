@@ -127,6 +127,21 @@ export const exportRegReportByRaceId = async (raceId) => {
   })
 }
 
+export const exportUsers = async () => {
+  return new Promise((resolve, reject) => {
+    try {
+      wx.cloud.callFunction({
+        name: 'exportUsers',
+        success(res) {
+          resolve(res.result)
+        }
+      });
+    } catch (err) {
+      reject(err)
+    }
+  })
+}
+
 export const exportFinanceReport = async (raceId) => {
   return new Promise((resolve, reject) => {
     try {

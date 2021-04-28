@@ -68,11 +68,6 @@ Page({
         name: '进入详情',
         type: 'detail'
       },
-      // {
-      //   name: '查看报名订单',
-      //   subname: '含未完成和已完成',
-      //   type: 'registration'
-      // },
       {
         name: '查看已报名完成名单',
         subname: '已经完成报名的成员',
@@ -83,11 +78,11 @@ Page({
         subname: '查看目前报名费用明细',
         type: 'finance'
       },
-      // {
-      //   name: '导入线下报名',
-      //   subname: '导入已经上传的Excel文件',
-      //   type: 'import'
-      // },
+      {
+        name: '导入线下报名',
+        subname: '导入已经上传的Excel文件',
+        type: 'import'
+      },
       {
         name: '查看比赛成绩',
         disabled: true,

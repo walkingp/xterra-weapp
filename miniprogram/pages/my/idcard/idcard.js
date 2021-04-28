@@ -17,7 +17,7 @@ Page({
     isLogined: false,
     userId: null,
     userInfo: null,
-
+    raceId: null,
     loading: false,
     user: null,
     src: null, //显示
@@ -25,7 +25,41 @@ Page({
     isChecked: false,
     hasUnchecked: false,
     race: null,
-    results: null
+    results: null,
+  },
+  async manualSearch(e){
+    const { raceId } = this.data;
+    const { id } = e.detail.value;
+    if(!id){
+      return;
+    }
+    
+    this.setData({
+      loading: true,
+    });
+    wx.showLoading({
+      title: '查询中',
+    })
+    const db = wx.cloud.database();
+    const _ = db.command;
+    const userTable = db.collection("start-list");
+    const res = await userTable.where({
+      raceId,
+      cardNo: {
+        $regex: '.*' + id,
+        $options: 'i'
+      }
+    }).get();
+    this.setData({
+      loading: false,
+      isChecked: true,
+      results: res.data
+    }, ()=>{
+      wx.showToast({
+        icon: 'none',
+        title: `查询到${res.data.length}条参赛信息`,
+      })
+    })
   },
   checkIn() {
     this.setData({ loading: true })
@@ -105,7 +139,7 @@ Page({
     })
     const ctx = wx.createCameraContext()
     ctx.takePhoto({
-      quality: 'high',
+      quality: 'normal',
       success: (res) => {
         this.setData({
           src: res.tempImagePath
@@ -179,10 +213,7 @@ Page({
       }
     })
   },
-  async search(id) {
-    wx.showLoading({
-      title: '查询中',
-    })
+  async fetch(){
     const db = wx.cloud.database();
     const _ = db.command;
     const userTable = db.collection("start-list");
@@ -194,11 +225,26 @@ Page({
     });
     if (config) {
       const race = await getRaceDetail(config.currentRaceId);
+      wx.setNavigationBarTitle({
+        title: race.title + ' | 志愿者检录',
+      })
       this.setData({
+        raceId: config.currentRaceId,
         race
       })
+    }
+  },
+  async search(id) {
+    wx.showLoading({
+      title: '查询中',
+    })
+    const db = wx.cloud.database();
+    const _ = db.command;
+    const userTable = db.collection("start-list");
+    const { race } = this.data;
+    if(race){
       const results = await userTable.where({
-        raceId: config.currentRaceId,
+        raceId: race._id,
         cardNo: id
       }).get();
       if (results.data.length == 0) {
@@ -225,7 +271,6 @@ Page({
         })
       })
     }
-
   },
 
   error(e) {
@@ -241,60 +286,26 @@ Page({
         userId,
         userInfo
       } = res;
+      if(!isLogined){
+        wx.showToast({
+          title: '没有登录',
+        })
+        return;
+      };
+      const hasRole = userInfo.role === 'admin' || user.role === 'volunteer';
+      if(!hasRole){
+        wx.showToast({
+          title: '没有权限',
+        })
+        return;
+      }
       this.setData({
         isLogined,
         userId,
         userInfo
+      }, () => {
+        this.fetch();
       });
     });
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })

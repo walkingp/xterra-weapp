@@ -50,7 +50,8 @@
     "pages/community/search/search",
     "pages/admin/events/fix/fix",
     "pages/my/idcard/idcard",
-    "pages/admin/events/my-checkin/my-checkin"
+    "pages/admin/events/my-checkin/my-checkin",
+    "pages/admin/users/users"
   ],
   "window": {
     "backgroundColor": "#ffffff",
@@ -165,9 +166,5 @@
     ]
   },
   "plugins": {
-    "ocr-plugin": {
-      "version": "3.0.4",
-      "provider": "wx4418e3e031e551be"
-    }
   }
 }

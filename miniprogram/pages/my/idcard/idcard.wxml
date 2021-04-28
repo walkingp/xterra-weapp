@@ -3,6 +3,16 @@
 <van-cell border="{{ false }}">
   <button disabled="{{loading}}" bindtap="takePhoto" type="primary">{{src ? '识别下一个' : '识别'}}</button>
 </van-cell>
+<form bindsubmit="manualSearch">
+  <van-cell-group title="或者手工录入">
+    <van-field name="id" center clearable label="证件号" placeholder="证件号后6位" border="{{ false }}"
+      use-button-slot>
+      <van-button slot="button" form-type="submit" size="small" type="primary">
+        查询
+      </van-button>
+    </van-field>
+  </van-cell-group>
+</form>
 <van-cell-group wx:if="{{src && user}}">
   <van-cell title="姓名" value="{{user.name}}" />
   <van-cell title="性别" value="{{user.gender}}" />
@@ -22,3 +32,12 @@
     <button bindtap="checkIn" disabled="{{loading}}" type="primary">资料无误，确认检录</button>
   </van-cell>
 </van-cell-group>
+<block wx:else>
+  <van-notice-bar wrapable scrollable="{{ false }}" color="#1989fa" background="#ecf9ff" left-icon="info-o"
+    text="当前检录赛事：{{race.title}}" />
+  <view class="tooltip">
+    <text>
+      注意事项：请务必认真核对身份证证件信息；确认无误后发放参赛物资并确认完成检录。
+    </text>
+  </view>
+</block>
