@@ -1,6 +1,7 @@
 const {
   getRaceDetail
 } = require("../../../api/race");
+const config = require("../../../config/config");
 const {
   getSingleCollectionByWhere,
   getCollectionByWhere
@@ -26,11 +27,16 @@ Page({
     hasUnchecked: false,
     race: null,
     results: null,
+    isByManual: false,
+    currentRaces: []
   },
   async manualSearch(e){
     const { raceId } = this.data;
     const { id } = e.detail.value;
     if(!id){
+      wx.showToast({
+        title: '请输入后6位证件号',
+      })
       return;
     }
     
@@ -53,6 +59,7 @@ Page({
     this.setData({
       loading: false,
       isChecked: true,
+      isByManual: true,
       results: res.data
     }, ()=>{
       wx.showToast({
@@ -198,6 +205,7 @@ Page({
           id
         } = res.result;
         that.setData({
+          isByManual: false,
           user: res.result
         }, () => {
           that.search(id);
@@ -216,23 +224,62 @@ Page({
   async fetch(){
     const db = wx.cloud.database();
     const _ = db.command;
-    const userTable = db.collection("start-list");
-    const config = await getSingleCollectionByWhere({
+    const configData = await getSingleCollectionByWhere({
       dbName: 'config',
       filter: {
         currentRaceId: _.neq(null)
       }
     });
-    if (config) {
-      const race = await getRaceDetail(config.currentRaceId);
+    if (configData) {
+      let raceId = configData.currentRaceId[0];
+      let race = null;
+      if(wx.getStorageSync(config.storageKey.currentCheckInRace)){
+        race = wx.getStorageSync(config.storageKey.currentCheckInRace);
+      }else{
+        race = await getRaceDetail(raceId);
+        const { _id, title } = race;
+        wx.setStorageSync(config.storageKey.currentCheckInRace, { id: _id, title })
+      }
       wx.setNavigationBarTitle({
         title: race.title + ' | 志愿者检录',
       })
       this.setData({
-        raceId: config.currentRaceId,
+        raceId,
         race
       })
+      this.getCheckinRaces();
     }
+  },
+  async getCheckinRaces(){
+      wx.cloud.callFunction({
+        name: 'getCheckInRaces'
+      }).then(res => {
+        const currentRaces = res.result.list[0].races.map(item=>{
+          const { _id, title} = item;
+          return { id: _id, name: title };
+        });
+        this.setData({
+          currentRaces
+        })
+        console.log(currentRaces)
+      })
+  },
+  onClose() {
+    this.setData({ show: false });
+  },
+  selectRaces() {
+    this.setData({ show: true });
+  },
+  onSelect(event) {
+    console.log(event.detail);
+    const { id, name } = event.detail;
+    const race = { _id: id, title: name };
+    this.setData({
+      raceId: id,
+      race
+    });
+    
+    wx.setStorageSync(config.storageKey.currentCheckInRace, race)
   },
   async search(id) {
     wx.showLoading({

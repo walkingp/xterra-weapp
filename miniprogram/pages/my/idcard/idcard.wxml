@@ -5,8 +5,7 @@
 </van-cell>
 <form bindsubmit="manualSearch">
   <van-cell-group title="或者手工录入">
-    <van-field name="id" center clearable label="证件号" placeholder="证件号后6位" border="{{ false }}"
-      use-button-slot>
+    <van-field name="id" center clearable label="证件号" placeholder="证件号后6位" border="{{ false }}" use-button-slot>
       <van-button slot="button" form-type="submit" size="small" type="primary">
         查询
       </van-button>
@@ -21,9 +20,29 @@
 <van-cell-group wx:if="{{isChecked}}" title="参赛信息(共{{results.length}}条）">
   <van-cell title-width="80px" title="比赛" value="{{race.title}}" />
   <block wx:for="{{results}}" wx:key="_id">
-    <van-cell title="组别" value="{{item.cateTitle}}" />
-    <van-cell title="参赛号" value="{{item.bibNum}}" />
-    <van-cell title="状态" value="{{item.finishedStatus === 'notStart' || !item.finishedStatus ? '未检录' : '已检录'}}" />
+    <block wx:if="{{isByManual}}">
+      <van-cell center label="{{item.cardNo}}">
+        <view slot="title">
+          <view class="van-cell-text">{{item.trueName}} <van-tag plain type="primary">{{item.gender}}</van-tag>
+          </view>
+        </view>
+        <view>T恤：<van-tag type="primary">{{item.tSize}}</van-tag>
+        </view>
+      </van-cell>
+    </block>
+    <van-cell center>
+      <view slot="title">
+        <view class="van-cell-text">{{item.bibNum}}</view>
+        <view>
+          <van-tag plain type="primary">{{item.cateTitle}}</van-tag>
+        </view>
+      </view>
+      <view>
+        <van-tag type="danger" plain wx:if="{{item.finishedStatus === 'notStart' || !item.finishedStatus}}">未检录
+        </van-tag>
+        <van-tag type="success" wx:else>已检录</van-tag>
+      </view>
+    </van-cell>
   </block>
   <!-- <van-cell title="民族" value="{{user.nationality}}" />
   <van-cell title="生日" value="{{user.birth}}" />
@@ -33,11 +52,12 @@
   </van-cell>
 </van-cell-group>
 <block wx:else>
-  <van-notice-bar wrapable scrollable="{{ false }}" color="#1989fa" background="#ecf9ff" left-icon="info-o"
+  <van-notice-bar bind:click="selectRaces" wrapable mode="link" scrollable="{{ false }}" color="#1989fa" background="#ecf9ff" left-icon="info-o"
     text="当前检录赛事：{{race.title}}" />
   <view class="tooltip">
     <text>
       注意事项：请务必认真核对身份证证件信息；确认无误后发放参赛物资并确认完成检录。
     </text>
   </view>
+  <van-action-sheet show="{{ show }}" cancel-text="取消" actions="{{ currentRaces }}" bind:close="onClose" bind:select="onSelect" />
 </block>

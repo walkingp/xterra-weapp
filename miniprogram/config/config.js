@@ -7,7 +7,8 @@ const config = {
   mapKey: 'YOWBZ-MK263-F7G3H-YWGGY-RGHKQ-ACFNH',
   storageKey: {
     kits: 'xterra.kits',
-    searchHistory: 'searchHistory'
+    searchHistory: 'searchHistory',
+    currentCheckInRace: 'currentCheckInRace'
   },
   messageTemplates: {
     registration: {
