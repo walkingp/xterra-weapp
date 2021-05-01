@@ -7,27 +7,49 @@
       </view>
       <van-cell-group>
         <van-cell title="{{raceDetail.title}}" size="large" border="{{ false }}" />
-        <van-cell wx:if="{{isPlogging}}" title="请选择分站" bind:click="showAction" data-type="cate" border="{{ false }}" is-link value="{{defaultCate}}" />
-        <van-cell title="请选择查询者" bind:click="showAction" data-type="profile" border="{{ false }}" is-link value="{{defaultName}}" />
-        <van-field label="或者直接输入证件号" title-width="10em" name="cardNo" value="{{ cardNo }}" placeholder="请输入11位手机号" border="{{ false }}" />
+        <van-cell wx:if="{{isPlogging}}" title="请选择分站" bind:click="showAction" data-type="cate" border="{{ false }}"
+          is-link value="{{defaultCate}}" />
+        <van-cell title="请选择查询者" bind:click="showAction" data-type="profile" border="{{ false }}" is-link
+          value="{{defaultName}}" />
+        <van-field label="或者直接输入证件号" title-width="10em" name="cardNo" value="{{ cardNo }}" placeholder="请输入11位手机号"
+          border="{{ false }}" />
         <van-cell border="{{ false }}">
           <button form-type="submit" class="primary button block">查询</button>
         </van-cell>
       </van-cell-group>
     </form>
-    <van-action-sheet show="{{ show }}" cancel-text="取消" actions="{{ actions }}" bind:cancel="onClose" bind:close="onClose" bind:select="onSelect" />
+    <van-action-sheet show="{{ show }}" cancel-text="取消" actions="{{ actions }}" bind:cancel="onClose"
+      bind:close="onClose" bind:select="onSelect" />
   </view>
   <view class="box result">
     <van-tabs active="{{ type }}" bind:change="onChange">
       <van-tab title="报名" name="registration">
-        <van-cell-group wx:if="{{searchedReg}}">
-          <van-cell title="姓名" border="{{ false }}" value="{{searchedReg.trueName}}" />
-          <van-cell title="性别" border="{{ false }}" value="{{searchedReg.gender}}" />
-          <van-cell title="证件类型" border="{{ false }}" value="{{searchedReg.cardType}}" />
-          <van-cell title="证件号码" border="{{ false }}" value="{{searchedReg.cardNo}}" />
-          <van-cell title="报名状态" border="{{ false }}" value="{{searchedReg.statusText}}" />
-          <van-cell title="报名时间" border="{{ false }}" value="{{searchedReg.regDate}}" />
-        </van-cell-group>
+        <block wx:if="{{searchedReg}}">
+          <van-cell-group>
+            <van-cell title="姓名" border="{{ false }}" value="{{searchedReg.trueName}}" />
+            <van-cell title="性别" border="{{ false }}" value="{{searchedReg.gender}}" />
+            <van-cell title="证件类型" border="{{ false }}" value="{{searchedReg.cardType}}" />
+            <van-cell title="证件号码" border="{{ false }}" value="{{searchedReg.cardNo}}" />
+            <van-cell title="报名状态" border="{{ false }}" value="{{searchedReg.statusText}}" />
+            <van-cell title="报名时间" border="{{ false }}" value="{{searchedReg.regDate}}" />
+          </van-cell-group>
+          <van-cell-group title="检录信息">
+            <van-cell center wx:for="{{bibUsers}}" wx:key="_id">
+              <view slot="title">
+                <view class="van-cell-text">{{item.bibNum}}</view>
+                <view>
+                  <van-tag plain type="primary">{{item.cateTitle}}</van-tag>
+                </view>
+              </view>
+              <view>
+                <van-tag type="danger" plain wx:if="{{item.finishedStatus === 'notStart' || !item.finishedStatus}}">未检录
+                </van-tag>
+                <van-tag type="success" wx:else>已检录</van-tag>
+              </view>
+            </van-cell>
+          </van-cell-group>
+
+        </block>
         <block wx:else>
           <van-empty image="search" description="没有查询到报名" />
         </block>

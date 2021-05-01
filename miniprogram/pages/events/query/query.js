@@ -12,6 +12,7 @@ const {
 const {
   raceResultStatus
 } = require("../../../config/const");
+const { getSingleCollectionByWhere, getCollectionByWhere } = require("../../../utils/cloud");
 const app = getApp();
 Page({
 
@@ -143,8 +144,10 @@ Page({
         });
         return;
       }
+      const bibUsers = await getCollectionByWhere({ dbName: 'start-list', filter: { raceId, cardNo }});
       searchedReg.regDate = dayjs(searchedReg.createdAt).format("YYYY-MM-DD HH:mm:ss");
       this.setData({
+        bibUsers,
         searchedReg
       }, () => {
         wx.hideLoading({
