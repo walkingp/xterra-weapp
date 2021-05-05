@@ -95,7 +95,7 @@ Page({
             cardNo: user.id,
             checkinUserId: userId,
             checkinTrueName: userInfo.truename,
-            raceId: race._id,
+            raceId: race.id,
             raceTitle: race.title,
             cateId,
             cateTitle,
@@ -236,9 +236,10 @@ Page({
       if(wx.getStorageSync(config.storageKey.currentCheckInRace)){
         race = wx.getStorageSync(config.storageKey.currentCheckInRace);
       }else{
-        race = await getRaceDetail(raceId);
-        const { _id, title } = race;
-        wx.setStorageSync(config.storageKey.currentCheckInRace, { id: _id, title })
+        const _race = await getRaceDetail(raceId);
+        const { _id, title } = _race;
+        race = { id: _id, title };
+        wx.setStorageSync(config.storageKey.currentCheckInRace, race)
       }
       wx.setNavigationBarTitle({
         title: race.title + ' | 志愿者检录',
@@ -273,7 +274,7 @@ Page({
   onSelect(event) {
     console.log(event.detail);
     const { id, name } = event.detail;
-    const race = { _id: id, title: name };
+    const race = { id, title: name };
     this.setData({
       raceId: id,
       race
@@ -291,7 +292,7 @@ Page({
     const { race } = this.data;
     if(race){
       const results = await userTable.where({
-        raceId: race._id,
+        raceId: race.id,
         cardNo: id
       }).get();
       if (results.data.length == 0) {

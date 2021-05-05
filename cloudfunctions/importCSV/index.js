@@ -63,7 +63,7 @@ async function insertSingle(raceId, row, mode){
   const cardType = row[9]; //证件类型
   const cardNo = row[10];
   const birthDate = formatDate(row[11]);
-  const age = 0;
+  const age = new Date().getFullYear() - birthDate.getFullYear();
   const email = row[12];
   const phoneNum = row[6];
   const nation = row[8];
@@ -114,15 +114,19 @@ async function insertSingle(raceId, row, mode){
       age
     };
 
-    let result = await startListTable.add({
-      data
-    });
-    console.log('start-list', result);
-    result = await insertRegistration(data);
-    console.log('registration', result);
-    ++ succCount;
+    try{
+      let result = await startListTable.add({
+        data
+      });
+      console.log('start-list', result);
+      result = await insertRegistration(data);
+      console.log('registration', result);
+      ++ succCount;
+    }catch(err){
+      console.error(err)
+      ++ failedCount;
+    }
   }
-  ++ failedCount;
 }
 
 async function insertRegistration(param){
