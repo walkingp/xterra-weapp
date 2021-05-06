@@ -56,7 +56,9 @@ Page({
         $options: 'i'
       }
     }).get();
+    const hasUnchecked = res.data.some(item=> item.finishedStatus === 'notStart' || !item.finishedStatus);
     this.setData({
+      hasUnchecked,
       loading: false,
       isChecked: true,
       isByManual: true,
@@ -252,6 +254,7 @@ Page({
     }
   },
   async getCheckinRaces(){
+    try{
       wx.cloud.callFunction({
         name: 'getCheckInRaces'
       }).then(res => {
@@ -264,6 +267,9 @@ Page({
         })
         console.log(currentRaces)
       })
+    }catch(err){
+      console.error(err);
+    }
   },
   onClose() {
     this.setData({ show: false });
@@ -306,7 +312,6 @@ Page({
       }
 
       const hasUnchecked = results.data.some(item=> item.finishedStatus === 'notStart' || !item.finishedStatus);
-
       this.setData({
         loading: false,
         isChecked: true,
@@ -340,7 +345,7 @@ Page({
         })
         return;
       };
-      const hasRole = userInfo.role === 'admin' || user.role === 'volunteer';
+      const hasRole = userInfo.role === 'admin' || userInfo.role === 'volunteer';
       if(!hasRole){
         wx.showToast({
           title: '没有权限',
