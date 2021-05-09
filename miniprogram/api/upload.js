@@ -16,6 +16,22 @@ export const getExcels = async ( raceId, pageIndex = 1, pageSize = 100) => {
   return data;
 }
 
+
+export const getResultExcel = async ( raceId, pageIndex = 1, pageSize = 100) => {
+  const data = await getPaginations({
+    dbName: 'results',
+    filter: {
+      raceId
+    },
+    orderBy: {
+      _createTime: 'desc'
+    },
+    pageIndex,
+    pageSize
+  })
+  return data;
+}
+
 export const getImportedUsers = async ( raceId, pageIndex = 1, pageSize = 1000) => {
   const data = await getPaginations({
     dbName: 'start-list',

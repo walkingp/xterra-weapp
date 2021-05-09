@@ -26,6 +26,7 @@
     "pages/events/users/users",
     "pages/admin/events/events",
     "pages/admin/events/registration/registration",
+    "pages/admin/events/result/result",
     "pages/admin/events/start-list/start-list",
     "pages/admin/qrcode/qrcode",
     "pages/admin/events/finance/finance",

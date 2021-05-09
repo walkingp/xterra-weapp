@@ -147,13 +147,13 @@
         {
           "name": "查询成绩",
           "pathName": "pages/events/query/query",
-          "query": "raceId=b45a21d55fe30169000a26693c7ad4f9&type=result",
+          "query": "raceId=21ded5cb5fe59992000dc46f4b31b4f8&type=result",
           "scene": null
         },
         {
           "name": "下载证书",
           "pathName": "pages/events/cert/cert",
-          "query": "raceId=ce805e785fe2c45d0008e6431622c51f&cateId=21ded5cb5fe2d140000a55f67fe4dbb8&id=ce805e785ff7d0dd03ab518343d83639",
+          "query": "raceId=21ded5cb5fe59992000dc46f4b31b4f8&cateId=null&id=b00064a76097fc1a161a59d41a4e7907",
           "scene": null
         },
         {
@@ -250,6 +250,12 @@
           "name": "志愿者检录",
           "pathName": "pages/my/idcard/idcard",
           "query": "id=0bcbdde05fc3a636006efd9971c76de4&type=relay",
+          "scene": null
+        },
+        {
+          "name": "导入比赛成绩",
+          "pathName": "pages/admin/events/result/result",
+          "query": "raceId=21ded5cb5fe59992000dc46f4b31b4f8",
           "scene": null
         }
       ]

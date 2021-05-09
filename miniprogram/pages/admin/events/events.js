@@ -84,8 +84,8 @@ Page({
         type: 'import'
       },
       {
-        name: '查看比赛成绩',
-        disabled: true,
+        name: '导入比赛成绩',
+        subname: '导入已经上传的成绩文件',
         type: 'result'
       },
       {

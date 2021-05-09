@@ -101,6 +101,7 @@ Page({
   },
   async formatFields(){
     let { fields, id, isMillionForrest, cateId } = this.data;
+    debugger
     const cateDetail = await getRaceCateDetail(cateId);
     const result = await getResultDetail(id);
     fields.map(item=>{

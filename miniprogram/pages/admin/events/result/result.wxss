@@ -1,0 +1,3 @@
+.copyable{
+  text-decoration: underline;
+}
