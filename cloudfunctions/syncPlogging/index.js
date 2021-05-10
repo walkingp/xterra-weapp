@@ -27,7 +27,6 @@ exports.main = async (event, context) => {
   .end();
   res.list.forEach(async item=>{
     const { cardNo } = item._id;
-    debugger
     await userTable.where({ cardNo, raceType: 'X-Plogging' }).update({
       data: {
         plogging: item.num > 1 ? '是' : '否'

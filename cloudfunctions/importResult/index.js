@@ -5,7 +5,7 @@ cloud.init({
 })
 var xlsx = require('node-xlsx');
 const db = cloud.database()
-
+const _ = db.command;
 let succCount = 0;
 let failedCount = 0;
 
@@ -44,6 +44,7 @@ async function insertSingle(raceId, cateTitle, row, mode){
 
   if(res.data.length){
     const { cateId, cateTitle, phoneNum, cardType, cardNo } = res.data[0];
+    const millionForrestNo = await generateMillionForrestNumber();
 
     const data = {
       trueName,
@@ -62,9 +63,9 @@ async function insertSingle(raceId, cateTitle, row, mode){
       cardNo,
       genderRank,
       overallRank,
-      checkPoints
+      checkPoints,
+      millionForrestNo
     };
-    debugger
   
     try{
       let result = await resultTable.add({
@@ -76,9 +77,16 @@ async function insertSingle(raceId, cateTitle, row, mode){
       console.error(err)
       ++ failedCount;
     }
-
   }
+}
 
+async function generateMillionForrestNumber(){
+  const res = await resultTable.where({
+    millionForrestNo: _.not(_.eq(null))
+  }).count();
+  const count = res.total + 1;
+  const millionForrestNo = new Date().getFullYear() + count.toString().padStart(5,'0');
+  return millionForrestNo;
 }
 
 exports.main = async (event, context) => {

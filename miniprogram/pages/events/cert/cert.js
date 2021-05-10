@@ -68,13 +68,13 @@ Page({
     this.setData({
       fields
     });
+    const { isMillionForrest } = this.data;
+    const temps = await getPloggingTemplate();
     if(isPlogging){
-      const temps = await getPloggingTemplate();
-      const { isMillionForrest } = this.data;
       // 百万森林
       cert = isMillionForrest ? temps[1] : temps[0];
     }else{
-      cert = await getCertTemplate(raceDetail._id);
+      cert = isMillionForrest ? temps[1] : await getCertTemplate(raceDetail._id);
     }
 
     const { tempFileUrl } = cert;
@@ -100,36 +100,42 @@ Page({
     })
   },
   async formatFields(){
-    let { fields, id, isMillionForrest, cateId } = this.data;
-    debugger
-    const cateDetail = await getRaceCateDetail(cateId);
+    let { fields, id, isMillionForrest, isPlogging, cateId } = this.data;
     const result = await getResultDetail(id);
-    fields.map(item=>{
-      switch(item.key){
-        case 'trueName':
-          item.value = result.trueName;
-          break;
-        case 'cityName':
-          item.value = result.city;
-          break;
-        case 'year':
-          item.value = new Date(cateDetail.cateDate || result.raceDate).getFullYear();
-          break;
-        case 'month':
-          item.value = new Date(cateDetail.cateDate || result.raceDate).getMonth() + 1;
-          break;
-        case 'date':
-          item.value = new Date(cateDetail.cateDate || result.raceDate).getDate();
-          break;
-      }
-      return item;
-    })
+    if(isPlogging){
+      const cateDetail = await getRaceCateDetail(cateId);
+      fields.map(item=>{
+        switch(item.key){
+          case 'trueName':
+            item.value = result.trueName;
+            break;
+          case 'cityName':
+            item.value = result.city;
+            break;
+          case 'year':
+            item.value = new Date(cateDetail.cateDate || result.raceDate).getFullYear();
+            break;
+          case 'month':
+            item.value = new Date(cateDetail.cateDate || result.raceDate).getMonth() + 1;
+            break;
+          case 'date':
+            item.value = new Date(cateDetail.cateDate || result.raceDate).getDate();
+            break;
+        }
+        return item;
+      })
+    }else{//正常比赛
+      fields.map(item=>{
+        item.value = result[item.key];
+        return item;
+      })
+    }
     if(isMillionForrest){
       fields = [{
         color: "#333",
         fontSize: 40,
         key: "millionForrestNo",
-        posX: 310,
+        posX: 210,
         posY: 200,
         textAlign: 'left',
         value: result.millionForrestNo
@@ -137,7 +143,7 @@ Page({
         color: "#333",
         fontSize: 80,
         key: "trueName",
-        posX: 528,
+        posX: 420,
         posY: 420,
         textAlign: 'left',
         value: result.trueName
@@ -154,8 +160,9 @@ Page({
 
     const texts = fields.map(item=>{
       return {
-        textAlign: 'center',
+        textAlign: item.textAlign || 'center',
         baseLine: 'bottom',
+        fontWeight: item.fontWeight || 'bold',
         x: item.posX,
         y: item.posY,
         text: item.value,

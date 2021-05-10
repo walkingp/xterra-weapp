@@ -63,7 +63,7 @@
           <van-cell wx:if="{{!isPlogging}}" title="完赛成绩" border="{{ false }}" value="{{searchResult.roughTime}}" />
           <van-cell wx:if="{{!isPlogging}}" title="净时间" border="{{ false }}" value="{{searchResult.netTime}}" />
           <van-cell wx:if="{{!isPlogging}}" title="组别排名" border="{{ false }}" value="{{searchResult.genderRank}}" />
-          <van-cell wx:if="{{!isPlogging}}" title="总排名" border="{{ false }}" value="{{searchResult.overalRanking}}" />
+          <van-cell wx:if="{{!isPlogging}}" title="总排名" border="{{ false }}" value="{{searchResult.overallRank}}" />
           <van-cell title="{{isPlogging ? '活动状态' : '完赛状态'}}" border="{{ false }}" value="{{searchResult.statusText}}" />
           <van-cell border="{{ false }}">
             <button data-id="{{searchResult._id}}" plain bindtap="viewCert" class="button block">下载证书</button>
