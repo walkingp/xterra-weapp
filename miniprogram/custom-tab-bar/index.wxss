@@ -3,7 +3,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  height: 64px;
+  height: 94rpx;
   background: #FFF;
   display: flex;
   line-height: 1.2;

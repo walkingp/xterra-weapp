@@ -3,6 +3,7 @@ Component({
     show: false,
     color: "#535353",
     selectedColor: "#000000",
+    bottom: 0,
     backgroundColor: "#ffffff",
     list: [{
         pagePath: "/pages/index/index",
@@ -37,7 +38,14 @@ Component({
     ]
   },
 
-  attached() {},
+  attached() {    
+      let screenHeight = wx.getSystemInfoSync().screenHeight
+      let bottom = wx.getSystemInfoSync().safeArea.bottom
+      console.log(screenHeight - bottom)
+      this.setData({
+        bottom: screenHeight - bottom
+      })
+  },
   methods: {
     switchTab(e) {
       const data = e.currentTarget.dataset
