@@ -3,16 +3,18 @@
   bottom: 0;
   left: 0;
   right: 0;
-  height: 48px;
+  height: 64px;
   background: #FFF;
   display: flex;
   line-height: 1.2;
   padding-bottom: env(safe-area-inset-bottom);
+  padding-bottom: constant(safe-area-inset-bottom);
   border-top: 1px solid #e6e6e6;
 }
 
 .tab-bar-item {
   flex: 1;
+  height: 48px;
   text-align: center;
   display: flex;
   justify-content: center;
@@ -20,8 +22,8 @@
   flex-direction: column;
 }
 .tab-bar-item .image {
-  width: 27px;
-  height: 27px;
+  width: 27px!important;
+  height: 27px!important;
 }
 .bulge {
   background-color: #FFF;
@@ -38,8 +40,8 @@
 }
 .bulge .image{
   position: absolute;
-  width: 40px;
-  height: 40px;
+  width: 40px!important;
+  height: 40px!important;
   top: -5rpx;
 }
 
