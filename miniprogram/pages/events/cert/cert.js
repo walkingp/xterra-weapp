@@ -16,6 +16,7 @@ Page({
     certUrl: null,
     fields: [],
     isPlogging: false,
+    isTriRace: false,
     type: null,
     isMillionForrest: false
   },
@@ -57,8 +58,10 @@ Page({
     let cert = null;
     const raceDetail = await getRaceDetail(id);
     const isPlogging = raceDetail.type === 'X-Plogging';
+    const isTriRace = raceDetail.type === '铁人三项';
     this.setData({
-      isPlogging
+      isPlogging,
+      isTriRace
     })
     wx.setNavigationBarTitle({
       title: raceDetail.title,
@@ -100,8 +103,8 @@ Page({
     })
   },
   async formatFields(){
-    let { fields, id, isMillionForrest, isPlogging, cateId } = this.data;
-    const result = await getResultDetail(id);
+    let { fields, id, isMillionForrest, isTriRace, isPlogging, cateId } = this.data;
+    const result = await getResultDetail(isTriRace, id);
     if(isPlogging){
       const cateDetail = await getRaceCateDetail(cateId);
       fields.map(item=>{

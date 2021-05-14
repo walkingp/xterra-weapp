@@ -5,8 +5,8 @@ export const searchResultByCardNo = async (isTriRace, filter) => {
   return data;
 }
 
-export const getResultDetail = async id => {
-  const data = await getSingleCollectionByWhere({ dbName: "race-result", filter: { _id: id} });
+export const getResultDetail = async (isTriRace, id) => {
+  const data = await getSingleCollectionByWhere({ dbName: isTriRace ? 'tri_result' : 'race-result', filter: { _id: id} });
   return data;
 }
 
