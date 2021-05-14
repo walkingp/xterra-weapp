@@ -40,7 +40,7 @@ Component({
             userInfo: res.userInfo,
             hasUserInfo: true
           })
-          this.callGetUserInfo();
+          this.callGetUserInfo(res.userInfo);
         }
       })
     },
@@ -48,14 +48,14 @@ Component({
       wx.showLoading({
         title: '登录中',
       })
-      var _this = this
       //需要用户同意授权获取自身相关信息
       if (e.detail.errMsg == "getUserInfo:ok") {
-        this.callGetUserInfo();
+        this.callGetUserInfo(e.detail.userInfo);
       } else
         console.log("未授权")
     },
-    callGetUserInfo() {
+    callGetUserInfo(userInfo) {
+      var _this = this
       //将授权结果写入app.js全局变量
       app.globalData.auth['scope.userInfo'] = true
       //尝试获取云端用户信息
@@ -86,9 +86,9 @@ Component({
               //调用注册方法
               console.log("未注册")
               _this.register({
-                nickName: e.detail.userInfo.nickName,
-                gender: e.detail.userInfo.gender,
-                avatarUrl: e.detail.userInfo.avatarUrl
+                nickName: userInfo.nickName,
+                gender: userInfo.gender,
+                avatarUrl: userInfo.avatarUrl
               })
             }
           await _this.fetch();

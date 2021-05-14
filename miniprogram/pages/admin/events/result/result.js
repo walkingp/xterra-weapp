@@ -18,6 +18,7 @@ Page({
     type: '',
     mode: '跳过',
     selectedIndex: 0,
+    isTriRace: false,
     users: [],
     showModal: false,
     detail: null
@@ -116,7 +117,7 @@ Page({
     });
   },
   saveNow(){
-    const { selectedIndex, files, raceId, mode } = this.data;
+    const { isTriRace, selectedIndex, files, raceId, mode } = this.data;
     const file = files[selectedIndex].tmplFile;
     if(!file){
       wx.showToast({
@@ -129,7 +130,7 @@ Page({
       title: '导入中',
     })
     wx.cloud.callFunction({
-      name: 'importResult',
+      name: isTriRace ? 'importTriResult' : 'importResult',
       data: {
         fileID: file,
         raceId,
@@ -211,6 +212,7 @@ Page({
     this.setData({
       users,
       detail,
+      isTriRace: detail.type === "铁人三项",
       files,
       actions
     },()=>{

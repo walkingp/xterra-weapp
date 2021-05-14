@@ -1,7 +1,7 @@
 import { getCollectionByWhere, getSingleCollectionByWhere } from "../utils/cloud"
 
-export const searchResultByCardNo = async (filter) => {
-  const data = await getSingleCollectionByWhere({ dbName: 'race-result', filter});
+export const searchResultByCardNo = async (isTriRace, filter) => {
+  const data = await getSingleCollectionByWhere({ dbName: isTriRace ? 'tri_result' : 'race-result', filter});
   return data;
 }
 

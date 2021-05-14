@@ -24,6 +24,7 @@ Page({
     cateId: null,
     raceDetail: null,
     show: false,
+    isTriRace: false,
     defaultName: '请选择',
     defaultCate: '请选择',
     cardNo: '',
@@ -89,6 +90,7 @@ Page({
       type,
       cateId,
       raceId,
+      isTriRace,
       isPlogging
     } = this.data;
     if(isPlogging && !cateId){
@@ -106,7 +108,7 @@ Page({
     } = e.detail.value;
     const param = isPlogging ? { cateId } : { raceId };
     if (type === 'result') {
-      let searchResult = await searchResultByCardNo({ cardNo, ...param });
+      let searchResult = await searchResultByCardNo(isTriRace, { cardNo, ...param });
       if(!searchResult){
         wx.showToast({
           icon: 'none',
@@ -275,6 +277,7 @@ Page({
       }
     });
     this.setData({
+      isTriRace: raceDetail.type === '铁人三项',
       isPlogging: raceDetail.type === 'X-Plogging',
       raceDetail
     })

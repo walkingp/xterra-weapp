@@ -147,7 +147,7 @@
         {
           "name": "查询成绩",
           "pathName": "pages/events/query/query",
-          "query": "raceId=21ded5cb5fe59992000dc46f4b31b4f8&type=result",
+          "query": "raceId=b00064a76049d98b0979e9d24bbda1d9&type=result",
           "scene": null
         },
         {
@@ -255,7 +255,7 @@
         {
           "name": "导入比赛成绩",
           "pathName": "pages/admin/events/result/result",
-          "query": "raceId=21ded5cb5fe59992000dc46f4b31b4f8",
+          "query": "raceId=b00064a76049d98b0979e9d24bbda1d9",
           "scene": null
         }
       ]
