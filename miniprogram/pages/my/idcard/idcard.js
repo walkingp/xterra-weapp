@@ -62,6 +62,9 @@ Page({
       loading: false,
       isChecked: true,
       isByManual: true,
+      user: {
+        id: res.data.length && res.data[0].cardNo
+      },
       results: res.data
     }, ()=>{
       wx.showToast({
