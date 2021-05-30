@@ -56,9 +56,35 @@ Page({
     detail.endRegTimeStr = dayjs(new Date(detail.endRegTime)).format("YYYY年MM月DD日 HH:mm:ss");
     detail.regStartTimeStr = dayjs(new Date(detail.regStartTime)).format("YYYY年MM月DD日 HH:mm:ss");
     detail.showAdminssion = detail.admission && detail.admission !== '<p>欢迎使用富文本编辑器</p>';
-    detail.admission = app.towxml(detail.admission,'html'); // 报名须知
+    detail.admission = app.towxml(detail.admission,'html', {
+      events: {
+        tap: e => {
+          const target = e.currentTarget.dataset.data;
+          if (target.tag === 'img') {
+            const url = target.attr.src;
+            wx.previewImage({
+              current: url,
+              urls: [url],
+            })
+          }
+        }
+      }
+    }); // 报名须知
     detail.showContent = !detail.isPlogging && detail.content && detail.content !== '<p>欢迎使用富文本编辑器</p>';
-    detail.content = app.towxml(detail.content,'html');
+    detail.content = app.towxml(detail.content,'html', {
+      events: {
+        tap: e => {
+          const target = e.currentTarget.dataset.data;
+          if (target.tag === 'img') {
+            const url = target.attr.src;
+            wx.previewImage({
+              current: url,
+              urls: [url],
+            })
+          }
+        }
+      }
+    });
     detail.showFlow = detail.flow && detail.flow !== '<p>欢迎使用富文本编辑器</p>';
     detail.flow = app.towxml(detail.flow,'html');
     detail.showCuisine = detail.cuisine && detail.cuisine !== '<p>欢迎使用富文本编辑器</p>';

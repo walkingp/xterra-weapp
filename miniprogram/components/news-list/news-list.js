@@ -1,3 +1,5 @@
+import { updateNewView } from "../../api/news";
+
 // components/news-list/news-list.js
 Component({
   /**
@@ -33,8 +35,9 @@ Component({
    * 组件的方法列表
    */
   methods: {
-    redirect(e){
-      const { url, wechaturl } = e.currentTarget.dataset;
+    async redirect(e){
+      const { id, url, wechaturl } = e.currentTarget.dataset;
+      await updateNewView(id);
       if(wechaturl){
         wx.navigateTo({
           url: `/pages/more/webview/webview?url=${wechaturl}`,

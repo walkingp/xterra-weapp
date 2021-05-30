@@ -20,3 +20,14 @@ export const getNewsDetail = async id => {
   const data = await getCollectionById({ dbName: "news", id});
   return data;
 }
+
+export const updateNewView = async id => {
+  const db = wx.cloud.database();
+  const _ = db.command;
+  const newsDb = db.collection("news");
+  await newsDb.doc(id).update({
+    data: {
+      click: _.inc(1)
+    }
+  })
+};

@@ -22,7 +22,7 @@
           </view>
           <view class="cell" wx:if="{{detail.cates!=='/'}}">
             <text>{{type}}组别：</text>
-            <text class="text">{{detail.cates}}</text>
+            <text selectable="{{true}}" class="text">{{detail.cates}}</text>
           </view>
           <block wx:if="{{!detail.isPlogging}}">
             <view class="cell">
@@ -100,7 +100,7 @@
         </block>
         <van-tab name="admission" title="报名须知" wx:if="{{detail.showAdminssion}}">
           <towxml nodes="{{detail.admission}}" />
-        </van-tab>
+        </van-tab> 
         <van-tab name="flow" title="{{type}}流程" wx:if="{{detail.showFlow}}">
           <towxml nodes="{{detail.flow}}" />
         </van-tab>

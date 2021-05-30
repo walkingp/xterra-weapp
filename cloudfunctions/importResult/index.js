@@ -28,7 +28,32 @@ async function insertSingle(raceId, cateTitle, row, mode){
   const cp1=row[8];
   const cp2=row[9];
   const cp3=row[10];
-  const checkPoints = [{ title: 'CP1', time: cp1 }, { title: 'CP2', time: cp2 }, { title: 'CP3', time: cp3 }]
+  const cp4=row[11];
+  const cp5=row[12];
+  const cp6=row[13];
+  const cp7=row[14];
+  let checkPoints = [];
+  if(cp1){
+    checkPoints.push({ title: 'CP1', time: cp1 })
+  }
+  if(cp2){
+    checkPoints.push({ title: 'CP2', time: cp2 })
+  }
+  if(cp3){
+    checkPoints.push({ title: 'CP3', time: cp3 })
+  }
+  if(cp4){
+    checkPoints.push({ title: 'CP4', time: cp4 })
+  }
+  if(cp5){
+    checkPoints.push({ title: 'CP5', time: cp5 })
+  }
+  if(cp6){
+    checkPoints.push({ title: 'CP6', time: cp6 })
+  }
+  if(cp7){
+    checkPoints.push({ title: 'CP7', time: cp7 })
+  }
   const existed = await resultTable.where({ raceId, bib }).get();
   if(existed.data.length > 0){
     if(mode === 'replace'){ //覆盖
@@ -47,6 +72,7 @@ async function insertSingle(raceId, cateTitle, row, mode){
     const millionForrestNo = await generateMillionForrestNumber();
 
     const data = {
+      _createTime: new Date(),
       trueName,
       status: 'done',
       gender,
