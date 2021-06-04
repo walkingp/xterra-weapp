@@ -312,6 +312,7 @@ Page({
       item.regDate = dayjs(new Date(item.createdAt)).format("YYYY-MM-DD HH:mm:ss");
       return item;
     })
+    console.log(users)
 
     this.setData({
       stats: `已报名${users.length}人`,

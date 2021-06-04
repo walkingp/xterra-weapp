@@ -3,3 +3,6 @@
 .title{
   font-weight: bold;
 }
+.list .van-radio, .list .van-checkbox{
+  margin-bottom: 10px;
+}

@@ -292,8 +292,7 @@ Page({
     const { detail } = this.data;
     return {
       title: detail.title,
-      imageUrl: "",
-      path: `/pages/events/detail/detail?id=${detail._id}`
+      query: `id=${detail._id}`
     }
   },
   /**

@@ -54,8 +54,7 @@ Page = function(app) {
     app.onShareTimeline = function() {
       return {
         title: config.appTitle,
-        imageUrl: "",
-        path: '/pages/index/index'
+        query: ''
       }
     }
   }

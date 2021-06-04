@@ -15,6 +15,9 @@ exports.main = async (event, context) => {
   .match({
     raceType: 'X-Plogging'
   })
+  .sort({
+    createdAt: -1
+  })
   .group({
     _id: {
       cardNo: '$cardNo',
