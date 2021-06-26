@@ -85,7 +85,7 @@ Page({
   onFilterChanged(e){
     const { type } = e.currentTarget.dataset;
     const value = e.detail;
-    let region = '', status = '', _type = '';
+    let { region = "", status = "", _type ="" } = this.data;
     switch(type){
       case 'region':
         region = value;
@@ -97,6 +97,9 @@ Page({
         _type = value;
         break;
     }
+    this.setData({
+      region, status, _type
+    });
     const filters = {
       region: region,
       status: status,
@@ -108,7 +111,7 @@ Page({
     races = allRaces.filter(item=>{
       const exist = keys.every(key=> {
         if(filters[key]){
-          return item[key] === filters[key];
+          return key === 'status' ? item[key].value === filters[key] : item[key] === filters[key];
         }else{
           return true;
         }

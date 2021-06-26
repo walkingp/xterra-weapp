@@ -167,6 +167,7 @@ Page({
   },
   async fetch(id) {
     let detail = await getProfileDetail(id);
+    console.log(detail)
 
     const {
       wechatId,
@@ -188,7 +189,8 @@ Page({
       contactUser,
       contactUserPhone,
       email,
-      phoneNum
+      phoneNum,
+      fields
     } = detail;
     if (certPic) {
       this.setData({
@@ -198,7 +200,22 @@ Page({
         }]
       })
     }
+    debugger
+    fields.map(item => {
+      if (item.options) {
+        item.options_arr = item.options.split(';');
+      }
+      if(item.defaultVal){
+        if(item.defaultVal.split(';').length === 1){
+          item.value = item.defaultVal;
+        }else{
+          item.value = item.defaultVal.split(';');
+        }
+      }
+      return item;
+    });
     this.setData({
+      fields,
       wechatId,
       pinyinLast,
       pinyinFirst,
@@ -577,9 +594,12 @@ Page({
           }
           if(item.defaultVal.split(';').length === 1){
             item.value = item.defaultVal;
+          }else{
+            item.value = item.defaultVal.split(';');
           }
           return item;
         })
+        console.log(cateDetail)
         this.setData({
           fields: cateDetail.fields,
           cateDetail: cateDetail

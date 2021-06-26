@@ -59,8 +59,8 @@
         </view>
       </van-cell>
     </van-cell-group>
-    <van-cell-group title="自定义项" wx:if="{{cateDetail.fields.length}}">
-      <block wx:for="{{cateDetail.fields}}" wx:key="_id">
+    <van-cell-group title="自定义项" wx:if="{{fields.length}}">
+      <block wx:for="{{fields}}" wx:key="_id">
         <block wx:if="{{item.type === 'radiobox'}}">
           <van-cell title="{{item.title}}">
             <van-radio-group class="list" value="{{fields[index].value}}" data-idx="{{index}}" bind:change="onRadioChange">
@@ -78,11 +78,11 @@
           </van-cell>
         </block>
         <block wx:if="{{item.type === 'input'}}">
-          <van-field bind:blur="onInputChange" data-idx="{{index}}" clearable label="{{item.title}}" required="{{item.isRequired}}" value="{{item.options}}"
+          <van-field bind:blur="onInputChange" data-idx="{{index}}" clearable label="{{item.title}}" required="{{item.isRequired}}" value="{{fields[index].value}}"
             placeholder="{{item.desc}}" />
         </block>
         <block wx:if="{{item.type === 'textarea'}}">
-          <van-field bind:blur="onInputChange" data-idx="{{index}}" clearable label="{{item.title}}" type="textarea" autosize required="{{item.isRequired}}" value="{{item.options}}"
+          <van-field bind:blur="onInputChange" data-idx="{{index}}" clearable label="{{item.title}}" type="textarea" autosize required="{{item.isRequired}}" value="{{fields[index].value}}"
             placeholder="{{item.desc}}" />
         </block>
         <block wx:if="{{item.type === 'file'}}">
