@@ -200,8 +200,7 @@ Page({
         }]
       })
     }
-    debugger
-    fields.map(item => {
+    fields && fields.map(item => {
       if (item.options) {
         item.options_arr = item.options.split(';');
       }
