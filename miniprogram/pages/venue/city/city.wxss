@@ -1,0 +1,49 @@
+page{
+  background-color: #fff;
+  color: #313030;
+}
+.city{
+  padding: 50rpx 18rpx;
+}
+.header{
+  margin-bottom: 30rpx;
+}
+.header .title{
+  font-size: 64rpx;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  padding-bottom: 20rpx;
+}
+.info{
+  font-size: 24rpx;
+  color: #666;
+}
+.item{
+  width: 714rpx;
+  height: 315rpx;
+  background-color: #F0F0F0;
+  overflow: hidden;
+}
+.item+.item{
+  margin-top: 34rpx;
+}
+.item image{
+  width: 420rpx;
+}
+.text text{
+  text-align: center;
+  display: block;
+  color: #666;
+  font-size: 24rpx;
+}
+.text .name{
+  color: #333;
+  font-size: 42rpx;
+  font-weight: bold;
+  padding-bottom: 10rpx;
+}
+.more{
+  font-size: 32rpx;
+  font-weight: bold;
+  letter-spacing: 4rpx;
+  padding: 50rpx 0;
+}

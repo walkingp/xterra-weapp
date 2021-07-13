@@ -263,6 +263,12 @@
           "pathName": "pages/register/form/form",
           "query": "action=add&raceId=21ded5cb60015f850515f27d48d9da70&cateId=21ded5cb60015fed0515fc1447da8e09",
           "scene": null
+        },
+        {
+          "name": "选择城市",
+          "pathName": "pages/venue/city/city",
+          "query": "",
+          "scene": null
         }
       ]
     }

@@ -52,7 +52,8 @@
     "pages/admin/events/fix/fix",
     "pages/my/idcard/idcard",
     "pages/admin/events/my-checkin/my-checkin",
-    "pages/admin/users/users"
+    "pages/admin/users/users",
+    "pages/venue/city/city"
   ],
   "window": {
     "backgroundColor": "#ffffff",
@@ -73,6 +74,7 @@
     "banner-list": "/components/banner-list/banner-list",
     "community-list": "/components/community-list/community-list",
     "coupon-list": "/components/coupon-list/coupon-list",
+    "venue-list": "/components/venue-list/venue-list",
     "news-list": "/components/news-list/news-list",
     "race-list": "/components/race-list/race-list",
     "feed-list": "/components/feed-list/feed-list",
@@ -129,43 +131,42 @@
     }
   },
   "tabBar": {
-    "custom": true,
-    "color": "#535353",
-    "selectedColor": "#000000",
-    "backgroundColor": "#ffffff",
+    "custom": false,
+    "color": "#B5B5B6",
+    "selectedColor": "#2E2D2F",
+    "backgroundColor": "#F2F3F3",
     "list": [
       {
         "pagePath": "pages/index/index",
         "text": "首页",
-        "iconPath": "pages/tabs/home@2x.png",
-        "selectedIconPath": "pages/tabs/home_fill@2x.png"
+        "iconPath": "images/tabs/home.png",
+        "selectedIconPath": "images/tabs/home_active.png"
       },
       {
         "pagePath": "pages/events/events",
         "text": "活动",
-        "iconPath": "pages/tabs/events@2x.png",
-        "selectedIconPath": "pages/tabs/events_fill@2x.png"
+        "iconPath": "images/tabs/events.png",
+        "selectedIconPath": "images/tabs/events_active.png"
       },
       {
         "pagePath": "pages/community/index/index",
         "text": "社区",
-        "iconPath": "pages/tabs/community@2x.png",
-        "selectedIconPath": "pages/tabs/community_fill@2x.png"
+        "iconPath": "images/tabs/community.png",
+        "selectedIconPath": "images/tabs/community_active.png"
       },
       {
         "pagePath": "pages/news/news",
         "text": "媒体中心",
-        "iconPath": "pages/tabs/news.png",
-        "selectedIconPath": "pages/tabs/news-fill.png"
+        "iconPath": "images/tabs/news.png",
+        "selectedIconPath": "images/tabs/news_active.png"
       },
       {
         "pagePath": "pages/my/my",
         "text": "我的",
-        "iconPath": "pages/tabs/my@2x.png",
-        "selectedIconPath": "pages/tabs/my_fill@2x.png"
+        "iconPath": "images/tabs/my.png",
+        "selectedIconPath": "images/tabs/my_active.png"
       }
     ]
   },
-  "plugins": {
-  }
+  "plugins": {}
 }

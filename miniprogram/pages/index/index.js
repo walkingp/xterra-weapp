@@ -17,6 +17,7 @@ Page({
     banners: [],
     news: [],
     races: [],
+    headerBarHeight: 60,
     current: 0
   },  
   swiperChange(e) {
@@ -25,14 +26,6 @@ Page({
     })
   },
   mainSwiperChanged(e) {
-    const {
-      currentItemId
-    } = e.detail;
-    if (currentItemId === '10') {
-      this.getTabBar().setData({ show: true });
-    } else {
-      this.getTabBar().setData({ show: true });
-    }
   },
   redirect(e){
     const { url, wechaturl } = e.currentTarget.dataset;
@@ -65,12 +58,7 @@ Page({
         const isTabbar = url.indexOf("/pages/news/news") >= 0 || url.indexOf("pages/events/events") >= 0;
         if(isTabbar){
           app.globalData.tabBarLink = url;
-          
-          this.getTabBar().setData({ show: true }, () => {
-            wx.switchTab({
-              url,
-            })
-          });       
+               
           return;
         }
         wx.navigateTo({
@@ -121,18 +109,19 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.hideTabBar({
-      animation: true,
-    })
     this.fetch();
     this.watchChanges('banner');
     this.watchChanges('news');
+    wx.getSystemInfo({
+      success: e => { 
+         let info = wx.getMenuButtonBoundingClientRect()
+         let headerBarHeight = info.bottom + info.top - e.statusBarHeight    
+         this.setData({      
+           headerBarHeight
+         })
+      }
+    })
   },
-  onShow(){    
-    if (typeof this.getTabBar === 'function' && this.getTabBar()) {
-      this.getTabBar().setData({
-        selected: 0
-      })
-    }
+  onShow(){
   }
 })

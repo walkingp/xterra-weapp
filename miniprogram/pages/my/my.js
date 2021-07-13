@@ -114,7 +114,6 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    this.getTabBar().setData({ show: true });
   },
 
   /**
@@ -127,11 +126,6 @@ Page({
     this.setData({
       isLogined
     })
-    if (typeof this.getTabBar === 'function' && this.getTabBar()) {
-      this.getTabBar().setData({
-        selected: config.version === 1 ? 3 : 4
-      })
-    }
   },
 
   /**

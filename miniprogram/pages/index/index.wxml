@@ -1,59 +1,52 @@
 <view class="container">
-  <swiper class="main" vertical="true" indicator-dots="{{false}}" bindchange="mainSwiperChanged" duration="1000">
-    <swiper-item item-id="0">
-      <view class="swiper">
-        <swiper class="{{banners.length === 1 ? 'disabled' : ''}}" bindchange="swiperChange" indicator-dots="{{false}}"
-          autoplay="{{true}}">
-          <block wx:for="{{banners}}" wx:key="_id">
-            <swiper-item>
-              <view class="swiper-item">
-                <image class="cover" src="{{item.picUrl}}" mode="aspectFill"></image>
-                <button bindtap="tap" data-src="{{item.picUrl}}" data-url="{{item.redirectUrl}}"
-                  data-type="{{item.type}}" class="button">查看详情</button>
-              </view>
-            </swiper-item>
-          </block>
-        </swiper>
-        <view class="dots" wx:if="{{banners.length>1}}">
-          <block wx:for="{{banners}}" wx:key="index">
-            <view class="dot{{index == current ? ' active' : ''}}"></view>
-          </block>
-        </view>
-        <view class="slide-more">
-          <image class="p1" src="./../../images/icons/arrow@2x.png" />
-          <image class="p2" src="./../../images/icons/arrow@2x.png" />
-        </view>
+  <view class="header" style="height:{{headerBarHeight}}px;">
+    <image mode="heightFix" src="./../../images/tabs/logo-dark.png"></image>
+  </view>
+  <view class="swiper" style="margin-top:{{headerBarHeight}}px;">
+    <swiper class="{{banners.length === 1 ? 'disabled' : ''}}" bindchange="swiperChange" indicator-dots="{{false}}"
+      autoplay="{{true}}">
+      <block wx:for="{{banners}}" wx:key="_id">
+        <swiper-item>
+          <view class="swiper-item">
+            <image class="cover" src="{{item.picUrl}}" mode="aspectFill"></image>
+            <button bindtap="tap" data-src="{{item.picUrl}}" data-url="{{item.redirectUrl}}" data-type="{{item.type}}"
+              class="button">查看详情</button>
+          </view>
+        </swiper-item>
+      </block>
+    </swiper>
+    <view class="dots" wx:if="{{banners.length>1}}">
+      <block wx:for="{{banners}}" wx:key="index">
+        <view class="dot{{index == current ? ' active' : ''}}"></view>
+      </block>
+    </view>
+  </view>
+  <view class="city flex column align-center">
+    <image mode="widthFix" src="https://7874-xterra-c2969f-1258173660.tcb.qcloud.la/cloudbase-cms/upload/2021-07-12/h1zmp98w7vi6u0jdo5z1rdd1es615w6u_.png"></image>
+    <text class="en">Shanghai</text>
+    <text class="cn">上海</text>
+    <view class="desc flex column align-center">
+      <text selectable="{{true}}">中国最现代化的城市</text>
+      <text selectable="{{true}}">全球知名的文化艺术中心城市</text>
+      <text selectable="{{true}}">拥有打卡点8个</text>
+    </view>
+    <button bindtap="redirect" data-url="/pages/venue/city/city" class="button">切换城市</button>
+  </view>
+  <venue-list />
+  <view class="news">
+      <view class="title">新闻动态</view>
+      <view bindtap="redirect" data-wechaturl="{{news[0].wechatUrl}}"
+        data-url="/pages/news/detail/detail?id={{news[0]._id}}" class="cover item">
+        <image src="{{news[0].coverUrl}}" mode="aspectFill" />
+        <view class="desc overflow-2">{{news[0].title}}</view>
       </view>
-    </swiper-item>
-    <!--<swiper-item class="main" item-id="{{index+1}}" wx:for="{{races}}" wx:key="_id" wx:if="{{index<2}}">
       <view class="list">
-        <view class="item">
-          <image class="cover" src="{{item.bigPic}}" mode="aspectFill" />
-          <button bindtap="redirect" data-url="/pages/events/detail/detail?id={{item._id}}" class="button">查看详情</button>
+        <view bindtap="redirect" data-wechaturl="{{item.wechatUrl}}"
+          data-url="/pages/news/detail/detail?id={{item._id}}" class="item" wx:for="{{news}}" wx:if="{{index>0}}"
+          wx:key="_id">
+          <image src="{{item.coverUrl}}" mode="aspectFill"></image>
+          <view class="desc overflow-2">{{item.title}}</view>
         </view>
       </view>
-    </swiper-item>-->
-    <swiper-item class="main" item-id="10" style="overflow-y: auto;">
-      <view class="news">
-        <scroll-view scroll-y="true">
-          <view class="title flex align-center space-between">
-            <text class="title">新闻动态</text>
-          </view>
-          <view bindtap="redirect" data-wechaturl="{{news[0].wechatUrl}}"
-            data-url="/pages/news/detail/detail?id={{news[0]._id}}" class="cover item">
-            <image src="{{news[0].coverUrl}}" mode="aspectFill" />
-            <view class="desc overflow-2">{{news[0].title}}</view>
-          </view>
-          <view class="list">
-            <view bindtap="redirect" data-wechaturl="{{item.wechatUrl}}"
-              data-url="/pages/news/detail/detail?id={{item._id}}" class="item" wx:for="{{news}}" wx:if="{{index>0}}"
-              wx:key="_id">
-              <image src="{{item.coverUrl}}" mode="aspectFill"></image>
-              <view class="desc overflow-2">{{item.title}}</view>
-            </view>
-          </view>
-        </scroll-view>
-      </view>
-    </swiper-item>
-  </swiper>
+  </view>
 </view>

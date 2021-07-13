@@ -1,0 +1,18 @@
+  <view class="venues">
+    <view class="title">精选地点</view>
+    <view class="main flex align-center">
+      <view class="left flex-none"></view>
+      <view class="swiper flex-auto">
+        <swiper>
+          <swiper-item class="flex column">
+            <image src="https://7874-xterra-c2969f-1258173660.tcb.qcloud.la/cloudbase-cms/upload/2021-07-13/p51bpu5c5k8uduvzm6zybg4voi95b8h4_.png" mode="aspectFit"></image>
+            <view class="flex count">324人已打卡</view>
+            <text class="desc">“上海地标，来了必须体验”</text>
+            <text class="place">上海站 上海新天地</text>
+            <button class="button">查看详情</button>
+          </swiper-item>
+        </swiper>
+      </view>
+      <view class="right flex-none"></view>
+    </view>
+  </view>
