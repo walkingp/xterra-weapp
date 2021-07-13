@@ -4,26 +4,13 @@
     <text class="info">XTERRA推出的城市体验活动，精选全球最好玩的地方</text>
   </view>
   <view class="list">
-    <view bindtap="select" data-id="" class="item flex">
-      <view class="flex-auto">
-        <image
-          src="https://7874-xterra-c2969f-1258173660.tcb.qcloud.la/cloudbase-cms/upload/2021-07-12/h1zmp98w7vi6u0jdo5z1rdd1es615w6u_.png"
-          mode="widthFix"></image>
+    <view bindtap="select" wx:for="{{list}}" data-id="{{item._id}}" wx:key="_id" class="item flex">
+      <view class="flex-none image">
+        <image src="{{item.cityCover}}" mode="scaleToFill"></image>
       </view>
       <view class="flex-auto flex align-center justify-center column text">
-        <text class="name">上海</text>
-        <text>国际化城市，打卡点3个</text>
-      </view>
-    </view>
-    <view bindtap="select" data-id="" class="item flex">
-      <view class="flex-auto">
-        <image
-          src="https://7874-xterra-c2969f-1258173660.tcb.qcloud.la/cloudbase-cms/upload/2021-07-12/h1zmp98w7vi6u0jdo5z1rdd1es615w6u_.png"
-          mode="widthFix"></image>
-      </view>
-      <view class="flex-auto flex align-center justify-center column text">
-        <text class="name">苏州</text>
-        <text>江南水乡，打卡点3个</text>
+        <text class="name">{{item.cityCN}}</text>
+        <text>{{item.desc}}</text>
       </view>
     </view>
   </view>

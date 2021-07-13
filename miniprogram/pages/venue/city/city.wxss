@@ -28,6 +28,7 @@ page{
 }
 .item image{
   width: 420rpx;
+  height: 315rpx;
 }
 .text text{
   text-align: center;

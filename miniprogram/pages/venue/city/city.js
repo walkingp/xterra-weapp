@@ -1,3 +1,5 @@
+import { getCityList } from "../../../api/venue"
+
 // miniprogram/pages/venue/city/city.js
 Page({
 
@@ -5,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    list: []
   },
   select(){
     wx.navigateBack({
@@ -17,7 +19,20 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.loadData();
+  },
 
+  async loadData(){
+    wx.showLoading({
+    })
+    const list = await getCityList();
+    this.setData({
+      list
+    }, () => {
+      wx.hideLoading({
+        success: (res) => {},
+      })
+    });
   },
 
   /**
