@@ -1,10 +1,28 @@
 import { getCollectionById, getPaginations } from "../utils/cloud"
 
-export const getFeedIndexList = async (pageIndex = 1, pageSize = 10) => {
+export const getCommentList = async (pageIndex = 1, pageSize = 10, placeId) => {
   const data = await getPaginations({
     dbName: 'feed',
     filter: {
-      isActive: true
+      isActive: true,
+      type: 'place',
+      placeId
+    },
+    orderBy: {
+      addedDate: 'desc'
+    },
+    pageIndex,
+    pageSize
+  })
+  return data;
+}
+
+export const getFeedIndexList = async (pageIndex = 1, pageSize = 10, type = 'feed') => {
+  const data = await getPaginations({
+    dbName: 'feed',
+    filter: {
+      isActive: true,
+      type
     },
     orderBy: {
       addedDate: 'desc'
@@ -70,11 +88,11 @@ export const getKudosFeedsByUserId = async (userId, pageIndex = 1, pageSize = 10
     });
   });
 }
-export const addFeed = ({ userId, avatarUrl, content, picUrls, nickName }) => {
+export const addFeed = ({ userId, avatarUrl, content, picUrls, nickName, type, placeId }) => {
   return new Promise((resolve, reject) => {
     wx.cloud.callFunction({
       name: 'postIng',
-      data: { userId, avatarUrl, content, picUrls, nickName },
+      data: { userId, avatarUrl, content, picUrls, nickName, type, placeId },
       success: res => {
         resolve(res)
       },

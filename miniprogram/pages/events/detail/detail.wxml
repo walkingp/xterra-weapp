@@ -98,9 +98,11 @@
             <towxml nodes="{{detail.content}}" />
           </van-tab>
         </block>
-        <van-tab name="admission" title="报名须知" wx:if="{{detail.showAdminssion}}">
-          <towxml nodes="{{detail.admission}}" />
-        </van-tab> 
+        <block wx:if="{{detail.showAdminssion}}">
+          <van-tab name="admission" title="报名须知">
+            <towxml nodes="{{detail.admission}}" />
+          </van-tab> 
+        </block>
         <van-tab name="flow" title="{{type}}流程" wx:if="{{detail.showFlow}}">
           <towxml nodes="{{detail.flow}}" />
         </van-tab>

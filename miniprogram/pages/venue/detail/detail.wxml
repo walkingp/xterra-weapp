@@ -1,0 +1,62 @@
+<view class="page">
+  <view class="banner">
+    <image src="{{detail.banner}}" mode="aspectFill"></image>
+  </view>
+  <view class="flex top align-center space-between">
+    <text class="flex-auto">{{detail.title}}</text>
+    <view class="flex-none">
+      <van-icon name="like-o" class="margin-right-md" />
+      <van-icon name="flag-o" />
+    </view>
+  </view>
+  <view class="desc">
+    <text selectable="{{true}}">{{detail.desc}}</text>
+  </view>
+  <view class="map">
+    <map id="map" markers="{{markers}}" longitude="{{detail.coordinate[0]}}" latitude="{{detail.coordinate[1]}}"
+      scale="11" subkey="{{mapKey}}" layer-style="1" bindtap="showLocation" bindregionchange="regionchange"></map>
+    <view class="fs-xs text-grey text-center">点击地图开始导航</view>
+  </view>
+  <view class="places">
+    <place-event-list list="{{races}}" />
+  </view>
+  <view class="photos">
+    <view class="title">精选照片</view>
+    <view class="grid">
+      <block wx:for="{{detail.pickedPics}}" wx:key="item" wx:if="{{index<6}}">
+        <image src="{{item}}" mode="aspectFill"></image>
+      </block>
+      <block wx:for="{{detail.pickedPics}}" wx:key="item" wx:if="{{index>5 && isLoadMore}}">
+        <image src="{{item}}" mode="aspectFill"></image>
+      </block>
+    </view>
+    <view class="more flex justify-center" wx:if="{{detail.pickedPics.length > 6 && !isLoadMore}}">
+      <button class="button" bindtap="loadMorePics">加载更多</button>
+    </view>
+  </view>
+  <view class="feeds relative">
+    <view class="line"></view>
+    <view class="title">发现</view>
+    <community-list list="{{list}}" />
+  </view>
+
+  <view class="bar flex column">
+    <van-icon bindtap="redirect" class="btnNew" color="white"
+      data-url="/pages/community/new/new?type=place&placeId={{id}}" name="plus" size="30px" />
+  </view>
+</view>
+<block wx:if="{{show}}">
+  <view class="mask"></view>
+  <view class="modal flex column" wx:if="{{show}}">
+    <view class="close flex-none flex justify-end">
+      <van-icon bindtap="hideContent" name="cross" />
+    </view>
+    <view class="content flex-auto flex align-center column">
+      <image class="medal" src="{{detail.medalUrl}}" mode="aspectFit"></image>
+      <text class="padding-y-xl fs-sm text-grey">勋章领取成功</text>
+    </view>
+    <view class="action flex-none">
+      <button bindtap="hideContent" class="button">我知道了</button>
+    </view>
+  </view>
+</block>

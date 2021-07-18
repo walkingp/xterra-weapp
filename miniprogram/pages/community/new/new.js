@@ -17,7 +17,9 @@ Page({
     userId: null,
     userInfo: null,
     photolist: [],
-    btnDisabled: false
+    btnDisabled: false,
+    type: null,
+    placeId: null
   },
   async bindTextAreaBlur(e){
     const content = e.detail.value;
@@ -146,7 +148,9 @@ Page({
     const {
       photolist,
       userId,
-      userInfo
+      userInfo,
+      type,
+      placeId
     } = this.data;
 
     const {
@@ -158,7 +162,9 @@ Page({
       avatarUrl,
       content,
       picUrls: photolist,
-      nickName: nickname
+      nickName: nickname,
+      type,
+      placeId
     });
     
     // 加分
@@ -171,9 +177,10 @@ Page({
       icon: 'success',
       title: '发布成功',
       success: function(){
+        const url = type === 'place' ? `/pages/venue/detail/detail?id=${placeId}&type=succ` : '/pages/community/detail/detail?id=' + id;
         setTimeout(() => {
           wx.redirectTo({
-            url: '/pages/community/detail/detail?id=' + id,
+            url
           })
         }, 1000);
       }
@@ -183,6 +190,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    const { placeId, type } = options;
+    this.setData({
+      placeId, type
+    });
     app.checkLogin().then(res => {
       const {
         isLogined,

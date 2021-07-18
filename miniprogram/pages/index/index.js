@@ -6,6 +6,7 @@ const {
   getNewsIndexList
 } = require("../../api/news");
 const dayjs = require("dayjs");
+const { getCityDetailByName, getPlaceList } = require("../../api/venue");
 // miniprogram/pages/index/index.js
 Page({
 
@@ -18,7 +19,9 @@ Page({
     news: [],
     races: [],
     headerBarHeight: 60,
-    current: 0
+    current: 0,
+    currentCity: null,
+    places: []
   },  
   swiperChange(e) {
     this.setData({
@@ -67,6 +70,21 @@ Page({
         break;
     }
   },
+  async fetchCurrentCity(){
+    const { currentCity } = app.globalData;
+    const city = await getCityDetailByName(currentCity);
+    if(city.length > 0){
+      this.setData({
+        currentCity: city[0]
+      }, async () => {
+        const { _id } = city[0];
+        const places = await getPlaceList(_id);
+        this.setData({
+          places
+        });
+      })
+    }
+  },
   async fetch() {
     wx.showLoading({
       title: '加载中…',
@@ -77,6 +95,7 @@ Page({
       item.formatDate = dayjs(new Date(item.postTime)).format("MM月DD日");
       return item;
     });
+    this.fetchCurrentCity();
     this.setData({
       loading: false,
       //races,

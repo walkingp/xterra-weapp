@@ -4,12 +4,12 @@
       <view class="left flex-none"></view>
       <view class="swiper flex-auto">
         <swiper>
-          <swiper-item class="flex column">
-            <image src="https://7874-xterra-c2969f-1258173660.tcb.qcloud.la/cloudbase-cms/upload/2021-07-13/p51bpu5c5k8uduvzm6zybg4voi95b8h4_.png" mode="aspectFit"></image>
+          <swiper-item class="flex column" wx:for="{{list}}" wx:key="_id">
+            <image src="{{item.banner}}" mode="aspectFit"></image>
             <view class="flex count">324人已打卡</view>
-            <text class="desc">“上海地标，来了必须体验”</text>
-            <text class="place">上海站 上海新天地</text>
-            <button class="button">查看详情</button>
+            <text class="desc">“{{item.desc}}”</text>
+            <text class="place">{{item.title}}</text>
+            <button data-url="/pages/venue/detail/detail?id={{item._id}}" bindtap="redirect" class="button">查看详情</button>
           </swiper-item>
         </swiper>
       </view>

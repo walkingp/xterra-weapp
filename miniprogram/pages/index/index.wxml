@@ -23,16 +23,15 @@
   </view>
   <view class="city flex column align-center">
     <image mode="widthFix" src="https://7874-xterra-c2969f-1258173660.tcb.qcloud.la/cloudbase-cms/upload/2021-07-12/h1zmp98w7vi6u0jdo5z1rdd1es615w6u_.png"></image>
-    <text class="en">Shanghai</text>
-    <text class="cn">上海</text>
+    <text class="en">{{currentCity.cityEn}}</text>
+    <text class="cn">{{currentCity.cityCN}}</text>
     <view class="desc flex column align-center">
-      <text selectable="{{true}}">中国最现代化的城市</text>
-      <text selectable="{{true}}">全球知名的文化艺术中心城市</text>
-      <text selectable="{{true}}">拥有打卡点8个</text>
+      <text selectable="{{true}}">{{currentCity.desc}}</text>
+      <text selectable="{{true}}">拥有打卡点{{places.length}}个</text>
     </view>
     <button bindtap="redirect" data-url="/pages/venue/city/city" class="button">切换城市</button>
   </view>
-  <venue-list />
+  <venue-list list="{{places}}" />
   <view class="news">
       <view class="title">新闻动态</view>
       <view bindtap="redirect" data-wechaturl="{{news[0].wechatUrl}}"

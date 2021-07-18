@@ -50,7 +50,7 @@
         },
         {
           "name": "社区首页",
-          "pathName": "pages/community/community",
+          "pathName": "pages/community/index/index",
           "query": "",
           "scene": null
         },
@@ -268,6 +268,18 @@
           "name": "选择城市",
           "pathName": "pages/venue/city/city",
           "query": "",
+          "scene": null
+        },
+        {
+          "name": "地点详情",
+          "pathName": "pages/venue/detail/detail",
+          "query": "id=79550af260ed79512652b54e6a6afd9b",
+          "scene": null
+        },
+        {
+          "name": "地点打卡成功",
+          "pathName": "pages/venue/detail/detail",
+          "query": "id=79550af260ed79512652b54e6a6afd9b&type=succ",
           "scene": null
         }
       ]

@@ -53,7 +53,8 @@
     "pages/my/idcard/idcard",
     "pages/admin/events/my-checkin/my-checkin",
     "pages/admin/users/users",
-    "pages/venue/city/city"
+    "pages/venue/city/city",
+    "pages/venue/detail/detail"
   ],
   "window": {
     "backgroundColor": "#ffffff",
@@ -75,6 +76,7 @@
     "community-list": "/components/community-list/community-list",
     "coupon-list": "/components/coupon-list/coupon-list",
     "venue-list": "/components/venue-list/venue-list",
+    "place-event-list": "/components/place-event-list/place-event-list",
     "news-list": "/components/news-list/news-list",
     "race-list": "/components/race-list/race-list",
     "feed-list": "/components/feed-list/feed-list",
