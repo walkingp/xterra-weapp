@@ -88,7 +88,7 @@
       <view class="cell">
         <label>付款方式</label>
         <text>微信支付</text>
-        <image src="/images/icons/wepay.svg" class="icon" />
+        <image src="/images/icons/wepay.png" class="icon" />
       </view>
       <view class="cell">
         <label>订单状态：</label>
