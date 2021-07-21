@@ -6,6 +6,7 @@ const {
   getNewsIndexList
 } = require("../../api/news");
 const dayjs = require("dayjs");
+const { getCityDetailByName, getPlaceList } = require("../../api/venue");
 // miniprogram/pages/index/index.js
 Page({
 
@@ -17,7 +18,10 @@ Page({
     banners: [],
     news: [],
     races: [],
-    current: 0
+    headerBarHeight: 60,
+    current: 0,
+    currentCity: null,
+    places: []
   },  
   swiperChange(e) {
     this.setData({
@@ -25,14 +29,6 @@ Page({
     })
   },
   mainSwiperChanged(e) {
-    const {
-      currentItemId
-    } = e.detail;
-    if (currentItemId === '10') {
-      this.getTabBar().setData({ show: true });
-    } else {
-      this.getTabBar().setData({ show: true });
-    }
   },
   redirect(e){
     const { url, wechaturl } = e.currentTarget.dataset;
@@ -65,18 +61,28 @@ Page({
         const isTabbar = url.indexOf("/pages/news/news") >= 0 || url.indexOf("pages/events/events") >= 0;
         if(isTabbar){
           app.globalData.tabBarLink = url;
-          
-          this.getTabBar().setData({ show: true }, () => {
-            wx.switchTab({
-              url,
-            })
-          });       
+               
           return;
         }
         wx.navigateTo({
           url,
         });
         break;
+    }
+  },
+  async fetchCurrentCity(){
+    const { currentCity } = app.globalData;
+    const city = await getCityDetailByName(currentCity);
+    if(city.length > 0){
+      this.setData({
+        currentCity: city[0]
+      }, async () => {
+        const { _id } = city[0];
+        const places = await getPlaceList(_id);
+        this.setData({
+          places
+        });
+      })
     }
   },
   async fetch() {
@@ -89,6 +95,7 @@ Page({
       item.formatDate = dayjs(new Date(item.postTime)).format("MM月DD日");
       return item;
     });
+    this.fetchCurrentCity();
     this.setData({
       loading: false,
       //races,
@@ -121,18 +128,19 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.hideTabBar({
-      animation: true,
-    })
     this.fetch();
     this.watchChanges('banner');
     this.watchChanges('news');
+    wx.getSystemInfo({
+      success: e => { 
+         let info = wx.getMenuButtonBoundingClientRect()
+         let headerBarHeight = info.bottom + info.top - e.statusBarHeight    
+         this.setData({      
+           headerBarHeight
+         })
+      }
+    })
   },
-  onShow(){    
-    if (typeof this.getTabBar === 'function' && this.getTabBar()) {
-      this.getTabBar().setData({
-        selected: 0
-      })
-    }
+  onShow(){
   }
 })

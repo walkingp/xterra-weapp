@@ -1,0 +1,27 @@
+<view class="venues">
+  <view class="title">精选活动</view>
+  <view class="main flex align-center">
+    <view class="left flex-none"></view>
+    <view class="swiper flex-auto">
+      <swiper>
+        <swiper-item class="flex column" wx:for="{{list}}" wx:key="_id">
+          <image src="{{item.picUrls[0]}}" mode="aspectFit"></image>
+          <text class="place">{{item.title}}</text>
+          <text class="desc">{{item.date}}</text>
+          <button data-url="/pages/events/detail/detail?id={{item._id}}" bindtap="redirect" class="button">查看详情</button>
+        </swiper-item>
+      </swiper>
+    </view>
+    <view class="right flex-none"></view>
+  </view>
+</view>
+<view class="mask" wx:if="{{show}}"></view>
+<view class="modal flex column" wx:if="{{show}}">
+    <view class="close flex-none flex justify-end"><van-icon bindtap="hideContent" name="cross" /></view>
+    <view class="content flex-auto">  
+      <towxml nodes="{{content}}" />
+    </view>
+    <view class="action flex-none">
+      <button class="button">立即报名</button>
+    </view>
+</view>

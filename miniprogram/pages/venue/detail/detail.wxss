@@ -1,0 +1,141 @@
+.banner{
+  height: 360rpx;  
+}
+.banner image{
+  height: 100%;
+  width: 100%;
+}
+.top {
+  background-color: #fff;
+  font-size: 36rpx;
+  font-weight: bold;
+  letter-spacing: 4rpx;
+  padding: 40rpx 20rpx 20rpx 20rpx;
+}
+.desc{
+  background-color: #fff;
+  font-size: 28rpx;
+  color: #313030;
+  line-height: 25rpx;
+  padding: 20rpx;
+}
+.desc text{
+  border-left: #A42736 solid 8rpx;
+  padding-left: 20rpx;
+}
+.map{
+  background-color: #fff;
+  padding: 20rpx;
+}
+map{
+  width: 100%;
+  margin-bottom: 20rpx;
+}
+.title{
+  font-size: 32rpx;
+  font-weight: bold;
+  letter-spacing: 4rpx;
+  text-align: center;
+}
+.photos{
+  background-color: #fff;
+  padding: 60rpx 40rpx;
+}
+image.medal{
+  width: 400rpx;
+  height: 400rpx;
+}
+.photos .grid{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-row-gap: 20rpx;
+  grid-column-gap: 20rpx;
+  padding: 20rpx 0;
+}
+.photos .grid image{
+  width: 100%;
+  height: 150rpx;
+}
+
+.more button.button{
+  width: 340rpx;
+}
+button.button{
+  border: solid 4rpx #313030;
+  color: #313030;
+  border-radius: 0;
+  letter-spacing: 4rpx;
+  height: 74rpx;
+  font-size: 28rpx;
+  line-height: 74rpx;
+  padding-top: 10rpx;
+}
+
+.bar{
+  position: fixed;
+  right: 50rpx;
+  bottom: 60rpx;
+}
+.bar van-icon{
+  padding: 10rpx;
+  background-color: #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 10rpx rgba(0,0,0,.2);
+  border: solid 4rpx rgba(0,0,0,.2);
+}
+.bar van-icon.btnNew{
+  background-color: #dc3545;
+  border: solid 4rpx #dc3545;
+}
+.line{
+  width: 54rpx;
+  height: 6rpx;
+  background-color: #dc3545;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.feeds .title{
+  padding-top: 8rpx;
+}
+
+.modal{
+  z-index: 9;
+  position: fixed;
+  top: 20%;
+  left: 50rpx;
+  transform: translateX(-50%, -50%);
+  height: 600rpx;
+  right: 50rpx;
+  background-color: #fff;
+  box-shadow: 0 0 20rpx rgba(0,0,0,.1);
+  padding: 50rpx;
+}
+.mask{
+  background-color: rgba(0,0,0,.2);
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 8;
+}
+.cnt{
+  background-color: #fff;
+}
+.content{
+  overflow: auto;
+}
+.filter{
+  padding: 0 20rpx;
+  font-size: 24rpx;
+  color: #777;
+}
+.filter van-icon{
+  margin-left: 20rpx;
+  padding-right: 8rpx;
+}
+
+.filter .current{
+  font-weight: bold;
+}

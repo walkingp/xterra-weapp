@@ -1,0 +1,95 @@
+@import "./../../style/mi.flex.wxss";
+.venues .title{
+  font-size: 35rpx;
+  color: #313030;
+  letter-spacing: 4rpx;
+  font-weight: bold;
+  padding: 45rpx;
+}
+.venues .place{
+  font-size: 28rpx;
+  text-align: center;
+  color: #313030;
+  letter-spacing: 4rpx;
+  font-weight: bold;
+  padding: 20rpx 0;
+}
+.venues swiper-item image{
+  width: 100%;
+  height: 265rpx;
+}
+.venues swiper{
+  height: 600rpx;
+}
+.venues .left, .venues .right{
+  height: 100%;
+  width: 100rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.left::after, .right::after{
+  width: 0;
+  height: 0;
+  border: 10px solid transparent;
+  position: absolute;
+  content: "";
+}
+.left::after{
+  border-right-color: #999;
+}
+.right::after{
+  border-left-color: #999;
+}
+.desc{
+  font-size: 20rpx;
+  padding-bottom: 20rpx;
+  color: #777;
+  text-align: center;
+}
+.title{
+  font-size: 35rpx;
+  font-weight: bold;
+  text-align: center;
+}
+.count{
+  color: #777;
+  font-size: 20rpx;
+  padding-top: 10rpx;
+}
+button.button{
+  width: 100%;
+  border: solid 4rpx #313030;
+  border-radius: 0;
+  letter-spacing: 4rpx;
+  height: 74rpx;
+  font-size: 28rpx;
+  line-height: 74rpx;
+}
+.modal{
+  z-index: 9;
+  position: fixed;
+  top: 50rpx;
+  left: 50rpx;
+  bottom: 50rpx;
+  right: 50rpx;
+  background-color: #fff;
+  box-shadow: 0 0 20rpx rgba(0,0,0,.1);
+  padding: 20rpx;
+}
+.mask{
+  background-color: rgba(0,0,0,.2);
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 8;
+}
+.cnt{
+  background-color: #fff;
+}
+.content{
+  overflow: auto;
+}

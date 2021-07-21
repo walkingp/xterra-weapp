@@ -61,8 +61,8 @@ Page({
       title: '退款中'
     })
     const { id, detail, isPlogging, raceDetail, refundMoney } = this.data;
-    const total_fee = +detail.paidFee * 100;
-    const refund_fee = Math.floor(refundMoney * 100);
+    const total_fee = +detail.paidFee * 10 * 10;
+    const refund_fee = Math.floor(refundMoney * 1000/10);
     console.log("refund_fee", refund_fee);
     if(isPlogging || refund_fee === 0){
       await removeRegistration(id);
@@ -82,6 +82,7 @@ Page({
       return;
     }
     const that = this;
+    console.log(refund_fee);
     wx.cloud.callFunction({
       name: "payment",
       data: {
@@ -147,7 +148,11 @@ Page({
     if(raceDetail){
       const { enabledRefund, refundRate, refundLastDate, raceDate } = raceDetail;
       policyText = `${dayjs(refundLastDate).format('YYYY年MM月DD日')}前可申请退款${(refundRate*100).toFixed(0)}%`
-      refundMoney = (Math.floor(detail.paidFee * refundRate*100)/100).toFixed(2);
+      refundMoney = +(Math.floor(detail.paidFee * refundRate*100)/100).toFixed(2);
+      if(!refundMoney.toString().endsWith('0')){
+        refundMoney = Math.round(refundMoney * 10)/10;
+      }
+      console.log('refundMoney', refundMoney);
       const isDateValid = dayjs(new Date()).isBefore(dayjs(refundLastDate));
       const isPaied = detail.status === orderStatus.paid.status || detail.status === orderStatus.pending.status;
       canRefund = enabledRefund && isDateValid && isPaied;

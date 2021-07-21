@@ -1,0 +1,5 @@
+<view class="list">
+  <view class="item" wx:for="{{list}}" wx:key="_id">
+  
+  </view>
+</view>
