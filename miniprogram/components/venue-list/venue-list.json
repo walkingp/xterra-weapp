@@ -1,4 +1,6 @@
 {
   "component": true,
-  "usingComponents": {}
+  "usingComponents": {    
+    "place-list": "/components/place-list/place-list"
+  }
 }

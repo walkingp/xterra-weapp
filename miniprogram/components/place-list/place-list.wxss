@@ -34,8 +34,12 @@
 }
 
 .place-item button {
-  height: 48rpx;
+  height: 60rpx;
   margin-top: 40rpx;
   width: 100%;
   font-size: 24rpx;
+}
+
+.place-item button.small {
+  height: 48rpx;
 }

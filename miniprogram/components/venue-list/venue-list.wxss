@@ -19,7 +19,7 @@
   height: 365rpx;
 }
 .venues swiper{
-  height: 600rpx;
+  height: 660rpx;
 }
 .venues .left, .venues .right{
   height: 100%;
@@ -41,29 +41,4 @@
 }
 .right::after{
   border-left-color: #999;
-}
-.desc{
-  font-size: 20rpx;
-  padding-top: 10rpx;
-  color: #777;
-}
-.title{
-  font-size: 35rpx;
-  font-weight: bold;
-}
-.count{
-  color: #777;
-  font-size: 20rpx;
-  padding-top: 10rpx;
-}
-button.button{
-  display: inline-block;
-  width: 100%;
-  border: solid 4rpx #313030;
-  border-radius: 0;
-  letter-spacing: 4rpx;
-  height: 74rpx;
-  font-size: 28rpx;
-  line-height: 100%;
-  padding-top: 18rpx;
 }

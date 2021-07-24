@@ -26,7 +26,7 @@
       <van-tab name="place" title="收藏">
         <view class="grid place">
         <block wx:for="{{favs}}" wx:key="_id">
-          <place-list item="{{item}}" />
+          <place-list type="small" item="{{item}}" />
         </block>
         </view>
       </van-tab>

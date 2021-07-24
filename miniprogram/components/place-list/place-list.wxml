@@ -2,5 +2,5 @@
   <image src="{{item.banner}}" mode="aspectFill"></image>
   <text class="desc overflow-2">“{{item.desc}}”</text>
   <text class="place">{{item.title}}</text>
-  <button data-url="/pages/venue/detail/detail?id={{item._id}}" bindtap="redirect" class="button">查看详情</button>
+  <button data-url="/pages/venue/detail/detail?id={{item._id}}" bindtap="redirect" class="button {{type}}">查看详情</button>
 </view>

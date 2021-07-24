@@ -6,6 +6,9 @@ Component({
   properties: {
     item: {
       type: Object
+    },
+    size: {
+      type: String
     }
   },
   observers: {

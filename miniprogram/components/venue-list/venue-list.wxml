@@ -5,11 +5,7 @@
       <view class="swiper flex-auto">
         <swiper>
           <swiper-item class="flex column" wx:for="{{list}}" wx:key="_id">
-            <image src="{{item.banner}}" mode="aspectFit"></image>
-            <view class="flex count">324人已打卡</view>
-            <text class="desc">“{{item.desc}}”</text>
-            <text class="place">{{item.title}}</text>
-            <button data-url="/pages/venue/detail/detail?id={{item._id}}" bindtap="redirect" class="button">查看详情</button>
+            <place-list item="{{item}}" />
           </swiper-item>
         </swiper>
       </view>
