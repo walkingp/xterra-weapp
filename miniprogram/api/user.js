@@ -169,3 +169,21 @@ export const checkInUser = async (userId) => {
     }
   })
 };
+
+export const getUserMedals = async (userId) => {
+  return new Promise((resolve, reject) => {
+    try {
+      wx.cloud.callFunction({
+        name: 'getUserMedals',
+        data: {
+          userId
+        },
+        success(res) {
+          resolve(res.result)
+        }
+      });
+    } catch (err) {
+      reject(err)
+    }
+  })
+}

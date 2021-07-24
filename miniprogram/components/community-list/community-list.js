@@ -9,6 +9,9 @@ Component({
   properties: {
     list: {
       type: Array
+    },
+    type: {
+      type: String
     }
   },
 

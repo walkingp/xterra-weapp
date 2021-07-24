@@ -1,8 +1,8 @@
 .top{
   position: relative;
-  height: 300rpx;
+  height: 400rpx;
   background-color: #fff;
-  padding: 20rpx;
+  padding: 100rpx;
   color: #fff;
   text-shadow: 2rpx 2rpx 4rpx #000000;
 }

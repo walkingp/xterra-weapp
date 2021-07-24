@@ -11,17 +11,26 @@
       </view>
       <navigator wx:if="{{ uInfo.point }}" url="/pages/points/user/user?userId={{userInfo._id}}" class="flex margin-top-md align-center">
         <van-icon name="gem" size="18px" class="margin-right-sm" />
-        <text class="underline">{{ uInfo.point }}</text>
+        <text class="">{{ uInfo.point }}</text>
       </navigator>
     </view>
   </view>
   <view class="bottom">
-    <van-tabs>
-      <van-tab title="动态">
-        <community-list list="{{list}}" />
+    <van-tabs active="{{ active }}" bind:change="onChange">
+      <van-tab name="feed" title="动态">
+        <community-list type="profile" list="{{feeds}}" />
       </van-tab>
-      <van-tab title="点赞">
-        <community-list list="{{kudosList}}" />
+      <van-tab name="tick" title="打卡">
+        <community-list type="profile" list="{{feeds}}" />
+      </van-tab>
+      <van-tab name="place" title="地点">
+        <community-list type="profile" list="{{feeds}}" />
+      </van-tab>
+      <van-tab name="medal" title="勋章">
+        <community-list type="profile" list="{{feeds}}" />
+      </van-tab>
+      <van-tab name="like" title="点赞">
+        <community-list type="profile" list="{{kudosList}}" />
       </van-tab>
     </van-tabs>
   </view>

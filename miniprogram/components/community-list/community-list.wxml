@@ -5,7 +5,7 @@
         src="{{item.picUrls[0]}}" mode="aspectFill"></image>
       <view class="content">
         <text class="desc">{{item.content}}</text>
-        <view class="user flex align-center">
+        <view class="user flex align-center" wx:if="{{type !== 'profile'}}">
           <view class="left flex-auto">
             <image class="avatar" src="{{item.avatarUrl}}" mode="aspectFill" />
             <text>{{item.nickName}}</text>

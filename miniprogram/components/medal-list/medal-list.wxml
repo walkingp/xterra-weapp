@@ -1,0 +1,13 @@
+<block wx:if="{{loading}}">
+  <van-loading type="spinner" />
+</block>
+<block wx:else>
+  <block wx:if="{{list.length}}">
+    <view bindtap="redirect" data-id="{{item._id}}" data-wechaturl="{{item.wechatUrl}}" data-url="/pages/news/detail/detail?id={{item._id}}" class="item flex column justify-center" wx:for="{{list}}" wx:key="_id">
+      <view class="cover flex-none">
+        <image lazy-load="{{true}}" src="{{'https://7874-xterra-c2969f-1258173660.tcb.qcloud.la/cloudbase-cms/upload/2021-07-18/k87geyfqbzsqc68vpd6ntf7a7mvzn8lc_.png' || item.coverUrl}}" mode="widthFix"></image>
+      </view>
+      <button class="button">{{item.title}}</button>
+    </view>
+  </block>
+</block>
