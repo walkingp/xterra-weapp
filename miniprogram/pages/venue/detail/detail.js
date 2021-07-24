@@ -1,5 +1,5 @@
 const { getCommentList } = require("../../../api/feed");
-const { getPlaceDetail, getPlaceList, getRaceListByPlace, checkIsTicked, tickPlace } = require("../../../api/venue");
+const { getPlaceDetail, getPlaceList, getRaceListByPlace, checkIsTicked, checkIsFaved, favPlace } = require("../../../api/venue");
 const config = require("../../../config/config");
 const dayjs = require("dayjs");
 const app = getApp();
@@ -21,6 +21,7 @@ Page({
     isLoadMore: false,
     show: false,
     isTicked: false,
+    isFaved: false,
     userId: null
   },
   
@@ -44,14 +45,17 @@ Page({
 
     this.fetch(id);
   },
-  async tick(){
-    const { id, userId, isTicked } = this.data;
-    const res = await tickPlace(id, userId);
+  regionchange(e){
+
+  },
+  async addFav(){
+    const { id, userId, isFaved } = this.data;
+    const res = await favPlace(id, userId);
     wx.showToast({
-      title: isTicked ? '取消收藏成功' : '收藏成功',
+      title: isFaved ? '取消收藏成功' : '收藏成功',
     });
     this.setData({
-      isTicked: isTicked ? false : true
+      isFaved: isFaved ? false : true
     })
   },
   async fetch(id){
@@ -70,6 +74,7 @@ Page({
 
     const { userId } = app.globalData;
     const isTicked = await checkIsTicked(id, userId);
+    const isFaved = await checkIsFaved(id, userId);
 
     let markers = null;
     if(res.coordinate){
@@ -88,6 +93,7 @@ Page({
     this.setData({
       markers,
       isTicked,
+      isFaved,
       userId,
       races,
       detail: res,

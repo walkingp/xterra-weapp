@@ -4,29 +4,17 @@ Component({
    * 组件的属性列表
    */
   properties: {
-    type: {
-      type: String,
-      value: 'thumbnail' // list
-    },
-    list: {
-      type: Array
+    item: {
+      type: Object
     }
   },
   observers: {
-    'list': function (list) {
-      if(list.length) {
-        this.setData({
-          loading: false
-        })
-      }
-    }
   },
 
   /**
    * 组件的初始数据
    */
   data: {
-    loading: false
   },
 
   /**

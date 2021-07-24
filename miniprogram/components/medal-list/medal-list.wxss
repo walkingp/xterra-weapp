@@ -1,1 +1,21 @@
-/* components/medal-list/medal-list.wxss */
+@import "./../../style/mi.flex.wxss";
+@import "./../../style/app.common.wxss";
+.grid{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-row-gap: 20rpx;
+  grid-column-gap: 20rpx
+}
+.item{
+  padding: 20rpx;
+}
+.cover image{
+  width: 100%;
+  height: 100%;
+}
+.item .button{
+  margin-top: 20rpx;
+  font-size: 24rpx;
+  height: 54rpx;
+  width: 100%;
+}

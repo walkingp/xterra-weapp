@@ -97,3 +97,29 @@ export const checkIsTicked = async (placeId, userId) => {
   }).get();
   return res.data.length > 0;
 };
+
+export const favPlace = async (placeId, userId) => {
+  return new Promise((resolve, reject) => {
+    wx.cloud.callFunction({
+      name: 'favPlace',
+      data: {
+        userId,
+        placeId,
+        type: 'place'
+      },
+      success: res => {
+        resolve(res)
+      },
+      fail: err => reject(err)
+    })
+  });
+};
+
+export const checkIsFaved = async (placeId, userId) => {
+  const db = wx.cloud.database()
+  const res = await db.collection("fav").where({
+    placeId,
+    userId
+  }).get();
+  return res.data.length > 0;
+};

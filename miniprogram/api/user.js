@@ -179,7 +179,43 @@ export const getUserMedals = async (userId) => {
           userId
         },
         success(res) {
-          resolve(res.result)
+          resolve(res.result?.list)
+        }
+      });
+    } catch (err) {
+      reject(err)
+    }
+  })
+}
+
+export const getUserPlaces = async (userId) => {
+  return new Promise((resolve, reject) => {
+    try {
+      wx.cloud.callFunction({
+        name: 'getUserPlaces',
+        data: {
+          userId
+        },
+        success(res) {
+          resolve(res.result?.list)
+        }
+      });
+    } catch (err) {
+      reject(err)
+    }
+  })
+}
+
+export const getUserFavs = async (userId) => {
+  return new Promise((resolve, reject) => {
+    try {
+      wx.cloud.callFunction({
+        name: 'getUserFavs',
+        data: {
+          userId
+        },
+        success(res) {
+          resolve(res.result?.list)
         }
       });
     } catch (err) {

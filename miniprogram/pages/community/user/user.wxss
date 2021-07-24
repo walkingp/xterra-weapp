@@ -39,3 +39,12 @@
   font-weight: bold;
   margin-bottom: 10rpx;
 }
+.grid {
+  display: grid;
+}
+.place{
+  padding: 20rpx;
+  grid-template-columns: repeat(2, 1fr);
+  grid-row-gap: 20rpx;
+  grid-column-gap: 20rpx
+}

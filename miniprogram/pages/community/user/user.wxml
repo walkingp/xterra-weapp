@@ -21,13 +21,17 @@
         <community-list type="profile" list="{{feeds}}" />
       </van-tab>
       <van-tab name="tick" title="打卡">
-        <community-list type="profile" list="{{feeds}}" />
+        <community-list type="profile" list="{{places}}" />
       </van-tab>
-      <van-tab name="place" title="地点">
-        <community-list type="profile" list="{{feeds}}" />
+      <van-tab name="place" title="收藏">
+        <view class="grid place">
+        <block wx:for="{{favs}}" wx:key="_id">
+          <place-list item="{{item}}" />
+        </block>
+        </view>
       </van-tab>
       <van-tab name="medal" title="勋章">
-        <community-list type="profile" list="{{feeds}}" />
+        <medal-list list="{{medals}}" />
       </van-tab>
       <van-tab name="like" title="点赞">
         <community-list type="profile" list="{{kudosList}}" />

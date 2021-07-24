@@ -1,0 +1,41 @@
+@import "./../../style/mi.flex.wxss";
+@import "./../../style/app.common.wxss";
+.place-item {
+  padding: 20rpx 0;
+}
+.overflow-2 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+.place-item .place {
+  font-size: 32rpx;
+  font-weight: bold;
+  padding-top: 10rpx;
+}
+
+.place-item image {
+  height: 265rpx;
+	width: 100%;
+	margin-bottom: 20rpx;
+}
+
+.place-item .en {
+	font-size: 60rpx;
+	font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+	color: #333;
+}
+
+.place-item .cn, .place-item .desc {
+	font-size: 24rpx;
+	color: #777;
+	line-height: 2;
+}
+
+.place-item button {
+  height: 48rpx;
+  margin-top: 40rpx;
+  width: 100%;
+  font-size: 24rpx;
+}

@@ -5,8 +5,8 @@
   <view class="flex top align-center space-between">
     <text class="flex-auto">{{detail.title}}</text>
     <view class="flex-none">
-      <van-icon name="like" color="#dc3545" bindtap="tick" size="20px" class="margin-right-md" wx:if="{{isTicked}}" />
-      <van-icon name="like-o" bindtap="tick" size="20px" class="margin-right-md" wx:else />
+      <van-icon name="like" color="#dc3545" bindtap="addFav" size="20px" class="margin-right-md" wx:if="{{isFaved}}" />
+      <van-icon name="like-o" bindtap="addFav" size="20px" class="margin-right-md" wx:else />
       <van-icon wx:if="{{detail.medalUrl}}" bindtap="showContent" size="20px" name="flag-o" />
     </view>
   </view>

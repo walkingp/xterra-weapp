@@ -22,6 +22,8 @@
 .desc text{
   border-left: #A42736 solid 8rpx;
   padding-left: 20rpx;
+  line-height: 1.5;
+  color: #999;
 }
 .map{
   background-color: #fff;
