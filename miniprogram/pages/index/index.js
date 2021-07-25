@@ -95,6 +95,7 @@ Page({
       const { citys } = this.data;
       currentCity = citys[0];
     }
+    wx.setStorageSync(config.storageKey.currentCity, currentCity.cityCN);
     this.setData({
       currentCity
     }, async () => {
@@ -155,11 +156,13 @@ Page({
     if (!currentCity) {
       const {citys} = this.data;
       if (citys.length === 1) {
-        currentCity = citys[0].cityEn;
+        currentCity = citys[0].cityCN;
       } else {
         this.locateCity();
       }
       wx.setStorageSync(config.storageKey.currentCity, currentCity);
+    }else{
+      this.fetchCurrentCity(currentCity)
     }
     app.globalData.currentCity = currentCity;
 
