@@ -1,3 +1,5 @@
+const i18n = require("./../../utils/i18n");
+
 // components/medal-list/medal-list.js
 Component({
   /**

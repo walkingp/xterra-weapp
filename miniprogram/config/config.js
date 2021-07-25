@@ -13,6 +13,13 @@ const config = {
     currentCity: 'currentCity',
     isChinese: 'isChinese'
   },
+  tabs: [
+    "pages/index/index",
+    "pages/events/events",
+    "pages/community/index/index",
+    "pages/news/news",
+    "pages/my/my"
+  ],
   messageTemplates: {
     registration: {
       title: '赛事活动报名通知',

@@ -104,12 +104,13 @@ App({
         that.globalData.headerBarHeight = headerBarHeight;
 
         let isChinese = wx.getStorageSync(config.storageKey.isChinese);
-        if(isChinese !== ""){
+        if(isChinese === ""){
           isChinese = res.language === 'zh_CN';
           wx.setStorageSync(config.storageKey.isChinese, isChinese);
         }
         that.globalData.isChinese = isChinese;
-        if(!isChinese) {
+        const isTab = getCurrentPages().length && config.tabs.includes(getCurrentPages()[0].route);
+        if(!isChinese && isTab) {
           const currentLocale = Array.from(locale).find(item=>item.isChinese === isChinese);
           currentLocale.tabs.forEach((text, index)=>{
             wx.setTabBarItem({
