@@ -11,11 +11,11 @@
           <image src="{{item.picUrls[0]}}" lazy-load="{{true}}" mode="aspectFill"></image>
         </view>
         <view class="flex-auto text flex column space-betwee info">
-          <text>类型：{{item.type}}</text>
-          <text wx:if="{{item.type==='X-Plogging'}}">费用：{{item.feeType}}</text>          
-          <text wx:else>组别：{{item.cates}}</text>
-          <text>地点：{{item.location}}</text>
-          <text>时间：{{item.raceDate}}</text>
+          <text>{{_t['类型']}}：{{item.type}}</text>
+          <text wx:if="{{item.type==='X-Plogging'}}">{{_t['费用']}}：{{item.feeType}}</text>          
+          <text wx:else>{{_t['组别']}}：{{item.cates}}</text>
+          <text>{{_t['地点']}}：{{item.location}}</text>
+          <text>{{_t['时间']}}：{{item.raceDate}}</text>
         </view>
       </view>
     </navigator>
@@ -24,6 +24,6 @@
 <block wx:else>
   <view class="flex align-center column justify-center empty">
     <image src="./../../images/empty@2x.png" />
-    <text>暂无数据，请检查数据或者更改过滤条件</text>
+    <text>{{_t['暂无数据，请检查数据或者更改过滤条件']}}</text>
   </view>
 </block>

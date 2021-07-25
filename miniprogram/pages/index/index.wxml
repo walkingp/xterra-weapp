@@ -10,7 +10,7 @@
           <view class="swiper-item">
             <image class="cover" src="{{item.picUrl}}" mode="aspectFill"></image>
             <button bindtap="tap" data-src="{{item.picUrl}}" data-url="{{item.redirectUrl}}" data-type="{{item.type}}"
-              class="button">查看详情</button>
+              class="button">{{_t['查看详情']}}</button>
           </view>
         </swiper-item>
       </block>
@@ -27,13 +27,13 @@
     <text class="cn">{{currentCity.cityCN}}</text>
     <view class="desc flex column align-center">
       <text selectable="{{true}}">{{currentCity.desc}}</text>
-      <text selectable="{{true}}">拥有打卡点{{places.length}}个</text>
+      <text selectable="{{true}}">{{_t['拥有打卡点']}} {{places.length}}</text>
     </view>
-    <button bindtap="redirect" data-url="/pages/venue/city/city" class="button">切换城市</button>
+    <button bindtap="redirect" data-url="/pages/venue/city/city" class="button">{{_t['切换城市']}}</button>
   </view>
   <venue-list list="{{places}}" />
   <view class="news">
-      <view class="title">新闻动态</view>
+      <view class="title">{{_t['新闻动态']}}</view>
       <view bindtap="redirect" data-wechaturl="{{news[0].wechatUrl}}"
         data-url="/pages/news/detail/detail?id={{news[0]._id}}" class="cover item">
         <image src="{{news[0].coverUrl}}" mode="aspectFill" />

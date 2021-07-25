@@ -4,9 +4,9 @@
     <image bindload="onImageLoad" src="{{tempFileUrl}}" mode="widthFix" wx:else />
   </view>
   <van-cell border="{{ false }}">
-    <button disabled="{{!certUrl}}" bindtap="onTapImg" class="primary button block">保存到本地</button>
-    <button disabled="{{!certUrl}}" bindtap="redirect" wx:if="{{!type}}" class="button margin-top-sm block">查看百万森林证书</button>
-    <button disabled="{{!certUrl}}" bindtap="backTo" wx:else class="button margin-top-sm block">返回XTERRA证书</button>
+    <button disabled="{{!certUrl}}" bindtap="onTapImg" class="primary button block">{{_t['保存到本地']}}</button>
+    <button disabled="{{!certUrl}}" bindtap="redirect" wx:if="{{!type}}" class="button margin-top-sm block">{{_t['查看百万森林证书']}}</button>
+    <button disabled="{{!certUrl}}" bindtap="backTo" wx:else class="button margin-top-sm block">{{_t['返回XTERRA证书']}}</button>
   </van-cell>
   <poster id="poster" config="{{posterConfig}}" bind:success="onPosterSuccess" bind:fail="onPosterFail">
   </poster>

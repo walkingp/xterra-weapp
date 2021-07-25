@@ -1,4 +1,5 @@
 const config = require("../config/config");
+const i18n = require("./i18n");
 const oldPage = Page;
 Page = function(app) {
   const oldOnLoad  =  app.onLoad;
@@ -10,6 +11,12 @@ Page = function(app) {
     // onLoad函数在是当前page实例上下文中执行，所以当前的this为当前page实例
     // 如果不使用call来硬绑定，而是直接app.onLoad()，那么onLoad里的this将为app这个对象
     // 即我们正常在page.js里Page(app) 括号里面我们自己写的page对象
+    const lang = i18n.i18n.getLang();
+    this.setData({
+      isChinese: lang,
+      _t: i18n.i18n.translate()
+    });
+
     if (typeof app.onLoad === 'function') {
       oldOnLoad && oldOnLoad.call(this, options); //apply
     }

@@ -10,7 +10,8 @@ const config = {
     kits: 'xterra.kits',
     searchHistory: 'searchHistory',
     currentCheckInRace: 'currentCheckInRace',
-    currentCity: 'currentCity'
+    currentCity: 'currentCity',
+    isChinese: 'isChinese'
   },
   messageTemplates: {
     registration: {

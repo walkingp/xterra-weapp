@@ -17,7 +17,7 @@
     </view>
   </view>
   <view class="buttons flex-none">
-    <button bindtap="nextStep" disabled="{{!nextEnabled}}" wx:if="{{step < 4 }}" class="button primary">{{step === 3 ? '返回主页' : (step === 2 ? '确认支付' : '下一步')}}</button>
-    <button bindtap="prevStep" disabled="{{!prevEnabled}}" class="button secondary" wx:if="{{ step > 0 && step < 4 }}">{{step === 3 ? '查看报名' : '返回上一步'}}</button>
+    <button bindtap="nextStep" disabled="{{!nextEnabled}}" wx:if="{{step < 4 }}" class="button primary">{{step === 3 ? _t['返回主页'] : (step === 2 ? _t['确认支付'] : _t['下一步'])}}</button>
+    <button bindtap="prevStep" disabled="{{!prevEnabled}}" class="button secondary" wx:if="{{ step > 0 && step < 4 }}">{{step === 3 ? _t['查看报名'] : _t['返回上一步']}}</button>
   </view>
 </view>

@@ -1,5 +1,5 @@
 <block wx:if="{{!showRelay}}">
-  <view class="title">请选择报名人</view>
+  <view class="title">{{_t['请选择报名人']}}</view>
   <view class="cates">
     <block wx:if="{{profiles.length>0}}">
       <checkbox-group bindchange="checkboxChanged">
@@ -12,27 +12,27 @@
             <label for="i{{index}}" class="label">({{item.relation}})</label>
             <label for="i{{index}}" class="label gender">{{item.gender}}</label>
             <label for="i{{index}}" class="unit">{{item.phoneNum}}</label>
-            <label for="i{{index}}" class="error" wx:if="{{!item.isValid}}">资料不完整</label>
-            <label for="i{{index}}" class="error" wx:elif="{{!item.isAgeValid}}">年龄不符合</label>
+            <label for="i{{index}}" class="error" wx:if="{{!item.isValid}}">{{_t['资料不完整']}}</label>
+            <label for="i{{index}}" class="error" wx:elif="{{!item.isAgeValid}}">{{_t['年龄不符合']}}</label>
             <label for="i{{index}}" class="blank flex-auto" wx:else>b</label>
           </view>
           <navigator wx:if="{{item.registered === false}}"
-            url="/pages/register/form/form?action=edit&raceId={{raceId}}&cateId={{cateId}}&id={{item._id}}">编辑
+            url="/pages/register/form/form?action=edit&raceId={{raceId}}&cateId={{cateId}}&id={{item._id}}">{{_t['编辑']}}
           </navigator>
         </view>
       </checkbox-group>
     </block>
     <block wx:else>
-      <view class="empty">你还没有添加过任何报名资料</view>
+      <view class="empty">{{_t['你还没有添加过任何报名资料']}}</view>
     </block>
     <view class="buttons">
       <button data-url="/pages/register/form/form?action=add&raceId={{raceId}}&cateId={{cateId}}" bindtap="gotoAdd"
-        class="button">添加新报名人</button>
+        class="button">{{_t['添加新报名人']}}</button>
     </view>
   </view>
 </block>
 <block wx:else>
-  <view class="title">请设置接力成员</view>
+  <view class="title">{{_t['请设置接力成员']}}</view>
   <block wx:for="{{selectedProfiles}}" wx:for-index="index" wx:key="_id">
     <van-cell title="{{item.trueName}}" is-link="{{selectedProfiles.length === 3}}" border="{{ false }}"
       bindtap="showPicker" data-id="{{item._id}}">
@@ -40,7 +40,7 @@
         <van-icon color="green" wx:if="{{item.sportItems !== ''}}" name="success" /> {{item.sportItems === '' ? '请选择项目' : item.sportItems}}
       </block>
       <block wx:else>
-        <text>请选择项目</text>
+        <text>{{_t['请选择项目']}}</text>
       </block>
     </van-cell>
     <van-checkbox-group value="{{ result[index] }}" data-main="{{index}}" bind:change="onChange" wx:if="{{selectedProfiles.length<3}}">
@@ -53,11 +53,11 @@
     </van-checkbox-group>
   </block>
   <view class="box">
-    <view class="title">注意事项</view>
+    <view class="title">{{_t['注意事项']}}</view>
     <view class="desc">
-      <text>3人团队，每人仅限一个单独项目；2人团队，每人最多可报2个项目。铁三团队组仅限队长统一报名。</text>
+      <text>{{_t['3人团队，每人仅限一个单独项目；2人团队，每人最多可报2个项目。铁三团队组仅限队长统一报名。']}}</text>
     </view>
   </view>
   <van-action-sheet show="{{ show }}" bind:close="onClose" bind:cancel="onClose" bind:select="onSelect"
-    actions="{{ actions }}" cancel-text="取消" />
+    actions="{{ actions }}" cancel-text="{{_t['取消']}}" />
 </block>

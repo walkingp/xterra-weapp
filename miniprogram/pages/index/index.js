@@ -292,14 +292,8 @@ Page({
     this.getCity();
     this.watchChanges('banner');
     this.watchChanges('news');
-    wx.getSystemInfo({
-      success: e => {
-        let info = wx.getMenuButtonBoundingClientRect()
-        let headerBarHeight = info.bottom + info.top - e.statusBarHeight
-        this.setData({
-          headerBarHeight
-        })
-      }
+    this.setData({
+      headerBarHeight: app.globalData.headerBarHeight
     })
   },
   onShow() {}

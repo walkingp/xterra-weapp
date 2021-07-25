@@ -32,13 +32,13 @@
       <view class="flex column justify-center text-grey fs-md align-center" catchtap="giveKudos" data-id="{{detail._id}}">        
         <van-icon size="28px" name="good-job" color="orange" wx:if="{{detail.kudosed}}" />
         <van-icon size="28px" name="good-job-o" wx:else />
-        <text wx:if="{{detail.kudos_list.length === 0}}">现在点赞</text>
+        <text wx:if="{{detail.kudos_list.length === 0}}">{{_t['现在点赞']}}</text>
       </view>
       <view class="flex justify-center text-grey fs-xs align-center" bindtap="showKudos" wx:if="{{detail.kudos_list.length}}">
-        <van-icon name="friends-o" size="18px" /> {{detail.kudos_list.length}}人觉得很赞 <van-icon name="arrow" />
+        <van-icon name="friends-o" size="18px" /> {{detail.kudos_list.length}}{{_t['人觉得很赞']}} <van-icon name="arrow" />
       </view>
       <van-popup position="bottom" closeable close-icon="close" bind:close="onClose" show="{{ kudosVisible }}">
-        <van-cell-group title="点赞用户">
+        <van-cell-group title="{{_t['点赞用户']}}">
           <block wx:for="{{detail.kudos_list}}" wx:key="userId">
             <van-cell class="flex align-center" title="{{item.userInfo.nickname}}" is-link link-type="navigateTo" url="/pages/community/user/user?id={{item.userId}}" icon="{{item.userInfo.avatarUrl}}" />
           </block>
@@ -46,7 +46,7 @@
       </van-popup>
     </view>
     <view class="comments">
-      <view class="title">所有评论<text wx:if="{{comments.length}}">（{{comments.length}}）</text></view>
+      <view class="title">{{_t['所有评论']}}<text wx:if="{{comments.length}}">（{{comments.length}}）</text></view>
       <block wx:if="{{comments.length}}">
         <view class="comment flex" wx:for="{{comments}}" wx:key="index">
           <navigator url="/pages/community/user/user?id={{item.userId}}" class="flex justify-center">
@@ -62,16 +62,16 @@
         </view>
       </block>
       <block wx:else>
-        <van-empty description="暂无评论" />
+        <van-empty description="{{_t['暂无评论']}}" />
       </block>
     </view>
   </view>
   <form bindsubmit="addComment" class="bottom flex-none">
     <view class="flex space-between align-center">
-      <input type="text" name="content" confirm-type="send" value="{{value}}" placeholder="评论内容"
+      <input type="text" name="content" confirm-type="send" value="{{value}}" placeholder="{{_t['评论内容']}}"
         disabled="{{!isLogined}}" class="flex-auto" />
-      <button form-type="submit" disabled="{{btnDisabled}}" wx:if="{{isLogined}}" class="flex-none">发表评论</button>
-      <button form-type="submit" wx:else class="flex-none">请先登录</button>
+      <button form-type="submit" disabled="{{btnDisabled}}" wx:if="{{isLogined}}" class="flex-none">{{_t['发表评论']}}</button>
+      <button form-type="submit" wx:else class="flex-none">{{_t['请先登录']}}</button>
     </view>
   </form>
 </view>

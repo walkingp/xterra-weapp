@@ -11,9 +11,13 @@ Component({
       type: String
     }
   },
-  observers: {
+  lifetimes: {
+    attached(){
+      this.setData({
+        _t: i18n.i18n.translate()
+      })
+    }
   },
-
   /**
    * 组件的初始数据
    */

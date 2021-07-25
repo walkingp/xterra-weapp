@@ -2,6 +2,7 @@ const { updatePoint } = require("../../api/points");
 const config = require("../../config/config");
 const { getCollectionById } = require("../../utils/cloud");
 const { pointRuleEnum } = require("./../../config/const");
+import { locale } from "../../config/locale";
 const app = getApp();
 Page({
 
@@ -126,6 +127,17 @@ Page({
     this.setData({
       isLogined
     })
+    const pages = getCurrentPages();
+    if(pages.length && pages[0].route === 'pages/my/my'){
+      const isChinese = getApp().globalData.isChinese;
+      const currentLocale = Array.from(locale).find(item=>item.isChinese === isChinese);
+      currentLocale.tabs.forEach((text, index)=>{
+        wx.setTabBarItem({
+          index,
+          text
+        })
+      });
+    }
   },
 
   /**

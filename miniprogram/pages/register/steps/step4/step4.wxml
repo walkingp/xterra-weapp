@@ -1,14 +1,14 @@
 <view class="box flex column align-center justify-center">
   <image src="./../../../../images/icons/succ@2x.png"></image>
   <view class="text flex column align-center justify-center">
-    <text class="bold">恭喜你完成报名！</text>
-    <view class="gray">请登录以下邮箱检查报名确认邮件：</view>
+    <text class="bold">{{_t['恭喜你完成报名！']}}</text>
+    <view class="gray">{{_t['请登录以下邮箱检查报名确认邮件：']}}</view>
     <view wx:for="{{emails}}" wx:key="index" class="email">{{item}}</view>
-    <text class="gray contact">如有任何报名问题，请与客服人员及时联系</text>
+    <text class="gray contact">{{_t['如有任何报名问题，请与客服人员及时联系']}}</text>
     
     <view class="ft flex justify-center align-center">
-      <button class="button mini" open-type="share" wx:if="{{order.type === 'relay'}}">邀请报名</button>
-      <button bindtap="redirect" data-url="/pages/my/registration/registration" class="button mini margin-left-xl">返回我的报名</button>
+      <button class="button mini" open-type="share" wx:if="{{order.type === 'relay'}}">{{_t['邀请报名']}}</button>
+      <button bindtap="redirect" data-url="/pages/my/registration/registration" class="button mini margin-left-xl">{{_t['返回我的报名']}}</button>
     </view>
   </view>
 </view>

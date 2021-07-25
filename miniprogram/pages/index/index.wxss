@@ -53,7 +53,7 @@
 button.button {
 	border: solid 4rpx #444;
 	height: 74rpx;
-	width: 250rpx;
+	width: 260rpx;
 	color: #444;
 	border-radius: 0;
 	background-color: transparent;

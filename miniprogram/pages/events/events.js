@@ -2,6 +2,9 @@ const { getRaceIndexList, getBannerList } = require("./../../api/race");
 const dayjs = require("dayjs");
 const { raceStatus } = require("../../config/const");
 const app = getApp();
+const i18n = require("./../../utils/i18n");
+
+const _t = i18n.i18n.translate();
 // miniprogram/pages/index/index.js
 Page({
 
@@ -14,30 +17,30 @@ Page({
     allRaces: [],
     banners: [],
     locations: [
-      { text: '地区', value: '' },
-      { text: '江浙沪', value: '江浙沪' },
-      { text: '京津冀', value: '京津冀' },
-      { text: '珠三角', value: '珠三角' },
-      { text: '西南地区', value: '西南地区' },
-      { text: '其他地区', value: '其他地区' },
-      { text: '海外', value: '海外' },
+      { text: _t['地区'], value: '' },
+      { text: _t['江浙沪'], value: '江浙沪' },
+      { text: _t['京津冀'], value: '京津冀' },
+      { text: _t['珠三角'], value: '珠三角' },
+      { text: _t['西南地区'], value: '西南地区' },
+      { text: _t['其他地区'], value: '其他地区' },
+      { text: _t['海外'], value: '海外' },
     ],
     statuses: [
-      { text: '报名状态', value: '' },
-      { text: '未开始报名', value: '未开始报名' },
-      { text: '报名中', value: '报名中' },
-      { text: '名额已满', value: '名额已满' },
-      { text: '报名已截止', value: '报名已截止' },
-      { text: '比赛已结束', value: '比赛已结束' },
+      { text: _t['报名状态'], value: '' },
+      { text: _t['未开始报名'], value: '未开始报名' },
+      { text: _t['报名中'], value: '报名中' },
+      { text: _t['名额已满'], value: '名额已满' },
+      { text: _t['报名已截止'], value: '报名已截止' },
+      { text: _t['比赛已结束'], value: '比赛已结束' },
     ],
     types: [
-      { text: '活动类型', value: '' },
-      { text: '铁人三项', value: '铁人三项' },
-      { text: '越野跑', value: '越野跑' },
-      { text: '山地车', value: '山地车' },
-      { text: 'X-Plogging', value: 'X-Plogging' },
-      { text: '训练营', value: '训练营' },
-      { text: '其他', value: '其他' },
+      { text: _t['活动类型'], value: '' },
+      { text: _t['铁人三项'], value: '铁人三项' },
+      { text: _t['越野跑'], value: '越野跑' },
+      { text: _t['山地车'], value: '山地车' },
+      { text: _t['X-Plogging'], value: 'X-Plogging' },
+      { text: _t['训练营'], value: '训练营' },
+      { text: _t['其他'], value: '其他' },
     ],
     location: '',
     status: '',
@@ -45,7 +48,7 @@ Page({
   },
   async fetch(){
     wx.showLoading({
-      title: '加载中',
+      title: _t['加载中……'],
     })
     let races = await getRaceIndexList();
     races.map(item=>{

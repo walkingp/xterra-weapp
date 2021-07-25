@@ -9,28 +9,28 @@
       <view class="info">
         <view class="cells">
           <view class="cell">
-            <text>{{type}}时间：</text>
+            <text>{{_t[type + '时间']}}：</text>
             <text selectable="{{true}}" class="text">{{detail.raceDate}}</text>
           </view>
           <view class="cell">
-            <text>{{type}}地点：</text>
+            <text>{{_t[type + '地点']}}：</text>
             <text selectable="{{true}}" class="text">{{detail.location}}</text>
           </view>
           <view class="cell">
-            <text>{{type}}类型：</text>
+            <text>{{_t[type + '类型']}}：</text>
             <text class="text">{{detail.type}}</text>
           </view>
           <view class="cell" wx:if="{{detail.cates!=='/'}}">
-            <text>{{type}}组别：</text>
+            <text>{{_t[type + '组别']}}：</text>
             <text selectable="{{true}}" class="text">{{detail.cates}}</text>
           </view>
           <block wx:if="{{!detail.isPlogging}}">
             <view class="cell">
-              <text>报名开始时间：</text>
+              <text>{{_t['报名开始时间']}}：</text>
               <text class="text">{{detail.regStartTimeStr}}</text>
             </view>
             <view class="cell">
-              <text>报名截止时间：</text>
+              <text>{{_t['报名截止时间']}}：</text>
               <text class="text">{{detail.endRegTimeStr}}</text>
             </view>
           </block>
@@ -39,7 +39,7 @@
     </view>
     <view class="section location" wx:if="{{detail.coordinate}}">
       <view class="hd">
-        <text>{{type}}地点</text>
+        <text>{{_t[type]}}{{_t['地点']}}</text>
       </view>
       <view class="map">
         <map id="map" markers="{{markers}}" longitude="{{detail.coordinate[0]}}" latitude="{{detail.coordinate[1]}}"
@@ -49,18 +49,18 @@
     </view>
     <view class="section icons">
       <van-grid border="{{false}}" column-num="4">
-        <van-grid-item icon="orders-o" url="/pages/events/query/query?raceId={{detail._id}}&type=registration" text="报名查询" />
-        <van-grid-item wx:if="{{false}}" icon="photo-o" url="/pages/profile/profile" link-type="switchTab" text="照片查询" />
-        <van-grid-item wx:if="{{true || detail.isEnded}}" icon="notes-o" url="/pages/events/query/query?raceId={{detail._id}}&type=result" text="{{detail.type !== 'X-Plogging' ? '成绩查询' : '证书下载'}}" />
-        <van-grid-item icon="paid" url="/pages/events/kits/kits?id={{detail._id}}" text="装备要求" />
-        <van-grid-item icon="hotel-o" url="/pages/events/info/info?id={{detail._id}}&type=traffic" text="交通住宿" />
-        <van-grid-item wx:if="{{detail.type !== 'X-Plogging' && detail.showCuisine}}" icon="flower-o" url="/pages/events/info/info?id={{detail._id}}&type=cuisine" text="美食美景" />
-        <van-grid-item icon-color="#f00" icon="friends-o" wx:if="{{isAdmin || isSuperAdmin}}" url="/pages/events/users/users?id={{detail._id}}" text="报名名单" />
+        <van-grid-item icon="orders-o" url="/pages/events/query/query?raceId={{detail._id}}&type=registration" text="{{_t['报名查询']}}" />
+        <van-grid-item wx:if="{{false}}" icon="photo-o" url="/pages/profile/profile" link-type="switchTab" text="{{_t['照片查询']}}" />
+        <van-grid-item wx:if="{{true || detail.isEnded}}" icon="notes-o" url="/pages/events/query/query?raceId={{detail._id}}&type=result" text="{{detail.type !== 'X-Plogging' ? _t['成绩查询'] : _t['证书下载']}}" />
+        <van-grid-item icon="paid" url="/pages/events/kits/kits?id={{detail._id}}" text="{{_t['装备要求']}}" />
+        <van-grid-item icon="hotel-o" url="/pages/events/info/info?id={{detail._id}}&type=traffic" text="{{_t['交通住宿']}}" />
+        <van-grid-item wx:if="{{detail.type !== 'X-Plogging' && detail.showCuisine}}" icon="flower-o" url="/pages/events/info/info?id={{detail._id}}&type=cuisine" text="{{_t['美食美景']}}" />
+        <van-grid-item icon-color="#f00" icon="friends-o" wx:if="{{isAdmin || isSuperAdmin}}" url="/pages/events/users/users?id={{detail._id}}" text="{{_t['报名名单']}}" />
       </van-grid>
     </view>
     <view class="section icons">
       <view class="hd">
-        <text>{{type}}新闻</text>
+        <text>{{_t[type]}}{{_t['新闻']}}</text>
       </view>
       <view class="bd">
         <block wx:if="{{news.length}}">
@@ -68,25 +68,25 @@
         </block>
         <block wx:else>
           <view class="empty">
-            暂无新闻
+            {{_t['暂无新闻']}}
           </view>
         </block>
       </view>
       <view bindtap="loadMoreNews" class="ft flex align-center justify-center" wx:if="{{news.length && hasMoreData}}">
-        查看更多
+        {{_t['查看更多']}}
         <van-icon name="arrow-down" />
       </view>
     </view>
     <view class="section icons">
       <view class="hd pb">
-        <text>{{type}}组别</text>
+        <text>{{_t[type]}}{{_t['组别']}}</text>
       </view>
       <view class="bd">
         <race-cate-list raceId="{{detail._id}}" list="{{cates}}" />
       </view>
     </view>
     <view class="section icons" wx:if="{{detail.routePics}}">
-      <view class="hd pb">线路图</view>
+      <view class="hd pb">{{_t['线路图']}}</view>
       <view class="list">
         <banner-list list="{{detail.routePics}}"></banner-list>
       </view>
@@ -94,22 +94,22 @@
     <view class="section content">
       <van-tabs sticky active="{{ active }}" bind:change="onChange">
         <block wx:if="{{detail.showContent}}">
-          <van-tab name="content" title="比赛规程">
+          <van-tab name="content" title="{{_t['比赛规程']}}">
             <towxml nodes="{{detail.content}}" />
           </van-tab>
         </block>
         <block wx:if="{{detail.showAdminssion}}">
-          <van-tab name="admission" title="报名须知">
+          <van-tab name="admission" title="{{_t['报名须知']}}">
             <towxml nodes="{{detail.admission}}" />
           </van-tab> 
         </block>
-        <van-tab name="flow" title="{{type}}流程" wx:if="{{detail.showFlow}}">
+        <van-tab name="flow" title="{{_t[type + '流程']}}" wx:if="{{detail.showFlow}}">
           <towxml nodes="{{detail.flow}}" />
         </van-tab>
       </van-tabs>
     </view>
   </view>
   <view wx:if="{{regBtnEnabled}}" class="bottom flex-none flex justify-center align-center">
-    <button bindtap="register" class="button">立即报名</button>
+    <button bindtap="register" class="button">{{_t['立即报名']}}</button>
   </view>
 </view>

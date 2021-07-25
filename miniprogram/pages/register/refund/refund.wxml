@@ -14,32 +14,32 @@
     <van-icon class="flex-none" name="arrow" />
   </navigator>
   <view class="box info">
-    <view class="title">{{ isPlogging ? '取消活动' : '申请退款' }}</view>
+    <view class="title">{{ isPlogging ? _t['取消活动'] : _t['申请退款'] }}</view>
     <view class="list">
       <van-cell title="退款金额" wx:if="{{!isPlogging}}" value="￥{{refundMoney}}" />
       <van-cell title="{{ isPlogging ? '取消理由' : '退款理由' }}" bind:click="showAction" value="{{reason}}" is-link border="{{ false }}" wx:if="{{canRefund}}" />
-      <van-cell title="{{ isPlogging ? '取消理由' : '退款理由' }}" border="{{ false }}" value="不可退款" wx:else />
+      <van-cell title="{{ isPlogging ? '取消理由' : '退款理由' }}" border="{{ false }}" value="{{_t['不可退款']}}" wx:else />
     </view>
   </view>
   <view class="box info">
     <block wx:if="{{!isPlogging}}">
-      <view class="title">退款政策</view>
+      <view class="title">{{_t['退款政策']}}</view>
       <view class="desc flex column">
         <text>{{policyText}}</text> 
       </view>
     </block>
-    <view class="title">注意事项</view>
+    <view class="title">{{_t['注意事项']}}</view>
     <view class="desc flex column">
-      <text wx:if="{{isPlogging}}">X-Plogging为免费活动，取消前请提前与负责人联系，多次取消后可能会影响您的后续报名。</text>
-      <text wx:else>退款申请将在后台审核完成后才能退款，退款在审核完成后大约一周内退还到原支付账户。</text>
+      <text wx:if="{{isPlogging}}">{{_t['X-Plogging为免费活动，取消前请提前与负责人联系，多次取消后可能会影响您的后续报名。']}}</text>
+      <text wx:else>{{_t['退款申请将在后台审核完成后才能退款，退款在审核完成后大约一周内退还到原支付账户。']}}</text>
     </view>
   </view>
   <view class="ft flex justify-end align-center">
-    <button bindtap="back" data-url="/pages/register/refund/refund?id={{detail._id}}" class="button secondary mini">再想一想</button>
-    <button bindtap="refund" disabled="{{disabled}}" class="button mini">{{ isPlogging ? '取消活动' : '申请退款' }}</button>
+    <button bindtap="back" data-url="/pages/register/refund/refund?id={{detail._id}}" class="button secondary mini">{{_t['再想一想']}}</button>
+    <button bindtap="refund" disabled="{{disabled}}" class="button mini">{{ isPlogging ? _t['取消活动'] : _t['申请退款'] }}</button>
   </view>
   <van-action-sheet
-  cancel-text="取消"
+  cancel-text="{{_t['取消']}}"
   show="{{ show }}"
   actions="{{ actions }}"
   bind:cancel="onClose"

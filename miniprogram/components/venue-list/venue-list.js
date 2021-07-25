@@ -1,3 +1,4 @@
+const i18n = require("./../../utils/i18n");
 // components/venue-list/venue-list.js
 Component({
   /**
@@ -14,6 +15,13 @@ Component({
    */
   data: {
 
+  },
+  lifetimes: {
+    attached(){
+      this.setData({
+        _t: i18n.i18n.translate()
+      })
+    }
   },
 
   /**

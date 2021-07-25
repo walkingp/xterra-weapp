@@ -1,5 +1,5 @@
 <view class="top flex align-center">
-  <van-search bindtap="gotoSearch" class="flex-auto" value="{{ value }}" placeholder="请输入搜索关键词" />
+  <van-search bindtap="gotoSearch" class="flex-auto" value="{{ value }}" placeholder="{{_t['请输入搜索关键词']}}" />
   <navigator url="/pages/community/new/new" class="flex-none">
     <van-icon class="camera" size="24px" name="/images/icons/camera.svg" />
   </navigator>
@@ -9,10 +9,10 @@
 </view>
 <view class="main">
   <van-tabs active="{{ 0 }}" bind:change="onChange">
-    <van-tab title="最新">
+    <van-tab title="{{_t['最新']}}">
       <community-list list="{{list}}" />
     </van-tab>
-    <van-tab title="推荐">
+    <van-tab title="{{_t['推荐']}}">
       <community-list list="{{recommendedList}}" />
     </van-tab>
   </van-tabs>

@@ -1,6 +1,9 @@
 const { getNewsIndexList } = require("./../../api/news");
 const dayjs = require("dayjs");
 const config = require("../../config/config");
+const i18n = require("./../../utils/i18n");
+
+const _t = i18n.i18n.translate();
 // miniprogram/pages/index/index.js
 Page({
 
@@ -12,15 +15,15 @@ Page({
     news: [],
     allNews: [],
     orders: [
-      { text: '排序', value: '' },
-      { text: '按时间倒序', value: 'desc' },
-      { text: '按时间正序', value: 'asc' }
+      { text: _t['排序'], value: '' },
+      { text: _t['按时间倒序'], value: 'desc' },
+      { text: _t['按时间正序'], value: 'asc' }
     ],
     types: [
-      { text: '分类', value: '' },
-      { text: '赛事', value: '赛事' },
-      { text: '人物', value: '人物' },
-      { text: '新闻', value: '新闻' }
+      { text: _t['分类'], value: '' },
+      { text: _t['赛事'], value: '赛事' },
+      { text: _t['人物'], value: '人物' },
+      { text: _t['新闻'], value: '新闻' }
     ],
     order: 'desc',
     type: ''
@@ -48,7 +51,7 @@ Page({
   },
   async fetch(){
     wx.showLoading({
-      title: '加载中……',
+      title: _t['加载中……'],
     })
     const news = await getNewsIndexList();
     news.map(item=>{

@@ -1,5 +1,5 @@
   <view class="venues">
-    <view class="title">精选地点</view>
+    <view class="title">{{_t['精选地点']}}</view>
     <view class="main flex align-center">
       <view class="left flex-none"></view>
       <view class="swiper flex-auto">

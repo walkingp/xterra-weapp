@@ -1,8 +1,13 @@
-import { updatePoint } from "../../../api/points";
-import { getUserDetail } from "../../../api/user";
-import { pointRuleEnum } from "../../../config/const";
-import areaList from "./../../../config/area";
-const dayjs = require("dayjs");
+import {
+  updatePoint
+} from "../../../api/points";
+import {
+  getUserDetail
+} from "../../../api/user";
+import config from "../../../config/config";
+import {
+  pointRuleEnum
+} from "../../../config/const";
 const app = getApp();
 Page({
 
@@ -21,12 +26,23 @@ Page({
     email: '',
     gender: '未选择',
     region: '未选择',
-    defaultBirthDate: new Date(1990,6,15).getTime(),
-    genders: [{name: '男'}, {name: '女'}],
+    defaultBirthDate: new Date(1990, 6, 15).getTime(),
+    genders: [{
+      name: '男'
+    }, {
+      name: '女'
+    }],
     birthDate: '未选择',
-    
-    minDate: new Date(1920, 1, 1).getTime(),
+    lang: null,
+    langs: [{
+      name: '中文'
+    }, {
+      name: 'English'
+    }],
+    minDate: new Date(1930, 1, 1).getTime(),
     maxDate: new Date().getTime(),
+    actions: null,
+    type: null
 
   },
 
@@ -37,18 +53,29 @@ Page({
     wx.showLoading({
       title: '加载中……',
     })
+    const isChinese = wx.getStorageSync(config.storageKey.isChinese);
+    this.setData({
+      lang: isChinese ? '中文' : 'English'
+    });
     app.checkLogin().then(async res => {
-      const { userId, userInfo } = res;
+      const {
+        userId,
+        userInfo
+      } = res;
       this.setData({
         nickname: userInfo.nickname,
         userId
       });
       const data = await getUserDetail(userId);
-      const { truename, phonenumber, gender } = data;
+      const {
+        truename,
+        phonenumber,
+        gender
+      } = data;
       this.setData({
-        trueName:truename,
+        trueName: truename,
         phoneNum: phonenumber,
-        gender:  isNaN(gender) ? gender : (gender === 0 ? '男' : '女')
+        gender: isNaN(gender) ? gender : (gender === 0 ? '男' : '女')
       }, () => {
         wx.hideLoading({
           success: (res) => {},
@@ -56,16 +83,36 @@ Page({
       })
     })
   },
-  showAction(){
-    this.setData({ showAction: true });
+  showAction(e) {
+    const {
+      name
+    } = e.currentTarget.dataset;
+    const {
+      langs,
+      genders
+    } = this.data;
+    this.setData({
+      showAction: true,
+      type: name,
+      actions: name === 'gender' ? genders : langs
+    });
   },
   onClose() {
-    this.setData({ showAction: false });
+    this.setData({
+      showAction: false
+    });
   },
-  async saveData(e){
-    const { phoneNum, trueName } = e.detail.value;
-    const { gender, userId } = this.data;
-    if(!phoneNum || !trueName || gender === '请选择'){
+  async saveData(e) {
+    this.saveLang();
+    const {
+      phoneNum,
+      trueName
+    } = e.detail.value;
+    const {
+      gender,
+      userId
+    } = this.data;
+    if (!phoneNum || !trueName || gender === '请选择') {
       wx.showToast({
         icon: 'none',
         title: '请填写完整资料',
@@ -81,37 +128,58 @@ Page({
       }
     });
     // 加分
-    const data = await updatePoint(userId, pointRuleEnum.UpdateProfile,{
+    const data = await updatePoint(userId, pointRuleEnum.UpdateProfile, {
       id: userId,
       title: trueName
     })
     wx.showToast({
       icon: 'success',
       title: '保存成功',
-      success: ()=> {
+      success: () => {
         setTimeout(() => {
           wx.switchTab({
             url: '/pages/my/my',
-          })          
+          })
         }, 1000);
       }
     });
   },
-  onSelect(event) {
-    const { name } = event.detail;
-    this.setData({
-      gender: name
-    })
+  saveLang(){
+    const { lang } = this.data;
+    const isChinese = lang === '中文';
+    wx.setStorageSync(config.storageKey.isChinese, isChinese);
+    getApp().globalData.isChinese = isChinese;    
   },
-  selectAddr(){
+  onSelect(event) {
+    const name = event.detail.name;
+    const { type } = this.data;
+    if(type === 'gender'){
+      this.setData({
+        gender: name
+      })
+    }else{
+      this.setData({
+        lang: name
+      });
+    }
+  },
+  selectAddr() {
     const that = this;
     wx.getSetting({
       success(res) {
-        console.log("vres.authSetting['scope.address']：",res.authSetting['scope.address'])
+        console.log("res.authSetting['scope.address']：", res.authSetting['scope.address'])
         if (res.authSetting['scope.address']) {
           wx.chooseAddress({
             success(res) {
-              const { provinceName, cityName, countyName, detailInfo, userName, telNumber, postalCode } = res;
+              const {
+                provinceName,
+                cityName,
+                countyName,
+                detailInfo,
+                userName,
+                telNumber,
+                postalCode
+              } = res;
               const region = `${provinceName}${cityName}${countyName}`;
               const addr = detailInfo;
               that.setData({
@@ -127,13 +195,21 @@ Page({
             console.log("222")
             wx.openSetting({
               success(res) {
-                console.log(res.authSetting)            
+                console.log(res.authSetting)
               }
             })
           } else {
             wx.chooseAddress({
               success(res) {
-                const { provinceName, cityName, countyName, detailInfo, userName, telNumber, postalCode } = res;
+                const {
+                  provinceName,
+                  cityName,
+                  countyName,
+                  detailInfo,
+                  userName,
+                  telNumber,
+                  postalCode
+                } = res;
                 const region = `${provinceName}${cityName}${countyName}`;
                 const addr = detailInfo;
                 that.setData({

@@ -17,23 +17,23 @@
   </view>
   <view class="bottom">
     <van-tabs active="{{ active }}" bind:change="onChange">
-      <van-tab name="feed" title="动态">
+      <van-tab name="feed" title="{{_t['动态']}}">
         <community-list type="profile" list="{{feeds}}" />
       </van-tab>
-      <van-tab name="tick" title="打卡">
+      <van-tab name="tick" title="{{_t['打卡']}}">
         <community-list type="profile" list="{{places}}" />
       </van-tab>
-      <van-tab name="place" title="收藏">
+      <van-tab name="place" title="{{_t['收藏']}}">
         <view class="grid place">
         <block wx:for="{{favs}}" wx:key="_id">
           <place-list type="small" item="{{item}}" />
         </block>
         </view>
       </van-tab>
-      <van-tab name="medal" title="勋章">
+      <van-tab name="medal" title="{{_t['勋章']}}">
         <medal-list list="{{medals}}" />
       </van-tab>
-      <van-tab name="like" title="点赞">
+      <van-tab name="like" title="{{_t['点赞']}}">
         <community-list type="profile" list="{{kudosList}}" />
       </van-tab>
     </van-tabs>

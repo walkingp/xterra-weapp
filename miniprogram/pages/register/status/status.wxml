@@ -14,7 +14,7 @@
     <van-icon class="flex-none" name="arrow" />
   </navigator>
   <view class="box">
-    <view class="title">报名人资料：</view>
+    <view class="title">{{_t['报名人资料']}}：</view>
     <view class="list">
       <navigator url="/pages/register/form/view/view?orderId={{id}}&id={{item._id}}" class="cell flex align-center" wx:for="{{detail.profiles}}" wx:key="_id">
         <view class="flex-auto">
@@ -28,7 +28,7 @@
     </view>
   </view>
   <view class="box" wx:if="{{detail.teamTitle}}">
-    <view class="title">团队：{{detail.teamTitle}}</view>
+    <view class="title">{{_t['团队']}}：{{detail.teamTitle}}</view>
     <view class="list">
       <view class="cell flex align-center" wx:for="{{members}}" wx:key="_id">
         <view class="flex-auto">
@@ -46,81 +46,81 @@
       </view>
     </view>
     <view class="ft flex justify-center align-center" wx:if="{{detail.groupType === 'relay' && detail.type !== '铁人三项'}}">
-      <button class="button mini" open-type="share">邀请报名</button>
+      <button class="button mini" open-type="share">{{_t['邀请报名']}}</button>
     </view>
   </view>
   <view class="box info">
-    <view class="title">报名信息：</view>
+    <view class="title">{{_t['报名信息']}}：</view>
     <view class="list">
       <view class="cell">
-        <label>订单编号：</label>
+        <label>{{_t['订单编号']}}：</label>
         <text>{{detail.orderNum}}</text>
-        <text bindtap="copyText" data-text="{{detail.orderNum}}" class="copy">复制</text>
+        <text bindtap="copyText" data-text="{{detail.orderNum}}" class="copy">{{_t['复制']}}</text>
       </view>
       <view class="cell">
-        <label>订单时间：</label>
+        <label>{{_t['订单时间']}}：</label>
         <text>{{detail.orderTime}}</text>
       </view>
       <view class="cell">
-        <label>报名类别：</label>
+        <label>{{_t['报名类别']}}：</label>
         <text>{{detail.groupText}}</text>
       </view>
       <view class="cell">
-        <label>报名组别：</label>
+        <label>{{_t['报名组别']}}：</label>
         <text>{{detail.cateTitle}}</text>
       </view>
       <view class="cell" wx:if="{{detail.teamTitle}}">
-        <label>团队名：</label>
+        <label>{{_t['团队名']}}：</label>
         <text>{{detail.teamTitle}}</text>
       </view>
       <view class="cell">
-        <label>报名费用：</label>
+        <label>{{_t['报名费用']}}：</label>
         <text>￥{{detail.totalFee}}</text>
       </view>
       <view class="cell">
-        <label>优惠金额：</label>
+        <label>{{_t['优惠金额']}}：</label>
         <text>￥{{detail.discountFee}}</text>
       </view>
       <view class="cell">
-        <label>实付费用：</label>
+        <label>{{_t['实付费用']}}：</label>
         <text class="price">￥{{detail.paidFee}}</text>
       </view>
       <view class="cell">
-        <label>付款方式</label>
-        <text>微信支付</text>
+        <label>{{_t['付款方式']}}</label>
+        <text>{{_t['微信支付']}}</text>
         <image src="/images/icons/wepay.png" class="icon" />
       </view>
       <view class="cell">
-        <label>订单状态：</label>
+        <label>{{_t['订单状态']}}：</label>
         <text>{{detail.statusText}}</text>
       </view>
       <view class="cell" wx:if="{{orderDetail}}">
-        <label>报名审核：</label>
-        <text wx:if="{{orderDetail.isCertApproved}}" class="text-green">已审核通过</text>
-        <text wx:else class="text-red">未审核通过</text>
+        <label>{{_t['报名审核']}}：</label>
+        <text wx:if="{{orderDetail.isCertApproved}}" class="text-green">{{_t['已审核通过']}}</text>
+        <text wx:else class="text-red">{{_t['未审核通过']}}</text>
       </view>
       <block wx:if="{{orderDetail && !orderDetail.isCertApproved}}">
         <view class="cell">
-          <label>拒绝原因：</label>
+          <label>{{_t['拒绝原因']}}：</label>
           <text class="text-red">{{orderDetail.rejectReason || '无'}}</text>
         </view>
         <view class="cell flex align-center">
-          <label class="flex-none">成绩证书：</label>
+          <label class="flex-none">{{_t['成绩证书']}}：</label>
           <view class="line flex align-center" bindtap="preview" data-url="{{certPic}}">
             <van-icon size="22px" name="{{certPic}}" />
-            <text class="copy">点击查看</text>
+            <text class="copy">{{_t['点击查看']}}</text>
           </view>
           <view class="line flex align-center margin-left-md" bindtap="upload">
             <van-icon size="22px" name="edit" />
-            <text class="copy">重新上传</text>
+            <text class="copy">{{_t['重新上传']}}</text>
           </view>
         </view>
       </block>
     </view>
     <view class="ft flex justify-end align-center">
       <button bindtap="redirect" disabled="{{!refundEnabled}}" data-url="/pages/register/refund/refund?id={{detail._id}}" class="button secondary mini" wx:if="{{showRefundBtn}}">{{detail.raceType === 'X-Plogging' ? '取消活动' : '申请退款'}}</button>
-      <button bindtap="confirmOrder" wx:if="{{showPayBtn}}" class="button mini">立即支付</button>
-      <button bindtap="redirect" data-url="/pages/my/registration/registration" class="button mini">我的报名</button>
+      <button bindtap="confirmOrder" wx:if="{{showPayBtn}}" class="button mini">{{_t['立即支付']}}</button>
+      <button bindtap="redirect" data-url="/pages/my/registration/registration" class="button mini">{{_t['我的报名']}}</button>
     </view>
   </view>
 </view>

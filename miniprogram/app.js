@@ -1,4 +1,5 @@
 const config = require('./config/config.js');
+const {locale} = require('./config/locale.js');
 
 require('./utils/libs.js');
 //app.js
@@ -91,11 +92,32 @@ App({
     const that = this;
     wx.getSystemInfo({
       success: function (res) {
+        console.log(res);
         const clientHeight = res.windowHeight;
         const clientWidth = res.windowWidth;
         const changeHeight = 750 / clientWidth;
         const winHeight = clientHeight * changeHeight;
         that.globalData.winHeight = winHeight;
+
+        let info = wx.getMenuButtonBoundingClientRect()
+        let headerBarHeight = info.bottom + info.top - res.statusBarHeight        
+        that.globalData.headerBarHeight = headerBarHeight;
+
+        let isChinese = wx.getStorageSync(config.storageKey.isChinese);
+        if(isChinese !== ""){
+          isChinese = res.language === 'zh_CN';
+          wx.setStorageSync(config.storageKey.isChinese, isChinese);
+        }
+        that.globalData.isChinese = isChinese;
+        if(!isChinese) {
+          const currentLocale = Array.from(locale).find(item=>item.isChinese === isChinese);
+          currentLocale.tabs.forEach((text, index)=>{
+            wx.setTabBarItem({
+              index,
+              text
+            })
+          })
+        }
       }
     });
   },

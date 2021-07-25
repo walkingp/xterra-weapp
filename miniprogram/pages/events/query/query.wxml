@@ -1,39 +1,39 @@
 <view class="container">
   <view class="box">
     <form bindsubmit="query">
-      <view class="title">查询报名和成绩</view>
+      <view class="title">{{_t['查询报名和成绩']}}</view>
       <view class="cover">
         <banner-list list="{{raceDetail.picUrls}}"></banner-list>
       </view>
       <van-cell-group>
         <van-cell title="{{raceDetail.title}}" size="large" border="{{ false }}" />
-        <van-cell wx:if="{{isPlogging}}" title="请选择分站" bind:click="showAction" data-type="cate" border="{{ false }}"
+        <van-cell wx:if="{{isPlogging}}" title="{{_t['请选择分站']}}" bind:click="showAction" data-type="cate" border="{{ false }}"
           is-link value="{{defaultCate}}" />
-        <van-cell title="请选择查询者" bind:click="showAction" data-type="profile" border="{{ false }}" is-link
+        <van-cell title="{{_t['请选择查询者']}}" bind:click="showAction" data-type="profile" border="{{ false }}" is-link
           value="{{defaultName}}" />
-        <van-field label="或者直接输入证件号" title-width="10em" name="cardNo" value="{{ cardNo }}" placeholder="请输入证件号码"
+        <van-field label="{{_t['或者直接输入证件号']}}" title-width="10em" name="cardNo" value="{{ cardNo }}" placeholder="{{_t['请输入证件号码']}}"
           border="{{ false }}" />
         <van-cell border="{{ false }}">
-          <button form-type="submit" class="primary button block">查询</button>
+          <button form-type="submit" class="primary button block">{{_t['查询']}}</button>
         </van-cell>
       </van-cell-group>
     </form>
-    <van-action-sheet show="{{ show }}" cancel-text="取消" actions="{{ actions }}" bind:cancel="onClose"
+    <van-action-sheet show="{{ show }}" cancel-text="{{_t['取消']}}" actions="{{ actions }}" bind:cancel="onClose"
       bind:close="onClose" bind:select="onSelect" />
   </view>
   <view class="box result">
     <van-tabs active="{{ type }}" bind:change="onChange">
-      <van-tab title="报名" name="registration">
+      <van-tab title="{{_t['报名']}}" name="registration">
         <block wx:if="{{searchedReg}}">
           <van-cell-group>
-            <van-cell title="姓名" border="{{ false }}" value="{{searchedReg.trueName}}" />
-            <van-cell title="性别" border="{{ false }}" value="{{searchedReg.gender}}" />
-            <van-cell title="证件类型" border="{{ false }}" value="{{searchedReg.cardType}}" />
-            <van-cell title="证件号码" border="{{ false }}" value="{{searchedReg.cardNo}}" />
-            <van-cell title="报名状态" border="{{ false }}" value="{{searchedReg.statusText}}" />
-            <van-cell title="报名时间" border="{{ false }}" value="{{searchedReg.regDate}}" />
+            <van-cell title="{{_t['姓名']}}" border="{{ false }}" value="{{searchedReg.trueName}}" />
+            <van-cell title="{{_t['性别']}}" border="{{ false }}" value="{{searchedReg.gender}}" />
+            <van-cell title="{{_t['证件类型']}}" border="{{ false }}" value="{{searchedReg.cardType}}" />
+            <van-cell title="{{_t['证件号码']}}" border="{{ false }}" value="{{searchedReg.cardNo}}" />
+            <van-cell title="{{_t['报名状态']}}" border="{{ false }}" value="{{searchedReg.statusText}}" />
+            <van-cell title="{{_t['报名时间']}}" border="{{ false }}" value="{{searchedReg.regDate}}" />
           </van-cell-group>
-          <van-cell-group title="检录信息">
+          <van-cell-group title="{{_t['检录信息']}}">
             <van-cell center wx:for="{{bibUsers}}" wx:key="_id">
               <view slot="title">
                 <view class="van-cell-text">{{item.bibNum}}</view>
@@ -42,50 +42,50 @@
                 </view>
               </view>
               <view>
-                <van-tag type="danger" plain wx:if="{{item.finishedStatus === 'notStart' || !item.finishedStatus}}">未检录
+                <van-tag type="danger" plain wx:if="{{item.finishedStatus === 'notStart' || !item.finishedStatus}}">{{_t['未检录']}}
                 </van-tag>
-                <van-tag type="success" wx:else>已检录</van-tag>
+                <van-tag type="success" wx:else>{{_t['已检录']}}</van-tag>
               </view>
             </van-cell>
           </van-cell-group>
 
         </block>
         <block wx:else>
-          <van-empty image="search" description="没有查询到报名" />
+          <van-empty image="search" description="{{_t['没有查询到报名']}}" />
         </block>
       </van-tab>
-      <van-tab title="{{isPlogging ? '证书' : '成绩'}}" name="result">
+      <van-tab title="{{_t[isPlogging ? '证书' : '成绩']}}" name="result">
         <van-cell-group wx:if="{{searchResult}}">
-          <van-cell title="姓名" border="{{ false }}" value="{{searchResult.trueName}}" />
-          <van-cell title="性别" border="{{ false }}" value="{{searchResult.gender}}" />
+          <van-cell title="{{_t['姓名']}}" border="{{ false }}" value="{{searchResult.trueName}}" />
+          <van-cell title="{{_t['性别']}}" border="{{ false }}" value="{{searchResult.gender}}" />
           <block wx:if="{{isTriRace}}">
-            <van-cell wx:if="{{!isPlogging}}" title="组别" border="{{ false }}" value="{{searchResult.cateTitle}}" />
-            <van-cell wx:if="{{!isPlogging}}" title="号码" border="{{ false }}" value="{{searchResult.bibNum}}" />
-            <van-cell wx:if="{{!isPlogging}}" title="组别" border="{{ false }}" value="{{searchResult.division}}" />
-            <van-cell wx:if="{{!isPlogging}}" title="完赛成绩" border="{{ false }}" value="{{searchResult.totalTime}}" />
-            <van-cell wx:if="{{!isPlogging}}" title="游泳时间" border="{{ false }}" value="{{searchResult.swimTime}}" />
-            <van-cell wx:if="{{!isPlogging}}" title="T1换项" border="{{ false }}" value="{{searchResult.t1}}" />
-            <van-cell wx:if="{{!isPlogging}}" title="骑行时间" border="{{ false }}" value="{{searchResult.bikeTime}}" />
-            <van-cell wx:if="{{!isPlogging}}" title="T2换项" border="{{ false }}" value="{{searchResult.t2}}" />
-            <van-cell wx:if="{{!isPlogging}}" title="跑步时间" border="{{ false }}" value="{{searchResult.runTime}}" />
-            <van-cell wx:if="{{!isPlogging}}" title="组内排名" border="{{ false }}" value="{{searchResult.divRank}}" />
-            <van-cell wx:if="{{!isPlogging}}" title="总排名" border="{{ false }}" value="{{searchResult.overallRank}}" />
+            <van-cell wx:if="{{!isPlogging}}" title="{{_t['组别']}}" border="{{ false }}" value="{{searchResult.cateTitle}}" />
+            <van-cell wx:if="{{!isPlogging}}" title="{{_t['号码']}}" border="{{ false }}" value="{{searchResult.bibNum}}" />
+            <van-cell wx:if="{{!isPlogging}}" title="{{_t['组别']}}" border="{{ false }}" value="{{searchResult.division}}" />
+            <van-cell wx:if="{{!isPlogging}}" title="{{_t['完赛成绩']}}" border="{{ false }}" value="{{searchResult.totalTime}}" />
+            <van-cell wx:if="{{!isPlogging}}" title="{{_t['游泳时间']}}" border="{{ false }}" value="{{searchResult.swimTime}}" />
+            <van-cell wx:if="{{!isPlogging}}" title="{{_t['T1换项']}}" border="{{ false }}" value="{{searchResult.t1}}" />
+            <van-cell wx:if="{{!isPlogging}}" title="{{_t['骑行时间']}}" border="{{ false }}" value="{{searchResult.bikeTime}}" />
+            <van-cell wx:if="{{!isPlogging}}" title="{{_t['T2换项']}}" border="{{ false }}" value="{{searchResult.t2}}" />
+            <van-cell wx:if="{{!isPlogging}}" title="{{_t['跑步时间']}}" border="{{ false }}" value="{{searchResult.runTime}}" />
+            <van-cell wx:if="{{!isPlogging}}" title="{{_t['组内排名']}}" border="{{ false }}" value="{{searchResult.divRank}}" />
+            <van-cell wx:if="{{!isPlogging}}" title="{{_t['总排名']}}" border="{{ false }}" value="{{searchResult.overallRank}}" />
           </block>
           <block wx:else>
-            <van-cell wx:if="{{!isPlogging}}" title="组别" border="{{ false }}" value="{{searchResult.cateTitle}}" />
-            <van-cell wx:if="{{!isPlogging}}" title="号码" border="{{ false }}" value="{{searchResult.bib}}" />
-            <van-cell wx:if="{{!isPlogging}}" title="完赛成绩" border="{{ false }}" value="{{searchResult.roughTime}}" />
-            <van-cell wx:if="{{!isPlogging}}" title="净时间" border="{{ false }}" value="{{searchResult.netTime}}" />
-            <van-cell wx:if="{{!isPlogging}}" title="组别排名" border="{{ false }}" value="{{searchResult.genderRank}}" />
-            <van-cell wx:if="{{!isPlogging}}" title="总排名" border="{{ false }}" value="{{searchResult.overallRank}}" />
+            <van-cell wx:if="{{!isPlogging}}" title="{{_t['组别']}}" border="{{ false }}" value="{{searchResult.cateTitle}}" />
+            <van-cell wx:if="{{!isPlogging}}" title="{{_t['号码']}}" border="{{ false }}" value="{{searchResult.bib}}" />
+            <van-cell wx:if="{{!isPlogging}}" title="{{_t['完赛成绩']}}" border="{{ false }}" value="{{searchResult.roughTime}}" />
+            <van-cell wx:if="{{!isPlogging}}" title="{{_t['净时间']}}" border="{{ false }}" value="{{searchResult.netTime}}" />
+            <van-cell wx:if="{{!isPlogging}}" title="{{_t['组别排名']}}" border="{{ false }}" value="{{searchResult.genderRank}}" />
+            <van-cell wx:if="{{!isPlogging}}" title="{{_t['总排名']}}" border="{{ false }}" value="{{searchResult.overallRank}}" />
           </block>
-          <van-cell title="{{isPlogging ? '活动状态' : '完赛状态'}}" border="{{ false }}" value="{{searchResult.statusText}}" />
+          <van-cell title="{{_t[isPlogging ? '活动状态' : '完赛状态']}}" border="{{ false }}" value="{{searchResult.statusText}}" />
           <van-cell border="{{ false }}">
-            <button data-id="{{searchResult._id}}" plain bindtap="viewCert" class="button block">下载证书</button>
+            <button data-id="{{searchResult._id}}" plain bindtap="viewCert" class="button block">{{_t['下载证书']}}</button>
           </van-cell>
         </van-cell-group>
         <block wx:else>
-          <van-empty image="search" description="没有查询到{{isPlogging ? '证书' : '成绩'}}" />
+          <van-empty image="search" description="{{_t['没有查询到' + isPlogging ? '证书' : '成绩']}}" />
         </block>
       </van-tab>
       <van-tab title="管理员" name="admin" wx:if="{{false && isPlogging && isAdmin}}">

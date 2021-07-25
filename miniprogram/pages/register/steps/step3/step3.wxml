@@ -1,24 +1,24 @@
 <view class="box info">
   <form bindsubmit="addCoupon">
-    <view class="title">报名信息：</view>
-    <van-cell title-width="120rpx" title="{{type}}名称" value="{{order.raceTitle}}" />
-    <van-cell title-width="120rpx" title="报名类别" value="{{order.cateTitle}}" />
-    <van-cell title-width="120rpx" title="总费用" value="￥{{order.totalFee}}" />
-    <van-cell title-width="150rpx" title="选择优惠券" value="{{coupon}}" bind:click="showAction" is-link />
+    <view class="title">{{_t['报名信息']}}：</view>
+    <van-cell title-width="120rpx" title="{{_t[type + '名称']}}" value="{{order.raceTitle}}" />
+    <van-cell title-width="120rpx" title="{{_t['报名类别']}}" value="{{order.cateTitle}}" />
+    <van-cell title-width="120rpx" title="{{_t['总费用']}}" value="￥{{order.totalFee}}" />
+    <van-cell title-width="150rpx" title="{{_t['选择优惠券']}}" value="{{coupon}}" bind:click="showAction" is-link />
     <van-field wx:if="{{inputVisible}}" name="coupon" focus="{{inputVisible}}" value="{{ code }}" center clearable
-      label="优惠券代码" placeholder="请输入12位优惠券代码" use-button-slot>
-      <van-button slot="button" size="small" form-type="submit" type="primary">添加</van-button>
+      label="{{_t['优惠券代码']}}" placeholder="{{_t['请输入12位优惠券代码']}}" use-button-slot>
+      <van-button slot="button" size="small" form-type="submit" type="primary">{{_t['添加']}}</van-button>
     </van-field>
-    <van-cell title="优惠金额">
+    <van-cell title="{{_t['优惠金额']}}">
       <view class="van-cell-text">￥{{discountFee}}</view>
-      <van-tag type="danger" wx:if="{{discountFee}}">优惠券</van-tag>
+      <van-tag type="danger" wx:if="{{discountFee}}">{{_t['优惠券']}}</van-tag>
     </van-cell>
-    <van-cell title="订单状态" value="待支付" />
-    <van-cell title="最终费用">
+    <van-cell title="{{_t['订单状态']}}" value="{{_t['待支付']}}" />
+    <van-cell title="{{_t['最终费用']}}">
       <van-tag type="danger" size="medium">￥{{paidFee}}</van-tag>
     </van-cell>
   </form>
 </view>
 <userlist profiles="{{order.profiles}}" />
-<van-action-sheet show="{{ show }}" actions="{{ actions }}" cancel-text="取消" bind:close="onClose" bind:cancel="onClose"
+<van-action-sheet show="{{ show }}" actions="{{ actions }}" cancel-text="{{_t['取消']}}" bind:close="onClose" bind:cancel="onClose"
   bind:select="onSelect" />
