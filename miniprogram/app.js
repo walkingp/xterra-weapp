@@ -69,7 +69,7 @@ App({
       auth: {
         'scope.userInfo': false
       },
-      currentCity: 'Shanghai'
+      currentCity: '上海'
     }
 
     this.checkUpdate();

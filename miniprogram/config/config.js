@@ -5,10 +5,12 @@ const config = {
   appTitle: 'XTERRA',
   appDescription: 'XTERRA官方小程序',
   mapKey: 'YOWBZ-MK263-F7G3H-YWGGY-RGHKQ-ACFNH',
+  mapSig: 'aKlxXOLwqBO164rcHbHEr95YyWg2R7',
   storageKey: {
     kits: 'xterra.kits',
     searchHistory: 'searchHistory',
-    currentCheckInRace: 'currentCheckInRace'
+    currentCheckInRace: 'currentCheckInRace',
+    city: 'currentCity'
   },
   messageTemplates: {
     registration: {

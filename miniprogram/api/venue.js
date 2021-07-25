@@ -39,7 +39,7 @@ export const getCityDetailByName = async name => {
   const data = await getCollectionByWhere({
     dbName: 'city',
     filter: {
-      cityEn: name
+      cityCN: name
     }
   });
   return data;
