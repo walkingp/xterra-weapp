@@ -18,7 +18,7 @@
       scale="11" subkey="{{mapKey}}" layer-style="1" bindtap="showLocation" bindregionchange="regionchange"></map>
     <view bindtap="showLocation" class="fs-xs text-grey text-center">{{_t['点击地图开始导航']}}</view>
   </view>
-  <view class="places">
+  <view class="places" wx:if="{{races.length}}">
     <place-event-list list="{{races}}" />
   </view>
   <view class="photos">

@@ -2,6 +2,13 @@
 @import "./../../style/app.common.wxss";
 .place-item {
   padding: 20rpx 0;
+  margin-right: 24rpx;
+}
+.overflow-1 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
 }
 .overflow-2 {
   display: -webkit-box;
@@ -30,7 +37,8 @@
 .place-item .cn, .place-item .desc {
 	font-size: 24rpx;
 	color: #777;
-	line-height: 2;
+  line-height: 2;
+  height: 104rpx;
 }
 
 .place-item button {

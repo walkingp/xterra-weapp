@@ -3,6 +3,7 @@ const dayjs = require("dayjs");
 const { getUserDetail, getUserMedals, getUserPlaces, getUserFavs } = require("../../../api/user");
 const app = getApp();
 const i18n = require("./../../../utils/i18n");
+const { getCollectionByWhere } = require("../../../utils/cloud");
 
 const _t = i18n.i18n.translate();
 // miniprogram/pages/community/user/user.js
@@ -38,12 +39,15 @@ Page({
     if(medals.length){
       return;
     }
-    medals = await getUserMedals(userId);
+    medals = await getCollectionByWhere({ dbName: 'place', filter: { isActive: true } });
+    const tickedMedals = await getUserMedals(userId);
     console.log(medals);
     this.setData({
       medals: medals.map(item=>{
-        item.medalUrl = item.place[0].medalUrl;
-        item.title = item.place[0].title;
+        //item.medalUrl = item.place[0].medalUrl;
+        //item.title = item.place[0].title;
+        const isTicked = tickedMedals.filter(m=>m.placeId === item._id).length > 0;
+        item.isTicked = isTicked;
         return item;
       })
     });
@@ -55,6 +59,11 @@ Page({
     }
     
     places = await getUserPlaces(userId);
+    places.map(item => {
+      item._title = i18n.i18n.getLang() ? item.title : item.titleEn;
+      item._desc = i18n.i18n.getLang() ? item.desc : item.descEn;
+      return item;
+    })
     this.setData({
       places
     });
@@ -71,6 +80,8 @@ Page({
         item.banner = item.place[0].banner;
         item.desc = item.place[0].desc;
         item.title = item.place[0].title;
+        item._title = i18n.i18n.getLang() ? item.place[0].title : item.place[0].titleEn;
+        item._desc = i18n.i18n.getLang() ? item.place[0].desc : item.place[0].descEn;
         return item;
       })
     });

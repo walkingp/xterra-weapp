@@ -16,12 +16,12 @@ Component({
   data: {
     current: 0
   },
-  lifetimes: {
-    attached(){
+  pageLifetimes: {
+    show: function() {
       this.setData({
         _t: i18n.i18n.translate()
       })
-    }
+    },
   },
 
   /**
@@ -49,7 +49,6 @@ Component({
       this.setData({
         current
       });
-
     },
     redirect(e){
       const { url } = e.currentTarget.dataset;

@@ -13,6 +13,13 @@ Component({
       type: String
     }
   },
+  pageLifetimes: {
+    show: function() {
+      this.setData({
+        _t: i18n.i18n.translate()
+      })
+    },
+  },
   lifetimes: {
     attached(){
       this.setData({

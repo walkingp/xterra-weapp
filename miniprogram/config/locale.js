@@ -12,6 +12,8 @@ const locale = [
 ];
 
 const locales = {
+  '我的主页': 'My page',
+  '我的收藏': 'My Favs',
   '拥有打卡点': 'Check points: ',
   '切换城市': 'Switch city',
   '精选地点': 'Picked sites',

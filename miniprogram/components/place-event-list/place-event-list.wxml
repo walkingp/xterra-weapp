@@ -1,9 +1,9 @@
 <view class="venues">
   <view class="title">{{_t['精选活动']}}</view>
   <view class="main flex align-center">
-    <view class="left flex-none"></view>
+    <view class="left flex-none" bindtap="prev"></view>
     <view class="swiper flex-auto">
-      <swiper>
+      <swiper current="{{current}}" previous-margin="30rpx" next-margin="30rpx" snap-to-edge="{{true}}">
         <swiper-item class="flex column" wx:for="{{list}}" wx:key="_id">
           <image src="{{item.picUrls[0]}}" mode="aspectFit"></image>
           <text class="place">{{item.title}}</text>
@@ -12,7 +12,7 @@
         </swiper-item>
       </swiper>
     </view>
-    <view class="right flex-none"></view>
+    <view class="right flex-none" bindtap="next"></view>
   </view>
 </view>
 <view class="mask" wx:if="{{show}}"></view>

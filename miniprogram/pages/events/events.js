@@ -16,35 +16,44 @@ Page({
     races: [],
     allRaces: [],
     banners: [],
-    locations: [
-      { text: _t['地区'], value: '' },
-      { text: _t['江浙沪'], value: '江浙沪' },
-      { text: _t['京津冀'], value: '京津冀' },
-      { text: _t['珠三角'], value: '珠三角' },
-      { text: _t['西南地区'], value: '西南地区' },
-      { text: _t['其他地区'], value: '其他地区' },
-      { text: _t['海外'], value: '海外' },
-    ],
-    statuses: [
-      { text: _t['报名状态'], value: '' },
-      { text: _t['未开始报名'], value: '未开始报名' },
-      { text: _t['报名中'], value: '报名中' },
-      { text: _t['名额已满'], value: '名额已满' },
-      { text: _t['报名已截止'], value: '报名已截止' },
-      { text: _t['比赛已结束'], value: '比赛已结束' },
-    ],
-    types: [
-      { text: _t['活动类型'], value: '' },
-      { text: _t['铁人三项'], value: '铁人三项' },
-      { text: _t['越野跑'], value: '越野跑' },
-      { text: _t['山地车'], value: '山地车' },
-      { text: _t['X-Plogging'], value: 'X-Plogging' },
-      { text: _t['训练营'], value: '训练营' },
-      { text: _t['其他'], value: '其他' },
-    ],
+    locations: [],
+    statuses: [],
+    types: [],
     location: '',
     status: '',
     type: ''
+  },
+  initialData(){
+    const { _t } = this.data;
+    this.setData({
+      locations: [
+        { text: _t['地区'], value: '' },
+        { text: _t['江浙沪'], value: '江浙沪' },
+        { text: _t['京津冀'], value: '京津冀' },
+        { text: _t['珠三角'], value: '珠三角' },
+        { text: _t['西南地区'], value: '西南地区' },
+        { text: _t['其他地区'], value: '其他地区' },
+        { text: _t['海外'], value: '海外' },
+      ],
+      statuses: [
+        { text: _t['报名状态'], value: '' },
+        { text: _t['未开始报名'], value: '未开始报名' },
+        { text: _t['报名中'], value: '报名中' },
+        { text: _t['名额已满'], value: '名额已满' },
+        { text: _t['报名已截止'], value: '报名已截止' },
+        { text: _t['比赛已结束'], value: '比赛已结束' },
+      ],
+      types: [
+        { text: _t['活动类型'], value: '' },
+        { text: _t['铁人三项'], value: '铁人三项' },
+        { text: _t['越野跑'], value: '越野跑' },
+        { text: _t['山地车'], value: '山地车' },
+        { text: _t['X-Plogging'], value: 'X-Plogging' },
+        { text: _t['X-Discovery'], value: 'X-Discovery' },
+        { text: _t['训练营'], value: '训练营' },
+        { text: _t['其他'], value: '其他' },
+      ]
+    });
   },
   async fetch(){
     wx.showLoading({
@@ -179,7 +188,12 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function () {    
+    this.setData({
+      _t: i18n.i18n.translate()
+    }, () => {
+      this.initialData();
+    });
   },
 
   /**

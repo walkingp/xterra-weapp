@@ -23,28 +23,28 @@
 }
 .venues .left, .venues .right{
   height: 100%;
-  width: 100rpx;
+  width: 75rpx;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
 }
+.venues .right{  
+  position: absolute;
+  right: 0;
+}
 .left::after, .right::after{
-  width: 0;
-  height: 0;
-  border: 10px solid transparent;
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border-top: 5px solid rgba(0,0,0,.5);
+  border-right: 5px solid rgba(0,0,0,.5);
   position: absolute;
   content: "";
 }
-.left:hover::after{
-  border-right-color: #333;
-}
-.right:hover::after{
-  border-left-color: #333;
-}
 .left::after{
-  border-right-color: #999;
+  transform: rotate(-135deg);
 }
 .right::after{
-  border-left-color: #999;
+  transform: rotate(45deg);
 }

@@ -22,7 +22,7 @@
     </view>
   </view>
   <view class="city flex column align-center">
-    <image mode="widthFix" src="https://7874-xterra-c2969f-1258173660.tcb.qcloud.la/cloudbase-cms/upload/2021-07-12/h1zmp98w7vi6u0jdo5z1rdd1es615w6u_.png"></image>
+    <image mode="widthFix" src="{{currentCity.coverUrl}}"></image>
     <text class="en">{{currentCity.cityEn}}</text>
     <text class="cn">{{currentCity.cityCN}}</text>
     <view class="desc flex column align-center">

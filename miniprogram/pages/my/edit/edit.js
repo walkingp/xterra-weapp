@@ -27,13 +27,13 @@ Page({
     trueName: '',
     phoneNum: '',
     email: '',
-    gender: '未选择',
-    region: '未选择',
+    gender: _t['未选择'],
+    region: _t['未选择'],
     defaultBirthDate: new Date(1990, 6, 15).getTime(),
     genders: [{
-      name: '男'
+      name: _t['男']
     }, {
-      name: '女'
+      name: _t['女']
     }],
     birthDate: '未选择',
     lang: null,
@@ -136,7 +136,7 @@ Page({
       title: trueName
     })
     wx.showToast({
-      icon: 'success',
+      icon: 'none',
       title: _t['保存成功'],
       success: () => {
         setTimeout(() => {

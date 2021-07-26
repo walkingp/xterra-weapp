@@ -3,12 +3,12 @@
     <view class="main flex align-center">
       <view class="left flex-none" bindtap="prev"></view>
       <view class="swiper flex-auto">
-        <swiper current="{{current}}">
+        <swiper current="{{current}}" previous-margin="30rpx" next-margin="30rpx" snap-to-edge="{{true}}">
           <swiper-item class="flex column" wx:for="{{list}}" wx:key="_id">
             <place-list item="{{item}}" />
           </swiper-item>
         </swiper>
       </view>
-      <view class="right flex-none" bindtap="next"></view>
+      <view class="right" bindtap="next"></view>
     </view>
   </view>

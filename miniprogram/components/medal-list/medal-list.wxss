@@ -9,6 +9,11 @@
 .item{
   padding: 20rpx;
 }
+.item.gray image{
+  filter: grayscale(100%);
+  filter: gray;
+  opacity: .8;
+}
 .cover image{
   width: 100%;
   height: 100%;

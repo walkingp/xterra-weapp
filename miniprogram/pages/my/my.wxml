@@ -37,7 +37,8 @@
       </view>
       <view class="list">
         <van-grid border="{{false}}">
-          <van-grid-item icon="/images/icons/post.svg" url="/pages/community/user/user?id={{userId}}" text="{{_t['我的帖子']}}" />
+          <van-grid-item icon="/images/icons/user.svg" url="/pages/community/user/user?id={{userId}}&active=feed" text="{{_t['我的主页']}}" />
+          <van-grid-item icon="/images/icons/fav.svg" url="/pages/community/user/user?id={{userId}}&active=place" text="{{_t['我的收藏']}}" />
           <van-grid-item icon="/images/icons/trophy.svg" url="/pages/my/registration/registration" text="{{_t['我的报名']}}" />
           <!-- <van-grid-item icon="/images/icons/post.svg" url="/pages/profile/profile" text="社区发贴" />
           <van-grid-item icon="/images/icons/doc.svg" url="/pages/community/community" text="兑换记录" /> -->

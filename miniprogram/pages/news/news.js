@@ -14,19 +14,26 @@ Page({
     loading: false,
     news: [],
     allNews: [],
-    orders: [
-      { text: _t['排序'], value: '' },
-      { text: _t['按时间倒序'], value: 'desc' },
-      { text: _t['按时间正序'], value: 'asc' }
-    ],
-    types: [
-      { text: _t['分类'], value: '' },
-      { text: _t['赛事'], value: '赛事' },
-      { text: _t['人物'], value: '人物' },
-      { text: _t['新闻'], value: '新闻' }
-    ],
+    orders: [],
+    types: [],
     order: 'desc',
     type: ''
+  },
+  initialData(){
+    const { _t } = this.data;
+    this.setData({
+      orders: [
+        { text: _t['排序'], value: '' },
+        { text: _t['按时间倒序'], value: 'desc' },
+        { text: _t['按时间正序'], value: 'asc' }
+      ],
+      types: [
+        { text: _t['分类'], value: '' },
+        { text: _t['赛事'], value: '赛事' },
+        { text: _t['人物'], value: '人物' },
+        { text: _t['新闻'], value: '新闻' }
+      ]
+    });
   },
   onFilterChanged(e){
     const { type } = e.currentTarget.dataset;
@@ -72,6 +79,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.initialData();
     this.fetch();
     this.watchChanges();
   },
@@ -101,6 +109,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    this.setData({
+      _t: i18n.i18n.translate()
+    }, () => {
+      this.initialData();
+    })
   },
 
   /**

@@ -16,13 +16,12 @@ Component({
   data: {
 
   },
-
-  lifetimes: {
-    attached(){
+  pageLifetimes: {
+    show: function() {
       this.setData({
         _t: i18n.i18n.translate()
       })
-    }
+    },
   },
   /**
    * 组件的方法列表

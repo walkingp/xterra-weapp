@@ -305,6 +305,10 @@ Page({
     })
   },
   onShow() {
-    this.getCity();
+    this.setData({
+      _t: i18n.i18n.translate()
+    }, () => {
+      this.getCity();
+    })
   }
 })
