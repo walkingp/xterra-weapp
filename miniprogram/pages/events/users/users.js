@@ -11,6 +11,9 @@ const {
 const {updateStartListStatus, updateStartListStatusByUser } = require("../../../api/result");
 const { raceResultStatus } = require("../../../config/const");
 const { exportReport } = require("../../../api/user");
+const i18n = require("./../../../utils/i18n");
+
+const _t = i18n.i18n.translate();
 // miniprogram/pages/events/users/users.js
 Page({
 
@@ -277,11 +280,11 @@ Page({
       })
     }
     wx.showLoading({
-      title: '加载中',
+      title: _t['加载中'],
     })
 
     let cates = [{
-      text: '请选择',
+      text: _t['请选择'],
       value: ''
     }];
     let _cates = await getRaceCatesList(raceId);

@@ -1,4 +1,4 @@
-// components/place-event-list/place-event-list.js
+const i18n = require("./../../utils/i18n");
 const app = getApp();
 Component({
   /**
@@ -17,6 +17,21 @@ Component({
   data: {
     show: false,
     content: null
+  },
+  lifetimes: {
+    attached(){
+      let { list } = this.properties;
+      list.map(item => {
+        item._title = i18n.i18n.getLang() ? item.title : item.titleEn;
+        item._desc = i18n.i18n.getLang() ? item.desc : item.descEn;
+        return item;
+      })
+      this.setData({
+        _t: i18n.i18n.translate(),
+        _c: i18n.i18n.getLang(),
+        list
+      })
+    }
   },
 
   /**

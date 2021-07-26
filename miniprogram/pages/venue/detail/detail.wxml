@@ -3,7 +3,7 @@
     <image src="{{detail.banner}}" mode="aspectFill"></image>
   </view>
   <view class="flex top align-center space-between">
-    <text class="flex-auto">{{detail.title}}</text>
+    <text class="flex-auto">{{isChinese ? detail.title : detail.titleEn}}</text>
     <view class="flex-none">
       <van-icon name="like" color="#dc3545" bindtap="addFav" size="20px" class="margin-right-md" wx:if="{{isFaved}}" />
       <van-icon name="like-o" bindtap="addFav" size="20px" class="margin-right-md" wx:else />
@@ -11,7 +11,7 @@
     </view>
   </view>
   <view class="desc">
-    <text selectable="{{true}}">{{detail.desc}}</text>
+    <text selectable="{{true}}">{{isChinese ? detail.desc : detail.descEn}}</text>
   </view>
   <view class="map">
     <map id="map" markers="{{markers}}" longitude="{{detail.coordinate[0]}}" latitude="{{detail.coordinate[1]}}"

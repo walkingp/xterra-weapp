@@ -5,6 +5,9 @@ const {
 const { raceGroups } = require("../../../../config/const");
 
 const app = getApp();
+const i18n = require("./../../../../utils/i18n");
+
+const _t = i18n.i18n.translate();
 Component({
   /**
    * 组件的属性列表
@@ -357,7 +360,7 @@ Component({
 
     async fetch() {
       wx.showLoading({
-        title: '加载中……'
+        title: _t['加载中……']
       });
       const {
         raceId

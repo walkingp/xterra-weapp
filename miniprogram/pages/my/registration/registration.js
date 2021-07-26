@@ -2,6 +2,9 @@ const { getMyRegistrations, getStartUserDetailByOrderNum } = require("../../../a
 const app = getApp();
 const dayjs = require("dayjs");
 const { orderStatus } = require("../../../config/const");
+const i18n = require("./../../../utils/i18n");
+
+const _t = i18n.i18n.translate();
 // miniprogram/pages/my/registration/registration.js
 Page({
 
@@ -27,7 +30,7 @@ Page({
    */
   onLoad: function (options) {
     wx.showLoading({
-      title: '加载中……',
+      title: _t['加载中……'],
     })
     app.checkLogin().then(res => {
       const { userId } = res;

@@ -6,6 +6,9 @@ const {
   getNewsIndexList
 } = require("../../api/news");
 const dayjs = require("dayjs");
+const i18n = require("./../../utils/i18n");
+
+const _t = i18n.i18n.translate();
 const {
   getCityDetailByName,
   getPlaceList,
@@ -29,7 +32,8 @@ Page({
     headerBarHeight: 60,
     current: 0,
     currentCity: null,
-    places: []
+    places: [],
+    isChinese: i18n.i18n.getLang()
   },
   swiperChange(e) {
     this.setData({
@@ -103,6 +107,11 @@ Page({
         _id
       } = currentCity;
       const places = await getPlaceList(_id);
+      places.map(item => {
+        item._title = i18n.i18n.getLang() ? item.title : item.titleEn;
+        item._desc = i18n.i18n.getLang() ? item.desc : item.descEn;
+        return item;
+      })
       this.setData({
         places
       });
@@ -110,7 +119,7 @@ Page({
   },
   async fetch() {
     wx.showLoading({
-      title: '加载中…',
+      title: _t['加载中…'],
     });
     const banners = await getBannerList();
     const news = await getNewsIndexList();
@@ -289,12 +298,13 @@ Page({
    */
   onLoad: async function (options) {
     await this.fetch();
-    this.getCity();
     this.watchChanges('banner');
     this.watchChanges('news');
     this.setData({
       headerBarHeight: app.globalData.headerBarHeight
     })
   },
-  onShow() {}
+  onShow() {
+    this.getCity();
+  }
 })

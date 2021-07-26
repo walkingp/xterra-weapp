@@ -3,6 +3,9 @@ const {
 } = require("../../../../api/race")
 const app = getApp();
 const dayjs = require("dayjs");
+const i18n = require("./../../../../utils/i18n");
+
+const _t = i18n.i18n.translate();
 // pages/register/userlist/userlist.js
 Component({
   /**
@@ -181,7 +184,7 @@ Component({
     },
     async fetch() {
       wx.showLoading({
-        title: '加载中……',
+        title: _t['加载中……'],
       })
       app.checkLogin().then(async res => {
         const { userId } = res;

@@ -1,6 +1,6 @@
 <view class="place-item flex column">
   <image src="{{item.banner}}" mode="aspectFill"></image>
-  <text class="desc overflow-2">“{{item.desc}}”</text>
-  <text class="place">{{item.title}}</text>
+  <text class="desc overflow-2">“{{item._desc}}”</text>
+  <text class="place">{{item._title}}</text>
   <button data-url="/pages/venue/detail/detail?id={{item._id}}" bindtap="redirect" class="button {{type}}">{{_t['查看详情']}}</button>
 </view>

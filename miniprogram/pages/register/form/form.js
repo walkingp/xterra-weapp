@@ -14,6 +14,9 @@ import {
 import areaList from "./../../../config/area";
 const dayjs = require("dayjs");
 const app = getApp();
+const i18n = require("./../../../utils/i18n");
+
+const _t = i18n.i18n.translate();
 Page({
 
   /**
@@ -528,7 +531,7 @@ Page({
    */
   onLoad: async function (options) {
     wx.showLoading({
-      title: '加载中……',
+      title: _t['加载中……'],
     })
     app.checkLogin().then(async res => {
       const {

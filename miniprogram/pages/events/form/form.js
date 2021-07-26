@@ -1,6 +1,9 @@
 const { getFieldsByCateId } = require("../../../api/race");
 import areaList from "./../../../config/area";
 // miniprogram/pages/events/form/form.js
+const i18n = require("./../../../utils/i18n");
+
+const _t = i18n.i18n.translate();
 Page({
 
   /**
@@ -22,7 +25,7 @@ Page({
   },
   async fetch(id){
     wx.showLoading({
-      title: '加载中...',
+      title: _t['加载中...'],
     });
     const fields = await getFieldsByCateId(id);
 

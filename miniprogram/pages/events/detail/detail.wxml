@@ -92,7 +92,7 @@
       </view>
     </view>
     <view class="section content">
-      <van-tabs sticky active="{{ active }}" bind:change="onChange">
+      <van-tabs sticky active="{{ 'admission' || active }}" bind:change="onChange">
         <block wx:if="{{detail.showContent}}">
           <van-tab name="content" title="{{_t['比赛规程']}}">
             <towxml nodes="{{detail.content}}" />

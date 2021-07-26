@@ -1,6 +1,9 @@
 const { getFeedIndexList } = require("../../api/feed");
 const { feedStatus } = require("../../config/const");
 const dayjs = require("dayjs");
+const i18n = require("./../../utils/i18n");
+
+const _t = i18n.i18n.translate();
 // miniprogram/pages/community/community.js
 Page({
 
@@ -15,7 +18,7 @@ Page({
   },
   async fetch(){
     wx.showLoading({
-      title: '加载中…',
+      title: _t['加载中…'],
     })
     const { statuses } = this.data;
     const list = await getFeedIndexList(statuses[0]);

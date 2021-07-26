@@ -22,7 +22,7 @@ Page({
    */
   onLoad: function (options) {
     wx.showLoading({
-      title: '加载中',
+      title: _t['加载中'],
     })
     const { id } = options;
 

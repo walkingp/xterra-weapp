@@ -14,6 +14,9 @@ const {
 } = require("../../../config/const");
 const { getSingleCollectionByWhere, getCollectionByWhere } = require("../../../utils/cloud");
 const app = getApp();
+const i18n = require("./../../../utils/i18n");
+
+const _t = i18n.i18n.translate();
 Page({
 
   /**
@@ -167,7 +170,7 @@ Page({
       return;
     }
     wx.showLoading({
-      title: '加载中……',
+      title: _t['加载中……'],
     })
     const allCates = await getRaceCatesList(raceId);
     const cates = allCates.map(item => {

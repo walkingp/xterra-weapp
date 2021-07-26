@@ -26,7 +26,7 @@
     <text class="en">{{currentCity.cityEn}}</text>
     <text class="cn">{{currentCity.cityCN}}</text>
     <view class="desc flex column align-center">
-      <text selectable="{{true}}">{{currentCity.desc}}</text>
+      <text selectable="{{true}}">{{isChinese ? currentCity.desc : currentCity.descEn}}</text>
       <text selectable="{{true}}">{{_t['拥有打卡点']}} {{places.length}}</text>
     </view>
     <button bindtap="redirect" data-url="/pages/venue/city/city" class="button">{{_t['切换城市']}}</button>

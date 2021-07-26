@@ -1,7 +1,7 @@
 <view class="container flex column">
   <view class="box flex column align-center justify-center">    
     <image class="icon" src="./../../../images/icons/succ@2x.png" />
-    <text>{{detail.statusText}}</text>
+    <text>{{_t[detail.statusText]}}</text>
   </view>
   <navigator url="pages/events/detail/detail?id={{detail.raceId}}" class="box flex align-center space-between">
     <view class="flex-auto flex align-center">
@@ -16,9 +16,9 @@
   <view class="box info">
     <view class="title">{{ isPlogging ? _t['取消活动'] : _t['申请退款'] }}</view>
     <view class="list">
-      <van-cell title="退款金额" wx:if="{{!isPlogging}}" value="￥{{refundMoney}}" />
-      <van-cell title="{{ isPlogging ? '取消理由' : '退款理由' }}" bind:click="showAction" value="{{reason}}" is-link border="{{ false }}" wx:if="{{canRefund}}" />
-      <van-cell title="{{ isPlogging ? '取消理由' : '退款理由' }}" border="{{ false }}" value="{{_t['不可退款']}}" wx:else />
+      <van-cell title="{{_t['退款金额']}}" wx:if="{{!isPlogging}}" value="￥{{refundMoney}}" />
+      <van-cell title="{{ isPlogging ? _t['取消理由'] : _t['退款理由'] }}" bind:click="showAction" value="{{reason}}" is-link border="{{ false }}" wx:if="{{canRefund}}" />
+      <van-cell title="{{ isPlogging ? _t['取消理由'] : _t['退款理由'] }}" border="{{ false }}" value="{{_t['不可退款']}}" wx:else />
     </view>
   </view>
   <view class="box info">

@@ -60,19 +60,19 @@
     </view>
     <view class="box admin" wx:if="{{isVolunteer}}">
       <view class="flex space-between">
-        <text class="hd">志愿者</text>
+        <text class="hd">{{_t['志愿者']}}</text>
       </view>
       <view class="list">
         <van-grid border="{{false}}">
           <!-- <van-grid-item icon="scan" bindtap="scanQR" text="二维码检录" /> -->
-          <van-grid-item icon="idcard" bindtap="scanIDCard" text="比赛检录" />
-          <van-grid-item icon="records" url="/pages/admin/events/my-checkin/my-checkin" text="我的检录" />
+          <van-grid-item icon="idcard" bindtap="scanIDCard" text="{{_t['比赛检录']}}" />
+          <van-grid-item icon="records" url="/pages/admin/events/my-checkin/my-checkin" text="{{_t['我的检录']}}" />
         </van-grid>
       </view>
     </view>
     <view class="box admin" wx:if="{{isAdmin}}">
       <view class="flex space-between">
-        <text class="hd">管理员专用</text>
+        <text class="hd">{{_t['管理员专用']}}</text>
       </view>
       <view class="list">
         <van-grid border="{{false}}">

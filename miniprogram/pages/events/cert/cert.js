@@ -1,6 +1,9 @@
 const { getPloggingTemplate, getCertTemplate, getCertFields } = require("../../../api/cert");
 const { getRaceDetail, getRaceCateDetail } = require("../../../api/race");
 import { getResultDetail } from "../../../api/result";
+const i18n = require("./../../../utils/i18n");
+
+const _t = i18n.i18n.translate();
 import Poster from "./../../../miniprogram_dist/wxa-plugin-canvas/poster/poster";
 Page({
 
@@ -52,7 +55,7 @@ Page({
   },
   async fetchRaceDetail(id){
     wx.showLoading({
-      title: '加载中',
+      title: _t['加载中'],
     });
 
     let cert = null;

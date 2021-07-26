@@ -3,6 +3,7 @@ const { getPlaceDetail, getPlaceList, getRaceListByPlace, checkIsTicked, checkIs
 const config = require("../../../config/config");
 const dayjs = require("dayjs");
 const app = getApp();
+const i18n = require("./../../../utils/i18n");
 // miniprogram/pages/venue/detail/detail.js
 Page({
 
@@ -22,7 +23,8 @@ Page({
     show: false,
     isTicked: false,
     isFaved: false,
-    userId: null
+    userId: null,
+    isChinese: i18n.i18n.getLang()
   },
   
   preview(e){
@@ -52,6 +54,7 @@ Page({
     const { id, userId, isFaved } = this.data;
     const res = await favPlace(id, userId);
     wx.showToast({
+      icon: 'none',
       title: isFaved ? '取消收藏成功' : '收藏成功',
     });
     this.setData({
@@ -70,7 +73,9 @@ Page({
     }
     const places = await getPlaceList(res.city);
     const races = await getRaceListByPlace(id);
-    races.map(item=> item.date = dayjs(item.raceDate).format('YYYY年MM月DD日 HH:mm'));
+    const isChinese = i18n.i18n.getLang();
+    const format = isChinese ? 'YYYY年MM月DD日 HH:mm' : 'YYYY MMMM DD HH:mm';
+    races.map(item=> item.date = dayjs(item.raceDate).format(format));
 
     const { userId } = app.globalData;
     const isTicked = await checkIsTicked(id, userId);

@@ -118,7 +118,7 @@
       </block>
     </view>
     <view class="ft flex justify-end align-center">
-      <button bindtap="redirect" disabled="{{!refundEnabled}}" data-url="/pages/register/refund/refund?id={{detail._id}}" class="button secondary mini" wx:if="{{showRefundBtn}}">{{detail.raceType === 'X-Plogging' ? '取消活动' : '申请退款'}}</button>
+      <button bindtap="redirect" disabled="{{!refundEnabled}}" data-url="/pages/register/refund/refund?id={{detail._id}}" class="button secondary mini" wx:if="{{showRefundBtn}}">{{detail.raceType === 'X-Plogging' ? _t['取消活动'] : _t['申请退款']}}</button>
       <button bindtap="confirmOrder" wx:if="{{showPayBtn}}" class="button mini">{{_t['立即支付']}}</button>
       <button bindtap="redirect" data-url="/pages/my/registration/registration" class="button mini">{{_t['我的报名']}}</button>
     </view>

@@ -91,6 +91,9 @@ button.button {
 .city button {
 	margin-top: 40rpx;
 }
+.city button.button.button-hover{
+  font-weight: normal;
+}
 
 .list .item {
 	position: relative;

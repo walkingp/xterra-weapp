@@ -19,6 +19,9 @@ const i18n = {
     }
     return locales;
   },
+  billingual(cn, en){
+    return this.getLang() ? cn : en;
+  },
   translateText(key) {
     return getLang() ? key : this.translate()[key] || 'null';
   }

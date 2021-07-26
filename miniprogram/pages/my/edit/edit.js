@@ -9,6 +9,9 @@ import {
   pointRuleEnum
 } from "../../../config/const";
 const app = getApp();
+const i18n = require("./../../../utils/i18n");
+
+const _t = i18n.i18n.translate();
 Page({
 
   /**
@@ -51,7 +54,7 @@ Page({
    */
   onLoad: function (options) {
     wx.showLoading({
-      title: '加载中……',
+      title: _t['加载中……'],
     })
     const isChinese = wx.getStorageSync(config.storageKey.isChinese);
     this.setData({

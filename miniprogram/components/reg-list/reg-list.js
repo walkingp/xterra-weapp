@@ -2,7 +2,7 @@ const {
   removeRegistration, getStartUserDetailByOrderNum
 } = require("../../api/race");
 const { hideCollectionById } = require("../../utils/cloud");
-
+const i18n = require("./../../utils/i18n");
 // components/reg-list/reg-list.js
 Component({
   /**
@@ -11,6 +11,13 @@ Component({
   properties: {
     list: {
       type: Array
+    }
+  },
+  lifetimes: {
+    attached(){
+      this.setData({
+        _t: i18n.i18n.translate()
+      })
     }
   },
   /**

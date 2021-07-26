@@ -2,6 +2,9 @@ const { getPageDetail } = require("../../../api/page");
 const { getCollectionById } = require("../../../utils/cloud");
 
 const app = getApp();
+const i18n = require("./../../../utils/i18n");
+
+const _t = i18n.i18n.translate();
 // miniprogram/pages/points/detail/detail.js
 Page({
 
@@ -82,7 +85,7 @@ Page({
   },
   async fetch(){
     wx.showLoading({
-      title: '加载中……',
+      title: _t['加载中……'],
     })
     const { id } = this.data;
     const detail = await getCollectionById({ dbName: 'goods', id});

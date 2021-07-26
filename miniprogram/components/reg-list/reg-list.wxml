@@ -24,17 +24,17 @@
         </view>
       </view>
       <view class="flex fee justify-end align-center" wx:if="{{item.discountFee}}">
-        <view class="small">优惠费用：<text class="bold margin-right-md">￥{{item.discountFee}}</text></view>
+        <view class="small">{{_t['优惠费用']}}：<text class="bold margin-right-md">￥{{item.discountFee}}</text></view>
       </view>
       <view class="flex fee justify-end align-center">
-        <view>实付费用：<text class="bold">￥{{item.paidFee}}</text></view>
+        <view>{{_t['实付费用']}}：<text class="bold">￥{{item.paidFee}}</text></view>
       </view>
       <view class="ft flex space-between align-center">
-        <text class="flex-none status" style="color:{{item.textColor}};">{{item.statusText}}</text>
-        <text wx:if="{{item.status === 1 && !item.isCertApproved}}" class="red">审核不通过</text>
+        <text class="flex-none status" style="color:{{item.textColor}};">{{_t[item.statusText]}}</text>
+        <text wx:if="{{item.status === 1 && !item.isCertApproved}}" class="red">{{_t['审核不通过']}}</text>
         <view class="buttons flex-auto justify-end flex align-center">
-          <button class="button secondary">查看详情</button>
-          <button wx:if="{{item.showPayButton}}" class="button primary">去支付</button>
+          <button class="button secondary">{{_t['查看详情']}}</button>
+          <button wx:if="{{item.showPayButton}}" class="button primary">{{_t['去支付']}}</button>
         </view>
       </view>
     </navigator>
@@ -42,7 +42,7 @@
 </block>
 <block wx:else>
   <view class="box">
-    <van-empty class="custom-image" image="/images/empty@2x.png" description="暂无数据" />
+    <van-empty class="custom-image" image="/images/empty@2x.png" description="{{_t['暂无数据']}}" />
   </view>
 </block>
 <van-action-sheet
@@ -51,5 +51,5 @@
   bind:close="onClose"
   bind:cancel="onClose"
   bind:select="onSelect"
-  cancel-text="取消"
+  cancel-text="{{_t['取消']}}"
 />

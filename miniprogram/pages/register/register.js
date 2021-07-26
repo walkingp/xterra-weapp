@@ -2,6 +2,9 @@ const { payNow } = require("../../api/pay");
 const { getRaceDetail, updateOrderStatus } = require("../../api/race");
 const { orderStatus } = require("../../config/const");
 const app = getApp();
+const i18n = require("./../../utils/i18n");
+
+const _t = i18n.i18n.translate();
 // miniprogram/pages/register/register.js
 Page({
 
@@ -91,7 +94,7 @@ Page({
   },
   order(){
     wx.showLoading({
-      title: '加载中',
+      title: _t['加载中'],
     })
     let { order } = app.globalData;
     order.userId = app.globalData.userId;
@@ -209,7 +212,7 @@ Page({
   },
   async fetch(id){
     wx.showLoading({
-      title: '加载中',
+      title: _t['加载中'],
     })
     const detail = await getRaceDetail(id);
     detail.disclaimer = app.towxml(detail.disclaimer,'html');

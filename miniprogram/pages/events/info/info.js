@@ -1,5 +1,8 @@
 const app = getApp();
 const { getRaceDetail } = require("../../../api/race");
+const i18n = require("./../../../utils/i18n");
+
+const _t = i18n.i18n.translate();
 // miniprogram/pages/news/detail/detail.js
 Page({
 
@@ -18,7 +21,7 @@ Page({
    */
   onLoad: function (options) {
     wx.showLoading({
-      title: '加载中',
+      title: _t['加载中'],
     })
     const { id, type } = options;
 

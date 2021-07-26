@@ -1,6 +1,9 @@
 const { getMyProfiles } = require("../../../api/race");
 const { sendRegSMS } = require("../../../api/sms");
 const app = getApp();
+const i18n = require("./../../../utils/i18n");
+
+const _t = i18n.i18n.translate();
 // miniprogram/pages/my/profile/profile.js
 Page({
 
@@ -17,7 +20,7 @@ Page({
   },
   async fetch(){
     wx.showLoading({
-      title: '加载中……',
+      title: _t['加载中……'],
     })
     const { userId } = app.globalData;
     if(!userId){

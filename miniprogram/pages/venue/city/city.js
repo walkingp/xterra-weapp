@@ -1,5 +1,6 @@
 import { getCityList } from "../../../api/venue"
-
+import config from "../../../config/config";
+const i18n = require("./../../../utils/i18n");
 // miniprogram/pages/venue/city/city.js
 Page({
 
@@ -9,9 +10,11 @@ Page({
   data: {
     list: []
   },
-  select(){
-    wx.navigateBack({
-      delta: -1,
+  select(e){
+    const { name } = e.currentTarget.dataset;    
+    wx.setStorageSync(config.storageKey.currentCity, name)
+    wx.switchTab({
+      url: '/pages/index/index',
     })
   },
 
@@ -26,6 +29,11 @@ Page({
     wx.showLoading({
     })
     const list = await getCityList();
+    list.map(item => {
+      item.city = i18n.i18n.getLang() ? item.cityCN : item.cityEn;
+      item.desc = i18n.i18n.getLang() ? item.desc : item.descEn;
+      return item;
+    })
     this.setData({
       list
     }, () => {

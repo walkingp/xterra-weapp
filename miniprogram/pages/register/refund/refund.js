@@ -2,6 +2,9 @@ const { getRegistrationDetail, updateOrderStatus, getRaceDetail, removeRegistrat
 const dayjs = require("dayjs");
 const { orderStatus } = require("../../../config/const");
 const config = require("../../../config/config");
+const i18n = require("./../../../utils/i18n");
+
+const _t = i18n.i18n.translate();
 // miniprogram/pages/register/status/status.js
 Page({
 
@@ -58,7 +61,7 @@ Page({
   //退款
   refund: async function() {    
     wx.showLoading({
-      title: '退款中'
+      title: _t['退款中']
     })
     const { id, detail, isPlogging, raceDetail, refundMoney } = this.data;
     const total_fee = +detail.paidFee * 10 * 10;
@@ -72,7 +75,7 @@ Page({
       this.updateCateUser();
       wx.showToast({
         icon: "success",
-        title: '取消成功',
+        title: _t['取消成功'],
         success: function(){
           wx.redirectTo({
             url: '/pages/my/registration/registration',
@@ -98,7 +101,7 @@ Page({
         await updateOrderStatus({ id, ...orderStatus.refunded, refundFee: refundMoney, refundTime: new Date() })
         wx.showToast({
           icon: "success",
-          title: '退款成功',
+          title: _t['退款成功'],
           success: function(){
             that.updateCateUser();
             setTimeout(() => {
@@ -134,7 +137,7 @@ Page({
   },
   async fetch( id ) {
     wx.showLoading({
-      title: '加载中……',
+      title: _t['加载中……'],
     })
     const detail = await getRegistrationDetail(id);
     detail.orderTime = dayjs(detail.addedDate).format("YYYY-MM-DD HH:mm:ss");

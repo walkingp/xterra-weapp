@@ -30,6 +30,9 @@ page{
   width: 420rpx;
   height: 315rpx;
 }
+.text{
+  padding: 0 20rpx;
+}
 .text text{
   text-align: center;
   display: block;
