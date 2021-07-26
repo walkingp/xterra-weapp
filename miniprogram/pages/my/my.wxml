@@ -54,7 +54,7 @@
           <van-grid-item icon="/images/icons/call.svg" url="/pages/page/page?id=contact" text="{{_t['联系我们']}}" />
           <van-grid-item icon="/images/icons/help.svg" url="/pages/page/page?id=help" text="{{_t['帮助中心']}}" />
           <van-grid-item icon="/images/icons/building.svg" url="/pages/page/page?id=about" text="{{_t['关于XTERRA']}}" />
-          <van-grid-item icon="setting-o" url="/pages/my/edit/edit" text="{{_t['语言设置']}}" />
+          <van-grid-item icon="/images/icons/language.svg" url="/pages/my/edit/edit" text="{{_t['语言设置']}}" />
         </van-grid>
       </view>
     </view>

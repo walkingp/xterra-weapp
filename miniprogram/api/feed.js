@@ -1,6 +1,7 @@
 import { getCollectionById, getPaginations } from "../utils/cloud"
 
-export const getCommentList = async (pageIndex = 1, pageSize = 10, placeId) => {
+export const getCommentList = async (pageIndex = 1, pageSize = 10, placeId, order = 'latest') => {
+  const orderBy = order === 'latest' ? { addedDate: 'desc' } : { kudos: 'desc' };
   const data = await getPaginations({
     dbName: 'feed',
     filter: {
@@ -8,9 +9,7 @@ export const getCommentList = async (pageIndex = 1, pageSize = 10, placeId) => {
       type: 'place',
       placeId
     },
-    orderBy: {
-      addedDate: 'desc'
-    },
+    orderBy,
     pageIndex,
     pageSize
   })

@@ -16,7 +16,7 @@
   <view class="map">
     <map id="map" markers="{{markers}}" longitude="{{detail.coordinate[0]}}" latitude="{{detail.coordinate[1]}}"
       scale="11" subkey="{{mapKey}}" layer-style="1" bindtap="showLocation" bindregionchange="regionchange"></map>
-    <view class="fs-xs text-grey text-center">{{_t['点击地图开始导航']}}</view>
+    <view bindtap="showLocation" class="fs-xs text-grey text-center">{{_t['点击地图开始导航']}}</view>
   </view>
   <view class="places">
     <place-event-list list="{{races}}" />
@@ -39,8 +39,8 @@
     <view class="line"></view>
     <view class="title">{{_t['发现']}}</view>
     <view class="flex justify-end filter">
-      <view class="latest flex align-center"><van-icon name="browsing-history-o" /> {{_t['最新']}}</view>
-      <view class="hot flex align-center current"><van-icon name="fire-o" /> {{_t['最热']}}</view>
+      <view bindtap="orderLatest" class="latest flex align-center {{order === 'latest' ? 'current' : ''}}"><van-icon name="browsing-history-o" /> {{_t['最新']}}</view>
+      <view bindtap="orderHottest" class="hot flex align-center {{order === 'hottest' ? 'current' : ''}} "><van-icon name="fire-o" /> {{_t['最热']}}</view>
     </view>
     <community-list list="{{list}}" />
   </view>

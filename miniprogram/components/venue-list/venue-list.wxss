@@ -36,6 +36,12 @@
   position: absolute;
   content: "";
 }
+.left:hover::after{
+  border-right-color: #333;
+}
+.right:hover::after{
+  border-left-color: #333;
+}
 .left::after{
   border-right-color: #999;
 }

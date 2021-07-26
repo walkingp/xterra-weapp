@@ -24,9 +24,28 @@ Page({
     isTicked: false,
     isFaved: false,
     userId: null,
+    order: 'hottest',
     isChinese: i18n.i18n.getLang()
   },
-  
+  orderLatest(){
+    this.setOrder('latest');
+  },
+  orderHottest(){
+    this.setOrder('hottest');
+  },
+  async setOrder(type){
+    this.setData({
+      order: type
+    })
+    switch(type){
+      case 'latest':
+        this.fetchComment('latest');
+        break;
+      case 'hottest':
+        this.fetchComment('hottest');
+        break;
+    }
+  },
   preview(e){
     const { url } = e.currentTarget.dataset;
     const { detail } = this.data;
@@ -137,7 +156,7 @@ Page({
       show: true
     })
   },
-  async fetchComment() {
+  async fetchComment(order = 'hottest') {
     wx.showNavigationBarLoading({
       success: (res) => {},
     })
@@ -147,7 +166,7 @@ Page({
       list,
       id
     } = this.data;
-    const newData = await getCommentList(pageIndex, pageSize, id);
+    const newData = await getCommentList(pageIndex, pageSize, id, order);
     if (newData.length > 0) {
       newData.map(item => {
         item.dateStr = dayjs(new Date(item.addedDate)).format("MM-DD HH:mm:ss");
@@ -178,7 +197,6 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    this.fetchComment();
   },
 
   /**

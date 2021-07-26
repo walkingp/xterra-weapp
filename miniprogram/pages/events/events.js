@@ -51,9 +51,10 @@ Page({
       title: _t['加载中……'],
     })
     let races = await getRaceIndexList();
+    const isChinese = i18n.i18n.getLang();
     races.map(item=>{
       item.cates = item.catesName ? item.catesName.join('/') : '/';
-      item.raceDate = dayjs(new Date(item.raceDate)).format("MM月DD日");
+      item.raceDate = dayjs(new Date(item.raceDate)).format(isChinese ? "MM月DD日" : "MMMM DD");
       item.isPlogging = item.type === 'X-Plogging';
 
       const status = raceStatus.find(s => s.value === item.status);

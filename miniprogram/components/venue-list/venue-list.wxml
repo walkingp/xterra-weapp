@@ -1,14 +1,14 @@
   <view class="venues">
     <view class="title">{{_t['精选地点']}}</view>
     <view class="main flex align-center">
-      <view class="left flex-none"></view>
+      <view class="left flex-none" bindtap="prev"></view>
       <view class="swiper flex-auto">
-        <swiper>
+        <swiper current="{{current}}">
           <swiper-item class="flex column" wx:for="{{list}}" wx:key="_id">
             <place-list item="{{item}}" />
           </swiper-item>
         </swiper>
       </view>
-      <view class="right flex-none"></view>
+      <view class="right flex-none" bindtap="next"></view>
     </view>
   </view>

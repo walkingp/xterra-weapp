@@ -118,7 +118,7 @@ Page({
     if (!phoneNum || !trueName || gender === '请选择') {
       wx.showToast({
         icon: 'none',
-        title: '请填写完整资料',
+        title: _t['请填写完整资料'],
       })
       return;
     }
@@ -137,7 +137,7 @@ Page({
     })
     wx.showToast({
       icon: 'success',
-      title: '保存成功',
+      title: _t['保存成功'],
       success: () => {
         setTimeout(() => {
           wx.switchTab({

@@ -4,15 +4,15 @@
       wx:key="_id">
       <view class="hd flex space-between align-center">
         <text class="title">{{item.title}}</text>
-        <text wx:if="{{!item.isPlogging}}" class="status" style="background-color:{{item.status.bgColor}}; color: {{item.status.textColor}};">{{item.status.text}}</text>
+        <text wx:if="{{!item.isPlogging}}" class="status" style="background-color:{{item.status.bgColor}}; color: {{item.status.textColor}};">{{_t[item.status.text]}}</text>
       </view>
       <view class="flex align-center">
         <view class="cover flex-none">
           <image src="{{item.picUrls[0]}}" lazy-load="{{true}}" mode="aspectFill"></image>
         </view>
         <view class="flex-auto text flex column space-betwee info">
-          <text>{{_t['类型']}}：{{item.type}}</text>
-          <text wx:if="{{item.type==='X-Plogging'}}">{{_t['费用']}}：{{item.feeType}}</text>          
+          <text>{{_t['类型']}}：{{_t[item.type]}}</text>
+          <text wx:if="{{item.type==='X-Plogging'}}">{{_t['费用']}}：{{_t[item.feeType]}}</text>          
           <text wx:else>{{_t['组别']}}：{{item.cates}}</text>
           <text>{{_t['地点']}}：{{item.location}}</text>
           <text>{{_t['时间']}}：{{item.raceDate}}</text>

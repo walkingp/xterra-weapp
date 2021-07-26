@@ -14,7 +14,7 @@ Component({
    * 组件的初始数据
    */
   data: {
-
+    current: 0
   },
   lifetimes: {
     attached(){
@@ -28,6 +28,29 @@ Component({
    * 组件的方法列表
    */
   methods: {
+    prev(){
+      let { current, list } = this.data;
+      if(current === 0){
+        current = list.length - 1;
+      }else{
+        --current;
+      }
+      this.setData({
+        current
+      });
+    },
+    next(){
+      let { current, list } = this.data;
+      if(current === list.length - 1){
+        current = 0;
+      }else{
+        ++current;
+      }
+      this.setData({
+        current
+      });
+
+    },
     redirect(e){
       const { url } = e.currentTarget.dataset;
       wx.navigateTo({

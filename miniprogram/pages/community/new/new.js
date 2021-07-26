@@ -3,8 +3,10 @@ const {
   addFeed, checkTextSec
 } = require("../../../api/feed");
 const { updatePoint } = require("../../../api/points");
+const { tickPlace } = require("../../../api/venue");
 const { pointRuleEnum } = require("../../../config/const");
-
+const i18n = require("./../../../utils/i18n");
+const t = i18n.i18n.translate();
 // miniprogram/pages/community/new/new.js
 const app = getApp();
 Page({
@@ -77,7 +79,7 @@ Page({
     }
     //上传图片到云存储
     wx.showLoading({
-      title: '上传中',
+      title: t['上传中'],
     })
     let promiseArr = [];
     const that = this;
@@ -135,7 +137,8 @@ Page({
       })
       await that.saveDB(content);
       wx.showToast({
-        title: "发布成功",
+        icon: 'none',
+        title: t["发布成功"],
       });
       wx.hideLoading();
       const url = ''
@@ -174,10 +177,12 @@ Page({
     });
     const id = res.result._id;
     wx.showToast({
-      icon: 'success',
-      title: '发布成功',
-      success: function(){
+      icon: 'none',
+      title: t['发布成功'],
+      success: async function(){
+        await tickPlace(placeId, userId);
         const url = type === 'place' ? `/pages/venue/detail/detail?id=${placeId}&type=succ` : '/pages/community/detail/detail?id=' + id;
+
         setTimeout(() => {
           wx.redirectTo({
             url
@@ -203,7 +208,7 @@ Page({
       if (!isLogined) {
         wx.showToast({
           icon: 'none',
-          title: '请先登录',
+          title: t['请先登录'],
           success: function () {
             setTimeout(() => {
               wx.switchTab({
