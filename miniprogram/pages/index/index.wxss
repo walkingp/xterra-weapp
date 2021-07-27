@@ -52,7 +52,7 @@
 button.button {
 	border: solid 4rpx #444;
 	height: 74rpx;
-	padding: 0 100rpx;
+	padding: 0 50rpx!important;
 	color: #444;
 	border-radius: 0;
 	background-color: transparent;
@@ -76,18 +76,19 @@ button.button {
 
 .city .en {
 	font-size: 60rpx;
-	font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-	font-weight: 800;
 	text-transform: uppercase;
 	color: #333;
 }
 
 .city .cn,
 .city .desc {
-	font-size: 24rpx;
+	font-size: 28rpx;
 	color: #777;
 	line-height: 2;
 	text-align: center;
+}
+.city .cn {
+	font-weight: bold;
 }
 .desc{
 	padding: 10rpx;

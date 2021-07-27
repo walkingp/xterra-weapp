@@ -180,9 +180,16 @@ Page({
       icon: 'none',
       title: t['发布成功'],
       success: async function(){
-        await tickPlace(placeId, userId);
-        const url = type === 'place' ? `/pages/venue/detail/detail?id=${placeId}&type=succ` : '/pages/community/detail/detail?id=' + id;
-
+        const res = await tickPlace(placeId, userId);
+        let url = '/pages/community/detail/detail?id=' + id;
+        if(type === 'place'){
+          if(res.result === false) {
+            url = `/pages/venue/detail/detail?id=${placeId}`;
+          }else{
+            url = `/pages/venue/detail/detail?id=${placeId}&type=succ`;
+          }
+        }
+        
         setTimeout(() => {
           wx.redirectTo({
             url

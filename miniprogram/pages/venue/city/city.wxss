@@ -12,9 +12,6 @@ page{
   font-size: 64rpx;
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   padding-bottom: 20rpx;
-  font-weight: bold;
-  font-weight: 1000;
-  transform: scaleX(0.8);
 }
 .info{
   font-size: 24rpx;
@@ -45,16 +42,23 @@ page{
 }
 .text .name{
   color: #333;
-  font-size: 42rpx;
+  font-size: 48rpx;
   font-weight: 800;
   font-weight: bold;
   padding-bottom: 10rpx;
   text-transform: uppercase;
 }
+.line{
+  width: 74rpx;
+  height: 4rpx;
+  background-color: #DF1042;
+  margin: 20rpx auto;
+}
 .more{
   font-size: 32rpx;
   letter-spacing: 4rpx;
   padding: 50rpx 0;
+  color: #aaa;
 }
 .title image{
   height: 60rpx;

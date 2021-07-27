@@ -23,7 +23,7 @@
   </view>
   <view class="city flex column align-center">
     <image mode="widthFix" src="{{currentCity.coverUrl}}"></image>
-    <text class="en">{{currentCity.cityEn}}</text>
+    <text class="en {{ fontLoaded ? 'impact' : '' }}">{{currentCity.cityEn}}</text>
     <text class="cn">{{currentCity.cityCN}}</text>
     <view class="desc flex column align-center">
       <text selectable="{{true}}">{{isChinese ? currentCity.desc : currentCity.descEn}}</text>

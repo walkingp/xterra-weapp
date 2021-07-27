@@ -16,10 +16,11 @@ exports.main = async (event, context) => {
   }).get();
   const isTicked = res.data.length > 0;
   if (isTicked) {
-    return await db.collection("medals").where({
-      placeId,
-      userId
-    }).remove();
+    return false;
+    // return await db.collection("medals").where({
+    //   placeId,
+    //   userId
+    // }).remove();
   }
   return await db.collection("medals").add({
     data: {

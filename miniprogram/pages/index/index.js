@@ -25,6 +25,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    fontLoaded: false,
     loading: false,
     banners: [],
     news: [],
@@ -34,6 +35,21 @@ Page({
     currentCity: null,
     places: [],
     isChinese: i18n.i18n.getLang()
+  },
+  loadFont(){
+    const source = 'https://xterra.club/fonts/Impact.ttf';
+    wx.loadFontFace({
+      global:true,
+      family: 'font',
+      source,
+      success: (res) => {
+        console.log(res.status)
+        this.setData({ fontLoaded: true })
+      },
+      fail: function (res) {
+        this.setData({ fontLoaded: false })
+      },
+    });
   },
   swiperChange(e) {
     this.setData({
@@ -302,10 +318,13 @@ Page({
     this.watchChanges('news');
     this.setData({
       headerBarHeight: app.globalData.headerBarHeight
+    }, () =>{
+      this.loadFont();
     })
   },
   onShow() {
     this.setData({
+      isChinese: i18n.i18n.getLang(),
       _t: i18n.i18n.translate()
     }, () => {
       this.getCity();

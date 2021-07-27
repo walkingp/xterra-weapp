@@ -106,3 +106,11 @@ button.button[disabled]{
   color: #fff!important;
   border-color: #d6d6d6!important;
 }
+.impact{
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+@font-face {
+  font-family: 'Impact';
+  src: url("https://xterra.club/fonts/Impact.ttf")
+}
