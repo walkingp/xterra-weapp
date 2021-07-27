@@ -46,14 +46,13 @@
 	background-color: transparent;
 	border: solid 4rpx #fff !important;
 	color: #fff !important;
-	width: 220rpx;
 	border-radius: 0px;
 }
 
 button.button {
 	border: solid 4rpx #444;
 	height: 74rpx;
-	width: 260rpx;
+	padding: 0 100rpx;
 	color: #444;
 	border-radius: 0;
 	background-color: transparent;
@@ -78,6 +77,8 @@ button.button {
 .city .en {
 	font-size: 60rpx;
 	font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+	font-weight: 800;
+	text-transform: uppercase;
 	color: #333;
 }
 
@@ -88,7 +89,9 @@ button.button {
 	line-height: 2;
 	text-align: center;
 }
-
+.desc{
+	padding: 10rpx;
+}
 .city button {
 	margin-top: 40rpx;
 }

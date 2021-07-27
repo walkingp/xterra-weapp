@@ -19,7 +19,7 @@
   height: 365rpx;
 }
 .venues swiper{
-  height: 660rpx;
+  height: 680rpx;
 }
 .venues .left, .venues .right{
   height: 100%;

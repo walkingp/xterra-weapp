@@ -1,6 +1,6 @@
 <view class="city flex align-center column">
-  <view class="header flex column align-center">
-    <text class="title">X-Discovery</text>
+  <view class="header flex column align-center title">
+    <image src="./../../../images/XD.png" mode="heightFix"></image>
     <text class="info">{{_t['XTERRA推出的城市体验活动，精选全球最好玩的地方']}}</text>
   </view>
   <view class="list">
