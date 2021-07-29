@@ -67,6 +67,9 @@ Component({
   lifetimes: {
     // 生命周期函数，可以为函数，或一个在methods段中定义的方法名
     attached: function () {
+      this.setData({        
+        _t: i18n.i18n.translate()
+      });
       this.watchChanges();
      },
   },

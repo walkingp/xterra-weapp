@@ -11,6 +11,9 @@
   width: 400rpx;
   margin: 20rpx auto;
 }
+.buttons button.primary{
+  border: solid 1px #DF1042;
+}
 .buttons button.secondary{
   border: solid 1rpx #333;
   color: #333;

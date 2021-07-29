@@ -85,7 +85,7 @@
     <checkbox name="agreed" value="true" id="accepted"></checkbox>
   </checkbox-group>
   <label for="accepted">{{_t['我已认真阅读并且同意']}}</label>
-  <text class="link" bindtap="showDisclaimer">《{{_t['免责协议》']}}</text>
+  <text class="link" bindtap="showDisclaimer">{{_t['《免责协议》']}}</text>
 </view>
 <view class="box"
   wx:if="{{selectedCateId !== null && (cates[selectedCateId].enableEarlierBirdPrice || cates[selectedCateId].enableEarlyBirdPrice) }}">

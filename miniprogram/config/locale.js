@@ -12,6 +12,8 @@ const locale = [
 ];
 
 const locales = {
+  '领队': 'Leader',
+  '队员': 'Member',
   '发现': 'Discovery',
   '我的主页': 'My page',
   '我的收藏': 'My Favs',
@@ -134,7 +136,7 @@ const locales = {
   '我是团队成员': 'I am a team member',
   '请选择组别': 'Please select category',
   '我已认真阅读并且同意': 'I have read it carefully and agree',
-  '免责协议': 'Waiver & Release Agreement',
+  '《免责协议》': ' Waiver & Release Agreement',
   '注意事项': 'Notes',
   '每次只能选择一个组别进行报名，如需多人报名多个组别，请依次完成每个组别的报名；': 'Each time one can only choose one category to register. If register for others or for other more categories, please complete one by one;',
   '各组别优惠价格及退改政策，请点击选择组别后查看报名优惠价格。': 'Preferential prices and refund policies, please click on the selected event or category for details.',

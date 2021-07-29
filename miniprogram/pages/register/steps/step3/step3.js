@@ -42,6 +42,9 @@ Component({
 
   lifetimes: {
     attached() {
+      this.setData({        
+        _t: i18n.i18n.translate()
+      });
       this.fetch();
     }
   },

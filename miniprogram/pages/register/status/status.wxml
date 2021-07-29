@@ -40,7 +40,7 @@
           <text class="gray">（{{item.sportItems}}）</text>
         </block>
         <block wx:else>
-          <text class="gray">（{{item.isTeamLeader ? '领队' : '队员'}}）</text>
+          <text class="gray">（{{item.isTeamLeader ? _t['领队'] : _t['队员']}}）</text>
         </block>
         </view>
       </view>

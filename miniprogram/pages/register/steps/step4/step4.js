@@ -1,6 +1,9 @@
 const config = require("../../../../config/config");
 const dayjs = require("dayjs");
 const app = getApp();
+const i18n = require("./../../../../utils/i18n");
+
+const _t = i18n.i18n.translate();
 // pages/register/steps/step4/step4.js
 Component({
   /**
@@ -31,6 +34,13 @@ Component({
     emails: []
   },
 
+  lifetimes: {
+    attached() {
+      this.setData({        
+        _t: i18n.i18n.translate()
+      });
+    }
+  },
   /**
    * 组件的方法列表
    */
