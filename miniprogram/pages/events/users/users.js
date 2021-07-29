@@ -130,7 +130,8 @@ Page({
         this.fetchCates();
       });
     }).catch(err => {
-      wx.showLoading({
+      console.error(err);
+      wx.showToast({
         title: '您没有权限',
       })
     });

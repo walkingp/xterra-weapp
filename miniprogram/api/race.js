@@ -1,5 +1,5 @@
 import { orderStatus } from "../config/const";
-import { getPaginations, getCollectionById, getCollectionByWhere, getSingleCollectionByWhere, hideCollectionById, removeCollectionByWhere } from "../utils/cloud"
+import { getPaginations, getCollectionById, getCollectionByWhere, getSingleCollectionByWhere, hideCollectionById, removeCollectionByWhere, getCollectionCount } from "../utils/cloud"
 const dayjs = require("dayjs");
 
 export const getBannerList = async ( position = 'index', size = 5) => {
@@ -144,16 +144,22 @@ export const getStartListCountByCateId = async cateId => {
   return res.total;
 };
 
-export const getAllRaces = async ( size = 100) => {
-  const data = await getPaginations({
-    dbName: 'race',
-    orderBy: {
-      raceDate: 'desc'
-    },
-    pageIndex: 1,
-    pageSize: size
-  })
-  return data;
+export const getAllRaces = async () => {
+  wx.cloud.init();
+  const db = wx.cloud.database()
+  const _ = db.command;
+  
+  const total = await getCollectionCount({ dbName: 'race'});
+  const pageSize = 20;
+  const pageCount = Math.ceil(total / pageSize);
+  let allRaces = [];
+  const raceTable = db.collection("race");
+  
+  for (let i = 1; i <= pageCount; i++) {    
+    const res = await raceTable.skip((i - 1) * pageSize).limit(pageSize).get();
+    allRaces.push(...res.data);
+  }
+  return allRaces;
 }
 
 export const getRaceIndexList = async ( size = 40) => {
