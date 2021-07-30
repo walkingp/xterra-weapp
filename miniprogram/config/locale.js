@@ -12,8 +12,9 @@ const locale = [
 ];
 
 const locales = {
-  '您当前位置距离目标$0为$1米，可以打卡': '',
-  '您当前位置距离目标$0为$1米，超出打卡距离，不可打卡': '',
+  '您当前位置距离目标$0为$1米，可以打卡': 'You are $1 meters from location $0, you can tick now.',
+  '您当前位置距离目标$0为$1米，超出打卡距离，不可打卡': 'You are $1 meters from location $0, you cannot tick now.',
+  '精选活动': 'Featured events',
   '成绩查询': 'Results',
   '暂无组别': 'No group',
   '活动详情': 'Introduction',

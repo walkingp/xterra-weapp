@@ -94,7 +94,7 @@ Page({
     const places = await getPlaceList(res.city);
     const races = await getRaceListByPlace(id);
     const isChinese = i18n.i18n.getLang();
-    const format = isChinese ? 'YYYY年MM月DD日 HH:mm' : 'YYYY MMMM DD HH:mm';
+    const format = isChinese ? 'YYYY年MM月DD日' : 'YYYY MMMM DD';
     races.map(item=> item.date = dayjs(item.raceDate).format(format));
 
     const { userId } = app.globalData;
