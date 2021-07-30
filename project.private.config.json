@@ -287,6 +287,12 @@
           "pathName": "pages/community/user/user",
           "query": "id=04db790c71365c0be61fae4e3e526141",
           "scene": null
+        },
+        {
+          "name": "XD打卡",
+          "pathName": "pages/community/new/new",
+          "query": "type=place&placeId=cd045e756101278b008a39064b0393f8",
+          "scene": null
         }
       ]
     }

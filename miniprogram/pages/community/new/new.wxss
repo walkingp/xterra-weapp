@@ -1,6 +1,8 @@
 .main{
-  height: 100vh;
   padding: 30rpx;
+}
+map{
+  width: 100%;
 }
 textarea{
   min-height: 200rpx;
@@ -116,4 +118,5 @@ button[disabled]{
 }
 .bottom button{
   width: 100%;
+  margin-top: 50rpx;
 }

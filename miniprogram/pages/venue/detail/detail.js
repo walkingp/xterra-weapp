@@ -13,6 +13,7 @@ Page({
   data: {
     id: null,
     detail: null,
+    mapKey: null,
     places: [],
     markers: [],
     pageIndex: 1,

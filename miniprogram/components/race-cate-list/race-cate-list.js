@@ -1,3 +1,4 @@
+const i18n = require("./../../utils/i18n");
 // components/race-cate-list/race-cate-list.js
 Component({
   /**
@@ -10,6 +11,13 @@ Component({
     list: {
       type: Array
     }
+  },
+  pageLifetimes: {
+    show: function() {
+      this.setData({
+        _t: i18n.i18n.translate()
+      })
+    },
   },
 
   /**

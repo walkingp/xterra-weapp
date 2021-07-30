@@ -97,7 +97,9 @@ Page({
         const isTabbar = url.indexOf("/pages/news/news") >= 0 || url.indexOf("pages/events/events") >= 0;
         if (isTabbar) {
           app.globalData.tabBarLink = url;
-
+          wx.switchTab({
+            url,
+          })
           return;
         }
         wx.navigateTo({

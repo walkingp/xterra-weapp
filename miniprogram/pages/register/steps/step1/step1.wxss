@@ -83,6 +83,7 @@
   color: #999;
   display: block;
   padding: 5rpx 0 10rpx 0;
+  line-height: 1.5;
 }
 .cates .item .hd{
   font-weight: bold;

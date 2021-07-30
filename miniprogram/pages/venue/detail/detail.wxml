@@ -15,7 +15,7 @@
   </view>
   <view class="map">
     <map id="map" markers="{{markers}}" longitude="{{detail.coordinate[0]}}" latitude="{{detail.coordinate[1]}}"
-      scale="11" subkey="{{mapKey}}" layer-style="1" bindtap="showLocation" bindregionchange="regionchange"></map>
+      scale="11" subkey="{{mapKey}}" layer-style="2" bindtap="showLocation" bindregionchange="regionchange"></map>
     <view bindtap="showLocation" class="fs-xs text-grey text-center">{{_t['点击地图开始导航']}}</view>
   </view>
   <view class="places" wx:if="{{races.length}}">

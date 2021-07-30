@@ -27,7 +27,8 @@ Page({
     pageSize: 2,
     hasMoreData: true,
     isAdmin: false,
-    isSuperAdmin: false
+    isSuperAdmin: false,
+    isChinese: true,
   },
   register(){
     const { id } = this.data;
@@ -120,13 +121,14 @@ Page({
 
     let markers = null;
     if(detail.coordinate){
+      const isChinese = i18n.i18n.getLang();
       detail.coordinate = detail.coordinate.map(item=>+item);
 
       markers = [{
         id: 0,
         longitude: detail.coordinate[0],
         latitude: detail.coordinate[1],
-        title: '卢湾体育中心',
+        title: isChinese ? place.title : place.titleEn,
         iconPath: '/images/icons/marker.png',
         width: 32,
         height: 32
@@ -260,7 +262,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.setData({
+      isChinese: i18n.i18n.getLang(),
+      _t: i18n.i18n.translate()
+    });
   },
 
   /**

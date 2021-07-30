@@ -1,4 +1,13 @@
 <form bindsubmit="savePhoto">
+  <block wx:if="{{type === 'place' && distance}}">
+    <map id="map" show-location="{{true}}" markers="{{markers}}" longitude="{{place.coordinate[0]}}" latitude="{{place.coordinate[1]}}"
+     include-points="{{points}}" subkey="{{mapKey}}" layer-style="2" bindtap="showLocation" bindregionchange="regionchange"></map>  
+    <view class="flex align-center justify-center fs-xs info padding-top-lg text-grey">
+      <van-icon color="#1AAD19" size="20px" name="passed" class="margin-right-md" wx:if="{{isDistanceClose}}" /> 
+      <van-icon color="#FF5958" size="20px" name="info-o" class="margin-right-md" wx:else />
+      {{message}}
+    </view>
+  </block>
   <view class="main flex column">
     <view class="top flex-auto flex column">
       <textarea name="content" bindblur="bindTextAreaBlur" auto-height placeholder="{{_t['和大家分享你的动态吧']}}" auto-focus></textarea>

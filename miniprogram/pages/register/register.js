@@ -23,20 +23,7 @@ Page({
     prevEnabled: true,
     nextEnabled: false,
     teamTitle: null,
-    steps: [
-      {
-        text: '选择组别',
-      },
-      {
-        text: '选择报名人',
-      },
-      {
-        text: '确认付款',
-      },
-      {
-        text: '完成报名',
-      },
-    ],
+    steps: [],
   },
   couponChanged(e){
     const { couponId, discountFee, paidFee } = e.detail;
@@ -263,6 +250,33 @@ Page({
       imageUrl: detail.picUrls[0],
       path: `/pages/register/register?id=${detail._id}`
     }
+  },
+  initialData(){
+    const { _t } = this.data;
+    this.setData({
+      steps: [
+        {
+          text:  _t['选择组别'],
+        },
+        {
+          text: _t['选择报名人'],
+        },
+        {
+          text: _t['确认付款'],
+        },
+        {
+          text: _t['完成报名'],
+        },
+      ]
+    })
+  },
+  onShow: function () {
+    this.setData({
+      _t: i18n.i18n.translate(),
+      isChinese: i18n.i18n.getLang()
+    }, () => {
+      this.initialData();
+    })
   },
   onUnload: function () {
     console.log(app.globalData.step);
