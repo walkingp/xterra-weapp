@@ -1,13 +1,16 @@
 <view class="page">
   <view class="banner">
-    <image src="{{detail.banner}}" mode="aspectFill"></image>
+    <image bindtap="preview" data-url="{{detail.banner}}" src="{{detail.banner}}" mode="aspectFill"></image>
   </view>
   <view class="flex top align-center space-between">
     <text class="flex-auto">{{isChinese ? detail.title : detail.titleEn}}</text>
     <view class="flex-none">
       <van-icon name="like" color="#dc3545" bindtap="addFav" size="20px" class="margin-right-md" wx:if="{{isFaved}}" />
       <van-icon name="like-o" bindtap="addFav" size="20px" class="margin-right-md" wx:else />
-      <van-icon wx:if="{{detail.medalUrl}}" bindtap="showContent" size="20px" name="flag-o" />
+      <block wx:if="{{detail.medalUrl}}">
+        <van-icon bindtap="showContent" color="#dc3545" size="20px" name="medal" wx:if="{{isTicked}}" />
+        <van-icon bindtap="showContent" size="20px" name="medal-o" wx:else />
+      </block>
     </view>
   </view>
   <view class="desc">
