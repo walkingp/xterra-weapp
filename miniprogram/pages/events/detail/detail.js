@@ -4,6 +4,7 @@ const config = require("../../../config/config");
 const { raceStatus } = require("../../../config/const");
 const app = getApp();
 const i18n = require("./../../../utils/i18n");
+const { getCollectionById } = require("../../../utils/cloud");
 
 const _t = i18n.i18n.translate();
 // miniprogram/pages/index/index.js
@@ -29,7 +30,9 @@ Page({
     isAdmin: false,
     isSuperAdmin: false,
     isChinese: true,
-    isDiscovery: false
+    isDiscovery: false,
+    city: null,
+    cityName: null
   },
   register(){
     const { id } = this.data;
@@ -164,10 +167,20 @@ Page({
       isDiscovery: detail.type === 'X-Discovery',
       detail
     }, ()=>{
+      if(detail.placeId){
+        this.fetchCity(detail.placeId);
+      }
       wx.hideLoading({
         success: (res) => {},
       })
     });
+  },
+  async fetchCity(id){
+    const city = await getCollectionById({ dbName: 'place', id });
+    this.setData({
+      city,
+      cityName: i18n.i18n.getLang() ? city.title : city.titleEn
+    })
   },
   async loadMoreNews(){
     wx.showLoading({

@@ -8,7 +8,7 @@
           <image src="{{item.picUrls[0]}}" mode="aspectFit"></image>
           <text class="place">{{item.title}}</text>
           <text class="desc">{{item.date}}</text>
-          <button data-url="/pages/events/detail/detail?id={{item._id}}" bindtap="redirect" class="button">{{_t['查看详情']}}</button>
+          <button data-url="/pages/events/detail/detail?id={{item._id}}" bindtap="redirect" class="button">{{_t['立即报名']}}</button>
         </swiper-item>
       </swiper>
     </view>

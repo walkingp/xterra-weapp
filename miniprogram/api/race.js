@@ -169,6 +169,7 @@ export const getRaceIndexList = async ( size = 40) => {
       isActive: true
     },
     orderBy: {
+      order: 'desc',
       raceDate: 'desc'
     },
     pageIndex: 1,

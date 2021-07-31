@@ -12,6 +12,9 @@ const locale = [
 ];
 
 const locales = {
+  '所属城市': 'City',
+  'X-Discovery': 'X-Discovery',
+  'X-Plogging': 'X-Plogging',
   '我的报名人资料': 'My profiles',
   '注意事项：': 'Cautions:',
   '确定要删除吗？': 'Are you sure to delete it?',
@@ -21,6 +24,7 @@ const locales = {
   '一经删除无法恢复，是否确定要删除吗？': 'Once deleted, it cannot be restored. Are you sure to delete it?',
   '您当前位置距离目标$0为$1米，可以打卡': 'Your current position is $1 meters from location $0, you can tick now.',
   '您当前位置距离目标$0为$1米，超出打卡距离，不可打卡': 'Your current position is $1 meters from location $0, you cannot tick now.',
+  '您当前位置在$0附近$1米': 'Your current position is $1 meters from location $0',
   '精选活动': 'Featured events',
   '成绩查询': 'Results',
   '暂无组别': 'No group',

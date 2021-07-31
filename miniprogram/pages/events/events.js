@@ -228,10 +228,11 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
+    const { type } = this.data;
     return {
-      title: '活动 - XTERRA',
+      title: 'XTERRA',
       imageUrl: "",
-      path: `/pages/events/events`
+      path: `/pages/events/events?type=${type}`
     }
   }
 })

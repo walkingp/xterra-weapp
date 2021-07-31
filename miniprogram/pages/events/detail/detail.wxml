@@ -20,6 +20,10 @@
             <text>{{_t[type + '类型']}}：</text>
             <text class="text">{{detail.type}}</text>
           </view>
+          <view class="cell" wx:if="{{detail.placeId}}">
+            <text>{{_t['所属城市']}}：</text>
+            <navigator url="/pages/venue/detail/detail?id={{detail.placeId}}" class="text link">{{cityName}}</navigator>            
+          </view>
           <view class="cell" wx:if="{{detail.cates!=='/'}}">
             <text>{{_t[type + '组别']}}：</text>
             <text selectable="{{true}}" class="text">{{detail.cates}}</text>

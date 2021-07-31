@@ -29,7 +29,11 @@ Page({
     place: null,
     isDistanceClose: false,
     isChinese: true,
-    message: null
+    message: null,
+    validMessage: null
+  },
+  regionchange(){
+
   },
   async bindTextAreaBlur(e){
     const content = e.detail.value;
@@ -289,16 +293,19 @@ Page({
         const distance = this.getDistance(res.latitude, res.longitude, place.coordinate[1], place.coordinate[0]);
         console.log(distance);
         const { MAX_METERS, type, _t } = this.data;
-        const isDistanceClose = place.isGpsRequired &&  distance < place.meters;
+        const isDistanceClose = !place.isGpsRequired || (place.isGpsRequired &&  distance < place.meters);
+        
         const btnDisabled = type === 'place' && !isDistanceClose;
         let message = btnDisabled ? _t['您当前位置距离目标$0为$1米，超出打卡距离，不可打卡'] : _t['您当前位置距离目标$0为$1米，可以打卡']
         message = message.replace('$0', title).replace('$1', distance);
+        let validMessage = _t['您当前位置在$0附近$1米'].replace('$0', title).replace('$1', distance);
         this.setData({
           points: [{ latitude, longitude }, { latitude: place.coordinate[1], longitude: place.coordinate[0] }],
           distance,
           isDistanceClose,
           btnDisabled,
-          message
+          message,
+          validMessage
         });
       }
     });
