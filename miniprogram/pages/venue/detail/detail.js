@@ -71,6 +71,7 @@ Page({
 
   },
   async addFav(){
+    wx.showLoading()
     const { id, userId, isFaved } = this.data;
     const res = await favPlace(id, userId);
     wx.showToast({
@@ -79,7 +80,8 @@ Page({
     });
     this.setData({
       isFaved: isFaved ? false : true
-    })
+    });
+    wx.hideLoading()
   },
   async fetch(id){
     wx.showLoading({})

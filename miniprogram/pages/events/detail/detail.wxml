@@ -43,17 +43,15 @@
       </view>
       <view class="map">
         <map id="map" markers="{{markers}}" longitude="{{detail.coordinate[0]}}" latitude="{{detail.coordinate[1]}}"
-          scale="11" subkey="{{mapKey}}" layer-style="1" bindtap="showLocation" bindregionchange="regionchange"></map>
+          scale="11" subkey="{{mapKey}}" layer-style="2" bindtap="showLocation" bindregionchange="regionchange"></map>
       </view>
-      <view selectable="{{true}}" class="text">{{detail.location}}</view>
+      <view selectable="{{true}}" bindtap="showLocation" class="text">{{detail.location}}</view>
     </view>
     <view class="section icons">
       <van-grid border="{{false}}" column-num="{{ isChinese ? 4 : 3 }}">
         <van-grid-item icon="orders-o" url="/pages/events/query/query?raceId={{detail._id}}&type=registration" text="{{_t['报名查询']}}" />
         <van-grid-item wx:if="{{false}}" icon="photo-o" url="/pages/profile/profile" link-type="switchTab" text="{{_t['照片查询']}}" />
-        <block wx:if="detail.type !== 'X-Discovery'">
-          <van-grid-item wx:if="{{true || detail.isEnded}}" icon="notes-o" url="/pages/events/query/query?raceId={{detail._id}}&type=result" text="{{detail.type !== 'X-Plogging' ? _t['成绩查询'] : _t['证书下载']}}" />
-        </block>
+        <van-grid-item wx:if="{{!isDiscovery}}" icon="notes-o" url="/pages/events/query/query?raceId={{detail._id}}&type=result" text="{{detail.type !== 'X-Plogging' ? _t['成绩查询'] : _t['证书下载']}}" />
         <van-grid-item icon="paid" url="/pages/events/kits/kits?id={{detail._id}}" text="{{_t['装备要求']}}" />
         <van-grid-item icon="hotel-o" url="/pages/events/info/info?id={{detail._id}}&type=traffic" text="{{_t['交通住宿']}}" />
         <van-grid-item wx:if="{{detail.type !== 'X-Plogging' && detail.showCuisine}}" icon="flower-o" url="/pages/events/info/info?id={{detail._id}}&type=cuisine" text="{{_t['美食美景']}}" />

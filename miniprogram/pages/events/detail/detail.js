@@ -29,6 +29,7 @@ Page({
     isAdmin: false,
     isSuperAdmin: false,
     isChinese: true,
+    isDiscovery: false
   },
   register(){
     const { id } = this.data;
@@ -128,7 +129,7 @@ Page({
         id: 0,
         longitude: detail.coordinate[0],
         latitude: detail.coordinate[1],
-        title: isChinese ? place.title : place.titleEn,
+        title: isChinese ? detail.title : detail.titleEn,
         iconPath: '/images/icons/marker.png',
         width: 32,
         height: 32
@@ -160,6 +161,7 @@ Page({
       cates,
       news,
       markers,
+      isDiscovery: detail.type === 'X-Discovery',
       detail
     }, ()=>{
       wx.hideLoading({

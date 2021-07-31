@@ -204,7 +204,7 @@ Page({
     } = this.data;
     const detail = users.find(item => item._id === id);
     detail.statusText = raceResultStatus[detail.finishedStatus || "notStart"].title;
-    const buttonText = detail.finishedStatus === raceResultStatus.notStart.value || detail.finishedStatus === raceResultStatus.DNS.value ? '置为已完成' : '置为未完成'
+    const buttonText = detail.finishedStatus === raceResultStatus.notStart.value || detail.finishedStatus === undefined || detail.finishedStatus === raceResultStatus.DNS.value ? '置为已完成' : '置为未完成'
     this.setData({
       startListId: id,
       show: true,

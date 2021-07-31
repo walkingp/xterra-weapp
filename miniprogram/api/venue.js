@@ -64,7 +64,7 @@ export const getRaceListByPlace = async (placeId, pageIndex = 1, pageSize = 20) 
     dbName: 'race',
     filter: {
       placeId,
-      type: 'XD',
+      type: 'X-Discovery',
       isActive: true
     },
     pageIndex,

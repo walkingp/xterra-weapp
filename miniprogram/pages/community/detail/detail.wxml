@@ -5,7 +5,7 @@
         <image class="avatar" src="{{detail.avatarUrl}}" mode="aspectFit" />
         <view class="flex column space-between">
           <text class="bold fs-md">{{detail.nickName}}</text>
-          <text class="text-grey fs-sm">{{detail.dateStr}}</text>
+          <text class="text-grey fs-xs">{{detail.dateStr}}</text>
         </view>
       </navigator>
       <view class="right flex column" catchtap="giveKudos" data-id="{{detail._id}}">
