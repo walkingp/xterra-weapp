@@ -1,3 +1,4 @@
+const { removeProfile } = require("../../../api/profile");
 const { getMyProfiles } = require("../../../api/race");
 const { sendRegSMS } = require("../../../api/sms");
 const app = getApp();
@@ -13,6 +14,34 @@ Page({
   data: {
     profiles: []
   },
+  onClose(event) {
+    const { position, instance } = event.detail;
+    const { id } = event.target.dataset;
+    const that = this;
+    switch (position) {
+      case 'left':
+      case 'cell':
+        instance.close();
+        break;
+      case 'right':
+        wx.showModal({
+          title: _t['提示'],
+          content: _t['确定要删除吗？'],
+          fail: console.log,
+          success: async function (sm) {
+            if (sm.confirm) {
+                await removeProfile(id);
+                that.fetch();
+                // 用户点击了确定 可以调用删除方法了
+                instance.close();
+              } else if (sm.cancel) {
+                console.log('用户点击取消')
+              }
+            }
+          });
+        break;
+    }
+  },
   gotoAdd(){
     wx.navigateTo({
       url: '/pages/register/form/form',
@@ -25,7 +54,7 @@ Page({
     const { userId } = app.globalData;
     if(!userId){
       wx.showToast({
-        title: '没有登录',
+        title: _t['没有登录'],
         icon: "none",
         success: ()=>{
           setTimeout(() => {

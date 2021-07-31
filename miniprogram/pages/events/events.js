@@ -48,8 +48,8 @@ Page({
         { text: _t['铁人三项'], value: '铁人三项' },
         { text: _t['越野跑'], value: '越野跑' },
         { text: _t['山地车'], value: '山地车' },
-        { text: _t['X-Plogging'], value: 'X-Plogging' },
-        { text: _t['X-Discovery'], value: 'X-Discovery' },
+        { text: 'X-Plogging', value: 'X-Plogging' },
+        { text: 'X-Discovery', value: 'X-Discovery' },
         { text: _t['训练营'], value: '训练营' },
         { text: _t['其他'], value: '其他' },
       ]

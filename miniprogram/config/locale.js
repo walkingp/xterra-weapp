@@ -12,8 +12,15 @@ const locale = [
 ];
 
 const locales = {
-  '您当前位置距离目标$0为$1米，可以打卡': 'You are $1 meters from location $0, you can tick now.',
-  '您当前位置距离目标$0为$1米，超出打卡距离，不可打卡': 'You are $1 meters from location $0, you cannot tick now.',
+  '我的报名人资料': 'My profiles',
+  '注意事项：': 'Cautions:',
+  '确定要删除吗？': 'Are you sure to delete it?',
+  '没有登录': 'You are not logged in',
+  '右滑可选择删除，注意一经删除无法恢复，请谨慎操作。': 'Note the deletion cannot be restored. Exercise caution when performing this operation.',
+  '提示': 'Caution',
+  '一经删除无法恢复，是否确定要删除吗？': 'Once deleted, it cannot be restored. Are you sure to delete it?',
+  '您当前位置距离目标$0为$1米，可以打卡': 'Your current position is $1 meters from location $0, you can tick now.',
+  '您当前位置距离目标$0为$1米，超出打卡距离，不可打卡': 'Your current position is $1 meters from location $0, you cannot tick now.',
   '精选活动': 'Featured events',
   '成绩查询': 'Results',
   '暂无组别': 'No group',

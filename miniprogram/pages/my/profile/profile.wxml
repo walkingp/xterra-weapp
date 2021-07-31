@@ -1,26 +1,24 @@
 <view class="container">
   <view class="box">
-    <view class="title">我的报名人资料</view>
-    <view class="list">
-      <navigator url="/pages/register/form/form?action=edit&id={{item._id}}" class="cell flex align-center" wx:for="{{profiles}}" wx:key="_id">
-        <view class="flex-auto">
-          <text>{{item.trueName}}</text>
-          <text class="gray">（{{item.relation}}）</text>
-          <text class="gray">（{{item.phoneNum}}）</text>
-        </view>
-        <view class="flex-none">
-          <van-icon name="arrow" />
-        </view>
-      </navigator>
-    </view>
+    <view class="title">{{_t['我的报名人资料']}}</view>
+    <van-swipe-cell async-close bind:close="onClose" data-id="{{item._id}}" right-width="{{ 65 }}"
+      wx:for="{{profiles}}" wx:key="_id">
+      <van-cell-group>
+        <van-cell is-link link-type="navigateTo" url="/pages/register/form/form?action=edit&id={{item._id}}"
+          title="{{item.trueName}}（{{item.relation}}）" value="{{item.phoneNum}}" />
+      </van-cell-group>
+      <view slot="right" class="van-swipe-cell__right">
+        <van-button type="danger">{{_t['删除']}}</van-button>
+      </view>
+    </van-swipe-cell>
   </view>
   <view class="box">
-    <view class="title">注意事项：</view>
+    <view class="title">{{_t['注意事项：']}}</view>
     <view class="desc">
-    请注意，填写信息时请核对填写内容的准确性，其中手机号和邮箱用于接收比赛通知，“本人”仅限一位。
+      {{_t['右滑可选择删除，注意一经删除无法恢复，请谨慎操作。']}}
     </view>
   </view>
   <view class="footer flex align-center justify-center">
-    <button class="button" bindtap="gotoAdd">添加新报名人</button>
+    <button class="button" bindtap="gotoAdd">{{_t['添加新报名人']}}</button>
   </view>
 </view>

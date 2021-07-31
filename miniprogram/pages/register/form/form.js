@@ -338,7 +338,7 @@ Page({
       return;
     }
     let isFieldsNotValid = false;
-    if(fields.length){
+    if(fields && fields.length){
       isFieldsNotValid = fields.some(item=> item.isRequired && !item.value);
     }
     if(isFieldsNotValid){
