@@ -15,7 +15,7 @@
           </block>
         </view>
       </view>
-      <text class="desc">{{item.desc}}</text>
+      <text user-select="true" class="desc">{{item.desc}}</text>
     </view>
     <view class="flex-none flex column space-between align-center btn" wx:if="{{item.isStartReg && !item.expired && !item.isFull}}">
       <button data-url="/pages/register/register?id={{raceId}}&cateId={{item._id}}&type={{item.type}}" bindtap="redirect" class="button">{{_t['一键报名']}}</button>

@@ -3,7 +3,7 @@
     <view class="section">
       <banner-list list="{{detail.picUrls}}"></banner-list>
       <view class="flex space-between align-center header">
-        <text selectable="{{true}}" class="title">{{detail.title}}</text>
+        <text selectable="{{true}}" user-select="true" class="title">{{detail.title}}</text>
         <text wx:if="{{!detail.isPlogging}}" class="status" style="background-color:{{detail.status.bgColor}}; color: {{detail.status.textColor}};">{{detail.status.text}}</text>
       </view>
       <view class="info">
@@ -41,7 +41,7 @@
         </view>
       </view>
     </view>
-    <view class="section location" wx:if="{{detail.coordinate}}">
+    <view class="section location" wx:if="{{detail.coordinate && detail.coordinate.length >= 2}}">
       <view class="hd">
         <text>{{_t[type]}}{{_t['地点']}}</text>
       </view>

@@ -55,6 +55,14 @@ Page({
       urls: detail.pickedPics,
     })
   },
+  previewBanner(e){
+    const { url } = e.currentTarget.dataset;
+    const { detail } = this.data;
+    wx.previewImage({
+      current: url,
+      urls: [url],
+    })
+  },
   onLoad: function (options) {
     const { mapKey } = config;
     const { userId } = app.globalData;

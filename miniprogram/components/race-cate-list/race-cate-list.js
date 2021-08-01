@@ -15,7 +15,8 @@ Component({
   pageLifetimes: {
     show: function() {
       this.setData({
-        _t: i18n.i18n.translate()
+        _t: i18n.i18n.translate(),
+        isChinese: i18n.i18n.getLang()
       })
     },
   },
