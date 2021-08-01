@@ -17,6 +17,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    mapKey: config.mapKey,
     MAX_METERS: 1 * 1000, // 最大打卡距离
     distance: 0,
     isLogined: false,
@@ -228,9 +229,8 @@ Page({
    */
   onLoad: function (options) {
     const { placeId, type } = options;
-    const { mapKey } = config;
     this.setData({
-      placeId, type, mapKey
+      placeId, type
     }, ()=>{
       this.fetchPlace(placeId);
     });

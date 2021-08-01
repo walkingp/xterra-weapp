@@ -13,7 +13,7 @@ Page({
   data: {
     id: null,
     detail: null,
-    mapKey: null,
+    mapKey: config.mapKey,
     places: [],
     markers: [],
     pageIndex: 1,
@@ -64,12 +64,11 @@ Page({
     })
   },
   onLoad: function (options) {
-    const { mapKey } = config;
     const { userId } = app.globalData;
     const { id, type } = options
     this.setData({
       show: type === 'succ',
-      id, mapKey,
+      id,
       userId
     });
 

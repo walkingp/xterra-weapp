@@ -14,7 +14,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    mapKey: null,
+    mapKey: config.mapKey,
     markers: [],
     id: null,
     loading: false,
@@ -205,7 +205,6 @@ Page({
   },
   onLoad: function (options) {
     const { id } = options;
-    const { mapKey } = config;
 
     app.checkLogin().then(res => {
       const { userId } = res;
@@ -216,7 +215,6 @@ Page({
       });
     });
     this.setData({
-      mapKey,
       id
     });
     this.fetch(id);
