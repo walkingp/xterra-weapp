@@ -22,8 +22,8 @@ exports.main = async (event, context) => {
     const kudos_list = feed.kudos_list || [];
     let hasMe = false;
     if(kudos_list.length){
-      hasMe = kudos_list.filter(item => {
-        return item.userId = data.userId;
+      hasMe = kudos_list.some(item => {
+        return item.userId === data.userId;
       });
     }
     if (hasMe) {
@@ -32,7 +32,7 @@ exports.main = async (event, context) => {
         id
       }).remove();
       const index = kudos_list.findIndex(item => {
-        return item.userId = data.userId;
+        return item.userId === data.userId;
       });
       kudos_list.splice(index, 1);
       const re = await feedTable.doc(id).update({

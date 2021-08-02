@@ -21,7 +21,7 @@
             <text class="text">{{detail.type}}</text>
           </view>
           <view class="cell" wx:if="{{detail.placeId}}">
-            <text>{{_t['所属城市']}}：</text>
+            <text>{{_t['所属地点']}}：</text>
             <navigator url="/pages/venue/detail/detail?id={{detail.placeId}}" class="text link">{{cityName}}</navigator>            
           </view>
           <view class="cell" wx:if="{{detail.cates!=='/'}}">

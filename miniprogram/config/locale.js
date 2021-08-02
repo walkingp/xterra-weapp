@@ -13,6 +13,7 @@ const locale = [
 
 const locales = {
   '所属城市': 'City',
+  '所属地点': 'Location',
   'X-Discovery': 'X-Discovery',
   'X-Plogging': 'X-Plogging',
   '我的报名人资料': 'My profiles',
