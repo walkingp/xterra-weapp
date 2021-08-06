@@ -2,7 +2,7 @@ const locale = [
   {
     lang: 'zh_CN',
     isChinese: true,
-    tabs: ['首页', '活动', '社区', '媒体中心', '我的']
+    tabs: ['首页', '活动报名', '社区', '媒体中心', '我的']
   },  
   {
     lang: 'en_US',

@@ -148,7 +148,7 @@
       },
       {
         "pagePath": "pages/events/events",
-        "text": "活动",
+        "text": "活动报名",
         "iconPath": "images/tabs/events.png",
         "selectedIconPath": "images/tabs/events_active.png"
       },
