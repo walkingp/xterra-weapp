@@ -5,9 +5,9 @@ const i18n = {
   getLang(){
     const isChinese = wx.getStorageSync(config.storageKey.isChinese);
     if(isChinese !== ""){
-      return wx.getStorageSync(config.storageKey.isChinese);
+      return isChinese;
     }
-    return false;
+    return true;
   },
   translate(){
     if(this.getLang()){

@@ -155,7 +155,7 @@ Page({
     const isBeforeEndTime = dayjs().isBefore(dayjs(new Date(detail.endRegTime)));
     const isDateValid = isAfterStartTime && isBeforeEndTime;
     const regBtnEnabled = cates.length > 0 && (detail.status === '报名中' || isDateValid);
-    const type =  ['越野跑', '铁人三项', '山地车'].indexOf(detail.type) >= 0 ? '赛事' : '活动';
+    const type =  ['越野跑', '铁人三项', '山地车'].indexOf(detail.type) >= 0 ? '比赛' : '活动';
     this.setData({
       regBtnEnabled,
       type,

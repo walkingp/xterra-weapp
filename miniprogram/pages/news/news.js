@@ -29,7 +29,7 @@ Page({
       ],
       types: [
         { text: _t['分类'], value: '' },
-        { text: _t['赛事'], value: '赛事' },
+        { text: _t['活动'], value: '赛事' },
         { text: _t['人物'], value: '人物' },
         { text: _t['新闻'], value: '新闻' }
       ]
