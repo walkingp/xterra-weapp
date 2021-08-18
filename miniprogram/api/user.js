@@ -50,6 +50,24 @@ export const updateStartListCert = async (id, certRecheckUrl) => {
   });
 };
 
+export const syncPlogging = async (id) => {
+  return new Promise((resolve, reject) => {
+    try {
+      wx.cloud.callFunction({
+        name: 'syncPlogging',
+        data: {
+          id
+        },
+        success(res) {
+          resolve(res.result)
+        }
+      });
+    } catch (err) {
+      reject(err)
+    }
+  })
+}
+
 export const exportReport = async cateId => {
   const db = wx.cloud.database()
   const cateTable = db.collection("race-cates");

@@ -4,6 +4,7 @@
   background-color: #fff;
   margin-bottom: 20rpx;
   break-inside: avoid;
+  overflow: hidden;
 }
 .item image.thumb {
   height: 210rpx!important;

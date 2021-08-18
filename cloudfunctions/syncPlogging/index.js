@@ -5,6 +5,11 @@ cloud.init()
 
 // 云函数入口函数
 exports.main = async (event, context) => {
+  const { id } = event;
+  let matched = { raceType: 'X-Plogging' };
+  if(id){
+    matched.raceId = id;
+  }
   const wxContext = cloud.getWXContext()
 
   const db = cloud.database();
@@ -12,9 +17,7 @@ exports.main = async (event, context) => {
   const $ = _.aggregate
   const userTable = db.collection('start-list');
   const res = await userTable.aggregate()
-  .match({
-    raceType: 'X-Plogging'
-  })
+  .match(matched)
   .sort({
     createdAt: -1
   })

@@ -10,7 +10,7 @@ const {
 } = require("../../../api/race");
 const {updateStartListStatus, updateStartListStatusByUser } = require("../../../api/result");
 const { raceResultStatus } = require("../../../config/const");
-const { exportReport } = require("../../../api/user");
+const { exportReport, syncPlogging } = require("../../../api/user");
 const i18n = require("./../../../utils/i18n");
 
 const _t = i18n.i18n.translate();
@@ -219,8 +219,11 @@ Page({
     })
     const that = this;
     const {
-      cateId
+      raceId, cateId, isPlogging
     } = this.data;
+    if(isPlogging){
+      await syncPlogging(raceId);
+    }
     const res = await exportReport(cateId);
     const url = res.fileList[0].tempFileURL;
     const filePath =  wx.env.USER_DATA_PATH + url.substr(url.lastIndexOf('/'));
@@ -270,11 +273,13 @@ Page({
       cateId
     } = this.data;
     let race = null;
+    let isPlogging = false;
     if(raceId){
       race = await getRaceDetail(raceId);
+      isPlogging = race.type === 'X-Plogging';
       this.setData({
         city: race.city || race.title.replace(/.*Plogging\s+(.+?)站/,'$1'),
-        isPlogging: race.type === 'X-Plogging'
+        isPlogging
       });
       wx.setNavigationBarTitle({
         title: race.title,
@@ -301,6 +306,9 @@ Page({
     })
     cates.push(..._cates);
 
+    if(isPlogging){
+      await syncPlogging(raceId);
+    }
     const filter = cateId ? { cateId } : null;
     let users = await getPaginations({
       dbName: 'start-list',

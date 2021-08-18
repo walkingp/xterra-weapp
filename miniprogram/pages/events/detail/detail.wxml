@@ -96,7 +96,7 @@
       </view>
     </view>
     <view class="section content">
-      <van-tabs sticky active="{{ active }}" bind:change="onChange">
+      <van-tabs sticky>
         <block wx:if="{{detail.showContent}}">
           <van-tab name="content" title="{{_t[detail.isPlogging ? '比赛规程' : '活动详情']}}">
             <towxml nodes="{{detail.content}}" />
