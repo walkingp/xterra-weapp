@@ -16,7 +16,6 @@ exports.main = async (event, context) => {
       })
     }
   }).limit(1000).get();
-  debugger
   res.data.forEach(async item => {
     const data = await userTable.doc(item._id).update({
       cardNo: item.cardNo.replace(/\s/g, '')

@@ -221,9 +221,6 @@ Page({
     const {
       raceId, cateId, isPlogging
     } = this.data;
-    if(isPlogging){
-      await syncPlogging(raceId);
-    }
     const res = await exportReport(cateId);
     const url = res.fileList[0].tempFileURL;
     const filePath =  wx.env.USER_DATA_PATH + url.substr(url.lastIndexOf('/'));
@@ -306,24 +303,28 @@ Page({
     })
     cates.push(..._cates);
 
-    if(isPlogging){
-      await syncPlogging(raceId);
-    }
     const filter = cateId ? { cateId } : null;
-    let users = await getPaginations({
-      dbName: 'start-list',
-      filter,
-      orderBy: {
-        createdAt: 'desc'
-      },
-      pageIndex: 1,
-      pageSize: 100
-    });
-    users = users.map(item => {
-      item.birthDate = dayjs(new Date(item.birthDate)).format("YYYY-MM-DD");
-      item.regDate = dayjs(new Date(item.createdAt)).format("YYYY-MM-DD HH:mm:ss");
-      return item;
-    })
+    let users = [];
+    if(!(isPlogging && cateId ===  null)){
+      users = await getPaginations({
+        dbName: 'start-list',
+        filter,
+        orderBy: {
+          createdAt: 'desc'
+        },
+        pageIndex: 1,
+        pageSize: 100
+      });
+      users = users.map(item => {
+        item.birthDate = dayjs(new Date(item.birthDate)).format("YYYY-MM-DD");
+        item.regDate = dayjs(new Date(item.createdAt)).format("YYYY-MM-DD HH:mm:ss");
+        return item;
+      })
+      const cardNos = users.slice().map(item=>item.cardNo);
+      if(isPlogging){
+        await syncPlogging(cardNos);
+      }
+    }
     console.log(users)
 
     this.setData({

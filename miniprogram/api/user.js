@@ -50,13 +50,13 @@ export const updateStartListCert = async (id, certRecheckUrl) => {
   });
 };
 
-export const syncPlogging = async (id) => {
+export const syncPlogging = async (cardNos) => {
   return new Promise((resolve, reject) => {
     try {
       wx.cloud.callFunction({
         name: 'syncPlogging',
         data: {
-          id
+          cardNos
         },
         success(res) {
           resolve(res.result)

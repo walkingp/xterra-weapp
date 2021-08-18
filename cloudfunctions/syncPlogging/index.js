@@ -5,16 +5,16 @@ cloud.init()
 
 // 云函数入口函数
 exports.main = async (event, context) => {
-  const { id } = event;
+  const { cardNos } = event;
   let matched = { raceType: 'X-Plogging' };
-  if(id){
-    matched.raceId = id;
-  }
   const wxContext = cloud.getWXContext()
 
   const db = cloud.database();
   const _ = db.command
   const $ = _.aggregate
+  if(cardNos){
+    matched.cardNo = _.in(cardNos);
+  }
   const userTable = db.collection('start-list');
   const res = await userTable.aggregate()
   .match(matched)
