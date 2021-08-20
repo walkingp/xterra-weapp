@@ -65,6 +65,7 @@ Page({
     bloodTypes: ['O', 'A', 'B', 'AB'],
     birthDate: '未选择',
     isPlogging: false,
+    isDiscovery: false,
 
     minDate: new Date(1920, 1, 1).getTime(),
     maxDate: new Date().getTime(),
@@ -293,7 +294,8 @@ Page({
       raceId,
       action,
       plogging,
-      fields
+      fields,
+      isDiscovery
     } = this.data;
     if (!trueName) {
       wx.showToast({
@@ -330,7 +332,7 @@ Page({
       })
       return;
     }
-    if (!email) {
+    if (!email && !isDiscovery) {
       wx.showToast({
         title: '邮箱不可为空',
         icon: 'none'
@@ -582,7 +584,9 @@ Page({
         const raceDetail = await getRaceDetail(raceId);
 
         const isPlogging = raceDetail.type === 'X-Plogging';
+        const isDiscovery = raceDetail.type === 'X-Discovery';
         this.setData({
+          isDiscovery,
           isPlogging
         });
       }

@@ -103,6 +103,9 @@ Page({
       });
       return;
     }
+    this.setData({
+      btnDisabled: true
+    });
     //上传图片到云存储
     wx.showLoading({
       title: t['上传中'],

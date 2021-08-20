@@ -58,6 +58,8 @@ Page({
 
     console.log(detail);
     detail.isPlogging = detail.type === 'X-Plogging';
+    detail.isDiscovery = detail.type === 'X-Discovery';
+    detail.isRace = !detail.isPlogging && !detail.isDiscovery;
     detail.cates = detail.catesName ? detail.catesName.join('/') : '/';
     detail.isEnded = dayjs(new Date(detail.raceDate)).isBefore(dayjs());// 是否截止
     detail.raceDate = dayjs(new Date(detail.raceDate)).format("YYYY年MM月DD日");

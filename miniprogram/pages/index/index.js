@@ -140,17 +140,17 @@ Page({
       title: _t['加载中…'],
     });
     const banners = await getBannerList();
-    const news = await getNewsIndexList();
-    news.map(item => {
-      item.formatDate = dayjs(new Date(item.postTime)).format("MM月DD日");
-      return item;
-    });
+    // const news = await getNewsIndexList();
+    // news.map(item => {
+    //   item.formatDate = dayjs(new Date(item.postTime)).format("MM月DD日");
+    //   return item;
+    // });
     
     const citys = await getCityList();
     this.setData({
       loading: false,
       //races,
-      news,
+      // news,
       citys,
       banners
     }, () => {
@@ -317,7 +317,7 @@ Page({
   onLoad: async function (options) {
     await this.fetch();
     this.watchChanges('banner');
-    this.watchChanges('news');
+    // this.watchChanges('news');
     this.setData({
       headerBarHeight: app.globalData.headerBarHeight
     }, () =>{

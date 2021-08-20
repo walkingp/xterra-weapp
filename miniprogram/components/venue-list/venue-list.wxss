@@ -1,4 +1,7 @@
 @import "./../../style/mi.flex.wxss";
+.venues {
+  padding-bottom: 100rpx;
+}
 .venues .title{
   font-size: 35rpx;
   color: #313030;
@@ -22,7 +25,6 @@
   height: 680rpx;
 }
 .venues .left, .venues .right{
-  height: 100%;
   width: 75rpx;
   display: flex;
   align-items: center;

@@ -23,19 +23,19 @@
         border="{{ false }}" />
       <van-cell value="{{ birthDate }}" required name="birthDate" is-link bind:click="showDate" label="{{_t['出生日期']}}"
         border="{{ false }}" />
-      <van-field value="{{ email }}" required name="email" label="{{_t['邮箱']}}" placeholder="{{_t['请输入邮箱，用于接收报名邮件']}}"
+      <van-field value="{{ email }}" required="{{!isDiscovery}}" name="email" label="{{_t['邮箱']}}" placeholder="{{_t['请输入邮箱，用于接收报名邮件']}}"
         border="{{ false }}" />
       <van-field value="{{ club }}" wx:if="{{!isPlogging}}" name="club" label="{{_t['所属俱乐部']}}" placeholder="{{_t['请输入俱乐部名称']}}"
         border="{{ false }}" />
     </van-cell-group>
     <van-cell-group title="{{_t['其他信息']}}">
-      <van-cell title="{{_t['血型']}}" wx:if="{{!isPlogging}}" required name="bloodType" border="{{ false }}" is-link
+      <van-cell title="{{_t['血型']}}" wx:if="{{!isPlogging}}" required="{{!isDiscovery}}" name="bloodType" border="{{ false }}" is-link
         value="{{bloodType}}" bind:click="showPicker" data-type="blood" />
-      <van-cell title="{{_t['衣服尺码']}}" wx:if="{{!isPlogging}}" required name="tSize" border="{{ false }}" is-link
+      <van-cell title="{{_t['衣服尺码']}}" wx:if="{{!isPlogging}}" required="{{!isDiscovery}}" name="tSize" border="{{ false }}" is-link
         value="{{tSize}}" bind:click="showPicker" data-type="tsize" />
-      <van-cell title="{{_t['住址所属地区']}}" required name="region" is-link border="{{ false }}" value="{{region}}"
+      <van-cell title="{{_t['住址所属地区']}}" required="{{!isDiscovery}}" name="region" is-link border="{{ false }}" value="{{region}}"
         bind:click="showAddr" />
-      <van-field value="{{ addr }}" required name="addr" label="{{_t['家庭住址']}}" placeholder="{{_t['如：xx路xx号xx室']}}" border="{{ false }}"
+      <van-field value="{{ addr }}" required="{{!isDiscovery}}" name="addr" label="{{_t['家庭住址']}}" placeholder="{{_t['如：xx路xx号xx室']}}" border="{{ false }}"
         use-button-slot>
         <van-button slot="button" bind:click="selectAddr" size="small" type="primary">{{_t['使用微信地址']}}</van-button>
       </van-field>
@@ -43,11 +43,11 @@
     <van-cell-group title="{{_t['紧急联系人信息']}}">
       <van-field value="{{ contactUser }}" bind:change="onChange" required name="contactUser" label="{{_t['姓名']}}"
         placeholder="{{_t['请输入真实姓名']}}" border="{{ false }}" bind:change="onChange" />
-      <van-field value="{{ contactUserPhone }}" required name="contactUserPhone" label="{{_t['手机号']}}" placeholder="{{_t['请输入11位手机号']}}"
+      <van-field value="{{ contactUserPhone }}" required="{{!isDiscovery}}" name="contactUserPhone" label="{{_t['手机号']}}" placeholder="{{_t['请输入11位手机号']}}"
         border="{{ false }}" />
     </van-cell-group>
     <van-cell-group title="{{_t['相关信息']}}" wx:if="{{isPlogging}}">
-      <van-cell title="{{_t['是否参加过X-Plogging']}}" required name="plogging" border="{{ false }}" is-link="{{!isPlogged}}"
+      <van-cell title="{{_t['是否参加过X-Plogging']}}" required="{{!isDiscovery}}" name="plogging" border="{{ false }}" is-link="{{!isPlogged}}"
         value="{{plogging}}" bind:click="showPicker" data-type="plogging" />
     </van-cell-group>
     <van-cell-group title="{{_t['完赛资质']}}" wx:if="{{cateDetail.isCheckCert || hasCert}}">

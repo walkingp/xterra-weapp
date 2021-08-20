@@ -79,6 +79,7 @@
     "place-list": "/components/place-list/place-list",
     "place-event-list": "/components/place-event-list/place-event-list",
     "news-list": "/components/news-list/news-list",
+    "index-news": "/components/index-news/index-news",
     "race-list": "/components/race-list/race-list",
     "feed-list": "/components/feed-list/feed-list",
     "reg-list": "/components/reg-list/reg-list",
@@ -157,12 +158,6 @@
         "text": "社区",
         "iconPath": "images/tabs/community.png",
         "selectedIconPath": "images/tabs/community_active.png"
-      },
-      {
-        "pagePath": "pages/news/news",
-        "text": "媒体中心",
-        "iconPath": "images/tabs/news.png",
-        "selectedIconPath": "images/tabs/news_active.png"
       },
       {
         "pagePath": "pages/my/my",
