@@ -126,6 +126,8 @@ export const pointRuleEnum = {
   Kudos: 5,
   Tick: 6,
   CancelKudos: 7,
+  XPlogging: 8,
+  XDiscovery: 9,
   AdminCustom: 99
 };
 // 注意cloudfunctions也需要同步更新
@@ -172,6 +174,18 @@ export const pointRules = [
     id: 7,
     title: '取消点赞',
     point: -2
+  },
+  {
+    id: 8,
+    title: '完成X-Plogging',
+    point: 10,
+    once: false
+  },
+  {
+    id: 9,
+    title: '完成X-Discovery',
+    point: 10,
+    once: false
   },
   {
     id: 99,

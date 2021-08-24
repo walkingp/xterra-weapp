@@ -137,7 +137,7 @@ Page({
                 }
               }).then(res => {
                 console.log("检测结果", res.result);
-                if (res.result.errCode === 0) {
+                if (res.result.errCode === 0 || res.result.errCode === 40006) {
                   reslove();
                 } else {
                   wx.showToast({

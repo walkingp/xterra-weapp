@@ -16,12 +16,11 @@ export const getCommentList = async (pageIndex = 1, pageSize = 10, placeId, orde
   return data;
 }
 
-export const getFeedIndexList = async (pageIndex = 1, pageSize = 10, type = 'feed') => {
+export const getFeedIndexList = async (pageIndex = 1, pageSize = 10) => {
   const data = await getPaginations({
     dbName: 'feed',
     filter: {
-      isActive: true,
-      type
+      isActive: true
     },
     orderBy: {
       addedDate: 'desc'

@@ -12,7 +12,7 @@
         </view>
         <view class="flex-auto text flex column space-betwee info">
           <text>{{_t['类型']}}：{{_t[item.type]}}</text>
-          <text wx:if="{{item.type==='X-Plogging'}}">{{_t['费用']}}：{{_t[item.feeType]}}</text>          
+          <text wx:if="{{item.type==='X-Plogging' || item.type==='X-Discovery'}}">{{_t['费用']}}：{{_t[item.feeType]}}</text>          
           <text wx:else>{{_t['组别']}}：{{item.cates}}</text>
           <text>{{_t['地点']}}：{{item.location}}</text>
           <text>{{_t['时间']}}：{{item.raceDate}}</text>

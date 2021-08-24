@@ -45,6 +45,18 @@ const rules = [
     point: -2
   },
   {
+    id: 8,
+    title: '完成X-Plogging',
+    point: 10,
+    once: false
+  },
+  {
+    id: 9,
+    title: '完成X-Discovery',
+    point: 10,
+    once: false
+  },
+  {
     id: 99,
     title: '管理员手工添加',
     point: 0,
@@ -60,6 +72,8 @@ const pointRuleEnum = {
   Kudos: 5,
   Tick: 6,
   CancelKudos: 7,
+  XPlogging: 8,
+  XDiscovery: 9,
   AdminCustom: 99
 };
 

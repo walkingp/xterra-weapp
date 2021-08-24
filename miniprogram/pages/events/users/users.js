@@ -8,10 +8,11 @@ const {
   getRaceCatesList,
   getAllRaces
 } = require("../../../api/race");
-const {updateStartListStatus, updateStartListStatusByUser } = require("../../../api/result");
-const { raceResultStatus } = require("../../../config/const");
+const { updateStartListStatus, updateStartListStatusByUser } = require("../../../api/result");
+const { raceResultStatus, pointRuleEnum } = require("../../../config/const");
 const { exportReport, syncPlogging } = require("../../../api/user");
 const i18n = require("./../../../utils/i18n");
+const { updatePoints, updatePoint } = require("../../../api/points");
 
 const _t = i18n.i18n.translate();
 // miniprogram/pages/events/users/users.js
@@ -44,7 +45,8 @@ Page({
     value: 20,
     stats: '已报名',
     buttonText: '置为已完成',
-    isPlogging:false
+    isPlogging: false,
+    isDiscovery: false
   },  
   copy(e) {
     const {
@@ -58,14 +60,22 @@ Page({
     wx.showLoading({
       title: '操作中',
     })
-    const { city, detail } = this.data;
-    let { finishedStatus, cardNo, cateId } = detail;
+    const { city, detail, raceId, isDiscovery, isPlogging } = this.data;
+    let { finishedStatus, cardNo, cateId, userId } = detail;
     if(finishedStatus === raceResultStatus.done.value){
       finishedStatus = raceResultStatus.DNS.value;
     }else if(finishedStatus === raceResultStatus.notStart.value || finishedStatus === raceResultStatus.DNS.value){
       finishedStatus = raceResultStatus.done.value;
     }
     const data = await updateStartListStatusByUser({cateId, cardNo, city, finishedStatus});
+    if(isDiscovery || isPlogging){
+      const type = isDiscovery ? pointRuleEnum.XDiscovery : pointRuleEnum.XPlogging;
+      const title = isDiscovery ? '参加X-Discovery' : '参加X-Plogging';
+      await updatePoint(userId, type, {
+        id: raceId,
+        title
+      })
+    }
     this.fetchCates();
     wx.showToast({
       icon: 'success',
@@ -78,9 +88,7 @@ Page({
     })
   },
   setFinished() {
-    const {
-      cateId, city
-    } = this.data;
+    const { city, cateId, raceId, users, isDiscovery, isPlogging } = this.data;
     const that = this;
     wx.showModal({
       title: '提示',
@@ -91,6 +99,16 @@ Page({
             city,
             cateId
           });
+
+          if(isDiscovery || isPlogging){
+            const _userIds = users.map(item=>item._id);
+            const type = isDiscovery ? pointRuleEnum.XDiscovery : pointRuleEnum.XPlogging;
+            const title = isDiscovery ? '参加X-Discovery' : '参加X-Plogging';
+            await updatePoints(_userIds, type, {
+              id: raceId,
+              title
+            })
+          }          
           wx.showToast({
             title: '设置完成',
             success: function(){
@@ -271,12 +289,15 @@ Page({
     } = this.data;
     let race = null;
     let isPlogging = false;
+    let isDiscovery = false;
     if(raceId){
       race = await getRaceDetail(raceId);
       isPlogging = race.type === 'X-Plogging';
+      isDiscovery = race.type === 'X-Discovery';
       this.setData({
         city: race.city || race.title.replace(/.*Plogging\s+(.+?)站/,'$1'),
-        isPlogging
+        isPlogging,
+        isDiscovery
       });
       wx.setNavigationBarTitle({
         title: race.title,

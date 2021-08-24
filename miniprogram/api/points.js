@@ -1,6 +1,21 @@
 
 import { getPaginations } from "../utils/cloud";
 
+export const updatePoints = (userIds, type, extraData) => {
+  return new Promise((resolve, reject) =>{
+    let promises = [];
+    userIds.forEach(userId => {
+      const p = updatePoint(userId, type, extraData);
+      promises.push(p);
+    });
+    Promise.all(promises).then(res=>{
+      resolve(res);
+    }).catch(err =>{
+      reject(err);
+    })
+  });
+};
+
 export const updatePoint = (userId, type, extraData) => {
   return new Promise((resolve, reject) => {
     wx.cloud.callFunction({
