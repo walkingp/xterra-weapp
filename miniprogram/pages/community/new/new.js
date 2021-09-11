@@ -9,6 +9,7 @@ const { pointRuleEnum } = require("../../../config/const");
 const { getCollectionById } = require("../../../utils/cloud");
 const i18n = require("./../../../utils/i18n");
 const t = i18n.i18n.translate();
+const QQMapWX = require('./../../../utils/qqmap-wx-jssdk.min.js');
 // miniprogram/pages/community/new/new.js
 const app = getApp();
 Page({
@@ -31,10 +32,58 @@ Page({
     isDistanceClose: false,
     isChinese: true,
     message: null,
-    validMessage: null
+    validMessage: null,
+    checked: false,
+    places: [],
+    selectedPlace: { title: '所在位置' },
+    showPlaces: false
   },
   regionchange(){
 
+  },
+  selectPlace(e){
+    const { title, address, lat, lng } = e.target.dataset;
+    this.setData({
+      showPlaces: false,
+      selectedPlace: { title, address, lat, lng }
+    })
+  },
+  onPick(e){
+    const that = this;
+    const qqmapsdk = new QQMapWX({
+      key: config.mapKey
+    });
+    wx.getLocation({
+      type: 'wgs84',
+      success: function (res) {
+        const { latitude, longitude } = res;
+        // 调用接口
+        qqmapsdk.reverseGeocoder({
+          sig: config.mapSig, // 必填
+          location: {
+            latitude,
+            longitude
+          },
+          get_poi: 1,
+          success(val) {
+            that.setData({
+                showPlaces: true,
+                places: val.result.pois
+              })
+            // qqmapsdk.search({
+            //   sig: config.mapSig, // 必填
+            //   keyword: '景点',  //搜索关键词
+            //   location,  //设置周边搜索中心点
+            //   success: function (r) { //搜索成功后的回调    
+            //   },
+            //   fail: function(err) {
+            //       console.error(err);
+            //   }
+            // })
+          }
+        });
+      }
+    });
   },
   async bindTextAreaBlur(e){
     const content = e.detail.value;

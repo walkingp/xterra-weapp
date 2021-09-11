@@ -23,6 +23,14 @@
           <view bindtap="uploadPhoto" hidden="{{photolist.length === 9}}" class="item post"></view>
         </view>
       </view>
+      <view class="pick">
+        <van-cell title="{{selectedPlace.title}}" icon="location-o" bind:tap="onPick" is-link />
+      </view>
+      <block wx:if="{{places.length}}">
+        <van-cell-group title="附近地点" wx:if="{{showPlaces}}">
+          <van-cell title="{{item.title}}" data-lat="{{item.location.lat}}" data-lng="{{item.location.lng}}" data-title="{{item.title}}" bindtap="selectPlace" label="{{item.address}}" data-address="{{item.address}}" wx:for="{{places}}" wx:key="id" />
+        </van-cell-group>      
+      </block>
       <view class="desc flex column">
         <text class="title">{{_t['注意事项']}}</text>
         <text>{{_t['1、营造良好社区氛围，请发表积极向上与运动相关的内容；']}}</text>
