@@ -24,6 +24,9 @@
         </swiper-item>
       </block>
     </swiper>
+    <view class="pick" wx:if="{{detail.location}}">
+      <van-cell title="{{detail.location.title}}" border="{{false}}" icon="location-o" bind:tap="showLocation"  is-link />
+    </view>
     <view class="title">{{detail.title}}</view>
     <view class="summary">
       <text selectable="{{true}}">{{detail.content}}</text>

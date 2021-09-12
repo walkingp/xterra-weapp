@@ -9,7 +9,7 @@ const feedTable = db.collection("feed")
 
 // 云函数入口函数
 exports.main = async (event, context) => {
-  const { userId, avatarUrl, content, picUrls, nickName, type = 'feed', placeId = null } = event;
+  const { userId, avatarUrl, content, picUrls, nickName, type = 'feed', placeId = null, location } = event;
 
   try{
     const secRes = await cloud.openapi.security.msgSecCheck({
@@ -22,7 +22,6 @@ exports.main = async (event, context) => {
         msg: secRes.errMsg
       }
     }
-  
     const res = await feedTable.add({
       data: {
         userId,
@@ -36,7 +35,8 @@ exports.main = async (event, context) => {
         isActive: true,
         nickName,
         type,
-        placeId
+        placeId,
+        location
       }
     });
     return {

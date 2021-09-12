@@ -12,6 +12,10 @@ const locale = [
 ];
 
 const locales = {
+  '地址：': 'Location: ',
+  '所在位置': 'Location',
+  '附近地点': 'Nearby locations',
+  '不使用位置': 'Not use location',
   '所属城市': 'City',
   '所属地点': 'Location',
   'X-Discovery': 'X-Discovery',

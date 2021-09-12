@@ -33,9 +33,8 @@ Page({
     isChinese: true,
     message: null,
     validMessage: null,
-    checked: false,
     places: [],
-    selectedPlace: { title: '所在位置' },
+    selectedPlace: { title: t['所在位置'] },
     showPlaces: false
   },
   regionchange(){
@@ -48,7 +47,14 @@ Page({
       selectedPlace: { title, address, lat, lng }
     })
   },
+  clearLocation(){
+    this.setData({
+      showPlaces: false,
+      selectedPlace: { title: t['所在位置'] },
+    });
+  },
   onPick(e){
+    wx.showLoading()
     const that = this;
     const qqmapsdk = new QQMapWX({
       key: config.mapKey
@@ -67,19 +73,10 @@ Page({
           get_poi: 1,
           success(val) {
             that.setData({
-                showPlaces: true,
-                places: val.result.pois
-              })
-            // qqmapsdk.search({
-            //   sig: config.mapSig, // 必填
-            //   keyword: '景点',  //搜索关键词
-            //   location,  //设置周边搜索中心点
-            //   success: function (r) { //搜索成功后的回调    
-            //   },
-            //   fail: function(err) {
-            //       console.error(err);
-            //   }
-            // })
+              showPlaces: true,
+              places: val.result.pois
+            });
+            wx.hideLoading()
           }
         });
       }
@@ -186,7 +183,7 @@ Page({
                 }
               }).then(res => {
                 console.log("检测结果", res.result);
-                if (res.result.errCode === 0 || res.result.errCode === 40006) {
+                if (res.result.errCode === 0 || res.result.errCode === 40006 || res.result.errCode === 40002) {
                   reslove();
                 } else {
                   wx.showToast({
@@ -231,14 +228,15 @@ Page({
       userId,
       userInfo,
       type,
-      placeId
+      placeId,
+      selectedPlace
     } = this.data;
 
     const {
       avatarUrl,
       nickname
     } = userInfo;
-    const res = await addFeed({
+    let data = {
       userId,
       avatarUrl,
       content,
@@ -246,7 +244,11 @@ Page({
       nickName: nickname,
       type,
       placeId
-    });
+    };
+    if(selectedPlace.address && selectedPlace.lat && selectedPlace.lng){
+      data.location = selectedPlace;
+    }
+    const res = await addFeed(data);
     
     // 加分
     await updatePoint(userId, pointRuleEnum.Post, {

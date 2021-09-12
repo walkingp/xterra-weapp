@@ -54,7 +54,8 @@
     "pages/admin/events/my-checkin/my-checkin",
     "pages/admin/users/users",
     "pages/venue/city/city",
-    "pages/venue/detail/detail"
+    "pages/venue/detail/detail",
+    "pages/community/location/location"
   ],
   "window": {
     "backgroundColor": "#ffffff",

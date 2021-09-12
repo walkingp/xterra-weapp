@@ -1,0 +1,19 @@
+.top{
+  padding: 20rpx 20rpx;
+  background-color: #fff;
+  font-size: 24rpx;
+  color: #333;
+}
+.top .title{
+  font-size: 32rpx;
+  font-weight: bold;
+  padding-bottom: 20rpx;
+}
+.top .addr text{
+  color: #576b95;
+}
+.bottom{
+  padding: 20rpx 10rpx;
+  padding: 10rpx;
+  font-size: 24rpx;
+}

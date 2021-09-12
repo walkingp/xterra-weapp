@@ -1,0 +1,13 @@
+<view class="">
+  <view class="top flex column">
+    <text class="title">{{detail.title}}</text>
+    <view class="addr" bindtap="showLocation">{{_t['地址：']}}<text>{{detail.address}}</text> <van-icon color="#576b95" name="location-o" /></view>
+  </view>
+  <view class="bottom">
+    <view class="bar">
+    </view>
+    <view class="feeds">
+      <community-list type="profile" list="{{feeds}}" />    
+    </view>
+  </view>
+</view>

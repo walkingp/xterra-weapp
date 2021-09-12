@@ -1,9 +1,10 @@
 <form bindsubmit="savePhoto">
   <block wx:if="{{type === 'place' && distance}}">
-    <map id="map" show-location="{{true}}" markers="{{markers}}" longitude="{{place.coordinate[0]}}" latitude="{{place.coordinate[1]}}"
-     include-points="{{points}}" subkey="{{mapKey}}" layer-style="2" bindtap="showLocation" bindregionchange="regionchange"></map>  
+    <map id="map" show-location="{{true}}" markers="{{markers}}" longitude="{{place.coordinate[0]}}"
+      latitude="{{place.coordinate[1]}}" include-points="{{points}}" subkey="{{mapKey}}" layer-style="2"
+      bindtap="showLocation" bindregionchange="regionchange"></map>
     <view class="flex align-center justify-center fs-xs info padding-top-lg text-grey" wx:if="{{place.isGpsRequired}}">
-      <van-icon color="#1AAD19" size="20px" name="passed" class="margin-right-md" wx:if="{{isDistanceClose}}" /> 
+      <van-icon color="#1AAD19" size="20px" name="passed" class="margin-right-md" wx:if="{{isDistanceClose}}" />
       <van-icon color="#FF5958" size="20px" name="info-o" class="margin-right-md" wx:else />
       {{message}}
     </view>
@@ -13,7 +14,8 @@
   </block>
   <view class="main flex column">
     <view class="top flex-auto flex column">
-      <textarea name="content" bindblur="bindTextAreaBlur" auto-height placeholder="{{_t['和大家分享你的动态吧']}}" auto-focus></textarea>
+      <textarea name="content" bindblur="bindTextAreaBlur" auto-height placeholder="{{_t['和大家分享你的动态吧']}}"
+        auto-focus></textarea>
       <view class="action">
         <view class='gallery'>
           <view class="item" wx:key="item" wx:for="{{photolist}}">
@@ -24,13 +26,18 @@
         </view>
       </view>
       <view class="pick">
-        <van-cell title="{{selectedPlace.title}}" icon="location-o" bind:tap="onPick" is-link />
+        <van-cell title-style="{{selectedPlace.title === _t['所在位置'] ? '' : 'color: #06ae56;'}}" title="{{selectedPlace.title}}" icon="location-o" bind:tap="onPick" is-link />
       </view>
-      <block wx:if="{{places.length}}">
-        <van-cell-group title="附近地点" wx:if="{{showPlaces}}">
-          <van-cell title="{{item.title}}" data-lat="{{item.location.lat}}" data-lng="{{item.location.lng}}" data-title="{{item.title}}" bindtap="selectPlace" label="{{item.address}}" data-address="{{item.address}}" wx:for="{{places}}" wx:key="id" />
-        </van-cell-group>      
-      </block>
+      <van-popup show="{{ showPlaces }}" closeable position="bottom" custom-style="padding-bottom: constant(safe-area-inset-bottom); padding-bottom: env(safe-area-inset-bottom);" bind:close="onClose">
+        <van-cell-group title="{{_t['附近地点']}}" wx:if="{{showPlaces}}">
+          <block wx:if="{{selectedPlace}}">
+            <van-cell title="{{_t['不使用位置']}}" bindtap="clearLocation"></van-cell>
+          </block>
+          <van-cell title="{{item.title}}" data-lat="{{item.location.lat}}" data-lng="{{item.location.lng}}"
+            data-title="{{item.title}}" bindtap="selectPlace" label="{{item.address}}" data-address="{{item.address}}"
+            wx:for="{{places}}" wx:key="id" />
+        </van-cell-group>
+      </van-popup>
       <view class="desc flex column">
         <text class="title">{{_t['注意事项']}}</text>
         <text>{{_t['1、营造良好社区氛围，请发表积极向上与运动相关的内容；']}}</text>

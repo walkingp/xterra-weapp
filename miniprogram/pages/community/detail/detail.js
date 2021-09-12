@@ -28,6 +28,12 @@ Page({
       kudosVisible: true
     })
   },
+  showLocation(e){
+    const { id } = this.data;
+    wx.navigateTo({
+      url: '/pages/community/location/location?id=' + id,
+    })
+  },
   onClose(){
     this.setData({
       kudosVisible: false
