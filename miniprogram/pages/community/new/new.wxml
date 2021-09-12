@@ -18,14 +18,14 @@
         auto-focus></textarea>
       <view class="action">
         <view class='gallery'>
-          <view class="item" wx:key="item" wx:for="{{photolist}}">
+          <view class="item" wx:key="item" wx:for="{{videoCoverUrls.length ? videoCoverUrls : photolist}}">
             <image bindtap='showDetail' data-url="{{item}}" src='{{item}}' mode='aspectFill'></image>
             <view bindtap='delPhoto' data-id='{{index}}' class='del'></view>
           </view>
           <view bindtap="uploadPhoto" hidden="{{photolist.length === 9}}" class="item post"></view>
         </view>
       </view>
-      <view class="pick">
+      <view class="pick margin-bottom-md">
         <van-cell title-style="{{selectedPlace.title === _t['所在位置'] ? '' : 'color: #06ae56;'}}" title="{{selectedPlace.title}}" icon="location-o" bind:tap="onPick" is-link />
       </view>
       <van-popup show="{{ showPlaces }}" closeable position="bottom" custom-style="padding-bottom: constant(safe-area-inset-bottom); padding-bottom: env(safe-area-inset-bottom);" bind:close="onClose">

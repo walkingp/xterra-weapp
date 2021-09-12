@@ -86,11 +86,11 @@ export const getKudosFeedsByUserId = async (userId, pageIndex = 1, pageSize = 10
     });
   });
 }
-export const addFeed = ({ userId, avatarUrl, content, picUrls, nickName, type, placeId, location }) => {
+export const addFeed = ({ userId, avatarUrl, content, picUrls, coverUrls, nickName, type, placeId, location }) => {
   return new Promise((resolve, reject) => {
     wx.cloud.callFunction({
       name: 'postIng',
-      data: { userId, avatarUrl, content, picUrls, nickName, type, placeId, location },
+      data: { userId, avatarUrl, content, picUrls, nickName, type, placeId, location, coverUrls },
       success: res => {
         resolve(res)
       },

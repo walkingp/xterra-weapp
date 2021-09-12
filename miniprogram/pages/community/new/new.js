@@ -25,6 +25,7 @@ Page({
     userId: null,
     userInfo: null,
     photolist: [],
+    videoCoverUrls: [],
     btnDisabled: false,
     type: null,
     placeId: null,
@@ -101,27 +102,33 @@ Page({
     }
   },
   delPhoto(e) {
-    const {photolist} = this.data;
+    const {photolist, videoCoverUrls} = this.data;
+
     if (photolist.length) {
       const id = e.currentTarget.dataset.id;
       photolist.splice(id, 1);
+      videoCoverUrls.splice(id, 1);
       this.setData({
-        photolist
+        photolist,videoCoverUrls
       })
     }
   },
   uploadPhoto() {
     var that = this;
     // 选择图片
-    wx.chooseImage({
+    wx.chooseMedia({
       count: 9,
+      mediaType: ['image','video'],
       sizeType: ['compressed'],
       sourceType: ['album', 'camera'],
       success: function (res) {
-        const filePath = res.tempFilePaths
+        const filePath = res.tempFiles.map(item=>item.tempFilePath);
+        //const fileType = 
+        const videoCoverUrls = that.data.videoCoverUrls.concat(res.tempFiles.filter(item=>item.fileType === 'video').map(item=>item.thumbTempFilePath));
         const photolist = that.data.photolist.concat(filePath);
         console.log(photolist);
         that.setData({
+          videoCoverUrls,
           photolist
         });
       }
@@ -159,7 +166,7 @@ Page({
     let promiseArr = [];
     const that = this;
     let {
-      photolist
+      photolist, videoCoverUrls
     } = this.data;
     for (let i = 0; i < photolist.length; i++) {
       promiseArr.push(new Promise((reslove, reject) => {
@@ -169,6 +176,16 @@ Page({
         }
         let suffix = /\.\w+$/.exec(item)[0]; //正则表达式返回文件的扩展名
         const folder = dayjs().format("YYYYMMDD");
+        if(videoCoverUrls[i]){
+          const _suffix = /\.\w+$/.exec(videoCoverUrls[i])[0];
+          wx.cloud.uploadFile({
+            cloudPath: `upload/post/${folder}/${new Date().getTime()}${_suffix}`,
+            filePath: videoCoverUrls[i], // 小程序临时文件路径
+            success: res => {
+              videoCoverUrls[i] = res.fileID;
+            }
+          });
+        }
         wx.cloud.uploadFile({
           cloudPath: `upload/post/${folder}/${new Date().getTime()}${suffix}`,
           filePath: item, // 小程序临时文件路径
@@ -208,7 +225,7 @@ Page({
     }
     Promise.all(promiseArr).then(async res => {
       this.setData({
-        photolist
+        photolist, videoCoverUrls
       })
       await that.saveDB(content);
       wx.showToast({
@@ -225,6 +242,7 @@ Page({
   async saveDB(content) {
     const {
       photolist,
+      videoCoverUrls,
       userId,
       userInfo,
       type,
@@ -245,6 +263,9 @@ Page({
       type,
       placeId
     };
+    if(videoCoverUrls.length) {
+      data = { ...data, coverUrls: videoCoverUrls };
+    }
     if(selectedPlace.address && selectedPlace.lat && selectedPlace.lng){
       data.location = selectedPlace;
     }
