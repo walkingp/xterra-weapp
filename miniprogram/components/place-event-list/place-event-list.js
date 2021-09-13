@@ -1,114 +1,94 @@
-<<<<<<< HEAD
 const i18n = require("./../../utils/i18n");
-=======
-// components/place-event-list/place-event-list.js
->>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
 const app = getApp();
 Component({
   /**
    * 组件的属性列表
    */
   properties: {
-
     list: {
-      type: Array
-    }
-  },
-
-<<<<<<< HEAD
-  pageLifetimes: {
-    show: function() {
-      this.setData({
-        _t: i18n.i18n.translate()
-      })
+      type: Array,
     },
   },
-=======
->>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
+
+  pageLifetimes: {
+    show: function () {
+      this.setData({
+        _t: i18n.i18n.translate(),
+      });
+    },
+  },
   /**
    * 组件的初始数据
    */
   data: {
-<<<<<<< HEAD
     current: 0,
     show: false,
-    content: null
+    content: null,
   },
   lifetimes: {
-    attached(){
+    attached() {
       let { list } = this.properties;
-      list.map(item => {
+      list.map((item) => {
         item._title = i18n.i18n.getLang() ? item.title : item.titleEn;
         item._desc = i18n.i18n.getLang() ? item.desc : item.descEn;
         return item;
-      })
+      });
       this.setData({
         _t: i18n.i18n.translate(),
         _c: i18n.i18n.getLang(),
-        list
-      })
-    }
+        list,
+      });
+    },
   },
-=======
-    show: false,
-    content: null
-  },
->>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
 
   /**
    * 组件的方法列表
    */
   methods: {
-<<<<<<< HEAD
-    prev(){
+    prev() {
       let { current, list } = this.data;
-      if(current === 0){
+      if (current === 0) {
         current = list.length - 1;
-      }else{
+      } else {
         --current;
       }
       this.setData({
-        current
+        current,
       });
     },
-    next(){
+    next() {
       let { current, list } = this.data;
-      if(current === list.length - 1){
+      if (current === list.length - 1) {
         current = 0;
-      }else{
+      } else {
         ++current;
       }
       this.setData({
-        current
+        current,
       });
     },
-=======
->>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
-    hideContent(){
+    hideContent() {
       this.setData({
-        show: false
-      })
+        show: false,
+      });
     },
-<<<<<<< HEAD
-    
-    redirect(e){
+
+    redirect(e) {
       const { url } = e.currentTarget.dataset;
       wx.navigateTo({
-        url
-      })
+        url,
+      });
     },
-=======
->>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
-    showContent(e){
+    showContent(e) {
       const { id } = e.currentTarget.dataset;
       const { list } = this.properties;
-      const current = list.find(item=>item._id === id);
-      if(current){
+      const current = list.find((item) => item._id === id);
+      if (current) {
         this.setData({
-          content: app.towxml(current.content, 'html'),
-          show: true
-        })
+          content: app.towxml(current.content, "html"),
+          show: true,
+        });
       }
-    }
-  }
-})
+    },
+  },
+});

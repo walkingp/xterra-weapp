@@ -3,22 +3,16 @@
     <image mode="heightFix" src="./../../images/tabs/logo-dark.png"></image>
   </view>
   <view class="swiper" style="margin-top:{{headerBarHeight}}px;">
-    <swiper class="{{banners.length === 1 ? 'disabled' : ''}}" bindchange="swiperChange" indicator-dots="{{false}}"
-      autoplay="{{true}}">
+    <swiper class="{{banners.length === 1 ? 'disabled' : ''}}" bindchange="swiperChange" indicator-dots="{{false}}" autoplay="{{true}}">
       <block wx:for="{{banners}}" wx:key="_id">
         <swiper-item>
           <view class="swiper-item">
-<<<<<<< HEAD
             <van-image width="100%" height="100%" use-loading-slot lazy-load="{{true}}" src="{{item.picUrl}}" fit="cover">
               <van-loading slot="loading" type="spinner" size="20" vertical />
             </van-image>
-            <button bindtap="tap" data-src="{{item.picUrl}}" data-url="{{item.redirectUrl}}" data-type="{{item.type}}"
-              class="button">{{item.buttonText === 'detail' ? _t['查看详情'] : _t['立即报名']}}</button>
-=======
-            <image class="cover" src="{{item.picUrl}}" mode="aspectFill"></image>
-            <button bindtap="tap" data-src="{{item.picUrl}}" data-url="{{item.redirectUrl}}" data-type="{{item.type}}"
-              class="button">查看详情</button>
->>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
+            <button bindtap="tap" data-src="{{item.picUrl}}" data-url="{{item.redirectUrl}}" data-type="{{item.type}}" class="button">
+              {{item.buttonText === 'detail' ? _t['查看详情'] : _t['立即报名']}}
+            </button>
           </view>
         </swiper-item>
       </block>
@@ -30,46 +24,21 @@
     </view>
   </view>
   <view class="city flex column align-center">
-<<<<<<< HEAD
     <image mode="widthFix" src="{{currentCity.coverUrl}}"></image>
-    <text user-select="{{true}}" class="en {{ fontLoaded ? 'impact' : '' }}">{{currentCity.cityEn}}</text>
+    <text user-select="{{true}}" class="en {{ fontLoaded ? 'impact' : '' }}">
+      {{currentCity.cityEn}}
+    </text>
     <text class="cn">{{currentCity.cityCN}}</text>
     <view class="desc flex column align-center">
       <text user-select="{{true}}">{{isChinese ? currentCity.desc : currentCity.descEn}}</text>
       <text user-select="{{true}}">{{_t['拥有打卡点：']}} {{places.length}}</text>
     </view>
-    <button bindtap="redirect" data-url="/pages/venue/city/city" class="button">{{_t['切换城市']}}</button>
+    <button bindtap="redirect" data-url="/pages/venue/city/city" class="button">
+      {{_t['切换城市']}}
+    </button>
   </view>
   <block wx:if="{{places.length}}">
     <venue-list list="{{places}}" />
   </block>
   <index-news news="{{news}}" />
-=======
-    <image mode="widthFix" src="https://7874-xterra-c2969f-1258173660.tcb.qcloud.la/cloudbase-cms/upload/2021-07-12/h1zmp98w7vi6u0jdo5z1rdd1es615w6u_.png"></image>
-    <text class="en">{{currentCity.cityEn}}</text>
-    <text class="cn">{{currentCity.cityCN}}</text>
-    <view class="desc flex column align-center">
-      <text selectable="{{true}}">{{currentCity.desc}}</text>
-      <text selectable="{{true}}">拥有打卡点{{places.length}}个</text>
-    </view>
-    <button bindtap="redirect" data-url="/pages/venue/city/city" class="button">切换城市</button>
-  </view>
-  <venue-list list="{{places}}" />
-  <view class="news">
-      <view class="title">新闻动态</view>
-      <view bindtap="redirect" data-wechaturl="{{news[0].wechatUrl}}"
-        data-url="/pages/news/detail/detail?id={{news[0]._id}}" class="cover item">
-        <image src="{{news[0].coverUrl}}" mode="aspectFill" />
-        <view class="desc overflow-2">{{news[0].title}}</view>
-      </view>
-      <view class="list">
-        <view bindtap="redirect" data-wechaturl="{{item.wechatUrl}}"
-          data-url="/pages/news/detail/detail?id={{item._id}}" class="item" wx:for="{{news}}" wx:if="{{index>0}}"
-          wx:key="_id">
-          <image src="{{item.coverUrl}}" mode="aspectFill"></image>
-          <view class="desc overflow-2">{{item.title}}</view>
-        </view>
-      </view>
-  </view>
->>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
 </view>

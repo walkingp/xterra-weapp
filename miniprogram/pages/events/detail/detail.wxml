@@ -4,7 +4,9 @@
       <banner-list list="{{detail.picUrls}}"></banner-list>
       <view class="flex space-between align-center header">
         <text selectable="{{true}}" user-select="true" class="title">{{detail.title}}</text>
-        <text wx:if="{{detail.isRace}}" class="status" style="background-color:{{detail.status.bgColor}}; color: {{detail.status.textColor}};">{{detail.status.text}}</text>
+        <text wx:if="{{detail.isRace}}" class="status" style="background-color:{{detail.status.bgColor}}; color: {{detail.status.textColor}};">
+          {{detail.status.text}}
+        </text>
       </view>
       <view class="info">
         <view class="cells">
@@ -22,7 +24,9 @@
           </view>
           <view class="cell" wx:if="{{detail.placeId}}">
             <text>{{_t['所属地点']}}：</text>
-            <navigator url="/pages/venue/detail/detail?id={{detail.placeId}}" class="text link">{{cityName}}</navigator>            
+            <navigator url="/pages/venue/detail/detail?id={{detail.placeId}}" class="text link">
+              {{cityName}}
+            </navigator>
           </view>
           <view class="cell" wx:if="{{detail.cates!=='/'}}">
             <text>{{_t[type + '组别']}}：</text>
@@ -46,8 +50,7 @@
         <text>{{_t[type]}}{{_t['地点']}}</text>
       </view>
       <view class="map">
-        <map id="map" markers="{{markers}}" longitude="{{detail.coordinate[0]}}" latitude="{{detail.coordinate[1]}}"
-          scale="11" subkey="{{mapKey}}" layer-style="2" bindtap="showLocation" bindregionchange="regionchange"></map>
+        <map id="map" markers="{{markers}}" longitude="{{detail.coordinate[0]}}" latitude="{{detail.coordinate[1]}}" scale="11" subkey="{{mapKey}}" layer-style="2" bindtap="showLocation" bindregionchange="regionchange"></map>
       </view>
       <view selectable="{{true}}" bindtap="showLocation" class="text">{{detail.location}}</view>
     </view>
@@ -71,9 +74,7 @@
           <news-list list="{{news}}" type="list" />
         </block>
         <block wx:else>
-          <view class="empty">
-            {{_t['暂无新闻']}}
-          </view>
+          <view class="empty">{{_t['暂无新闻']}}</view>
         </block>
       </view>
       <view bindtap="loadMoreNews" class="ft flex align-center justify-center" wx:if="{{news.length && hasMoreData}}">
@@ -100,19 +101,8 @@
         <block wx:for="{{detail.tabs}}" wx:key="key">
           <van-tab title="{{item.title}}">
             <towxml nodes="{{item.nodes}}" />
-          </van-tab>      
+          </van-tab>
         </block>
-<<<<<<< HEAD
-=======
-        <block wx:if="{{detail.showAdminssion}}">
-          <van-tab name="admission" title="报名须知">
-            <towxml nodes="{{detail.admission}}" />
-          </van-tab> 
-        </block>
-        <van-tab name="flow" title="{{type}}流程" wx:if="{{detail.showFlow}}">
-          <towxml nodes="{{detail.flow}}" />
-        </van-tab>
->>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
       </van-tabs>
     </view>
   </view>

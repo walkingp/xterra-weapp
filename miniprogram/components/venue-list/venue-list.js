@@ -1,7 +1,4 @@
-<<<<<<< HEAD
 const i18n = require("./../../utils/i18n");
-=======
->>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
 // components/venue-list/venue-list.js
 Component({
   /**
@@ -9,62 +6,55 @@ Component({
    */
   properties: {
     list: {
-      type: Array
-    }
+      type: Array,
+    },
   },
 
   /**
    * 组件的初始数据
    */
   data: {
-<<<<<<< HEAD
-    current: 0
+    current: 0,
   },
   pageLifetimes: {
-    show: function() {
+    show: function () {
       this.setData({
-        _t: i18n.i18n.translate()
-      })
+        _t: i18n.i18n.translate(),
+      });
     },
-=======
-
->>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
   },
 
   /**
    * 组件的方法列表
    */
   methods: {
-<<<<<<< HEAD
-    prev(){
+    prev() {
       let { current, list } = this.data;
-      if(current === 0){
+      if (current === 0) {
         current = list.length - 1;
-      }else{
+      } else {
         --current;
       }
       this.setData({
-        current
+        current,
       });
     },
-    next(){
+    next() {
       let { current, list } = this.data;
-      if(current === list.length - 1){
+      if (current === list.length - 1) {
         current = 0;
-      }else{
+      } else {
         ++current;
       }
       this.setData({
-        current
+        current,
       });
     },
-=======
->>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
-    redirect(e){
+    redirect(e) {
       const { url } = e.currentTarget.dataset;
       wx.navigateTo({
         url,
-      })
+      });
     },
-  }
-})
+  },
+});

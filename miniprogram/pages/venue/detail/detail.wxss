@@ -1,11 +1,7 @@
-.banner{
-<<<<<<< HEAD
-  height: 460rpx;  
-=======
-  height: 360rpx;  
->>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
+.banner {
+  height: 460rpx;
 }
-.banner image{
+.banner image {
   height: 100%;
   width: 100%;
 }
@@ -14,74 +10,59 @@
   font-size: 36rpx;
   font-weight: bold;
   letter-spacing: 4rpx;
-<<<<<<< HEAD
   padding: 40rpx 20rpx 20rpx 20rpx;
-=======
-  padding: 60rpx 20rpx 20rpx 20rpx;
->>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
 }
-.desc{
+.desc {
   background-color: #fff;
   font-size: 28rpx;
   color: #313030;
   line-height: 25rpx;
   padding: 20rpx;
 }
-.desc text{
-  border-left: #A42736 solid 8rpx;
+.desc text {
+  border-left: #a42736 solid 8rpx;
   padding-left: 20rpx;
-<<<<<<< HEAD
   line-height: 1.5;
   color: #999;
-=======
->>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
 }
-.map{
+.map {
   background-color: #fff;
   padding: 20rpx;
 }
-map{
+map {
   width: 100%;
   margin-bottom: 20rpx;
 }
-.title{
+.title {
   font-size: 32rpx;
   font-weight: bold;
   letter-spacing: 4rpx;
   text-align: center;
 }
-.photos{
+.photos {
   background-color: #fff;
   padding: 60rpx 40rpx;
 }
-image.medal{
+image.medal {
   width: 400rpx;
   height: 400rpx;
 }
-.photos .grid{
+.photos .grid {
   display: grid;
-<<<<<<< HEAD
   grid-template-columns: repeat(2, 1fr);
-=======
-  grid-template-columns: repeat(3, 1fr);
->>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
   grid-row-gap: 20rpx;
   grid-column-gap: 20rpx;
   padding: 20rpx 0;
 }
-.photos .grid image{
+.photos .grid image {
   width: 100%;
-<<<<<<< HEAD
   height: 210rpx;
-=======
-  height: 150rpx;
->>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
 }
 
-.more button.button{
+.more button.button {
   width: 340rpx;
 }
-button.button{
+button.button {
   border: solid 4rpx #313030;
   color: #313030;
   border-radius: 0;
@@ -92,23 +73,23 @@ button.button{
   padding-top: 10rpx;
 }
 
-.bar{
+.bar {
   position: fixed;
   right: 50rpx;
   bottom: 60rpx;
 }
-.bar van-icon{
+.bar van-icon {
   padding: 10rpx;
   background-color: #fff;
   border-radius: 50%;
-  box-shadow: 0 0 10rpx rgba(0,0,0,.2);
-  border: solid 4rpx rgba(0,0,0,.2);
+  box-shadow: 0 0 10rpx rgba(0, 0, 0, 0.2);
+  border: solid 4rpx rgba(0, 0, 0, 0.2);
 }
-.bar van-icon.btnNew{
+.bar van-icon.btnNew {
   background-color: #dc3545;
   border: solid 4rpx #dc3545;
 }
-.line{
+.line {
   width: 54rpx;
   height: 6rpx;
   background-color: #dc3545;
@@ -116,11 +97,11 @@ button.button{
   left: 50%;
   transform: translateX(-50%);
 }
-.feeds .title{
+.feeds .title {
   padding-top: 8rpx;
 }
 
-.modal{
+.modal {
   z-index: 9;
   position: fixed;
   top: 20%;
@@ -129,11 +110,11 @@ button.button{
   height: 600rpx;
   right: 50rpx;
   background-color: #fff;
-  box-shadow: 0 0 20rpx rgba(0,0,0,.1);
+  box-shadow: 0 0 20rpx rgba(0, 0, 0, 0.1);
   padding: 50rpx;
 }
-.mask{
-  background-color: rgba(0,0,0,.2);
+.mask {
+  background-color: rgba(0, 0, 0, 0.2);
   position: fixed;
   left: 0;
   right: 0;
@@ -141,25 +122,22 @@ button.button{
   bottom: 0;
   z-index: 8;
 }
-.cnt{
+.cnt {
   background-color: #fff;
 }
-.content{
+.content {
   overflow: auto;
-<<<<<<< HEAD
 }
-.filter{
+.filter {
   padding: 0 20rpx;
   font-size: 24rpx;
   color: #777;
 }
-.filter van-icon{
+.filter van-icon {
   margin-left: 20rpx;
   padding-right: 8rpx;
 }
 
-.filter .current{
+.filter .current {
   font-weight: bold;
-=======
->>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
 }

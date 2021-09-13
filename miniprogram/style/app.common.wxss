@@ -1,4 +1,4 @@
-.status{
+.status {
   padding: 0 20rpx;
   height: 40rpx;
   border-radius: 20rpx;
@@ -9,39 +9,39 @@
   font-size: 22rpx;
   white-space: nowrap;
 }
-.status.ing{
-  background-color: #FF6D02;
+.status.ing {
+  background-color: #ff6d02;
 }
-.avatar{
+.avatar {
   width: 74rpx;
   height: 74rpx;
-  border: solid 2rpx #E1DDDD;
+  border: solid 2rpx #e1dddd;
   border-radius: 50%;
 }
-.box{
-  border-radius: 10rpx;  
+.box {
+  border-radius: 10rpx;
   background: #fff;
   padding: 30rpx;
 }
-.box+.box{
+.box + .box {
   margin-top: 20rpx;
 }
-.box .hd{
+.box .hd {
   font-weight: bold;
 }
-.box .desc{
+.box .desc {
   color: #999;
   font-size: 24rpx;
 }
-.section{
+.section {
   background-color: #fff;
   padding: 30rpx;
   margin-bottom: 18rpx;
 }
-.section:last-child{
+.section:last-child {
   margin-bottom: 0;
 }
-.section .hd{
+.section .hd {
   font-size: 30rpx;
   font-weight: bold;
   color: #333;
@@ -49,73 +49,69 @@
   align-items: center;
   justify-content: space-between;
 }
-.section .hd.pb{
+.section .hd.pb {
   padding-bottom: 20rpx;
 }
-.section .ft{
+.section .ft {
   font-size: 22rpx;
   color: #999;
   padding-top: 20rpx;
 }
-.section .ft van-icon{
+.section .ft van-icon {
   margin-left: 10rpx;
 }
-.hd navigator{
+.hd navigator {
   color: #999;
   font-size: 26rpx;
   font-weight: normal;
 }
-.icon.mini{
+.icon.mini {
   width: 35rpx;
   height: 35rpx;
 }
-.sticky{
+.sticky {
   position: sticky;
 }
-button.button{
-<<<<<<< HEAD
+button.button {
   border: solid 2rpx #313030;
-=======
-  border: solid 4rpx #313030;
->>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
   height: 72rpx;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 30rpx!important;
+  padding: 0 30rpx !important;
   background-color: #fff;
   border-radius: 0rpx;
   color: #313030;
   font-size: 30rpx;
   letter-spacing: 4rpx;
 }
-button.button.button-hover{
+button.button.button-hover {
   background-color: transparent;
   font-weight: bold;
-  color: #DF1042;
+  color: #df1042;
 }
-button.button.primary{
-  background-color: #DF1042!important;
+button.button.primary {
+  background-color: #df1042 !important;
   color: #fff;
 }
-button.button.secondary{
+button.button.secondary {
   border: solid 2rpx #666;
   color: #666;
 }
-button.button.mini{
+button.button.mini {
   height: 60rpx;
   font-size: 26rpx;
 }
-button.button[disabled]{
-  background-color: #d6d6d6!important;
-  color: #fff!important;
-  border-color: #d6d6d6!important;
+button.button[disabled] {
+  background-color: #d6d6d6 !important;
+  color: #fff !important;
+  border-color: #d6d6d6 !important;
 }
-.impact{
-  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+.impact {
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
 }
 
 @font-face {
-  font-family: 'Impact';
-  src: url("https://xterra.club/fonts/Impact.ttf")
+  font-family: "Impact";
+  src: url("https://xterra.club/fonts/Impact.ttf");
 }

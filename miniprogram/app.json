@@ -54,12 +54,8 @@
     "pages/admin/events/my-checkin/my-checkin",
     "pages/admin/users/users",
     "pages/venue/city/city",
-<<<<<<< HEAD
     "pages/venue/detail/detail",
     "pages/community/location/location"
-=======
-    "pages/venue/detail/detail"
->>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
   ],
   "window": {
     "backgroundColor": "#ffffff",
@@ -81,10 +77,7 @@
     "community-list": "/components/community-list/community-list",
     "coupon-list": "/components/coupon-list/coupon-list",
     "venue-list": "/components/venue-list/venue-list",
-<<<<<<< HEAD
     "place-list": "/components/place-list/place-list",
-=======
->>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
     "place-event-list": "/components/place-event-list/place-event-list",
     "news-list": "/components/news-list/news-list",
     "index-news": "/components/index-news/index-news",
@@ -157,11 +150,7 @@
       },
       {
         "pagePath": "pages/events/events",
-<<<<<<< HEAD
         "text": "活动报名",
-=======
-        "text": "活动",
->>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
         "iconPath": "images/tabs/events.png",
         "selectedIconPath": "images/tabs/events_active.png"
       },
@@ -170,15 +159,6 @@
         "text": "社区",
         "iconPath": "images/tabs/community.png",
         "selectedIconPath": "images/tabs/community_active.png"
-<<<<<<< HEAD
-=======
-      },
-      {
-        "pagePath": "pages/news/news",
-        "text": "媒体中心",
-        "iconPath": "images/tabs/news.png",
-        "selectedIconPath": "images/tabs/news_active.png"
->>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
       },
       {
         "pagePath": "pages/my/my",

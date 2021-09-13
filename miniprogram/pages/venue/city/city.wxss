@@ -1,88 +1,66 @@
-page{
+page {
   background-color: #fff;
   color: #313030;
 }
-.city{
+.city {
   padding: 50rpx 18rpx;
 }
-.header{
+.header {
   margin-bottom: 30rpx;
 }
-.header .title{
+.header .title {
   font-size: 64rpx;
-  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
   padding-bottom: 20rpx;
 }
-.info{
+.info {
   font-size: 24rpx;
   color: #666;
-<<<<<<< HEAD
   text-align: center;
-=======
->>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
 }
-.item{
+.item {
   width: 714rpx;
   height: 315rpx;
-  background-color: #F0F0F0;
+  background-color: #f0f0f0;
   overflow: hidden;
 }
-.item+.item{
+.item + .item {
   margin-top: 34rpx;
 }
-.item image{
+.item image {
   width: 420rpx;
   height: 315rpx;
 }
-<<<<<<< HEAD
-.text{
+.text {
   padding: 0 20rpx;
 }
-.text text{
+.text text {
   text-align: center;
   display: block;
   color: #aaa;
-=======
-.text text{
-  text-align: center;
-  display: block;
-  color: #666;
->>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
   font-size: 24rpx;
 }
-.text .name{
+.text .name {
   color: #333;
-<<<<<<< HEAD
   font-size: 48rpx;
   font-weight: 800;
   font-weight: bold;
   padding-bottom: 10rpx;
   text-transform: uppercase;
 }
-.line{
+.line {
   width: 74rpx;
   height: 4rpx;
-  background-color: #DF1042;
+  background-color: #df1042;
   margin: 20rpx auto;
 }
-.more{
+.more {
   font-size: 32rpx;
   letter-spacing: 4rpx;
   padding: 50rpx 0;
   color: #aaa;
 }
-.title image{
+.title image {
   height: 60rpx;
   margin-bottom: 20rpx;
-=======
-  font-size: 42rpx;
-  font-weight: bold;
-  padding-bottom: 10rpx;
-}
-.more{
-  font-size: 32rpx;
-  font-weight: bold;
-  letter-spacing: 4rpx;
-  padding: 50rpx 0;
->>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
 }

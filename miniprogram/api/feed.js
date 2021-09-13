@@ -1,152 +1,185 @@
-import { getCollectionById, getPaginations } from "../utils/cloud"
+import { getCollectionById, getPaginations } from "../utils/cloud";
 
-<<<<<<< HEAD
-export const getCommentList = async (pageIndex = 1, pageSize = 10, placeId, order = 'latest') => {
-  const orderBy = order === 'latest' ? { addedDate: 'desc' } : { kudos: 'desc' };
+export const getCommentList = async (
+  pageIndex = 1,
+  pageSize = 10,
+  placeId,
+  order = "latest"
+) => {
+  const orderBy =
+    order === "latest" ? { addedDate: "desc" } : { kudos: "desc" };
   const data = await getPaginations({
-    dbName: 'feed',
+    dbName: "feed",
     filter: {
       isActive: true,
-      type: 'place',
-      placeId
+      type: "place",
+      placeId,
     },
     orderBy,
     pageIndex,
-    pageSize
-  })
+    pageSize,
+  });
   return data;
-}
+};
 
 export const getFeedIndexList = async (pageIndex = 1, pageSize = 10) => {
-=======
-export const getCommentList = async (pageIndex = 1, pageSize = 10, placeId) => {
->>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
   const data = await getPaginations({
-    dbName: 'feed',
+    dbName: "feed",
     filter: {
       isActive: true,
-      type: 'place',
-      placeId
+      type: "place",
+      placeId,
     },
     orderBy: {
-      addedDate: 'desc'
+      addedDate: "desc",
     },
     pageIndex,
-    pageSize
-  })
+    pageSize,
+  });
   return data;
-}
+};
 
-export const getFeedIndexList = async (pageIndex = 1, pageSize = 10, type = 'feed') => {
+export const getFeedIndexList = async (
+  pageIndex = 1,
+  pageSize = 10,
+  type = "feed"
+) => {
   const data = await getPaginations({
-    dbName: 'feed',
+    dbName: "feed",
     filter: {
       isActive: true,
-      type
+      type,
     },
     orderBy: {
-      addedDate: 'desc'
+      addedDate: "desc",
     },
     pageIndex,
-    pageSize
-  })
+    pageSize,
+  });
   return data;
-}
+};
 
-export const getRecommendedFeedIndexList = async (pageIndex = 1, pageSize = 10) => {
+export const getRecommendedFeedIndexList = async (
+  pageIndex = 1,
+  pageSize = 10
+) => {
   const data = await getPaginations({
-    dbName: 'feed',
+    dbName: "feed",
     filter: {
-      status: '3',
-      isActive: true
+      status: "3",
+      isActive: true,
     },
     orderBy: {
-      addedDate: 'desc'
+      addedDate: "desc",
     },
     pageIndex,
-    pageSize
-  })
+    pageSize,
+  });
   return data;
-}
+};
 
-export const searchFeed = async keyword => {
+export const searchFeed = async (keyword) => {
   const db = wx.cloud.database();
-  const res = await db.collection('feed').where({
-    content: {
-      $regex: '.*' + keyword + '.*',
-      $options: '1'
-    }
-  }).limit(20).get();
+  const res = await db
+    .collection("feed")
+    .where({
+      content: {
+        $regex: ".*" + keyword + ".*",
+        $options: "1",
+      },
+    })
+    .limit(20)
+    .get();
   return res;
 };
 
-export const getFeedsByUserId = async (userId, pageIndex = 1, pageSize = 10) => {
+export const getFeedsByUserId = async (
+  userId,
+  pageIndex = 1,
+  pageSize = 10
+) => {
   const data = await getPaginations({
-    dbName: 'feed',
+    dbName: "feed",
     filter: {
       userId,
-      isActive: true
+      isActive: true,
     },
     orderBy: {
-      addedDate: 'desc'
+      addedDate: "desc",
     },
     pageIndex,
-    pageSize
-  })
+    pageSize,
+  });
   return data;
-}
+};
 
-export const getKudosFeedsByUserId = async (userId, pageIndex = 1, pageSize = 10) => {
+export const getKudosFeedsByUserId = async (
+  userId,
+  pageIndex = 1,
+  pageSize = 10
+) => {
   return new Promise((resolve, reject) => {
     wx.cloud.callFunction({
-      name: 'getKudosedFeeds',
+      name: "getKudosedFeeds",
       data: { userId },
-      success: res => {
-        resolve(res)
+      success: (res) => {
+        resolve(res);
       },
-      fail: err => reject(err)
+      fail: (err) => reject(err),
     });
   });
-}
-<<<<<<< HEAD
-export const addFeed = ({ userId, avatarUrl, content, picUrls, coverUrls, nickName, type, placeId, location }) => {
+};
+export const addFeed = ({
+  userId,
+  avatarUrl,
+  content,
+  picUrls,
+  coverUrls,
+  nickName,
+  type,
+  placeId,
+  location,
+}) => {
   return new Promise((resolve, reject) => {
     wx.cloud.callFunction({
-      name: 'postIng',
-      data: { userId, avatarUrl, content, picUrls, nickName, type, placeId, location, coverUrls },
-=======
-export const addFeed = ({ userId, avatarUrl, content, picUrls, nickName, type, placeId }) => {
-  return new Promise((resolve, reject) => {
-    wx.cloud.callFunction({
-      name: 'postIng',
-      data: { userId, avatarUrl, content, picUrls, nickName, type, placeId },
->>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
-      success: res => {
-        resolve(res)
+      name: "postIng",
+      data: {
+        userId,
+        avatarUrl,
+        content,
+        picUrls,
+        nickName,
+        type,
+        placeId,
+        location,
+        coverUrls,
       },
-      fail: err => reject(err)
+      success: (res) => {
+        resolve(res);
+      },
+      fail: (err) => reject(err),
     });
   });
-}
+};
 
 export const checkTextSec = ({ content }) => {
   return new Promise((resolve, reject) => {
     wx.cloud.callFunction({
-      name: 'checkTextSec',
+      name: "checkTextSec",
       data: { content },
-      success: res => {
-        resolve(res)
+      success: (res) => {
+        resolve(res);
       },
-      fail: err => reject(err)
+      fail: (err) => reject(err),
     });
   });
-}
+};
 
-export const giveKudos = ({userId, userInfo, id, type = 'feed'}) => {
+export const giveKudos = ({ userId, userInfo, id, type = "feed" }) => {
   return new Promise((resolve, reject) => {
     wx.cloud.callFunction({
-      name: 'giveKudos',
-      data: { 
+      name: "giveKudos",
+      data: {
         data: {
           userInfo,
           updatedAt: new Date(),
@@ -154,12 +187,12 @@ export const giveKudos = ({userId, userInfo, id, type = 'feed'}) => {
           userId,
         },
         type,
-        id
-       },
-      success: res => {
-        resolve(res)
+        id,
       },
-      fail: err => reject(err)
+      success: (res) => {
+        resolve(res);
+      },
+      fail: (err) => reject(err),
     });
   });
-}
+};

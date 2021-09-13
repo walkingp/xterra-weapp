@@ -1,11 +1,8 @@
 @import "./../../style/mi.flex.wxss";
-<<<<<<< HEAD
 .venues {
   padding-bottom: 100rpx;
 }
-=======
->>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
-.venues .title{
+.venues .title {
   font-size: 35rpx;
   color: #313030;
   letter-spacing: 4rpx;
@@ -13,90 +10,45 @@
   text-align: center;
   padding: 45rpx;
 }
-.venues .place{
+.venues .place {
   font-size: 28rpx;
   color: #313030;
   letter-spacing: 4rpx;
   font-weight: bold;
   padding: 20rpx 0;
 }
-.venues swiper-item image{
+.venues swiper-item image {
   width: 100%;
   height: 365rpx;
 }
-.venues swiper{
-<<<<<<< HEAD
+.venues swiper {
   height: 680rpx;
 }
-.venues .left, .venues .right{
+.venues .left,
+.venues .right {
   width: 75rpx;
-=======
-  height: 600rpx;
-}
-.venues .left, .venues .right{
-  height: 100%;
-  width: 100rpx;
->>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
 }
-<<<<<<< HEAD
-.venues .right{  
+.venues .right {
   position: absolute;
   right: 0;
 }
-.left::after, .right::after{
+.left::after,
+.right::after {
   display: inline-block;
   width: 18px;
   height: 18px;
-  border-top: 5px solid rgba(0,0,0,.5);
-  border-right: 5px solid rgba(0,0,0,.5);
-=======
-.left::after, .right::after{
-  width: 0;
-  height: 0;
-  border: 10px solid transparent;
->>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
+  border-top: 5px solid rgba(0, 0, 0, 0.5);
+  border-right: 5px solid rgba(0, 0, 0, 0.5);
   position: absolute;
   content: "";
 }
-.left::after{
-<<<<<<< HEAD
+.left::after {
   transform: rotate(-135deg);
 }
-.right::after{
+.right::after {
   transform: rotate(45deg);
-=======
-  border-right-color: #999;
-}
-.right::after{
-  border-left-color: #999;
-}
-.desc{
-  font-size: 20rpx;
-  padding-top: 10rpx;
-  color: #777;
-}
-.title{
-  font-size: 35rpx;
-  font-weight: bold;
-}
-.count{
-  color: #777;
-  font-size: 20rpx;
-  padding-top: 10rpx;
-}
-button.button{
-  display: inline-block;
-  width: 100%;
-  border: solid 4rpx #313030;
-  border-radius: 0;
-  letter-spacing: 4rpx;
-  height: 74rpx;
-  font-size: 28rpx;
-  line-height: 100%;
-  padding-top: 18rpx;
->>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
 }

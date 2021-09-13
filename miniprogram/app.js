@@ -1,10 +1,10 @@
-const config = require('./config/config.js');
-const {locale} = require('./config/locale.js');
+const config = require("./config/config.js");
+const { locale } = require("./config/locale.js");
 
-require('./utils/libs.js');
+require("./utils/libs.js");
 //app.js
 App({
-  towxml: require('/towxml/index'),
+  towxml: require("/towxml/index"),
   checkLogin() {
     const that = this;
     return new Promise((resolve, reject) => {
@@ -13,11 +13,11 @@ App({
         success: function (res) {
           //从云端获取用户资料
           wx.cloud.callFunction({
-            name: 'get_setUserInfo',
+            name: "get_setUserInfo",
             data: {
-              getSelf: true
+              getSelf: true,
             },
-            success: res => {
+            success: (res) => {
               if (res.errMsg == "cloud.callFunction:ok" && res.result) {
                 console.log(res.result.data);
                 //如果成功获取到
@@ -25,40 +25,41 @@ App({
                 that.globalData.userInfo = res.result.data;
                 that.globalData.userId = res.result.data._id;
                 that.globalData.userName = res.result.data.nickname;
-                that.globalData.trueName = res.result.data.truename || res.result.data.nickname;
+                that.globalData.trueName =
+                  res.result.data.truename || res.result.data.nickname;
                 that.globalData.isLogined = true;
-                that.globalData.isAdmin = res.result.data.role === 'admin';
+                that.globalData.isAdmin = res.result.data.role === "admin";
 
                 resolve({
                   userInfo: res.result.data,
                   userId: res.result.data._id,
-                  isLogined: true
-                })
+                  isLogined: true,
+                });
                 //将授权结果写入app.js全局变量
-                that.globalData.auth['scope.userInfo'] = true
+                that.globalData.auth["scope.userInfo"] = true;
               } else {
-                reject(null)
+                reject(null);
               }
             },
-            fail: err => {
-              console.error("get_setUserInfo调用失败", err.errMsg)
-              reject(err)
-            }
-          })
+            fail: (err) => {
+              console.error("get_setUserInfo调用失败", err.errMsg);
+              reject(err);
+            },
+          });
         },
         fail(err) {
           wx.showToast({
-            title: '请检查网络您的状态',
+            title: "请检查网络您的状态",
             duration: 800,
-            icon: 'none'
-          })
-          console.error("wx.getSetting调用失败", err.errMsg)
+            icon: "none",
+          });
+          console.error("wx.getSetting调用失败", err.errMsg);
           reject({
-            message: err.errMsg
-          })
-        }
-      })
-    })
+            message: err.errMsg,
+          });
+        },
+      });
+    });
   },
   onLaunch: async function () {
     this.globalData = {
@@ -68,25 +69,21 @@ App({
       isLogined: false,
       isJoined: false,
       auth: {
-        'scope.userInfo': false
+        "scope.userInfo": false,
       },
-<<<<<<< HEAD
-      currentCity: '上海'
-=======
-      currentCity: 'Shanghai'
->>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
-    }
+      currentCity: "上海",
+    };
 
     this.checkUpdate();
     if (!wx.cloud) {
-      console.error('请使用 2.2.3 或以上的基础库以使用云能力')
+      console.error("请使用 2.2.3 或以上的基础库以使用云能力");
     } else {
       wx.cloud.init({
         env: config.env,
         traceUser: true,
-      })
+      });
       const res = await this.checkLogin();
-      console.log(res)
+      console.log(res);
     }
 
     this.initDeviceInfo();
@@ -103,39 +100,43 @@ App({
         const winHeight = clientHeight * changeHeight;
         that.globalData.winHeight = winHeight;
 
-        let info = wx.getMenuButtonBoundingClientRect()
-        let headerBarHeight = info.bottom + info.top - res.statusBarHeight        
+        let info = wx.getMenuButtonBoundingClientRect();
+        let headerBarHeight = info.bottom + info.top - res.statusBarHeight;
         that.globalData.headerBarHeight = headerBarHeight;
 
         let isChinese = wx.getStorageSync(config.storageKey.isChinese);
-        if(isChinese === ""){
-          isChinese = res.language === 'zh_CN';
+        if (isChinese === "") {
+          isChinese = res.language === "zh_CN";
           wx.setStorageSync(config.storageKey.isChinese, isChinese);
         }
         that.globalData.isChinese = isChinese;
-        const isTab = getCurrentPages().length && config.tabs.includes(getCurrentPages()[0].route);
-        if(!isChinese && isTab) {
-          const currentLocale = Array.from(locale).find(item=>item.isChinese === isChinese);
-          currentLocale.tabs.forEach((text, index)=>{
+        const isTab =
+          getCurrentPages().length &&
+          config.tabs.includes(getCurrentPages()[0].route);
+        if (!isChinese && isTab) {
+          const currentLocale = Array.from(locale).find(
+            (item) => item.isChinese === isChinese
+          );
+          currentLocale.tabs.forEach((text, index) => {
             wx.setTabBarItem({
               index,
-              text
-            })
-          })
+              text,
+            });
+          });
         }
-      }
+      },
     });
   },
 
   checkUpdate() {
-    if (wx.canIUse('getUpdateManager')) {
+    if (wx.canIUse("getUpdateManager")) {
       const updateManager = wx.getUpdateManager();
       updateManager.onCheckForUpdate(function (res) {
-        console.log("是否更新版本:", res.hasUpdate)
-      })
+        console.log("是否更新版本:", res.hasUpdate);
+      });
       updateManager.onUpdateReady(function () {
         updateManager.applyUpdate();
-      })
+      });
     }
-  }
-})
+  },
+});
