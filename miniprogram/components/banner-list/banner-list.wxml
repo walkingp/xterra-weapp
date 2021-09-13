@@ -3,7 +3,9 @@
     <block wx:for="{{list}}" wx:key="_id">
       <swiper-item bindtap="tapItem" data-src="{{item.picUrl}}" data-url="{{item.redirectUrl}}" data-type="{{item.type}}">
         <view class="swiper-item">
-          <image lazy-load="{{true}}" src="{{item.picUrl}}" mode="aspectFill"></image>
+          <van-image width="100%" height="320rpx" use-loading-slot lazy-load="{{true}}" src="{{item.picUrl}}" fit="cover">
+            <van-loading slot="loading" type="spinner" size="20" vertical />
+          </van-image>
         </view>
       </swiper-item>
     </block>

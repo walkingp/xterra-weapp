@@ -51,7 +51,7 @@
   align-items: center;
   font-size: 24rpx;
 }
-image.avatar{
+.avatar{
   width: 48rpx;
   height: 48rpx;
   border-radius: 50%;

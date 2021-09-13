@@ -69,3 +69,12 @@ swiper, swiper image{
 .van-icon__image{
   margin-top: -15rpx;
 }
+.avatar{  
+  margin-right: 20rpx;
+}
+.avatar image{
+  width: 74rpx;
+  height: 74rpx;
+  border: solid 2rpx #E1DDDD;
+  border-radius: 50%;
+}

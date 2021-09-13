@@ -12,6 +12,7 @@ const locale = [
 ];
 
 const locales = {
+  '美食美景': 'Landmark & Cuisine',
   '地址：': 'Location: ',
   '所在位置': 'Location',
   '附近地点': 'Nearby locations',

@@ -1,5 +1,7 @@
 <view data-url="/pages/venue/detail/detail?id={{item._id}}" bindtap="redirect" class="place-item flex column">
-  <image src="{{item.banner}}" mode="aspectFill"></image>
+  <van-image width="100%" height="365rpx" use-loading-slot lazy-load="{{true}}" src="{{item.banner}}" fit="cover">
+    <van-loading slot="loading" type="spinner" size="20" vertical />
+  </van-image>
   <text class="desc overflow-2">“{{item._desc}}”</text>
   <text class="place">{{item._title}}</text>
   <button class="button {{type}}">{{_t['查看详情']}}</button>

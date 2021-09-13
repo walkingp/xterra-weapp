@@ -22,7 +22,7 @@ Page({
     news: [],
     cates: [],
     type: '活动',
-    active: 'content',
+    active: 0,
     regBtnEnabled: false,
     pageIndex: 1,
     pageSize: 2,
@@ -44,7 +44,7 @@ Page({
     wx.showLoading({
       title: _t['加载中...'],
     });
-    let { active, pageIndex, pageSize, isAdmin } = this.data;
+    let { pageIndex, pageSize, isAdmin } = this.data;
     const { userId } = app.globalData;
     const detail = await getRaceDetail(id);
     if(detail.leaders && detail.leaders.indexOf(userId) >= 0 && !isAdmin){
@@ -99,17 +99,31 @@ Page({
     detail.flow = app.towxml(detail.flow,'html');
     detail.showCuisine = detail.cuisine && detail.cuisine !== '<p>欢迎使用富文本编辑器</p>';
     detail.cuisine = app.towxml(detail.cuisine,'html'); // 美食美景
+    const type =  ['越野跑', '铁人三项', '山地车'].indexOf(detail.type) >= 0 ? '比赛' : '活动';
+
+    detail.tabs = [];
     if(detail.showContent){
-      active = 'content'
-    }else{
-      if(detail.showAdminssion){
-        active = 'admission'
-      }else{
-        if(detail.showFlow){
-          active = 'flow';
-        }
-      }
+      detail.tabs.push({
+        key: 'content',
+        title: _t[detail.isPlogging ? '比赛规程' : '活动详情'],
+        nodes: detail.content
+      })
     }
+    if(detail.showAdminssion){
+      detail.tabs.push({
+        key: 'admission',
+        title: _t['报名须知'],
+        nodes: detail.admission
+      })
+    }
+    if(detail.showFlow){
+      detail.tabs.push({
+        key: 'flow',
+        title: _t[type + '流程'],
+        nodes: detail.flow
+      })
+    }
+
     detail.picUrls = detail.picUrls.map(item=> {
       return {
         picUrl: item,
@@ -157,23 +171,24 @@ Page({
     const isBeforeEndTime = dayjs().isBefore(dayjs(new Date(detail.endRegTime)));
     const isDateValid = isAfterStartTime && isBeforeEndTime;
     const regBtnEnabled = cates.length > 0 && (detail.status === '报名中' || isDateValid);
-    const type =  ['越野跑', '铁人三项', '山地车'].indexOf(detail.type) >= 0 ? '比赛' : '活动';
     this.setData({
       regBtnEnabled,
       type,
-      active,
       loading: false,
       cates,
       news,
       markers,
       isDiscovery: detail.type === 'X-Discovery',
+      active: 0,
       detail
     }, ()=>{
       if(detail.placeId){
         this.fetchCity(detail.placeId);
       }
       wx.hideLoading({
-        success: (res) => {},
+        success: (res) => {
+          this.selectComponent('#tabs').resize();
+        },
       })
     });
   },
@@ -234,7 +249,11 @@ Page({
       address: detail.location
     });
   },
-  
+  onTabChange(e){
+    this.setData({
+      active: e.detail.name
+    })
+  },
   watchChanges(){
     const db = wx.cloud.database()
     const that = this;

@@ -2,7 +2,9 @@
   <view class="top flex-auto">
     <view class="user flex space-between align-center">
       <navigator url="/pages/community/user/user?id={{detail.userId}}" class="left flex align-center">
-        <image class="avatar" src="{{detail.avatarUrl}}" mode="aspectFit" />
+        <van-image class="avatar" width="74rpx" height="74rpx" use-loading-slot lazy-load="{{true}}" src="{{detail.avatarUrl}}" fit="cover">
+          <van-loading slot="loading" type="spinner" size="20" vertical />
+        </van-image>
         <view class="flex column space-between">
           <text class="bold fs-md">{{detail.nickName}}</text>
           <text class="text-grey fs-xs">{{detail.dateStr}}</text>
@@ -29,7 +31,9 @@
         <block wx:for="{{detail.picUrls}}" wx:key="item">
           <swiper-item>
             <view class="swiper-item">
-              <image lazy-load="{{true}}" bindtap="preview" data-src="{{item}}" src="{{item}}" mode="widthFix"></image>
+              <van-image width="100vw" height="440rpx" use-loading-slot lazy-load="{{true}}" bindtap="preview" data-src="{{item}}" src="{{item}}" fit="cover">
+                <van-loading slot="loading" type="spinner" size="20" vertical />
+              </van-image>
             </view>
           </swiper-item>
         </block>

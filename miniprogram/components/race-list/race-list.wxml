@@ -8,7 +8,9 @@
       </view>
       <view class="flex align-center">
         <view class="cover flex-none">
-          <image src="{{item.picUrls[0]}}" lazy-load="{{true}}" mode="aspectFill"></image>
+          <van-image width="100%" height="160rpx" use-loading-slot lazy-load="{{true}}" src="{{item.picUrls[0]}}" fit="cover">
+            <van-loading slot="loading" type="spinner" size="20" vertical />
+          </van-image>
         </view>
         <view class="flex-auto text flex column space-betwee info">
           <text>{{_t['类型']}}：{{_t[item.type]}}</text>

@@ -1,13 +1,17 @@
 <view class="masonry">
   <navigator url="/pages/community/detail/detail?id={{item._id}}" class="item" wx:for="{{list}}" wx:key="_id" wx:for-index="idx">
     <view class="item__content">
-      <block wx:if="{{item.coverUrls.length}}">
-        <image class="thumb" data-url="{{item.coverUrls[0]}}" data-urls="{{item.coverUrls}}"
-          src="{{item.coverUrls[0]}}" mode="aspectFill"></image>
+      <block wx:if="{{item.coverUrls.length}}">      
+        <van-image class="thumb" width="100%" height="210rpx" use-loading-slot lazy-load="{{true}}" src="{{item.coverUrls[0]}}" fit="cover">
+          <van-loading slot="loading" type="spinner" size="20" vertical />
+        </van-image>
         <van-icon name="play-circle-o" size="50px" color="rgba(255,255,255,.8)" class="play" />
       </block>
-      <image class="thumb" data-url="{{item.picUrls[0]}}" data-urls="{{item.picUrls}}"
-        src="{{item.picUrls[0]}}" mode="aspectFill" wx:else></image>
+      <block wx:else>
+        <van-image class="thumb" width="100%" height="210rpx" use-loading-slot lazy-load="{{true}}" src="{{item.picUrls[0]}}" fit="cover">
+          <van-loading slot="loading" type="spinner" size="20" vertical />
+        </van-image>
+      </block>
       <view class="content">
         <view class="flex align-center">
           <van-icon name="play-circle-o" wx:if="{{item.coverUrls.length}}" style="margin-right: 5rpx;" />
@@ -15,7 +19,9 @@
         </view>
         <view class="user flex align-center" wx:if="{{type !== 'profile'}}">
           <view class="left flex-auto">
-            <image class="avatar" src="{{item.avatarUrl}}" mode="aspectFill" />
+            <van-image class="avatar" width="48rpx" height="48rpx" use-loading-slot lazy-load="{{true}}" src="{{item.avatarUrl}}" fit="cover">
+              <van-loading slot="loading" type="spinner" size="20" vertical />
+            </van-image>
             <text>{{item.nickName}}</text>
           </view>
         </view>
