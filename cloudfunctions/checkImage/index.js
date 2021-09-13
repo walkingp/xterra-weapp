@@ -11,6 +11,9 @@ exports.main = async (event, context) => {
     fileID: fileID,
   })
   const buffer = res.fileContent
+  if(buffer.length > 1 * 1024 * 1024){
+    return { errCode: 0, errMsg: '图片大于1MB' };
+  }
   try {
     var result = await cloud.openapi.security.imgSecCheck({
       media: {

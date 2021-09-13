@@ -22,23 +22,6 @@ export const getCommentList = async (
   return data;
 };
 
-export const getFeedIndexList = async (pageIndex = 1, pageSize = 10) => {
-  const data = await getPaginations({
-    dbName: "feed",
-    filter: {
-      isActive: true,
-      type: "place",
-      placeId,
-    },
-    orderBy: {
-      addedDate: "desc",
-    },
-    pageIndex,
-    pageSize,
-  });
-  return data;
-};
-
 export const getFeedIndexList = async (
   pageIndex = 1,
   pageSize = 10,

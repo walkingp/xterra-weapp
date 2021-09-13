@@ -252,15 +252,6 @@ Page({
         videoCoverUrls,
       });
       await that.saveDB(content);
-      wx.showToast({
-        icon: "none",
-        title: t["发布成功"],
-      });
-      wx.hideLoading();
-      const url = "";
-      wx.redirectTo({
-        url,
-      });
     });
   },
   async saveDB(content) {
