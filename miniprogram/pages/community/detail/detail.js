@@ -20,9 +20,12 @@ Page({
     userInfo: null,
     kudosVisible: false,
     btnDisabled: false,
-    value: ''
+    value: '',
+    isVideo: false
   },
-
+  onVideoLoaded(e){
+    console.log(e);
+  },
   showKudos(){
     this.setData({
       kudosVisible: true

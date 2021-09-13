@@ -5,6 +5,13 @@
   margin-bottom: 20rpx;
   break-inside: avoid;
   overflow: hidden;
+  position: relative;
+}
+.item .play{
+  position: absolute;
+  left: 50%;
+  top: 108rpx;
+  transform: translate(-50%, -50%);
 }
 .item image.thumb {
   height: 210rpx!important;

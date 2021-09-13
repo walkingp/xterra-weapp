@@ -305,6 +305,12 @@
           "pathName": "pages/community/location/location",
           "query": "id=8937eaa9613db4c60aa1a7fa1272482c",
           "scene": null
+        },
+        {
+          "name": "视频动态",
+          "pathName": "pages/community/detail/detail",
+          "query": "id=14139e12613e134d0bc425d052821464",
+          "scene": null
         }
       ]
     }

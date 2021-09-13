@@ -15,35 +15,51 @@
         <!-- <button>关注</button> -->
       </view>
     </view>
-    <swiper indicator-dots="{{true}}" autoplay="{{true}}">
-      <block wx:for="{{detail.picUrls}}" wx:key="item">
-        <swiper-item>
-          <view class="swiper-item">
-            <image lazy-load="{{true}}" bindtap="preview" data-src="{{item}}" src="{{item}}" mode="widthFix"></image>
-          </view>
-        </swiper-item>
+    <swiper indicator-dots="{{detail.picUrls.length > 1}}" autoplay="{{true}}">
+      <block wx:if="{{detail.coverUrls.length}}">
+        <block wx:for="{{detail.picUrls}}" wx:key="item">
+          <swiper-item>
+            <view class="swiper-item">
+              <video id="myVideo{{index}}" bindloadedmetadata="onVideoLoaded" poster="{{detail.coverUrls[index]}}" src="{{item}}" autoplay="{{true}}"></video>
+            </view>
+          </swiper-item>
+        </block>
+      </block>
+      <block wx:else>
+        <block wx:for="{{detail.picUrls}}" wx:key="item">
+          <swiper-item>
+            <view class="swiper-item">
+              <image lazy-load="{{true}}" bindtap="preview" data-src="{{item}}" src="{{item}}" mode="widthFix"></image>
+            </view>
+          </swiper-item>
+        </block>
       </block>
     </swiper>
     <view class="pick" wx:if="{{detail.location}}">
-      <van-cell title-style="color: #576b95; font-size: 24rpx;" title="{{detail.location.title}}" border="{{false}}" icon="location-o" bind:tap="showLocation" />
+      <van-cell title-style="color: #576b95; font-size: 24rpx;" title="{{detail.location.title}}" border="{{false}}"
+        icon="location-o" bind:tap="showLocation" />
     </view>
     <view class="title">{{detail.title}}</view>
     <view class="summary">
       <text selectable="{{true}}">{{detail.content}}</text>
     </view>
     <view class="comments">
-      <view class="flex column justify-center text-grey fs-md align-center" catchtap="giveKudos" data-id="{{detail._id}}">        
+      <view class="flex column justify-center text-grey fs-md align-center" catchtap="giveKudos"
+        data-id="{{detail._id}}">
         <van-icon size="28px" name="good-job" color="orange" wx:if="{{detail.kudosed}}" />
         <van-icon size="28px" name="good-job-o" wx:else />
         <text wx:if="{{detail.kudos_list.length === 0}}">{{_t['现在点赞']}}</text>
       </view>
-      <view class="flex justify-center text-grey fs-xs align-center" bindtap="showKudos" wx:if="{{detail.kudos_list.length}}">
-        <van-icon name="friends-o" size="18px" /> {{detail.kudos_list.length}}{{_t['人觉得很赞']}} <van-icon name="arrow" />
+      <view class="flex justify-center text-grey fs-xs align-center" bindtap="showKudos"
+        wx:if="{{detail.kudos_list.length}}">
+        <van-icon name="friends-o" size="18px" /> {{detail.kudos_list.length}}{{_t['人觉得很赞']}}
+        <van-icon name="arrow" />
       </view>
       <van-popup position="bottom" closeable close-icon="close" bind:close="onClose" show="{{ kudosVisible }}">
         <van-cell-group title="{{_t['点赞用户']}}">
           <block wx:for="{{detail.kudos_list}}" wx:key="userId">
-            <van-cell class="flex align-center" title="{{item.userInfo.nickname}}" is-link link-type="navigateTo" url="/pages/community/user/user?id={{item.userId}}" icon="{{item.userInfo.avatarUrl}}" />
+            <van-cell class="flex align-center" title="{{item.userInfo.nickname}}" is-link link-type="navigateTo"
+              url="/pages/community/user/user?id={{item.userId}}" icon="{{item.userInfo.avatarUrl}}" />
           </block>
         </van-cell-group>
       </van-popup>
@@ -73,7 +89,8 @@
     <view class="flex space-between align-center">
       <input type="text" name="content" confirm-type="send" value="{{value}}" placeholder="{{_t['评论内容']}}"
         disabled="{{!isLogined}}" class="flex-auto" />
-      <button form-type="submit" disabled="{{btnDisabled}}" wx:if="{{isLogined}}" class="flex-none">{{_t['发表评论']}}</button>
+      <button form-type="submit" disabled="{{btnDisabled}}" wx:if="{{isLogined}}"
+        class="flex-none">{{_t['发表评论']}}</button>
       <button form-type="submit" wx:else class="flex-none">{{_t['请先登录']}}</button>
     </view>
   </form>

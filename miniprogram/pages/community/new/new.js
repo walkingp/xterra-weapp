@@ -11,6 +11,9 @@ const i18n = require("./../../../utils/i18n");
 const t = i18n.i18n.translate();
 const QQMapWX = require('./../../../utils/qqmap-wx-jssdk.min.js');
 // miniprogram/pages/community/new/new.js
+const qqmapsdk = new QQMapWX({
+  key: config.mapKey
+});
 const app = getApp();
 Page({
 
@@ -54,12 +57,22 @@ Page({
       selectedPlace: { title: t['所在位置'] },
     });
   },
+  onClose(){
+    this.setData({
+      showPlaces: false
+    })
+  },
   onPick(e){
     wx.showLoading()
+    const { places } = this.data;
+    if(places.length){
+      this.setData({
+        showPlaces: true
+      })
+      wx.hideLoading();
+      return;
+    }
     const that = this;
-    const qqmapsdk = new QQMapWX({
-      key: config.mapKey
-    });
     wx.getLocation({
       type: 'wgs84',
       success: function (res) {
@@ -78,6 +91,12 @@ Page({
               places: val.result.pois
             });
             wx.hideLoading()
+          },
+          fail(err){
+            console.error(err);
+            wx.showToast({
+              title: err,
+            })
           }
         });
       }
@@ -124,7 +143,7 @@ Page({
       success: function (res) {
         const filePath = res.tempFiles.map(item=>item.tempFilePath);
         //const fileType = 
-        const videoCoverUrls = that.data.videoCoverUrls.concat(res.tempFiles.filter(item=>item.fileType === 'video').map(item=>item.thumbTempFilePath));
+        const videoCoverUrls = that.data.videoCoverUrls.concat(res.tempFiles.filter(item=>item.thumbTempFilePath).map(item=>item.thumbTempFilePath));
         const photolist = that.data.photolist.concat(filePath);
         console.log(photolist);
         that.setData({
@@ -307,7 +326,9 @@ Page({
     this.setData({
       placeId, type
     }, ()=>{
-      this.fetchPlace(placeId);
+      if(placeId){
+        this.fetchPlace(placeId);
+      }
     });
     app.checkLogin().then(res => {
       const {
