@@ -5,7 +5,7 @@ view {
 }
 
 view:before,
-view:after {
+view:after, form, text {
   box-sizing: border-box;
 }
 
