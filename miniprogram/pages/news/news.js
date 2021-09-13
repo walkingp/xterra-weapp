@@ -109,11 +109,14 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+<<<<<<< HEAD
     this.setData({
       _t: i18n.i18n.translate()
     }, () => {
       this.initialData();
     })
+=======
+>>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
   },
 
   /**

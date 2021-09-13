@@ -9,6 +9,7 @@ const feedTable = db.collection("feed")
 
 // 云函数入口函数
 exports.main = async (event, context) => {
+<<<<<<< HEAD
   const {
     userId,
     avatarUrl,
@@ -20,6 +21,9 @@ exports.main = async (event, context) => {
     location,
     coverUrls
   } = event;
+=======
+  const { userId, avatarUrl, content, picUrls, nickName, type = 'feed', placeId = null } = event;
+>>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
 
   try {
     const secRes = await cloud.openapi.security.msgSecCheck({
@@ -54,7 +58,24 @@ exports.main = async (event, context) => {
       data.coverUrls = coverUrls;
     }
     const res = await feedTable.add({
+<<<<<<< HEAD
       data
+=======
+      data: {
+        userId,
+        avatarUrl,
+        addedDate: new Date(),
+        content,
+        picUrls,
+        kudos: 0,
+        comments: 0,
+        status: '1',
+        isActive: true,
+        nickName,
+        type,
+        placeId
+      }
+>>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
     });
     return {
       code: 0,

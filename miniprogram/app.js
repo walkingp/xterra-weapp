@@ -70,7 +70,11 @@ App({
       auth: {
         'scope.userInfo': false
       },
+<<<<<<< HEAD
       currentCity: '上海'
+=======
+      currentCity: 'Shanghai'
+>>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
     }
 
     this.checkUpdate();

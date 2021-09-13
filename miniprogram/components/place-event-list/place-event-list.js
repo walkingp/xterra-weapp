@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 const i18n = require("./../../utils/i18n");
+=======
+// components/place-event-list/place-event-list.js
+>>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
 const app = getApp();
 Component({
   /**
@@ -11,6 +15,7 @@ Component({
     }
   },
 
+<<<<<<< HEAD
   pageLifetimes: {
     show: function() {
       this.setData({
@@ -18,10 +23,13 @@ Component({
       })
     },
   },
+=======
+>>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
   /**
    * 组件的初始数据
    */
   data: {
+<<<<<<< HEAD
     current: 0,
     show: false,
     content: null
@@ -41,11 +49,17 @@ Component({
       })
     }
   },
+=======
+    show: false,
+    content: null
+  },
+>>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
 
   /**
    * 组件的方法列表
    */
   methods: {
+<<<<<<< HEAD
     prev(){
       let { current, list } = this.data;
       if(current === 0){
@@ -68,11 +82,14 @@ Component({
         current
       });
     },
+=======
+>>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
     hideContent(){
       this.setData({
         show: false
       })
     },
+<<<<<<< HEAD
     
     redirect(e){
       const { url } = e.currentTarget.dataset;
@@ -80,6 +97,8 @@ Component({
         url
       })
     },
+=======
+>>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
     showContent(e){
       const { id } = e.currentTarget.dataset;
       const { list } = this.properties;

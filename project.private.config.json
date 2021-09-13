@@ -281,6 +281,7 @@
           "pathName": "pages/venue/detail/detail",
           "query": "id=79550af260ed79512652b54e6a6afd9b&type=succ",
           "scene": null
+<<<<<<< HEAD
         },
         {
           "name": "个人主页",
@@ -311,6 +312,8 @@
           "pathName": "pages/community/detail/detail",
           "query": "id=8937eaa9613ef5a60ac7ea8d1c853525",
           "scene": null
+=======
+>>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
         }
       ]
     }

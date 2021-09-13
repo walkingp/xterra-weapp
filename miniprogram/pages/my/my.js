@@ -128,6 +128,7 @@ Page({
     this.setData({
       isLogined
     })
+<<<<<<< HEAD
     const pages = getCurrentPages();
     if(pages.length && pages[0].route === 'pages/my/my'){
       const isChinese = getApp().globalData.isChinese;
@@ -142,6 +143,8 @@ Page({
         })
       });
     }
+=======
+>>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
   },
 
   /**

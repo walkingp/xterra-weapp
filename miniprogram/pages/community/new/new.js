@@ -28,6 +28,7 @@ Page({
     userId: null,
     userInfo: null,
     photolist: [],
+<<<<<<< HEAD
     videoCoverUrls: [],
     btnDisabled: false,
     type: null,
@@ -101,6 +102,11 @@ Page({
         });
       }
     });
+=======
+    btnDisabled: false,
+    type: null,
+    placeId: null
+>>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
   },
   async bindTextAreaBlur(e){
     const content = e.detail.value;
@@ -265,8 +271,12 @@ Page({
       userId,
       userInfo,
       type,
+<<<<<<< HEAD
       placeId,
       selectedPlace
+=======
+      placeId
+>>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
     } = this.data;
 
     const {
@@ -281,6 +291,7 @@ Page({
       nickName: nickname,
       type,
       placeId
+<<<<<<< HEAD
     };
     if(videoCoverUrls.length) {
       data = { ...data, coverUrls: videoCoverUrls };
@@ -289,6 +300,9 @@ Page({
       data.location = selectedPlace;
     }
     const res = await addFeed(data);
+=======
+    });
+>>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
     
     // 加分
     await updatePoint(userId, pointRuleEnum.Post, {
@@ -297,6 +311,7 @@ Page({
     });
     const id = res.result._id;
     wx.showToast({
+<<<<<<< HEAD
       icon: 'none',
       title: t['发布成功'],
       success: async function(){
@@ -310,6 +325,12 @@ Page({
           }
         }
         
+=======
+      icon: 'success',
+      title: '发布成功',
+      success: function(){
+        const url = type === 'place' ? `/pages/venue/detail/detail?id=${placeId}&type=succ` : '/pages/community/detail/detail?id=' + id;
+>>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
         setTimeout(() => {
           wx.redirectTo({
             url
@@ -325,10 +346,13 @@ Page({
     const { placeId, type } = options;
     this.setData({
       placeId, type
+<<<<<<< HEAD
     }, ()=>{
       if(placeId){
         this.fetchPlace(placeId);
       }
+=======
+>>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
     });
     app.checkLogin().then(res => {
       const {

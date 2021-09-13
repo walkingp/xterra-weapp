@@ -1,5 +1,9 @@
 .banner{
+<<<<<<< HEAD
   height: 460rpx;  
+=======
+  height: 360rpx;  
+>>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
 }
 .banner image{
   height: 100%;
@@ -10,7 +14,11 @@
   font-size: 36rpx;
   font-weight: bold;
   letter-spacing: 4rpx;
+<<<<<<< HEAD
   padding: 40rpx 20rpx 20rpx 20rpx;
+=======
+  padding: 60rpx 20rpx 20rpx 20rpx;
+>>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
 }
 .desc{
   background-color: #fff;
@@ -22,8 +30,11 @@
 .desc text{
   border-left: #A42736 solid 8rpx;
   padding-left: 20rpx;
+<<<<<<< HEAD
   line-height: 1.5;
   color: #999;
+=======
+>>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
 }
 .map{
   background-color: #fff;
@@ -49,14 +60,22 @@ image.medal{
 }
 .photos .grid{
   display: grid;
+<<<<<<< HEAD
   grid-template-columns: repeat(2, 1fr);
+=======
+  grid-template-columns: repeat(3, 1fr);
+>>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
   grid-row-gap: 20rpx;
   grid-column-gap: 20rpx;
   padding: 20rpx 0;
 }
 .photos .grid image{
   width: 100%;
+<<<<<<< HEAD
   height: 210rpx;
+=======
+  height: 150rpx;
+>>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
 }
 
 .more button.button{
@@ -127,6 +146,7 @@ button.button{
 }
 .content{
   overflow: auto;
+<<<<<<< HEAD
 }
 .filter{
   padding: 0 20rpx;
@@ -140,4 +160,6 @@ button.button{
 
 .filter .current{
   font-weight: bold;
+=======
+>>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
 }

@@ -30,19 +30,32 @@
   position: relative;
 }
 .left::after, .right::after{
+<<<<<<< HEAD
   display: inline-block;
   width: 18px;
   height: 18px;
   border-top: 5px solid rgba(0,0,0,.5);
   border-right: 5px solid rgba(0,0,0,.5);
+=======
+  width: 0;
+  height: 0;
+  border: 10px solid transparent;
+>>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
   position: absolute;
   content: "";
 }
 .left::after{
+<<<<<<< HEAD
   transform: rotate(-135deg);
 }
 .right::after{
   transform: rotate(45deg);
+=======
+  border-right-color: #999;
+}
+.right::after{
+  border-left-color: #999;
+>>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
 }
 .desc{
   font-size: 20rpx;

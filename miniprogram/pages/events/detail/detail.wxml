@@ -102,6 +102,17 @@
             <towxml nodes="{{item.nodes}}" />
           </van-tab>      
         </block>
+<<<<<<< HEAD
+=======
+        <block wx:if="{{detail.showAdminssion}}">
+          <van-tab name="admission" title="报名须知">
+            <towxml nodes="{{detail.admission}}" />
+          </van-tab> 
+        </block>
+        <van-tab name="flow" title="{{type}}流程" wx:if="{{detail.showFlow}}">
+          <towxml nodes="{{detail.flow}}" />
+        </van-tab>
+>>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
       </van-tabs>
     </view>
   </view>

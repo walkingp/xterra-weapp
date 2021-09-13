@@ -73,7 +73,11 @@
   position: sticky;
 }
 button.button{
+<<<<<<< HEAD
   border: solid 2rpx #313030;
+=======
+  border: solid 4rpx #313030;
+>>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
   height: 72rpx;
   display: flex;
   align-items: center;

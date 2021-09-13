@@ -1,6 +1,10 @@
 import { getCityList } from "../../../api/venue"
+<<<<<<< HEAD
 import config from "../../../config/config";
 const i18n = require("./../../../utils/i18n");
+=======
+
+>>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
 // miniprogram/pages/venue/city/city.js
 Page({
 
@@ -10,11 +14,17 @@ Page({
   data: {
     list: []
   },
+<<<<<<< HEAD
   select(e){
     const { name } = e.currentTarget.dataset;    
     wx.setStorageSync(config.storageKey.currentCity, name)
     wx.switchTab({
       url: '/pages/index/index',
+=======
+  select(){
+    wx.navigateBack({
+      delta: -1,
+>>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
     })
   },
 
@@ -29,11 +39,14 @@ Page({
     wx.showLoading({
     })
     const list = await getCityList();
+<<<<<<< HEAD
     list.map(item => {
       item.city = i18n.i18n.getLang() ? item.cityCN : item.cityEn;
       item.desc = i18n.i18n.getLang() ? item.desc : item.descEn;
       return item;
     })
+=======
+>>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
     this.setData({
       list
     }, () => {

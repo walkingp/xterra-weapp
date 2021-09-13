@@ -1,18 +1,34 @@
 <view class="venues">
+<<<<<<< HEAD
   <view class="title">{{_t['精选活动']}}</view>
   <view class="main flex align-center">
     <view class="left flex-none" bindtap="prev"></view>
     <view class="swiper flex-auto">
       <swiper current="{{current}}" previous-margin="30rpx" next-margin="30rpx" snap-to-edge="{{true}}">
+=======
+  <view class="title">精选活动</view>
+  <view class="main flex align-center">
+    <view class="left flex-none"></view>
+    <view class="swiper flex-auto">
+      <swiper>
+>>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
         <swiper-item class="flex column" wx:for="{{list}}" wx:key="_id">
           <image src="{{item.picUrls[0]}}" mode="aspectFit"></image>
           <text class="place">{{item.title}}</text>
           <text class="desc">{{item.date}}</text>
+<<<<<<< HEAD
           <button data-url="/pages/events/detail/detail?id={{item._id}}" bindtap="redirect" class="button">{{_t['立即报名']}}</button>
         </swiper-item>
       </swiper>
     </view>
     <view class="right flex-none" bindtap="next"></view>
+=======
+          <button data-id="{{item._id}}" bindtap="showContent" class="button">查看详情</button>
+        </swiper-item>
+      </swiper>
+    </view>
+    <view class="right flex-none"></view>
+>>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
   </view>
 </view>
 <view class="mask" wx:if="{{show}}"></view>
@@ -22,6 +38,10 @@
       <towxml nodes="{{content}}" />
     </view>
     <view class="action flex-none">
+<<<<<<< HEAD
       <button class="button">{{_t['立即报名']}}</button>
+=======
+      <button class="button">立即报名</button>
+>>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
     </view>
 </view>

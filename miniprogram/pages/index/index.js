@@ -6,6 +6,7 @@ const {
   getNewsIndexList
 } = require("../../api/news");
 const dayjs = require("dayjs");
+<<<<<<< HEAD
 const i18n = require("./../../utils/i18n");
 
 const _t = i18n.i18n.translate();
@@ -18,6 +19,9 @@ const config = require("../../config/config");
 const QQMapWX = require('./../../utils/qqmap-wx-jssdk.min.js');
 let qqmapsdk;
 
+=======
+const { getCityDetailByName, getPlaceList } = require("../../api/venue");
+>>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
 // miniprogram/pages/index/index.js
 Page({
 
@@ -33,6 +37,7 @@ Page({
     headerBarHeight: 60,
     current: 0,
     currentCity: null,
+<<<<<<< HEAD
     places: [],
     isChinese: i18n.i18n.getLang()
   },
@@ -51,11 +56,16 @@ Page({
       },
     });
   },
+=======
+    places: []
+  },  
+>>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
   swiperChange(e) {
     this.setData({
       current: e.detail.current
     })
   },
+<<<<<<< HEAD
   mainSwiperChanged(e) {},
   redirect(e) {
     const {
@@ -63,6 +73,13 @@ Page({
       wechaturl
     } = e.currentTarget.dataset;
     if (wechaturl) {
+=======
+  mainSwiperChanged(e) {
+  },
+  redirect(e){
+    const { url, wechaturl } = e.currentTarget.dataset;
+    if(wechaturl){
+>>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
       wx.navigateTo({
         url: `/pages/more/webview/webview?url=${wechaturl}`,
       })
@@ -97,9 +114,13 @@ Page({
         const isTabbar = url.indexOf("/pages/news/news") >= 0 || url.indexOf("pages/events/events") >= 0;
         if (isTabbar) {
           app.globalData.tabBarLink = url;
+<<<<<<< HEAD
           wx.switchTab({
             url,
           })
+=======
+               
+>>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
           return;
         }
         wx.navigateTo({
@@ -108,6 +129,7 @@ Page({
         break;
     }
   },
+<<<<<<< HEAD
   async fetchCurrentCity(cityName) {
     const city = await getCityDetailByName(cityName);
     let currentCity = null;
@@ -134,12 +156,29 @@ Page({
         places
       });
     })
+=======
+  async fetchCurrentCity(){
+    const { currentCity } = app.globalData;
+    const city = await getCityDetailByName(currentCity);
+    if(city.length > 0){
+      this.setData({
+        currentCity: city[0]
+      }, async () => {
+        const { _id } = city[0];
+        const places = await getPlaceList(_id);
+        this.setData({
+          places
+        });
+      })
+    }
+>>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
   },
   async fetch() {
     wx.showLoading({
       title: _t['加载中…'],
     });
     const banners = await getBannerList();
+<<<<<<< HEAD
     // const news = await getNewsIndexList();
     // news.map(item => {
     //   item.formatDate = dayjs(new Date(item.postTime)).format("MM月DD日");
@@ -147,6 +186,14 @@ Page({
     // });
     
     const citys = await getCityList();
+=======
+    const news = await getNewsIndexList();
+    news.map(item => {
+      item.formatDate = dayjs(new Date(item.postTime)).format("MM月DD日");
+      return item;
+    });
+    this.fetchCurrentCity();
+>>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
     this.setData({
       loading: false,
       //races,
@@ -314,6 +361,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
+<<<<<<< HEAD
   onLoad: async function (options) {
     await this.fetch();
     this.watchChanges('banner');
@@ -331,5 +379,22 @@ Page({
     }, () => {
       this.getCity();
     })
+=======
+  onLoad: function (options) {
+    this.fetch();
+    this.watchChanges('banner');
+    this.watchChanges('news');
+    wx.getSystemInfo({
+      success: e => { 
+         let info = wx.getMenuButtonBoundingClientRect()
+         let headerBarHeight = info.bottom + info.top - e.statusBarHeight    
+         this.setData({      
+           headerBarHeight
+         })
+      }
+    })
+  },
+  onShow(){
+>>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
   }
 })

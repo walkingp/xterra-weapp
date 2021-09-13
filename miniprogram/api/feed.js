@@ -1,5 +1,6 @@
 import { getCollectionById, getPaginations } from "../utils/cloud"
 
+<<<<<<< HEAD
 export const getCommentList = async (pageIndex = 1, pageSize = 10, placeId, order = 'latest') => {
   const orderBy = order === 'latest' ? { addedDate: 'desc' } : { kudos: 'desc' };
   const data = await getPaginations({
@@ -17,10 +18,31 @@ export const getCommentList = async (pageIndex = 1, pageSize = 10, placeId, orde
 }
 
 export const getFeedIndexList = async (pageIndex = 1, pageSize = 10) => {
+=======
+export const getCommentList = async (pageIndex = 1, pageSize = 10, placeId) => {
+>>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
   const data = await getPaginations({
     dbName: 'feed',
     filter: {
-      isActive: true
+      isActive: true,
+      type: 'place',
+      placeId
+    },
+    orderBy: {
+      addedDate: 'desc'
+    },
+    pageIndex,
+    pageSize
+  })
+  return data;
+}
+
+export const getFeedIndexList = async (pageIndex = 1, pageSize = 10, type = 'feed') => {
+  const data = await getPaginations({
+    dbName: 'feed',
+    filter: {
+      isActive: true,
+      type
     },
     orderBy: {
       addedDate: 'desc'
@@ -86,11 +108,19 @@ export const getKudosFeedsByUserId = async (userId, pageIndex = 1, pageSize = 10
     });
   });
 }
+<<<<<<< HEAD
 export const addFeed = ({ userId, avatarUrl, content, picUrls, coverUrls, nickName, type, placeId, location }) => {
   return new Promise((resolve, reject) => {
     wx.cloud.callFunction({
       name: 'postIng',
       data: { userId, avatarUrl, content, picUrls, nickName, type, placeId, location, coverUrls },
+=======
+export const addFeed = ({ userId, avatarUrl, content, picUrls, nickName, type, placeId }) => {
+  return new Promise((resolve, reject) => {
+    wx.cloud.callFunction({
+      name: 'postIng',
+      data: { userId, avatarUrl, content, picUrls, nickName, type, placeId },
+>>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
       success: res => {
         resolve(res)
       },

@@ -1,4 +1,5 @@
   <view class="venues">
+<<<<<<< HEAD
     <view class="title">{{_t['精选地点']}}</view>
     <view class="main flex align-center">
       <view class="left flex-none" bindtap="prev"></view>
@@ -10,5 +11,22 @@
         </swiper>
       </view>
       <view class="right" bindtap="next"></view>
+=======
+    <view class="title">精选地点</view>
+    <view class="main flex align-center">
+      <view class="left flex-none"></view>
+      <view class="swiper flex-auto">
+        <swiper>
+          <swiper-item class="flex column" wx:for="{{list}}" wx:key="_id">
+            <image src="{{item.banner}}" mode="aspectFit"></image>
+            <view class="flex count">324人已打卡</view>
+            <text class="desc">“{{item.desc}}”</text>
+            <text class="place">{{item.title}}</text>
+            <button data-url="/pages/venue/detail/detail?id={{item._id}}" bindtap="redirect" class="button">查看详情</button>
+          </swiper-item>
+        </swiper>
+      </view>
+      <view class="right flex-none"></view>
+>>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
     </view>
   </view>

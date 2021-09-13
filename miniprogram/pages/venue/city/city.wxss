@@ -16,7 +16,10 @@ page{
 .info{
   font-size: 24rpx;
   color: #666;
+<<<<<<< HEAD
   text-align: center;
+=======
+>>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
 }
 .item{
   width: 714rpx;
@@ -31,6 +34,7 @@ page{
   width: 420rpx;
   height: 315rpx;
 }
+<<<<<<< HEAD
 .text{
   padding: 0 20rpx;
 }
@@ -38,10 +42,17 @@ page{
   text-align: center;
   display: block;
   color: #aaa;
+=======
+.text text{
+  text-align: center;
+  display: block;
+  color: #666;
+>>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
   font-size: 24rpx;
 }
 .text .name{
   color: #333;
+<<<<<<< HEAD
   font-size: 48rpx;
   font-weight: 800;
   font-weight: bold;
@@ -63,4 +74,15 @@ page{
 .title image{
   height: 60rpx;
   margin-bottom: 20rpx;
+=======
+  font-size: 42rpx;
+  font-weight: bold;
+  padding-bottom: 10rpx;
+}
+.more{
+  font-size: 32rpx;
+  font-weight: bold;
+  letter-spacing: 4rpx;
+  padding: 50rpx 0;
+>>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
 }

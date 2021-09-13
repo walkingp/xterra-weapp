@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 const i18n = require("./../../utils/i18n");
+=======
+>>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
 // components/venue-list/venue-list.js
 Component({
   /**
@@ -14,6 +17,7 @@ Component({
    * 组件的初始数据
    */
   data: {
+<<<<<<< HEAD
     current: 0
   },
   pageLifetimes: {
@@ -22,12 +26,16 @@ Component({
         _t: i18n.i18n.translate()
       })
     },
+=======
+
+>>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
   },
 
   /**
    * 组件的方法列表
    */
   methods: {
+<<<<<<< HEAD
     prev(){
       let { current, list } = this.data;
       if(current === 0){
@@ -50,6 +58,8 @@ Component({
         current
       });
     },
+=======
+>>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
     redirect(e){
       const { url } = e.currentTarget.dataset;
       wx.navigateTo({

@@ -1,9 +1,16 @@
 const { getCommentList } = require("../../../api/feed");
+<<<<<<< HEAD
 const { getPlaceDetail, getPlaceList, getRaceListByPlace, checkIsTicked, checkIsFaved, favPlace } = require("../../../api/venue");
 const config = require("../../../config/config");
 const dayjs = require("dayjs");
 const app = getApp();
 const i18n = require("./../../../utils/i18n");
+=======
+const { getPlaceDetail, getPlaceList, getRaceListByPlace } = require("../../../api/venue");
+const config = require("../../../config/config");
+const dayjs = require("dayjs");
+
+>>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
 // miniprogram/pages/venue/detail/detail.js
 Page({
 
@@ -13,14 +20,19 @@ Page({
   data: {
     id: null,
     detail: null,
+<<<<<<< HEAD
     mapKey: config.mapKey,
     places: [],
     markers: [],
+=======
+    places: [],
+>>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
     pageIndex: 1,
     pageSize: 10,
     list: [],
     races: [],
     isLoadMore: false,
+<<<<<<< HEAD
     show: false,
     isTicked: false,
     isFaved: false,
@@ -70,10 +82,21 @@ Page({
       show: type === 'succ',
       id,
       userId
+=======
+    show: false
+  },
+  onLoad: function (options) {
+    const { mapKey } = config;
+    const { id, type } = options
+    this.setData({
+      show: type === 'succ',
+      id, mapKey
+>>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
     });
 
     this.fetch(id);
   },
+<<<<<<< HEAD
   regionchange(e){
 
   },
@@ -92,6 +115,11 @@ Page({
   },
   async fetch(id){
     wx.showLoading({})
+=======
+  async fetch(id){
+    wx.showLoading({
+    })
+>>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
     const res = await getPlaceDetail(id);
     if(!res){
       wx.showToast({
@@ -102,6 +130,7 @@ Page({
     }
     const places = await getPlaceList(res.city);
     const races = await getRaceListByPlace(id);
+<<<<<<< HEAD
     const isChinese = i18n.i18n.getLang();
     const format = isChinese ? 'YYYY年MM月DD日' : 'YYYY MMMM DD';
     races.map(item=> item.date = dayjs(item.raceDate).format(format));
@@ -129,6 +158,10 @@ Page({
       isTicked,
       isFaved,
       userId,
+=======
+    races.map(item=> item.date = dayjs(item.raceDate).format('YYYY年MM月DD日 HH:mm'));
+    this.setData({
+>>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
       races,
       detail: res,
       places
@@ -161,12 +194,16 @@ Page({
       show: false
     })
   },
+<<<<<<< HEAD
   showContent(){
     this.setData({
       show: true
     })
   },
   async fetchComment(order = 'hottest') {
+=======
+  async fetchComment() {
+>>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
     wx.showNavigationBarLoading({
       success: (res) => {},
     })
@@ -176,7 +213,11 @@ Page({
       list,
       id
     } = this.data;
+<<<<<<< HEAD
     const newData = await getCommentList(pageIndex, pageSize, id, order);
+=======
+    const newData = await getCommentList(pageIndex, pageSize, id);
+>>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
     if (newData.length > 0) {
       newData.map(item => {
         item.dateStr = dayjs(new Date(item.addedDate)).format("MM-DD HH:mm:ss");
@@ -207,6 +248,10 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
+<<<<<<< HEAD
+=======
+    this.fetchComment();
+>>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
   },
 
   /**

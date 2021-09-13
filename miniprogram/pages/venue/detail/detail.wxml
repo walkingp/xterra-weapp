@@ -1,5 +1,6 @@
 <view class="page">
   <view class="banner">
+<<<<<<< HEAD
     <image bindtap="previewBanner" data-url="{{detail.banner}}" src="{{detail.banner}}" mode="aspectFill"></image>
   </view>
   <view class="flex top align-center space-between">
@@ -36,15 +37,53 @@
     </view>
     <view class="more flex justify-center" wx:if="{{detail.pickedPics.length > 6 && !isLoadMore}}">
       <button class="button" bindtap="loadMorePics">{{_t['加载更多']}}</button>
+=======
+    <image src="{{detail.banner}}" mode="aspectFill"></image>
+  </view>
+  <view class="flex top align-center space-between">
+    <text class="flex-auto">{{detail.title}}</text>
+    <view class="flex-none">
+      <van-icon name="like-o" class="margin-right-md" />
+      <van-icon name="flag-o" />
+    </view>
+  </view>
+  <view class="desc">
+    <text selectable="{{true}}">{{detail.desc}}</text>
+  </view>
+  <view class="map">
+    <map id="map" markers="{{markers}}" longitude="{{detail.coordinate[0]}}" latitude="{{detail.coordinate[1]}}"
+      scale="11" subkey="{{mapKey}}" layer-style="1" bindtap="showLocation" bindregionchange="regionchange"></map>
+    <view class="fs-xs text-grey text-center">点击地图开始导航</view>
+  </view>
+  <view class="places">
+    <place-event-list list="{{races}}" />
+  </view>
+  <view class="photos">
+    <view class="title">精选照片</view>
+    <view class="grid">
+      <block wx:for="{{detail.pickedPics}}" wx:key="item" wx:if="{{index<6}}">
+        <image src="{{item}}" mode="aspectFill"></image>
+      </block>
+      <block wx:for="{{detail.pickedPics}}" wx:key="item" wx:if="{{index>5 && isLoadMore}}">
+        <image src="{{item}}" mode="aspectFill"></image>
+      </block>
+    </view>
+    <view class="more flex justify-center" wx:if="{{detail.pickedPics.length > 6 && !isLoadMore}}">
+      <button class="button" bindtap="loadMorePics">加载更多</button>
+>>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
     </view>
   </view>
   <view class="feeds relative">
     <view class="line"></view>
+<<<<<<< HEAD
     <view class="title">{{_t['发现']}}</view>
     <view class="flex justify-end filter">
       <view bindtap="orderLatest" class="latest flex align-center {{order === 'latest' ? 'current' : ''}}"><van-icon name="browsing-history-o" /> {{_t['最新']}}</view>
       <view bindtap="orderHottest" class="hot flex align-center {{order === 'hottest' ? 'current' : ''}} "><van-icon name="fire-o" /> {{_t['最热']}}</view>
     </view>
+=======
+    <view class="title">发现</view>
+>>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
     <community-list list="{{list}}" />
   </view>
 
@@ -61,12 +100,19 @@
     </view>
     <view class="content flex-auto flex align-center column">
       <image class="medal" src="{{detail.medalUrl}}" mode="aspectFit"></image>
+<<<<<<< HEAD
       <text class="padding-y-xl fs-sm text-grey" wx:if="{{isTicked}}">{{_t['勋章领取成功']}}</text>
       <text class="padding-y-xl fs-sm text-grey" wx:else>{{_t['打卡后即可领取此勋章']}}</text>
     </view>
     <view class="action flex-none">
       <button bindtap="hideContent" class="button" wx:if="{{isTicked}}">{{_t['我知道了']}}</button>
       <button bindtap="redirect" data-url="/pages/community/new/new?type=place&placeId={{id}}" class="button" wx:else>现在去打卡</button>
+=======
+      <text class="padding-y-xl fs-sm text-grey">勋章领取成功</text>
+    </view>
+    <view class="action flex-none">
+      <button bindtap="hideContent" class="button">我知道了</button>
+>>>>>>> b9e7367006069f33940f96daa9502cad52ea4cb4
     </view>
   </view>
 </block>
