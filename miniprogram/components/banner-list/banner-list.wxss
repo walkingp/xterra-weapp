@@ -1,6 +1,9 @@
 .swiper {
   position: relative;
 }
+.swiper swiper{
+  height: 320rpx;
+}
 .swiper-item {
   height: 100%;
 }
