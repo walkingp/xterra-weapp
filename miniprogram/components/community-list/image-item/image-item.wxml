@@ -1,0 +1,51 @@
+<block wx:for="{{list}}" wx:key="_id" wx:for-item="detail">
+  <view class="photo-item">
+    <view class="user flex space-between align-center">
+      <navigator url="/pages/community/user/user?id={{detail.userId}}" class="left flex align-center">
+        <image class="avatar" src="{{detail.avatarUrl}}" mode="aspectFit" />
+        <view class="flex column space-between">
+          <text class="bold fs-md">{{detail.nickName}}</text>
+          <text class="text-grey fs-xs">{{detail.dateStr}}</text>
+        </view>
+      </navigator>
+      <view class="right flex column" catchtap="giveKudos" data-id="{{detail._id}}">
+        <van-icon size="24px" name="good-job" color="orange" wx:if="{{detail.kudosed}}" />
+        <van-icon size="24px" name="good-job-o" wx:else />
+        <text class="text-grey align-center fs-xs" wx:if="{{detail.kudos}}">{{detail.kudos}}人</text>
+        <!-- <button>关注</button> -->
+      </view>
+    </view>
+    <swiper indicator-dots="{{detail.picUrls.length > 1}}" autoplay="{{true}}">
+      <block wx:if="{{detail.coverUrls.length}}">
+        <block wx:for="{{detail.picUrls}}" wx:key="item">
+          <swiper-item>
+            <view class="swiper-item">
+              <video id="myVideo{{index}}" bindloadedmetadata="onVideoLoaded" poster="{{detail.coverUrls[index]}}"
+                src="{{item}}" autoplay="{{true}}"></video>
+            </view>
+          </swiper-item>
+        </block>
+      </block>
+      <block wx:else>
+        <block wx:for="{{detail.picUrls}}" wx:key="item">
+          <swiper-item>
+            <view class="swiper-item">
+              <van-image width="100vw" height="440rpx" use-loading-slot lazy-load="{{true}}" bindtap="preview"
+                data-src="{{item}}" src="{{item}}" fit="cover">
+                <van-loading slot="loading" type="spinner" size="20" vertical />
+              </van-image>
+            </view>
+          </swiper-item>
+        </block>
+      </block>
+    </swiper>
+    <view class="pick" wx:if="{{detail.location}}">
+      <van-cell title-style="color: #576b95; font-size: 24rpx;" title="{{detail.location.title}}" border="{{false}}"
+        icon="location-o" bind:tap="showLocation" />
+    </view>
+    <view class="title">{{detail.title}}</view>
+    <view class="summary">
+      <text selectable="{{true}}">{{detail.content}}</text>
+    </view>
+  </view>
+</block>

@@ -311,6 +311,12 @@
           "pathName": "pages/community/detail/detail",
           "query": "id=8937eaa9613ef5a60ac7ea8d1c853525",
           "scene": null
+        },
+        {
+          "name": "视频",
+          "pathName": "pages/community/video/video",
+          "query": "id=8937eaa9613ef5a60ac7ea8d1c853525",
+          "scene": null
         }
       ]
     }

@@ -7,6 +7,17 @@
   overflow: hidden;
   position: relative;
 }
+.items{
+  width: calc(50% - 30rpx);
+}
+.items:nth-child(1){
+  margin-right: 10rpx;
+  margin-left: 20rpx;
+}
+.items:nth-child(2){
+  margin-right: 20rpx;
+  margin-left: 10rpx;
+}
 .item .play{
   position: absolute;
   left: 50%;
@@ -14,7 +25,6 @@
   transform: translate(-50%, -50%);
 }
 .item image.thumb {
-  height: 210rpx!important;
   width: 100%;
 }
 .margin-left{
@@ -28,16 +38,15 @@
   padding: 20rpx;
 }
 .masonry {
-  padding: 20rpx;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-column-gap: 10px;
+  padding: 20rpx 0;
+  display: flex;
 }
 .content .desc{  
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
   overflow: hidden;  
+  font-size: 28rpx;
   word-break: break-all;
 }
 .user{
@@ -46,18 +55,24 @@
   align-items: center;
   padding-top: 20rpx;
 }
+.user .left{
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 .user .left, .user .right{
   display: flex;
   align-items: center;
-  font-size: 24rpx;
+  font-size: 22rpx;
+  width: 56rpx;
 }
 .avatar{
-  width: 48rpx;
-  height: 48rpx;
+  width: 36rpx;
+  height: 36rpx;
   border-radius: 50%;
 }
 .user text{
   margin-left: 10rpx;
+  color: #999;
 }
 .left{
   white-space: nowrap;

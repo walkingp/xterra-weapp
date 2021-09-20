@@ -55,7 +55,8 @@
     "pages/admin/users/users",
     "pages/venue/city/city",
     "pages/venue/detail/detail",
-    "pages/community/location/location"
+    "pages/community/location/location",
+    "pages/community/video/video"
   ],
   "window": {
     "backgroundColor": "#ffffff",

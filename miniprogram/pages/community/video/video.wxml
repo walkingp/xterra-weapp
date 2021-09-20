@@ -1,0 +1,34 @@
+<swiper class="video">
+  <block wx:for="{{list}}" wx:key="_id">
+    <swiper-item>
+      <video id="myVideo{{index}}" bindloadedmetadata="onVideoLoaded" loop="{{true}}" poster="{{item.coverUrls[0]}}"
+        src="{{item.picUrls[0]}}" object-fit="contain" controls="{{false}}" autoplay="{{true}}"></video>
+      <view class="btns flex column align-center">
+        <view class="item flex column align-center">
+          <van-icon name="like" color="white" size="40px" />
+          <text>24309</text>
+        </view>
+        <view class="item flex column align-center">
+          <van-icon name="star" color="white" size="40px" />
+          <text>24309</text>
+        </view>
+        <view class="item flex column align-center">
+          <van-icon name="chat" color="white" size="40px" />
+          <text>24309</text>
+        </view>
+        <view class="item">
+          <van-icon name="share" color="white" size="40px" />
+        </view>
+      </view>
+      <view class="info flex column">
+        <view class="flex align-center">
+          <navigator url="/pages/user/{{detail.userId}}">@{{detail.nickName}}</navigator>
+          <button plain="{{true}}">+关注</button>
+        </view>
+        <text selectable="{{true}}">
+          {{detail.content}}
+        </text>
+      </view>
+    </swiper-item>
+  </block>
+</swiper>

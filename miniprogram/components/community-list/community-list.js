@@ -15,10 +15,24 @@ Component({
     }
   },
 
+  observers: {
+    'list': function(list){
+      if(list.length) {
+        const list1 = list.filter((item, index) => index % 2 === 0);
+        const list2 = list.filter((item, index) => index % 2 !== 0);
+        this.setData({
+          lists: [ list1, list2 ]
+        });
+      }
+    }
+  },
+
   /**
    * 组件的初始数据
    */
   data: {
+    lists: [],
+    list2: [],
     show: false,
     comments: null
   },

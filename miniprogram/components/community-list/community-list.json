@@ -1,4 +1,7 @@
 {
   "component": true,
-  "usingComponents": {}
+  "usingComponents": {
+    "image-item": "./image-item/image-item",
+    "video-item": "./video-item/video-item"
+  }
 }
