@@ -38,7 +38,8 @@
       }
     ],
     "minifyWXSS": true,
-    "showES6CompileOption": false
+    "showES6CompileOption": false,
+    "minifyWXML": true
   },
   "appid": "wx491fb14c7948a753",
   "projectname": "XTERRA",

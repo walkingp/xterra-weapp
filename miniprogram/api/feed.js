@@ -22,6 +22,23 @@ export const getCommentList = async (
   return data;
 };
 
+export const getVideoList = async (
+  pageIndex = 1,
+  pageSize = 10
+) => {
+  const db = wx.cloud.database();
+  const _ = db.command;
+  const res = await db
+    .collection("feed")
+    .where({
+      coverUrls: _.neq(null)
+    })
+    .skip((pageIndex - 1) * pageSize)
+    .limit(pageSize)
+    .get();
+  return res.data;
+};
+
 export const getFeedIndexList = async (
   pageIndex = 1,
   pageSize = 10,

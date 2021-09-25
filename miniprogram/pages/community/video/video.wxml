@@ -1,20 +1,25 @@
-<swiper class="video">
+<swiper class="video" vertical bindchange="onSwiperChange">
   <block wx:for="{{list}}" wx:key="_id">
     <swiper-item>
-      <video id="myVideo{{index}}" bindloadedmetadata="onVideoLoaded" loop="{{true}}" poster="{{item.coverUrls[0]}}"
+      <video id="myVideo{{index}}" bindloadedmetadata="onVideoLoaded" bindplay="onPlay" loop="{{true}}" poster="{{item.coverUrls[0]}}"
         src="{{item.picUrls[0]}}" object-fit="contain" controls="{{false}}" autoplay="{{true}}"></video>
       <view class="btns flex column align-center">
         <view class="item flex column align-center">
-          <van-icon name="like" color="white" size="40px" />
-          <text>24309</text>
+          <navigator url="/pages/community/user/user?id={{item.userId}}">
+            <image src="{{item.avatarUrl}}" class="user" mode="aspectFill" />
+          </navigator>
         </view>
-        <view class="item flex column align-center">
+        <view class="item flex column align-center" bindtap="giveKudos" data-id="{{item._id}}">
+          <van-icon name="like" color="{{item.kudosed ? 'orange' : 'white'}}" color="white" size="40px" />
+          <text>{{item.kudos}}</text>
+        </view>
+        <!-- <view class="item flex column align-center">
           <van-icon name="star" color="white" size="40px" />
           <text>24309</text>
-        </view>
-        <view class="item flex column align-center">
-          <van-icon name="chat" color="white" size="40px" />
-          <text>24309</text>
+        </view> -->
+        <view bindtap="showComments" class="item flex column align-center">
+          <van-icon name="chat" size="40px" />
+          <text>{{item.comments}}</text>
         </view>
         <view class="item">
           <van-icon name="share" color="white" size="40px" />
@@ -22,13 +27,47 @@
       </view>
       <view class="info flex column">
         <view class="flex align-center">
-          <navigator url="/pages/user/{{detail.userId}}">@{{detail.nickName}}</navigator>
-          <button plain="{{true}}">+关注</button>
+          <navigator url="/pages/community/user/user?id={{item.userId}}">@{{item.nickName}}</navigator>
+          <!-- <button plain="{{true}}">+关注</button> -->
         </view>
-        <text selectable="{{true}}">
-          {{detail.content}}
-        </text>
+        <text class="text" selectable="{{true}}">{{item.content}}</text>
       </view>
     </swiper-item>
   </block>
 </swiper>
+<van-popup
+custom-style="height: 60%"
+  show="{{ show }}"
+  closeable
+  position="bottom"
+  bind:close="onClose">
+  <view class="comments">
+      <view class="title">{{_t['所有评论']}}<text wx:if="{{comments.length}}">（{{comments.length}}）</text></view>
+      <block wx:if="{{comments.length}}">
+        <view class="comment flex" wx:for="{{comments}}" wx:key="index">
+          <navigator url="/pages/community/user/user?id={{item.userId}}" class="flex justify-center">
+            <image class="avatar" src="{{item.avatarUrl}}" mode="aspectFill" />
+          </navigator>
+          <view class="flex-auto flex column">
+            <view class="info2 flex align-center space-between">
+              <navigator class="fs-xs" url="/pages/community/user/user?id={{item.userId}}">{{item.nickName}}</navigator>
+              <text class="text-grey fs-xs">{{item.dateStr}}</text>
+            </view>
+            <text class="content">{{item.content}}</text>
+          </view>
+        </view>
+      </block>
+      <block wx:else>
+        <van-empty description="{{_t['暂无评论']}}" />
+      </block>
+      <form bindsubmit="addComment" class="bottom flex-none">
+        <view class="flex space-between align-center">
+          <input type="text" name="content" confirm-type="send" value="{{value}}" placeholder="{{_t['评论内容']}}"
+            disabled="{{!isLogined}}" class="flex-auto" />
+          <button form-type="submit" disabled="{{btnDisabled}}" wx:if="{{isLogined}}"
+            class="flex-none">{{_t['发表评论']}}</button>
+          <button form-type="submit" wx:else class="flex-none">{{_t['请先登录']}}</button>
+        </view>
+      </form>      
+    </view>  
+  </van-popup>

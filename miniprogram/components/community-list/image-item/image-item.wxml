@@ -30,8 +30,8 @@
         <block wx:for="{{detail.picUrls}}" wx:key="item">
           <swiper-item>
             <view class="swiper-item">
-              <van-image width="100vw" height="440rpx" use-loading-slot lazy-load="{{true}}" bindtap="preview"
-                data-src="{{item}}" src="{{item}}" fit="cover">
+              <van-image width="100%" use-loading-slot lazy-load="{{true}}" bindtap="preview"
+                data-src="{{item}}" src="{{item}}" fit="widthFix">
                 <van-loading slot="loading" type="spinner" size="20" vertical />
               </van-image>
             </view>

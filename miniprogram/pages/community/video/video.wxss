@@ -6,11 +6,12 @@ swiper-item{
 }
 .video swiper-item video{
   height: 100%; 
+  margin: 0;
 }
 .btns{
   position: fixed;
   right: 40rpx;
-  bottom: 100rpx;
+  bottom: 300rpx;
 }
 .btns .item{
   margin-top: 40rpx;
@@ -18,9 +19,14 @@ swiper-item{
 }
 .info{
   position: fixed;
-  bottom: 20rpx;
+  width: 100vw;
   left: 20rpx;
   color: white;
+  bottom: env(safe-area-inset-bottom);
+  bottom: constant(safe-area-inset-bottom);
+}
+.info .text{
+  line-height: 2;
 }
 .info button{
   border: solid 1rpx #fff;
@@ -31,4 +37,65 @@ swiper-item{
   height: 40rpx;
   line-height: 40rpx;
   padding: 0 10rpx;
+}
+image.user{
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  margin-bottom: 20rpx;
+}
+
+.comments .title{
+  font-weight: bold;
+  padding: 20rpx;
+  font-size: 26rpx;
+}
+.comment{
+  font-size: 24rpx;
+  padding: 10rpx 20rpx;
+}
+.comment navigator{
+  margin-right: 20rpx;
+}
+.comment .content{
+  padding: 10rpx 0;
+  line-height: 1.8;
+  border-bottom: 2rpx solid #f1f1f1;
+}
+.comment:last-child .content{
+  border-bottom: none;
+}
+.van-icon__image{
+  margin-top: -15rpx;
+}
+
+.bottom{
+  background-color: #fff;
+  padding: 15rpx 30rpx;
+  border-top: solid 2rpx #eee;
+  position: fixed;
+  left: 0;
+  width: 100%;
+  bottom: env(safe-area-inset-bottom);
+  bottom: constant(safe-area-inset-bottom);
+}
+.bottom input{
+  background-color: #f1f1f1;
+  padding: 15rpx;
+  border-radius: 10rpx;
+}
+.bottom button{
+  font-size: 24rpx;
+  padding-left: 20rpx;
+  padding-right: 0;
+  color: #666;
+  width: auto!important;
+  display: inline-block;
+  margin: 0!important;
+  letter-spacing: 4rpx;
+  background-color: #fff;
+}
+.bottom button::after{
+  display: none!important;
+  content: none;
 }
