@@ -2,7 +2,7 @@
   <block wx:for="{{list}}" wx:key="_id">
     <swiper-item>
       <video id="myVideo{{index}}" bindloadedmetadata="onVideoLoaded" bindplay="onPlay" loop="{{true}}" poster="{{item.coverUrls[0]}}"
-        src="{{item.picUrls[0]}}" object-fit="contain" controls="{{false}}" autoplay="{{true}}"></video>
+        src="{{item.picUrls[0]}}" object-fit="contain" controls="{{false}}" autoplay="{{index === current}}"></video>
       <view class="btns flex column align-center">
         <view class="item flex column align-center">
           <navigator url="/pages/community/user/user?id={{item.userId}}">

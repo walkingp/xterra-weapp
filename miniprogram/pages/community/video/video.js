@@ -14,6 +14,7 @@ Page({
    */
   data: {
     id: null,
+    current: 0,
     detail: null,
     comments: null,
     isLogined: false,
@@ -22,7 +23,8 @@ Page({
     list: [],
     page: 1,
     pageSize: 10,
-    show: false
+    show: false,
+    videoContext: null
   },
   showComments(){
     this.setData({
@@ -159,23 +161,26 @@ Page({
     })
   },
   async onVideoLoaded(){
-    console.log('1')
+    const { current } = this.data;
+
   },
   async bindplay(){
     console('2');
   },
   async onSwiperChange(e){
+    const contextPrev = wx.createVideoContext('myVideo' + this.data.current);
+    contextPrev.pause();
     const { current } = e.detail;
+    this.setData({
+      current
+    })
+    const contextCur = wx.createVideoContext('myVideo' + current);
+    contextCur.play();
+    console.log(current);
     const { list, page, pageSize } = this.data;
     if(current === list.length - 1) {
       let res = await getVideoList(page + 1, pageSize);
       if(res.length === 0) {
-        setTimeout(() => {
-          wx.showToast({
-            icon: 'none',
-            title: '已加载完全部视频',
-          });          
-        }, 1000);
         return;
       }
       this.setData({
@@ -183,10 +188,9 @@ Page({
         page: page + 1
       })
     }
-
   },
   async fetch(){
-    const { id } = this.data;
+    const { id, current } = this.data;
     const detail = await getCollectionById({dbName: 'feed', id});
     detail.dateStr = dayjs(detail.addedDate).format("YYYY-MM-DD HH:mm:ss");
     detail.content = detail.content.trim();
