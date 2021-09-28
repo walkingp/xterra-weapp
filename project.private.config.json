@@ -317,6 +317,12 @@
           "pathName": "pages/community/video/video",
           "query": "id=8937eaa9613ef5a60ac7ea8d1c853525",
           "scene": null
+        },
+        {
+          "name": "动态页（新）",
+          "pathName": "pages/community/item/item",
+          "query": "id=14139e12613d760f0bb1374c027715f6",
+          "scene": null
         }
       ]
     }

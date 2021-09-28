@@ -10,7 +10,7 @@
           </navigator>
         </view>
         <view class="item flex column align-center" bindtap="giveKudos" data-id="{{item._id}}">
-          <van-icon name="like" color="{{item.kudosed ? 'orange' : 'white'}}" color="white" size="40px" />
+          <van-icon name="like" color="{{item.kudosed ? '#ff5e00' : 'white'}}" size="40px" />
           <text>{{item.kudos}}</text>
         </view>
         <!-- <view class="item flex column align-center">

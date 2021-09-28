@@ -23,16 +23,19 @@ export const getCommentList = async (
 };
 
 export const getVideoList = async (
+  type = 'video',
   pageIndex = 1,
   pageSize = 10
 ) => {
   const db = wx.cloud.database();
   const _ = db.command;
+  let where = { isActive: true };
+  if(type === 'video') {
+    where.coverUrls = _.neq(null)
+  }
   const res = await db
     .collection("feed")
-    .where({
-      coverUrls: _.neq(null)
-    })
+    .where(where)
     .skip((pageIndex - 1) * pageSize)
     .limit(pageSize)
     .get();

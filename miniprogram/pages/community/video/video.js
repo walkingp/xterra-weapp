@@ -121,7 +121,6 @@ Page({
     }
     wx.showLoading()
     const {id} = e.currentTarget.dataset;
-    console.log(id)
     const res = await giveKudos({ userId, userInfo, type: 'feed', id});
     
     // 加分
@@ -149,16 +148,14 @@ Page({
       const { isLogined, userId, userInfo } = res;
       this.setData({
         isLogined,
+        id,
         userId,
         userInfo
+      },()=>{
+        this.fetch();
+        this.watchChanges();
       });
     });
-    this.setData({
-      id
-    },()=>{
-      this.fetch();
-      this.watchChanges();
-    })
   },
   async onVideoLoaded(){
     const { current } = this.data;
@@ -190,7 +187,7 @@ Page({
     }
   },
   async fetch(){
-    const { id, current } = this.data;
+    const { id, userId } = this.data;
     const detail = await getCollectionById({dbName: 'feed', id});
     detail.dateStr = dayjs(detail.addedDate).format("YYYY-MM-DD HH:mm:ss");
     detail.content = detail.content.trim();
