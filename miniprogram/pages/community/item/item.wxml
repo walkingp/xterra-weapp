@@ -18,21 +18,21 @@
       </view>
       <swiper indicator-dots="{{item.picUrls.length > 1}}">
         <block wx:if="{{item.coverUrls.length}}">
-          <block wx:for="{{item.picUrls}}" wx:key="item">
+          <block wx:for="{{item.picUrls}}" wx:key="video" wx:for-item="video">
             <swiper-item>
               <view class="swiper-item">
                 <video id="myVideo{{index}}" bindloadedmetadata="onVideoLoaded" poster="{{item.coverUrls[index]}}"
-                  src="{{item}}" autoplay="{{true}}"></video>
+                  src="{{video}}" autoplay="{{true}}"></video>
               </view>
             </swiper-item>
           </block>
         </block>
         <block wx:else>
-          <block wx:for="{{item.picUrls}}" wx:key="item">
+          <block wx:for="{{item.picUrls}}" wx:key="img" wx:for-item="img">
             <swiper-item>
               <view class="swiper-item">
                 <van-image width="100vw" height="680rpx" use-loading-slot lazy-load="{{true}}" bindtap="preview"
-                  data-src="{{item}}" src="{{item}}" fit="cover">
+                  data-src="{{img}}" data-urls="{{item.picUrls}}" src="{{img}}" fit="cover">
                   <van-loading slot="loading" type="spinner" size="20" vertical />
                 </van-image>
               </view>

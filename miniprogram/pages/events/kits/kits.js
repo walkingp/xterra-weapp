@@ -1,6 +1,9 @@
 const app = getApp();
 const { getdetail, getRaceDetail } = require("../../../api/race");
 const config = require("../../../config/config");
+const i18n = require("./../../../utils/i18n");
+
+const _t = i18n.i18n.translate();
 // miniprogram/pages/news/detail/detail.js
 Page({
 

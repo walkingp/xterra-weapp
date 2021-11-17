@@ -101,7 +101,7 @@ Page({
     const { raceId } = detail;
     const raceDetail = await getRaceDetail(raceId);
     detail.orderTime = dayjs(detail.addedDate).format("YYYY-MM-DD HH:mm:ss");
-    const isBeforeRaceDate = dayjs(new Date()).isBefore(dayjs(raceDetail.raceDate));
+    const isBeforeRaceDate = dayjs().isBefore(dayjs(raceDetail.raceDate));
     const isPlogging = raceDetail.type === 'X-Plogging';
     this.setData({
       detail,
@@ -124,7 +124,7 @@ Page({
         this.watchChanges();
       })
       // 可取消活动时间
-      const isBeforeRefundDate = raceDetail.enabledRefund && dayjs(new Date()).isBefore(dayjs(raceDetail.refundLastDate));
+      const isBeforeRefundDate = raceDetail.enabledRefund && dayjs().isBefore(dayjs(raceDetail.refundLastDate));
       const enabled = (isPlogging || isBeforeRefundDate) && isBeforeRaceDate;
       if(!enabled){
         this.setData({

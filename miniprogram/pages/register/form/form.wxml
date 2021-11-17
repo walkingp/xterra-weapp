@@ -31,7 +31,7 @@
     <van-cell-group title="{{_t['其他信息']}}">
       <van-cell title="{{_t['血型']}}" wx:if="{{!isPlogging}}" required="{{!isDiscovery}}" name="bloodType" border="{{ false }}" is-link
         value="{{bloodType}}" bind:click="showPicker" data-type="blood" />
-      <van-cell title="{{_t['衣服尺码']}}" wx:if="{{!isPlogging}}" required="{{!isDiscovery}}" name="tSize" border="{{ false }}" is-link
+      <van-cell title="{{_t['衣服尺码']}}" required="{{!isDiscovery}}" name="tSize" border="{{ false }}" is-link
         value="{{tSize}}" bind:click="showPicker" data-type="tsize" />
       <van-cell title="{{_t['住址所属地区']}}" required="{{!isDiscovery}}" name="region" is-link border="{{ false }}" value="{{region}}"
         bind:click="showAddr" />

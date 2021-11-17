@@ -23,7 +23,9 @@ Page({
     btnDisabled: false,
     value: '',
     commentVisible: false,
-    isVideo: false
+    isVideo: false,
+    page: 1,
+    pageSize: 10,
   },
   onVideoLoaded(e){
     console.log(e);
@@ -45,8 +47,7 @@ Page({
     })
   },
   preview(e){
-    const { src } = e.currentTarget.dataset;
-    const urls = this.data.detail.picUrls;
+    const { src, urls } = e.currentTarget.dataset;
     wx.previewImage({
       urls,
       current: src
@@ -126,25 +127,30 @@ Page({
     })
   },
   async fetch(){
-    const { id } = this.data;
-    const detail = await getCollectionById({dbName: 'feed', id});
-    detail.dateStr = dayjs(detail.addedDate).format("YYYY-MM-DD HH:mm:ss");
-    const comments = await getCollectionByWhere({ dbName: 'reply', filter: { feedId: id }});
-    comments.map(item=>{
-      item.dateStr = dayjs(item.createdAt).format("MM-DD HH:mm:ss");
-      return item;
-    });
-    let res = await getVideoList('photo');
+    wx.showNavigationBarLoading();
+    let { id, page, pageSize, list } = this.data;
+    if(page === 1){
+      const detail = await getCollectionById({dbName: 'feed', id});
+      detail.dateStr = dayjs(detail.addedDate).format("YYYY-MM-DD HH:mm:ss");
+      list = [ detail ];
+    }
+    // const comments = await getCollectionByWhere({ dbName: 'reply', filter: { feedId: id }});
+    // comments.map(item=>{
+    //   item.dateStr = dayjs(item.createdAt).format("MM-DD HH:mm:ss");
+    //   return item;
+    // });
+    let res = await getVideoList('photo', page, pageSize);
     console.log(res);
     res = res.filter(item => item._id !== id);
+    list = list.concat(res);
     this.setData({
-      value: '',
-      comments,
-      detail,
-      list: [detail, ...res]
+      list
     }, () => {
       this.fetchKudos(id);
     });
+    wx.hideNavigationBarLoading({
+      success: (res) => {},
+    })
   },
   
   watchChanges(){
@@ -283,7 +289,11 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    const { page } = this.data;
+    this.setData({
+      page: page + 1
+    });
+    this.fetch();
   },
 
   /**
