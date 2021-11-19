@@ -4,6 +4,9 @@
   padding: 20rpx 0;
   border-bottom: solid 2rpx #f1f1f1;
 }
+.item:last-child{
+  border-bottom: none;
+}
 .desc{
   font-size: 24rpx;
   color: #999;
@@ -14,9 +17,7 @@
   color: #333;
   font-size: 28rpx;
   margin-right: 30rpx;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  white-space: normal;
 }
 .price{
   color:#DF1042;
