@@ -1,7 +1,7 @@
 import { getCollectionByWhere, getSingleCollectionByWhere } from "../utils/cloud"
 
 export const getPloggingTemplate = async () =>{
-  const data = await getCollectionByWhere({ dbName: "cert", filter: { type: 'X-Plogging' } });
+  const data = await getCollectionByWhere({ dbName: "cert", filter: { type: 'X-Plogging', isActive: true } });
   return data;
 }
 

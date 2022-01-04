@@ -37,7 +37,7 @@
       {{_t['切换城市']}}
     </button>
   </view>
-  <block wx:if="{{places.length}}">
+  <block wx:if="{{false && places.length}}">
     <venue-list list="{{places}}" />
   </block>
   <index-news news="{{news}}" />

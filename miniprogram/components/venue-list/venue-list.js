@@ -16,12 +16,12 @@ Component({
   data: {
     current: 0,
   },
-  pageLifetimes: {
-    show: function () {
+  lifetimes: {
+    attached(){
       this.setData({
-        _t: i18n.i18n.translate(),
-      });
-    },
+        _t: i18n.i18n.translate()
+      })
+    }
   },
 
   /**

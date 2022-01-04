@@ -91,6 +91,7 @@ button.button.button-hover {
   color: #df1042;
 }
 button.button.primary {
+  border: none!important;
   background-color: #df1042 !important;
   color: #fff;
 }

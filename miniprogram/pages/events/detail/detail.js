@@ -235,6 +235,10 @@ Page({
       id
     });
     this.fetch(id);
+    const that = this;
+    setTimeout(() => {
+      that.selectComponent('#tabs').resize();      
+    }, 300);
     this.watchChanges()
   },
   showLocation(e) {

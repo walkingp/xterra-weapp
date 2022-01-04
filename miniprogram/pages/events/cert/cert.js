@@ -1,5 +1,5 @@
 const { getPloggingTemplate, getCertTemplate, getCertFields } = require("../../../api/cert");
-const { getRaceDetail, getRaceCateDetail } = require("../../../api/race");
+const { getRaceDetail, getRaceCateDetail, getPinyin } = require("../../../api/race");
 import { getResultDetail } from "../../../api/result";
 const i18n = require("./../../../utils/i18n");
 
@@ -105,18 +105,29 @@ Page({
       });
     })
   },
+
+  async formatCityName(city){
+    const arr = await getPinyin(city.replace('市',''));
+    const chars = [...arr.join('')];
+    chars[0] = chars[0].toUpperCase();
+    return chars.join('')
+  },
   async formatFields(){
     let { fields, id, isMillionForrest, isTriRace, isPlogging, cateId } = this.data;
     const result = await getResultDetail(isTriRace, id);
+    const cityNameEn = await this.formatCityName(result.city);
     if(isPlogging){
       const cateDetail = await getRaceCateDetail(cateId);
-      fields.map(item=>{
+      fields.map(async item=>{
         switch(item.key){
           case 'trueName':
             item.value = result.trueName;
             break;
           case 'cityName':
             item.value = result.city;
+            break;
+          case 'cityNameEn':
+            item.value = cityNameEn;
             break;
           case 'year':
             item.value = new Date(cateDetail.cateDate || result.raceDate).getFullYear();
@@ -126,6 +137,11 @@ Page({
             break;
           case 'date':
             item.value = new Date(cateDetail.cateDate || result.raceDate).getDate();
+            break;
+          case 'yearMonthDate':
+            item.value = [new Date(cateDetail.cateDate || result.raceDate).getFullYear(),
+              new Date(cateDetail.cateDate || result.raceDate).getMonth() + 1,
+              new Date(cateDetail.cateDate || result.raceDate).getDate()].join('-')
             break;
         }
         return item;
