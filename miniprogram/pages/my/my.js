@@ -145,7 +145,7 @@ Page({
       const currentLocale = Array.from(locale).find(
         (item) => item.isChinese === isChinese
       );
-      currentLocale.tabs.forEach((text, index) => {
+      currentLocale?.tabs?.forEach((text, index) => {
         wx.setTabBarItem({
           index,
           text,

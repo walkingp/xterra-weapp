@@ -33,16 +33,17 @@ Page({
   },
   loadFont() {
     const source = "https://xterra.club/fonts/Impact.ttf";
+    const _this = this;
     wx.loadFontFace({
       global: true,
       family: "font",
       source,
       success: (res) => {
         console.log(res.status);
-        this.setData({ fontLoaded: true });
+        _this.setData({ fontLoaded: true });
       },
       fail: function (res) {
-        this.setData({ fontLoaded: false });
+        _this.setData({ fontLoaded: false });
       },
     });
   },
@@ -172,7 +173,7 @@ Page({
     let currentCity = wx.getStorageSync(config.storageKey.currentCity);
     if (!currentCity) {
       const { citys } = this.data;
-      if (citys.length === 1) {
+      if (citys?.length === 1) {
         currentCity = citys[0].cityCN;
       } else {
         this.locateCity();

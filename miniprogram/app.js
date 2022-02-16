@@ -131,6 +131,9 @@ App({
   checkUpdate() {
     if (wx.canIUse("getUpdateManager")) {
       const updateManager = wx.getUpdateManager();
+      if(!updateManager){
+        return;
+      }
       updateManager.onCheckForUpdate(function (res) {
         console.log("是否更新版本:", res.hasUpdate);
       });

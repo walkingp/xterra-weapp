@@ -143,6 +143,9 @@ async function updateCouponStatus(id){
   }
 }
 function saveStartlist(detail){
+  const logManager = wx.getRealtimeLogManager();
+  logManager.info('报名信息开始=====');
+  logManager.info(detail);
   const { isTeamLeader, teamTitle, profiles, id, orderNum, userId, userName, userInfo, orderType, raceId, raceDate, raceType, raceTitle, racePic, cateId, cateTitle, groupType, groupText, out_trade_no } = detail;
   const db = wx.cloud.database();
   const userTable = db.collection("start-list");
@@ -153,19 +156,25 @@ function saveStartlist(detail){
     console.log(item);
     const { cardNo } = item;
     const existed = await userTable.where({ cateId, cardNo }).get();
-    if(existed.data.length === 0){
-      const result = await userTable.add({
-        data: {
-          ...item,
-          status: orderStatus.paid.status,
-          statusText: orderStatus.paid.statusText, 
-          createdAt: new Date(),
-          isCertApproved: true,
-          isTeamLeader, teamTitle, id, orderNum, profileId, userId, userName, userInfo, orderType, raceId, raceDate, raceType, raceTitle, racePic, cateId, cateTitle, groupType, groupText, out_trade_no
-        }
-      });
-      console.log(result)
+    try{
+      if(existed.data.length === 0){
+        const result = await userTable.add({
+          data: {
+            ...item,
+            status: orderStatus.paid.status,
+            statusText: orderStatus.paid.statusText, 
+            createdAt: new Date(),
+            isCertApproved: true,
+            isTeamLeader, teamTitle, id, orderNum, profileId, userId, userName, userInfo, orderType, raceId, raceDate, raceType, raceTitle, racePic, cateId, cateTitle, groupType, groupText, out_trade_no
+          }
+        });
+        console.log(result)
+        logManager.info(result);
+      }
+    }catch(e){
+      logManager.error(e);
     }
+    logManager.info('报名信息截止=====');
   })
 }
 
