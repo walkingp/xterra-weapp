@@ -66,7 +66,7 @@ Page({
     });
   },
   tap(e) {
-    let { src, type, url } = e.currentTarget.dataset;
+    let { src, type, url, bannerid } = e.currentTarget.dataset;
     const { banners } = this.data;
     const urls = banners.map((item) => item.picUrl);
     switch (type) {
@@ -77,6 +77,7 @@ Page({
         });
         break;
       case "navigate":
+        getApp().globalData.bid = bannerid;
         if (!url.startsWith("/")) {
           url = "/" + url;
         }

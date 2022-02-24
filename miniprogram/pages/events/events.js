@@ -3,6 +3,7 @@ const dayjs = require("dayjs");
 const { raceStatus } = require("../../config/const");
 const app = getApp();
 const i18n = require("./../../utils/i18n");
+const { getCollectionById } = require("../../utils/cloud");
 
 const _t = i18n.i18n.translate();
 // miniprogram/pages/index/index.js
@@ -21,6 +22,9 @@ Page({
     location: "",
     status: "",
     type: "",
+    ids: [],
+    filterRaceIds,
+    filterRaces: []
   },
   initialData() {
     const { _t } = this.data;
@@ -75,7 +79,7 @@ Page({
     this.setData({
       allRaces: races.slice(),
     });
-    const { region, status, type } = this.data;
+    const { region, status, type, filterRaceIds } = this.data;
     if (type) {
       races = races.filter((item) => item.type === type);
     }
@@ -84,6 +88,10 @@ Page({
     }
     if (status) {
       races = races.filter((item) => item.status === status);
+    }
+    if(filterRaceIds){
+      races = races.filter(item=> filterRaceIds.includes(item._id));
+      debugger;
     }
     const banners = await getBannerList("race");
     this.setData(
@@ -147,9 +155,9 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-    let { region, status, type } = options;
-    const { tabBarLink } = app.globalData;
+  onLoad: async function (options) {
+    let { region, status, type, ids } = options;
+    const { tabBarLink, bid } = app.globalData;
     if (tabBarLink) {
       const args = tabBarLink.substr(tabBarLink.indexOf("?") + 1);
       const arr = args.split("&");
@@ -163,9 +171,18 @@ Page({
       });
       app.globalData.tabBarLink = null;
     }
+    let filterRaceIds = null;
+    if(bid) {
+      const banner = await getCollectionById({ dbName: 'banner', id: bid});
+      if(banner.raceIds){
+        filterRaceIds = banner.raceIds;
+      }
+    }
     this.setData({
+      filterRaceIds,
       region,
       status,
+      ids,
       type,
     });
     this.fetch();
