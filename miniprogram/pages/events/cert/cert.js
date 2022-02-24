@@ -4,7 +4,7 @@ import { getResultDetail } from "../../../api/result";
 const i18n = require("./../../../utils/i18n");
 
 const _t = i18n.i18n.translate();
-import Poster from "./../../../miniprogram_dist/wxa-plugin-canvas/poster/poster";
+import Poster from "./../../../miniprogram_npm/wxa-plugin-canvas/poster/poster";
 Page({
 
   /**

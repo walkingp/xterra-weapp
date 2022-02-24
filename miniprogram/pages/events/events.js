@@ -91,7 +91,6 @@ Page({
     }
     if(filterRaceIds){
       races = races.filter(item=> filterRaceIds.includes(item._id));
-      debugger;
     }
     const banners = await getBannerList("race");
     this.setData(
