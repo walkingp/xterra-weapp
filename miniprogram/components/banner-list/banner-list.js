@@ -28,7 +28,7 @@ Component({
       })
     },
     tapItem(e){
-      const { src, type, url } = e.currentTarget.dataset;
+      let { src, type, url, bannerid } = e.currentTarget.dataset;
       const { list } = this.properties;
       const urls = list.map(item=>item.picUrl);
       switch(type){
@@ -39,7 +39,15 @@ Component({
           });
           break;
         case 'navigate':
-          if(!url.startsWith('/')){
+          if(bannerid){
+            getApp().globalData.bid = bannerid;
+            url = `/pages/events/events`;
+            wx.switchTab({
+              url
+            })
+            return;
+          }
+          if(url && !url.startsWith('/')){
             url = '/' + url;
           }
           wx.navigateTo({
