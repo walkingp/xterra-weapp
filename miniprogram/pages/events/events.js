@@ -23,7 +23,7 @@ Page({
     status: "",
     type: "",
     ids: [],
-    filterRaceIds,
+    filterRaceIds: null,
     filterRaces: []
   },
   initialData() {
