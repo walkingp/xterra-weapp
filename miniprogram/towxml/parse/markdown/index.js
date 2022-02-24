@@ -15,7 +15,18 @@ const config = require('../../config'),
                 let lineLen = code.split(/\r|\n/ig).length,
                     result = hljs.highlightAuto(code).value;
 
-                    result = result.replace(/\r|\n/g,'<br/>').replace(/ /g,'&nbsp;').replace(/\t/g,'&nbsp;&nbsp;&nbsp;&nbsp;');
+                    // 代码块多换行的问题
+                    result = result.replace(/(\r|\n){2,}/g, str => {
+                        return new Array(str.length).join("<p>&nbsp;</p>")
+                    });
+                    result = result.replace(/\r|\n/g, str => {
+                        return "<br/>"
+                    });
+
+                    // 代码空格处理
+                    result = result.replace(/>[^<]+</g,str => {
+                        return str.replace(/\s/g,"&nbsp;");
+                    }).replace(/\t/g,new Array(4).join("&nbsp;"));
 
                 if(config.showLineNumber){
                     let lineStr = (()=>{
@@ -37,11 +48,12 @@ const config = require('../../config'),
     md = require('./markdown')(mdOption);
 
 // 应用Markdown解析扩展，包括自定义组件（['sub','sup','ins','mark','emoji','todo','latex','yuml','echarts']）
-[...config.markdown,...config.components].forEach(item => {
-    if(!/^audio-player|table|todogroup|img$/.test(item)){
-        md.use(require(`./plugins/${item}`));
-    };
-});
+// [...config.markdown,...config.components].forEach(item => {
+//     if(!/^audio-player|table|todogroup|img$/.test(item)){
+//         md.use(require(`./plugins/${item}`));
+//     };
+// });
+md.use(require('./plugins/sub'));md.use(require('./plugins/sup'));md.use(require('./plugins/ins'));md.use(require('./plugins/mark'));md.use(require('./plugins/emoji'));md.use(require('./plugins/todo'));md.use(require('./plugins/latex'));md.use(require('./plugins/yuml'));
 
 // 定义emoji渲染规则
 md.renderer.rules.emoji = (token,index)=>{

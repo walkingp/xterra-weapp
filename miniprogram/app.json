@@ -68,7 +68,7 @@
   },
   "sitemapLocation": "sitemap.json",
   "usingComponents": {
-    "table": "../../../miniprogram_npm/miniprogram-table-component",
+    "table": "/miniprogram_npm/miniprogram-table-component",
     "towxml": "/towxml/towxml",
     "progress": "/components/progress/progress",
     "exchanged": "/components/exchanged/exchanged",

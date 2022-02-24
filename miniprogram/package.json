@@ -8,7 +8,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@vant/weapp": "^1.6.1",
+    "@vant/weapp": "^1.10.2",
     "dayjs": "^1.9.6",
     "miniprogram-sm-crypto": "^0.2.1",
     "miniprogram-table-component": "^1.1.0",
