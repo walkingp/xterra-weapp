@@ -1,373 +1,373 @@
 {
-    "miniprogramRoot": "miniprogram/",
-    "cloudfunctionRoot": "cloudfunctions/",
-    "setting": {
-        "urlCheck": false,
-        "es6": true,
-        "enhance": true,
-        "postcss": true,
-        "preloadBackgroundData": false,
-        "minified": true,
-        "newFeature": true,
-        "coverView": true,
-        "nodeModules": true,
-        "autoAudits": true,
-        "showShadowRootInWxmlPanel": true,
-        "scopeDataCheck": false,
-        "uglifyFileName": false,
-        "checkInvalidKey": true,
-        "checkSiteMap": true,
-        "uploadWithSourceMap": true,
-        "compileHotReLoad": false,
-        "useMultiFrameRuntime": true,
-        "useApiHook": true,
-        "useApiHostProcess": true,
-        "babelSetting": {
-            "ignore": [],
-            "disablePlugins": [],
-            "outputPath": ""
-        },
-        "enableEngineNative": false,
-        "useIsolateContext": false,
-        "userConfirmedBundleSwitch": false,
-        "packNpmManually": true,
-        "packNpmRelationList": [
-            {
-                "packageJsonPath": "./miniprogram/package.json",
-                "miniprogramNpmDistDir": "./miniprogram/"
-            }
-        ],
-        "minifyWXSS": true,
-        "disableUseStrict": false,
-        "minifyWXML": true,
-        "showES6CompileOption": false,
-        "useCompilerPlugins": false
+  "miniprogramRoot": "miniprogram/",
+  "cloudfunctionRoot": "cloudfunctions/",
+  "setting": {
+    "urlCheck": false,
+    "es6": true,
+    "enhance": true,
+    "postcss": true,
+    "preloadBackgroundData": false,
+    "minified": true,
+    "newFeature": true,
+    "coverView": true,
+    "nodeModules": true,
+    "autoAudits": true,
+    "showShadowRootInWxmlPanel": true,
+    "scopeDataCheck": false,
+    "uglifyFileName": false,
+    "checkInvalidKey": true,
+    "checkSiteMap": true,
+    "uploadWithSourceMap": true,
+    "compileHotReLoad": false,
+    "useMultiFrameRuntime": false,
+    "useApiHook": false,
+    "useApiHostProcess": false,
+    "babelSetting": {
+      "ignore": [],
+      "disablePlugins": [],
+      "outputPath": ""
     },
-    "appid": "wx491fb14c7948a753",
-    "projectname": "XTERRA",
-    "libVersion": "2.14.1",
-    "simulatorType": "wechat",
-    "simulatorPluginLibVersion": {},
-    "cloudfunctionTemplateRoot": "cloudfunctionTemplate",
-    "condition": {
-        "plugin": {
-            "list": []
+    "useIsolateContext": false,
+    "userConfirmedBundleSwitch": false,
+    "packNpmManually": true,
+    "packNpmRelationList": [
+      {
+        "packageJsonPath": "./miniprogram/package.json",
+        "miniprogramNpmDistDir": "./miniprogram/"
+      }
+    ],
+    "minifyWXSS": true,
+    "disableUseStrict": false,
+    "minifyWXML": true,
+    "showES6CompileOption": false,
+    "useCompilerPlugins": false,
+    "ignoreUploadUnusedFiles": true
+  },
+  "appid": "wx491fb14c7948a753",
+  "projectname": "XTERRA",
+  "libVersion": "2.22.0",
+  "simulatorType": "wechat",
+  "simulatorPluginLibVersion": {},
+  "cloudfunctionTemplateRoot": "cloudfunctionTemplate",
+  "condition": {
+    "plugin": {
+      "list": []
+    },
+    "game": {
+      "list": []
+    },
+    "gamePlugin": {
+      "list": []
+    },
+    "miniprogram": {
+      "list": [
+        {
+          "name": "培训购买",
+          "pathName": "pages/category/category",
+          "query": "",
+          "scene": null
         },
-        "game": {
-            "list": []
+        {
+          "name": "我的",
+          "pathName": "pages/my/my",
+          "query": "",
+          "scene": null
         },
-        "gamePlugin": {
-            "list": []
+        {
+          "name": "赛事列表",
+          "pathName": "pages/events/events",
+          "query": "type=X-Plogging",
+          "scene": null
         },
-        "miniprogram": {
-            "list": [
-                {
-                    "name": "培训购买",
-                    "pathName": "pages/category/category",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "name": "我的",
-                    "pathName": "pages/my/my",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "name": "赛事列表",
-                    "pathName": "pages/events/events",
-                    "query": "type=X-Plogging",
-                    "scene": null
-                },
-                {
-                    "name": "赛事详情",
-                    "pathName": "pages/events/detail/detail",
-                    "query": "id=0bcbdde05fc3a636006efd9971c76de4",
-                    "scene": null
-                },
-                {
-                    "name": "新闻详情",
-                    "pathName": "pages/news/detail/detail",
-                    "query": "id=b1a52c595fc3929700a0add379c4e0c4",
-                    "scene": null
-                },
-                {
-                    "name": "新闻中心",
-                    "pathName": "pages/news/news",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "name": "社区首页",
-                    "pathName": "pages/community/community",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "name": "报名",
-                    "pathName": "pages/register/register",
-                    "query": "id=21ded5cb5fe59992000dc46f4b31b4f8&type=family",
-                    "scene": null
-                },
-                {
-                    "name": "报名状态",
-                    "pathName": "pages/register/status/status",
-                    "query": "id=79550af2602147d1037293a1680ee216",
-                    "scene": null
-                },
-                {
-                    "name": "添加报名人",
-                    "pathName": "pages/register/form/form",
-                    "query": "raceId=79550af26007fa470037fb3f22aeea14",
-                    "scene": null
-                },
-                {
-                    "name": "我的报名资料",
-                    "pathName": "pages/my/profile/profile",
-                    "query": "id=0bcbdde05fc3a636006efd9971c76de4",
-                    "scene": null
-                },
-                {
-                    "name": "修改联系人资料",
-                    "pathName": "pages/register/form/form",
-                    "query": "action=edit&id=846bf2595fd0d6b1000dd7471a1d6b7a",
-                    "scene": null
-                },
-                {
-                    "name": "我的报名",
-                    "pathName": "pages/my/registration/registration",
-                    "query": "action=edit&id=846bf2595fd0d6b1000dd7471a1d6b7a",
-                    "scene": null
-                },
-                {
-                    "name": "申请退款",
-                    "pathName": "pages/register/refund/refund",
-                    "query": "id=023ce9555fe56500000bf3bb501f1270",
-                    "scene": null
-                },
-                {
-                    "name": "查询报名和成绩",
-                    "pathName": "pages/events/query/query",
-                    "query": "id=0bcbdde05fc3a636006efd9971c76de4",
-                    "scene": null
-                },
-                {
-                    "name": "装备要求",
-                    "pathName": "pages/events/kits/kits",
-                    "query": "id=0bcbdde05fc3a636006efd9971c76de4",
-                    "scene": null
-                },
-                {
-                    "name": "修改资料",
-                    "pathName": "pages/my/edit/edit",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "name": "动态表单",
-                    "pathName": "pages/events/form/form",
-                    "query": "id=21ded5cb5fe30441000a9f8512985ff7",
-                    "scene": null
-                },
-                {
-                    "name": "报名跳转添加资料",
-                    "pathName": "pages/register/form/form",
-                    "query": "action=add&raceId=0bcbdde05fc3a636006efd9971c76de4&cateId=0bcbdde05fc3a69f006f008159baed49",
-                    "scene": null
-                },
-                {
-                    "name": "报名完成查看联系人",
-                    "pathName": "pages/register/form/view/view",
-                    "query": "orderId=023ce9555fe56500000bf3bb501f1270&id=92d9b75b5fd0d64e000d37f07ddab6ea",
-                    "scene": null
-                },
-                {
-                    "name": "报名成绩查询",
-                    "pathName": "pages/events/query/query",
-                    "query": "id=0bcbdde05fc3a636006efd9971c76de4&type=relay",
-                    "scene": null
-                },
-                {
-                    "name": "报名Plogging",
-                    "pathName": "pages/events/detail/detail",
-                    "query": "id=b45a21d55fe30169000a26693c7ad4f9",
-                    "scene": null
-                },
-                {
-                    "name": "查询成绩",
-                    "pathName": "pages/events/query/query",
-                    "query": "raceId=b45a21d55fe30169000a26693c7ad4f9&type=result",
-                    "scene": null
-                },
-                {
-                    "name": "下载证书",
-                    "pathName": "pages/events/cert/cert",
-                    "query": "raceId=ce805e785fe2c45d0008e6431622c51f&cateId=21ded5cb5fe2d140000a55f67fe4dbb8&id=ce805e785ff7d0dd03ab518343d83639",
-                    "scene": null
-                },
-                {
-                    "name": "生成优惠券",
-                    "pathName": "pages/admin/coupon/coupon",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "name": "报名名单",
-                    "pathName": "pages/events/users/users",
-                    "query": "id=0bcbdde05fc3a636006efd9971c76de4",
-                    "scene": null
-                },
-                {
-                    "name": "邀请报名页面",
-                    "pathName": "pages/register/register",
-                    "query": "id=0bcbdde05fc3a636006efd9971c76de4&type=relay&teamTitle=米高测试3",
-                    "scene": null
-                },
-                {
-                    "name": "完赛资质",
-                    "pathName": "pages/register/form/form",
-                    "query": "action=edit&raceId=0bcbdde05fc3a636006efd9971c76de4&cateId=53176a855fd57b7f0017b8c41d73bcd7&id=846bf2595fd0d6b1000dd7471a1d6b7a",
-                    "scene": null
-                },
-                {
-                    "name": "报名正式比赛",
-                    "pathName": "pages/register/register",
-                    "query": "id=21ded5cb5fe59992000dc46f4b31b4f8",
-                    "scene": null
-                },
-                {
-                    "name": "百万森林证书",
-                    "pathName": "pages/events/cert/cert",
-                    "query": "raceId=ce805e785fe2c45d0008e6431622c51f&cateId=21ded5cb5fe2d140000a55f67fe4dbb8&id=be7fb3985ff7f338032d215e6dc67407&type=million-forrest",
-                    "scene": null
-                },
-                {
-                    "name": "管理员：比赛列表",
-                    "pathName": "pages/admin/events/events",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "name": "管理员：比赛全部报名",
-                    "pathName": "pages/admin/events/registration/registration",
-                    "query": "raceId=b45a21d55fe30169000a26693c7ad4f9",
-                    "scene": null
-                },
-                {
-                    "name": "管理员：查看已报名完成名单",
-                    "pathName": "pages/admin/events/start-list/start-list",
-                    "query": "raceId=b45a21d55fe30169000a26693c7ad4f9",
-                    "scene": null
-                },
-                {
-                    "name": "管理员：生成二维码",
-                    "pathName": "pages/admin/qrcode/qrcode",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "name": "管理员：财务信息",
-                    "pathName": "pages/admin/events/finance/finance",
-                    "query": "raceId=0bcbdde05fc3a636006efd9971c76de4",
-                    "scene": null
-                },
-                {
-                    "name": "管理员：导入报名",
-                    "pathName": "pages/admin/events/upload/upload",
-                    "query": "raceId=0bcbdde05fc3a636006efd9971c76de4",
-                    "scene": null
-                },
-                {
-                    "name": "用户积分",
-                    "pathName": "pages/points/user/user",
-                    "query": "userId=04db790c71365c0be61fae4e3e526141",
-                    "scene": null
-                },
-                {
-                    "name": "积分商城",
-                    "pathName": "pages/points/points",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "name": "积分商品详情",
-                    "pathName": "pages/points/detail/detail",
-                    "query": "id=1526e12a600d9570009ada625fe1acaf",
-                    "scene": null
-                },
-                {
-                    "name": "兑换记录",
-                    "pathName": "pages/points/my/my",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "name": "积分兑换明细",
-                    "pathName": "pages/points/status/status",
-                    "query": "id=3b020ca360101d6e00fe7a501fb33de2",
-                    "scene": null
-                },
-                {
-                    "name": "社区新首页",
-                    "pathName": "pages/community/index/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "name": "动态明细",
-                    "pathName": "pages/community/detail/detail",
-                    "query": "id=0bcbdde05fc904ee009f45091944e4d2",
-                    "scene": null
-                },
-                {
-                    "name": "动态详情",
-                    "pathName": "pages/community/detail/detail",
-                    "query": "id=28ee4e3e6031da4d0694deaf01a13f4d",
-                    "scene": null
-                },
-                {
-                    "name": "二维码",
-                    "pathName": "pages/my/qrcode/qrcode",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "name": "志愿者：签到检录",
-                    "pathName": "pages/admin/volunteer/checkin/checkin",
-                    "query": "userId=04db790c71365c0be61fae4e3e526141",
-                    "scene": null
-                },
-                {
-                    "name": "比赛现场签到",
-                    "pathName": "pages/my/checkin/checkin",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "name": "检录：选手签署比赛协议",
-                    "pathName": "pages/admin/volunteer/agreement/agreement",
-                    "query": "raceId=0bcbdde05fc3a636006efd9971c76de4",
-                    "scene": null
-                },
-                {
-                    "name": "发表动态",
-                    "pathName": "pages/community/new/new",
-                    "query": "raceId=0bcbdde05fc3a636006efd9971c76de4",
-                    "scene": null
-                },
-                {
-                    "name": "个人主页",
-                    "pathName": "pages/community/user/user",
-                    "query": "id=04db790c71365c0be61fae4e3e526141",
-                    "scene": null
-                },
-                {
-                    "name": "搜索页",
-                    "pathName": "pages/community/search/search",
-                    "query": "",
-                    "scene": null
-                }
-            ]
+        {
+          "name": "赛事详情",
+          "pathName": "pages/events/detail/detail",
+          "query": "id=0bcbdde05fc3a636006efd9971c76de4",
+          "scene": null
+        },
+        {
+          "name": "新闻详情",
+          "pathName": "pages/news/detail/detail",
+          "query": "id=b1a52c595fc3929700a0add379c4e0c4",
+          "scene": null
+        },
+        {
+          "name": "新闻中心",
+          "pathName": "pages/news/news",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "社区首页",
+          "pathName": "pages/community/community",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "报名",
+          "pathName": "pages/register/register",
+          "query": "id=21ded5cb5fe59992000dc46f4b31b4f8&type=family",
+          "scene": null
+        },
+        {
+          "name": "报名状态",
+          "pathName": "pages/register/status/status",
+          "query": "id=79550af2602147d1037293a1680ee216",
+          "scene": null
+        },
+        {
+          "name": "添加报名人",
+          "pathName": "pages/register/form/form",
+          "query": "raceId=79550af26007fa470037fb3f22aeea14",
+          "scene": null
+        },
+        {
+          "name": "我的报名资料",
+          "pathName": "pages/my/profile/profile",
+          "query": "id=0bcbdde05fc3a636006efd9971c76de4",
+          "scene": null
+        },
+        {
+          "name": "修改联系人资料",
+          "pathName": "pages/register/form/form",
+          "query": "action=edit&id=846bf2595fd0d6b1000dd7471a1d6b7a",
+          "scene": null
+        },
+        {
+          "name": "我的报名",
+          "pathName": "pages/my/registration/registration",
+          "query": "action=edit&id=846bf2595fd0d6b1000dd7471a1d6b7a",
+          "scene": null
+        },
+        {
+          "name": "申请退款",
+          "pathName": "pages/register/refund/refund",
+          "query": "id=023ce9555fe56500000bf3bb501f1270",
+          "scene": null
+        },
+        {
+          "name": "查询报名和成绩",
+          "pathName": "pages/events/query/query",
+          "query": "id=0bcbdde05fc3a636006efd9971c76de4",
+          "scene": null
+        },
+        {
+          "name": "装备要求",
+          "pathName": "pages/events/kits/kits",
+          "query": "id=0bcbdde05fc3a636006efd9971c76de4",
+          "scene": null
+        },
+        {
+          "name": "修改资料",
+          "pathName": "pages/my/edit/edit",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "动态表单",
+          "pathName": "pages/events/form/form",
+          "query": "id=21ded5cb5fe30441000a9f8512985ff7",
+          "scene": null
+        },
+        {
+          "name": "报名跳转添加资料",
+          "pathName": "pages/register/form/form",
+          "query": "action=add&raceId=0bcbdde05fc3a636006efd9971c76de4&cateId=0bcbdde05fc3a69f006f008159baed49",
+          "scene": null
+        },
+        {
+          "name": "报名完成查看联系人",
+          "pathName": "pages/register/form/view/view",
+          "query": "orderId=023ce9555fe56500000bf3bb501f1270&id=92d9b75b5fd0d64e000d37f07ddab6ea",
+          "scene": null
+        },
+        {
+          "name": "报名成绩查询",
+          "pathName": "pages/events/query/query",
+          "query": "id=0bcbdde05fc3a636006efd9971c76de4&type=relay",
+          "scene": null
+        },
+        {
+          "name": "报名Plogging",
+          "pathName": "pages/events/detail/detail",
+          "query": "id=b45a21d55fe30169000a26693c7ad4f9",
+          "scene": null
+        },
+        {
+          "name": "查询成绩",
+          "pathName": "pages/events/query/query",
+          "query": "raceId=b45a21d55fe30169000a26693c7ad4f9&type=result",
+          "scene": null
+        },
+        {
+          "name": "下载证书",
+          "pathName": "pages/events/cert/cert",
+          "query": "raceId=ce805e785fe2c45d0008e6431622c51f&cateId=21ded5cb5fe2d140000a55f67fe4dbb8&id=ce805e785ff7d0dd03ab518343d83639",
+          "scene": null
+        },
+        {
+          "name": "生成优惠券",
+          "pathName": "pages/admin/coupon/coupon",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "报名名单",
+          "pathName": "pages/events/users/users",
+          "query": "id=0bcbdde05fc3a636006efd9971c76de4",
+          "scene": null
+        },
+        {
+          "name": "邀请报名页面",
+          "pathName": "pages/register/register",
+          "query": "id=0bcbdde05fc3a636006efd9971c76de4&type=relay&teamTitle=米高测试3",
+          "scene": null
+        },
+        {
+          "name": "完赛资质",
+          "pathName": "pages/register/form/form",
+          "query": "action=edit&raceId=0bcbdde05fc3a636006efd9971c76de4&cateId=53176a855fd57b7f0017b8c41d73bcd7&id=846bf2595fd0d6b1000dd7471a1d6b7a",
+          "scene": null
+        },
+        {
+          "name": "报名正式比赛",
+          "pathName": "pages/register/register",
+          "query": "id=21ded5cb5fe59992000dc46f4b31b4f8",
+          "scene": null
+        },
+        {
+          "name": "百万森林证书",
+          "pathName": "pages/events/cert/cert",
+          "query": "raceId=ce805e785fe2c45d0008e6431622c51f&cateId=21ded5cb5fe2d140000a55f67fe4dbb8&id=be7fb3985ff7f338032d215e6dc67407&type=million-forrest",
+          "scene": null
+        },
+        {
+          "name": "管理员：比赛列表",
+          "pathName": "pages/admin/events/events",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "管理员：比赛全部报名",
+          "pathName": "pages/admin/events/registration/registration",
+          "query": "raceId=b45a21d55fe30169000a26693c7ad4f9",
+          "scene": null
+        },
+        {
+          "name": "管理员：查看已报名完成名单",
+          "pathName": "pages/admin/events/start-list/start-list",
+          "query": "raceId=b45a21d55fe30169000a26693c7ad4f9",
+          "scene": null
+        },
+        {
+          "name": "管理员：生成二维码",
+          "pathName": "pages/admin/qrcode/qrcode",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "管理员：财务信息",
+          "pathName": "pages/admin/events/finance/finance",
+          "query": "raceId=0bcbdde05fc3a636006efd9971c76de4",
+          "scene": null
+        },
+        {
+          "name": "管理员：导入报名",
+          "pathName": "pages/admin/events/upload/upload",
+          "query": "raceId=0bcbdde05fc3a636006efd9971c76de4",
+          "scene": null
+        },
+        {
+          "name": "用户积分",
+          "pathName": "pages/points/user/user",
+          "query": "userId=04db790c71365c0be61fae4e3e526141",
+          "scene": null
+        },
+        {
+          "name": "积分商城",
+          "pathName": "pages/points/points",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "积分商品详情",
+          "pathName": "pages/points/detail/detail",
+          "query": "id=1526e12a600d9570009ada625fe1acaf",
+          "scene": null
+        },
+        {
+          "name": "兑换记录",
+          "pathName": "pages/points/my/my",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "积分兑换明细",
+          "pathName": "pages/points/status/status",
+          "query": "id=3b020ca360101d6e00fe7a501fb33de2",
+          "scene": null
+        },
+        {
+          "name": "社区新首页",
+          "pathName": "pages/community/index/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "动态明细",
+          "pathName": "pages/community/detail/detail",
+          "query": "id=0bcbdde05fc904ee009f45091944e4d2",
+          "scene": null
+        },
+        {
+          "name": "动态详情",
+          "pathName": "pages/community/detail/detail",
+          "query": "id=28ee4e3e6031da4d0694deaf01a13f4d",
+          "scene": null
+        },
+        {
+          "name": "二维码",
+          "pathName": "pages/my/qrcode/qrcode",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "志愿者：签到检录",
+          "pathName": "pages/admin/volunteer/checkin/checkin",
+          "query": "userId=04db790c71365c0be61fae4e3e526141",
+          "scene": null
+        },
+        {
+          "name": "比赛现场签到",
+          "pathName": "pages/my/checkin/checkin",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "检录：选手签署比赛协议",
+          "pathName": "pages/admin/volunteer/agreement/agreement",
+          "query": "raceId=0bcbdde05fc3a636006efd9971c76de4",
+          "scene": null
+        },
+        {
+          "name": "发表动态",
+          "pathName": "pages/community/new/new",
+          "query": "raceId=0bcbdde05fc3a636006efd9971c76de4",
+          "scene": null
+        },
+        {
+          "name": "个人主页",
+          "pathName": "pages/community/user/user",
+          "query": "id=04db790c71365c0be61fae4e3e526141",
+          "scene": null
+        },
+        {
+          "name": "搜索页",
+          "pathName": "pages/community/search/search",
+          "query": "",
+          "scene": null
         }
+      ]
     }
+  }
 }

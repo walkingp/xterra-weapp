@@ -162,7 +162,7 @@ export const getAllRaces = async () => {
   return allRaces;
 }
 
-export const getRaceIndexList = async ( size = 40) => {
+export const getRaceIndexList = async ( size = 50) => {
   const data = await getPaginations({
     dbName: 'race',
     filter: {

@@ -89,7 +89,7 @@ Page({
     if (status) {
       races = races.filter((item) => item.status === status);
     }
-    if(filterRaceIds){
+    if(filterRaceIds && filterRaceIds.length){
       races = races.filter(item=> filterRaceIds.includes(item._id));
     }
     const banners = await getBannerList("race");
@@ -155,7 +155,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: async function (options) {
-    let { region, status, type, ids } = options;
+    this.watchChanges("race");
+  },
+  async redirect(){
+    let type = '';
     const { tabBarLink, bid } = app.globalData;
     if (tabBarLink) {
       const args = tabBarLink.substr(tabBarLink.indexOf("?") + 1);
@@ -175,19 +178,15 @@ Page({
       const banner = await getCollectionById({ dbName: 'banner', id: bid});
       if(banner.raceIds){
         filterRaceIds = banner.raceIds;
+        app.globalData.bid = null;
       }
     }
     this.setData({
-      filterRaceIds,
-      region,
-      status,
-      ids,
       type,
+      filterRaceIds,
     });
     this.fetch();
-    this.watchChanges("race");
   },
-
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -220,6 +219,7 @@ Page({
       },
       () => {
         this.initialData();
+        this.redirect();
       }
     );
   },
