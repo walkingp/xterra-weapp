@@ -40,6 +40,13 @@ Page({
       url: `/pages/register/register?id=${id}`,
     })
   },
+  
+  redirect(e){
+    const { url } = e.currentTarget.dataset;
+    wx.navigateTo({
+      url
+    })
+  },
   async fetch(id){
     wx.showLoading({
       title: _t['加载中...'],

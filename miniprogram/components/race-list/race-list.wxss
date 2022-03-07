@@ -33,11 +33,16 @@
   height: 160rpx;
   justify-content: space-between;
 }
-.info text{
+.info text, .info .text{
   font-size: 24rpx;
   color: #666;
   white-space: nowrap;
   overflow: hidden;
+}
+.info .red{
+  color: #f00;
+  font-weight: bold;
+  padding: 0 4rpx;
 }
 .empty{
   height: 100%;

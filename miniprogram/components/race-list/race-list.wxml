@@ -13,7 +13,10 @@
           </van-image>
         </view>
         <view class="flex-auto text flex column space-betwee info">
-          <text>{{_t['类型']}}：{{_t[item.type]}}</text>
+          <view>
+            <text class="text">{{_t['类型']}}：{{_t[item.type]}}</text>          
+            <text class="red" wx:if="{{item.isVirtual}}">{{_t['线上赛']}}</text>
+          </view>
           <text wx:if="{{item.type==='X-Plogging' || item.type==='X-Discovery'}}">{{_t['费用']}}：{{_t[item.feeType]}}</text>          
           <text wx:else>{{_t['组别']}}：{{item.cates}}</text>
           <text>{{_t['地点']}}：{{item.location}}</text>

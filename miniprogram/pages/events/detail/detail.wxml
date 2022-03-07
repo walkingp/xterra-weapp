@@ -107,6 +107,7 @@
     </view>
   </view>
   <view wx:if="{{regBtnEnabled}}" class="bottom flex-none flex justify-center align-center">
-    <button bindtap="register" class="button">{{_t['立即报名']}}</button>
+    <button bindtap="redirect" data-url="/pages/register/register?id={{id}}" class="button">{{_t['立即报名']}}</button>
+    <button bindtap="redirect" data-url="/pages/events/virtual/virtual?raceId={{id}}" class="button">{{_t['上传成绩']}}</button>
   </view>
 </view>

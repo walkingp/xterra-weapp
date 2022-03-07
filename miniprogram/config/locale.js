@@ -372,7 +372,9 @@ const locales = {
   '团队负责人报名时可选择一次录入多名团员资料，也可在创建团队后分享给其他成员填写资料；': 'Team leader can choose to enter more than one group member information at a time, or after the creation of the team to share with other members to fill in the information;',
   '费用由团队负责人支付；': 'The registration fee is paid by the team leader;',
   '团队成员报名时请注意选择正确团队。': 'When team members sign up, be careful to select the right team.',
-  '必须一次完成报名，人数不可少于2人；': 'Registration must be completed at once and the number of persons must not be less than 2;'
+  '必须一次完成报名，人数不可少于2人；': 'Registration must be completed at once and the number of persons must not be less than 2;',
+  '线上赛': 'Virtual Race',
+  '上传成绩': 'Post result',
 };
 
 module.exports = { locale, locales };

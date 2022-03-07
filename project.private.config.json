@@ -323,6 +323,13 @@
           "pathName": "pages/community/item/item",
           "query": "id=14139e12613d760f0bb1374c027715f6",
           "scene": null
+        },
+        {
+          "name": "上传成绩",
+          "pathName": "pages/events/virtual/virtual",
+          "query": "raceId=5b049cc8621c86d60ea862b9781463e9",
+          "scene": null,
+          "launchMode": "default"
         }
       ]
     }

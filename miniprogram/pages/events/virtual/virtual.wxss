@@ -1,0 +1,65 @@
+/* pages/events/virtual/virtual.wxss */image.icon{
+  width: 100rpx!important;
+  height: 100rpx!important;
+}
+.cate{
+  font-size: 26rpx;
+  padding-top: 10rpx;
+  color: #999;
+}
+.title{
+  font-size: 28rpx;
+  color: #333;
+  font-weight: bold;
+  padding-bottom: 10rpx;
+}
+.image{
+  width: 196rpx;
+  height: 145rpx;
+  border-radius: 10rpx;
+  margin-right: 20rpx;
+}
+.info{
+  margin-top: 20rpx;
+}
+.cell{
+  padding: 8rpx 0;
+  font-size: 26rpx;
+}
+.cell label{
+  color: #999;
+  display: inline-block;
+  width: 180rpx;
+}
+.cell:last-child{
+  border-bottom: none;
+}
+image.paystatus{
+  width: 100rpx!important;
+  height: 100rpx!important;
+}
+image.icon{
+  width: 36rpx!important;
+  height: 36rpx!important;
+  margin-left: 10rpx;
+}
+.price{
+  font-weight: bold;
+  color: #BA0C2F;
+}
+.gray{
+  color: #999;
+}
+.ft{
+  padding: 20rpx 0;
+}
+button{
+  margin: 0 0 0 20rpx;
+}
+.copy{
+  padding: 0 10rpx;
+  color: #0078D4;
+}
+.cell image{
+  vertical-align: baseline;
+}
