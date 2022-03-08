@@ -327,7 +327,7 @@
         {
           "name": "上传成绩",
           "pathName": "pages/events/virtual/virtual",
-          "query": "raceId=5b049cc8621c86d60ea862b9781463e9",
+          "query": "raceId=41ae62ef6218852308d7013e6f147a3f&id=bf4a0bf26226a981134d09200cdc4336",
           "scene": null,
           "launchMode": "default"
         }

@@ -13,6 +13,10 @@
   font-weight: bold;
   padding-bottom: 10rpx;
 }
+.title .ft{
+  font-weight: normal;
+  color: #0078D4;
+}
 .image{
   width: 196rpx;
   height: 145rpx;
@@ -62,4 +66,15 @@ button{
 }
 .cell image{
   vertical-align: baseline;
+}
+.content{
+  font-size: 24rpx;
+  line-height: 1.8;
+  color: #888;
+}
+.content .sub-title{
+  font-weight: bold;
+}
+.zone{
+  margin: 80rpx 0;
 }

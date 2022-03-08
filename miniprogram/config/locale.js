@@ -375,6 +375,12 @@ const locales = {
   '必须一次完成报名，人数不可少于2人；': 'Registration must be completed at once and the number of persons must not be less than 2;',
   '线上赛': 'Virtual Race',
   '上传成绩': 'Post result',
+  '上传完赛证明': 'Upload Finish Cert',
+  '报名人':'Participant',
+  '参赛组别':'Category',
+  '参赛号':'Bib Number',
+  '成绩状态':'Status',
+  '上传.gpx文件轨迹文件': 'Upload .gpx file'
 };
 
 module.exports = { locale, locales };

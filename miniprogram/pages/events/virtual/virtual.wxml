@@ -1,8 +1,4 @@
 <view class="container flex column">
-  <view class="box flex column align-center justify-center">    
-    <image class="paystatus" src="./../../../images/icons/succ@2x.png" />
-    <text>{{detail.statusText}}</text>
-  </view>
   <navigator url="/pages/events/detail/detail?id={{detail.raceId}}" class="box flex align-center space-between">
     <view class="flex-auto flex align-center">
       <image src="{{detail.racePic[0]}}" mode="aspectFill" class="image"></image>
@@ -21,11 +17,43 @@
         <text>{{detail.orderNum}}</text>
         <text bindtap="copyText" data-text="{{detail.orderNum}}" class="copy">{{_t['复制']}}</text>
       </view>
+      <view class="cell">
+        <label>{{_t['报名人']}}：</label>
+        <text>{{detail.orderNum}}</text>
+      </view>
+      <view class="cell">
+        <label>{{_t['参赛组别']}}：</label>
+        <text>{{detail.orderNum}}</text>
+      </view>
+      <view class="cell">
+        <label>{{_t['参赛号']}}：</label>
+        <text>{{detail.orderNum}}</text>
+      </view>
+      <view class="cell">
+        <label>{{_t['成绩状态']}}：</label>
+        <text>{{detail.orderNum}}</text>
+      </view>
     </view>
-    <view class="ft flex justify-end align-center">
-      <button bindtap="redirect" disabled="{{!refundEnabled}}" data-url="/pages/register/refund/refund?id={{detail._id}}" class="button secondary mini" wx:if="{{showRefundBtn}}">{{detail.raceType === 'X-Plogging' ? _t['取消活动'] : _t['申请退款']}}</button>
-      <button bindtap="confirmOrder" wx:if="{{showPayBtn}}" class="button mini">{{_t['立即支付']}}</button>
-      <button bindtap="redirect" data-url="/pages/my/registration/registration" class="button mini">{{_t['我的报名']}}</button>
+  </view>  
+  <view class="box info">
+    <view class="title flex align-center space-between">
+      <text>{{_t['上传完赛证明']}}</text>
+      <view class="ft">{{_t['上传.gpx文件轨迹文件']}}</view>
+    </view>
+    <view class="zone">
+      <van-grid column-num="1" border="{{false}}">
+        <van-grid-item icon="photo-o" text="上传运动APP截图" />
+      </van-grid>
+    </view>
+    <view class="zone">
+      
+    </view>
+    <view class="content flex column">
+      <text class="sub-title">注意事项：</text>
+      <text>1、数据截图只可上传多张，请勿重复上传；</text>
+      <text>2、请在数据截图中体现出完整的距离和持续时间，如一张图片无法展示，请合并后上传；</text>
+      <text>3、比赛成绩审核成功后，即将发送奖品；</text>
+      <text>4、成绩提交时间：2022年4月30日-5月5日</text>
     </view>
   </view>
 </view>

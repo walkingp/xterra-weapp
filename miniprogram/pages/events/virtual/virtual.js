@@ -88,10 +88,9 @@ Page({
     if(id){
       detail = await getRegistrationDetail(id);
     }
-    const { raceId } = detail;
+    const { raceId } = this.data;
     const raceDetail = await getRaceDetail(raceId);
-    debugger;
-    detail.orderTime = dayjs(detail.addedDate).format("YYYY-MM-DD HH:mm:ss");
+    raceDetail.orderTime = dayjs(raceDetail.addedDate).format("YYYY-MM-DD HH:mm:ss");
     const isBeforeRaceDate = dayjs().isBefore(dayjs(raceDetail.raceDate));
 
     this.setData({
