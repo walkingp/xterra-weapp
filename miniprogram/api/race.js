@@ -399,6 +399,11 @@ export const getRegistrationByCardNo = async (filter) => {
   return data;
 }
 
+export const getStartListByRaceIdUserId = async ({raceId, userId}) => {
+  const data = await getSingleCollectionByWhere({ dbName: 'start-list', filter: {raceId, userId}});
+  return data;
+}
+
 export const getStartedUsersByRaceId = async raceId => {
   const data = await getCollectionByWhere({ dbName: 'start-list', filter: { raceId } });
   return data;

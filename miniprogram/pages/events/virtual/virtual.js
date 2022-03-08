@@ -1,5 +1,5 @@
 const dayjs = require("dayjs");
-const { getRegistrationDetail, getRaceDetail } = require("../../../api/race");
+const { getRegistrationDetail, getRaceDetail, getStartListByRaceIdUserId } = require("../../../api/race");
 const app = getApp();
 Page({
 
@@ -10,7 +10,6 @@ Page({
     raceDetail: null,
     orderDetail: null,
     raceId: null,
-    id: null,
     detail: null,
     showSaveBtn: false,
     bibPic: null
@@ -20,11 +19,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    const { id, raceId } = options;
+    const { raceId } = options;
     this.setData({
-      id, raceId
+      raceId
     });
-    this.fetch(id);
+    this.fetch();
 
   },
   copyText(e){
@@ -80,24 +79,29 @@ Page({
       }
     })
   },
-  async fetch( id ) {
+  async fetch() {
     wx.showLoading({
       title: '加载中……',
     })
-    let detail = null;
-    if(id){
-      detail = await getRegistrationDetail(id);
-    }
-    const { raceId } = this.data;
-    const raceDetail = await getRaceDetail(raceId);
-    raceDetail.orderTime = dayjs(raceDetail.addedDate).format("YYYY-MM-DD HH:mm:ss");
-    const isBeforeRaceDate = dayjs().isBefore(dayjs(raceDetail.raceDate));
+    
+    app.checkLogin()
+      .then(async (res) => {
+        const { userId } = res;
+        const { raceId } = this.data;
+        let detail = null;
+        if (userId && raceId) {
+          detail = await getStartListByRaceIdUserId({ raceId, userId });
+        }
+        const raceDetail = await getRaceDetail(raceId);
+        raceDetail.orderTime = dayjs(raceDetail.addedDate).format("YYYY-MM-DD HH:mm:ss");
+        const isBeforeRaceDate = dayjs().isBefore(dayjs(raceDetail.raceDate));
 
-    this.setData({
-      detail, raceDetail
-    }, () => {
-      wx.hideLoading();
-    })
+        this.setData({
+          detail, raceDetail
+        }, () => {
+          wx.hideLoading();
+        })
+      });
   },
 
   /**

@@ -19,15 +19,15 @@
       </view>
       <view class="cell">
         <label>{{_t['报名人']}}：</label>
-        <text>{{detail.orderNum}}</text>
+        <text>{{detail.trueName}}</text>
       </view>
       <view class="cell">
         <label>{{_t['参赛组别']}}：</label>
-        <text>{{detail.orderNum}}</text>
+        <text>{{detail.cateTitle}}</text>
       </view>
       <view class="cell">
         <label>{{_t['参赛号']}}：</label>
-        <text>{{detail.orderNum}}</text>
+        <text>{{detail.bibNum || '暂无'}}</text>
       </view>
       <view class="cell">
         <label>{{_t['成绩状态']}}：</label>
