@@ -19,7 +19,7 @@
     </view>
     <view class="flex-none flex column space-between align-center btn" wx:if="{{item.isStartReg && !item.expired && !item.isFull}}">
       <button data-url="/pages/register/register?id={{raceId}}&cateId={{item._id}}&type={{item.type}}" bindtap="redirect" class="button">{{_t['一键报名']}}</button>
-      <view class="limit" style="font-size: 24rpx; color: #999; padding-top: 10rpx;" wx:if="{{item.limit > 0}}">
+      <view class="limit" style="font-size: 24rpx; color: #999; padding-top: 10rpx;" wx:if="{{item.limit > 0 && !item.isHideNum}}">
         <block wx:if="{{isChinese}}">
           已报{{item.users.length ? item.users.length : 0}}/{{item.limit}}人
         </block>
