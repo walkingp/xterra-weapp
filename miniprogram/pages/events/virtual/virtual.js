@@ -1,5 +1,5 @@
 const dayjs = require("dayjs");
-const { getRegistrationDetail, getRaceDetail, getStartListByRaceIdUserId } = require("../../../api/race");
+const { getRaceDetail, getStartListByRaceIdUserId, updateBibNum } = require("../../../api/race");
 const app = getApp();
 Page({
 
@@ -58,26 +58,26 @@ Page({
           wx.showLoading({
             title: '上传中...',
           })
-          const suffix = /\.\w+$/.exec(tempFilePaths[0])[0];
-          wx.cloud.uploadFile({
-            cloudPath: `upload/certs/${new Date().getTime()}${suffix}`,
-            filePath: tempFilePaths[0], 
-            success: async (result) => {
-              that.setData({
-                certPic: result.fileID,
-              });
-              const res = await updateStartListCert(orderDetail._id, result.fileID);     
-              wx.hideLoading({
-                success: (res) => {},
-              })
-            },
-            fail: err => {
-              console.error(err);
-            }
-          });
+          const uploadTasks = fileList.map((file, index) => this.uploadFilePromise(`upload/snap/my-photo/${new Date().getTime()}.png`, file));
+          Promise.all(uploadTasks)
+            .then(data => {
+              wx.showToast({ title: '上传成功', icon: 'none' });
+              const newFileList = data.map(item => ({ url: item.fileID }));
+              this.setData({ cloudPath: data, fileList: newFileList });
+            })
+            .catch(e => {
+              wx.showToast({ title: '上传失败', icon: 'none' });
+              console.log(e);
+            });
         }
       }
     })
+  },
+  uploadFilePromise(fileName, chooseResult) {
+    return wx.cloud.uploadFile({
+      cloudPath: fileName,
+      filePath: chooseResult.url
+    });
   },
   async fetch() {
     wx.showLoading({
@@ -91,6 +91,10 @@ Page({
         let detail = null;
         if (userId && raceId) {
           detail = await getStartListByRaceIdUserId({ raceId, userId });
+        }
+        debugger;
+        if(!detail.bibNum){
+          updateBibNum(raceId, userId);
         }
         const raceDetail = await getRaceDetail(raceId);
         raceDetail.orderTime = dayjs(raceDetail.addedDate).format("YYYY-MM-DD HH:mm:ss");

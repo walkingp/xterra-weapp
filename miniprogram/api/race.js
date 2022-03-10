@@ -156,7 +156,7 @@ export const getAllRaces = async () => {
   const raceTable = db.collection("race");
   
   for (let i = 1; i <= pageCount; i++) {    
-    const res = await raceTable.skip((i - 1) * pageSize).limit(pageSize).get();
+    const res = await raceTable.orderBy('raceDate', 'desc').skip((i - 1) * pageSize).limit(pageSize).get();
     allRaces.push(...res.data);
   }
   return allRaces;
@@ -483,6 +483,17 @@ export const getUnsavedStartList = async raceId => {
     wx.cloud.callFunction({
       name: 'getUnsavedStartList',
       data: { raceId }
+    }).then(res => {
+      resolve(res);
+    }).catch(reject)
+  })
+}
+
+export const updateBibNum = async (raceId, userId) => {
+  return new Promise((resolve, reject) => {
+    wx.cloud.callFunction({
+      name: 'generateBibNum',
+      data: { raceId, userId }
     }).then(res => {
       resolve(res);
     }).catch(reject)

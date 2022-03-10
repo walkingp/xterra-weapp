@@ -328,6 +328,13 @@
           "name": "上传成绩",
           "pathName": "pages/events/virtual/virtual",
           "query": "raceId=41ae62ef6218852308d7013e6f147a3f&id=bf4a0bf26226a981134d09200cdc4336",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "上传完赛证书",
+          "pathName": "pages/register/status/status",
+          "query": "id=bf4a0bf26226a981134d09200cdc4336",
           "scene": null,
           "launchMode": "default"
         }

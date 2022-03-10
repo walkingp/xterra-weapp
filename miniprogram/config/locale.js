@@ -380,6 +380,7 @@ const locales = {
   '参赛组别':'Category',
   '参赛号':'Bib Number',
   '成绩状态':'Status',
+  '完赛证明':'Finish Certification',
   '上传.gpx文件轨迹文件': 'Upload .gpx file'
 };
 

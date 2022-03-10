@@ -10,7 +10,7 @@ const userTable = db.collection("start-list");
 // 云函数入口函数
 exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext()
-  const { raceId } = event;
+  const { raceId, userId } = event;
   const cates = await cateTable.where({ raceId }).get();
   let count = 0;
   cates.data.forEach(async cate=>{
@@ -32,13 +32,15 @@ exports.main = async (event, context) => {
         bibNum = bibRule.female.startChar + (bibRule.female.firstBib + femalCount);
       }
 
-      await userTable.doc(_id).update({
-        data: {
-          bibNum
-        }
-      });
-      count += 1;
-      console.log(trueName + ': ' + bibNum);
+      if(!userId || (userId === user.userId)){
+        await userTable.doc(_id).update({
+          data: {
+            bibNum
+          }
+        });
+        count += 1;
+        console.log(trueName + ': ' + bibNum);
+      }
     })
     console.log(`${count}人已更新号码`)
   })

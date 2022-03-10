@@ -49,6 +49,15 @@
       <button class="button mini" open-type="share">{{_t['邀请报名']}}</button>
     </view>
   </view>
+  <view class="box" wx:if="{{raceDetail.isVirtual}}">
+    <view class="title">{{_t['完赛证明']}}：</view>
+    <view class="list">
+      <view class="cell">
+        <label>{{_t['优惠金额']}}：</label>
+        <text>￥{{detail.discountFee}}</text>
+      </view>
+    </view>
+  </view>
   <view class="box info">
     <view class="title">{{_t['报名信息']}}：</view>
     <view class="list">
@@ -93,6 +102,10 @@
       <view class="cell">
         <label>{{_t['订单状态']}}：</label>
         <text>{{detail.statusText}}</text>
+      </view>
+      <view class="cell">
+        <label>{{_t['参赛号']}}：</label>
+        <text>{{orderDetail.bibNum}}</text>
       </view>
       <view class="cell" wx:if="{{orderDetail}}">
         <label>{{_t['报名审核']}}：</label>
