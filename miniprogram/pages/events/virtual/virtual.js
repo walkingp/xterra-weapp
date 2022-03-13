@@ -7,14 +7,22 @@ Page({
    * 页面的初始数据
    */
   data: {
+    show: false,
     raceDetail: null,
     orderDetail: null,
     raceId: null,
     detail: null,
     showSaveBtn: false,
-    bibPic: null
+    bibPic: null,
+    fileList: [],
+  },
+  showPopup() {
+    this.setData({ show: true });
   },
 
+  onClose() {
+    this.setData({ show: false });
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -38,40 +46,37 @@ Page({
       }
     })
   },
-  upload(event) {
-    const that = this;
-    const { orderDetail } = this.data;
-    wx.chooseImage({
-      count: 1,
-      sizeType: ['original', 'compressed'],
-      sourceType: ['album', 'camera'],
-      success (res) {
-        // tempFilePath可以作为img标签的src属性显示图片
-        const tempFilePaths = res.tempFilePaths;        
-        wx.cloud.init();
-        if (tempFilePaths.length === 0) {
-          wx.showToast({
-            title: '请选择图片',
-            icon: 'none'
-          });
-        } else {
-          wx.showLoading({
-            title: '上传中...',
-          })
-          const uploadTasks = fileList.map((file, index) => this.uploadFilePromise(`upload/snap/my-photo/${new Date().getTime()}.png`, file));
-          Promise.all(uploadTasks)
-            .then(data => {
-              wx.showToast({ title: '上传成功', icon: 'none' });
-              const newFileList = data.map(item => ({ url: item.fileID }));
-              this.setData({ cloudPath: data, fileList: newFileList });
-            })
-            .catch(e => {
-              wx.showToast({ title: '上传失败', icon: 'none' });
-              console.log(e);
-            });
-        }
-      }
-    })
+  uploadToCloud(event) {
+    const { raceDetail } = this.data;
+    const { file } = event.detail;
+    let filelist = [];
+    if(raceDetail.isMultiPic) {
+      filelist = file;
+    }else{
+      filelist = [ file ];
+    }
+    wx.cloud.init();
+    if (filelist.length === 0) {
+      wx.showToast({
+        title: '请选择图片',
+        icon: 'none'
+      });
+    } else {
+      wx.showLoading({
+        title: '上传中...',
+      })
+      const uploadTasks = filelist.map((file, index) => this.uploadFilePromise(`upload/app/${new Date().getTime()}.png`, file));
+      Promise.all(uploadTasks)
+        .then(data => {
+          wx.showToast({ title: '上传成功', icon: 'none' });
+          const newFileList = data.map(item => ({ url: item.fileID }));
+          this.setData({ cloudPath: data, fileList: newFileList });
+        })
+        .catch(e => {
+          wx.showToast({ title: '上传失败', icon: 'none' });
+          console.log(e);
+        });
+    }
   },
   uploadFilePromise(fileName, chooseResult) {
     return wx.cloud.uploadFile({
@@ -92,7 +97,6 @@ Page({
         if (userId && raceId) {
           detail = await getStartListByRaceIdUserId({ raceId, userId });
         }
-        debugger;
         if(!detail.bibNum){
           updateBibNum(raceId, userId);
         }

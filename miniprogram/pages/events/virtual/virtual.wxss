@@ -1,4 +1,6 @@
-/* pages/events/virtual/virtual.wxss */image.icon{
+@import "./../../../style/mi.flex.wxss";
+
+image.icon{
   width: 100rpx!important;
   height: 100rpx!important;
 }

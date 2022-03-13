@@ -1,4 +1,14 @@
 <view class="container flex column">
+  <navigator url="/pages/events/detail/detail?id={{detail.raceId}}" class="box flex align-center space-between">
+    <view class="flex-auto flex align-center">
+      <image src="{{detail.racePic[0]}}" mode="aspectFill" class="image"></image>
+      <view class="text flex column">
+        <text class="title">{{detail.raceTitle}}</text>
+        <text class="cate">{{detail.cateTitle}}</text>
+      </view>
+    </view>
+    <van-icon class="flex-none" name="arrow" />
+  </navigator>
   <view class="box info">
     <view class="title">{{_t['报名信息']}}：</view>
     <view class="list">
@@ -24,12 +34,12 @@
   <view class="box info">
     <view class="title flex align-center space-between">
       <text>{{_t['上传完赛证明']}}</text>
-      <view class="ft">{{_t['上传.gpx文件轨迹文件']}}</view>
+      <view class="ft" bindtap="showPopup">{{_t['上传.gpx文件轨迹文件']}}</view>
     </view>
     <view class="zone">
-      <van-uploader accept="image" max-count="{{1}}" bind:after-read="uploadToCloud" style="display: flex; justify-content: center;">
-        <van-grid column-num="1" border="{{false}}">
-          <van-grid-item icon="photo-o" text="上传运动APP截图" />
+      <van-uploader image-fit="aspectFill" file-list="{{ fileList }}" multiple="{{raceDetail.isMultiPic}}" accept="image" max-count="{{raceDetail.isMultiPic ? 9 : 1}}" bind:after-read="uploadToCloud" style="display: flex; justify-content: center;">
+        <van-grid column-num="1" border="{{false}}" wx:if="{{fileList.length === 0}}">
+          <van-grid-item icon="photo-o" text="上传运动APP截图{{raceDetail.isMultiPic ? '（多张）' : '（单张）'}}" />
         </van-grid>
       </van-uploader>
     </view>
@@ -45,3 +55,17 @@
     </view>
   </view>
 </view>
+<van-popup
+  show="{{ show }}"
+  closeable
+  position="bottom"
+  custom-style="height: 50%"
+  bind:close="onClose">
+  <van-uploader accept="file">
+    <view style="width: 100vw; height: 400rpx;" class="flex align-center justify-center">
+      <van-grid column-num="1" border="{{false}}">
+        <van-grid-item icon="add-o" text="上传.gpx轨迹文件" />
+      </van-grid>
+    </view> 
+  </van-uploader>
+</van-popup>
