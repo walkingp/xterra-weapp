@@ -262,6 +262,17 @@ export const removeRegistration = async id => {
   })  
 }
 
+export const updateStartList =  async (id, data) => {
+  const db = wx.cloud.database();  
+  return await db.collection("start-list").doc(id).update({
+    data
+  });
+};
+
+export const updateGpxJsonFile = async (id, gpxFileUrl) => {
+  return updateStartList(id, { gpxFileUrl });
+};
+
 export const updateRaceCateUsers = async cateId => {
   const db = wx.cloud.database();
   const cateTable = db.collection("race-cates");

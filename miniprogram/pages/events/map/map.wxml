@@ -1,0 +1,3 @@
+<view class="container">
+  <map id="map" markers="{{markers}}" polyline="{{polyline}}" regionchange="{{regionchange}}" markers="{{markers}}" include-points="{{points}}" subkey="{{subKey}}" layer-style="2" bindregionchange="regionchange"></map>
+</view>

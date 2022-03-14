@@ -58,7 +58,8 @@
     "pages/community/location/location",
     "pages/community/video/video",
     "pages/community/item/item",
-    "pages/events/virtual/virtual"
+    "pages/events/virtual/virtual",
+    "pages/events/map/map"
   ],
   "window": {
     "backgroundColor": "#ffffff",

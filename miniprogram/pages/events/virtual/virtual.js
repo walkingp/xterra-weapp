@@ -1,5 +1,6 @@
 const dayjs = require("dayjs");
-const { getRaceDetail, getStartListByRaceIdUserId, updateBibNum } = require("../../../api/race");
+const { getRaceDetail, getStartListByRaceIdUserId, updateBibNum, updateGpxJsonFile, updateStartList } = require("../../../api/race");
+const { gpxToJson } = require("../../../api/upload");
 const app = getApp();
 Page({
 
@@ -7,7 +8,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    show: false,
     raceDetail: null,
     orderDetail: null,
     raceId: null,
@@ -15,13 +15,10 @@ Page({
     showSaveBtn: false,
     bibPic: null,
     fileList: [],
-  },
-  showPopup() {
-    this.setData({ show: true });
-  },
-
-  onClose() {
-    this.setData({ show: false });
+    jsonUrl: null,
+    virtualStatuses: ['未上传', '已上传待审核', '审核通过', '审核不通过'],
+    virtualStatus: "",
+    btnDisabled: true
   },
   /**
    * 生命周期函数--监听页面加载
@@ -47,16 +44,17 @@ Page({
     })
   },
   uploadToCloud(event) {
-    const { raceDetail } = this.data;
+    const that = this;
+    let { raceDetail, fileList = [] } = this.data;
     const { file } = event.detail;
-    let filelist = [];
+    let files = [];
     if(raceDetail.isMultiPic) {
-      filelist = file;
+      files = file;
     }else{
-      filelist = [ file ];
+      files = [ file ];
     }
     wx.cloud.init();
-    if (filelist.length === 0) {
+    if (files.length === 0) {
       wx.showToast({
         title: '请选择图片',
         icon: 'none'
@@ -65,12 +63,14 @@ Page({
       wx.showLoading({
         title: '上传中...',
       })
-      const uploadTasks = filelist.map((file, index) => this.uploadFilePromise(`upload/app/${new Date().getTime()}.png`, file));
+      const uploadTasks = files.map((file, index) => this.uploadFilePromise(`upload/app/${new Date().getTime()}.png`, file));
       Promise.all(uploadTasks)
-        .then(data => {
-          wx.showToast({ title: '上传成功', icon: 'none' });
+        .then(async data => {
           const newFileList = data.map(item => ({ url: item.fileID }));
-          this.setData({ cloudPath: data, fileList: newFileList });
+          fileList.push(...newFileList);
+          wx.showToast({ title: '上传成功', icon: 'none' });
+          const btnDisabled = fileList.length === 0;
+          that.setData({ cloudPath: data, fileList, btnDisabled });
         })
         .catch(e => {
           wx.showToast({ title: '上传失败', icon: 'none' });
@@ -95,28 +95,100 @@ Page({
         const { raceId } = this.data;
         let detail = null;
         if (userId && raceId) {
-          detail = await getStartListByRaceIdUserId({ raceId, userId });
+          detail = await getStartListByRaceIdUserId({ raceId, userId });          
         }
+        const { appActivities, virtualStatus } = detail;
+        const fileList = appActivities?.map(item=> {
+          return { url: item };
+        });
         if(!detail.bibNum){
           updateBibNum(raceId, userId);
         }
         const raceDetail = await getRaceDetail(raceId);
         raceDetail.orderTime = dayjs(raceDetail.addedDate).format("YYYY-MM-DD HH:mm:ss");
-        const isBeforeRaceDate = dayjs().isBefore(dayjs(raceDetail.raceDate));
-
+        const btnDisabled = !virtualStatus || ['已上传待审核', '审核通过'].includes(virtualStatus);
         this.setData({
-          detail, raceDetail
+          detail, raceDetail, jsonUrl: detail.gpxFileUrl, fileList, virtualStatus, btnDisabled
         }, () => {
           wx.hideLoading();
         })
+        this.watchChanges(detail._id);
       });
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+  uploadGpx(event) {
+    const { file } = event.detail;
+    const { detail } = this.data;
+    wx.cloud.init();
+    if (!file) {
+      wx.showToast({
+        title: '请选择文件',
+        icon: 'none'
+      });
+    } else {
+      if(!file.url.toLocaleLowerCase().endsWith('.gpx')){
+        wx.showToast({
+          title: '请选择.gpx文件',
+          icon: 'none'
+        });
+        return;
+      }
+      wx.showLoading({
+        title: '上传中...',
+      })
+      const that = this
+      const suffix = /\.\w+$/.exec(file.url)[0];
+      wx.cloud.uploadFile({
+        cloudPath: `upload/gpx/${new Date().getTime()}${suffix}`,
+        filePath: file.url, // 文件路径
+        success: async res => {
+          console.log("上传成功", res.fileID);
+          const { errMsg, result } = await gpxToJson(res.fileID);
+          if(errMsg === "cloud.callFunction:ok"){
+            const jsonUrl = result.fileID;
+            that.setData({
+              btnDisabled: false,
+              jsonUrl
+            }, async () => {
+              const data = await updateGpxJsonFile(detail._id, jsonUrl);
+              if(data.errMsg === "document.update:ok"){
+                wx.showToast({
+                  title: '上传成功',
+                  icon: 'success'
+                });
+                return;
+              }
+            })
+          }
+        },
+        fail: err => {
+          console.log("上传失败", err)
+        }
+      })
+    }
+  },
+  async submitApprove(){
+    const { detail, jsonUrl } = this.data;
+    const { appActivities } = detail;
+    const res = await updateStartList(detail._id, { jsonUrl, appActivities, gpxUploadTime: new Date(), virtualStatus: '已上传待审核' })
+    if(res.errMsg === "document.update:ok"){
+      wx.showToast({ title: '提交成功', icon: 'none' });
+    }
+  },
+  watchChanges(id) {
+    const db = wx.cloud.database();
+    const that = this;
+    db.collection('start-list').doc(id).watch({
+      onChange: function (snapshot) {
+        const { type } = snapshot;
+        if (type !== "init") {
+          that.fetch();
+        }
+        console.log("snapshot", snapshot);
+      },
+      onError: function (err) {
+        console.error("the watch closed because of error", err);
+      },
+    });
   },
 
   /**

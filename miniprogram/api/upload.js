@@ -47,3 +47,18 @@ export const getImportedUsers = async ( raceId, pageIndex = 1, pageSize = 1000) 
   })
   return data;
 }
+
+export const gpxToJson = async (gpxCloudUrl) => {
+  return new Promise((resolve, reject) => {
+    wx.cloud.callFunction({
+      name: 'gpxToJson',
+      data: {
+        gpxCloudUrl
+      },
+      success: res => {
+        resolve(res);
+      },
+      fail: err => reject(err)
+    });
+  });
+}

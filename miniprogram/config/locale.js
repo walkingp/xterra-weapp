@@ -381,6 +381,8 @@ const locales = {
   '参赛号':'Bib Number',
   '成绩状态':'Status',
   '完赛证明':'Finish Certification',
+  '查看号码布': 'View Bib',
+  '审核意见': 'Audit opinion',
   '上传.gpx文件轨迹文件': 'Upload .gpx file'
 };
 

@@ -24,27 +24,33 @@
       <view class="cell">
         <label>{{_t['参赛号']}}：</label>
         <text>{{detail.bibNum || '暂无'}}</text>
+        <text wx:if="{{detail.bibNum}}" bindtap="showBibNum" data-text="{{detail.bibNum}}" class="copy">{{_t['查看号码布']}}</text>
       </view>
       <view class="cell">
         <label>{{_t['成绩状态']}}：</label>
-        <text>{{detail.bibNum}}</text>
+        <text class="red">{{virtualStatus || '未上传'}}</text>
+      </view>
+      <view class="cell" wx:if="{{detail.approveText}}">
+        <label>{{_t['审核意见']}}：</label>
+        <text class="red">{{detail.approveText}}</text>
       </view>
     </view>
   </view>  
   <view class="box info">
     <view class="title flex align-center space-between">
       <text>{{_t['上传完赛证明']}}</text>
-      <view class="ft" bindtap="showPopup">{{_t['上传.gpx文件轨迹文件']}}</view>
+      <view class="ft">
+        <navigator url="/pages/events/map/map?startId={{detail._id}}&jsonUrl={{jsonUrl}}" wx:if="{{jsonUrl}}">查看轨迹</navigator>
+        <van-uploader wx:else accept="file" bind:after-read="uploadGpx">{{_t['上传.gpx文件轨迹文件']}}
+        </van-uploader>
+      </view>
     </view>
     <view class="zone">
-      <van-uploader image-fit="aspectFill" file-list="{{ fileList }}" multiple="{{raceDetail.isMultiPic}}" accept="image" max-count="{{raceDetail.isMultiPic ? 9 : 1}}" bind:after-read="uploadToCloud" style="display: flex; justify-content: center;">
+      <van-uploader deletable="{{ !btnDisabled }}" image-fit="aspectFill" file-list="{{ fileList }}" multiple="{{raceDetail.isMultiPic}}" accept="image" max-count="{{raceDetail.isMultiPic ? 9 : 1}}" bind:after-read="uploadToCloud" style="display: flex; justify-content: center;">
         <van-grid column-num="1" border="{{false}}" wx:if="{{fileList.length === 0}}">
           <van-grid-item icon="photo-o" text="上传运动APP截图{{raceDetail.isMultiPic ? '（多张）' : '（单张）'}}" />
         </van-grid>
       </van-uploader>
-    </view>
-    <view class="zone">
-      
     </view>
     <view class="content flex column">
       <text class="sub-title">注意事项：</text>
@@ -53,19 +59,8 @@
       <text>3、比赛成绩审核成功后，即将发送奖品；</text>
       <text>4、成绩提交时间：2022年4月30日-5月5日</text>
     </view>
+    <view class="margin-top-xl flex justify-center">
+      <van-button type="primary" bind:click="submitApprove" disabled="{{btnDisabled}}" class="button secondary mini">{{ virtualStatus || '提交审核'}}</van-button>
+    </view>
   </view>
 </view>
-<van-popup
-  show="{{ show }}"
-  closeable
-  position="bottom"
-  custom-style="height: 50%"
-  bind:close="onClose">
-  <van-uploader accept="file">
-    <view style="width: 100vw; height: 400rpx;" class="flex align-center justify-center">
-      <van-grid column-num="1" border="{{false}}">
-        <van-grid-item icon="add-o" text="上传.gpx轨迹文件" />
-      </van-grid>
-    </view> 
-  </van-uploader>
-</van-popup>

@@ -1,7 +1,7 @@
 import dayjs from "dayjs";
 import { emailTemplateType, orderStatus } from "../config/const";
 import { sendRegEmail } from "./email";
-import { updateCoupon, updateOrderStatus } from "./race";
+import { updateBibNum, updateCoupon, updateOrderStatus } from "./race";
 import { sendRegSMS } from "./sms";
 
 export const payNow = function(detail, callback) {
@@ -86,7 +86,7 @@ function updateStatuses(detail, callback){
     title: '处理中……',
   })
   // 重要：此处更新保存out_trade_no，用于退款
-  const { _id, paidFee, discountFee } = detail;
+  const { _id, paidFee, discountFee, raceId, userId } = detail;
   const { out_trade_no } = getApp().globalData;
 
   getApp().globalData.out_trade_no = null;
@@ -115,7 +115,8 @@ function updateStatuses(detail, callback){
         wx.showToast({
           icon: 'success',
           title: '报名成功',
-          success: (res) => {
+          success: async (res) => {
+            await updateBibNum(raceId, userId)
             if(callback){
               callback();
             }else{

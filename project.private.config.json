@@ -335,6 +335,13 @@
           "name": "上传完赛证书",
           "pathName": "pages/register/status/status",
           "query": "id=bf4a0bf26226a981134d09200cdc4336",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "查看轨迹",
+          "pathName": "pages/events/map/map",
+          "query": "startId=5b049cc86226a9860faac00f2e2acad9&jsonUrl=cloud%3A%2F%2Fxterra-c2969f.7874-xterra-c2969f-1258173660%2Fupload%2Fgpx%2F1647250706980.json",
           "scene": null,
           "launchMode": "default"
         }
