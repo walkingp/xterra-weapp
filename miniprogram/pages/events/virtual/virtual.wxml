@@ -59,7 +59,7 @@
       <text>3、比赛成绩审核成功后，即将发送奖品；</text>
     </view>
     <view class="margin-top-xl flex justify-center">
-      <van-button type="primary" bind:click="submitApprove" disabled="{{btnDisabled}}" class="button secondary mini">{{ virtualStatus || _t['提交审核']}}</van-button>
+      <van-button type="primary" bind:click="submitApprove" disabled="{{btnDisabled}}" class="button secondary mini">{{ btnDisabled ? virtualStatus : _t['提交审核']}}</van-button>
     </view>
   </view>
 </view>

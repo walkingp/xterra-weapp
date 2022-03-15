@@ -116,7 +116,7 @@ Page({
       const orderDetail = await getStartUserDetailByOrderNum(detail.orderNum);
       if(orderDetail){
         const { certPic, certRecheckUrl, virtualStatus } = orderDetail;
-        const btnEnabled = virtualStatus === undefined || ['未上传', '审核不通过'].includes(virtualStatus);
+        const btnEnabled = virtualStatus === undefined || ['未上传', '审核不通过', '已上传待审核', '审核通过'].includes(virtualStatus);
         const isDateValid = dayjs().isBefore(dayjs(raceDetail.appEndDate)) && dayjs().isAfter(dayjs(raceDetail.appStartDate));
         this.setData({
           certPic: certRecheckUrl ? certRecheckUrl: certPic,

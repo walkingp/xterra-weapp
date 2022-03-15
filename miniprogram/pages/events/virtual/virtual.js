@@ -72,7 +72,8 @@ Page({
           wx.showToast({ title: '上传成功', icon: 'none' });
           const btnDisabled = fileList.length === 0;
           const newFiles = data.map(item => item.fileID);
-          appActivities.push(newFiles);
+          appActivities.push(...newFiles);
+          debugger
           that.setData({ cloudPath: data, fileList, appActivities, btnDisabled });
         })
         .catch(e => {

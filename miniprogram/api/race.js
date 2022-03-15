@@ -264,7 +264,7 @@ export const removeRegistration = async id => {
   })  
 }
 
-export const updateStartList =  async (id, data) => {
+export const updateStartList = async (id, data) => {
   const db = wx.cloud.database();  
   return await db.collection("start-list").doc(id).update({
     data
