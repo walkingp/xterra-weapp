@@ -228,7 +228,9 @@ export const checkIsValid = async (cateId, profileId) => {
   const isCertValid = !cate.isCheckCert || (cate.isCheckCert && !!certPic);
 
   if(Date.parse(profile.birthDate)){
-    const age = dayjs(race.raceDate).diff(dayjs(profile.birthDate), 'year');
+    // const age = getAge(dayjs(new Date(2017,5, 15) || profile.birthDate).format("YYYY-M-D").split('-'), race.raceDate)[0]; 
+    let age = dayjs(race.raceDate).diff(dayjs(profile.birthDate), 'months', true);
+    age = Math.floor(age);
     const isMinAgeValid = !cate.minAge || cate.minAge <= age;
     const isMaxAgeValid = !cate.maxAge || cate.maxAge >= age;
     const isAgeValid = isMinAgeValid && isMaxAgeValid;
@@ -245,7 +247,7 @@ export const removeRegistration = async id => {
   const regDetail = await getCollectionById ({ dbName: 'registration', id });
   const { profiles, cateId } = regDetail;
   let promises = [];
-  profiles.forEach(async p => {
+  profiles?.forEach(async p => {
     const promise = new Promise(async (resolve, reject) => {
       const { cardNo } = p;
       const res = await removeCollectionByWhere({ dbName: 'start-list', filter: { cateId, cardNo } });

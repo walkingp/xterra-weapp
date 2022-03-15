@@ -18,7 +18,8 @@ Page({
     jsonUrl: null,
     virtualStatuses: ['未上传', '已上传待审核', '审核通过', '审核不通过'],
     virtualStatus: "",
-    btnDisabled: true
+    btnDisabled: true,
+    appActivities: null
   },
   /**
    * 生命周期函数--监听页面加载
@@ -45,7 +46,7 @@ Page({
   },
   uploadToCloud(event) {
     const that = this;
-    let { raceDetail, fileList = [] } = this.data;
+    let { raceDetail, fileList = [], appActivities = [] } = this.data;
     const { file } = event.detail;
     let files = [];
     if(raceDetail.isMultiPic) {
@@ -70,7 +71,9 @@ Page({
           fileList.push(...newFileList);
           wx.showToast({ title: '上传成功', icon: 'none' });
           const btnDisabled = fileList.length === 0;
-          that.setData({ cloudPath: data, fileList, btnDisabled });
+          const newFiles = data.map(item => item.fileID);
+          appActivities.push(newFiles);
+          that.setData({ cloudPath: data, fileList, appActivities, btnDisabled });
         })
         .catch(e => {
           wx.showToast({ title: '上传失败', icon: 'none' });
@@ -106,9 +109,13 @@ Page({
         }
         const raceDetail = await getRaceDetail(raceId);
         raceDetail.orderTime = dayjs(raceDetail.addedDate).format("YYYY-MM-DD HH:mm:ss");
-        const btnDisabled = !virtualStatus || ['已上传待审核', '审核通过'].includes(virtualStatus);
+        
+        const btnEnabled = virtualStatus === undefined || ['未上传', '审核不通过'].includes(virtualStatus);
+        const isDateValid = dayjs().isBefore(dayjs(raceDetail.appEndDate)) && dayjs().isAfter(dayjs(raceDetail.appStartDate));
+        raceDetail.appStartDate = dayjs(raceDetail.appStartDate).format("YYYY-MM-DD");
+        raceDetail.appEndDate = dayjs(raceDetail.appEndDate).format("YYYY-MM-DD");
         this.setData({
-          detail, raceDetail, jsonUrl: detail.gpxFileUrl, fileList, virtualStatus, btnDisabled
+          detail, raceDetail, appActivities, jsonUrl: detail.gpxFileUrl, fileList, virtualStatus, btnDisabled: !(btnEnabled && isDateValid)
         }, () => {
           wx.hideLoading();
         })
@@ -167,8 +174,7 @@ Page({
     }
   },
   async submitApprove(){
-    const { detail, jsonUrl } = this.data;
-    const { appActivities } = detail;
+    const { detail, jsonUrl, appActivities } = this.data;
     const res = await updateStartList(detail._id, { jsonUrl, appActivities, gpxUploadTime: new Date(), virtualStatus: '已上传待审核' })
     if(res.errMsg === "document.update:ok"){
       wx.showToast({ title: '提交成功', icon: 'none' });

@@ -24,7 +24,7 @@
       <view class="cell">
         <label>{{_t['参赛号']}}：</label>
         <text>{{detail.bibNum || '暂无'}}</text>
-        <text wx:if="{{detail.bibNum}}" bindtap="showBibNum" data-text="{{detail.bibNum}}" class="copy">{{_t['查看号码布']}}</text>
+        <text wx:if="{{detail.bibNum  && false}}" bindtap="showBibNum" data-text="{{detail.bibNum}}" class="copy">{{_t['查看号码布']}}</text>
       </view>
       <view class="cell">
         <label>{{_t['成绩状态']}}：</label>
@@ -46,21 +46,20 @@
       </view>
     </view>
     <view class="zone">
-      <van-uploader deletable="{{ !btnDisabled }}" image-fit="aspectFill" file-list="{{ fileList }}" multiple="{{raceDetail.isMultiPic}}" accept="image" max-count="{{raceDetail.isMultiPic ? 9 : 1}}" bind:after-read="uploadToCloud" style="display: flex; justify-content: center;">
+      <van-uploader disabled="{{btnDisabled}}" deletable="{{ false }}" image-fit="aspectFill" file-list="{{ fileList }}" multiple="{{raceDetail.isMultiPic}}" accept="image" max-count="{{raceDetail.isMultiPic ? 9 : 1}}" bind:after-read="uploadToCloud" style="display: flex; justify-content: center;">
         <van-grid column-num="1" border="{{false}}" wx:if="{{fileList.length === 0}}">
           <van-grid-item icon="photo-o" text="上传运动APP截图{{raceDetail.isMultiPic ? '（多张）' : '（单张）'}}" />
         </van-grid>
       </van-uploader>
     </view>
     <view class="content flex column">
-      <text class="sub-title">注意事项：</text>
+      <text class="sub-title">{{_t['注意事项：']}}</text>
       <text>1、数据截图只可上传多张，请勿重复上传；</text>
       <text>2、请在数据截图中体现出完整的距离和持续时间，如一张图片无法展示，请合并后上传；</text>
       <text>3、比赛成绩审核成功后，即将发送奖品；</text>
-      <text>4、成绩提交时间：2022年4月30日-5月5日</text>
     </view>
     <view class="margin-top-xl flex justify-center">
-      <van-button type="primary" bind:click="submitApprove" disabled="{{btnDisabled}}" class="button secondary mini">{{ virtualStatus || '提交审核'}}</van-button>
+      <van-button type="primary" bind:click="submitApprove" disabled="{{btnDisabled}}" class="button secondary mini">{{ virtualStatus || _t['提交审核']}}</van-button>
     </view>
   </view>
 </view>

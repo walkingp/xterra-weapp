@@ -20,7 +20,8 @@ Page({
     showRefundBtn: false,
     showPayBtn: false,
     members: [],
-    certPic: null
+    certPic: null,
+    btnUploadCert: true
   },
 
   preview(e){
@@ -101,8 +102,11 @@ Page({
     const { raceId } = detail;
     const raceDetail = await getRaceDetail(raceId);
     detail.orderTime = dayjs(detail.addedDate).format("YYYY-MM-DD HH:mm:ss");
+    raceDetail.appStartDate = dayjs(raceDetail.appStartDate).format("YYYY-MM-DD");
+    raceDetail.appEndDate = dayjs(raceDetail.appEndDate).format("YYYY-MM-DD");
     const isBeforeRaceDate = dayjs().isBefore(dayjs(raceDetail.raceDate));
     const isPlogging = raceDetail.type === 'X-Plogging';
+    
     this.setData({
       detail,
       showRefundBtn: (isPlogging && detail.status === orderStatus.pending.status) || detail.status === orderStatus.paid.status,
@@ -111,9 +115,12 @@ Page({
     if(raceDetail){
       const orderDetail = await getStartUserDetailByOrderNum(detail.orderNum);
       if(orderDetail){
-        const { certPic, certRecheckUrl } = orderDetail;
+        const { certPic, certRecheckUrl, virtualStatus } = orderDetail;
+        const btnEnabled = virtualStatus === undefined || ['未上传', '审核不通过'].includes(virtualStatus);
+        const isDateValid = dayjs().isBefore(dayjs(raceDetail.appEndDate)) && dayjs().isAfter(dayjs(raceDetail.appStartDate));
         this.setData({
-          certPic: certRecheckUrl ? certRecheckUrl: certPic
+          certPic: certRecheckUrl ? certRecheckUrl: certPic,
+          btnUploadCert: !(btnEnabled && isDateValid)
         });
       }
       this.setData({

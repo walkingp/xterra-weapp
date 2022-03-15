@@ -74,6 +74,7 @@
 }
 .fee{
   padding-bottom: 10rpx;
+  font-size: 24rpx;
   color: #999;
 }
 .fee .bold{

@@ -327,9 +327,9 @@
         {
           "name": "上传成绩",
           "pathName": "pages/events/virtual/virtual",
-          "query": "raceId=41ae62ef6218852308d7013e6f147a3f&id=bf4a0bf26226a981134d09200cdc4336",
-          "launchMode": "default",
-          "scene": null
+          "query": "raceId=cd045e7560ffbb2b0037ec8d245ce3a3&id=617ef50c622f4b5e0b8f025a173da698",
+          "scene": null,
+          "launchMode": "default"
         },
         {
           "name": "上传完赛证书",
@@ -342,8 +342,8 @@
           "name": "查看轨迹",
           "pathName": "pages/events/map/map",
           "query": "startId=5b049cc86226a9860faac00f2e2acad9&jsonUrl=cloud%3A%2F%2Fxterra-c2969f.7874-xterra-c2969f-1258173660%2Fupload%2Fgpx%2F1647250706980.json",
-          "scene": null,
-          "launchMode": "default"
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }

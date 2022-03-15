@@ -4,9 +4,7 @@
       <banner-list list="{{detail.picUrls}}"></banner-list>
       <view class="flex space-between align-center header">
         <text selectable="{{true}}" user-select="true" class="title">{{detail.title}}</text>
-        <text wx:if="{{detail.isRace}}" class="status" style="background-color:{{detail.status.bgColor}}; color: {{detail.status.textColor}};">
-          {{detail.status.text}}
-        </text>
+        <text wx:if="{{detail.isRace}}" class="status" style="background-color:{{detail.status.bgColor}}; color: {{detail.status.textColor}};">{{detail.status.text}}</text>
       </view>
       <view class="info">
         <view class="cells">
@@ -108,6 +106,5 @@
   </view>
   <view wx:if="{{regBtnEnabled}}" class="bottom flex-none flex justify-center align-center">
     <button bindtap="redirect" data-url="/pages/register/register?id={{id}}" class="button">{{_t['立即报名']}}</button>
-    <button bindtap="redirect" data-url="/pages/events/virtual/virtual?raceId={{id}}" class="button">{{_t['上传成绩']}}</button>
   </view>
 </view>

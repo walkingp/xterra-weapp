@@ -29,7 +29,7 @@ image.icon{
 .cell label{
   color: #999;
   display: inline-block;
-  width: 180rpx;
+  min-width: 180rpx;
 }
 .cell:last-child{
   border-bottom: none;

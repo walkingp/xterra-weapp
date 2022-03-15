@@ -2,12 +2,12 @@ const locale = [
   {
     lang: 'zh_CN',
     isChinese: true,
-    tabs: ['首页', '活动报名', '社区', '我的']
+    tabs: ['首页', '活动报名'/*, '社区'*/, '我的']
   },  
   {
     lang: 'en_US',
     isChinese: false,
-    tabs: ['Home', 'Events', 'Community', 'My']
+    tabs: ['Home', 'Events', /*'Community',*/ 'My']
   }
 ];
 
@@ -383,7 +383,13 @@ const locales = {
   '完赛证明':'Finish Certification',
   '查看号码布': 'View Bib',
   '审核意见': 'Audit opinion',
-  '上传.gpx文件轨迹文件': 'Upload .gpx file'
+  '上传.gpx文件轨迹文件': 'Upload .gpx file',
+  '去支付': 'Pay now',
+  '提交开始时间': 'Submit start date',
+  '提交截止时间': 'Submit end date',
+  '优惠费用': 'Disccount',
+  '成绩提交时间': 'Submit date',
+  '提交审核': 'Submit'
 };
 
 module.exports = { locale, locales };

@@ -49,6 +49,26 @@
       <button class="button mini" open-type="share">{{_t['邀请报名']}}</button>
     </view>
   </view>
+  <view class="box" wx:if="{{raceDetail.isVirtual}}">
+    <view class="title">{{_t['完赛证明']}}：</view>
+    <view class="list">
+      <view class="cell">
+        <label>{{_t['成绩状态']}}：</label>
+        <text class="red">{{orderDetail.virtualStatus || '未上传'}}</text>
+      </view>
+      <view class="cell">
+        <label>{{_t['提交开始时间']}}：</label>
+        <text>{{raceDetail.appStartDate || '未上传'}}</text>
+      </view>
+      <view class="cell">
+        <label>{{_t['提交截止时间']}}：</label>
+        <text>{{raceDetail.appEndDate || '未上传'}}</text>
+      </view>
+    </view>
+    <view class="ft flex justify-end align-center">
+      <button bindtap="redirect" disabled="{{btnUploadCert}}" data-url="/pages/events/virtual/virtual?raceId={{detail.raceId}}&id={{detail._id}}" class="button secondary mini">{{_t['上传成绩']}}</button>  
+    </view>    
+  </view>
   <view class="box info">
     <view class="title">{{_t['报名信息']}}：</view>
     <view class="list">
@@ -122,7 +142,6 @@
       </block>
     </view>
     <view class="ft flex justify-end align-center">
-      <button bindtap="redirect" disabled="{{!refundEnabled}}" data-url="/pages/events/virtual/virtual?raceId={{detail.raceId}}&id={{detail._id}}" class="button secondary mini">{{_t['上传成绩']}}</button>      
       <button bindtap="redirect" disabled="{{!refundEnabled}}" data-url="/pages/register/refund/refund?id={{detail._id}}" class="button secondary mini" wx:if="{{showRefundBtn}}">{{detail.raceType === 'X-Plogging' ? _t['取消活动'] : _t['申请退款']}}</button>
       <button bindtap="confirmOrder" wx:if="{{showPayBtn}}" class="button mini">{{_t['立即支付']}}</button>
       <button bindtap="redirect" data-url="/pages/my/registration/registration" class="button mini">{{_t['我的报名']}}</button>
