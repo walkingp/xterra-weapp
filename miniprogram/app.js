@@ -74,7 +74,11 @@ App({
       currentCity: "上海",
     };
 
-    this.checkUpdate();
+    const res = wx.getAccountInfoSync().miniProgram;
+    const { envVersion } = res;
+    if(envVersion === 'release') {
+      this.checkUpdate();      
+    }
     if (!wx.cloud) {
       console.error("请使用 2.2.3 或以上的基础库以使用云能力");
     } else {
