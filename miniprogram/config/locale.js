@@ -383,7 +383,7 @@ const locales = {
   '完赛证明':'Finish Certification',
   '查看号码布': 'View Bib',
   '审核意见': 'Audit opinion',
-  '上传.gpx文件轨迹文件': 'Upload .gpx file',
+  '上传.gpx轨迹文件(可选）': 'Upload .gpx file(optional)',
   '去支付': 'Pay now',
   '提交开始时间': 'Submit start date',
   '提交截止时间': 'Submit end date',

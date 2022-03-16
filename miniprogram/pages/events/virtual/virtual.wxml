@@ -41,12 +41,12 @@
       <text>{{_t['上传完赛证明']}}</text>
       <view class="ft">
         <navigator url="/pages/events/map/map?startId={{detail._id}}&jsonUrl={{jsonUrl}}" wx:if="{{jsonUrl}}">查看轨迹</navigator>
-        <van-uploader wx:else accept="file" bind:after-read="uploadGpx">{{_t['上传.gpx文件轨迹文件']}}
+        <van-uploader wx:else accept="file" bind:after-read="uploadGpx">{{_t['上传.gpx轨迹文件(可选）']}}
         </van-uploader>
       </view>
     </view>
     <view class="zone">
-      <van-uploader disabled="{{btnDisabled}}" deletable="{{ false }}" image-fit="aspectFill" file-list="{{ fileList }}" multiple="{{raceDetail.isMultiPic}}" accept="image" max-count="{{raceDetail.isMultiPic ? 9 : 1}}" bind:after-read="uploadToCloud" style="display: flex; justify-content: center;">
+      <van-uploader disabled="{{uploadDisabled}}" deletable="{{ false }}" image-fit="aspectFill" file-list="{{ fileList }}" multiple="{{raceDetail.isMultiPic}}" accept="image" max-count="{{raceDetail.isMultiPic ? 9 : 1}}" bind:after-read="uploadToCloud" style="display: flex; justify-content: center;">
         <van-grid column-num="1" border="{{false}}" wx:if="{{fileList.length === 0}}">
           <van-grid-item icon="photo-o" text="上传运动APP截图{{raceDetail.isMultiPic ? '（多张）' : '（单张）'}}" />
         </van-grid>

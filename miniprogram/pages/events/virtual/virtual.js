@@ -64,7 +64,7 @@ Page({
       wx.showLoading({
         title: '上传中...',
       })
-      const uploadTasks = files.map((file, index) => this.uploadFilePromise(`upload/app/${new Date().getTime()}.png`, file));
+      const uploadTasks = files.map((file) => this.uploadFilePromise(`upload/app/${dayjs().format("YYYYMMDD")}/${new Date().getTime()}.png`, file));
       Promise.all(uploadTasks)
         .then(async data => {
           const newFileList = data.map(item => ({ url: item.fileID }));
@@ -73,7 +73,6 @@ Page({
           const btnDisabled = fileList.length === 0;
           const newFiles = data.map(item => item.fileID);
           appActivities.push(...newFiles);
-          debugger
           that.setData({ cloudPath: data, fileList, appActivities, btnDisabled });
         })
         .catch(e => {
@@ -92,6 +91,7 @@ Page({
     wx.showLoading({
       title: '加载中……',
     })
+    const that = this;
     
     app.checkLogin()
       .then(async (res) => {
@@ -101,7 +101,14 @@ Page({
         if (userId && raceId) {
           detail = await getStartListByRaceIdUserId({ raceId, userId });          
         }
-        const { appActivities, virtualStatus } = detail;
+        if(!detail){
+          wx.showToast({
+            title: '没有报名',
+            icon: 'error'
+          })
+          return;
+        }
+        let { appActivities, virtualStatus } = detail;
         const fileList = appActivities?.map(item=> {
           return { url: item };
         });
@@ -113,14 +120,20 @@ Page({
         
         const btnEnabled = virtualStatus === undefined || ['未上传', '审核不通过'].includes(virtualStatus);
         const isDateValid = dayjs().isBefore(dayjs(raceDetail.appEndDate)) && dayjs().isAfter(dayjs(raceDetail.appStartDate));
+        const isFilesValid = fileList?.length > 0;
         raceDetail.appStartDate = dayjs(raceDetail.appStartDate).format("YYYY-MM-DD");
         raceDetail.appEndDate = dayjs(raceDetail.appEndDate).format("YYYY-MM-DD");
-        this.setData({
-          detail, raceDetail, appActivities, jsonUrl: detail.gpxFileUrl, fileList, virtualStatus, btnDisabled: !(btnEnabled && isDateValid)
+        let btnDisabled = !(btnEnabled && isDateValid && isFilesValid);
+        const uploadDisabled = !(btnEnabled && isDateValid);
+        if(!virtualStatus){
+          virtualStatus = '等待上传';
+        }
+        that.setData({
+          detail, raceDetail, appActivities, jsonUrl: detail.gpxFileUrl, fileList, virtualStatus, btnDisabled, uploadDisabled
         }, () => {
           wx.hideLoading();
         })
-        this.watchChanges(detail._id);
+        that.watchChanges(detail._id);
       });
   },
   uploadGpx(event) {

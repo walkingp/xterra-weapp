@@ -114,7 +114,7 @@
         <label>{{_t['订单状态']}}：</label>
         <text>{{detail.statusText}}</text>
       </view>
-      <view class="cell">
+      <view class="cell" wx:if="{{orderDetail.bibNum}}">
         <label>{{_t['参赛号']}}：</label>
         <text>{{orderDetail.bibNum}}</text>
       </view>
