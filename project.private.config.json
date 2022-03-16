@@ -328,8 +328,8 @@
           "name": "上传成绩",
           "pathName": "pages/events/virtual/virtual",
           "query": "raceId=5b049cc8621c86d60ea862b9781463e9&id=617ef50c623132bd0bd3205d3af2ecca",
-          "scene": null,
-          "launchMode": "default"
+          "launchMode": "default",
+          "scene": null
         },
         {
           "name": "上传完赛证书",
@@ -344,6 +344,13 @@
           "query": "startId=5b049cc86226a9860faac00f2e2acad9&jsonUrl=cloud%3A%2F%2Fxterra-c2969f.7874-xterra-c2969f-1258173660%2Fupload%2Fgpx%2F1647250706980.json",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "查看电子号码布",
+          "pathName": "pages/events/query/query",
+          "query": "raceId=617ef50c620c6cc005eceddb0ca275ff&type=registration",
+          "scene": null,
+          "launchMode": "default"
         }
       ]
     }

@@ -10,4 +10,6 @@ form .van-cell{
 }
 .box.result{
   padding: 0;
+  margin-bottom: constant(safe-area-inset-bottom); /* 兼容 iOS < 11.2 */
+  margin-bottom: env(safe-area-inset-bottom); /* 兼容 iOS >= 11.2 */
 }

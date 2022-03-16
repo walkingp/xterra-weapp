@@ -2,5 +2,5 @@
   width: 100%!important;
 }
 .cert{
-  min-height: 550rpx;
+  min-height: 500rpx;
 }

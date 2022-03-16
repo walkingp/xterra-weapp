@@ -27,10 +27,6 @@ image.avatar{
   color: #fff;
   font-size: 24rpx;
 }
-.info navigator text{
-  /* text-decoration: underline;
-  font-weight: bold; */
-}
 .version{
   text-align: center;
   font-size: 20rpx;

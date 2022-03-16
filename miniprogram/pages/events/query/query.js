@@ -287,13 +287,13 @@ Page({
   },
   viewCert(e) {
     const {
-      id
+      id, type = 'cert'
     } = e.currentTarget.dataset;
     const {
       raceDetail, cateId
     } = this.data;
     wx.navigateTo({
-      url: `/pages/events/cert/cert?raceId=${raceDetail._id}&cateId=${cateId}&id=${id}`,
+      url: `/pages/events/cert/cert?raceId=${raceDetail._id}&cateId=${cateId}&id=${id}&isbib=${type === "bib"}`,
     })
   },
   /**

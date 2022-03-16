@@ -1,6 +1,7 @@
 const { getPloggingTemplate, getCertTemplate, getCertFields } = require("../../../api/cert");
 const { getRaceDetail, getRaceCateDetail, getPinyin } = require("../../../api/race");
 import { getResultDetail } from "../../../api/result";
+import { getCollectionById } from "../../../utils/cloud";
 const i18n = require("./../../../utils/i18n");
 
 const _t = i18n.i18n.translate();
@@ -21,6 +22,7 @@ Page({
     isPlogging: false,
     isTriRace: false,
     type: null,
+    isCert: true,
     isMillionForrest: false
   },
   redirect(){
@@ -39,10 +41,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    const { id, raceId, cateId, type } = options;
+    const { id, raceId, cateId, type, isbib } = options;
     this.setData({
       id, raceId, type, cateId,
-      isMillionForrest: type === 'million-forrest'
+      isMillionForrest: type === 'million-forrest',
+      isCert: isbib !== 'true'
     })
     this.fetchRaceDetail(raceId);
   },
@@ -69,41 +72,48 @@ Page({
     wx.setNavigationBarTitle({
       title: raceDetail.title,
     })
-    const fields = await getCertFields(id, isPlogging);
-    console.log(fields)
-    this.setData({
-      fields
-    });
-    const { isMillionForrest } = this.data;
-    const temps = await getPloggingTemplate();
-    if(isPlogging){
-      // 百万森林
-      cert = isMillionForrest ? temps[1] : temps[0];
-    }else{
-      cert = isMillionForrest ? temps[1] : await getCertTemplate(raceDetail._id);
-    }
-
-    const { tempFileUrl } = cert;
-    wx.cloud.getTempFileURL({
-      fileList: [{
-        fileID: tempFileUrl
-      }]
-    }).then(res => {
-      // get temp file URL
-      const url = res.fileList[0].tempFileURL;
+    try{
+      const fields = await getCertFields(id, isPlogging);
+      console.log(fields)
       this.setData({
-        tempFileUrl: url
-      }, () => {
-        wx.hideLoading({
-          success: (res) => {},
-        })
-      })
-    }).catch(error => {
-      wx.showToast({
-        icon: 'none',
-        title: '生成失败',
+        fields
       });
-    })
+      const { isMillionForrest } = this.data;
+      const temps = await getPloggingTemplate();
+      if(isPlogging){
+        // 百万森林
+        cert = isMillionForrest ? temps[1] : temps[0];
+      }else{
+        cert = isMillionForrest ? temps[1] : await getCertTemplate(raceDetail._id);
+      }
+
+      const { tempFileUrl } = cert;
+      wx.cloud.getTempFileURL({
+        fileList: [{
+          fileID: tempFileUrl
+        }]
+      }).then(res => {
+        // get temp file URL
+        const url = res.fileList[0].tempFileURL;
+        this.setData({
+          tempFileUrl: url
+        }, () => {
+          wx.hideLoading({
+            success: (res) => {},
+          })
+        })
+      }).catch(error => {
+        wx.showToast({
+          icon: 'none',
+          title: '生成失败',
+        });
+      })
+    }catch(err){
+      wx.showToast({
+        title: '异常',
+        icon: 'error'
+      })
+    }
   },
 
   async formatCityName(city){
@@ -113,10 +123,31 @@ Page({
     return chars.join('')
   },
   async formatFields(){
-    let { fields, id, isMillionForrest, isTriRace, isPlogging, cateId } = this.data;
+    let { fields, id, isMillionForrest, isTriRace, isPlogging, cateId, isCert } = this.data;
+    if(!isCert){ // 号码布
+      const res = await getCollectionById({ dbName: 'start-list', id });
+      fields.map(async item=>{
+        const { bibNum, cateTitle, trueName } = res;
+        switch(item.key){
+          case 'cateTitle':
+            item.value = cateTitle;
+            break;
+          case 'bib':
+            item.value = bibNum;
+            break;
+          case 'trueName':
+            item.value = trueName;
+            break;
+        }
+      });
+      this.setData({
+        fields
+      })
+      return;
+    }
     const result = await getResultDetail(isTriRace, id);
-    const cityNameEn = await this.formatCityName(result.city);
     if(isPlogging){
+      const cityNameEn = await this.formatCityName(result.city);
       const cateDetail = await getRaceCateDetail(cateId);
       fields.map(async item=>{
         switch(item.key){

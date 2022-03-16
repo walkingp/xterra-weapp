@@ -19,6 +19,9 @@ export const getCertFields = (raceId, isPlogging) => {
      }else{
       cert = await getCertTemplate(raceId);
      }
+     if(!cert){
+       throw new Error('数据未设置')
+     }
     const db = wx.cloud.database();
     const _ = db.command;
     db.collection("cert-field").where({

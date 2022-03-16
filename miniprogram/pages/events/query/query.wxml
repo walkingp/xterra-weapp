@@ -34,18 +34,17 @@
             <van-cell title="{{_t['报名时间']}}" border="{{ false }}" value="{{searchedReg.regDate}}" />
           </van-cell-group>
           <van-cell-group title="{{_t['检录信息']}}">
-            <van-cell center wx:for="{{bibUsers}}" wx:key="_id">
+            <van-cell center wx:for="{{bibUsers}}" wx:key="_id" is-link data-id="{{item._id}}" data-type="bib" bindtap="viewCert">
               <view slot="title">
                 <view class="van-cell-text">{{item.bibNum}}</view>
                 <view>
-                  <van-tag plain type="primary">{{item.cateTitle}}</van-tag>
+                  <van-tag style="margin-right: 4rpx;" plain type="primary">{{item.cateTitle}}</van-tag> 
+                  <van-tag type="danger" plain wx:if="{{item.finishedStatus === 'notStart' || !item.finishedStatus}}">{{_t['未检录']}}
+                  </van-tag>
+                  <van-tag type="success" wx:else>{{_t['已检录']}}</van-tag>
                 </view>
               </view>
-              <view>
-                <van-tag type="danger" plain wx:if="{{item.finishedStatus === 'notStart' || !item.finishedStatus}}">{{_t['未检录']}}
-                </van-tag>
-                <van-tag type="success" wx:else>{{_t['已检录']}}</van-tag>
-              </view>
+              <view>{{_t['电子号码布']}}</view>
             </van-cell>
           </van-cell-group>
 
@@ -81,7 +80,7 @@
           </block>
           <van-cell title="{{_t[isPlogging ? '活动状态' : '完赛状态']}}" border="{{ false }}" value="{{searchResult.statusText}}" />
           <van-cell border="{{ false }}">
-            <button data-id="{{searchResult._id}}" plain bindtap="viewCert" class="button block">{{_t['下载证书']}}</button>
+            <button data-id="{{searchedReg._id}}" data-type="cert" plain bindtap="viewCert" class="button block">{{_t['下载证书']}}</button>
           </van-cell>
         </van-cell-group>
         <block wx:else>

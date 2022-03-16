@@ -24,7 +24,7 @@
       <view class="cell">
         <label>{{_t['参赛号']}}：</label>
         <text>{{detail.bibNum || '暂无'}}</text>
-        <text wx:if="{{detail.bibNum  && false}}" bindtap="showBibNum" data-text="{{detail.bibNum}}" class="copy">{{_t['查看号码布']}}</text>
+        <navigator style="display: inline;" wx:if="{{detail.bibNum}}" url="/pages/events/cert/cert?raceId={{detail.raceId}}&cateId={{detail.cateId}}&id={{detail._id}}&isbib=true" class="copy">{{_t['查看号码布']}}</navigator>
       </view>
       <view class="cell">
         <label>{{_t['成绩状态']}}：</label>
