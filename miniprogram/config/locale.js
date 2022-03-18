@@ -261,6 +261,7 @@ const locales = {
   '邀请报名': 'Invite',
   '加载中': 'Loading',
   '加载中…': 'Loading',
+  '加载中...': 'Loading',
   '加载中……': 'Loading',
   '团队': 'Team',
   '团队名': 'Team name',
@@ -392,7 +393,8 @@ const locales = {
   '提交截止时间': 'Submit end date',
   '优惠费用': 'Disccount',
   '成绩提交时间': 'Submit date',
-  '提交审核': 'Submit'
+  '提交审核': 'Submit',
+  '邀请你加入': 'You are invited to join the race:'
 };
 
 module.exports = { locale, locales };

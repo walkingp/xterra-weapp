@@ -240,7 +240,7 @@ Page({
       const path = `/pages/register/register?id=${order.raceId}&type=relay&teamTitle=${order.teamTitle}`;
       console.log(path)
       return {
-        title: `邀请你加入${order.raceTitle}: ${order.teamTitle}`,
+        title: `${_t['邀请你加入']}${order.raceTitle}: ${order.teamTitle}`,
         imageUrl: order.racePic[0],
         path
       }

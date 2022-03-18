@@ -10,7 +10,7 @@
               <text class="price">{{_t['免费']}}</text>
             </block>
             <block wx:else>
-              <text class="price">￥{{item.price}}</text>
+              <text class="price" user-select="{{true}}">￥{{item.price}}</text>
             </block>
           </block>
         </view>

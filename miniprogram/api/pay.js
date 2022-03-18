@@ -3,6 +3,7 @@ import { emailTemplateType, orderStatus } from "../config/const";
 import { sendRegEmail } from "./email";
 import { updateBibNum, updateCoupon, updateOrderStatus } from "./race";
 import { sendRegSMS } from "./sms";
+const logManager = wx.getRealtimeLogManager();
 
 export const payNow = function(detail, callback) {
   const { paidFee } = detail;
@@ -30,11 +31,16 @@ export const payNow = function(detail, callback) {
       total_fee
     },
     success(res) {
-      console.log("云函数payment提交成功：", res.result)
-      pay(res.result, detail, callback)
+      console.log("云函数payment提交成功：", res.result);      
+      try{
+        pay(res.result, detail, callback)         
+      }catch(err){            
+        logManager.error('pay', err);
+      }
     },
     fail(res) {
       console.log("云函数payment提交失败：", res)
+      logManager.error('pay', res);
     }
   })
 }
@@ -56,15 +62,21 @@ function pay(payData, detail, callback) {
           out_trade_no: "test0004"
         },
         success: function(){
-          updateStatuses(detail, callback);
+          try{
+            updateStatuses(detail, callback);            
+          }catch(err){            
+            logManager.error('pay', err);
+          }
         }
       })
     },
     fail(res) {
+      logManager.error('pay', res);
       console.log("支付失败：", res);
       const { paidFee, discountFee } = detail;
-      updateOrderStatus({ id: detail._id, ...orderStatus.failed, paidFee, discountFee }).then(res=>{
-        console.log(res);
+      updateOrderStatus({ id: detail._id, ...orderStatus.failed, paidFee, discountFee }).then(res2=>{
+        console.log(res2);
+        logManager.error('pay', res2);
         wx.showToast({
           icon: 'none',
           title: '支付失败',
@@ -107,7 +119,15 @@ function updateStatuses(detail, callback){
         wx.showLoading({
           title: '发送邮件中',
         })
-        await sendEmailSMS(detail);
+        try{
+          await sendEmailSMS(detail);
+        }catch(err){          
+          logManager.error('sms', err);
+          wx.showToast({
+            title: '发送短信邮件时发生错误',
+            icon: 'none'
+          })
+        }
         wx.showLoading({
           title: '发送短信中',
         })
@@ -191,13 +211,17 @@ async function sendEmailSMS(order){
     totalFee,
     paidFee
   } = order;
-  await profiles.forEach(async profile => {
-    const { trueName, phoneNum, email } = profile;
-    const orderDate = dayjs(new Date()).format("YYYY年MM月DD日 HH:mm:ss");
-    const params = { discountFee, orderDate, catePrice: price, cateNum: profiles.length, raceId, raceTitle, orderNum, cateTitle, price, totalFee, paidFee, trueName, phoneNum, email };
-    await sendEmail(params);
-    await sendSms(params);
-  }) 
+  try{
+    await profiles.forEach(async profile => {
+      const { trueName, phoneNum, email } = profile;
+      const orderDate = dayjs(new Date()).format("YYYY年MM月DD日 HH:mm:ss");
+      const params = { discountFee, orderDate, catePrice: price, cateNum: profiles.length, raceId, raceTitle, orderNum, cateTitle, price, totalFee, paidFee, trueName, phoneNum, email };
+      await sendEmail(params);
+      await sendSms(params);
+    }) 
+  }catch(err) {
+    throw err;
+  }
 }
 async function sendEmail(order) {
   const {
