@@ -248,3 +248,23 @@ X-Discovery
 2021/9/3
 地理位置
 上传视频
+
+
+### 小程序跳转
+以下用于公众号：
+
+第一步：公众号插入时选择开启账户
+pages/events/events.html?type=X-Plogging&raceId=6
+第二步：将此地址进行编码，并放到url.html后
+pages/url/url.html?url=pages/events/events.html?type%3DX-Plogging%26raceId%3D6
+
+注意其中：
+%3D：?
+%26：&
+
+常用链接：
+1. 跳转X-Plogging：
+pages/url/url.html?url=pages/events/events.html?type%3DX-Plogging
+
+2. 跳转X-Disovery
+pages/url/url.html?url=pages/events/events.html?type%3DX-Disovery

@@ -159,7 +159,8 @@ Page({
   },
   async redirect(){
     let type = '';
-    const { tabBarLink, bid } = app.globalData;
+    let { tabBarLink, bid, URLARGS } = app.globalData;
+    debugger;
     if (tabBarLink) {
       const args = tabBarLink.substr(tabBarLink.indexOf("?") + 1);
       const arr = args.split("&");
@@ -174,6 +175,13 @@ Page({
       app.globalData.tabBarLink = null;
     }
     let filterRaceIds = null;
+    if(URLARGS){
+      if(URLARGS.bid){
+        bid = URLARGS.bid;
+      }
+      type = type || URLARGS.type;
+      app.globalData.URLARGS = null;
+    }
     if(bid) {
       const banner = await getCollectionById({ dbName: 'banner', id: bid});
       if(banner.raceIds){

@@ -349,6 +349,27 @@
           "name": "查看电子号码布",
           "pathName": "pages/events/query/query",
           "query": "raceId=617ef50c620c6cc005eceddb0ca275ff&type=registration",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "太湖线上赛",
+          "pathName": "pages/register/status/status",
+          "query": "id=82afc00a6239213600b395f479f29936",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "X-Plogging",
+          "pathName": "pages/events/events",
+          "query": "type=X-Plogging",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "页面跳转",
+          "pathName": "pages/url/url",
+          "query": "url=pages/events/events.html?type%3DX-Plogging%26raceId%3D6",
           "scene": null,
           "launchMode": "default"
         }

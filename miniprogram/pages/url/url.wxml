@@ -1,0 +1,3 @@
+<view class="container flex align-center justify-center">
+  {{_t['加载中']}}
+</view>
