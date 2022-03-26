@@ -160,7 +160,6 @@ Page({
   async redirect(){
     let type = '';
     let { tabBarLink, bid, URLARGS } = app.globalData;
-    debugger;
     if (tabBarLink) {
       const args = tabBarLink.substr(tabBarLink.indexOf("?") + 1);
       const arr = args.split("&");

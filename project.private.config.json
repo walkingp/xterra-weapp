@@ -370,6 +370,13 @@
           "name": "页面跳转",
           "pathName": "pages/url/url",
           "query": "url=pages/events/events.html?type%3DX-Plogging%26raceId%3D6",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "XP无法下载证书",
+          "pathName": "pages/events/query/query",
+          "query": "raceId=023ce9555fe2fd5600095c6304fe5a4b&type=result",
           "scene": null,
           "launchMode": "default"
         }

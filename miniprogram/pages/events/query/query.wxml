@@ -80,7 +80,7 @@
           </block>
           <van-cell title="{{_t[isPlogging ? '活动状态' : '完赛状态']}}" border="{{ false }}" value="{{searchResult.statusText}}" />
           <van-cell border="{{ false }}">
-            <button data-id="{{searchedReg._id}}" data-type="cert" plain bindtap="viewCert" class="button block">{{_t['下载证书']}}</button>
+            <button data-type="cert" plain bindtap="viewCert" class="button block">{{_t['下载证书']}}</button>
           </van-cell>
         </van-cell-group>
         <block wx:else>
