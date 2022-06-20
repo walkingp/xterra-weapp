@@ -69,7 +69,7 @@ XTERRA官方小程序，主要功能:
 ## 介绍
 
 ## 链接
-
+https://xterra-c2969f-1258173660.tcloudbaseapp.com/index.html#/login
 [CMS](https://xterra-c2969f-1258173660.tcloudbaseapp.com)
 xterra/xterra2020
 

@@ -29,7 +29,7 @@ exports.main = async (event, context) => {
         trueName,
         cardNo
       } = item;
-      if (cardNo.length >= 18) {
+      if (cardNo && cardNo.length >= 18) {
         const birthDateStr = cardNo.substr(6, 8);
         const birthDate = new Date(birthDateStr.substr(0,4), birthDateStr.substr(4,2), birthDateStr.substr(6,2));
         const age = new Date().getFullYear() - new Date(birthDate).getFullYear();

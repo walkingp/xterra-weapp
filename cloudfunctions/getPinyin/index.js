@@ -6,6 +6,8 @@ cloud.init()
 // 云函数入口函数
 exports.main = async (event, context) => {
   const { word } = event;
-
+  if(word === '重庆') {
+    return [["chong"],["qing"]];
+  }
   return pinyin(word, {style:'normal'});
 }
