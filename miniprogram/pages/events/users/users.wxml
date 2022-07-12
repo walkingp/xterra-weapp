@@ -5,7 +5,7 @@
       options="{{ cates }}" />
   </van-dropdown-menu>
   <block wx:if="{{cateValue ===''}}">
-    <van-empty description="请选择组别后查看" />
+    <van-empty description="{{stats}}，请选择组别后查看" />
   </block>
   <block wx:else>
     <block wx:if="{{users.length}}">

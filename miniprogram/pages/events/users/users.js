@@ -1,5 +1,5 @@
 const {
-  getPaginations
+  getPaginations, getCollectionCount
 } = require("../../../utils/cloud")
 const app = getApp();
 const dayjs = require("dayjs");
@@ -46,7 +46,9 @@ Page({
     stats: '已报名',
     buttonText: '置为已完成',
     isPlogging: false,
-    isDiscovery: false
+    isDiscovery: false,
+    pageIndex: 1,
+    pageSize: 100
   },  
   copy(e) {
     const {
@@ -281,11 +283,10 @@ Page({
       races
     })
   },
-
   async fetchCates() {
     const {
       raceId,
-      cateId
+      cateId, pageSize
     } = this.data;
     let race = null;
     let isPlogging = false;
@@ -327,15 +328,23 @@ Page({
     const filter = cateId ? { cateId } : null;
     let users = [];
     if(!(isPlogging && cateId ===  null)){
-      users = await getPaginations({
-        dbName: 'start-list',
-        filter,
-        orderBy: {
-          createdAt: 'desc'
-        },
-        pageIndex: 1,
-        pageSize: 100
-      });
+      
+      const total = await getCollectionCount({ dbName: 'start-list', filter: { raceId, ...filter }});
+      const pageCount = Math.ceil(total / pageSize);
+      let promises = [];
+      for(let i = 0; i < pageCount; i ++){
+        promises.push(getPaginations({
+          dbName: 'start-list',
+          filter,
+          orderBy: {
+            createdAt: 'desc'
+          },
+          pageIndex: i+1,
+          pageSize
+        }))
+      };
+      const res = await Promise.all(promises);
+      users = res.reduce((prev,cur)=> prev.concat(cur));
       users = users.map(item => {
         item.birthDate = dayjs(new Date(item.birthDate)).format("YYYY-MM-DD");
         item.regDate = dayjs(new Date(item.createdAt)).format("YYYY-MM-DD HH:mm:ss");
@@ -349,7 +358,7 @@ Page({
     console.log(users)
 
     this.setData({
-      stats: `已报名${users.length}人`,
+      stats: raceId ? `已报名${users.length}人` : null,
       users,
       race,
       cates,
