@@ -166,66 +166,66 @@ Page({
       });
     }
   },
-  selectAddr() {
-    const that = this;
-    wx.getSetting({
-      success(res) {
-        console.log("res.authSetting['scope.address']：", res.authSetting['scope.address'])
-        if (res.authSetting['scope.address']) {
-          wx.chooseAddress({
-            success(res) {
-              const {
-                provinceName,
-                cityName,
-                countyName,
-                detailInfo,
-                userName,
-                telNumber,
-                postalCode
-              } = res;
-              const region = `${provinceName}${cityName}${countyName}`;
-              const addr = detailInfo;
-              that.setData({
-                trueName: userName,
-                phoneNum: telNumber,
-                region,
-                addr
-              });
-            }
-          })
-        } else {
-          if (res.authSetting['scope.address'] == false) {
-            console.log("222")
-            wx.openSetting({
-              success(res) {
-                console.log(res.authSetting)
-              }
-            })
-          } else {
-            wx.chooseAddress({
-              success(res) {
-                const {
-                  provinceName,
-                  cityName,
-                  countyName,
-                  detailInfo,
-                  userName,
-                  telNumber,
-                  postalCode
-                } = res;
-                const region = `${provinceName}${cityName}${countyName}`;
-                const addr = detailInfo;
-                that.setData({
-                  trueName: userName,
-                  phoneNum: telNumber,
-                  region,
-                  addr
-                });
-              }
-            })
-          }
-        }
-      }
-    })
-  }
+  // selectAddr() {
+  //   const that = this;
+  //   wx.getSetting({
+  //     success(res) {
+  //       console.log("res.authSetting['scope.address']：", res.authSetting['scope.address'])
+  //       if (res.authSetting['scope.address']) {
+  //         wx.chooseAddress({
+  //           success(res) {
+  //             const {
+  //               provinceName,
+  //               cityName,
+  //               countyName,
+  //               detailInfo,
+  //               userName,
+  //               telNumber,
+  //               postalCode
+  //             } = res;
+  //             const region = `${provinceName}${cityName}${countyName}`;
+  //             const addr = detailInfo;
+  //             that.setData({
+  //               trueName: userName,
+  //               phoneNum: telNumber,
+  //               region,
+  //               addr
+  //             });
+  //           }
+  //         })
+  //       } else {
+  //         if (res.authSetting['scope.address'] == false) {
+  //           console.log("222")
+  //           wx.openSetting({
+  //             success(res) {
+  //               console.log(res.authSetting)
+  //             }
+  //           })
+  //         } else {
+  //           // wx.chooseAddress({
+  //           //   success(res) {
+  //           //     const {
+  //           //       provinceName,
+  //           //       cityName,
+  //           //       countyName,
+  //           //       detailInfo,
+  //           //       userName,
+  //           //       telNumber,
+  //           //       postalCode
+  //           //     } = res;
+  //           //     const region = `${provinceName}${cityName}${countyName}`;
+  //           //     const addr = detailInfo;
+  //           //     that.setData({
+  //           //       trueName: userName,
+  //           //       phoneNum: telNumber,
+  //           //       region,
+  //           //       addr
+  //           //     });
+  //           //   }
+  //           // })
+  //         }
+  //       }
+  //     }
+  //   })
+  // }
 })

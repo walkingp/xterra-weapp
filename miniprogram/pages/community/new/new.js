@@ -67,35 +67,35 @@ Page({
       wx.hideLoading();
       return;
     }
-    const that = this;
-    wx.getLocation({
-      type: "wgs84",
-      success: function (res) {
-        const { latitude, longitude } = res;
-        // 调用接口
-        qqmapsdk.reverseGeocoder({
-          sig: config.mapSig, // 必填
-          location: {
-            latitude,
-            longitude,
-          },
-          get_poi: 1,
-          success(val) {
-            that.setData({
-              showPlaces: true,
-              places: val.result.pois,
-            });
-            wx.hideLoading();
-          },
-          fail(err) {
-            console.error(err);
-            wx.showToast({
-              title: err,
-            });
-          },
-        });
-      },
-    });
+    // const that = this;
+    // wx.getLocation({
+    //   type: "wgs84",
+    //   success: function (res) {
+    //     const { latitude, longitude } = res;
+    //     // 调用接口
+    //     qqmapsdk.reverseGeocoder({
+    //       sig: config.mapSig, // 必填
+    //       location: {
+    //         latitude,
+    //         longitude,
+    //       },
+    //       get_poi: 1,
+    //       success(val) {
+    //         that.setData({
+    //           showPlaces: true,
+    //           places: val.result.pois,
+    //         });
+    //         wx.hideLoading();
+    //       },
+    //       fail(err) {
+    //         console.error(err);
+    //         wx.showToast({
+    //           title: err,
+    //         });
+    //       },
+    //     });
+    //   },
+    // });
   },
   async bindTextAreaBlur(e) {
     const content = e.detail.value;
@@ -376,44 +376,44 @@ Page({
       markers,
       place,
     });
-    wx.getLocation({
-      type: "gcj02",
-      success: (res) => {
-        console.log("当前位置:", res);
-        const { latitude, longitude } = res;
-        const distance = this.getDistance(
-          res.latitude,
-          res.longitude,
-          place.coordinate[1],
-          place.coordinate[0]
-        );
-        console.log(distance);
-        const { MAX_METERS, type, _t } = this.data;
-        const isDistanceClose =
-          !place.isGpsRequired ||
-          (place.isGpsRequired && distance < place.meters);
+    // wx.getLocation({
+    //   type: "gcj02",
+    //   success: (res) => {
+    //     console.log("当前位置:", res);
+    //     const { latitude, longitude } = res;
+    //     const distance = this.getDistance(
+    //       res.latitude,
+    //       res.longitude,
+    //       place.coordinate[1],
+    //       place.coordinate[0]
+    //     );
+    //     console.log(distance);
+    //     const { MAX_METERS, type, _t } = this.data;
+    //     const isDistanceClose =
+    //       !place.isGpsRequired ||
+    //       (place.isGpsRequired && distance < place.meters);
 
-        const btnDisabled = type === "place" && !isDistanceClose;
-        let message = btnDisabled
-          ? _t["您当前位置距离目标$0为$1米，超出打卡距离，不可打卡"]
-          : _t["您当前位置距离目标$0为$1米，可以打卡"];
-        message = message.replace("$0", title).replace("$1", distance);
-        let validMessage = _t["您当前位置在$0附近$1米"]
-          .replace("$0", title)
-          .replace("$1", distance);
-        this.setData({
-          points: [
-            { latitude, longitude },
-            { latitude: place.coordinate[1], longitude: place.coordinate[0] },
-          ],
-          distance,
-          isDistanceClose,
-          btnDisabled,
-          message,
-          validMessage,
-        });
-      },
-    });
+    //     const btnDisabled = type === "place" && !isDistanceClose;
+    //     let message = btnDisabled
+    //       ? _t["您当前位置距离目标$0为$1米，超出打卡距离，不可打卡"]
+    //       : _t["您当前位置距离目标$0为$1米，可以打卡"];
+    //     message = message.replace("$0", title).replace("$1", distance);
+    //     let validMessage = _t["您当前位置在$0附近$1米"]
+    //       .replace("$0", title)
+    //       .replace("$1", distance);
+    //     this.setData({
+    //       points: [
+    //         { latitude, longitude },
+    //         { latitude: place.coordinate[1], longitude: place.coordinate[0] },
+    //       ],
+    //       distance,
+    //       isDistanceClose,
+    //       btnDisabled,
+    //       message,
+    //       validMessage,
+    //     });
+    //   },
+    // });
   },
   Rad(d) {
     //根据经纬度判断距离
