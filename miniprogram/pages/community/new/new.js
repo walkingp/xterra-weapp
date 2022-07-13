@@ -7,11 +7,11 @@ const { pointRuleEnum } = require("../../../config/const");
 const { getCollectionById } = require("../../../utils/cloud");
 const i18n = require("./../../../utils/i18n");
 const t = i18n.i18n.translate();
-const QQMapWX = require("./../../../utils/qqmap-wx-jssdk.min.js");
+// const QQMapWX = require("./../../../utils/qqmap-wx-jssdk.min.js");
 // miniprogram/pages/community/new/new.js
-const qqmapsdk = new QQMapWX({
-  key: config.mapKey,
-});
+// const qqmapsdk = new QQMapWX({
+//   key: config.mapKey,
+// });
 const app = getApp();
 Page({
   /**

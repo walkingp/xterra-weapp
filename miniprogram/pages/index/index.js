@@ -11,8 +11,8 @@ const {
   getCityList,
 } = require("../../api/venue");
 const config = require("../../config/config");
-const QQMapWX = require("./../../utils/qqmap-wx-jssdk.min.js");
-let qqmapsdk;
+// const QQMapWX = require("./../../utils/qqmap-wx-jssdk.min.js");
+// let qqmapsdk;
 
 // miniprogram/pages/index/index.js
 Page({
@@ -267,30 +267,30 @@ Page({
   //   });
   // },
 
-  decodeCity({ latitude, longitude }) {
-    const that = this;
-    qqmapsdk = new QQMapWX({
-      key: config.mapKey,
-    });
-    qqmapsdk.reverseGeocoder({
-      sig: config.mapSig, // 必填
-      location: {
-        latitude,
-        longitude,
-      },
-      success(res) {
-        const locatedCity = res.result.ad_info.city.replace("市", "");
-        that.fetchCurrentCity(locatedCity);
-      },
-      fail(err) {
-        console.log(err);
-        wx.showToast("获取城市失败");
-      },
-      complete() {
-        // 做点什么
-      },
-    });
-  },
+  // decodeCity({ latitude, longitude }) {
+  //   const that = this;
+  //   qqmapsdk = new QQMapWX({
+  //     key: config.mapKey,
+  //   });
+  //   qqmapsdk.reverseGeocoder({
+  //     sig: config.mapSig, // 必填
+  //     location: {
+  //       latitude,
+  //       longitude,
+  //     },
+  //     success(res) {
+  //       const locatedCity = res.result.ad_info.city.replace("市", "");
+  //       that.fetchCurrentCity(locatedCity);
+  //     },
+  //     fail(err) {
+  //       console.log(err);
+  //       wx.showToast("获取城市失败");
+  //     },
+  //     complete() {
+  //       // 做点什么
+  //     },
+  //   });
+  // },
 
   /**
    * 生命周期函数--监听页面加载
