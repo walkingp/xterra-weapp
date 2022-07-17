@@ -21,5 +21,13 @@ Component({
    */
   methods: {
 
+    copy(e) {
+      const {
+        text
+      } = e.currentTarget.dataset;
+      wx.setClipboardData({
+        data: text,
+      })
+    },
   }
 })

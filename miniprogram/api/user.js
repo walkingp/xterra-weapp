@@ -1,11 +1,5 @@
 import {
-  getCollectionById,
-  getPaginations,
-  getSingleCollectionByWhere
-} from "../utils/cloud";
-import {
-  getAllRegistrationsByRaceId
-} from "./registration";
+  getCollectionById, getCollectionByWhere, getPaginations} from "../utils/cloud";
 const dayjs = require("dayjs");
 
 export const getUserDetail = async id => {
@@ -15,6 +9,11 @@ export const getUserDetail = async id => {
   });
   return data;
 }
+
+export const getStartListByOrderNum = async (orderNum) => {
+  const data = await getCollectionByWhere({ dbName: 'start-list', filter: { orderNum } });
+  return data;
+};
 
 export const getStartListList = async (cateId, size = 1000) => {
   const data = await getPaginations({

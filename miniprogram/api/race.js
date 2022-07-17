@@ -1,5 +1,5 @@
 import { orderStatus } from "../config/const";
-import { getPaginations, getCollectionById, getCollectionByWhere, getSingleCollectionByWhere, hideCollectionById, removeCollectionByWhere, getCollectionCount } from "../utils/cloud"
+import { getPaginations, getCollectionById, getCollectionByWhere, getSingleCollectionByWhere, removeCollectionByWhere, getCollectionCount } from "../utils/cloud"
 const dayjs = require("dayjs");
 
 export const getBannerList = async ( position = 'index', size = 5) => {
@@ -377,8 +377,25 @@ export const getFieldsByCateId = async (cateId, size = 100) => {
   })
   return data;
 }
+
 export const getProfileDetail = async id => {
   const data = await getCollectionById({ dbName: 'profile', id });
+  return data;
+}
+
+export const getProfileDetailByIdOrUserId = async uid => {
+  return new Promise((resolve, reject) => {
+    wx.cloud.callFunction({
+      name: 'getProfileByUid',
+      data: { uid }
+    }).then(res => {
+      resolve(res.result?.list[0]);
+    }).catch(reject)
+  })
+}
+
+export const getProfileDetailByUserId = async userId => {
+  const data = await getCollectionByWhere({ dbName: 'profile', filter: { userId } });
   return data;
 }
 

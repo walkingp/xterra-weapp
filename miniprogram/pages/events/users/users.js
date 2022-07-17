@@ -204,14 +204,6 @@ Page({
       show: false
     })
   },
-  copy(e) {
-    const {
-      text
-    } = e.currentTarget.dataset;
-    wx.setClipboardData({
-      data: text,
-    })
-  },
   call(e) {
     const {
       phone

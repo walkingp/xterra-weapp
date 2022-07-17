@@ -31,11 +31,9 @@ exports.main = async (event, context) => {
         }
       },
       success: res => {
-        debugger;
         resolve(res.result)
       },
       fail: err=> {
-        debugger;
         reject(err)
       }
     });

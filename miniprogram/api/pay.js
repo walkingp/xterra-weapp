@@ -1,9 +1,14 @@
 import dayjs from "dayjs";
 import { emailTemplateType, orderStatus } from "../config/const";
 import { sendRegEmail } from "./email";
-import { updateBibNum, updateCoupon, updateOrderStatus } from "./race";
+import { getRegistrationByOrderNum, updateBibNum, updateCoupon, updateOrderStatus } from "./race";
 import { sendRegSMS } from "./sms";
 const logManager = wx.getRealtimeLogManager();
+
+export const adminChangeStatus = async function(orderNum, isSendSms, isSendEmail, callback) {
+  const order = await getRegistrationByOrderNum(orderNum);
+  updateStatuses({ ...order, skipSendEmail: !isSendEmail, skipSendSms: !isSendSms }, callback)
+};
 
 export const payNow = function(detail, callback) {
   const { paidFee } = detail;
@@ -117,7 +122,8 @@ function updateStatuses(detail, callback){
           await updateCouponStatus(detail.couponId);
         }
         wx.showLoading({
-          title: '发送邮件中',
+          title: '发送邮件短信中',
+          icon: 'none'
         })
         try{
           await sendEmailSMS(detail);
@@ -209,15 +215,21 @@ async function sendEmailSMS(order){
     cateTitle,
     price,
     totalFee,
-    paidFee
+    paidFee,
+    skipSendEmail,
+    skipSendSms
   } = order;
   try{
     await profiles.forEach(async profile => {
       const { trueName, phoneNum, email } = profile;
       const orderDate = dayjs(new Date()).format("YYYY年MM月DD日 HH:mm:ss");
       const params = { discountFee, orderDate, catePrice: price, cateNum: profiles.length, raceId, raceTitle, orderNum, cateTitle, price, totalFee, paidFee, trueName, phoneNum, email };
-      await sendEmail(params);
-      await sendSms(params);
+      if(!skipSendEmail){
+        await sendEmail(params);
+      } 
+      if(!skipSendSms){
+        await sendSms(params);
+      }
     }) 
   }catch(err) {
     throw err;

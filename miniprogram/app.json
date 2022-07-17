@@ -61,7 +61,8 @@
     "pages/events/virtual/virtual",
     "pages/events/map/map",
     "pages/url/url",
-    "pages/admin/events/order/order"
+    "pages/admin/events/order/order",
+    "pages/admin/events/profile/profile"
   ],
   "window": {
     "backgroundColor": "#ffffff",

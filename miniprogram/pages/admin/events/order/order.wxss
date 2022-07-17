@@ -1,1 +1,6 @@
-/* pages/admin/events/order/order.wxss */
+.mt20{
+  margin-top: 20rpx;
+}
+.value-class {
+  flex: none !important;
+}

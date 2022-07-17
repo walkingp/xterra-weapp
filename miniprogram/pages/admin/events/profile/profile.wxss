@@ -1,0 +1,4 @@
+/* pages/admin/events/profile/profile.wxss */
+.copyable{
+  text-decoration: underline;
+}

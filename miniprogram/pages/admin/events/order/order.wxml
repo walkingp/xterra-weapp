@@ -5,7 +5,7 @@
     value="{{ orderNum }}"
     name="orderNum"
     placeholder="如：20220714054213501647"
-    value="{{orderNum || '20220714054213501647'}}"
+    value="{{orderNum}}"
     bind:change="onChange"
     label="订单号"
     clearable
@@ -18,10 +18,15 @@
 </form>
 <block wx:if="{{detail}}">
   <van-cell-group title="比赛信息" inset>
-    <van-cell title-width="46px" title="比赛" value="{{detail.raceTitle}}" label="{{detail.raceType}}" />
+    <van-cell is-link url="/pages/events/detail/detail?id={{detail.raceId}}" link-type="navigateTo" title-width="46px" title="比赛" value="{{detail.raceTitle}}" label="{{detail.raceType}}" />
     <van-cell title-width="56px" title="组别" value="{{detail.cateTitle}}" label="{{detail.groupText}}" />
   </van-cell-group>
-  <van-cell-group title="报名人信息" inset>
+  <van-cell-group title="报名人" inset>
+    <block wx:for="{{detail.profiles}}" wx:key="_id">
+      <van-cell is-link url="/pages/admin/events/profile/profile?userId={{detail.userId}}" link-type="navigateTo" title="{{item.trueName}}（{{item.gender}}）" value="{{item.phoneNum}}" />
+    </block>
+  </van-cell-group>
+  <van-cell-group title="订单提交用户信息" inset>
     <van-cell title="姓名" value="{{detail.userInfo.truename}}" />
     <van-cell title="性别" value="{{detail.userInfo.gender}}" />
     <van-cell title="微信名" value="{{detail.userInfo.nickname}}" />
@@ -33,5 +38,37 @@
     <van-cell title="实际支付" value="{{detail.paidFee}}" />
     <van-cell title="支付方式" value="{{detail.orderType}}" />
     <van-cell title="支付状态" value="{{detail.statusText}}" />
+    <van-cell title="订单时间" value="{{detail.orderTime}}" />
+  </van-cell-group>
+  <van-cell-group class="mt20">
+    <van-popup show="{{ show }}" position="bottom" closeable bind:close="onClose">
+      <van-cell-group title="置为支付完成">
+        <van-checkbox-group value="{{ result }}" bind:change="onChange">
+          <van-cell-group>
+            <van-cell
+              wx:for="{{ options }}"
+              wx:key="index"
+              title="{{ item }}"
+              value-class="value-class"
+              clickable
+              data-index="{{ index }}"
+              bind:click="toggle"
+            >
+              <van-checkbox
+                catch:tap="noop"
+                class="checkboxes-{{ index }}"
+                name="{{ item }}"
+              />
+            </van-cell>
+          </van-cell-group>
+        </van-checkbox-group>
+        <van-cell title="上传凭证" label="注意，修改订单信息将记录日志，请上传有效的截图。">
+          <van-uploader accept="image" multiple max-count="{{9}}" upload-text="{{_t['仅限图片']}}" bind:after-read="uploadToCloud"
+            file-list="{{ fileList }}" />
+        </van-cell>
+        <van-cell><van-button bind:click="changeStatus" disabled="{{btnDisabled}}" size="small" type="primary">置为支付完成</van-button></van-cell>
+      </van-cell-group>
+    </van-popup>
+    <van-cell><van-button disabled="{{!canEdit}}" bind:click="showPopup" size="small" type="primary">{{canEdit ? '修改状态' : '已在出发名单，不可修改'}}</van-button></van-cell>
   </van-cell-group>
 </block>
