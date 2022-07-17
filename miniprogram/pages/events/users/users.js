@@ -43,7 +43,7 @@ Page({
     }],
     show: false,
     value: 20,
-    stats: '已报名',
+    stats: '',
     buttonText: '置为已完成',
     isPlogging: false,
     isDiscovery: false,
@@ -129,6 +129,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: async function (options) {
+    wx.showLoading({
+      title: _t['加载中'],
+    })
     app.checkLogin().then(async res => {
       const {
         userId
@@ -167,6 +170,7 @@ Page({
     switch (type) {
       case 'race':
         this.setData({
+          stats: '',
           raceValue: value,
           raceId: value
         }, () => {
@@ -175,6 +179,7 @@ Page({
         break;
       case 'cate':
         this.setData({
+          stats: '',
           cateValue: value,
           cateId: value
         })
@@ -189,7 +194,7 @@ Page({
         this.setData({
           currentCate,
           value: currentCate.limit === 0 ? 98 : Math.floor(users.length / currentCate.limit * 100),
-          stats: `${users.length}/${currentCate.limit === 0 ? '不限制' : currentCate.limit}`
+          stats: `${users.length}/${currentCate.limit === 0 ? '不限制' : '限制' + currentCate.limit}`
         });
         break;
     }
@@ -291,6 +296,15 @@ Page({
     let race = null;
     let isPlogging = false;
     let isDiscovery = false;
+    wx.showLoading({
+      title: _t['加载中'],
+    })
+
+    let cates = [{
+      text: _t['请选择'],
+      value: ''
+    }];
+    let users = [];
     if(raceId){
       race = await getRaceDetail(raceId);
       isPlogging = race.type === 'X-Plogging';
@@ -303,62 +317,54 @@ Page({
       wx.setNavigationBarTitle({
         title: race.title,
       })
-    }
-    wx.showLoading({
-      title: _t['加载中'],
-    })
-
-    let cates = [{
-      text: _t['请选择'],
-      value: ''
-    }];
-    let _cates = await getRaceCatesList(raceId);
-    this.setData({
-      allCates: _cates
-    })
-    _cates = _cates.map(cate => {
-      return {
-        text: `${cate.title}`,
-        id: cate._id,
-        value: cate._id,
-      }
-    })
-    cates.push(..._cates);
-
-    const filter = cateId ? { cateId } : null;
-    let users = [];
-    if(!(isPlogging && cateId ===  null)){
-      
-      const total = await getCollectionCount({ dbName: 'start-list', filter: { raceId, ...filter }});
-      const pageCount = Math.ceil(total / pageSize);
-      let promises = [];
-      for(let i = 0; i < pageCount; i ++){
-        promises.push(getPaginations({
-          dbName: 'start-list',
-          filter,
-          orderBy: {
-            createdAt: 'desc'
-          },
-          pageIndex: i+1,
-          pageSize
-        }))
-      };
-      const res = await Promise.all(promises);
-      users = res.reduce((prev,cur)=> prev.concat(cur));
-      users = users.map(item => {
-        item.birthDate = dayjs(new Date(item.birthDate)).format("YYYY-MM-DD");
-        item.regDate = dayjs(new Date(item.createdAt)).format("YYYY-MM-DD HH:mm:ss");
-        return item;
+      let _cates = await getRaceCatesList(raceId);
+      this.setData({
+        allCates: _cates
       })
-      const cardNos = users.slice().map(item=>item.cardNo);
-      if(isPlogging){
-        await syncPlogging(cardNos);
+      _cates = _cates.map(cate => {
+        return {
+          text: `${cate.title}`,
+          id: cate._id,
+          value: cate._id,
+        }
+      })
+      cates.push(..._cates);
+
+      const filter = cateId ? { cateId } : null;
+      if(!(isPlogging && cateId ===  null)){
+        
+        const total = await getCollectionCount({ dbName: 'start-list', filter: { raceId, ...filter }});
+        const pageCount = Math.ceil(total / pageSize);
+        let promises = [];
+        for(let i = 0; i < pageCount; i ++){
+          promises.push(getPaginations({
+            dbName: 'start-list',
+            filter,
+            orderBy: {
+              createdAt: 'desc'
+            },
+            pageIndex: i+1,
+            pageSize
+          }))
+        };
+        const res = await Promise.all(promises);
+        if(res && res.length){
+          users = res.reduce((prev,cur)=> prev.concat(cur));
+        }
+        users = users.map(item => {
+          item.birthDate = dayjs(new Date(item.birthDate)).format("YYYY-MM-DD");
+          item.regDate = dayjs(new Date(item.createdAt)).format("YYYY-MM-DD HH:mm:ss");
+          return item;
+        })
+        const cardNos = users.slice().map(item=>item.cardNo);
+        if(isPlogging){
+          await syncPlogging(cardNos);
+        }
       }
+      console.log(users)
     }
-    console.log(users)
 
     this.setData({
-      stats: raceId ? `已报名${users.length}人` : null,
       users,
       race,
       cates,

@@ -79,10 +79,11 @@ export const exportReport = async cateId => {
     console.log(`开始读取${title}报名人数`);
     const res = await getStartListList(cateId);
     let users = [
-      ['报名人', '姓名', '性别', '手机号', '微信号', '国籍', '证件类型', '证件号码', '出生日期', '邮箱', '所属俱乐部', '血型', '衣服尺码', '省份', '住址', '紧急联系人', '紧急联系人手机', '是否参加过X-Plogging']
+      ['组别', '报名人', '姓名', '性别', '手机号', '微信号', '国籍', '证件类型', '证件号码', '出生日期', '邮箱', '所属俱乐部', '血型', '衣服尺码', '省份', '住址', '紧急联系人', '紧急联系人手机', '是否参加过X-Plogging']
     ];
     res.forEach(item => {
       let user = [];
+      user.push(item.cateTitle);
       user.push(item.userName);
       user.push(item.trueName);
       user.push(item.gender);

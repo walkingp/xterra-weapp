@@ -1,0 +1,37 @@
+<form bindsubmit="query">
+<van-cell-group title="订单号">
+  <van-field
+    title-width="46px"
+    value="{{ orderNum }}"
+    name="orderNum"
+    placeholder="如：20220714054213501647"
+    value="{{orderNum || '20220714054213501647'}}"
+    bind:change="onChange"
+    label="订单号"
+    clearable
+    use-button-slot>
+    <van-button form-type="submit" slot="button" size="small" type="primary">
+      查询
+    </van-button>
+    </van-field>
+</van-cell-group>
+</form>
+<block wx:if="{{detail}}">
+  <van-cell-group title="比赛信息" inset>
+    <van-cell title-width="46px" title="比赛" value="{{detail.raceTitle}}" label="{{detail.raceType}}" />
+    <van-cell title-width="56px" title="组别" value="{{detail.cateTitle}}" label="{{detail.groupText}}" />
+  </van-cell-group>
+  <van-cell-group title="报名人信息" inset>
+    <van-cell title="姓名" value="{{detail.userInfo.truename}}" />
+    <van-cell title="性别" value="{{detail.userInfo.gender}}" />
+    <van-cell title="微信名" value="{{detail.userInfo.nickname}}" />
+    <van-cell title="手机号" value="{{detail.userInfo.phonenumber}}" />
+  </van-cell-group>
+  <van-cell-group title="费用" inset>
+    <van-cell title="总费用" value="{{detail.totalFee}}" />
+    <van-cell title="折扣费用" value="{{detail.discountFee}}" />
+    <van-cell title="实际支付" value="{{detail.paidFee}}" />
+    <van-cell title="支付方式" value="{{detail.orderType}}" />
+    <van-cell title="支付状态" value="{{detail.statusText}}" />
+  </van-cell-group>
+</block>

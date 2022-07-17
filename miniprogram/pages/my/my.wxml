@@ -76,11 +76,12 @@
         <text class="hd">{{_t['管理员专用']}}</text>
       </view>
       <view class="list">
-        <van-grid border="{{false}}">
-          <van-grid-item icon="coupon-o" url="/pages/admin/coupon/coupon" text="生成优惠券" />
+        <van-grid border="{{false}}" column-num="5">
           <van-grid-item icon="friends-o" url="/pages/events/users/users" text="报名明细" />
           <van-grid-item icon="bar-chart-o" url="/pages/admin/events/events" text="赛事报表" />
           <van-grid-item icon="user-o" url="/pages/admin/users/users" text="注册用户" />
+          <van-grid-item icon="filter-o" url="/pages/admin/events/order/order" text="订单查询" />
+          <van-grid-item icon="coupon-o" url="/pages/admin/coupon/coupon" text="优惠券" />
         </van-grid>
       </view>
     </view>

@@ -60,7 +60,8 @@
     "pages/community/item/item",
     "pages/events/virtual/virtual",
     "pages/events/map/map",
-    "pages/url/url"
+    "pages/url/url",
+    "pages/admin/events/order/order"
   ],
   "window": {
     "backgroundColor": "#ffffff",
@@ -78,6 +79,7 @@
     "login": "/components/login/login",
     "point-goods": "/components/point-goods/point-goods",
     "loader": "/components/loader/loader",
+    "profile": "/components/profile/profile",
     "banner-list": "/components/banner-list/banner-list",
     "community-list": "/components/community-list/community-list",
     "coupon-list": "/components/coupon-list/coupon-list",

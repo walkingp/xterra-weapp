@@ -370,6 +370,13 @@
           "query": "raceId=023ce9555fe2fd5600095c6304fe5a4b&type=result",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "订单查询",
+          "pathName": "pages/admin/events/order/order",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }
