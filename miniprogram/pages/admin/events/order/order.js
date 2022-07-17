@@ -11,6 +11,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    active: "search",
     show: false,
     orderNum: '',
     detail: null,
@@ -19,6 +20,18 @@ Page({
     certPics: [],
     btnDisabled: true,
     canEdit: true
+  },
+  onTabChange(event) {
+    this.setData({
+      active: event.detail.name
+    })
+  },
+  onSelect(e) {
+    const orderNum = e.detail;
+    this.setData({
+      orderNum, active: 'search'
+    });
+    this.queryNow();
   },
   uploadToCloud(event) {
     const that = this;
