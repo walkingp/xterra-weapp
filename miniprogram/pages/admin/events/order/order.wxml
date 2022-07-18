@@ -55,9 +55,14 @@
       </van-cell-group>
     </block>
   </van-tab>
-  <van-tab title="最近失败订单" name="list">
+  <van-tab title="未支付订单" name="list">
     <van-cell-group title="最近未支付订单">
       <list id="list" bind:onSelect="onSelect" bind:onLoaded="onLoaded" />
+    </van-cell-group>
+  </van-tab>
+  <van-tab title="操作日志" name="logs">
+    <van-cell-group title="操作日志">
+      <logs id="logs" bind:onSelect="onSelect" bind:onLoaded="onLoaded" />
     </van-cell-group>
   </van-tab>
 </van-tabs>

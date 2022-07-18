@@ -1,5 +1,6 @@
 {
   "usingComponents": {
-    "list": "/pages/admin/events/order/list/list"
+    "list": "/pages/admin/events/order/list/list",
+    "logs": "/pages/admin/events/order/logs/logs"
   }
 }

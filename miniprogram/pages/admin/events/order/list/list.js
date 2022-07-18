@@ -77,7 +77,7 @@ Component({
       });
       this.setData({ list });
       wx.hideLoading();
-      this.triggerEvent("onLoaded");
+      this.triggerEvent("onLoaded", 'order');
     },
 
     onRowClick: function(e) {

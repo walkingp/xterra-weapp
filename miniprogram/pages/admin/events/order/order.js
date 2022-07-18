@@ -20,21 +20,28 @@ Page({
     certPics: [],
     btnDisabled: true,
     canEdit: true,
-    loaded: false
+    loaded: {
+      order: false,
+      logs: false
+    },
   },
   onTabChange(event) {
     const name = event.detail.name;
-    if(name === 'list' && !this.data.loaded) {
+    if(name === 'list' && !this.data.loaded.order) {
       const list = this.selectComponent("#list");
       list.loadData();
+    }
+    if(name === 'logs' && !this.data.loaded.logs) {
+      const logs = this.selectComponent("#logs");
+      logs.loadData();
     }
     this.setData({
       active: event.detail.name
     })
   },
-  onLoaded() {
+  onLoaded(arg) {
     this.setData({
-      loaded: true
+      [`loaded.${arg}`]: true
     })
   },
   onSelect(e) {
@@ -94,7 +101,7 @@ Page({
     
     const res = await adminChangeStatus(orderNum, isSendSms, isSendEmail, () => {
       const desc = `更改订单【${orderNum}】为已完成`;
-      const result = addLog({ userId, targetUserId: detail.userId, desc,  certPics });
+      const result = addLog({ userId, type: '修改订单', targetUserId: detail.userId, desc,  certPics });
       wx.showToast({
         title: '更改完成',
         icon: "success"
