@@ -20,10 +20,7 @@
         </block>
       </van-cell-group>
       <van-cell-group title="订单提交用户信息" inset>
-        <van-cell title="姓名" value="{{detail.userInfo.truename}}" />
-        <van-cell title="性别" value="{{detail.userInfo.gender}}" />
-        <van-cell title="微信名" value="{{detail.userInfo.nickname}}" />
-        <van-cell title="手机号" value="{{detail.userInfo.phonenumber}}" />
+        <van-cell title="{{detail.userInfo.nickname}}" label="{{detail.userInfo.truename}}(真实姓名）" is-link url="/pages/admin/events/profile/profile?userId={{detail.userInfo._id}}" border="{{ false }}"><van-image width="40" height="40" src="{{detail.userInfo.avatarUrl}}" /></van-cell>
       </van-cell-group>
       <van-cell-group title="费用" inset>
         <van-cell title="总费用" value="{{detail.totalFee}}" />
@@ -33,7 +30,8 @@
         <van-cell title="支付状态" value="{{detail.statusText}}" />
         <van-cell title="订单时间" value="{{detail.orderTime}}" />
       </van-cell-group>
-      <van-cell-group class="mt20">
+      <van-divider hairline />
+      <van-cell-group>
         <van-popup show="{{ show }}" position="bottom" closeable bind:close="onClose">
           <van-cell-group title="置为支付完成">
             <van-checkbox-group value="{{ result }}" bind:change="onChange">
@@ -58,8 +56,8 @@
     </block>
   </van-tab>
   <van-tab title="最近失败订单" name="list">
-    <van-cell-group title="支付失败订单">
-      <list bind:onSelect="onSelect" />
+    <van-cell-group title="最近未支付订单">
+      <list id="list" bind:onSelect="onSelect" bind:onLoaded="onLoaded" />
     </van-cell-group>
   </van-tab>
 </van-tabs>

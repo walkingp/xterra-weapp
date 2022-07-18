@@ -9,19 +9,6 @@ Component({
   properties: {
 
   },
-  lifetimes: {
-    async attached(){
-      wx.showLoading()
-      const list = await getAllFailedRegistrations();
-      list.map(item => {
-        item.addedDate = dayjs(item.addedDate).format("YYYY-MM-DD HH:mm:ss");
-        item.profiles = item.profiles && item.profiles.length ? item.profiles.map(p=>p.trueName).join() : ''
-      });
-      this.setData({ list });
-      wx.hideLoading();
-    }
-  },
-
   /**
    * 组件的初始数据
    */
@@ -36,6 +23,11 @@ Component({
         prop: 'userName',
         width: 200,
         label: '订单提交人',
+      },
+      {
+        prop: 'raceTitle',
+        width: 152,
+        label: '比赛'
       },
       {
         prop: 'cateTitle',
@@ -76,6 +68,17 @@ Component({
    * 组件的方法列表
    */
   methods: {
+    async loadData(){
+      wx.showLoading()
+      const list = await getAllFailedRegistrations();
+      list.map(item => {
+        item.addedDate = dayjs(item.addedDate).format("YYYY-MM-DD HH:mm:ss");
+        item.profiles = item.profiles && item.profiles.length ? item.profiles.map(p=>p.trueName).join() : ''
+      });
+      this.setData({ list });
+      wx.hideLoading();
+      this.triggerEvent("onLoaded");
+    },
 
     onRowClick: function(e) {
       const { orderNum } = e.detail.target.dataset.it;

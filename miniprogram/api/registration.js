@@ -39,6 +39,7 @@ export const getAllFailedRegistrations = async (pageIndex = 1, pageSize = 200) =
       orderNum: true,
       out_trade_no: true,
       userName: true,
+      raceTitle: true,
       cateTitle: true,
       statusText: true,
       totalFee: true,

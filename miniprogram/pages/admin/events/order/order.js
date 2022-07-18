@@ -19,11 +19,22 @@ Page({
     result: ['发送短信', '发送邮件'],
     certPics: [],
     btnDisabled: true,
-    canEdit: true
+    canEdit: true,
+    loaded: false
   },
   onTabChange(event) {
+    const name = event.detail.name;
+    if(name === 'list' && !this.data.loaded) {
+      const list = this.selectComponent("#list");
+      list.loadData();
+    }
     this.setData({
       active: event.detail.name
+    })
+  },
+  onLoaded() {
+    this.setData({
+      loaded: true
     })
   },
   onSelect(e) {
@@ -114,7 +125,10 @@ Page({
     this.queryNow();
   },
   async queryNow(){
-    const { orderNum } = this.data;
+    let { orderNum } = this.data;
+    if(!orderNum){
+      orderNum = '20220714054213501647';
+    }
     wx.showLoading({
       title: '查询中',
     });
