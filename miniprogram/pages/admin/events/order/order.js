@@ -166,6 +166,7 @@ Page({
     getApp().checkLogin().then(res => {
       const { userId, userInfo } = res;
       const isAdmin = res.userInfo.role === 'admin';
+      this.setData({ userId, userInfo });
       if(!isAdmin){
         wx.showToast({
           icon: 'none',
@@ -178,7 +179,6 @@ Page({
             }, 1000);
           }
         })
-        this.setData({ userId, userInfo });
       }else{
         const { orderNum } = options;
         if(orderNum){

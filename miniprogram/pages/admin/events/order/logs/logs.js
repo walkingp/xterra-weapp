@@ -54,8 +54,8 @@ Component({
       const list = await getLogs();
       list.map(item => {
         item.addedDate = dayjs(item.createdAt).format("YYYY-MM-DD HH:mm:ss");
-        item.nickName = item.userInfo[0].nickname;
-        item.trueName = item.userInfo[0].truename;
+        item.nickName = item.userInfo?.[0].nickname;
+        item.trueName = item.userInfo?.[0].truename;
         return item;
       });
       this.setData({ list });

@@ -142,6 +142,9 @@
   "permission": {
     "scope.userLocation": {
       "desc": "将用于系统判断您的当前位置用于接收通知"
+    },
+    "scope.address": {
+      "desc": "将用于系统判断您的当前位置用于填写个人报名地址"
     }
   },
   "tabBar": {
