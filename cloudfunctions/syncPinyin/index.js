@@ -50,7 +50,6 @@ exports.main = async (event, context) => {
   res.data.forEach(async item=>{
     const { trueName, _id } = item;
     const { pinyinLast, pinyinFirst } = await getFullPinyin(trueName, {style:'normal'});
-    // debugger;
     console.log(pinyinLast, pinyinFirst);
     await userTable.doc(_id).update({
       data: {
