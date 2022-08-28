@@ -1,4 +1,5 @@
 const cloud = require('wx-server-sdk')
+const dayjs = require("dayjs");
 cloud.init({
   // API 调用都保持和云函数当前所在环境一致
   env: cloud.DYNAMIC_CURRENT_ENV
@@ -21,8 +22,8 @@ async function insertSingle(raceId, cateTitle, row, mode){
   const trueName = row[1]; //姓名
   const gender = row[2]; //性别
   const group = row[3]; //组别
-  const roughTime = row[4];
-  const netTime = row[5];
+  const roughTime = dayjs(row[4]).format("h:mm:ss");
+  const netTime = dayjs(row[5]).format("h:mm:ss");
   const genderRank = row[6];
   const overallRank = row[7];
   const cp1=row[8];

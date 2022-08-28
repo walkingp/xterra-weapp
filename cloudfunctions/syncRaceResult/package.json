@@ -1,5 +1,5 @@
 {
-  "name": "importResult",
+  "name": "syncRaceResult",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,7 +10,6 @@
   "license": "ISC",
   "dependencies": {
     "dayjs": "^1.11.5",
-    "node-xlsx": "^0.16.1",
-    "wx-server-sdk": "~2.4.0"
+    "wx-server-sdk": "~2.6.3"
   }
 }
