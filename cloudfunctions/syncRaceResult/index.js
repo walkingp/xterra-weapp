@@ -14,10 +14,13 @@ exports.main = async (event, context) => {
   const userTable = db.collection('race-result');
   const res = await userTable.where({
     netTime: _.neq(null),
-    cateId: '6d85a2b962aad2a60ae784331d606500'
+    status: "done",
+    //gender: '男',
+    cateId: '6d85a2b962aad2a60ae784331d606500'// `0a4ec1f962aad2210ad561bd6837de59`
   }).orderBy('netTime', 'asc').limit(1000).get();
   res.data.forEach(async (item, index) => {
     const data = await userTable.doc(item._id).update({
+      //data: { genderRank: index+ 1}
       data: { overallRank: index+ 1}
     });
    //if(isDate(item.netTime)){

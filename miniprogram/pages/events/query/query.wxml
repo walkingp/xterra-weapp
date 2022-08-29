@@ -75,7 +75,7 @@
             <van-cell wx:if="{{!isPlogging}}" title="{{_t['号码']}}" border="{{ false }}" value="{{searchResult.bib}}" />
             <van-cell wx:if="{{!isPlogging}}" title="{{_t['完赛成绩']}}" border="{{ false }}" value="{{searchResult.roughTime}}" />
             <van-cell wx:if="{{!isPlogging}}" title="{{_t['净时间']}}" border="{{ false }}" value="{{searchResult.netTime}}" />
-            <van-cell wx:if="{{!isPlogging}}" title="{{_t['组别排名']}}" border="{{ false }}" value="{{searchResult.genderRank}}" />
+            <van-cell wx:if="{{!isPlogging}}" title="{{_t['组内排名']}}" border="{{ false }}" value="{{searchResult.genderRank}}" />
             <van-cell wx:if="{{!isPlogging}}" title="{{_t['总排名']}}" border="{{ false }}" value="{{searchResult.overallRank}}" />
           </block>
           <van-cell title="{{_t[isPlogging ? '活动状态' : '完赛状态']}}" border="{{ false }}" value="{{searchResult.statusText}}" />

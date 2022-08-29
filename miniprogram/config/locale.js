@@ -124,6 +124,7 @@ const locales = {
   'T2换项': 'T2 time',
   '跑步时间': 'Run time',
   '组内排名': 'Division rank',
+  '组别排名': 'Division rank',
   '总排名': 'Overall rank',
   '净时间': 'Net time',
   '活动状态': 'Event status',
