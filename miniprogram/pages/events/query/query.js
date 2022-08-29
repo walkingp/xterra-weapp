@@ -122,7 +122,7 @@ Page({
       const {
         status
       } = searchResult;
-      if (status !== raceResultStatus.done.value) {
+      if (status === raceResultStatus.notStart.value) {
         wx.showToast({
           icon: 'none',
           title: '没有查询到完赛记录',

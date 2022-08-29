@@ -381,7 +381,7 @@
         {
           "name": "2022渔洋山证书",
           "pathName": "pages/events/cert/cert",
-          "query": "raceId=8f75309d62aab2f608c7eee27507e242&cateId=null&id=8f75309d63089ec7165f1d52193a9983&isbib=false",
+          "query": "raceId=8f75309d62aab2f608c7eee27507e242&cateId=null&id=b69f67c0630a5a2112f198d05f96a722&isbib=false",
           "launchMode": "default",
           "scene": null
         }

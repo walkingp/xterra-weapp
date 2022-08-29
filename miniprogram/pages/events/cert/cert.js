@@ -179,7 +179,11 @@ Page({
       })
     }else{//正常比赛
       fields.map(item=>{
-        item.value = result[item.key];
+        if(["DNF", "DNS", "DSQ"].includes(result.status) && ["overallRank", "netTime", "genderRank"].includes(item.key)){
+          item.value = result.status;
+        }else{
+          item.value = result[item.key];
+        }
         return item;
       })
     }
