@@ -119,14 +119,15 @@ function updateStatuses(detail, callback){
           title: '处理订单中',
         })
         if(detail.couponId){
-          await updateCouponStatus(detail.couponId);
+          updateCouponStatus(detail.couponId);
         }
-        wx.showLoading({
-          title: '发送邮件短信中',
-          icon: 'none'
-        })
+        // wx.showLoading({
+        //   title: '发送邮件短信中',
+        //   icon: 'none'
+        // })
         try{
-          await sendEmailSMS(detail);
+          console.log('开始发送短信');
+          sendEmailSMS(detail);
         }catch(err){          
           logManager.error('sms', err);
           wx.showToast({
@@ -134,10 +135,10 @@ function updateStatuses(detail, callback){
             icon: 'none'
           })
         }
-        wx.showLoading({
-          title: '发送短信中',
-        })
-        await updateRaceCate(detail);
+        // wx.showLoading({
+        //   title: '发送短信中',
+        // })
+        //await updateRaceCate(detail);
         wx.showToast({
           icon: 'success',
           title: '报名成功',
@@ -259,7 +260,7 @@ async function sendEmail(order) {
     paidFee
   };
   const res = await sendRegEmail(emailTemplateType.registration.value, values);
-  console.log(res);
+  console.log('邮件发送成功', res);
 }
 
 async function sendSms({ phoneNum, trueName, raceId, raceTitle, cateTitle}){
@@ -270,7 +271,7 @@ async function sendSms({ phoneNum, trueName, raceId, raceTitle, cateTitle}){
     raceTitle,
     cateTitle
   })
-  console.log(res);
+  console.log('短信发送成功', res);
 };
 
 // 更新race-cates下users
