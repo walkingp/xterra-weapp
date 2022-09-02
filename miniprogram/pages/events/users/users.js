@@ -323,9 +323,8 @@ Page({
       cates.push(..._cates);
 
       const filter = cateId ? { cateId } : null;
-      if(!(isPlogging && cateId ===  null)){
-        
-        const total = await getCollectionCount({ dbName: 'start-list', filter: { raceId, ...filter }});
+      if(cateId !==  null){
+        const total = await getCollectionCount({ dbName: 'start-list', filter: { ...filter }});
         const pageCount = Math.ceil(total / pageSize);
         let promises = [];
         for(let i = 0; i < pageCount; i ++){
