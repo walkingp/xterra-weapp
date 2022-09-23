@@ -1,5 +1,5 @@
 const {
-  getMyProfilesWithCate, getRaceCatesList, checkIsJoinedPlogging, updatePloggingStatus
+  getMyProfilesWithCate, getRaceCatesList, checkIsJoinedPlogging, updatePloggingStatus, getRegisteredUsersCount
 } = require("../../../../api/race")
 const app = getApp();
 const dayjs = require("dayjs");
@@ -28,6 +28,7 @@ Component({
     profiles: [],
     selectedProfiles: [],
     selectedSports: [],
+    registerUsersCount: 0,
     currentProfileId: null,
     currentIndex: null,
     cates: [],
@@ -198,10 +199,12 @@ Component({
         const {
           raceId, raceDetail
         } = this.properties;
+        const registerUsersCount = await getRegisteredUsersCount(cateId);
         const cates = await getRaceCatesList(raceId);
         const cate = cates.find(item => item._id === cateId);
         this.setData({
           cateId,
+          registerUsersCount,
           cates,
           isRelay: cate.type  === 'relay' && raceDetail.type === '铁人三项',
           cate,
@@ -228,7 +231,7 @@ Component({
     },
     checkboxChanged(e){
       const profileIds = e.detail.value;
-      let { profiles, cate, isRelay } = this.data;
+      let { profiles, cate, isRelay, registerUsersCount } = this.data;
       profiles = profiles.filter(item => {
         return profileIds.includes(item._id);
       });
@@ -241,10 +244,19 @@ Component({
       this.setData({
         selectedProfiles: profiles
       });
-      if(profiles.length > cate.teamSizeLimit && cate.teamSizeLimit > 0){
+      if(profiles.length + registerUsersCount > cate.limit && cate.limit > 0){        
         wx.showToast({
           icon: 'none',
-          title: `已经超出报名人数限制`,
+          title: `已经超出总报名人数限制`,
+        });
+        
+        this.triggerEvent('onComplete', { prevEnabled: true, nextEnabled: false }); 
+        return;
+      }
+      if(isRelay && profiles.length > cate.teamSizeLimit && cate.teamSizeLimit > 0){
+        wx.showToast({
+          icon: 'none',
+          title: `已经超出团队报名人数限制`,
         });
         
         this.triggerEvent('onComplete', { prevEnabled: true, nextEnabled: false }); 

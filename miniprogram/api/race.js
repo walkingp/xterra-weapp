@@ -72,6 +72,10 @@ export const checkTeamExisted = async ({cateId, teamTitle}) => {
   return false;
 };
 
+export const getRegisteredUsersCount = async (cateId) => {
+  return getCollectionCount({ dbName: 'start-list', filter: { cateId }})
+}
+
 export const getRaceCatesList = async ( raceId, size = 500) => {  
   return new Promise((resolve, reject) => {
     wx.cloud.callFunction({

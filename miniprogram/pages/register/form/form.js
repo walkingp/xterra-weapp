@@ -12,6 +12,7 @@ import {
 } from "./../../../api/profile";
 // miniprogram/pages/register/form/form.js
 import areaList from "./../../../config/area";
+import { checkIDCard } from "./util";
 const dayjs = require("dayjs");
 const app = getApp();
 const i18n = require("./../../../utils/i18n");
@@ -147,8 +148,18 @@ Page({
     const idCard = e.detail.value;
     const {
       myProfiles,
-      action
+      action, cardType
     } = this.data;
+    if(idCard.trim()){
+      const isValid = cardType === '身份证' && checkIDCard(idCard);
+      if(!isValid){
+        wx.showToast({
+          title: '身份证格式不正确',
+          icon: 'none'
+        });
+        return;
+      }
+    }
     if (action !== 'edit' && myProfiles.find(item => item.cardNo === idCard)) {
       wx.showToast({
         title: '此证件号码已经添加过',

@@ -36,7 +36,7 @@
           <van-cell-group title="{{_t['检录信息']}}">
             <van-cell center wx:for="{{bibUsers}}" wx:key="_id" is-link data-id="{{item._id}}" data-type="bib" bindtap="viewCert">
               <view slot="title">
-                <view class="van-cell-text">{{item.bibNum}}</view>
+                <view class="van-cell-text" wx:if="{{isPlogging}}">{{item.bibNum}}</view>
                 <view>
                   <van-tag style="margin-right: 4rpx;" plain type="primary">{{item.cateTitle}}</van-tag> 
                   <van-tag type="danger" plain wx:if="{{item.finishedStatus === 'notStart' || !item.finishedStatus}}">{{_t['未检录']}}
