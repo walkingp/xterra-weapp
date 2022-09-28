@@ -16,7 +16,7 @@ exports.main = async (event, context) => {
     netTime: _.neq(null),
     status: "done",
     //gender: '男',
-    cateId: '6d85a2b962aad2a60ae784331d606500'// `0a4ec1f962aad2210ad561bd6837de59`
+    cateId: 'f6e08a646305c05d1463f1622315f408'// `0a4ec1f962aad2210ad561bd6837de59`
   }).orderBy('netTime', 'asc').limit(1000).get();
   res.data.forEach(async (item, index) => {
     const data = await userTable.doc(item._id).update({

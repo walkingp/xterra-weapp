@@ -392,6 +392,13 @@
           "query": "raceId=ca780ad5630499751205afca0db6bcf9&type=result",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "查询证书",
+          "pathName": "pages/events/query/query",
+          "query": "raceId=b45a21d55fe2f415000a12d3544a9d75&type=result",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }

@@ -34,9 +34,9 @@
             <van-cell title="{{_t['报名时间']}}" border="{{ false }}" value="{{searchedReg.regDate}}" />
           </van-cell-group>
           <van-cell-group title="{{_t['检录信息']}}">
-            <van-cell center wx:for="{{bibUsers}}" wx:key="_id" is-link data-id="{{item._id}}" data-type="bib" bindtap="viewCert">
+            <van-cell center wx:for="{{bibUsers}}" wx:key="_id" is-link="{{!isPlogging}}" data-id="{{item._id}}" data-type="bib" bindtap="viewCert">
               <view slot="title">
-                <view class="van-cell-text" wx:if="{{isPlogging}}">{{item.bibNum}}</view>
+                <view class="van-cell-text" wx:if="{{!isPlogging}}">{{item.bibNum}}</view>
                 <view>
                   <van-tag style="margin-right: 4rpx;" plain type="primary">{{item.cateTitle}}</van-tag> 
                   <van-tag type="danger" plain wx:if="{{item.finishedStatus === 'notStart' || !item.finishedStatus}}">{{_t['未检录']}}
@@ -44,7 +44,7 @@
                   <van-tag type="success" wx:else>{{_t['已检录']}}</van-tag>
                 </view>
               </view>
-              <view>{{_t['电子号码布']}}</view>
+              <view wx:if="{{!isPlogging}}">{{_t['电子号码布']}}</view>
             </van-cell>
           </van-cell-group>
 
