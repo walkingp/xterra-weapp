@@ -211,7 +211,8 @@ Page({
       this.setData({
         hasCert: true,
         fileList: [{
-          url: certPic
+          url: certPic,
+          deletable: true,
         }]
       })
     }
@@ -673,7 +674,8 @@ Page({
           that.setData({
             certPic: result.fileID,
             fileList: [{
-              url: result.fileID
+              url: result.fileID,
+              deletable: true,
             }]
           });
 
@@ -686,6 +688,12 @@ Page({
         }
       });
     }
+  },
+  onDeletePic(e){
+    const { index } = e.detail;
+    this.setData({
+      fileList: []
+    })
   },
   selectAddr() {
     const that = this;

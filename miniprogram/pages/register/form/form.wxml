@@ -54,8 +54,8 @@
       <van-cell title="{{_t['完赛资质']}}" required="{{cateDetail.isCheckCert || hasCert}}" name="file"
         label="{{cateDetail.certTitle}}">
         <view slot="">
-          <van-uploader accept="image" max-count="{{1}}" upload-text="{{_t['仅限图片']}}" bind:after-read="uploadToCloud"
-            file-list="{{ fileList }}" />
+          <van-uploader accept="image" max-count="{{1}}" deletable="{{ true }}" upload-text="{{_t['仅限图片']}}" bind:after-read="uploadToCloud"
+            file-list="{{ fileList }}" image-fit="cover" bind:delete="onDeletePic" />
         </view>
       </van-cell>
     </van-cell-group>
@@ -87,7 +87,7 @@
         </block>
         <block wx:if="{{item.type === 'file'}}">
           <van-cell title="{{item.title}}" label="{{item.desc}}">
-            <van-uploader file-list="{{ fileList }}" />
+            <van-uploader file-list="{{ fileList }}"  deletable="{{ true }}" />
           </van-cell>
         </block>
 

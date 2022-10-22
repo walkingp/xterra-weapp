@@ -173,5 +173,8 @@
       }
     ]
   },
+  "requiredPrivateInfos": [
+    "chooseAddress"
+  ],
   "plugins": {}
 }

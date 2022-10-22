@@ -11,7 +11,7 @@
               <van-loading slot="loading" type="spinner" size="20" vertical />
             </van-image>
             <button bindtap="tap" data-bannerid="{{item._id}}" data-src="{{item.picUrl}}" data-url="{{item.redirectUrl}}" data-type="{{item.type}}" class="button">
-              {{item.buttonText === 'detail' ? _t['查看详情'] : _t['立即报名']}}
+              {{item.buttonText === 'register' ? _t['立即报名'] : _t['查看详情']}}
             </button>
           </view>
         </swiper-item>

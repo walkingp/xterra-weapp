@@ -399,6 +399,13 @@
           "query": "raceId=b45a21d55fe2f415000a12d3544a9d75&type=result",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "修改资料",
+          "pathName": "pages/register/form/form",
+          "query": "action=edit&id=b45a21d55fe48cb6000c14737b0fb4e6",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }
