@@ -648,6 +648,7 @@ Page({
 
       birthday = birthday.replace(/(.{4})(.{2})/, "$1-$2-");
     }
+    
 
     return birthday;
   },

@@ -149,34 +149,50 @@ Page({
     if(isPlogging){
       const cityNameEn = await this.formatCityName(result.city);
       const cateDetail = await getRaceCateDetail(cateId);
-      fields.map(async item=>{
-        switch(item.key){
-          case 'trueName':
-            item.value = result.trueName;
-            break;
-          case 'cityName':
-            item.value = result.city;
-            break;
-          case 'cityNameEn':
-            item.value = cityNameEn;
-            break;
-          case 'year':
-            item.value = new Date(cateDetail.cateDate || result.raceDate).getFullYear();
-            break;
-          case 'month':
-            item.value = new Date(cateDetail.cateDate || result.raceDate).getMonth() + 1;
-            break;
-          case 'date':
-            item.value = new Date(cateDetail.cateDate || result.raceDate).getDate();
-            break;
-          case 'yearMonthDate':
-            item.value = [new Date(cateDetail.cateDate || result.raceDate).getFullYear(),
-              new Date(cateDetail.cateDate || result.raceDate).getMonth() + 1,
-              new Date(cateDetail.cateDate || result.raceDate).getDate()].join('-')
-            break;
-        }
-        return item;
-      })
+      await Promise.all(
+        fields.map(item=>{
+          return (async()=>{
+            switch(item.key){
+              case 'trueName':
+                item.value = result.trueName;
+                break;
+              case 'cityPinyin':
+                const py = await getPinyin(result.city);
+                item.value = py.join('').toUpperCase();
+                break;
+              case 'pinyin':
+                const str = await getPinyin(result.trueName);
+                item.value = str.join('').toUpperCase();
+                break;
+              case 'cityName':
+                item.value = result.city;
+                break;
+              case 'cityNameEn':
+                item.value = cityNameEn;
+                break;
+              case 'year':
+                item.value = new Date(cateDetail.cateDate || result.raceDate).getFullYear();
+                break;
+              case 'month':
+                item.value = new Date(cateDetail.cateDate || result.raceDate).getMonth() + 1;
+                break;
+              case 'date':
+                item.value = new Date(cateDetail.cateDate || result.raceDate).getDate();
+                break;
+              case 'yearMonthDate':
+                item.value = [new Date(cateDetail.cateDate || result.raceDate).getFullYear(),
+                  new Date(cateDetail.cateDate || result.raceDate).getMonth() + 1,
+                  new Date(cateDetail.cateDate || result.raceDate).getDate()].join('-')
+                break;
+                case 'yearMonth':
+                  item.value = [new Date(cateDetail.cateDate || result.raceDate).getFullYear(),
+                    new Date(cateDetail.cateDate || result.raceDate).getMonth() + 1].join('.')
+                  break;
+            }
+            return item;
+          })();
+        })
+      ) 
     }else{//正常比赛
       fields.map(item=>{
         if(["DNF", "DNS", "DSQ"].includes(result.status) && ["overallRank", "netTime", "genderRank"].includes(item.key)){

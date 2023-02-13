@@ -74,6 +74,7 @@
           "name": "修改联系人资料",
           "pathName": "pages/register/form/form",
           "query": "action=edit&id=846bf2595fd0d6b1000dd7471a1d6b7a",
+          "launchMode": "default",
           "scene": null
         },
         {

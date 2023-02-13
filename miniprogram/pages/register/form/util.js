@@ -22,7 +22,7 @@ export function checkIDCard (idcode) {
   const lastNo = checkCode[resisue]
 
   // 身份证号格式的正则思路
-  const idcardPatter = /^[1-9][0-9]{5}([1][9][0-9]{2}|[2][0][0|1][0-9])([0][1-9]|[1][0|1|2])([0][1-9]|[1|2][0-9]|[3][0|1])[0-9]{3}([0-9]|[X])$/
+  const idcardPatter = /^[1-9]\d{5}(18|19|20)\d{2}((0[1-9])|(1[0-2]))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/;
 
   // 判断格式是否正确
   const format = idcardPatter.test(idcode)
