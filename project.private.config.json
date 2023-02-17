@@ -407,6 +407,13 @@
           "query": "action=edit&id=b45a21d55fe48cb6000c14737b0fb4e6",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "导出名单",
+          "pathName": "pages/events/users/users",
+          "query": "id=28ee4e3e60ab62751bf8e2aa333f1e5c",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }

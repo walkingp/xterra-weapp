@@ -4,7 +4,7 @@
     <van-cell title="报名时间" value="{{detail.regDate}}" border="{{ false }}" />
     <van-cell title="状态" value="{{detail.statusText}}" border="{{ false }}" />
     <van-cell title="姓名" value="{{detail.trueName}}" bindtap="copy" value-class="copyable" data-text="{{detail.trueName}}" border="{{ false }}" />
-    <van-cell title="微信id" value="{{detail.wechatid}}" bindtap="copy" value-class="copyable" data-text="{{detail.wehcatid}}"
+    <van-cell title="微信id" value="{{detail.wechatId}}" bindtap="copy" value-class="copyable" data-text="{{detail.wehcatid}}"
       border="{{ false }}" />
     <van-cell title="性别" value="{{detail.gender}}" border="{{ false }}" />
     <van-cell title="国籍" value="{{detail.nation}}" border="{{ false }}" />

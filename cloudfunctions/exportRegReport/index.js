@@ -55,7 +55,7 @@ exports.main = async (event) => {
     user.push(item.bibNum ? item.bibNum: '');
     user.push(item.gender);
     user.push(item.phoneNum);
-    user.push(item.wechatid);
+    user.push(item.wechatId);
     user.push(item.nation);
     user.push(item.cardType);
     user.push(item.cardNo);

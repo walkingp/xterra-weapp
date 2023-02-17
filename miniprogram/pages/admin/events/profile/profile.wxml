@@ -1,6 +1,6 @@
 <van-cell-group title="用户信息">
     <van-cell title="姓名" value="{{detail.trueName}}" bindtap="copy" value-class="copyable" data-text="{{detail.trueName}}" border="{{ false }}" />
-    <van-cell title="微信id" value="{{detail.wechatid}}" bindtap="copy" value-class="copyable" data-text="{{detail.wehcatid}}" border="{{ false }}" /> 
+    <van-cell title="微信id" value="{{detail.wechatId}}" bindtap="copy" value-class="copyable" data-text="{{detail.wehcatid}}" border="{{ false }}" /> 
     <van-cell title="微信昵称" value="{{detail.userInfo[0].nickname}}" border="{{ false }}" /> 
     <van-cell title="头像" border="{{ false }}"><van-image width="100" height="100" src="{{detail.userInfo[0].avatarUrl}}" /></van-cell>
     <van-cell title="注册时间" value="{{detail.regDate}}" border="{{ false }}" />

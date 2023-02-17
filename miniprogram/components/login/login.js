@@ -49,6 +49,7 @@ Component({
         title: '登录中',
       })
       //需要用户同意授权获取自身相关信息
+      debugger;
       if (e.detail.errMsg == "getUserInfo:ok") {
         this.callGetUserInfo(e.detail.userInfo);
       } else
