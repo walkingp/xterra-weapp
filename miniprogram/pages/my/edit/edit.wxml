@@ -1,13 +1,14 @@
 <view class="container">
   <form bindsubmit="saveData" class="list">
-    <van-cell-group title="{{_t['个人资料']}}">
-      <van-cell title="{{_t['微信名']}}" border="{{ false }}" value="{{nickname}}" />
+    <van-cell-group title="{{_t['个人资料']}}">    
+      <van-field bind:confirm="onChange" data-type="nickname" wx:if="{{nickname ==='微信用户'}}" value="{{ nickname }}" required name="nickname" input-align="right" label="{{_t['微信名']}}" placeholder="{{_t['请输入微信昵称']}}" border="{{ false }}" />
+      <van-cell wx:else title="{{_t['微信名']}}" border="{{ false }}" value="{{nickname}}" />
       <!--<van-cell title="数据来源" label="以下资料可从微信地址选择" border="{{ false }}">
         <van-button type="primary" round plain size="small" bind:click="selectAddr">从微信地址中读取</van-button>
       </van-cell>-->
-      <van-field value="{{ trueName }}" required name="trueName" label="{{_t['姓名']}}" placeholder="{{_t['请输入真实姓名']}}" border="{{ false }}" />
+      <van-field bind:confirm="onChange" data-type="trueName" value="{{ trueName }}" required name="trueName" input-align="right" label="{{_t['姓名']}}" placeholder="{{_t['请输入真实姓名']}}" border="{{ false }}" />
       <van-cell title="{{_t['性别']}}" data-name="gender" required is-link border="{{ false }}" value="{{gender}}" bind:click="showAction" />
-      <van-field title-width="200px" value="{{ phoneNum }}" required name="phoneNum" label="{{_t['手机号']}}" placeholder="{{_t['请输入手机号']}}" border="{{ false }}" />
+      <van-field bind:confirm="onChange" data-type="phoneNum" title-width="200px" value="{{ phoneNum }}" required name="phoneNum" label="{{_t['手机号']}}" placeholder="{{_t['请输入手机号']}}" border="{{ false }}" />
       <!--<van-cell value="{{ birthDate }}" required name="birthDate" is-link bind:click="showDate" label="出生日期" border="{{ false }}" />
       <van-cell title="住址所属地区" required name="region" is-link border="{{ false }}" value="{{region}}" bind:click="showAddr" />
       <van-field value="{{ addr }}" required name="addr" label="家庭住址" placeholder="如：xx路xx号xx室" border="{{ false }}" />

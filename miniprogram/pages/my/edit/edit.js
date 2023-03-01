@@ -49,6 +49,14 @@ Page({
 
   },
 
+  onChange(e){
+    const { type } = e.dataset;
+    debugger;
+    this.setData({
+      [type]: e.detail.value
+    });
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
@@ -109,7 +117,7 @@ Page({
     this.saveLang();
     const {
       phoneNum,
-      trueName
+      trueName, nickname
     } = e.detail.value;
     const {
       gender,
@@ -122,12 +130,14 @@ Page({
       })
       return;
     }
+    debugger;
     const db = wx.cloud.database();
     const result = await db.collection("userlist").doc(userId).update({
       data: {
         gender,
         truename: trueName,
-        phonenumber: phoneNum
+        phonenumber: phoneNum,
+        nickname
       }
     });
     // 加分

@@ -56,6 +56,7 @@ Component({
         console.log("未授权")
     },
     callGetUserInfo(userInfo) {
+      debugger;
       var _this = this
       //将授权结果写入app.js全局变量
       app.globalData.auth['scope.userInfo'] = true
