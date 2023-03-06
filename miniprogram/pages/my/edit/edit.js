@@ -51,7 +51,6 @@ Page({
 
   onChange(e){
     const { type } = e.dataset;
-    debugger;
     this.setData({
       [type]: e.detail.value
     });
@@ -130,7 +129,13 @@ Page({
       })
       return;
     }
-    debugger;
+    if(nickname === '微信用户'){
+      wx.showToast({
+        icon: 'none',
+        title: '昵称不可为“微信用户”',
+      })
+      return;
+    }
     const db = wx.cloud.database();
     const result = await db.collection("userlist").doc(userId).update({
       data: {

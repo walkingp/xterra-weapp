@@ -32,7 +32,7 @@ Page({
     isChinese: i18n.i18n.getLang(),
   },
   loadFont() {
-    const source = "https://xterra.club/fonts/Impact.ttf";
+    const source = "https://7874-xterra-c2969f-1258173660.tcb.qcloud.la/app/fonts/Impact.ttf?sign=cd15b675439865107179d4b1a659f27d&t=1678109310";
     const _this = this;
     wx.loadFontFace({
       global: true,

@@ -23,6 +23,14 @@ Page({
       url: "/pages/my/idcard/idcard",
     });
   },
+  gotoEdit() {
+    wx.navigateTo({
+      url: "/pages/my/edit/edit",
+    });
+  },
+  onClose(){
+    this.setData({ show: false })
+  },
   scanQR() {
     wx.scanCode({
       onlyFromCamera: true,
@@ -64,6 +72,7 @@ Page({
 
         const isAdmin = res.userInfo.role === "admin";
         const isVolunteer = res.userInfo.role === "volunteer" || isAdmin;
+        const isShow = userInfo.nickname === '微信用户';
         this.setData(
           {
             userInfo,
@@ -71,6 +80,7 @@ Page({
             isLogined,
             isAdmin,
             isVolunteer,
+            isShow
           },
           async () => {
             this.fetch();

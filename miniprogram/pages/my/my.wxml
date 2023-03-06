@@ -88,3 +88,15 @@
     <view wx:if="{{version}}" class="version">{{version}}</view>
   </block>
 </view>
+<van-dialog
+  use-slot
+  title="修改提醒"
+  show="{{ isShow }}"
+	show-cancel-button
+	confirmButtonText="立即修改"
+	cancelButtonText="下次提醒"
+	bind:confirm="gotoEdit"
+	bind:cancel="onClose"
+  bind:close="onClose">
+		<view style="padding: 10rpx 40rpx;">您的微信昵称当前是“微信用户”，为方便您参与我们的活动，请修改您的微信昵称。</view>
+	</van-dialog>
