@@ -47,6 +47,7 @@
   border: solid 4rpx #fff !important;
   color: #fff !important;
   border-radius: 0px;
+  z-index: 3;
 }
 
 button.button {

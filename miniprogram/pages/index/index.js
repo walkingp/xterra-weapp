@@ -65,7 +65,7 @@ Page({
       url,
     });
   },
-  tap(e) {
+  onClickButton(e) {
     let { src, type, url, bannerid } = e.currentTarget.dataset;
     const { banners } = this.data;
     const urls = banners.map((item) => item.picUrl);

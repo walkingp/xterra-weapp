@@ -43,7 +43,8 @@
     "useCompilerPlugins": false,
     "ignoreUploadUnusedFiles": true,
     "useStaticServer": true,
-    "lazyloadPlaceholderEnable": false
+    "lazyloadPlaceholderEnable": false,
+    "condition": false
   },
   "appid": "wx491fb14c7948a753",
   "projectname": "XTERRA",
