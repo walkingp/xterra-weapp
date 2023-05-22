@@ -3,6 +3,7 @@ const dayjs = require("dayjs");
 const app = getApp();
 const i18n = require("./../../../../utils/i18n");
 
+const imgUrl = `https://7874-xterra-c2969f-1258173660.tcb.qcloud.la/app/images/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20230427210604.jpg?sign=fdb66d68d3a98ead3a8a495c39d7eceb&t=1682600972`;
 const _t = i18n.i18n.translate();
 // pages/register/steps/step4/step4.js
 Component({
@@ -31,12 +32,15 @@ Component({
    * 组件的初始数据
    */
   data: {
+    imgUrl,
+    show: false,
     emails: []
   },
 
   lifetimes: {
     attached() {
-      this.setData({        
+      this.setData({    
+        show: true,    
         _t: i18n.i18n.translate()
       });
     }
@@ -45,6 +49,16 @@ Component({
    * 组件的方法列表
    */
   methods: {
+    onClose(){
+      this.setData({ show:false })
+    },
+    preview(e){
+      const { url } = e.currentTarget.dataset;
+      wx.previewImage({
+        current: url,
+        urls: [url],
+      })
+    },
     receiveMessage() {
       const templateId = config.messageTemplates.registration.templateId;
       const that = this;

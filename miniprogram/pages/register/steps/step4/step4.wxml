@@ -12,3 +12,7 @@
     </view>
   </view>
 </view>
+<van-popup closeable show="{{ show }}" bind:close="onClose" custom-class="flex column align-center justify-center" custom-style="padding: 20px; font-size: 14px; color: #444;">
+  <image bindtap="preview" data-url="{{imgUrl}}" mode="widthFix" class="wechat" src="{{imgUrl}}" />
+  <view class="info">请添加客服微信，方便我们与您联系</view>
+</van-popup>

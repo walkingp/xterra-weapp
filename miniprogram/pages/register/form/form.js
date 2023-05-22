@@ -70,7 +70,7 @@ Page({
 
     minDate: new Date(1920, 1, 1).getTime(),
     maxDate: new Date().getTime(),
-    tSizes: ['S', 'M', 'L', 'XL'],
+    tSizes: ['XS', 'S', 'M', 'L', 'XL'],
     isView: false,
 
     myProfiles: [],
