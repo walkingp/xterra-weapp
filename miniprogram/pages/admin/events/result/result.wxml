@@ -8,7 +8,7 @@
     </van-cell-group>
     <van-radio-group value="{{ radio }}" bind:change="onChange">
       <van-cell-group title="导入线下报名">
-        <van-cell title="{{item.title}}({{item.fileName}})" wx:for="{{files}}" wx:key="_id" clickable
+        <van-cell title="{{item.title}}"  label="{{item.fileName}}" wx:for="{{files}}" wx:key="_id" clickable
           data-name="{{index}}" bind:click="onClick">
           {{item.isImported ? '已导入' : '未导入'}}
           <van-radio slot="right-icon" name="{{index}}" />

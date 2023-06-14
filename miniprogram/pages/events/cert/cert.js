@@ -84,7 +84,9 @@ Page({
         // 百万森林
         cert = isMillionForrest ? temps[1] : temps[0];
       }else{
-        cert = isMillionForrest ? temps[1] : await getCertTemplate(raceDetail._id);
+        const { isCert } = this.data;
+        const certOrBib = isCert ? 'cert': 'bib';
+        cert = isMillionForrest ? temps[1] : await getCertTemplate(raceDetail._id, certOrBib);
       }
 
       const { tempFileUrl } = cert;

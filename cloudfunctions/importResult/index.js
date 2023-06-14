@@ -22,8 +22,8 @@ async function insertSingle(raceId, cateTitle, row, mode){
   const trueName = row[1]; //姓名
   const gender = row[2]; //性别
   const group = row[3]; //组别
-  const roughTime = dayjs(row[4]).format("h:mm:ss");
-  const netTime = dayjs(row[5]).format("h:mm:ss");
+  const roughTime = typeof row[4] === 'string' ? row[4] : dayjs(row[4]).format("h:mm:ss");
+  const netTime = typeof row[5] === 'string' ? row[5] : dayjs(row[5]).format("h:mm:ss");
   const genderRank = row[6];
   const overallRank = row[7];
   const cp1=row[8];

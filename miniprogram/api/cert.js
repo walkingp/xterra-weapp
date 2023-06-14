@@ -5,8 +5,8 @@ export const getPloggingTemplate = async () =>{
   return data;
 }
 
-export const getCertTemplate = async raceId => {
-  const data = await getSingleCollectionByWhere({ dbName: "cert", filter: { raceId } });
+export const getCertTemplate = async (raceId, certOrBib = 'cert') => {
+  const data = await getSingleCollectionByWhere({ dbName: "cert", filter: { raceId, certOrBib } });
   return data;
 }
 
